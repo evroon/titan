@@ -16,5 +16,3 @@ Libraries used:
   - Assimp
   - Glew
   - RapidXML
-
-(the source is not yet complete)
