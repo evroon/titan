@@ -1,6 +1,6 @@
 #include "Model.h"
 
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 Model::Model()
 {

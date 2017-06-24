@@ -58,8 +58,6 @@ void Time::OnUpdate()
 	GameTime += DeltaTime;
 	LastTime = AbsoluteTime;
 
-	T_LOG(DeltaTime);
-
 	//for_each(timers.begin(), timers.end(), [](Timer* timer) { timer->update(); });
 	//for_each(uitimers.begin(), uitimers.end(), [](UITimer* timer) { timer->update(); });
 	//for_each(timed_callers.begin(), timed_callers.end(), [](TimedCaller *timed_caller) { timed_caller->update(); });

@@ -4,6 +4,8 @@
 
 #include "Time.h"
 
+#include "graphics/Renderer.h"
+
 //=========================================================================
 //FBO
 //=========================================================================
@@ -29,7 +31,7 @@ void FBO::Clear()
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
 	glViewport(0, 0, (GLsizei)size.x, (GLsizei)size.y);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 //=========================================================================
@@ -39,15 +41,22 @@ void FBO::Clear()
 FBO2D::FBO2D(const vec2i &p_size)
 {
 	size = p_size;
-	tex = new Texture2D(size);
-	CONTENT->AddTexture((Texture2D*)tex);
+
+	color = new Texture2D(size);
+	depth = new DepthTexture2D(size);
+
+	CONTENT->AddTexture((Texture2D*)color);
+	//CONTENT->AddTexture((DepthTexture2D*)depth);
 
 	glGenFramebuffers(1, &ID);
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex->ID, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color->ID, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth->ID, 0);
 	glDrawBuffers(1, DrawBuffers);
 
 	CheckStatus();
+
+	RENDERER->CheckGLError();
 }
 
 //=========================================================================
@@ -57,11 +66,11 @@ FBO2D::FBO2D(const vec2i &p_size)
 FBO1D::FBO1D(int size)
 {
 	this->size = vec2i(size, 1.0f);
-	tex = new Texture1D(size);
+	color = new Texture1D(size);
 
 	glGenFramebuffers(1, &ID);
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
-	glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, tex->ID, 0);
+	glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, color->ID, 0);
 	glDrawBuffers(1, DrawBuffers);
 
 	CheckStatus();

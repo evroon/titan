@@ -139,3 +139,19 @@ Color RawTexture2D::read_pixel(const vec2i & p_pos)
 
 	return Color(r, g, b);
 }
+
+//=========================================================================
+//DepthTexture2D
+//=========================================================================
+
+DepthTexture2D::DepthTexture2D(const vec2i& p_size)
+{
+	glGenTextures(1, &ID);
+	glBindTexture(GL_TEXTURE_2D, ID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, to_int(p_size.x), to_int(p_size.y), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+}

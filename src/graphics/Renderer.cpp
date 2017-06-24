@@ -1,13 +1,13 @@
 #include "Renderer.h"
 
-#include "WindowManager.h"
+#include "core/WindowManager.h"
 
 Renderer Renderer::singleton;
 
 void Renderer::Init ()
 {
 	FBOMANAGER->BindDefaultFBO();
-	glClearColor(0, 0, 0, 1);
+	glClearColor(0.3f, 0.3f, 0.3f, 1);
 
 	MeshHandler::get_singleton()->Init();
 	FBOMANAGER->Init();
@@ -17,7 +17,7 @@ void Renderer::Init ()
 
 	render_buffer = new FBO2D(WINDOWSIZE);
 
-	use_depth_test(0.1f, 1000.0f);
+	use_depth_test(.5f, 1000.0f);
 	use_culling();
 	use_blending();
 }
@@ -48,7 +48,7 @@ void Renderer::Prepare()
 
 void Renderer::Finish()
 {
-	render_buffer->tex->Bind(0);
+	render_buffer->color->Bind(0);
 
 	VISUALEFFECT->post_process();
 }

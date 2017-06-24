@@ -51,8 +51,11 @@ void Scene::Init()
 		Terrain* t = new Terrain();
 		t->set_name("terrain");
 
+		Water* water = new Water;
+
 		w->add_worldobject(m);
 		w->add_worldobject(t);
+		w->add_worldobject(water);
 
 		w->init();
 	}
@@ -78,7 +81,7 @@ void Scene::update()
 	Terrain* t = VIEW->get_active_viewport()->get_world()->get_worldobject("terrain")->cast_to_type<Terrain*>();
 
 	vec3 rotate_speed = 1.0f * 0.000001f * TIME->get_deltatime();
-	vec3 movement_speed = 1.0f * 0.000001f * TIME->get_deltatime();
+	vec3 movement_speed = 10.0f * 0.000001f * TIME->get_deltatime();
 
 	//rotation
 

@@ -92,3 +92,11 @@ public:
 private:
 	SDL_Surface *surface;
 };
+
+class DepthTexture2D : public Texture2D
+{
+	OBJ_DEFINITION(DepthTexture2D, Texture2D);
+
+public:
+	DepthTexture2D(const vec2i& p_size);
+};

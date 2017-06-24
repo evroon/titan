@@ -55,8 +55,14 @@ private:
 
 class Water : public WorldObject
 {
-	
+	OBJ_DEFINITION(Water, WorldObject);
 
 public:
+	Water();
 
+
+	void draw() override;
+
+private:
+	Shader* shader;
 };

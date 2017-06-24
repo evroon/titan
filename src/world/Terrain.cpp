@@ -10,7 +10,7 @@
 
 Terrain::Terrain()
 {
-	size = vec2i(254);
+	size = vec2i(255);
 	height_factor = 0.1f;
 
 	build_from_heightmap(CONTENT->LoadRawTexture("Textures/heightmap.png"));
@@ -18,6 +18,8 @@ Terrain::Terrain()
 	shader = CONTENT->LoadShader("EngineCore/Terrain");
 
 	textures.push_back(CONTENT->LoadTexture("Textures/grass.png"));
+
+	//add_child(new Water);
 }
 
 
@@ -35,7 +37,7 @@ void Terrain::build_from_heightmap(RawTexture2D* p_heightmap)
 
 			float z = 0.0f;
 
-			if (p_heightmap && x != size.x && y != size.y)
+			if (p_heightmap)
 				z = p_heightmap->read_pixel(vec2i(x, y)).r * height_factor;
 
 			v.position = vec3(to_float(x), to_float(y), z);
@@ -197,4 +199,36 @@ void Terrain::draw()
 void Terrain::set_tex_name(int p_index, const String& p_tex_name)
 {
 	texture_names[p_index] = p_tex_name;
+}
+
+//=========================================================================
+//Water
+//=========================================================================
+
+Water::Water()
+{
+	set_size(vec3(1000.0f, 1000.0f, 1.0f));
+	set_pos(vec3(0, 0, 15.0f));
+
+	shader = CONTENT->LoadShader("EngineCore/Water");
+}
+
+void Water::draw()
+{
+	RENDERER->stop_culling();
+
+	Transform t = get_transform();
+	t.update();
+
+	shader->Bind();
+	shader->setUniform("view", RENDERER->RENDERER->get_final_matrix());
+	shader->setUniform("model", t.get_model());
+	shader->setUniform("color", Color::Blue);
+	shader->setUniform("light_position", vec3(0, 0, 100));
+	shader->setUniform("ambient", vec3(0.3f));
+
+	MeshHandler::get_singleton()->get_plane()->bind();
+	MeshHandler::get_singleton()->get_plane()->draw();
+
+	RENDERER->use_culling();
 }

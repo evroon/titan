@@ -1,8 +1,8 @@
 #include "Camera.h"
 
-#include "Viewport.h"
+#include "graphics/Viewport.h"
 #include "World.h"
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 #ifdef near
 #undef near
@@ -13,7 +13,7 @@
 
 Camera::Camera()
 {
-	near = 1;
+	near = 0.5f;
 	far = 1000.0f;
 
 	target = vec3(0, 0, -1.0f);

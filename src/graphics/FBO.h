@@ -15,9 +15,11 @@ public:
 	void Clear();
 
 	GLuint ID;
-	Texture *tex;
+	Texture* color;
+	Texture* depth;
 	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
 	vec2i size;
+	bool depth_buffer;
 };
 
 class FBO2D : public FBO

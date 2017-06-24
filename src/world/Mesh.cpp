@@ -4,9 +4,9 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
-#include "ContentManager.h"
+#include "core/ContentManager.h"
 
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 MeshHandler* MeshHandler::singleton = new MeshHandler;
 
