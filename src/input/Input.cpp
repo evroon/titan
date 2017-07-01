@@ -1,7 +1,7 @@
 #include "Input.h"
 
-#include "Application.h"
-#include "WindowManager.h"
+#include "core/Application.h"
+#include "core/WindowManager.h"
 
 Input *Input::singleton;
 

@@ -1,6 +1,6 @@
 #include "Frame.h"
 
-#include "ContentManager.h"
+#include "core/ContentManager.h"
 
 Frame::Frame()
 {

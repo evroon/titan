@@ -45,8 +45,6 @@ private:
 
 	Shader* shader;
 
-	Texture2D* look_up;
-
 	Vector<Texture2D> textures;
 	Array<String> texture_names;
 
@@ -62,10 +60,9 @@ class Water : public WorldObject
 public:
 	Water();
 
+
 	void draw() override;
 
 private:
 	Shader* shader;
-
-	Texture2D* normals;
 };

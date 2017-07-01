@@ -85,6 +85,7 @@ public:
 	void replace(int index, const VAL &e) { vec[index] = e; }
 	void insert(int index, const VAL &e) { vec.insert(begin() + index, e); }
 	int size() const { return static_cast<int>(vec.size()); }
+	void reserve(int p_size) { vec.reserve(p_size); }
 
 	//Cleaning
 	void clear(int index) { vec.erase(vec.begin() + index); }

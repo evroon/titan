@@ -1,6 +1,6 @@
 #include "Light.h"
 
-#include "WindowManager.h"
+#include "core/WindowManager.h"
 
 Light::Light(Shader* shader, Texture *tex, vec2 pos, double radius)
 {

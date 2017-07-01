@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Resource.h"
-#include "Scene.h"
+#include "resources/Resource.h"
+#include "game/Scene.h"
 
 class Project : public Resource
 {

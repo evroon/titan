@@ -2,8 +2,8 @@
 
 #include "PhysicsGod.h"
 
-#include "WorldObject.h"
-#include "TransformComponent.h"
+#include "world/WorldObject.h"
+#include "math/TransformComponent.h"
 
 //RigidBody
 RigidBody::RigidBody(b2World *world, WorldObject *obj, bool dyn = true)

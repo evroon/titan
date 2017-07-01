@@ -1,6 +1,7 @@
 #include "Label.h"
 
 #include "Canvas.h"
+#include "core/TMessage.h"
 
 Label::Label() : Label("Label")
 {
@@ -84,9 +85,6 @@ void Label::set_text(const String &p_text)
 
 	update();
 }
-
-#include "Canvas.h"
-#include "TMessage.h"
 
 void Label::notification(int p_notification)
 {

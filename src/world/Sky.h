@@ -2,6 +2,8 @@
 
 #include "WorldObject.h"
 
+#include "Mesh.h"
+
 class Mesh;
 
 class Sky :	public WorldObject
@@ -12,11 +14,16 @@ public:
 	Sky();
 	virtual ~Sky();
 
+	void build_mesh();
+
 
 	void draw() override;
 
 
 private:
-	Mesh* mesh;
+	Shader* shader;
+
+	unsigned VAO, VBO, EBO;
+
 };
 

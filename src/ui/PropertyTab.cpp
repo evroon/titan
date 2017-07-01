@@ -1,7 +1,7 @@
 #include "PropertyTab.h"
 
 #include "Dock.h"
-#include "Font.h"
+#include "resources/Font.h"
 
 #include "ImageButton.h"
 #include "TextField.h"

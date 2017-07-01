@@ -1,6 +1,7 @@
 #include "Executer.h"
 
-#include "Memory.h"
+#include "core/Memory.h"
+#include "types/MethodMaster.h"
 
 Executer::Executer()
 {

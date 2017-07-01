@@ -1,7 +1,7 @@
 #include "ContentView.h"
 
 #include "String.h"
-#include "StringUtils.h"
+#include "utility/StringUtils.h"
 
 ContentTile::ContentTile(const String &filepath) : ImageButton(filepath)
 {

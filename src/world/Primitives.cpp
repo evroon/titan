@@ -1,6 +1,6 @@
 #include "Primitives.h"
 
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 
 void Primitives::Init()

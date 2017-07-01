@@ -1,12 +1,12 @@
 #include "Control.h"
 
 #include "Container.h"
-#include "View.h"
-#include "Renderer.h"
-#include "Texture.h"
+#include "graphics/View.h"
+#include "graphics/Renderer.h"
+#include "resources/Texture.h"
 #include "TChar.h"
 
-#include "WindowManager.h"
+#include "core/WindowManager.h"
 
 Control::Control()
 {

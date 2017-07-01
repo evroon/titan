@@ -1,9 +1,10 @@
 #include "Dock.h"
 
 #include "PropertyTab.h"
-#include "EditorCanvas.h"
 
-#include "Memory.h"
+#include "core/Memory.h"
+
+#include "Canvas.h"
 
 //=========================================================================
 //Dock

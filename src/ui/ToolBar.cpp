@@ -1,6 +1,6 @@
 #include "ToolBar.h"
 
-#include "View.h"
+#include "graphics/View.h"
 
 //=========================================================================
 //ToolBar

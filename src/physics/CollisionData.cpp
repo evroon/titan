@@ -1,7 +1,7 @@
 #include "CollisionData.h"
 
-#include "ScriptComponent.h"
-#include "EventHandler.h"
+#include "core/titanscript/ScriptComponent.h"
+#include "input/EventHandler.h"
 
 void CollisionData::BeginContact(b2Contact* contact)
 {

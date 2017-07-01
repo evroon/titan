@@ -35,6 +35,7 @@ public:
 
 	void set_plane();
 	void set_line();
+	void set_cube();
 
 	void SetAttributes(Shader *shader);
 	void bind();
@@ -153,9 +154,12 @@ public:
 
 	SimpleMesh* get_plane() const;
 	SimpleMesh* get_line() const;
+	SimpleMesh* get_cube() const;
 
 private:
 	static MeshHandler *singleton;
 
-	SimpleMesh *plane, *line;
+	SimpleMesh* plane;
+	SimpleMesh* line;
+	SimpleMesh* cube;
 };

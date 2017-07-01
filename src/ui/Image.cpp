@@ -1,8 +1,8 @@
 #include "Image.h"
 
-#include "Renderer.h"
-#include "ContentManager.h"
-#include "Mesh.h"
+#include "graphics/Renderer.h"
+#include "core/ContentManager.h"
+#include "world/Mesh.h"
 
 Image::Image()
 {

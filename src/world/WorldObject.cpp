@@ -1,10 +1,10 @@
 #include "WorldObject.h"
 
-#include "RenderComponent.h"
-#include "TransformComponent.h"
-#include "PhysicsComponent.h"
-#include "ScriptComponent.h"
-#include "PhysicsGod.h"
+#include "graphics/RenderComponent.h"
+#include "math/TransformComponent.h"
+#include "physics/PhysicsComponent.h"
+#include "core/titanscript/ScriptComponent.h"
+#include "physics/PhysicsGod.h"
 #include "World.h"
 
 WorldObject::WorldObject()

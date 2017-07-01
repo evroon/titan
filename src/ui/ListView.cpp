@@ -1,11 +1,11 @@
 #include "ListView.h"
 
 #include "Canvas.h"
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 #include "Slider.h"
 
-#include "Keyboard.h"
+#include "input/Keyboard.h"
 
 
 ListElement::ListElement(const String &p_text)

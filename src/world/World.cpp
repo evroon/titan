@@ -1,8 +1,8 @@
 #include "World.h"
 
-#include "View.h"
+#include "graphics/View.h"
 
-#include "CoreNames.h"
+#include "core/CoreNames.h"
 
 World2D::World2D()
 {

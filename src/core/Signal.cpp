@@ -1,8 +1,9 @@
 #include "Signal.h"
 
-#include "TypeManager.h"
-#include "MethodMaster.h"
-#include "TitanScript.h"
+#include "types/TypeManager.h"
+#include "types/MethodMaster.h"
+#include "core/titanscript/TitanScript.h"
+#include "types/Scriptable.h"
 
 
 //=========================================================================

@@ -18,7 +18,7 @@ public:
 	static void Quit();
 
 	Texture2D* DrawToTex(const String &src);
-	int get_index(const String &text, double offset) const;
+	int get_index(const String &text, float p_offset) const;
 	float get_width(const String &text) const;
 	float get_height() const;
 

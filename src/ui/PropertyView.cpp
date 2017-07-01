@@ -4,7 +4,7 @@
 #include "CheckBox.h"
 #include "ResourceField.h"
 
-#include "MethodMaster.h"
+#include "types/MethodMaster.h"
 
 PropertyView::PropertyView(const Variant &p_var)
 {

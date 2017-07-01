@@ -65,7 +65,7 @@ FBO2D::FBO2D(const vec2i &p_size)
 
 FBO1D::FBO1D(int size)
 {
-	this->size = vec2i(size, 1);
+	this->size = vec2i(size, 1.0f);
 	color = new Texture1D(size);
 
 	glGenFramebuffers(1, &ID);

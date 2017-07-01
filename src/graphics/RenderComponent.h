@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Color.h"
-#include "Component.h"
+#include "math/Color.h"
+#include "core/Component.h"
 
 class RenderComponent : public Component
 {

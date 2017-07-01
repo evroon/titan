@@ -21,6 +21,9 @@ public:
 	void FromRGB(vec3 val) { rgba = { val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, 1.0f }; }
 	static Color FromRGB(vec3i val) { return { val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, 1.0f }; }
 
+	vec3 get_rgb() const { return vec3(r, g, b); }
+	vec4 get_rgba() const { return vec4(r, g, b, a); }
+
 	//(operators are exactly the same as Vec4)
 
 	//General operators

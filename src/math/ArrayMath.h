@@ -84,6 +84,6 @@ public:
 		for (int c = 0; c < array.size(); c++)
 			distances.push_back(Math::distance(value, array[c]));
 
-		return min_index(distances);
+		return static_cast<T>(min_index(distances));
 	}
 };

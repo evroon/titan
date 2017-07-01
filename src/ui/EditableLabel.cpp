@@ -1,7 +1,7 @@
 #include "EditableLabel.h"
 
-#include "Input.h"
-#include "Cursor.h"
+#include "input/Input.h"
+#include "input/Cursor.h"
 
 EditableLabel::EditableLabel() : EditableLabel("")
 {

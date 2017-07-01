@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Method.h"
+#include "types/Method.h"
 
 class Scriptable;
 class TitanScript;

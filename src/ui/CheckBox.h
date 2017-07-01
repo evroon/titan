@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Font.h"
-#include "ContentManager.h"
+#include "resources/Font.h"
+#include "core/ContentManager.h"
 #include "PropertyControl.h"
-#include "ContentManager.h"
 #include "Image.h"
 
 

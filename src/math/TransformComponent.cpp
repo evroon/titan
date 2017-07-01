@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 
-#include "RenderComponent.h"
-#include "WorldObject.h"
+#include "graphics/RenderComponent.h"
+#include "world/WorldObject.h"
 
 void TransformComponent::update()
 {

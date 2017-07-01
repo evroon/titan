@@ -3,8 +3,8 @@
 #include <string>
 #include <functional>
 
-#include "Variant.h"
-#include "Callable.h"
+#include "core/variant/Variant.h"
+#include "types/Callable.h"
 
 #define OP_ADD(TYPE_RET, TYPE_L, TYPE_R) \
 	static Variant TYPE_L##_##TYPE_R##_##ADD(const Variant &left, const Variant &right) \

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Event.h"
+#include "input/Event.h"
 
 class Control;
 

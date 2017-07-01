@@ -3,7 +3,7 @@
 #include "Canvas.h"
 #include "Container.h"
 #include "ListView.h"
-#include "File.h"
+#include "resources/File.h"
 #include "TreeView.h"
 #include "NumberField.h"
 

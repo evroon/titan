@@ -1,6 +1,6 @@
 #include "VisualEffect.h"
 
-#include "WindowManager.h"
+#include "core/WindowManager.h"
 
 VisualEffect* VisualEffect::singleton;
 
@@ -32,12 +32,12 @@ void VisualEffect::post_process()
 
 	FBOMANAGER->BindDefaultFBO();
 
-
-
 	shader->Bind();
 	shader->setUniform("rendered", 0);
 
+	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();
+	MeshHandler::get_singleton()->get_plane()->unbind();
 }
 
 void VisualEffect::blur_texture(Texture *p_tex, FBO2D *p_target)

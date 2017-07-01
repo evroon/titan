@@ -1,7 +1,7 @@
 #include "ExplorerTab.h"
 
 #include "Dock.h"
-#include "Font.h"
+#include "resources/Font.h"
 
 #include "ImageButton.h"
 #include "TextField.h"
@@ -13,7 +13,7 @@
 #include "Dialog.h"
 #include "Canvas.h"
 
-#include "World.h"
+#include "world/World.h"
 
 ExplorerTab::ExplorerTab(World2D* p_world)
 {

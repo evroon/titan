@@ -1,7 +1,7 @@
 #include "UIBox.h"
 
-#include "ContentManager.h"
-#include "Renderer.h"
+#include "core/ContentManager.h"
+#include "graphics/Renderer.h"
 
 
 UIBox::UIBox()

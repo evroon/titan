@@ -1,13 +1,14 @@
 /*
 Titan Engine
-2D Game Engine using OpenGL
+3D Game Engine using OpenGL
 Languages: c++, TitanScript, glsl
 Started: november 2015
 Platforms: Android, Linux, Mac OS X and Windows
 */
 
-#include "GameApp.h"
-#include "EditorApp.h"
+#include "game/GameApp.h"
+#include "editor/EditorApp.h"
+#include "core/platform/Windows.h"
 
 #undef main
 

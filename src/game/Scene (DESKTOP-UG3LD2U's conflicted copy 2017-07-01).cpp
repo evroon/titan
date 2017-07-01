@@ -16,7 +16,6 @@
 
 #include "world/Model.h"
 #include "world/Terrain.h"
-#include "world/Sky.h"
 
 #include "input/Keyboard.h"
 
@@ -53,10 +52,8 @@ void Scene::Init()
 		t->set_name("terrain");
 
 		Water* water = new Water;
-		Sky* sky = new Sky;
 
-		//w->add_worldobject(m);
-		w->add_worldobject(sky);
+		w->add_worldobject(m);
 		w->add_worldobject(t);
 		w->add_worldobject(water);
 

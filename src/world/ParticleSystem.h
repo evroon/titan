@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Sprite.h"
-#include "Transform.h"
-#include "ContentManager.h"
-#include "WorldObject.h"
+#include "math/Transform.h"
+#include "core/ContentManager.h"
+#include "world/WorldObject.h"
 
 class Particle
 {

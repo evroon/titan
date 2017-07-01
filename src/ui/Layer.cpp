@@ -1,6 +1,6 @@
 #include "Layer.h"
 
-#include "WorldObject.h"
+#include "world/WorldObject.h"
 
 void Layer::Bind(WorldObject *o)
 {

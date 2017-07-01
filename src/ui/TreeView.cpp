@@ -1,9 +1,9 @@
 #include "TreeView.h"
 
 #include "Canvas.h"
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
-#include "Keyboard.h"
+#include "input/Keyboard.h"
 
 #include "Slider.h"
 

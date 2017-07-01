@@ -1,6 +1,6 @@
 #include "ContextMenu.h"
 
-#include "EditorCanvas.h"
+#include "ui/Canvas.h"
 
 ContextMenu::ContextMenu()
 {

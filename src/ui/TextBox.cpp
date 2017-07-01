@@ -1,10 +1,10 @@
 #include "TextBox.h"
 
 #include "Label.h"
-#include "Input.h"
-#include "Cursor.h"
-#include "Renderer.h"
-#include "EditorCanvas.h"
+#include "input/Input.h"
+#include "input/Cursor.h"
+#include "graphics/Renderer.h"
+#include "Graphics/View.h"
 #include "ContextMenu.h"
 
 TextLine::TextLine(const String &p_text)

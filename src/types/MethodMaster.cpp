@@ -3,7 +3,7 @@
 #include "Method.h"
 #include "MethodBuilder.h"
 
-#include "Rect.h"
+#include "math/Rect.h"
 
 MethodMaster *MethodMaster::method_master;
 

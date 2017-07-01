@@ -3,7 +3,6 @@
 #include "core/ContentManager.h"
 
 #include "graphics/Renderer.h"
-#include "graphics/View.h"
 
 #define INDEX(X, Y) (X) * (size.y + 1) + Y
 #define HEIGHT(X, Y) vertices[INDEX(X, Y)].position.z
@@ -19,10 +18,6 @@ Terrain::Terrain()
 	shader = CONTENT->LoadShader("EngineCore/Terrain");
 
 	textures.push_back(CONTENT->LoadTexture("Textures/grass.png"));
-	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));
-
-	texture_names.push_back("grass");
-	texture_names.push_back("rocks");
 
 	//add_child(new Water);
 }
@@ -189,11 +184,7 @@ void Terrain::draw()
 	shader->setUniform("model", mat4());
 	//shader->setUniform("ambient", vec3(0.4f));
 	
-	for (int c = 0; c < textures.size(); c++)
-	{
-		textures[c]->Bind(c);
-		shader->setUniform(texture_names[c], c);
-	}
+	textures[0]->Bind(0);
 
 
 	glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
@@ -217,10 +208,9 @@ void Terrain::set_tex_name(int p_index, const String& p_tex_name)
 Water::Water()
 {
 	set_size(vec3(1000.0f, 1000.0f, 1.0f));
-	set_pos(vec3(0, 0, 12.0f));
+	set_pos(vec3(0, 0, 15.0f));
 
 	shader = CONTENT->LoadShader("EngineCore/Water");
-	normals = CONTENT->LoadTexture("Textures/dudv.jpg");
 }
 
 void Water::draw()
@@ -230,16 +220,12 @@ void Water::draw()
 	Transform t = get_transform();
 	t.update();
 
-	normals->Bind(0);
-
 	shader->Bind();
 	shader->setUniform("view", RENDERER->RENDERER->get_final_matrix());
 	shader->setUniform("model", t.get_model());
-	shader->setUniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
-	shader->setUniform("light_direction", vec3(0, 0, 1));
-	shader->setUniform("light_color", vec3(1.0f));
-	shader->setUniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
-	shader->setUniform("time", TIME->get_absolutetime() / 1000.0f);
+	shader->setUniform("color", Color::Blue);
+	shader->setUniform("light_position", vec3(0, 0, 100));
+	shader->setUniform("ambient", vec3(0.3f));
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();

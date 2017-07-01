@@ -69,17 +69,17 @@ Texture2D* Font::DrawToTex(const String& src)
 	return tex;
 }
 
-int Font::get_index(const String& text, double offset) const
+int Font::get_index(const String& text, float p_offset) const
 {
-	if (offset < 0)
+	if (p_offset < 0)
 		return 0;
 
-	Array<double> offsets;
+	Array<float> offsets;
 
 	for (int c = 0; c < text.size() + 1; c++)
 		offsets.push_back(get_width(text.substr(0, c)));
 
-	return to_int(ArrayMath::closest_to_index(offset, offsets));
+	return to_int(ArrayMath::closest_to_index(p_offset, offsets));
 }
 
 float Font::get_width(const String& text) const

@@ -54,13 +54,13 @@ void SimpleMesh::set_plane()
 		{ -1, -1, 0 }
 	};
 
-	const Array<Face> faces =
+	const Array<Face> indices =
 	{
 		{ 0, 1, 2 },
 		{ 2, 3, 0 }
 	};
 
-	init(vertices, faces, GL_TRIANGLES);
+	init(vertices, indices, GL_TRIANGLES);
 }
 
 void SimpleMesh::set_line()
@@ -71,51 +71,12 @@ void SimpleMesh::set_line()
 		{ 1, 0, 0 }
 	};
 
-	const Array<Face> faces =
+	const Array<Face> indices =
 	{
 		{ 0, 1 }
 	};
 
-	init(vertices, faces, GL_LINES);
-}
-
-void SimpleMesh::set_cube()
-{
-	Array<Vertex> vertices;
-	Array<Face> faces;
-
-	vertices.reserve(8);
-	faces.reserve(12);
-
-	vertices.push_back({ -1.0, -1.0,  1.0 });
-	vertices.push_back({ 1.0, -1.0, 1.0 });
-	vertices.push_back({ 1.0, 1.0, 1.0 });
-	vertices.push_back({ -1.0, 1.0, 1.0 });
-
-	vertices.push_back({ -1.0, -1.0, -1.0 });
-	vertices.push_back({ 1.0, -1.0, -1.0 });
-	vertices.push_back({ 1.0, 1.0, -1.0 });
-	vertices.push_back({ -1.0, 1.0, -1.0 });
-
-	faces.push_back({ 1, 5, 6 });
-	faces.push_back({ 6, 2, 1 });
-
-	faces.push_back({ 0, 1, 2 });
-	faces.push_back({ 2, 3, 0 });
-
-	faces.push_back({ 7, 6, 5 });
-	faces.push_back({ 5, 4, 7 });
-
-	faces.push_back({ 4, 0, 3 });
-	faces.push_back({ 3, 7, 4 });
-
-	faces.push_back({ 4, 5, 1 });
-	faces.push_back({ 1, 0, 4 });
-
-	faces.push_back({ 3, 2, 6 });
-	faces.push_back({ 6, 7, 3 });
-
-	init(vertices, faces, GL_TRIANGLES);
+	init(vertices, indices, GL_LINES);
 }
 
 void SimpleMesh::SetAttributes(Shader *shader)
@@ -300,7 +261,7 @@ void Mesh::MeshNode::setup_buffers()
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.size() * sizeof(Face), &faces[0], GL_STATIC_DRAW);
-
+	
 	// Vertex Positions
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
@@ -347,7 +308,7 @@ void Material::load_material(const aiMaterial* p_material)
 
 	p_material->Get(AI_MATKEY_OPACITY, value);
 	opacity = value;
-
+	
 	//initialize textures
 	diffuse_texture = load_texture(p_material, aiTextureType_DIFFUSE);
 	specular_texture = load_texture(p_material, aiTextureType_SPECULAR);
@@ -382,10 +343,7 @@ void MeshHandler::Init()
 	line = new SimpleMesh;
 	line->set_line();
 
-	cube = new SimpleMesh;
-	cube->set_cube();
-
-	//plane->bind();
+	plane->bind();
 }
 
 SimpleMesh* MeshHandler::get_plane() const
@@ -396,11 +354,6 @@ SimpleMesh* MeshHandler::get_plane() const
 SimpleMesh* MeshHandler::get_line() const
 {
 	return line;
-}
-
-SimpleMesh* MeshHandler::get_cube() const
-{
-	return cube;
 }
 
 MeshHandler* MeshHandler::get_singleton()

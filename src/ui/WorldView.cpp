@@ -1,6 +1,6 @@
 #include "WorldView.h"
 
-#include "Renderer.h"
+#include "graphics/Renderer.h"
 
 WorldView::WorldView() : WorldView(NULL)
 {
