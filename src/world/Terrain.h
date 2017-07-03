@@ -69,3 +69,8 @@ private:
 
 	Texture2D* normals;
 };
+
+class Vegetation : public WorldObject
+{
+
+};

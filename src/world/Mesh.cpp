@@ -179,7 +179,7 @@ bool Mesh::import(const String& p_filepath)
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
-		aiProcess_GenNormals);
+		aiProcess_GenSmoothNormals);
 
 	if (!scene)
 	{

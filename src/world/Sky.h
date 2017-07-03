@@ -14,16 +14,10 @@ public:
 	Sky();
 	virtual ~Sky();
 
-	void build_mesh();
-
-
 	void draw() override;
-
 
 private:
 	Shader* shader;
-
-	unsigned VAO, VBO, EBO;
 
 };
 

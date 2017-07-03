@@ -41,13 +41,19 @@ void Texture::UnBind(int p_unit)
 //Texture2D
 //=========================================================================
 
-Texture2D::Texture2D(const vec2& p_size) : Texture(GL_TEXTURE_2D)
+Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D()
 { 
 	GenerateGLTexture();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+	if (p_byte)
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	else
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA, GL_FLOAT, 0);
+
+	size = p_size;
 }
 
-Texture2D::Texture2D(const String &p_filepath) : Texture(GL_TEXTURE_2D)
+Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 {
 	SDL_Surface *image = IMG_Load((p_filepath).c_str());
 
@@ -67,7 +73,7 @@ Texture2D::Texture2D(const String &p_filepath) : Texture(GL_TEXTURE_2D)
 	SDL_FreeSurface(image);
 }
 
-Texture2D::Texture2D(SDL_Surface *p_surface) : Texture(GL_TEXTURE_2D)
+Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D()
 {
 	GenerateGLTexture();
 
@@ -79,7 +85,7 @@ Texture2D::Texture2D(SDL_Surface *p_surface) : Texture(GL_TEXTURE_2D)
 	SDL_FreeSurface(p_surface);
 }
 
-Texture2D::Texture2D(aiTexture* p_texture) : Texture(GL_TEXTURE_2D)
+Texture2D::Texture2D(aiTexture* p_texture) : Texture2D()
 {
 	GenerateGLTexture();
 
@@ -146,12 +152,15 @@ Color RawTexture2D::read_pixel(const vec2i & p_pos)
 
 DepthTexture2D::DepthTexture2D(const vec2i& p_size)
 {
+	size = vec2(p_size.x, p_size.y);
+	loaded = true;
+
 	glGenTextures(1, &ID);
 	glBindTexture(GL_TEXTURE_2D, ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, to_int(p_size.x), to_int(p_size.y), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 }

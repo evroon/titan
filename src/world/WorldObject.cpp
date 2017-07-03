@@ -70,6 +70,10 @@ void WorldObject::notificate(int notification)
 		draw();
 		break;
 
+	case NOTIFICATION_DRAW_SHADOW:
+		shadow_draw();
+		break;
+
 	case NOTIFICATION_UPDATE:
 		update();
 		break;
@@ -139,6 +143,7 @@ void WorldObject::set_pos(const vec3 &p_pos)
 	Transform &transform = transformcomponent->transform;
 
 	transform.set_pos(p_pos);
+	transform.update();
 
 	if (physicscomponent)
 		physicscomponent->set_transform(transform);
@@ -154,6 +159,7 @@ void WorldObject::set_size(const vec3 &p_size)
 	Transform &transform = transformcomponent->transform;
 
 	transform.set_size(p_size);
+	transform.update();
 
 	
 	//if (physicscomponent)
@@ -171,6 +177,7 @@ void WorldObject::set_rotation(const vec3& p_rotation)
 	Transform &transform = transformcomponent->transform;
 
 	transform.set_rotation(p_rotation);
+	transform.update();
 
 	if (physicscomponent)
 		physicscomponent->set_transform(transform);

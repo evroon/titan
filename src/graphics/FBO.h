@@ -14,24 +14,48 @@ public:
 	void CheckStatus();
 	void Clear();
 
+	virtual void init();
+
+	virtual void add_depth_texture();
+	virtual void add_color_texture();
+
 	GLuint ID;
-	Texture* color;
-	Texture* depth;
 	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
 	vec2i size;
-	bool depth_buffer;
+
+	bool depth;
+
+	Texture* depth_tex;
+	Vector<Texture> color_textures;
+
+	struct color_tex_def
+	{
+		bool type_byte;
+	};
+
+	Array<color_tex_def> definitions;
 };
 
 class FBO2D : public FBO
 {
 public:
 	FBO2D(const vec2i &p_size);
+
+	void init() override;
+
+	void add_depth_texture() override;
+	void add_color_texture() override;
 };
 
 class FBO1D : public FBO
 {
 public:
 	FBO1D(int size);
+
+	void init() override;
+
+	void add_depth_texture() override;
+	void add_color_texture() override;
 };
 
 class RenderTarget

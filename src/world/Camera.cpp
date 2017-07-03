@@ -13,7 +13,7 @@
 
 Camera::Camera()
 {
-	near = 0.5f;
+	near = 1.0f;
 	far = 1000.0f;
 
 	target = vec3(0, 0, -1.0f);
@@ -117,7 +117,7 @@ void Camera::update_view_matrix()
 	translate.translate(vec3(-1.0f) * get_pos());
 
 	mat4 look_at;
-	look_at.look_at(get_pos(), get_pos() + vec3(0, 1, 0), vec3(0, 0, 1));
+	look_at.look_at(get_pos(), get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
 
 	view_matrix = rotate * look_at;
 }

@@ -11,7 +11,7 @@
 
 Terrain::Terrain()
 {
-	size = vec2i(255);
+	size = vec2i(254);
 	height_factor = 0.1f;
 
 	build_from_heightmap(CONTENT->LoadRawTexture("Textures/heightmap.png"));
@@ -36,7 +36,7 @@ void Terrain::build_from_heightmap(RawTexture2D* p_heightmap)
 {
 	for (int x = 0; x <= size.x; x++) // size.x + 1 elements
 	{
-		for (int y = 0; y <= size.y; y++)
+		for (int y = 0; y <= size.y; y++) // size.y + 1 elements
 		{
 			Vertex v;
 
@@ -60,12 +60,12 @@ void Terrain::build_from_heightmap(RawTexture2D* p_heightmap)
 			Face f1, f2;
 
 			f1.indices[0] = INDEX(x, y);
-			f1.indices[1] = INDEX(x, y + 1);
-			f1.indices[2] = INDEX(x + 1, y);
+			f1.indices[1] = INDEX(x + 1, y);
+			f1.indices[2] = INDEX(x, y + 1);
 
 			f2.indices[0] = INDEX(x, y + 1);
-			f2.indices[1] = INDEX(x + 1, y + 1);
-			f2.indices[2] = INDEX(x + 1, y);
+			f2.indices[1] = INDEX(x + 1, y);
+			f2.indices[2] = INDEX(x + 1, y + 1);
 
 			faces.push_back(f1);
 			faces.push_back(f2);
@@ -91,22 +91,22 @@ void Terrain::generate_normals()
 		float here = vertices[c].position.z;
 		float left, right, up, down;
 
-		if (c <= size.y)
+		if (c < size.y + 1)
 			left = here;
 		else
 			left = vertices[c - (size.y + 1)].position.z;
 
-		if (c >= vertices.size() - size.y)
+		if (c >= vertices.size() - size.y - 1)
 			right = here;
 		else
 			right = vertices[c + (size.y + 1)].position.z;
 
-		if (c % size.y == 0)
+		if (c % (size.y + 1) == 0)
 			down = here;
 		else
 			down = vertices[c - 1].position.z;
 
-		if (c == vertices.size() - 1)
+		if (c % (size.y + 1) == size.y)
 			up = here;
 		else
 			up = vertices[c + 1].position.z;
@@ -187,7 +187,8 @@ void Terrain::draw()
 	shader->Bind();
 	shader->setUniform("view", RENDERER->get_final_matrix());
 	shader->setUniform("model", mat4());
-	//shader->setUniform("ambient", vec3(0.4f));
+	shader->setUniform("light_matrix", RENDERER->get_light_matrix());
+	shader->setUniform("ambient", vec3(0.4f));
 	
 	for (int c = 0; c < textures.size(); c++)
 	{
@@ -195,6 +196,9 @@ void Terrain::draw()
 		shader->setUniform(texture_names[c], c);
 	}
 
+	Texture* depth_tex = RENDERER->get_shadow_buffer()->depth_tex;
+	depth_tex->Bind(2);
+	shader->setUniform("shadow_map", 2);
 
 	glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
 
@@ -227,14 +231,11 @@ void Water::draw()
 {
 	RENDERER->stop_culling();
 
-	Transform t = get_transform();
-	t.update();
-
 	normals->Bind(0);
 
 	shader->Bind();
-	shader->setUniform("view", RENDERER->RENDERER->get_final_matrix());
-	shader->setUniform("model", t.get_model());
+	shader->setUniform("view", RENDERER->get_final_matrix());
+	shader->setUniform("model", get_transform().get_model());
 	shader->setUniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
 	shader->setUniform("light_direction", vec3(0, 0, 1));
 	shader->setUniform("light_color", vec3(1.0f));

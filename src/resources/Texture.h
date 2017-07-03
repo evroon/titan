@@ -33,8 +33,8 @@ public:
 protected:
 	void GenerateGLTexture();
 
-private:
 	bool loaded = false;
+private:
 	int type;
 };
 
@@ -53,9 +53,9 @@ class Texture2D : public Texture
 	OBJ_DEFINITION(Texture2D, Texture)
 
 public:
-	Texture2D() = default;
-	Texture2D(const vec2& p_size);
-	Texture2D(const vec2i& p_size) : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y))) { }
+	Texture2D() : Texture(GL_TEXTURE_2D) { }
+	Texture2D(const vec2& p_size, bool p_byte);
+	Texture2D(const vec2i& p_size, bool p_byte = true) : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y)), p_byte) { }
 	Texture2D(const String &p_filepath);
 	Texture2D(SDL_Surface *p_surface);
 

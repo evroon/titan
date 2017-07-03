@@ -47,6 +47,9 @@ public:
 	const mat4& get_view_matrix() const;
 	const mat4& get_final_matrix() const;
 
+	void set_light_matrix(const mat4& p_light_matrix);
+	const mat4& get_light_matrix() const;
+
 	void use_scissor(const rect2 &area);
 	void stop_scissor();
 
@@ -58,6 +61,12 @@ public:
 
 	void use_blending();
 	void stop_blending();
+
+	void use_wireframe();
+	void fill();
+
+	FBO2D* get_shadow_buffer() const;
+	FBO2D* get_render_buffer() const;
 
 	static Renderer* get_singleton();
 
@@ -75,8 +84,11 @@ private:
 	mat4 projection_matrix;
 	mat4 view_matrix;
 	mat4 final_matrix;
+	mat4 light_matrix;
 
 	FBO2D* render_buffer;
+	FBO2D* shadow_buffer;
+	FBO2D* reflection_buffer;
 
 	Stack<mat4> projections;
 	Stack<mat4> views;

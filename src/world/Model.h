@@ -15,6 +15,7 @@ public:
 	virtual ~Model();
 
 	void draw() override;
+	void shadow_draw() override;
 
 	void load_mesh(const String& p_path);
 

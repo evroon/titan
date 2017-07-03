@@ -22,8 +22,9 @@ FBO::~FBO()
 
 void FBO::CheckStatus()
 {
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		T_ERROR("Error Setting up FBO");
+	int err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if (err != GL_FRAMEBUFFER_COMPLETE)
+		T_ERROR("Error Setting up FBO" + String(err));
 }
 
 void FBO::Clear()
@@ -31,7 +32,27 @@ void FBO::Clear()
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
 	glViewport(0, 0, (GLsizei)size.x, (GLsizei)size.y);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	if (depth && color_textures.size() > 0)
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	else if (depth)
+		glClear(GL_DEPTH_BUFFER_BIT);
+	else
+		glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void FBO::init()
+{
+
+}
+
+void FBO::add_depth_texture()
+{
+
+}
+
+void FBO::add_color_texture()
+{
+
 }
 
 //=========================================================================
@@ -41,22 +62,54 @@ void FBO::Clear()
 FBO2D::FBO2D(const vec2i &p_size)
 {
 	size = p_size;
+	depth = false;
+}
 
-	color = new Texture2D(size);
-	depth = new DepthTexture2D(size);
-
-	CONTENT->AddTexture((Texture2D*)color);
-	//CONTENT->AddTexture((DepthTexture2D*)depth);
-
+void FBO2D::init()
+{
 	glGenFramebuffers(1, &ID);
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color->ID, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth->ID, 0);
-	glDrawBuffers(1, DrawBuffers);
+	glClearColor(0.3f, 0.3f, 0.3f, 1);
+
+	if (definitions.size() > 0)
+	{
+		GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+		glDrawBuffers(1, DrawBuffers);
+	}
+	else
+		glDrawBuffer(GL_NONE);
+
+
+	glReadBuffer(GL_NONE);
+
+	for (int c = 0; c < definitions.size(); c++)
+	{
+		Texture2D* color = new Texture2D(size, definitions[c].type_byte);
+		color_textures.push_back(color);
+		
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + c, GL_TEXTURE_2D, color->ID, 0);
+	}
+
+	if (depth)
+	{
+		depth_tex = new DepthTexture2D(size);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth_tex->ID, 0);
+	}
 
 	CheckStatus();
 
 	RENDERER->CheckGLError();
+}
+
+void FBO2D::add_depth_texture()
+{
+	depth = true;
+}
+
+void FBO2D::add_color_texture()
+{
+	definitions.push_back({ true });
 }
 
 //=========================================================================
@@ -66,7 +119,7 @@ FBO2D::FBO2D(const vec2i &p_size)
 FBO1D::FBO1D(int size)
 {
 	this->size = vec2i(size, 1);
-	color = new Texture1D(size);
+	Texture1D* color = new Texture1D(size);
 
 	glGenFramebuffers(1, &ID);
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
@@ -74,6 +127,18 @@ FBO1D::FBO1D(int size)
 	glDrawBuffers(1, DrawBuffers);
 
 	CheckStatus();
+}
+
+void FBO1D::init()
+{
+}
+
+void FBO1D::add_depth_texture()
+{
+}
+
+void FBO1D::add_color_texture()
+{
 }
 
 //=========================================================================

@@ -1,6 +1,7 @@
 #include "World.h"
 
 #include "graphics/View.h"
+#include "graphics/Renderer.h"
 
 #include "core/CoreNames.h"
 
@@ -10,6 +11,12 @@ World2D::World2D()
 
 	active_camera = new Camera;
 	add_worldobject(active_camera);
+
+	light_camera = new Camera;
+	add_worldobject(light_camera);
+	light_camera->set_pos(vec3(50.0f, 50.0f, 60.0f));
+	light_camera->set_projection(30.0f, 1.0f, 1000.0f);
+	light_camera->set_rotation(vec3(-PI / 2.0f, 0, PI));
 }
 
 
@@ -110,9 +117,8 @@ void World2D::init()
 
 	if (active_camera)
 	{
-		active_camera->set_pos(vec3(50.0f, 50.0f, -2.0f));
-		active_camera->set_projection(30.0f, .1f, 1000.0f);
-		active_camera->look_at(active_camera->get_pos() + vec3(0, 1, 0), vec3(0, 0, 1));
+		active_camera->set_pos(vec3(50.0f, 50.0f, 20.0f));
+		active_camera->set_projection(30.0f, 1.0f, 1000.0f);
 	}
 }
 
@@ -125,6 +131,23 @@ void World2D::update()
 
 void World2D::draw()
 {
+	//draw shadowmap
+	FBOMANAGER->BindFBO(RENDERER->get_shadow_buffer());
+
+	RENDERER->switch_to_camera(light_camera);
+
+	mat4 light_matrix = RENDERER->get_final_matrix();
+
+	for (Layer *l : layers)
+		for (WorldObject *wo : l->objects)
+			wo->notificate(WorldObject::NOTIFICATION_DRAW);	
+
+	RENDERER->deactivate_camera();
+
+	//draw scene
+	FBOMANAGER->BindFBO(RENDERER->get_render_buffer());
+	RENDERER->set_light_matrix(light_matrix);
+
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
 			wo->notificate(WorldObject::NOTIFICATION_DRAW);

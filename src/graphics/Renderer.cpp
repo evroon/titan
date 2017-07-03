@@ -4,7 +4,7 @@
 
 Renderer Renderer::singleton;
 
-void Renderer::Init ()
+void Renderer::Init()
 {
 	FBOMANAGER->BindDefaultFBO();
 	glClearColor(0.3f, 0.3f, 0.3f, 1);
@@ -16,8 +16,20 @@ void Renderer::Init ()
 	Primitives::Init();
 
 	render_buffer = new FBO2D(WINDOWSIZE);
+	render_buffer->add_color_texture();
+	render_buffer->add_depth_texture();
+	render_buffer->init();
 
-	use_depth_test(.5f, 1000.0f);
+	shadow_buffer = new FBO2D(1024);
+	shadow_buffer->add_depth_texture();
+	shadow_buffer->init();
+
+	/*reflection_buffer = new FBO2D(WINDOWSIZE);
+	reflection_buffer->add_color_texture();
+	reflection_buffer->add_depth_texture();
+	reflection_buffer->init();*/
+
+	use_depth_test(0.5f, 100.0f);
 	use_culling();
 	use_blending();
 }
@@ -48,7 +60,9 @@ void Renderer::Prepare()
 
 void Renderer::Finish()
 {
-	render_buffer->color->Bind(0);
+	render_buffer->color_textures[0]->Bind(0);
+	//shadow_buffer->depth_tex->Bind(0);
+	//render_buffer->depth_tex->Bind(0);
 
 	VISUALEFFECT->post_process();
 }
@@ -135,6 +149,16 @@ const mat4& Renderer::get_final_matrix() const
 	return final_matrix;
 }
 
+void Renderer::set_light_matrix(const mat4& p_light_matrix)
+{
+	light_matrix = p_light_matrix;
+}
+
+const mat4& Renderer::get_light_matrix() const
+{
+	return light_matrix;
+}
+
 void Renderer::use_scissor(const rect2 &area)
 {
 	glEnable(GL_SCISSOR_TEST);
@@ -182,6 +206,26 @@ void Renderer::use_blending()
 void Renderer::stop_blending()
 {
 	glDisable(GL_BLEND);
+}
+
+void Renderer::use_wireframe()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+}
+
+void Renderer::fill()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+FBO2D* Renderer::get_shadow_buffer() const
+{
+	return shadow_buffer;
+}
+
+FBO2D* Renderer::get_render_buffer() const
+{
+	return render_buffer;
 }
 
 Renderer* Renderer::get_singleton()

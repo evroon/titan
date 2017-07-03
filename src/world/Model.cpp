@@ -24,12 +24,23 @@ Model::~Model()
 
 void Model::draw()
 {
-	Transform t = get_transform();
-	t.update();									//TODO
-
 	shader->Bind();
 	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", t.get_model());
+	shader->setUniform("model", get_transform().get_model());
+	shader->setUniform("color", get_color());
+	shader->setUniform("texture_enabled", true);
+	shader->setUniform("ambient", vec3(0.3f));
+
+	mesh->draw();
+
+	shader->setWhiteColor("color");
+}
+
+void Model::shadow_draw()
+{
+	shader->Bind();
+	shader->setUniform("view", RENDERER->get_final_matrix());
+	shader->setUniform("model", get_transform().get_model());
 	shader->setUniform("color", get_color());
 	shader->setUniform("texture_enabled", true);
 	shader->setUniform("ambient", vec3(0.3f));

@@ -26,6 +26,7 @@ public:
 	{
 		NOTIFICATION_READY,
 		NOTIFICATION_DRAW,
+		NOTIFICATION_DRAW_SHADOW,
 		NOTIFICATION_UPDATE,
 		NOTIFICATION_RESIZED
 	};
@@ -35,6 +36,7 @@ public:
 	virtual void update();
 	virtual void SimpleDraw() { }
 	virtual void draw() { }
+	virtual void shadow_draw() { }
 
 	//Get or set the most important properties
 	Transform get_transform() const;

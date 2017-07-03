@@ -43,5 +43,6 @@ public:
 
 private:
 	Camera *active_camera;
+	Camera *light_camera;
 };
 

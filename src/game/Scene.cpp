@@ -47,7 +47,8 @@ void Scene::Init()
 		v->set_world(w);
 
 		Model* m = new Model("assets/Models/672a8302d72f34f79980861feb2bdcd5/untitled.dae");
-		m->set_pos(vec3(50, 50, 10));
+		m->set_pos(vec3(50, 50, 25));
+		m->set_size(vec3(10.0f));
 
 		Terrain* t = new Terrain();
 		t->set_name("terrain");
@@ -55,10 +56,12 @@ void Scene::Init()
 		Water* water = new Water;
 		Sky* sky = new Sky;
 
-		//w->add_worldobject(m);
 		w->add_worldobject(sky);
+		w->add_worldobject(m);
 		w->add_worldobject(t);
 		w->add_worldobject(water);
+
+		w->get_active_camera()->set_rotation(vec3(0, 0, PI));
 
 		w->init();
 	}
@@ -130,7 +133,7 @@ void Scene::update()
 
 	//c->set_pos(vec3(pos.x, t->get_height(pos), pos.y));
 
-	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, 1));
+	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
 
 	VIEW->update();
 }

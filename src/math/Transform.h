@@ -8,9 +8,9 @@
 class Transform
 {
 public:
-	Transform() : Transform(vec3(), vec3(100), 0) { }
+	Transform() : Transform(vec3(), vec3(1.0f), 0) { }
 
-	Transform(const vec3& p) : Transform(p, vec3(100), 0) { }
+	Transform(const vec3& p) : Transform(p, vec3(1.0f), 0) { }
 
 	Transform(const vec3& p, const vec3& s) : Transform(p, s, 0) { }
 	Transform(const vec3& p, const vec2& s) : Transform(p, vec3(s, 0.0f), 0) { }
