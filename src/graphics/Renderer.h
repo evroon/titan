@@ -67,6 +67,7 @@ public:
 
 	FBO2D* get_shadow_buffer() const;
 	FBO2D* get_render_buffer() const;
+	FBO2D* get_reflection_buffer() const;
 
 	static Renderer* get_singleton();
 

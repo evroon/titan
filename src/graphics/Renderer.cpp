@@ -24,10 +24,10 @@ void Renderer::Init()
 	shadow_buffer->add_depth_texture();
 	shadow_buffer->init();
 
-	/*reflection_buffer = new FBO2D(WINDOWSIZE);
+	reflection_buffer = new FBO2D(WINDOWSIZE);
 	reflection_buffer->add_color_texture();
 	reflection_buffer->add_depth_texture();
-	reflection_buffer->init();*/
+	reflection_buffer->init();
 
 	use_depth_test(0.5f, 100.0f);
 	use_culling();
@@ -226,6 +226,11 @@ FBO2D* Renderer::get_shadow_buffer() const
 FBO2D* Renderer::get_render_buffer() const
 {
 	return render_buffer;
+}
+
+FBO2D* Renderer::get_reflection_buffer() const
+{
+	return reflection_buffer;
 }
 
 Renderer* Renderer::get_singleton()

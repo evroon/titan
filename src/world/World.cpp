@@ -14,6 +14,7 @@ World2D::World2D()
 
 	light_camera = new Camera;
 	add_worldobject(light_camera);
+
 	light_camera->set_pos(vec3(50.0f, 50.0f, 60.0f));
 	light_camera->set_projection(30.0f, 1.0f, 1000.0f);
 	light_camera->set_rotation(vec3(-PI / 2.0f, 0, PI));
@@ -140,9 +141,33 @@ void World2D::draw()
 
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
-			wo->notificate(WorldObject::NOTIFICATION_DRAW);	
+			wo->notificate(WorldObject::NOTIFICATION_DRAW_SHADOW);	
 
 	RENDERER->deactivate_camera();
+
+	//draw refection
+	Camera* c = get_active_camera();
+
+	vec3 p = c->get_pos();
+	c->set_pos(vec3(p.x, p.y, 0 - p.z));
+
+	vec3 r = c->get_rotation();
+	c->set_rotation(vec3(-r.x, r.y, r.z));
+
+	c->update();
+
+	FBOMANAGER->BindFBO(RENDERER->get_reflection_buffer());
+
+	RENDERER->switch_to_camera(c);
+
+	get_child("terrain")->cast_to_type<WorldObject*>()->notificate(WorldObject::NOTIFICATION_DRAW);
+
+	RENDERER->deactivate_camera();
+
+	c->set_rotation(r);
+	c->set_pos(p);
+
+	c->update();
 
 	//draw scene
 	FBOMANAGER->BindFBO(RENDERER->get_render_buffer());

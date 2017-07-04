@@ -14,7 +14,7 @@ Terrain::Terrain()
 	size = vec2i(254);
 	height_factor = 0.1f;
 
-	build_from_heightmap(CONTENT->LoadRawTexture("Textures/heightmap.png"));
+	build_from_heightmap(CONTENT->LoadRawTexture("Textures/light.png"));
 
 	shader = CONTENT->LoadShader("EngineCore/Terrain");
 
@@ -186,7 +186,7 @@ void Terrain::draw()
 
 	shader->Bind();
 	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", mat4());
+	shader->setUniform("model", mat4::Translate(vec3(0, 0, -12)));
 	shader->setUniform("light_matrix", RENDERER->get_light_matrix());
 	shader->setUniform("ambient", vec3(0.4f));
 	
@@ -220,8 +220,8 @@ void Terrain::set_tex_name(int p_index, const String& p_tex_name)
 
 Water::Water()
 {
-	set_size(vec3(1000.0f, 1000.0f, 1.0f));
-	set_pos(vec3(0, 0, 12.0f));
+	set_size(vec3(1000.0f, 1000.0f, 0.0f));
+	set_pos(vec3(0, 0, 0.0f));
 
 	shader = CONTENT->LoadShader("EngineCore/Water");
 	normals = CONTENT->LoadTexture("Textures/dudv.jpg");
@@ -232,6 +232,7 @@ void Water::draw()
 	RENDERER->stop_culling();
 
 	normals->Bind(0);
+	RENDERER->get_reflection_buffer()->color_textures[0]->Bind(1);
 
 	shader->Bind();
 	shader->setUniform("view", RENDERER->get_final_matrix());
@@ -241,6 +242,9 @@ void Water::draw()
 	shader->setUniform("light_color", vec3(1.0f));
 	shader->setUniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
 	shader->setUniform("time", TIME->get_absolutetime() / 1000.0f);
+
+	shader->setUniform("normals", 0);
+	shader->setUniform("reflection_tex", 1);
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();

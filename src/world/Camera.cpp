@@ -19,7 +19,7 @@ Camera::Camera()
 	target = vec3(0, 0, -1.0f);
 	up = vec3(0, 1, 0);
 
-	fov = 45;
+	fov = 30.0f;
 
 	zoom = 1.0f;
 	pos = vec2();

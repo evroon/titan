@@ -49,11 +49,14 @@ void Scene::Init()
 		Model* m = new Model("assets/Models/672a8302d72f34f79980861feb2bdcd5/untitled.dae");
 		m->set_pos(vec3(50, 50, 25));
 		m->set_size(vec3(10.0f));
+		m->set_name("plane");
 
 		Terrain* t = new Terrain();
 		t->set_name("terrain");
 
 		Water* water = new Water;
+		water->set_name("water");
+
 		Sky* sky = new Sky;
 
 		w->add_worldobject(sky);
@@ -85,6 +88,8 @@ void Scene::update()
 {
 	Camera* c = VIEW->get_active_viewport()->get_world()->get_active_camera();
 	Terrain* t = VIEW->get_active_viewport()->get_world()->get_worldobject("terrain")->cast_to_type<Terrain*>();
+
+	T_LOG(c->get_pos().to_string());
 
 	vec3 rotate_speed = 1.0f * 0.000001f * TIME->get_deltatime();
 	vec3 movement_speed = 10.0f * 0.000001f * TIME->get_deltatime();
