@@ -29,7 +29,7 @@ void Renderer::Init()
 	reflection_buffer->add_depth_texture();
 	reflection_buffer->init();
 
-	use_depth_test(0.5f, 100.0f);
+	use_depth_test(0.5f, 1000.0f);
 	use_culling();
 	use_blending();
 }

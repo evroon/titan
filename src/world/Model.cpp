@@ -30,6 +30,7 @@ void Model::draw()
 	shader->setUniform("color", get_color());
 	shader->setUniform("texture_enabled", true);
 	shader->setUniform("ambient", vec3(0.3f));
+	shader->setUniform("view_pos", get_world()->get_active_camera()->get_pos());
 
 	mesh->draw();
 
@@ -60,7 +61,7 @@ void Model::set_mesh(Mesh* p_mesh)
 	mesh = p_mesh;
 }
 
-Mesh * Model::get_mesh() const
+Mesh* Model::get_mesh() const
 {
 	return mesh;
 }

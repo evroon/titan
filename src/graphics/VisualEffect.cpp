@@ -43,7 +43,7 @@ void VisualEffect::post_process()
 	MeshHandler::get_singleton()->get_plane()->draw();
 	MeshHandler::get_singleton()->get_plane()->unbind();
 
-	RENDERER->use_depth_test(0.5f, 100.0f);
+	RENDERER->use_depth_test(0.5f, 1000.0f);
 }
 
 void VisualEffect::blur_texture(Texture *p_tex, FBO2D *p_target)

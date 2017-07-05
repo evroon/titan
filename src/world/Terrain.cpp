@@ -14,7 +14,7 @@ Terrain::Terrain()
 	size = vec2i(254);
 	height_factor = 0.1f;
 
-	build_from_heightmap(CONTENT->LoadRawTexture("Textures/light.png"));
+	build_from_heightmap(CONTENT->LoadRawTexture("Textures/heightmap.png"));
 
 	shader = CONTENT->LoadShader("EngineCore/Terrain");
 
@@ -181,6 +181,9 @@ void Terrain::draw()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
+
+	//aparantly not needed on some intel drivers
+	glEnable(GL_CLIP_DISTANCE0);
 
 	glBindVertexArray(VAO);
 

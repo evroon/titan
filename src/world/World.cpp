@@ -3,6 +3,8 @@
 #include "graphics/View.h"
 #include "graphics/Renderer.h"
 
+#include "world/Terrain.h"
+
 #include "core/CoreNames.h"
 
 World2D::World2D()
@@ -15,8 +17,8 @@ World2D::World2D()
 	light_camera = new Camera;
 	add_worldobject(light_camera);
 
-	light_camera->set_pos(vec3(50.0f, 50.0f, 60.0f));
-	light_camera->set_projection(30.0f, 1.0f, 1000.0f);
+	light_camera->set_pos(vec3(50.0f, 50.0f, 200.0f));
+	light_camera->set_projection(30.0f, 0.5f, 1000.0f);
 	light_camera->set_rotation(vec3(-PI / 2.0f, 0, PI));
 }
 
@@ -119,7 +121,7 @@ void World2D::init()
 	if (active_camera)
 	{
 		active_camera->set_pos(vec3(50.0f, 50.0f, 20.0f));
-		active_camera->set_projection(30.0f, 1.0f, 1000.0f);
+		active_camera->set_projection(30.0f, 0.5f, 1000.0f);
 	}
 }
 
@@ -160,7 +162,14 @@ void World2D::draw()
 
 	RENDERER->switch_to_camera(c);
 
-	get_child("terrain")->cast_to_type<WorldObject*>()->notificate(WorldObject::NOTIFICATION_DRAW);
+	for (Layer *l : layers)
+	{
+		for (WorldObject *wo : l->objects)
+		{
+			if (!dynamic_cast<Water*>(wo))
+				wo->notificate(WorldObject::NOTIFICATION_DRAW);
+		}
+	}
 
 	RENDERER->deactivate_camera();
 

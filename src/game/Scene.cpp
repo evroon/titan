@@ -89,8 +89,6 @@ void Scene::update()
 	Camera* c = VIEW->get_active_viewport()->get_world()->get_active_camera();
 	Terrain* t = VIEW->get_active_viewport()->get_world()->get_worldobject("terrain")->cast_to_type<Terrain*>();
 
-	T_LOG(c->get_pos().to_string());
-
 	vec3 rotate_speed = 1.0f * 0.000001f * TIME->get_deltatime();
 	vec3 movement_speed = 10.0f * 0.000001f * TIME->get_deltatime();
 
