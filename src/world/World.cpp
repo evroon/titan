@@ -48,10 +48,8 @@ WorldObject* World2D::get_worldobject(const String &name)
 {
 	for (Node* obj : children)
 	{
-		WorldObject* w = obj->cast_to_type<WorldObject*>();
-
-		if (w->name == name)
-			return w;
+		if (obj->get_name() == name)
+			return obj->cast_to_type<WorldObject*>();
 	}
 
 	return NULL;

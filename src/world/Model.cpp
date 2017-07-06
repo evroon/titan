@@ -17,7 +17,6 @@ Model::Model(Mesh* p_mesh) : Model()
 	set_mesh(p_mesh);
 }
 
-
 Model::~Model()
 {
 }
@@ -25,12 +24,12 @@ Model::~Model()
 void Model::draw()
 {
 	shader->Bind();
-	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", get_transform().get_model());
-	shader->setUniform("color", get_color());
-	shader->setUniform("texture_enabled", true);
-	shader->setUniform("ambient", vec3(0.3f));
-	shader->setUniform("view_pos", get_world()->get_active_camera()->get_pos());
+	shader->set_uniform("view", RENDERER->get_final_matrix());
+	shader->set_uniform("model", get_transform().get_model());
+	shader->set_uniform("color", get_color());
+	shader->set_uniform("texture_enabled", true);
+	shader->set_uniform("ambient", vec3(0.3f));
+	shader->set_uniform("view_pos", get_world()->get_active_camera()->get_pos());
 
 	mesh->draw();
 
@@ -40,11 +39,11 @@ void Model::draw()
 void Model::shadow_draw()
 {
 	shader->Bind();
-	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", get_transform().get_model());
-	shader->setUniform("color", get_color());
-	shader->setUniform("texture_enabled", true);
-	shader->setUniform("ambient", vec3(0.3f));
+	shader->set_uniform("view", RENDERER->get_final_matrix());
+	shader->set_uniform("model", get_transform().get_model());
+	shader->set_uniform("color", get_color());
+	shader->set_uniform("texture_enabled", true);
+	shader->set_uniform("ambient", vec3(0.3f));
 
 	mesh->draw();
 

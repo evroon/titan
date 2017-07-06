@@ -58,20 +58,19 @@ void Scene::Init()
 		water->set_name("water");
 
 		Sky* sky = new Sky;
+		
+		Vegetation* veg = new Vegetation;
 
 		w->add_worldobject(sky);
 		w->add_worldobject(m);
 		w->add_worldobject(t);
 		w->add_worldobject(water);
+		w->add_worldobject(veg);
 
 		w->get_active_camera()->set_rotation(vec3(0, 0, PI));
 
 		w->init();
 	}
-
-	String s = SERIALIZER->serialize(v);
-
-	//T_LOG(s);
 }
 
 void Scene::LoadContent()
@@ -134,7 +133,7 @@ void Scene::update()
 
 	vec2 pos = c->get_pos().get_xy();
 
-	//c->set_pos(vec3(pos.x, t->get_height(pos), pos.y));
+	c->set_pos(vec3(pos.x, pos.y, t->get_height(pos) + 1.0f));
 
 	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
 

@@ -93,7 +93,9 @@ bool File::is_directory() const
 
 bool File::is_file() const
 {
-	return false;
+	DWORD attributes = GetFileAttributes(path.c_str());
+
+	return (attributes != INVALID_FILE_ATTRIBUTES && !(attributes & FILE_ATTRIBUTE_DIRECTORY));
 }
 
 String File::get_extension() const

@@ -72,5 +72,14 @@ private:
 
 class Vegetation : public WorldObject
 {
+	OBJ_DEFINITION(Vegetation, WorldObject);
 
+public:
+	Vegetation();
+
+	void draw() override;
+
+private:
+	Shader* shader;
+	Texture2D* grass_tex;
 };

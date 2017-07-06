@@ -25,16 +25,12 @@ public:
 
 	String get_name() const;
 
-	bool is_directory() const;
-
-	
+	bool is_directory() const;	
 	bool is_file() const;
 
 	String get_extension() const;
 
 	Array<File> listdir() const;
-
-
 
 	File operator+(const String& r);
 	void operator+=(const String &r);

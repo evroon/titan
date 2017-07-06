@@ -164,7 +164,7 @@ float Terrain::get_height(const vec2& p_pos) const
 
 	vec2 clipped = pos - vec2(to_int(pos.x), to_int(pos.y));
 
-	if (clipped.x <= 1 - pos.y)
+	if (clipped.x >= 1 - pos.y)
 	{
 		result = Math::get_barry_centric(vec3(0.0f, bl, 0.0f), vec3(1.0f, br, 0.0f), vec3(0, ul, 1), clipped);
 	}
@@ -172,6 +172,8 @@ float Terrain::get_height(const vec2& p_pos) const
 	{
 		result = Math::get_barry_centric(vec3(1.0f, br, 0.0f), vec3(1.0f, ur, 1.0f), vec3(0, ul, 1), clipped);
 	}
+
+	result -=12;
 
 	return result;
 }
@@ -188,20 +190,20 @@ void Terrain::draw()
 	glBindVertexArray(VAO);
 
 	shader->Bind();
-	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", mat4::Translate(vec3(0, 0, -12)));
-	shader->setUniform("light_matrix", RENDERER->get_light_matrix());
-	shader->setUniform("ambient", vec3(0.4f));
+	shader->set_uniform("view", RENDERER->get_final_matrix());
+	shader->set_uniform("model", mat4::Translate(vec3(0, 0, -12)));
+	shader->set_uniform("light_matrix", RENDERER->get_light_matrix());
+	shader->set_uniform("ambient", vec3(0.4f));
 	
 	for (int c = 0; c < textures.size(); c++)
 	{
 		textures[c]->Bind(c);
-		shader->setUniform(texture_names[c], c);
+		shader->set_uniform(texture_names[c], c);
 	}
 
 	Texture* depth_tex = RENDERER->get_shadow_buffer()->depth_tex;
 	depth_tex->Bind(2);
-	shader->setUniform("shadow_map", 2);
+	shader->set_uniform("shadow_map", 2);
 
 	glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
 
@@ -232,25 +234,64 @@ Water::Water()
 
 void Water::draw()
 {
-	RENDERER->stop_culling();
-
 	normals->Bind(0);
 	RENDERER->get_reflection_buffer()->color_textures[0]->Bind(1);
 
 	shader->Bind();
-	shader->setUniform("view", RENDERER->get_final_matrix());
-	shader->setUniform("model", get_transform().get_model());
-	shader->setUniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
-	shader->setUniform("light_direction", vec3(0, 0, 1));
-	shader->setUniform("light_color", vec3(1.0f));
-	shader->setUniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
-	shader->setUniform("time", TIME->get_absolutetime() / 1000.0f);
+	shader->set_uniform("view", RENDERER->get_final_matrix());
+	shader->set_uniform("model", get_transform().get_model());
+	shader->set_uniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
+	shader->set_uniform("light_direction", vec3(0, 0, 1));
+	shader->set_uniform("light_color", vec3(1.0f));
+	shader->set_uniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
+	shader->set_uniform("time", TIME->get_absolutetime() / 1000.0f);
 
-	shader->setUniform("normals", 0);
-	shader->setUniform("reflection_tex", 1);
+	shader->set_uniform("normals", 0);
+	shader->set_uniform("reflection_tex", 1);
+
+	MeshHandler::get_singleton()->get_plane()->bind();
+	MeshHandler::get_singleton()->get_plane()->draw();
+}
+
+//=========================================================================
+//Vegetation
+//=========================================================================
+
+Vegetation::Vegetation()
+{
+	grass_tex = CONTENT->LoadTexture("Textures/grass_0.png");
+	shader = CONTENT->LoadShader("Shaders/Grass/Grass");
+
+	set_pos(vec3(100, 100, 1));
+	set_rotation(vec3(PI / 2.0f, 0, 0));
+}
+
+void Vegetation::draw()
+{
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GEQUAL, 0.01);
+
+	RENDERER->stop_culling();
+	grass_tex->Bind(0);
+
+	static Transform t = Transform(vec3(101, 101, 1), vec3(1.0f), vec3(PI / 2.0f, PI / 2.0f, 0));
+
+	shader->Bind();
+	shader->set_uniform("view", RENDERER->get_final_matrix());
+	shader->set_uniform("model", get_transform().get_model());
+	shader->set_uniform("color", vec4(1.0));
+	shader->set_uniform("texture_enabled", true);
+	shader->set_uniform("ambient", vec3(0.3f));
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();
 
+	shader->set_uniform("model", t.get_model());
+
+	MeshHandler::get_singleton()->get_plane()->draw();
+
 	RENDERER->use_culling();
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

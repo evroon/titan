@@ -37,7 +37,7 @@ void VisualEffect::post_process()
 	RENDERER->stop_depth_test();
 
 	shader->Bind();
-	shader->setUniform("rendered", 0);
+	shader->set_uniform("rendered", 0);
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();

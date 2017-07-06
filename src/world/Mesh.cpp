@@ -243,7 +243,7 @@ void Mesh::MeshNode::draw()
 		if (material->diffuse_texture)
 			material->diffuse_texture->Bind(0);
 
-		material->shader->setUniform("color", material->diffuse_color);
+		material->shader->set_uniform("color", material->diffuse_color);
 	}
 
 	glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);

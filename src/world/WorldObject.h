@@ -97,5 +97,4 @@ public:
 	
 	World2D *world = NULL;
 	Layer *layer = NULL;
-	String name;
 };

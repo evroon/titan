@@ -28,25 +28,27 @@ public:
 	void Reload();
 	void Free();
 
-    void Start();
+    void start();
     GLint createShader(const String& p_path, GLenum ShaderType);
 	void DetectUniforms();
     void createProgram();
     void Bind();
 	void UnBind();
 
-    void setUniform(const String &name, const bool value);
-    void setUniform(const String &name, const int value);
-    void setUniform(const String &name, const float value);
-	void setUniform(const String &name, const double value);
-    void setUniform(const String &name, const vec2 &value);
-	void setUniform(const String &name, const vec2i &value);
-    void setUniform(const String &name, const vec3 &value);
-	void setUniform(const String &name, const vec3i &value);
-    void setUniform(const String &name, const vec4 &value);
-	void setUniform(const String &name, const vec4i &value);
-	void setUniform(const String &name, const Color &value);
-    void setUniform(const String &name, const mat4 &value);
+	bool has_geometry_shader();
+
+    void set_uniform(const String &name, const bool value);
+    void set_uniform(const String &name, const int value);
+    void set_uniform(const String &name, const float value);
+	void set_uniform(const String &name, const double value);
+    void set_uniform(const String &name, const vec2 &value);
+	void set_uniform(const String &name, const vec2i &value);
+    void set_uniform(const String &name, const vec3 &value);
+	void set_uniform(const String &name, const vec3i &value);
+    void set_uniform(const String &name, const vec4 &value);
+	void set_uniform(const String &name, const vec4i &value);
+	void set_uniform(const String &name, const Color &value);
+    void set_uniform(const String &name, const mat4 &value);
 
 	void setWhiteColor(const String &name);
 
@@ -57,7 +59,10 @@ public:
 private:
     void setUniformNames();
 
-	int program_id, vertexshader_id, fragmentshader_id;
+	int program_id;
+	int vertexshader_id;
+	int fragmentshader_id;
+	int geometryshader_id;
 
 	bool isvalid = false;
 
@@ -66,4 +71,5 @@ private:
 
 	File vertex_path;
 	File fragment_path;
+	File geometry_path;
 };

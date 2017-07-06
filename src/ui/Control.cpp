@@ -389,14 +389,14 @@ void Control::draw_texture(Texture2D* p_texture, const rect2& p_area, const Colo
 	Transform transform = Transform(p_area.pos, p_area.size);
 
 	shader->Bind();
-	shader->setUniform("texbounds", p_bounds);
-	shader->setUniform("color", p_color);
-	shader->setUniform("texture_enabled", true);
+	shader->set_uniform("texbounds", p_bounds);
+	shader->set_uniform("color", p_color);
+	shader->set_uniform("texture_enabled", true);
 
 	p_texture->Bind(0);
 
 	mat4 final = RENDERER->get_final_matrix() * transform.get_model();
-	shader->setUniform("model", final);
+	shader->set_uniform("model", final);
 	mesh->draw();
 }
 
@@ -440,8 +440,8 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos, c
 	Shader* shader = CanvasData::get_singleton()->get_default_shader();
 
 	shader->Bind();
-	shader->setUniform("color", p_color);
-	shader->setUniform("texture_enabled", true);
+	shader->set_uniform("color", p_color);
+	shader->set_uniform("texture_enabled", true);
 
 	tex->Bind(0);
 
@@ -472,8 +472,8 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos, c
 
 		Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y), vec2(delta, tex->size.y) / 2.0f);
 
-		shader->setUniform("model", RENDERER->get_final_matrix() * transform.get_model());
-		shader->setUniform("texbounds", b);
+		shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
+		shader->set_uniform("texbounds", b);
 
 		mesh->draw();
 
@@ -490,12 +490,12 @@ void Control::draw_box(const rect2& p_area, const Color& p_color)
 	Transform transform = Transform(p_area.pos, p_area.size);
 
 	shader->Bind();
-	shader->setUniform("color", p_color);
-	shader->setUniform("texture_enabled", false);
+	shader->set_uniform("color", p_color);
+	shader->set_uniform("texture_enabled", false);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	shader->setUniform("model", RENDERER->get_final_matrix() * transform.get_model());
+	shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 	mesh->draw();
 }
 
@@ -521,12 +521,12 @@ void Control::draw_line(const vec2& p_start, const vec2& p_end, const Color& p_c
 	Transform transform = Transform(center, vec2(1.0f, length), angle);
 
 	shader->Bind();
-	shader->setUniform("color", p_color);
-	shader->setUniform("texture_enabled", false);
+	shader->set_uniform("color", p_color);
+	shader->set_uniform("texture_enabled", false);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	shader->setUniform("model", RENDERER->get_final_matrix() * transform.get_model());
+	shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 	mesh->bind();
 	mesh->draw();
 
@@ -561,8 +561,8 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 	Transform transform;
 
 	shader->Bind();
-	shader->setUniform("color", p_color);
-	shader->setUniform("texture_enabled", true);
+	shader->set_uniform("color", p_color);
+	shader->set_uniform("texture_enabled", true);
 
 	p_texture->Bind(0);
 
@@ -580,8 +580,8 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 
 			transform = Transform(new_area.pos, new_area.size);
 
-			shader->setUniform("texbounds", bounds);
-			shader->setUniform("model", RENDERER->get_final_matrix() * transform.get_model());
+			shader->set_uniform("texbounds", bounds);
+			shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 
 			mesh->draw();
 		}

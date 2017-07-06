@@ -29,12 +29,12 @@ Color UIBox::get_color() const
 void UIBox::prepare_draw()
 {
 	shader->Bind();
-	shader->setUniform("color", color);
+	shader->set_uniform("color", color);
 }
 
 void UIBox::draw_mesh()
 {
-	shader->setUniform("model", RENDERER->get_final_matrix() * transform.get_model());
+	shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 	mesh_2d->draw();
 }
 void UIBox::draw()

@@ -104,17 +104,17 @@ void Sprite::draw()
 	t.update();									//TODO
 
 	shader->Bind();
-	shader->setUniform("model", RENDERER->get_final_matrix() * t.get_model());
-	shader->setUniform("color", get_color());
-	shader->setUniform("texture_enabled", true);
+	shader->set_uniform("model", RENDERER->get_final_matrix() * t.get_model());
+	shader->set_uniform("color", get_color());
+	shader->set_uniform("texture_enabled", true);
 
 	if (packed)
 	{
 		vec4 b = GetTileBounds(activeindex);
-		shader->setUniform("texbounds", b);
+		shader->set_uniform("texbounds", b);
 	}
 	else
-		shader->setUniform("texbounds", bounds);
+		shader->set_uniform("texbounds", bounds);
 
 	texture->Bind(0);
 	defaultmesh->draw();
@@ -125,7 +125,7 @@ void Sprite::draw()
 void Sprite::SimpleDraw()
 {
 	CONTENT->SimpleShader->Bind();
-	CONTENT->SimpleShader->setUniform("model", get_transform().get_model());
+	CONTENT->SimpleShader->set_uniform("model", get_transform().get_model());
 
 	defaultmesh->draw();
 }
