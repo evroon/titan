@@ -152,7 +152,7 @@ float Terrain::get_height(const vec2& p_pos) const
 {
 	vec2 pos = p_pos;
 
-	if (pos.x < 0 || pos.y < 0 || pos.x > size.x || pos.y > size.y)
+	if (pos.x < 0 || pos.y < 0 || pos.x >= size.x || pos.y >= size.y)
 		return 0.0f;
 
 	float bl = HEIGHT(to_int(pos.x), to_int(pos.y));
@@ -257,41 +257,66 @@ void Water::draw()
 //Vegetation
 //=========================================================================
 
-Vegetation::Vegetation()
+Vegetation::Vegetation(Terrain* p_parent)
 {
+	terrain = p_parent;
+
 	grass_tex = CONTENT->LoadTexture("Textures/grass_0.png");
 	shader = CONTENT->LoadShader("Shaders/Grass/Grass");
 
 	set_pos(vec3(100, 100, 1));
 	set_rotation(vec3(PI / 2.0f, 0, 0));
+
+	for (int c = 0; c < 95; c++)
+	{
+		vec3 pos = vec3(100.0f, 100, 1);
+
+		while (true)
+		{
+			float r1 = (Math::random() - 0.5f) * 2.0f * 100.0f;
+			float r2 = (Math::random() - 0.5f) * 2.0f * 100.0f;
+
+			pos += vec3(r1, r2, 0.0f);
+
+			float height = terrain->get_height(pos.get_xy());
+
+			if (height > 0.0f)
+			{
+				pos += vec3(0, 0, height);
+				break;
+			}
+			break;
+		}
+		
+		Transform t1 = Transform(pos + vec3(1, 1, 0), vec3(1.0f), vec3(PI / 2.0f, PI / 2.0f, 0));
+		Transform t2 = Transform(pos, vec3(1.0f), vec3(PI / 2.0f, 0, 0));
+
+		model_matrices.push_back(t1.get_model());
+		model_matrices.push_back(t2.get_model());
+	}
+
+	int i;
+	glGetIntegerv(GL_MAX_VERTEX_UNIFORM_VECTORS, &i);
+
+	T_LOG(i);
+
+	shader->Bind();
+	shader->set_uniform("model", model_matrices);
 }
 
 void Vegetation::draw()
 {
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	
-	glEnable(GL_ALPHA_TEST);
-	glAlphaFunc(GL_GEQUAL, 0.01);
-
 	RENDERER->stop_culling();
 	grass_tex->Bind(0);
 
-	static Transform t = Transform(vec3(101, 101, 1), vec3(1.0f), vec3(PI / 2.0f, PI / 2.0f, 0));
-
 	shader->Bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
-	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("color", vec4(1.0));
 	shader->set_uniform("texture_enabled", true);
 	shader->set_uniform("ambient", vec3(0.3f));
 
 	MeshHandler::get_singleton()->get_plane()->bind();
-	MeshHandler::get_singleton()->get_plane()->draw();
-
-	shader->set_uniform("model", t.get_model());
-
-	MeshHandler::get_singleton()->get_plane()->draw();
+	MeshHandler::get_singleton()->get_plane()->draw_instanced(model_matrices.size());
 
 	RENDERER->use_culling();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <math.h>
+#include <cstdlib>
+#include <ctime>
 
 #include "core/Array.h"
 #include "Vec2.h"
@@ -56,6 +58,8 @@ public:
 
 	static inline float DegToRad(float p_degrees) { return p_degrees * PI / 180; }
 	static inline float RadToDeg(float p_radians) { return p_radians / PI * 180; }
+
+	static inline float random() { return static_cast<float>(rand()) / static_cast<float>(RAND_MAX); }
 			
 	static vec2 GetVector(float angle)
 	{
@@ -101,5 +105,10 @@ public:
 		float l3 = 1.0f - l1 - l2;
 
 		return l1 * p_p1.y + l2 * p_p2.y + l3 * p_p3.y;
+	}
+
+	static void init()
+	{
+		srand(static_cast<unsigned>(time(NULL)));
 	}
 };

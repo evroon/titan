@@ -59,7 +59,7 @@ void Scene::Init()
 
 		Sky* sky = new Sky;
 		
-		Vegetation* veg = new Vegetation;
+		Vegetation* veg = new Vegetation(t);
 
 		w->add_worldobject(sky);
 		w->add_worldobject(m);
@@ -131,10 +131,12 @@ void Scene::update()
 	if (KEYBOARD->is_button_pressed(Key::KEY_F))
 		c->move(movement_speed * vec3(0, 0, -1));
 
-	vec2 pos = c->get_pos().get_xy();
+	vec3 pos = c->get_pos();
+	float height = t->get_height(pos.get_xy());
 
-	c->set_pos(vec3(pos.x, pos.y, t->get_height(pos) + 1.0f));
-
+	if (c->get_pos().z < height + 1.0f)
+		c->set_pos(vec3(pos.x, pos.y, height + 1.0f));
+		
 	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
 
 	VIEW->update();

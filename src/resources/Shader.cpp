@@ -285,6 +285,13 @@ void Shader::set_uniform(const String &name, const mat4 &value)
     glUniformMatrix4fv(uniforms[name].location, 1, false, &value.m[0]);
 }
 
+void Shader::set_uniform(const String &name, const Array<mat4> &value)
+{
+	CHECK_NAME
+
+	glUniformMatrix4fv(uniforms[name].location, value.size(), false, &(&value[0])->m[0]);
+}
+
 void Shader::setWhiteColor(const String &name)
 {
 	CHECK_NAME

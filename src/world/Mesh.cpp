@@ -150,6 +150,15 @@ void SimpleMesh::draw()
 	glDisableVertexAttribArray(0);
 }
 
+void SimpleMesh::draw_instanced(int p_count)
+{
+	glEnableVertexAttribArray(0);
+
+	glDrawElementsInstanced(draw_type, faces_count * (draw_type == GL_TRIANGLES ? 3 : 2), GL_UNSIGNED_BYTE, 0, p_count);
+
+	glDisableVertexAttribArray(0);
+}
+
 //=========================================================================
 //Mesh
 //=========================================================================

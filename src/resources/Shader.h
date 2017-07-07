@@ -49,6 +49,7 @@ public:
 	void set_uniform(const String &name, const vec4i &value);
 	void set_uniform(const String &name, const Color &value);
     void set_uniform(const String &name, const mat4 &value);
+	void set_uniform(const String & name, const Array<mat4>& value);
 
 	void setWhiteColor(const String &name);
 

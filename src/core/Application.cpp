@@ -68,6 +68,7 @@ void Application::InitEngine()
 	Input::init();
 	EventManager::init();
 	SceneManager::init();
+	Math::init();
 
 	INPUT->parent = this;
 

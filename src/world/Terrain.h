@@ -75,11 +75,14 @@ class Vegetation : public WorldObject
 	OBJ_DEFINITION(Vegetation, WorldObject);
 
 public:
-	Vegetation();
+	Vegetation(Terrain* p_parent);
 
 	void draw() override;
 
 private:
 	Shader* shader;
 	Texture2D* grass_tex;
+	Terrain* terrain;
+
+	Array<mat4> model_matrices;
 };

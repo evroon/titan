@@ -40,7 +40,9 @@ public:
 	void SetAttributes(Shader *shader);
 	void bind();
 	void unbind();
+
 	void draw();
+	void draw_instanced(int p_count);
 
 private:
 	Vertex* vertices;
