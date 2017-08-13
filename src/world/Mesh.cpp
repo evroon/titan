@@ -250,7 +250,7 @@ void Mesh::MeshNode::draw()
 		material->shader->Bind();
 
 		if (material->diffuse_texture)
-			material->diffuse_texture->Bind(0);
+			material->diffuse_texture->bind(0);
 
 		material->shader->set_uniform("color", material->diffuse_color);
 	}

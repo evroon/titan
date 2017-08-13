@@ -25,6 +25,10 @@ Terrain::Terrain()
 	texture_names.push_back("rocks");
 
 	//add_child(new Water);
+
+
+	set_pos(vec3(0, 0, -12.0f));
+	set_size(vec3(10, 10, 10));
 }
 
 
@@ -150,7 +154,7 @@ void Terrain::setup_buffers()
 
 float Terrain::get_height(const vec2& p_pos) const
 {
-	vec2 pos = p_pos;
+	vec2 pos = p_pos / get_size().get_xy();
 
 	if (pos.x < 0 || pos.y < 0 || pos.x >= size.x || pos.y >= size.y)
 		return 0.0f;
@@ -173,9 +177,15 @@ float Terrain::get_height(const vec2& p_pos) const
 		result = Math::get_barry_centric(vec3(1.0f, br, 0.0f), vec3(1.0f, ur, 1.0f), vec3(0, ul, 1), clipped);
 	}
 
-	result -=12;
+	result *= get_size().z;
+	result += get_pos().z;
 
 	return result;
+}
+
+float Terrain::get_height_fast(const vec2& p_pos) const
+{
+	return HEIGHT(p_pos.x, p_pos.y);
 }
 
 void Terrain::draw()
@@ -191,18 +201,18 @@ void Terrain::draw()
 
 	shader->Bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
-	shader->set_uniform("model", mat4::Translate(vec3(0, 0, -12)));
+	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("light_matrix", RENDERER->get_light_matrix());
 	shader->set_uniform("ambient", vec3(0.4f));
 	
 	for (int c = 0; c < textures.size(); c++)
 	{
-		textures[c]->Bind(c);
+		textures[c]->bind(c);
 		shader->set_uniform(texture_names[c], c);
 	}
 
 	Texture* depth_tex = RENDERER->get_shadow_buffer()->depth_tex;
-	depth_tex->Bind(2);
+	depth_tex->bind(2);
 	shader->set_uniform("shadow_map", 2);
 
 	glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
@@ -234,8 +244,8 @@ Water::Water()
 
 void Water::draw()
 {
-	normals->Bind(0);
-	RENDERER->get_reflection_buffer()->color_textures[0]->Bind(1);
+	normals->bind(0);
+	RENDERER->get_reflection_buffer()->color_textures[0]->bind(1);
 
 	shader->Bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
@@ -307,7 +317,7 @@ Vegetation::Vegetation(Terrain* p_parent)
 void Vegetation::draw()
 {
 	RENDERER->stop_culling();
-	grass_tex->Bind(0);
+	grass_tex->bind(0);
 
 	shader->Bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
@@ -319,4 +329,16 @@ void Vegetation::draw()
 	MeshHandler::get_singleton()->get_plane()->draw_instanced(model_matrices.size());
 
 	RENDERER->use_culling();
+}
+
+//=========================================================================
+//Clouds
+//=========================================================================
+
+#include "math\Noise.h"
+
+Clouds::Clouds()
+{
+	PerlinNoise n;
+	texture = n.create_3d_texture();
 }

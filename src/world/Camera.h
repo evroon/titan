@@ -54,6 +54,8 @@ public:
 
 	mat4 get_inverse() const;
 
+	float get_focal_length() const;
+
 
 private:
 	Viewport* get_viewport() const;

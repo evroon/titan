@@ -558,7 +558,7 @@ void TreeView::notification(int p_notification)
 				
 				if (item->childs)
 				{
-					vec2 size = expanded_tex->size.y / 4.0f;
+					vec2 size = expanded_tex->get_size().y / 4.0f;
 
 					left += size.x;
 
@@ -571,11 +571,11 @@ void TreeView::notification(int p_notification)
 				}
 				else
 				{
-					left += expanded_tex->size.y / 2.0f + 4;
+					left += expanded_tex->get_size().y / 2.0f + 4;
 				}
 				if (item->get_icon())
 				{
-					vec2 size = item->get_icon()->size / 2.0f;
+					vec2 size = item->get_icon()->get_size() / 2.0f;
 					vec2 pos = vec2(left + size.x, item_area.pos.y);
 
 					draw_texture(item->get_icon(), rect2(pos, size), Color::White);

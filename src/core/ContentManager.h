@@ -32,6 +32,7 @@ public:
 
 	void AddTexture(Texture2D *tex);
 
+	// load
 	Object* Load(const File &p_file);
 	Texture2D* LoadTexture(const File& p_file);
 	RawTexture2D * LoadRawTexture(const File & p_file);
@@ -43,6 +44,12 @@ public:
 	VariantType GetType(const File& p_file);
 	void ReloadAll();
 	void FreeAll();
+
+	// reload
+
+
+	// free
+	void free_textfile(const File& p_file);
 
 	File get_assets_dir() const;
 

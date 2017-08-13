@@ -199,3 +199,8 @@ mat4 Camera::get_inverse() const
 
 	return view_inverse * projection_inverse;
 }
+
+float Camera::get_focal_length() const
+{
+	return 1.0f / Math::tan(fov / 2.0f);
+}

@@ -67,11 +67,19 @@ void Shader::Reload()
 
 void Shader::Free()
 {
+	CONTENT->free_textfile(vertex_path);
+	CONTENT->free_textfile(fragment_path);
+	CONTENT->free_textfile(geometry_path);
+
 	if (!isvalid)
 		return;
 
 	glDeleteShader(vertexshader_id);
 	glDeleteShader(fragmentshader_id);
+
+	if (geometryshader_id > -1)
+		glDeleteShader(geometryshader_id);
+
 	glDeleteProgram(program_id);
 }
 

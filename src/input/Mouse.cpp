@@ -65,9 +65,9 @@ vec2 Mouse::get_position()
 {
 	vec2i pos;
 
-	//SDL_GetMouseState(&pos.x, &pos.y);
+	SDL_GetMouseState(&pos.x, &pos.y);
 
-	//pos -= WINDOWSIZE / 2;
+	pos -= WINDOWSIZE / 2;
 	pos.y *= -1;
 
 	return vec2(to_float(pos.x), to_float(pos.y));

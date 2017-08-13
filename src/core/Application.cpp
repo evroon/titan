@@ -31,8 +31,6 @@ void Application::InitSDL()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	//Titan::height = Titan::width = 1200;
-
 	window = new Window(vec2i(2400, 1300));
 	window->CreateGLContext();
 }

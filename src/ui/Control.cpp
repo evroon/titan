@@ -393,7 +393,7 @@ void Control::draw_texture(Texture2D* p_texture, const rect2& p_area, const Colo
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
 
-	p_texture->Bind(0);
+	p_texture->bind(0);
 
 	mat4 final = RENDERER->get_final_matrix() * transform.get_model();
 	shader->set_uniform("model", final);
@@ -443,7 +443,7 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos, c
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
 
-	tex->Bind(0);
+	tex->bind(0);
 
 	for (int i = 0; i < p_text.size(); i++)
 	{
@@ -466,11 +466,11 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos, c
 		}
 
 		vec4 bounds = p_font->get_renderer()->get_bounds(c);
-		vec4 b = vec4(bounds.x / tex->size.x, bounds.y / tex->size.x, 1, 0);
+		vec4 b = vec4(bounds.x / tex->get_size().x, bounds.y / tex->get_size().x, 1, 0);
 
 		float delta = bounds.y - bounds.x;
 
-		Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y), vec2(delta, tex->size.y) / 2.0f);
+		Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y), vec2(delta, tex->get_size().y) / 2.0f);
 
 		shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 		shader->set_uniform("texbounds", b);
@@ -545,7 +545,7 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 		return;
 	}
 
-	vec2 tex_size = p_texture->size;
+	vec2 tex_size = p_texture->get_size();
 	vec2 size = p_area.size;
 
 	vec2 pos = p_area.get_bottom_left();
@@ -564,7 +564,7 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
 
-	p_texture->Bind(0);
+	p_texture->bind(0);
 
 	for (int x = 0; x < 3; x++)
 	{
@@ -576,7 +576,7 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 			rect2 new_area = rect2(h_pos[x], h_pos[x + 1], v_pos[y + 1], v_pos[y]);
 
 			vec4 b = vec4(horiz_bounds, vert_bounds);
-			vec4 bounds = vec4(vec2(b.x, b.y) / p_texture->size.x, vec2(b.z, b.w) / p_texture->size.y);
+			vec4 bounds = vec4(vec2(b.x, b.y) / p_texture->get_size().x, vec2(b.z, b.w) / p_texture->get_size().y);
 
 			transform = Transform(new_area.pos, new_area.size);
 

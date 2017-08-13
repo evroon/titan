@@ -36,7 +36,7 @@ void Frame::notification(int p_notification)
 
 void Frame::build()
 {
-	vec2 tex_size = texture->size;
+	vec2 tex_size = texture->get_size();
 	vec2 size = area.size;
 
 	vec2 pos = area.get_bottom_left();

@@ -18,6 +18,7 @@ public:
 	void setup_buffers();
 
 	float get_height(const vec2& p_pos) const;
+	float get_height_fast(const vec2& p_pos) const;
 
 	void draw() override;
 
@@ -85,4 +86,16 @@ private:
 	Terrain* terrain;
 
 	Array<mat4> model_matrices;
+};
+
+class Clouds : public WorldObject
+{
+	OBJ_DEFINITION(Clouds, WorldObject);
+
+public:
+	Clouds();
+
+
+	Texture3D* texture;
+	Shader* shader;
 };

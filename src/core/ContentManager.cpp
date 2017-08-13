@@ -206,6 +206,13 @@ void ContentManager::FreeAll()
 	Font::Quit();
 }
 
+void ContentManager::free_textfile(const File & p_file)
+{
+	for (int c = 0; c < textfiles.size(); c++)
+		if (textfiles[c]->file.get_absolute_path() == p_file)
+			textfiles.clear(c);
+}
+
 File ContentManager::get_assets_dir() const
 {
 	return assets_directory;

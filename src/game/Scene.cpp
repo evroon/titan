@@ -20,6 +20,8 @@
 
 #include "input/Keyboard.h"
 
+#include "world\Raycaster.h"
+
 Scene::Scene(const String &p_name)
 {
 	set_name(p_name);
@@ -58,6 +60,9 @@ void Scene::Init()
 		water->set_name("water");
 
 		Sky* sky = new Sky;
+
+		Clouds* c = new Clouds;
+		c->set_name("clouds");
 		
 		Vegetation* veg = new Vegetation(t);
 
@@ -66,6 +71,7 @@ void Scene::Init()
 		w->add_worldobject(t);
 		w->add_worldobject(water);
 		w->add_worldobject(veg);
+		w->add_worldobject(c);
 
 		w->get_active_camera()->set_rotation(vec3(0, 0, PI));
 
@@ -131,6 +137,9 @@ void Scene::update()
 	if (KEYBOARD->is_button_pressed(Key::KEY_F))
 		c->move(movement_speed * vec3(0, 0, -1));
 
+	if (KEYBOARD->is_button_pressed(Key::KEY_T))
+		CONTENT->LoadShader("EngineCore/PostProcess")->Reload();
+
 	vec3 pos = c->get_pos();
 	float height = t->get_height(pos.get_xy());
 
@@ -140,6 +149,9 @@ void Scene::update()
 	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
 
 	VIEW->update();
+
+	Raycaster r = Raycaster(c);
+	vec3 p = r.raycast(MOUSE->get_position());
 }
 
 void Scene::Draw()

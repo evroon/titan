@@ -60,10 +60,6 @@ void Renderer::Prepare()
 
 void Renderer::Finish()
 {
-	render_buffer->color_textures[0]->Bind(0);
-	//shadow_buffer->depth_tex->Bind(0);
-	//render_buffer->depth_tex->Bind(0);
-
 	VISUALEFFECT->post_process();
 }
 

@@ -26,14 +26,17 @@ public:
 	Texture(int p_t) { type = p_t; }
 	~Texture();
 
-	void Bind(int p_unit);
-	void UnBind(int p_unit);
-	GLuint ID;
+	void bind(int p_unit);
+	void unbind(int p_unit);
+
+	unsigned get_id();
 
 protected:
-	void GenerateGLTexture();
+	void generate_gl_texture();
 
 	bool loaded = false;
+	GLuint id;
+
 private:
 	int type;
 };
@@ -43,9 +46,13 @@ class Texture3D : public Texture
 	OBJ_DEFINITION(Texture3D, Texture)
 
 public:
-	Texture3D() : Texture(GL_TEXTURE_3D) { GenerateGLTexture(); } //TODO
+	Texture3D() : Texture(GL_TEXTURE_3D) { }
+	Texture3D(const vec3& p_size, int p_index);
 
-	vec3i size;
+	vec3 get_size() const;
+
+private:
+	vec3 size;
 };
 
 class Texture2D : public Texture
@@ -56,11 +63,14 @@ public:
 	Texture2D() : Texture(GL_TEXTURE_2D) { }
 	Texture2D(const vec2& p_size, bool p_byte);
 	Texture2D(const vec2i& p_size, bool p_byte = true) : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y)), p_byte) { }
+	Texture2D(const vec2& p_size, int p_index);
 	Texture2D(const String &p_filepath);
 	Texture2D(SDL_Surface *p_surface);
-
 	Texture2D(aiTexture* p_texture);
 
+	vec2 get_size() const;
+
+protected:
 	vec2 size;
 };
 
@@ -72,6 +82,7 @@ public:
 	Texture1D() = default;
 	Texture1D(int p_size);
 
+protected:
 	int size;
 };
 

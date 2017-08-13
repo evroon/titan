@@ -94,7 +94,7 @@ public:
 	
 	Vec3<T> get_xyz() const
 	{
-		return{ x, y };
+		return{ x, y, z };
 	}
 
 	//Set

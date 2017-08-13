@@ -10,9 +10,9 @@
 
 SimpleMesh * Sprite::defaultmesh;
 
-Sprite::Sprite(Texture2D *tex, Shader *shader)	: Sprite(tex, vec2(tex->size.x, tex->size.y), shader) { }
+Sprite::Sprite(Texture2D *tex, Shader *shader)	: Sprite(tex, tex->get_size(), shader) { }
 Sprite::Sprite(Texture2D *tex, vec2 ts)			: Sprite(tex, ts, CONTENT->Shader2D) { }
-Sprite::Sprite(Texture2D *tex)					: Sprite(tex, vec2(tex->size.x, tex->size.y)) { }
+Sprite::Sprite(Texture2D *tex)					: Sprite(tex, tex->get_size()) { }
 Sprite::Sprite(const String &tex_name)			: Sprite(CONTENT->LoadTexture(tex_name)) { }
 
 Sprite::Sprite(Texture2D *tex, vec2 ts, Shader *shader)
@@ -37,8 +37,8 @@ Sprite::~Sprite()
 void Sprite::SetTileSize(const vec2 &size)
 {
 	tilesize = size;
-	tilecount = { texture->size.x / tilesize.x, texture->size.y / tilesize.y };
-	packed = tilesize.x != texture->size.x && tilesize.y != texture->size.y;
+	tilecount = { texture->get_size().x / tilesize.x, texture->get_size().y / tilesize.y };
+	packed = tilesize.x != texture->get_size().x && tilesize.y != texture->get_size().y;
 }
 
 vec2 Sprite::GetTilePosition(int index) const
@@ -51,7 +51,7 @@ vec2 Sprite::GetTilePosition(int index) const
 vec4 Sprite::GetTileBounds(int index) const
 {
 	vec2 pos = GetTilePosition(index) * tilesize;
-	return vec4(pos.x, pos.x + tilesize.x, pos.y + tilesize.y, pos.y) / vec4(vec2(texture->size.x), vec2(texture->size.y));
+	return vec4(pos.x, pos.x + tilesize.x, pos.y + tilesize.y, pos.y) / vec4(vec2(texture->get_size().x), vec2(texture->get_size().y));
 }
 
 void Sprite::set_shader(Shader *p_shader)
@@ -116,7 +116,7 @@ void Sprite::draw()
 	else
 		shader->set_uniform("texbounds", bounds);
 
-	texture->Bind(0);
+	texture->bind(0);
 	defaultmesh->draw();
 
 	shader->setWhiteColor("color");

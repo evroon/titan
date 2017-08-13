@@ -7,10 +7,10 @@
 //Texture
 //=========================================================================
 
-void Texture::GenerateGLTexture()
+void Texture::generate_gl_texture()
 {
-	glGenTextures(1, &ID);
-	glBindTexture(type, ID);
+	glGenTextures(1, &id);
+	glBindTexture(type, id);
 	glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -21,29 +21,62 @@ void Texture::GenerateGLTexture()
 
 Texture::~Texture()
 {
-    glDeleteTextures(1, &ID);
+    glDeleteTextures(1, &id);
 }
 
-void Texture::Bind(int p_unit)
+void Texture::bind(int p_unit)
 {
-	if (!loaded) return;
+	if (!loaded)
+		return;
+
     glActiveTexture(GL_TEXTURE0 + p_unit);
-    glBindTexture(type, ID);
+    glBindTexture(type, id);
 }
-void Texture::UnBind(int p_unit)
+void Texture::unbind(int p_unit)
 {
-	if (!loaded) return;
+	if (!loaded)
+		return;
+
 	glActiveTexture(GL_TEXTURE0 + p_unit);
 	glBindTexture(type, 0);
+}
+
+unsigned Texture::get_id()
+{
+	return id;
+}
+
+//=========================================================================
+//Texture3D
+//=========================================================================
+
+Texture3D::Texture3D(const vec3& p_size, int p_index) : Texture3D()
+{
+	size = p_size;
+	id = p_index;
+	loaded = true;
+}
+
+
+vec3 Texture3D::get_size() const
+{
+	return size;
 }
 
 //=========================================================================
 //Texture2D
 //=========================================================================
 
+Texture2D::Texture2D(const vec2& p_size, int p_index) : Texture2D()
+{
+	loaded = true;
+	size = p_size;
+	id = p_index;
+}
+
 Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D()
 { 
-	GenerateGLTexture();
+	generate_gl_texture();
 
 	if (p_byte)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -63,7 +96,7 @@ Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 		return;
 	}
 
-	GenerateGLTexture();
+	generate_gl_texture();
 
 	int texture_format = image->format->Amask ? GL_RGBA : GL_RGB;
 	glTexImage2D(GL_TEXTURE_2D, 0, texture_format, image->w, image->h, 0, texture_format, GL_UNSIGNED_BYTE, image->pixels);
@@ -75,7 +108,7 @@ Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 
 Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D()
 {
-	GenerateGLTexture();
+	generate_gl_texture();
 
 	int texture_format = p_surface->format->Amask ? GL_RGBA : GL_RGB;
 	glTexImage2D(GL_TEXTURE_2D, 0, texture_format, p_surface->w, p_surface->h, 0, texture_format, GL_UNSIGNED_BYTE, p_surface->pixels);
@@ -87,12 +120,17 @@ Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D()
 
 Texture2D::Texture2D(aiTexture* p_texture) : Texture2D()
 {
-	GenerateGLTexture();
+	generate_gl_texture();
 
 	int texture_format = GL_BGRA;
 	glTexImage2D(GL_TEXTURE_2D, 0, texture_format, (int) p_texture->mWidth, (int) p_texture->mHeight, 0, texture_format, GL_UNSIGNED_INT_8_8_8_8_REV, p_texture->pcData);
 
 	size = vec2(to_float(p_texture->mWidth), to_float(p_texture->mHeight));
+}
+
+vec2 Texture2D::get_size() const
+{
+	return size;
 }
 
 //=========================================================================
@@ -101,7 +139,7 @@ Texture2D::Texture2D(aiTexture* p_texture) : Texture2D()
 
 Texture1D::Texture1D(int p_size) : Texture(GL_TEXTURE_1D)
 {
-	GenerateGLTexture();
+	generate_gl_texture();
 
 	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, p_size, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 }
@@ -155,8 +193,8 @@ DepthTexture2D::DepthTexture2D(const vec2i& p_size)
 	size = vec2(p_size.x, p_size.y);
 	loaded = true;
 
-	glGenTextures(1, &ID);
-	glBindTexture(GL_TEXTURE_2D, ID);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

@@ -173,7 +173,7 @@ void FontRenderer::init()
 
 vec4 FontRenderer::get_bounds(Char p_c) const
 {
-	return vec4(starts[p_c.kar - 33], ends[p_c.kar - 33], texture->size.y, 0);
+	return vec4(starts[p_c.kar - 33], ends[p_c.kar - 33], texture->get_size().y, 0);
 }
 
 float FontRenderer::get_space_offset() const
