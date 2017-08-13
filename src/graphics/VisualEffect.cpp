@@ -46,7 +46,7 @@ void VisualEffect::post_process()
 
 	RENDERER->stop_depth_test();
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("rendered", 0);
 	shader->set_uniform("noise", 1);
 	shader->set_uniform("cam_pos", cam->get_pos());

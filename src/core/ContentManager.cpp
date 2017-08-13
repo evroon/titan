@@ -182,7 +182,7 @@ VariantType ContentManager::GetType(const File& p_file)
 }
 
 #define RELOAD(X) for (int c = 0; c < X.size(); c++) \
-					  X[c]->Reload();
+					  X[c]->reload();
 
 void ContentManager::ReloadAll()
 {

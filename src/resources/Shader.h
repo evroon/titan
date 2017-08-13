@@ -2,6 +2,7 @@
 
 #include <glew\glew.h>
 
+#include "types\UBO.h"
 #include "Resource.h"
 #include "File.h"
 
@@ -17,23 +18,29 @@ public:
     struct Uniform
 	{
 		GLfloat count;
-		GLuint location, index;
+		GLuint location;
+		GLuint index;
 		GLint size;
 		GLsizei length;
 		GLchar name[100];
 		GLenum type;
 	};
 
-	void Load();
-	void Reload();
-	void Free();
+	struct Block
+	{
+		GLuint index;
+		GLuint location;
+		GLchar name[100];
+		GLsizei length;
+	};
+
+	void load() override;
+	void reload() override;
+	void free() override;
 
     void start();
-    GLint createShader(const String& p_path, GLenum ShaderType);
-	void DetectUniforms();
-    void createProgram();
-    void Bind();
-	void UnBind();
+    void bind();
+	void unbind();
 
 	bool has_geometry_shader();
 
@@ -51,14 +58,15 @@ public:
     void set_uniform(const String &name, const mat4 &value);
 	void set_uniform(const String & name, const Array<mat4>& value);
 
-	void setWhiteColor(const String &name);
-
-    void setModelMatrix(mat4 *matrix);
+	void bind_buffer(const String& p_name, Ref<UBO> p_ubo);
 
 	int get_program() const;
 
 private:
-    void setUniformNames();
+	GLint create_shader(const String& p_path, GLenum ShaderType);
+	void create_program();
+
+    void set_info();
 
 	int program_id;
 	int vertexshader_id;
@@ -68,7 +76,7 @@ private:
 	bool isvalid = false;
 
     Dictionary<String, Uniform> uniforms;
-	Array<String> DefaultUniforms;
+	Dictionary<String, Block> blocks;
 
 	File vertex_path;
 	File fragment_path;

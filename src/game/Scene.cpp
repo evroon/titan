@@ -138,7 +138,7 @@ void Scene::update()
 		c->move(movement_speed * vec3(0, 0, -1));
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_T))
-		CONTENT->LoadShader("EngineCore/PostProcess")->Reload();
+		CONTENT->LoadShader("EngineCore/PostProcess")->reload();
 
 	vec3 pos = c->get_pos();
 	float height = t->get_height(pos.get_xy());

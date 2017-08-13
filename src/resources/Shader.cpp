@@ -31,41 +31,39 @@ Shader::Shader(const String &p_path)
 
 	file = p_path;
 
-	Load();
+	load();
 }
 
 Shader::~Shader()
 {
-	Free();
+	free();
 }
 
-void Shader::Load()
+void Shader::load()
 {
-	vertexshader_id = createShader(vertex_path, GL_VERTEX_SHADER);
+	vertexshader_id = create_shader(vertex_path, GL_VERTEX_SHADER);
 
 	if (vertexshader_id != -1)
-		fragmentshader_id = createShader(fragment_path, GL_FRAGMENT_SHADER);
+		fragmentshader_id = create_shader(fragment_path, GL_FRAGMENT_SHADER);
 
 	if (has_geometry_shader() && fragmentshader_id != -1)
-		geometryshader_id = createShader(geometry_path, GL_GEOMETRY_SHADER);
+		geometryshader_id = create_shader(geometry_path, GL_GEOMETRY_SHADER);
 
 	isvalid = vertexshader_id != -1 && fragmentshader_id != -1;
 
 	if (isvalid)
-		createProgram();
+		create_program();
 	else
 		T_ERROR("Failed to compile: " + get_file() + "!");
-
-	DetectUniforms();
 }
 
-void Shader::Reload()
+void Shader::reload()
 {
-	Free();
-	Load();
+	free();
+	load();
 }
 
-void Shader::Free()
+void Shader::free()
 {
 	CONTENT->free_textfile(vertex_path);
 	CONTENT->free_textfile(fragment_path);
@@ -83,22 +81,12 @@ void Shader::Free()
 	glDeleteProgram(program_id);
 }
 
-void Shader::DetectUniforms()
-{
-	for (auto p : uniforms)
-	{
-		if ( p.first == "model" || p.first == "texbounds" || p.first == "windowsize" ||
-			 p.first == "texcoords" || p.first == "color" || p.first == "tex") 
-					DefaultUniforms.push_back(p.first); 
-	};
-}
-
 void Shader::start()
 {
     glUseProgram(program_id);
 }
 
-GLint Shader::createShader(const String& p_path, GLenum ShaderType)
+GLint Shader::create_shader(const String& p_path, GLenum ShaderType)
 {
     GLint ShaderID = glCreateShader(ShaderType);
     GLchar infolog[MAX_LOG_LENGTH];
@@ -133,7 +121,7 @@ GLint Shader::createShader(const String& p_path, GLenum ShaderType)
     return ShaderID;
 }
 
-void Shader::createProgram()
+void Shader::create_program()
 {
     GLint linkStatus, infologlength;
     GLchar *infolog;
@@ -163,15 +151,15 @@ void Shader::createProgram()
 	else
     	 glUseProgram(program_id);
 
-    setUniformNames();
+    set_info();
 }
 
-void Shader::Bind()
+void Shader::bind()
 {
 	if (isvalid)
 		glUseProgram(program_id);
 }
-void Shader::UnBind()
+void Shader::unbind()
 {
 	glUseProgram(0);
 }
@@ -181,7 +169,7 @@ bool Shader::has_geometry_shader()
 	return geometry_path.is_file();
 }
 
-void Shader::setUniformNames()
+void Shader::set_info()
 {
 	Uniform uni;
     GLint count = 0;
@@ -190,11 +178,23 @@ void Shader::setUniformNames()
 
     for (GLint c = 0; c < count; c++)
     {
-        glGetActiveUniform(program_id, c, sizeof(get_file()) - 1, &uni.length, &uni.size, &uni.type, uni.name);
+        glGetActiveUniform(program_id, c, sizeof(uni.name) - 1, &uni.length, &uni.size, &uni.type, uni.name);
         uni.location = glGetUniformLocation(program_id, uni.name);
         uni.index = c;
         uniforms[uni.name] = uni;
     }
+
+	Block block;
+
+	glGetProgramiv(program_id, GL_ACTIVE_UNIFORM_BLOCKS, &count);
+
+	for (GLint c = 0; c < count; c++)
+	{
+		glGetActiveUniformBlockName(program_id, c, sizeof(block.name) - 1, &block.length, block.name);
+		block.location = glGetUniformBlockIndex(program_id, block.name);
+		block.index = c;
+		blocks[block.name] = block;
+	}
 }
 
 #if 0
@@ -300,16 +300,9 @@ void Shader::set_uniform(const String &name, const Array<mat4> &value)
 	glUniformMatrix4fv(uniforms[name].location, value.size(), false, &(&value[0])->m[0]);
 }
 
-void Shader::setWhiteColor(const String &name)
+void Shader::bind_buffer(const String& p_name, Ref<UBO> p_ubo)
 {
-	CHECK_NAME
-
-	glUniform4f(uniforms[name].location, 1.f, 1.f, 1.f, 1.f);
-}
-
-void Shader::setModelMatrix(mat4 *matrix)
-{
-
+	glUniformBlockBinding(program_id, blocks[p_name].location, p_ubo->get_bound_index());
 }
 
 int Shader::get_program() const

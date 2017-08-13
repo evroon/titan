@@ -32,7 +32,7 @@ Light::~Light()
 void Light::Draw()
 {
 	box->get_transform().update();
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", color);
 	float rad = (float)radius / WINDOWSIZE.x;
 	shader->set_uniform("radius", rad);

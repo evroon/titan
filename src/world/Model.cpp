@@ -23,7 +23,7 @@ Model::~Model()
 
 void Model::draw()
 {
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("color", get_color());
@@ -33,12 +33,12 @@ void Model::draw()
 
 	mesh->draw();
 
-	shader->setWhiteColor("color");
+	shader->set_uniform("color", Color::White);
 }
 
 void Model::shadow_draw()
 {
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("color", get_color());
@@ -47,7 +47,7 @@ void Model::shadow_draw()
 
 	mesh->draw();
 
-	shader->setWhiteColor("color");
+	shader->set_uniform("color", Color::White);
 }
 
 void Model::load_mesh(const String& p_path)

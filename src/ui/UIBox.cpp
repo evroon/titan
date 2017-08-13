@@ -28,7 +28,7 @@ Color UIBox::get_color() const
 
 void UIBox::prepare_draw()
 {
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", color);
 }
 

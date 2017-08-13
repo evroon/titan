@@ -247,7 +247,7 @@ void Mesh::MeshNode::draw()
 
 	if (material)
 	{
-		material->shader->Bind();
+		material->shader->bind();
 
 		if (material->diffuse_texture)
 			material->diffuse_texture->bind(0);
