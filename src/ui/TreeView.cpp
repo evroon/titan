@@ -338,8 +338,8 @@ TreeView::TreeView()
 	selected = NULL;
 	highlighted = NULL;
 
-	collapsed_tex = CONTENT->LoadTexture("EngineCore/UnCollapsed.png");
-	expanded_tex = CONTENT->LoadTexture("EngineCore/Collapsed.png");
+	collapsed_tex = CONTENT->LoadTexture("EngineCore/UI/UnCollapsed.png");
+	expanded_tex = CONTENT->LoadTexture("EngineCore/UI/Collapsed.png");
 }
 
 TreeView::~TreeView()

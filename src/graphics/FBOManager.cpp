@@ -4,25 +4,17 @@
 
 FBOManager FBOManager::singleton;
 
-void FBOManager::AddFBO(FBO *fbo)
+void FBOManager::set_active_fbo(FBO* p_active)
+{
+	active_fbo = p_active;
+}
+
+void FBOManager::register_fbo(FBO *fbo)
 {
 	fbos.push_back(fbo);
 }
 
-void FBOManager::Init()
-{
-
-}
-
-void FBOManager::BindFBO(FBO *fbo)
-{
-	activeFBO = fbo;
-
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo->ID);
-	glViewport(0, 0, fbo->size.x, fbo->size.y);
-}
-
-void FBOManager::BindDefaultFBO()
+void FBOManager::bind_default_fbo()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -31,15 +23,15 @@ void FBOManager::BindDefaultFBO()
 	glViewport(0, 0, size.x, size.y);
 }
 
-void FBOManager::ClearAll()
+void FBOManager::clear_all()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (int c = 0; c < fbos.size(); c++)
-		fbos[c]->Clear();
+		fbos[c]->clear();
 }
 
-void FBOManager::Destroy()
+void FBOManager::free()
 {
 	fbos.clean();
 }

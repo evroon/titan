@@ -15,11 +15,11 @@
 
 #include "world/World.h"
 
-ExplorerTab::ExplorerTab(World2D* p_world)
+ExplorerTab::ExplorerTab(World* p_world)
 {
 	tree_view = new TreeView;
 	buttons = new Container;
-	add_button = new ImageButton("EngineCore/New.png");
+	add_button = new ImageButton("EngineCore/UI/New.png");
 
 	buttons->add_child(add_button);
 
@@ -101,12 +101,12 @@ void ExplorerTab::notification(int p_notification)
 	}
 }
 
-void ExplorerTab::set_world(World2D * p_world)
+void ExplorerTab::set_world(World * p_world)
 {
 	world = p_world;
 }
 
-World2D* ExplorerTab::get_world() const
+World* ExplorerTab::get_world() const
 {
 	return world;
 }

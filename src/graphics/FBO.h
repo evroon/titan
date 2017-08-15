@@ -11,11 +11,11 @@ public:
 	FBO();
 	~FBO();
 
-	void CheckStatus();
-	void Clear();
+	void clear();
+	void bind();
+	void unbind();
 
 	virtual void init();
-
 	virtual void add_depth_texture();
 	virtual void add_color_texture();
 
@@ -34,6 +34,9 @@ public:
 	};
 
 	Array<color_tex_def> definitions;
+	
+protected:
+	void check_status();
 };
 
 class FBO2D : public FBO

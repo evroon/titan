@@ -8,7 +8,7 @@
 
 Sky::Sky()
 {
-	shader = CONTENT->LoadShader("EngineCore/Sky");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Sky");
 
 	set_size(vec3(10.0f, 10.0f, 10.0f));
 	set_pos(vec3(0, 0, 0.0f));
@@ -23,7 +23,7 @@ void Sky::draw()
 {
 	RENDERER->stop_culling();
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("light_position", vec3(0, 0, 1));
 	shader->set_uniform("ambient", Color::FromRGB(vec3i(66, 182, 244)).get_rgb());

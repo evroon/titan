@@ -2,6 +2,8 @@
 
 #include "FBOManager.h"
 
+#include "core/WindowManager.h"
+
 #include "Time.h"
 
 #include "graphics/Renderer.h"
@@ -12,7 +14,7 @@
 
 FBO::FBO()
 {
-	FBOMANAGER->AddFBO(this);
+	FBOMANAGER->register_fbo(this);
 }
 
 FBO::~FBO()
@@ -20,14 +22,14 @@ FBO::~FBO()
 	glDeleteFramebuffers(1, &ID);
 }
 
-void FBO::CheckStatus()
+void FBO::check_status()
 {
 	int err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (err != GL_FRAMEBUFFER_COMPLETE)
 		T_ERROR("Error Setting up FBO" + String(err));
 }
 
-void FBO::Clear()
+void FBO::clear()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, ID);
 	glViewport(0, 0, (GLsizei)size.x, (GLsizei)size.y);
@@ -38,6 +40,23 @@ void FBO::Clear()
 		glClear(GL_DEPTH_BUFFER_BIT);
 	else
 		glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void FBO::bind()
+{
+	FBOMANAGER->set_active_fbo(this);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, ID);
+	glViewport(0, 0, size.x, size.y);
+}
+
+void FBO::unbind()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	vec2i size = WINDOWSIZE;
+
+	glViewport(0, 0, size.x, size.y);
 }
 
 void FBO::init()
@@ -97,7 +116,7 @@ void FBO2D::init()
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth_tex->get_id(), 0);
 	}
 
-	CheckStatus();
+	check_status();
 
 	RENDERER->CheckGLError();
 }
@@ -126,7 +145,7 @@ FBO1D::FBO1D(int size)
 	glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, color->get_id(), 0);
 	glDrawBuffers(1, DrawBuffers);
 
-	CheckStatus();
+	check_status();
 }
 
 void FBO1D::init()

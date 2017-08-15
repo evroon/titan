@@ -15,11 +15,11 @@ ContentTab::ContentTab(const File& p_file)
 {
 	file = ASSETS_DIR;
 
-	directory_icon = CONTENT->LoadTexture(File("EngineCore/Directory.png"));
-	file_icon = CONTENT->LoadTexture(File("EngineCore/Picture.png"));
+	directory_icon = CONTENT->LoadTexture(File("EngineCore/UI/Directory.png"));
+	file_icon = CONTENT->LoadTexture(File("EngineCore/UI/Picture.png"));
 
-	back_button = new ImageButton("EngineCore/Back.png");
-	forward_button = new ImageButton("EngineCore/Forward.png");
+	back_button = new ImageButton("EngineCore/UI/Back.png");
+	forward_button = new ImageButton("EngineCore/UI/Forward.png");
 	buttons = new Container;
 	path_label = new TextField;
 	list = new ListView;

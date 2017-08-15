@@ -16,7 +16,7 @@ Terrain::Terrain()
 
 	build_from_heightmap(CONTENT->LoadRawTexture("Textures/heightmap.png"));
 
-	shader = CONTENT->LoadShader("EngineCore/Terrain");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Terrain");
 
 	textures.push_back(CONTENT->LoadTexture("Textures/grass.png"));
 	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));
@@ -199,7 +199,7 @@ void Terrain::draw()
 
 	glBindVertexArray(VAO);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("light_matrix", RENDERER->get_light_matrix());
@@ -238,7 +238,7 @@ Water::Water()
 	set_size(vec3(1000.0f, 1000.0f, 0.0f));
 	set_pos(vec3(0, 0, 0.0f));
 
-	shader = CONTENT->LoadShader("EngineCore/Water");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Water");
 	normals = CONTENT->LoadTexture("Textures/dudv.jpg");
 }
 
@@ -247,7 +247,7 @@ void Water::draw()
 	normals->bind(0);
 	RENDERER->get_reflection_buffer()->color_textures[0]->bind(1);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
@@ -310,7 +310,7 @@ Vegetation::Vegetation(Terrain* p_parent)
 
 	T_LOG(i);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("model", model_matrices);
 }
 
@@ -319,7 +319,7 @@ void Vegetation::draw()
 	RENDERER->stop_culling();
 	grass_tex->bind(0);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("color", vec4(1.0));
 	shader->set_uniform("texture_enabled", true);

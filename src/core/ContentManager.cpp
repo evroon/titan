@@ -62,9 +62,9 @@ void ContentManager::setup()
 
 	assets_directory = temp;
 
-	Shader2D = LoadShader(File("EngineCore/Shader2D"));
-	SimpleShader = LoadShader(File("EngineCore/SimpleShader"));
-	ShadowShader = LoadShader(File("EngineCore/ShadowShader"));
+	Shader2D = LoadShader(File("EngineCore/Shaders/Shader2D"));
+	SimpleShader = LoadShader(File("EngineCore/Shaders/SimpleShader"));
+	ShadowShader = LoadShader(File("EngineCore/Shaders/ShadowShader"));
 
 	//DefaultFont = LoadFont("EngineCore/Fonts/consola.ttf", 15);
 }
@@ -182,7 +182,7 @@ VariantType ContentManager::GetType(const File& p_file)
 }
 
 #define RELOAD(X) for (int c = 0; c < X.size(); c++) \
-					  X[c]->Reload();
+					  X[c]->reload();
 
 void ContentManager::ReloadAll()
 {

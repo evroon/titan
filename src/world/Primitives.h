@@ -37,15 +37,15 @@ public:
 
 	void draw() override
 	{
-		shader->Bind();
+		shader->bind();
 		shader->set_uniform("color", get_color());
 		Primitives::DrawRectangle(shader, get_transform());
 	}
 
 	void SimpleDraw() override
 	{
-		CONTENT->SimpleShader->Bind();
-		shader->setWhiteColor("color");
+		CONTENT->SimpleShader->bind();
+		shader->set_uniform("color", Color::White);
 		Primitives::DrawRectangle(CONTENT->SimpleShader, get_transform());
 	}
 
@@ -66,15 +66,15 @@ public:
 
 	void draw() override
 	{
-		shader->Bind();
+		shader->bind();
 		shader->set_uniform("color", get_color());
 		Primitives::DrawCircle(shader, get_transform());
 	}
 
 	void SimpleDraw() override
 	{
-		shader->Bind();
-		shader->setWhiteColor("color");
+		shader->bind();
+		shader->set_uniform("color", Color::White);
 		Primitives::DrawCircle(shader, get_transform());
 	}
 

@@ -4,7 +4,7 @@
 
 #include "resources/File.h"
 
-class World2D;
+class World;
 class Dock;
 class TextEditorTab;
 class GamePreviewTab;
@@ -33,8 +33,8 @@ public:
 	
 	void open_file(const String & p_file);
 
-	void set_world2d(World2D* p_world2d);
-	World2D* get_world2d() const;
+	void set_world2d(World* p_world2d);
+	World* get_world2d() const;
 
 	static void bind_methods();
 
@@ -57,6 +57,6 @@ private:
 	//add bars
 	ToolBar* bar;
 
-	World2D* world2d;
+	World* world;
 };
 

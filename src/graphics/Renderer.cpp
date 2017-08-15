@@ -6,12 +6,10 @@ Renderer Renderer::singleton;
 
 void Renderer::Init()
 {
-	FBOMANAGER->BindDefaultFBO();
+	FBOMANAGER->bind_default_fbo();
 	glClearColor(0.3f, 0.3f, 0.3f, 1);
 
 	MeshHandler::get_singleton()->Init();
-	FBOMANAGER->Init();
-	VISUALEFFECT->init();
 	Sprite::Init();
 	Primitives::Init();
 
@@ -29,8 +27,8 @@ void Renderer::Init()
 	reflection_buffer->add_depth_texture();
 	reflection_buffer->init();
 
-	use_depth_test(0.5f, 1000.0f);
-	use_culling();
+	//use_depth_test(0.5f, 1000.0f);
+	//use_culling();
 	use_blending();
 }
 
@@ -54,13 +52,13 @@ void Renderer::Prepare()
 {
 	CheckGLError();
 
-	FBOMANAGER->ClearAll();
-	FBOMANAGER->BindFBO(render_buffer);
+	FBOMANAGER->clear_all();
+	//render_buffer->bind();
 }
 
 void Renderer::Finish()
 {
-	VISUALEFFECT->post_process();
+	//VISUALEFFECT->post_process();
 }
 
 void Renderer::Free()

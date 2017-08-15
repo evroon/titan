@@ -7,34 +7,63 @@
 
 #include "graphics/View.h"
 
-VisualEffect* VisualEffect::singleton;
-
-VisualEffect::VisualEffect()
-{
-	blurshader = CONTENT->LoadShader("EngineCore/Blur");
-	shader = CONTENT->LoadShader("EngineCore/PostProcess");
-
-	//blurbuffer = new FBO2D(size);
-}
-
-VisualEffect::~VisualEffect()
-{
-}
-
-void VisualEffect::init()
-{
-	singleton = new VisualEffect;
-}
-
-void VisualEffect::free()
+PostProcess::PostProcess() : PostProcess(CONTENT->LoadShader("EngineCore/Shaders/PostProcess"))
 {
 
 }
 
-void VisualEffect::post_process()
+PostProcess::PostProcess(Shader* p_shader)
 {
-	//BlurTexture(FBOMANAGER->ShadowFBO->tex, FBOMANAGER->ShadowFBO);
+	shader = p_shader;
+}
 
+PostProcess::~PostProcess()
+{
+}
+
+void PostProcess::set_area(const rect2& p_area)
+{
+	area = p_area;
+}
+
+rect2 PostProcess::get_area() const
+{
+	return area;
+}
+
+void PostProcess::post_process()
+{
+	Transform transform = Transform(area);
+	mat4 final = RENDERER->get_final_matrix() * transform.get_model();
+
+	RENDERER->get_render_buffer()->color_textures[0]->bind(0);
+
+	FBOMANAGER->bind_default_fbo();
+	RENDERER->stop_depth_test();
+
+	shader->bind();
+
+	MeshHandler::get_singleton()->get_plane()->bind();
+	MeshHandler::get_singleton()->get_plane()->draw();
+	MeshHandler::get_singleton()->get_plane()->unbind();
+
+	RENDERER->use_depth_test(0.5f, 1000.0f);
+}
+
+//=========================================================================
+//WorldPostProcess
+//=========================================================================
+
+WorldPostProcess::WorldPostProcess()
+{
+}
+
+WorldPostProcess::~WorldPostProcess()
+{
+}
+
+void WorldPostProcess::post_process()
+{
 	RENDERER->get_render_buffer()->color_textures[0]->bind(0);
 
 	Clouds* c = VIEW->get_active_viewport()->get_world()->get_worldobject("clouds")->cast_to_type<Clouds*>();
@@ -42,11 +71,11 @@ void VisualEffect::post_process()
 
 	Camera* cam = VIEW->get_active_viewport()->get_world()->get_active_camera();
 
-	FBOMANAGER->BindDefaultFBO();
+	FBOMANAGER->bind_default_fbo();
 
 	RENDERER->stop_depth_test();
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("rendered", 0);
 	shader->set_uniform("noise", 1);
 	shader->set_uniform("cam_pos", cam->get_pos());
@@ -64,7 +93,20 @@ void VisualEffect::post_process()
 	RENDERER->use_depth_test(0.5f, 1000.0f);
 }
 
-void VisualEffect::blur_texture(Texture *p_tex, FBO2D *p_target)
+//=========================================================================
+//WorldPostProcess
+//=========================================================================
+
+BlurPostProcess::BlurPostProcess()
+{
+	blurshader = CONTENT->LoadShader("EngineCore/Shaders/Blur");
+}
+
+BlurPostProcess::~BlurPostProcess()
+{
+}
+
+void BlurPostProcess::post_process()
 {
 #if 0
 	blurbuffer->Clear();
@@ -89,9 +131,4 @@ void VisualEffect::blur_texture(Texture *p_tex, FBO2D *p_target)
 	box->get_transform().update(vec3(), target->size);
 	box->draw();
 #endif
-}
-
-VisualEffect * VisualEffect::get_singleton()
-{
-	return singleton;
 }

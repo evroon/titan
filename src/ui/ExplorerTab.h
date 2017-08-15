@@ -5,7 +5,7 @@
 class Container;
 class TreeView;
 class ImageButton;
-class World2D;
+class World;
 class TreeElement;
 
 class ExplorerTab : public Tab
@@ -14,7 +14,7 @@ class ExplorerTab : public Tab
 
 public:
 	ExplorerTab();
-	ExplorerTab(World2D * p_world);
+	ExplorerTab(World * p_world);
 
 	virtual ~ExplorerTab();
 
@@ -30,8 +30,8 @@ public:
 
 	void notification(int p_notification);
 
-	void set_world(World2D* p_world);
-	World2D* get_world() const;
+	void set_world(World* p_world);
+	World* get_world() const;
 
 	void emit_selected(TreeElement* p_element);
 
@@ -43,7 +43,7 @@ private:
 	TreeView* tree_view;
 	Container* buttons;
 
-	World2D* world;
+	World* world;
 
 	ImageButton* add_button;
 };

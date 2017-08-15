@@ -16,11 +16,11 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 int main(int argc, char* argv[])
 {
-	GameApp game(new Windows);
-	game.Loop();
+	//GameApp game(new Windows);
+	//game.Loop();
 
-	//EditorApp editor(new Windows);
-	//editor.Loop();
+	EditorApp editor(new Windows);
+	editor.Loop();
 
 	return 0;
 } 

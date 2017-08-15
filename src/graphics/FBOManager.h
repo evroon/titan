@@ -8,24 +8,16 @@
 class FBOManager
 {
 public:
-	void Init();
-
-	void AddFBO(FBO *fbo);
-
-	void BindFBO(FBO *fbo);
-	void BindDefaultFBO();
-
-	void ClearAll();
-
-	void Destroy();
+	void set_active_fbo(FBO* p_active);
+	void register_fbo(FBO *fbo);
+	void bind_default_fbo();
+	void clear_all();
+	void free();
 
 	static FBOManager* get_singleton();
 
-	FBO* activeFBO;
-
 private:
-
+	FBO* active_fbo;
 	Vector<FBO> fbos;
-
 	static FBOManager singleton;
 };

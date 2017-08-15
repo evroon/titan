@@ -7,14 +7,14 @@
 Image::Image()
 {
 	mesh_2d = MeshHandler::get_singleton()->get_plane();
-	shader = CONTENT->LoadShader("EngineCore/Shader2D");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader2D");
 	bounds = vec4(0.0, 1.0, 0.0, 1.0);
 }
 Image::Image(Texture2D *p_texture)
 {
 	texture = p_texture;
 	mesh_2d = MeshHandler::get_singleton()->get_plane();
-	shader = CONTENT->LoadShader("EngineCore/Shader2D");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader2D");
 	bounds = vec4(0.0, 1.0, 0.0, 1.0);
 }
 Image::Image(const String &tex_name) : Image(CONTENT->LoadTexture(tex_name))
@@ -29,7 +29,7 @@ void Image::set_bounds(vec4 p_bounds)
 
 void Image::set_bounds_in_pixels(vec4 p_bounds)
 {
-	bounds = vec4(vec2(p_bounds.x, p_bounds.y) / texture->size.x, vec2(p_bounds.z, p_bounds.w) / texture->size.y);
+	bounds = vec4(vec2(p_bounds.x, p_bounds.y) / get_texture_size().x, vec2(p_bounds.z, p_bounds.w) / get_texture_size().y);
 }
 
 void Image::set_color(const Color &p_color)
@@ -71,7 +71,7 @@ vec2 Image::get_required_size() const
 
 vec2& Image::get_texture_size() const
 {
-	return texture->size;
+	return texture->get_size();
 }
 
 float Image::get_texture_ratio() const

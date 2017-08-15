@@ -224,12 +224,12 @@ void WorldObject::set_layer(Layer *l)
 	layer->Bind(this);
 }
 
-World2D* WorldObject::get_world() const
+World* WorldObject::get_world() const
 {
 	return world;
 }
 
-void WorldObject::register_in_world(World2D *p_world)
+void WorldObject::register_in_world(World *p_world)
 {
 	world = p_world;
 }

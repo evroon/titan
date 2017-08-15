@@ -23,7 +23,7 @@ void ImageButton::notification(int p_notification)
 		if (highlighted || selected)
 			draw_frame(area, color);
 
-		draw_texture(texture, rect2(area.pos, texture->size / 2.0f), Color::White);
+		draw_texture(texture, rect2(area.pos, texture->get_size() / 2.0f), Color::White);
 
 		break;
 
@@ -37,5 +37,5 @@ void ImageButton::notification(int p_notification)
 
 vec2 ImageButton::get_required_size() const
 {
-	return texture->size + vec2(texture_margins[0] + texture_margins[2], texture_margins[1] + texture_margins[3]);
+	return texture->get_size() + vec2(texture_margins[0] + texture_margins[2], texture_margins[1] + texture_margins[3]);
 }

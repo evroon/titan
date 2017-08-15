@@ -101,10 +101,11 @@ void Application::Free()
 	INPUT->Clean();
 }
 
-void Application::PrepareDraw()
+void Application::prepare_draw()
 {
 	RENDERER->Prepare();
 }
+
 void Application::FinishDraw()
 {
 	RENDERER->Finish();
@@ -176,8 +177,8 @@ void Application::Loop()
 
 		if (default_target->should_update())
 		{
-			PrepareDraw();
-			draw();
+			prepare_draw();
+			ACTIVE_VIEWPORT->draw();
 			FinishDraw();
 
 			window->SwapBuffer();					//Switch buffers			
@@ -201,10 +202,9 @@ void Application::Quit()
 	GC->free();
 	StringUtils::Free();
 	PhysicsGod::DestroyWorld();
-	FBOMANAGER->Destroy();
+	FBOMANAGER->free();
 	ERROR_HANDLER->clean();
 	Audio::Free();
-	VISUALEFFECT->free();
 	RENDERER->Free();
 	SCENEMANAGER->Free();
 	EventManager::get_manager().clean();

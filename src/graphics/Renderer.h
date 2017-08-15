@@ -80,7 +80,7 @@ private:
 
 	Camera *activecamera;
 	Shader *activeshader;
-	VisualEffect *viseffect;
+	PostProcess *viseffect;
 
 	mat4 projection_matrix;
 	mat4 view_matrix;

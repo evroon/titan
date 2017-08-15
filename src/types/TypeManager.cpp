@@ -88,7 +88,7 @@ void TypeManager::init()
 
 	Sprite::init_type();
 	WorldObject::init_type();
-	World2D::init_type();
+	World::init_type();
 	Scriptable::init_type();
 	TitanScript::init_type();
 	Mouse::init_type();
@@ -155,7 +155,7 @@ void TypeManager::init()
 
 	Sprite::bind_methods();
 	WorldObject::bind_methods();
-	World2D::bind_methods();
+	World::bind_methods();
 	Scriptable::bind_methods();
 	TitanScript::bind_methods();
 	Mouse::bind_methods();

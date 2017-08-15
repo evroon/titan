@@ -6,29 +6,50 @@
 #include "core/ContentManager.h"
 #include "world/Primitives.h"
 
-#define VISUALEFFECT VisualEffect::get_singleton()
+#define VISUALEFFECT PostProcess::get_singleton()
 
-class VisualEffect : public Object
+class PostProcess : public Object
 {
-	OBJ_DEFINITION(VisualEffect, Object);
+	OBJ_DEFINITION(PostProcess, Object);
 
 public:
-	VisualEffect();
-	virtual ~VisualEffect();
+	PostProcess();
+	PostProcess(Shader* p_shader);
+	virtual ~PostProcess();
 
-	void init();
-	void free();
-	void post_process();
+	void set_area(const rect2 & p_area);
+	rect2 get_area() const;
 
-	void blur_texture(Texture* p_tex, FBO2D* p_target);
-	
+	virtual void post_process();
+
+protected:	
 	Shader* shader;
-	Shader* blurshader;
 
-	FBO2D *blurbuffer;
+	rect2 area;
+};
 
-	static VisualEffect* get_singleton();
+class WorldPostProcess : public PostProcess
+{
+	OBJ_DEFINITION(WorldPostProcess, PostProcess);
+	
+public:
+	WorldPostProcess();
+	virtual ~WorldPostProcess();
+
+	void post_process() override;
+};
+
+class BlurPostProcess : public PostProcess
+{
+	OBJ_DEFINITION(BlurPostProcess, PostProcess);
+
+public:
+	BlurPostProcess();
+	virtual ~BlurPostProcess();
+
+	void post_process() override;
 
 private:
-	static VisualEffect* singleton;
+	Shader* blurshader;
+	FBO2D *blurbuffer;
 };

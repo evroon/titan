@@ -38,13 +38,15 @@ void Scene::Init()
 {	
 	LoadContent();
 	
-	Viewport* v = VIEW->get_active_viewport();
+	Viewport* v = ACTIVE_VIEWPORT;
+	v->set_postprocess(new PostProcess);
+	v->set_fbo(RENDERER->get_render_buffer());
 
 	//mouse_position = MOUSE->get_position();
 
 	if (v)
 	{
-		World2D* w = new World2D;
+		World* w = new World;
 
 		v->set_world(w);
 
@@ -138,7 +140,7 @@ void Scene::update()
 		c->move(movement_speed * vec3(0, 0, -1));
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_T))
-		CONTENT->LoadShader("EngineCore/PostProcess")->Reload();
+		CONTENT->LoadShader("EngineCore/Shaders/PostProcess")->reload();
 
 	vec3 pos = c->get_pos();
 	float height = t->get_height(pos.get_xy());

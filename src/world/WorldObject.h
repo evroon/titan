@@ -12,7 +12,7 @@ class TransformComponent;
 class ScriptComponent;
 class RenderComponent;
 class PhysicsComponent;
-class World2D;
+class World;
 
 class WorldObject : public Node
 {
@@ -63,9 +63,9 @@ public:
 	Layer* get_layer() const;
 	void set_layer(Layer *l);
 
-	World2D* get_world() const;
+	World* get_world() const;
 
-	void register_in_world(World2D *p_world);
+	void register_in_world(World *p_world);
 
 	void free();
 
@@ -95,6 +95,6 @@ public:
 
 	static void bind_methods();
 	
-	World2D *world = NULL;
+	World *world = NULL;
 	Layer *layer = NULL;
 };

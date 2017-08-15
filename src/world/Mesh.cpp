@@ -247,7 +247,7 @@ void Mesh::MeshNode::draw()
 
 	if (material)
 	{
-		material->shader->Bind();
+		material->shader->bind();
 
 		if (material->diffuse_texture)
 			material->diffuse_texture->bind(0);
@@ -364,7 +364,7 @@ void Material::load_material(const aiMaterial* p_material)
 
 	diffuse_texture = CONTENT->LoadTexture("Models/672a8302d72f34f79980861feb2bdcd5/Arch73_06_Diff.jpg");
 
-	shader = CONTENT->LoadShader("EngineCore/Shader3D");
+	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader3D");
 }
 
 Texture2D* Material::load_texture(const aiMaterial* p_material, const aiTextureType &p_type)

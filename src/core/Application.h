@@ -23,7 +23,7 @@ public:
 	virtual void draw() { }
 	virtual void resize(const vec2i& p_size) { }
 
-	void PrepareDraw();
+	void prepare_draw();
 	void FinishDraw();
 
 	void Loop();

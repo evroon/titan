@@ -103,7 +103,7 @@ void Sprite::draw()
 	Transform t = get_transform();
 	t.update();									//TODO
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("model", RENDERER->get_final_matrix() * t.get_model());
 	shader->set_uniform("color", get_color());
 	shader->set_uniform("texture_enabled", true);
@@ -119,12 +119,12 @@ void Sprite::draw()
 	texture->bind(0);
 	defaultmesh->draw();
 
-	shader->setWhiteColor("color");
+	shader->set_uniform("color", Color::White);
 }
 
 void Sprite::SimpleDraw()
 {
-	CONTENT->SimpleShader->Bind();
+	CONTENT->SimpleShader->bind();
 	CONTENT->SimpleShader->set_uniform("model", get_transform().get_model());
 
 	defaultmesh->draw();
@@ -166,7 +166,7 @@ void Sprite::DrawMap()
 void Sprite::Init()
 {
 	defaultmesh = MeshHandler::get_singleton()->get_plane();
-	defaultmesh->SetAttributes(CONTENT->LoadShader("EngineCore/Shader2D"));
+	defaultmesh->SetAttributes(CONTENT->LoadShader("EngineCore/Shaders/Shader2D"));
 }
 
 void Sprite::update()

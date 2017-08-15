@@ -388,7 +388,7 @@ void Control::draw_texture(Texture2D* p_texture, const rect2& p_area, const Colo
 	Shader* shader = CanvasData::get_singleton()->get_default_shader();
 	Transform transform = Transform(p_area.pos, p_area.size);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("texbounds", p_bounds);
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
@@ -439,7 +439,7 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos, c
 	SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
 	Shader* shader = CanvasData::get_singleton()->get_default_shader();
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
 
@@ -489,7 +489,7 @@ void Control::draw_box(const rect2& p_area, const Color& p_color)
 	Shader* shader = CanvasData::get_singleton()->get_default_shader();
 	Transform transform = Transform(p_area.pos, p_area.size);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", false);
 
@@ -520,7 +520,7 @@ void Control::draw_line(const vec2& p_start, const vec2& p_end, const Color& p_c
 
 	Transform transform = Transform(center, vec2(1.0f, length), angle);
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", false);
 
@@ -560,7 +560,7 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color&
 	Shader* shader = CanvasData::get_singleton()->get_default_shader();
 	Transform transform;
 
-	shader->Bind();
+	shader->bind();
 	shader->set_uniform("color", p_color);
 	shader->set_uniform("texture_enabled", true);
 

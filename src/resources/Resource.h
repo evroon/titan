@@ -11,9 +11,9 @@ class Resource : public Referenced
 public:
 	Resource() = default;
 
-	virtual void Load() { }
-	virtual void Reload() { }
-	virtual void Free() { }
+	virtual void load() { }
+	virtual void reload() { }
+	virtual void free() { }
 
 	File get_file() const;
 

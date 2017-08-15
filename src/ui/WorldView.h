@@ -9,17 +9,20 @@ class WorldView : public Control
 
 public:
 	WorldView();
-	WorldView(World2D * p_world);
+	WorldView(World * p_world);
 	virtual ~WorldView();
 
 	vec2 get_required_size() const override;
 
 	void notification(int p_notification) override;
 
-	void handle_event(UIEvent *ui_event) override;
+	void handle_event(UIEvent* ui_event) override;
 
-	void set_world(World2D* p_world);
-	World2D* get_world();
+	void set_postprocess(PostProcess* p_postprocess);
+	PostProcess* get_postprocess() const;
+
+	void set_world(World* p_world);
+	World* get_world();
 
 	void select(WorldObject* p_object);
 	WorldObject* get_selected() const;
@@ -32,7 +35,8 @@ public:
 private:
 	void draw_grid();
 
-	Viewport *viewport;
+	Viewport* viewport;
+	PostProcess* postprocess;
 
 	WorldObject* selected;
 	WorldObject* highlighted;

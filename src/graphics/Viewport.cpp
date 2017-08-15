@@ -23,12 +23,12 @@ Viewport::~Viewport()
 	delete canvas;
 }
 
-void Viewport::set_world(World2D* p_world)
+void Viewport::set_world(World* p_world)
 {
 	world = p_world;
 }
 
-World2D* Viewport::get_world() const
+World* Viewport::get_world() const
 {
 	return world;
 }
@@ -43,6 +43,37 @@ Canvas* Viewport::get_canvas() const
 	return canvas;
 }
 
+void Viewport::set_mode(DrawMode p_mode)
+{
+	mode = p_mode;
+}
+
+int Viewport::get_mode() const
+{
+	return mode;
+}
+
+void Viewport::set_fbo(FBO2D *p_fbo)
+{
+	fbo = p_fbo;
+}
+
+FBO* Viewport::get_fbo() const
+{
+	return fbo;
+}
+
+void Viewport::set_postprocess(PostProcess* p_postprocess)
+{
+	postprocess = p_postprocess;
+	mode = POSTPROCESS;
+}
+
+PostProcess* Viewport::get_postprocess() const
+{
+	return postprocess;
+}
+
 void Viewport::init()
 {
 	if (canvas)
@@ -52,9 +83,9 @@ void Viewport::init()
 		world->init();
 }
 
-void Viewport::bind_parent(View *_parentview)
+void Viewport::bind_parent(View *p_parentview)
 {
-	parentview = _parentview;
+	parentview = p_parentview;
 }
 
 vec2 Viewport::get_size() const
@@ -62,11 +93,11 @@ vec2 Viewport::get_size() const
 	return renderarea.size;
 }
 
-void Viewport::resize(const rect2 &area)
+void Viewport::resize(const rect2 &p_area)
 {
-	renderarea = area;
+	renderarea = p_area;
 
-	vec2 size = area.size;
+	vec2 size = p_area.size;
 	vec2 window_size = vec2(to_float(WINDOWSIZE.x), to_float(WINDOWSIZE.y));
 
 	mat4 translate, rotate, scale;
@@ -77,23 +108,23 @@ void Viewport::resize(const rect2 &area)
 	graphics_transform = scale;
 
 	vec3 s = vec3(size * 2.0f / window_size, 0.0f);
-	input_transform = mat4::Translate(vec3(-area.pos.x, -area.pos.y, 0));
+	input_transform = mat4::Translate(vec3(-p_area.pos.x, -p_area.pos.y, 0));
 
 	if (canvas)
 		canvas->resize();
 }
 
-rect2 Viewport::get_area(const vec2 &pos) const
+rect2 Viewport::get_area(const vec2 &p_pos) const
 {
 	return renderarea;
 }
 
-vec2 Viewport::get_screen_coords(const vec2 &pos) const
+vec2 Viewport::get_screen_coords(const vec2 &p_pos) const
 {
 	if (!world)
 		return vec2();
 
-	vec4 p = { (pos - renderarea.pos) / get_size(), 0.0f, 1.0f };
+	vec4 p = { (p_pos - renderarea.pos) / get_size(), 0.0f, 1.0f };
 
 	Camera* cam = world->get_active_camera();
 	mat4 inv = cam->get_inverse();
@@ -105,10 +136,12 @@ bool Viewport::is_overlapping(const rect2 &area) const
 {
 	return renderarea.is_overlapping(area);
 }
+
 bool Viewport::is_in_box(const vec2 &pos) const
 {
 	return renderarea.is_in_box(pos);
 }
+
 bool Viewport::is_in_box(const rect2 &area) const
 {
 	return renderarea.is_in_box(area);
@@ -176,16 +209,21 @@ void Viewport::deactivate_canvas_transform()
 
 void Viewport::draw()
 {
-	activate_transform();
+	FBOMANAGER->bind_default_fbo();
+
+	if ((mode == FRAMEBUFFER || mode == POSTPROCESS) && fbo)
+		fbo->bind();
+
+	//activate_transform();
 	
 	if (world)
 	{
 		if (world->get_active_camera())
 			world->get_active_camera()->update();
 
-		activate_world_transform();
+		//activate_world_transform();
 		world->draw();
-		deactivate_world_transform();
+		//deactivate_world_transform();
 	}
 
 	if (canvas)
@@ -195,7 +233,13 @@ void Viewport::draw()
 		deactivate_canvas_transform();
 	}
 
-	deactivate_transform();
+	//deactivate_transform();
+
+	if (mode == POSTPROCESS && postprocess)
+		postprocess->post_process();
+
+	if (fbo)
+		fbo->unbind();
 }
 
 void Viewport::update()

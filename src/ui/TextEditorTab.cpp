@@ -10,16 +10,16 @@ TextEditorTab::TextEditorTab() : TextEditorTab("")
 
 TextEditorTab::TextEditorTab(const File& p_file)
 {
-	save_button = new ImageButton("EngineCore/Save.png");
+	save_button = new ImageButton("EngineCore/UI/Save.png");
 	save_button->connect("clicked", this, "savebutton_pressed");
 
-	save_all_button = new ImageButton("EngineCore/SaveAll.png");
+	save_all_button = new ImageButton("EngineCore/UI/SaveAll.png");
 	save_all_button->connect("clicked", this, "savebutton_pressed");
 
-	new_button = new ImageButton("EngineCore/New.png");
+	new_button = new ImageButton("EngineCore/UI/New.png");
 	new_button->connect("clicked", this, "open_file");
 
-	open_button = new ImageButton("EngineCore/Open.png");
+	open_button = new ImageButton("EngineCore/UI/Open.png");
 	open_button->connect("clicked", this, "show_dialog");
 
 	add_child(&textbox);
@@ -37,7 +37,7 @@ TextEditorTab::TextEditorTab(const File& p_file)
 	buttons.add_child(open_button);
 	buttons.add_child(new Seperator);
 	buttons.add_child(save_button);
-	buttons.add_child(new ImageButton("EngineCore/SaveAll.png"));
+	buttons.add_child(new ImageButton("EngineCore/UI/SaveAll.png"));
 
 	open_file(p_file);
 }

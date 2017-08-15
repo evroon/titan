@@ -407,7 +407,7 @@ void ListView::notification(int p_notification)
 
 			if (items[c].get_icon())
 			{
-				vec2 size = items[c].get_icon()->size / 2.0f;
+				vec2 size = items[c].get_icon()->get_size() / 2.0f;
 				vec2 pos = vec2(items[c].get_area().get_left() + internal_left_margin + size.x, items[c].get_area().pos.y);
 
 				draw_texture(items[c].get_icon(), rect2(pos, size), Color::White);

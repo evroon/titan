@@ -404,8 +404,8 @@ void Canvas::bind_methods()
 CanvasTheme::CanvasTheme()
 {
 	font = CONTENT->LoadFont("EngineCore/Fonts/consola.ttf", 17);
-	frame = CONTENT->LoadTexture("EngineCore/ContainerTemplate.png");
-	highlight = CONTENT->LoadTexture("EngineCore/Highlight.png");
+	frame = CONTENT->LoadTexture("EngineCore/UI/ContainerTemplate.png");
+	highlight = CONTENT->LoadTexture("EngineCore/UI/Highlight.png");
 
 	highlight_color = TO_RGB(100);
 	selection_color = TO_RGB(vec3i(65, 133, 165));
@@ -445,7 +445,7 @@ CanvasData* CanvasData::singleton;
 
 CanvasData::CanvasData()
 {
-	default_shader = CONTENT->LoadShader("EngineCore/Shader2D");
+	default_shader = CONTENT->LoadShader("EngineCore/Shaders/Shader2D");
 
 	default_theme = new CanvasTheme;
 }

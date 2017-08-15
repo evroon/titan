@@ -7,12 +7,20 @@ WorldView::WorldView() : WorldView(NULL)
 
 }
 
-WorldView::WorldView(World2D* p_world)
+WorldView::WorldView(World* p_world)
 {
 	viewport = new Viewport();
+	FBO2D* fbo = new FBO2D(vec2i(1024));
+	
 	viewport->set_canvas(new Canvas);
 	viewport->set_world(p_world);
+	viewport->set_mode(Viewport::FRAMEBUFFER);
+	viewport->set_fbo(fbo);
 	
+	fbo->add_color_texture();
+	fbo->add_depth_texture();
+	fbo->init();
+
 	selected = NULL;
 
 	if (p_world)
@@ -37,7 +45,7 @@ void WorldView::notification(int p_notification)
 	if (!viewport)
 		return;
 
-	World2D* world = viewport->get_world();
+	World* world = viewport->get_world();
 
 	switch (p_notification)
 	{
@@ -53,10 +61,12 @@ void WorldView::notification(int p_notification)
 
 		if (viewport)
 		{
-			RENDERER->use_scissor(area);
-			viewport->draw();
-			RENDERER->stop_scissor();
+			//viewport->draw();
 		}
+
+		RENDERER->use_scissor(area);
+		//draw_texture(viewport->get_fbo()->color_textures[0]->cast_to_type<Texture2D*>(), get_area(), Color::White);
+		RENDERER->stop_scissor();
 
 		viewport->activate_transform();
 		viewport->activate_world_transform();
@@ -210,12 +220,22 @@ void WorldView::handle_event(UIEvent *ui_event)
 		viewport->handle_event(ui_event);
 }
 
-void WorldView::set_world(World2D * p_world)
+void WorldView::set_postprocess(PostProcess* p_postprocess)
+{
+	postprocess = p_postprocess;
+}
+
+PostProcess* WorldView::get_postprocess() const
+{
+	return postprocess;
+}
+
+void WorldView::set_world(World* p_world)
 {
 	viewport->set_world(p_world);
 }
 
-World2D * WorldView::get_world()
+World * WorldView::get_world()
 {
 	return viewport->get_world();
 }

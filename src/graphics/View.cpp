@@ -28,8 +28,10 @@ void View::init(const vec2& p_default_size)
 
 void View::draw()
 {
-	for (int c = 0; c < viewports.size(); c++)
-		viewports[c]->draw();
+	default_viewport->draw();
+
+	/*for (int c = 0; c < viewports.size(); c++)
+		viewports[c]->draw();*/
 }
 
 void View::update()

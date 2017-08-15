@@ -20,21 +20,25 @@
 #include "ui/ContentTab.h"
 #include "ui/PropertyTab.h"
 
+#include "world/Model.h"
+#include "world/Terrain.h"
+#include "world/Sky.h"
+
 #include "graphics/View.h"
 
 void EditorApp::init()
 {
-	//vec2 windowsize = vec2(to_float(window->size.x), to_float(window->size.y)) / 2.0f;
-
-	//VIEW->init(windowsize);
-
 	Canvas* c = ACTIVE_CANVAS;
+	Viewport* v = ACTIVE_VIEWPORT;
 
-	world2d = new World2D;
-	world2d->set_name("World");
+	v->set_mode(Viewport::DIRECT);
+
+	world = new World;
+	world->set_name("World");
 
 	Sprite* sprite = new Sprite("Textures/grass.png");
 	sprite->set_name("test_sprite");
+	sprite->set_size(vec3(100, 100, 1));
 
 	//add controls
 	main_dock = new Dock;
@@ -45,9 +49,9 @@ void EditorApp::init()
 
 	//add tabs
 	//text_edit_tab = new TextEditorTab("");
-	game_preview_tab = new GamePreviewTab(world2d);
+	game_preview_tab = new GamePreviewTab(world);
 	content_tab = new ContentTab;
-	explorer_tab = new ExplorerTab(world2d);
+	explorer_tab = new ExplorerTab(world);
 	property_tab = new PropertyTab();
 	console_tab = new ConsoleTab;
 
@@ -101,7 +105,38 @@ void EditorApp::init()
 
 	content_tab->connect("file_chosen", this, "open_file");
 
-	world2d->add_worldobject(sprite);
+	World* w = world;
+
+	v->set_world(w);
+
+	Model* m = new Model("assets/Models/672a8302d72f34f79980861feb2bdcd5/untitled.dae");
+	m->set_pos(vec3(50, 50, 25));
+	m->set_size(vec3(10.0f));
+	m->set_name("plane");
+
+	Terrain* t = new Terrain();
+	t->set_name("terrain");
+
+	Water* water = new Water;
+	water->set_name("water");
+
+	Sky* sky = new Sky;
+
+	Clouds* clouds = new Clouds;
+	clouds->set_name("clouds");
+
+	Vegetation* veg = new Vegetation(t);
+
+	w->add_worldobject(sky);
+	w->add_worldobject(m);
+	w->add_worldobject(t);
+	w->add_worldobject(water);
+	w->add_worldobject(veg);
+	w->add_worldobject(clouds);
+
+	w->get_active_camera()->set_rotation(vec3(0, 0, PI));
+
+	w->init();
 }
 
 void EditorApp::update()
@@ -122,7 +157,6 @@ void EditorApp::resize(const vec2i & p_size)
 	ACTIVE_VIEWPORT->resize(rect2(vec2(), vec2((float)p_size.x, (float)p_size.y) / 2.0f));
 }
 
-
 void EditorApp::open_file(const String& p_file)
 {
 	VariantType type = CONTENT->GetType(p_file);
@@ -133,17 +167,16 @@ void EditorApp::open_file(const String& p_file)
 	{
 		main_dock->add_tab(new TextEditorTab(p_file));
 	}
-
 }
 
-void EditorApp::set_world2d(World2D * p_world2d)
+void EditorApp::set_world2d(World * p_world2d)
 {
-	world2d = p_world2d;
+	world = p_world2d;
 }
 
-World2D * EditorApp::get_world2d() const
+World * EditorApp::get_world2d() const
 {
-	return world2d;
+	return world;
 }
 
 #undef CLASSNAME

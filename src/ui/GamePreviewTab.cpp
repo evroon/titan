@@ -9,18 +9,18 @@ GamePreviewTab::GamePreviewTab() : GamePreviewTab(NULL)
 
 }
 
-GamePreviewTab::GamePreviewTab(World2D* p_world)
+GamePreviewTab::GamePreviewTab(World* p_world)
 {
-	ImageButton* run_button = new ImageButton("EngineCore/Run.png");
+	ImageButton* run_button = new ImageButton("EngineCore/UI/Run.png");
 	run_button->set_tip_description("Run");
 
-	ImageButton* move_button = new ImageButton("EngineCore/Move.png");
+	ImageButton* move_button = new ImageButton("EngineCore/UI/Move.png");
 	move_button->set_tip_description("Move");
 
-	ImageButton* rotate_button = new ImageButton("EngineCore/Rotate.png");
+	ImageButton* rotate_button = new ImageButton("EngineCore/UI/Rotate.png");
 	rotate_button->set_tip_description("Rotate");
 
-	ImageButton* scale_button = new ImageButton("EngineCore/Scale.png");
+	ImageButton* scale_button = new ImageButton("EngineCore/UI/Scale.png");
 	scale_button->set_tip_description("Scale");
 
 	world_view = new WorldView(p_world);

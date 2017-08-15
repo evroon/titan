@@ -23,8 +23,8 @@ ContentView::ContentView()
 	//buttons.space = 3;
 	//buttons.border = 3;
 
-	buttons.add_child(back = new ImageButton("EngineCore/Back.png"));
-	buttons.add_child(forward = new ImageButton("EngineCore/Forward.png"));
+	buttons.add_child(back = new ImageButton("EngineCore/UI/Back.png"));
+	buttons.add_child(forward = new ImageButton("EngineCore/UI/Forward.png"));
 
 	go_home();
 }

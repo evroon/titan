@@ -7,7 +7,7 @@
 
 #include "core/CoreNames.h"
 
-World2D::World2D()
+World::World()
 {
 	AddLayer(new Layer(0, "DefaultLayer"));
 
@@ -23,11 +23,11 @@ World2D::World2D()
 }
 
 
-World2D::~World2D()
+World::~World()
 {
 }
 
-void World2D::add_worldobject(WorldObject *world_object)
+void World::add_worldobject(WorldObject *world_object)
 {
 	add_child(world_object);
 	world_object->register_in_world(this);
@@ -38,13 +38,13 @@ void World2D::add_worldobject(WorldObject *world_object)
 	emit_signal("changed");
 }
 
-void World2D::remove_world_object(WorldObject *world_object)
+void World::remove_world_object(WorldObject *world_object)
 {
 	children.clear(world_object);
 	emit_signal("changed");
 }
 
-WorldObject* World2D::get_worldobject(const String &name)
+WorldObject* World::get_worldobject(const String &name)
 {
 	for (Node* obj : children)
 	{
@@ -55,12 +55,12 @@ WorldObject* World2D::get_worldobject(const String &name)
 	return NULL;
 }
 
-Viewport* World2D::get_viewport() const
+Viewport* World::get_viewport() const
 {
 	return ACTIVE_VIEWPORT;
 }
 
-Layer* World2D::GetLayer(const String &name)
+Layer* World::GetLayer(const String &name)
 {
 	for (int c = 0; c < layers.size(); c++)
 		if (layers[c]->name == name)
@@ -68,7 +68,8 @@ Layer* World2D::GetLayer(const String &name)
 
 	return NULL;
 }
-Layer* World2D::GetLayer(int depth)
+
+Layer* World::GetLayer(int depth)
 {
 	for (int c = 0; c < layers.size(); c++)
 		if (layers[c]->depth == depth)
@@ -76,7 +77,8 @@ Layer* World2D::GetLayer(int depth)
 
 	return NULL;
 }
-void World2D::AddLayer(Layer *l)
+
+void World::AddLayer(Layer *l)
 {
 	int destination = -1;
 
@@ -94,24 +96,24 @@ void World2D::AddLayer(Layer *l)
 	else
 		layers.insert(destination, l);
 }
-void World2D::RemoveLayer(Layer *l)
+void World::RemoveLayer(Layer *l)
 {
 	layers.clear(l);
 }
 
-void World2D::RepositionLayer(Layer *l)
+void World::RepositionLayer(Layer *l)
 {
 	RemoveLayer(l);
 	AddLayer(l);
 }
 
-void World2D::handle_event(Event *e)
+void World::handle_event(Event *e)
 {
 	for (Node* p : children)
 		p->cast_to_type<WorldObject*>()->handle_event(e);
 }
 
-void World2D::init()
+void World::init()
 {
 	if (has_script())
 		run(CORE_NAMES->ready, Arguments());
@@ -123,17 +125,18 @@ void World2D::init()
 	}
 }
 
-void World2D::update()
+void World::update()
 {
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
 			wo->notificate(WorldObject::NOTIFICATION_UPDATE);
 }
 
-void World2D::draw()
+void World::draw()
 {
+	/*
 	//draw shadowmap
-	FBOMANAGER->BindFBO(RENDERER->get_shadow_buffer());
+	RENDERER->get_shadow_buffer()->bind();
 
 	RENDERER->switch_to_camera(light_camera);
 
@@ -156,7 +159,7 @@ void World2D::draw()
 
 	c->update();
 
-	FBOMANAGER->BindFBO(RENDERER->get_reflection_buffer());
+	RENDERER->get_reflection_buffer()->bind();
 
 	RENDERER->switch_to_camera(c);
 
@@ -170,40 +173,40 @@ void World2D::draw()
 	}
 
 	RENDERER->deactivate_camera();
-
 	c->set_rotation(r);
 	c->set_pos(p);
 
 	c->update();
+	*/
 
 	//draw scene
-	FBOMANAGER->BindFBO(RENDERER->get_render_buffer());
-	RENDERER->set_light_matrix(light_matrix);
+	//RENDERER->get_render_buffer()->bind();
+	//RENDERER->set_light_matrix(light_matrix);
 
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
 			wo->notificate(WorldObject::NOTIFICATION_DRAW);
 }
 
-void World2D::Free()
+void World::Free()
 {
 	children.clean();
 }
 
-void World2D::set_active_camera(Camera *p_camera)
+void World::set_active_camera(Camera *p_camera)
 {
 	active_camera = p_camera;
 }
 
-Camera* World2D::get_active_camera() const
+Camera* World::get_active_camera() const
 {
 	return active_camera;
 }
 
 #undef CLASSNAME
-#define CLASSNAME World2D
+#define CLASSNAME World
 
-void World2D::bind_methods()
+void World::bind_methods()
 {
 	REG_METHOD(add_worldobject);
 

@@ -7,13 +7,13 @@
 
 class Viewport;
 
-class World2D : public Node
+class World : public Node
 {
-	OBJ_DEFINITION(World2D, Node);
+	OBJ_DEFINITION(World, Node);
 
 public:
-	World2D();
-	~World2D();
+	World();
+	~World();
 
 	void add_worldobject(WorldObject *world_object);
 	void remove_world_object(WorldObject *world_object);
