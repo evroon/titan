@@ -56,6 +56,8 @@ public:
 
 	float get_focal_length() const;
 
+	void handle_input();
+
 
 private:
 	Viewport* get_viewport() const;

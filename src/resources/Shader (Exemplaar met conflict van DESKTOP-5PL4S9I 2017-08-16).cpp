@@ -24,14 +24,10 @@ Shader::Shader(const String &p_path)
 	vertexshader_id = -1;
 	fragmentshader_id = -1;
 	geometryshader_id = -1;
-	tess_control_id = -1;
-	tess_evaluation_id = -1;
 
 	vertex_path = p_path + ".vert";
 	fragment_path = p_path + ".frag";
 	geometry_path = p_path + ".geom";
-	tess_control_path = p_path + ".tc";
-	tess_evaluation_path = p_path + ".te";
 
 	file = p_path;
 
@@ -53,12 +49,6 @@ void Shader::load()
 	if (has_geometry_shader() && fragmentshader_id != -1)
 		geometryshader_id = create_shader(geometry_path, GL_GEOMETRY_SHADER);
 
-	if (has_tesselation_shader() && geometryshader_id != -1)
-	{
-		tess_control_id = create_shader(tess_control_path, GL_TESS_CONTROL_SHADER);
-		tess_evaluation_id = create_shader(tess_evaluation_path, GL_TESS_EVALUATION_SHADER);
-	}
-
 	isvalid = vertexshader_id != -1 && fragmentshader_id != -1;
 
 	if (isvalid)
@@ -78,8 +68,6 @@ void Shader::free()
 	CONTENT->free_textfile(vertex_path);
 	CONTENT->free_textfile(fragment_path);
 	CONTENT->free_textfile(geometry_path);
-	CONTENT->free_textfile(tess_control_path);
-	CONTENT->free_textfile(tess_evaluation_path);
 
 	if (!isvalid)
 		return;
@@ -89,12 +77,6 @@ void Shader::free()
 
 	if (geometryshader_id > -1)
 		glDeleteShader(geometryshader_id);
-
-	if (tess_control_id != -1 && tess_evaluation_id != -1)
-	{
-		glDeleteShader(tess_control_id);
-		glDeleteShader(tess_evaluation_id);
-	}
 
 	glDeleteProgram(program_id);
 }
@@ -106,7 +88,7 @@ void Shader::start()
 
 GLint Shader::create_shader(const String& p_path, GLenum ShaderType)
 {
-    GLint shader_id = glCreateShader(ShaderType);
+    GLint ShaderID = glCreateShader(ShaderType);
     GLchar infolog[MAX_LOG_LENGTH];
     const GLchar* shadersource;
     GLint infologlength;
@@ -117,25 +99,26 @@ GLint Shader::create_shader(const String& p_path, GLenum ShaderType)
 	String s = file->get_source();
 	shadersource = s.c_str();
 
-    glShaderSource(shader_id, 1, &shadersource, NULL);
-    glCompileShader(shader_id);
-    glGetShaderiv(shader_id, GL_COMPILE_STATUS, &compilestatus);
+    glShaderSource(ShaderID, 1, &shadersource, NULL);
+    glCompileShader(ShaderID);
+    glGetShaderiv(ShaderID, GL_COMPILE_STATUS, &compilestatus);
 
-    if (!compilestatus)
+    if (compilestatus != GL_TRUE)
     {
-		glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &infologlength);
-        glGetShaderInfoLog(shader_id, MAX_LOG_LENGTH, NULL, infolog);
+		glGetShaderiv(ShaderID, GL_INFO_LOG_LENGTH, &infologlength);
+        glGetShaderInfoLog(ShaderID, MAX_LOG_LENGTH, NULL, infolog);
 
-		String err = "Failed to compile: " + p_path;
+		String err = "Failed to compile: ";
+		err += p_path;
 		err += "\n\nStart InfoLog:\n\n";
 		err += infolog;
 		err += "End InfoLog\n";
 
 		T_ERROR(err);
 
-		shader_id = -1;
+		ShaderID = -1;
     }
-    return shader_id;
+    return ShaderID;
 }
 
 void Shader::create_program()
@@ -150,18 +133,12 @@ void Shader::create_program()
 	if (geometryshader_id != -1)
 		glAttachShader(program_id, geometryshader_id);
 
-	if (tess_control_id != -1 && tess_evaluation_id != -1)
-	{
-		glAttachShader(program_id, tess_control_id);
-		glAttachShader(program_id, tess_evaluation_id);
-	}
-
 	glLinkProgram(program_id);
     glGetProgramiv(program_id, GL_LINK_STATUS, &linkStatus);
 
     if (linkStatus != GL_TRUE)
     {
-        T_ERROR("Program link failed for shader: " + file);
+        T_ERROR("Program link failed!");
 
         glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &infologlength);
         infolog = new GLchar(infologlength + 1);
@@ -192,11 +169,6 @@ bool Shader::has_geometry_shader()
 	return geometry_path.is_file();
 }
 
-bool Shader::has_tesselation_shader()
-{
-	return tess_control_path.is_file() && tess_evaluation_path.is_file();
-}
-
 void Shader::set_info()
 {
 	Uniform uni;
@@ -219,7 +191,7 @@ void Shader::set_info()
 	for (GLint c = 0; c < count; c++)
 	{
 		glGetActiveUniformBlockName(program_id, c, sizeof(block.name) - 1, &block.length, block.name);
-		block.location = glGetUniformLocation(program_id, block.name);
+		block.location = glGetUniformBlockIndex(program_id, block.name);
 		block.index = c;
 		blocks[block.name] = block;
 	}
@@ -326,6 +298,11 @@ void Shader::set_uniform(const String &name, const Array<mat4> &value)
 	CHECK_NAME
 
 	glUniformMatrix4fv(uniforms[name].location, value.size(), false, &(&value[0])->m[0]);
+}
+
+void Shader::bind_buffer(const String& p_name, Ref<UBO> p_ubo)
+{
+	glUniformBlockBinding(program_id, blocks[p_name].location, p_ubo->get_bound_index());
 }
 
 int Shader::get_program() const

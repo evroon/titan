@@ -11,17 +11,17 @@ public:
 	virtual ~UBO();
 
 	void set_data(const Array<float>& p_buffer);
+	void set_data(const Array<mat4>& p_buffer);
+
 	void update_data(const Array<float>& buffer);
+	void update_data(const Array<mat4>& p_buffer);
 
 	void bind();
 
-	void bindBufferBase();
-
-	void bindBufferBase(int index);
+	void bind_at_index(int p_index);
+	int get_bound_index() const;
 
 private:
 	unsigned ubo;
-	int binding_point_index;
-	String bindingName;
+	unsigned bound_index;
 };
-

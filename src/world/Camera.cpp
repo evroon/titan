@@ -1,8 +1,13 @@
 #include "Camera.h"
 
-#include "graphics/Viewport.h"
-#include "World.h"
+#include "graphics/View.h"
 #include "graphics/Renderer.h"
+
+#include "World.h"
+#include "world/Terrain.h"
+#include "world/Raycaster.h"
+
+#include "input/Keyboard.h"
 
 #ifdef near
 #undef near
@@ -203,4 +208,68 @@ mat4 Camera::get_inverse() const
 float Camera::get_focal_length() const
 {
 	return 1.0f / Math::tan(fov / 2.0f);
+}
+
+void Camera::handle_input()
+{
+	Camera* c = VIEW->get_active_viewport()->get_world()->get_active_camera();
+	Terrain* t = VIEW->get_active_viewport()->get_world()->get_worldobject("terrain")->cast_to_type<Terrain*>();
+
+	vec3 rotate_speed = 1.0f * 0.000001f * TIME->get_deltatime();
+	vec3 movement_speed = 10.0f * 0.000001f * TIME->get_deltatime();
+
+	//rotation
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_UP))
+		c->rotate(rotate_speed * vec3(1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_DOWN))
+		c->rotate(rotate_speed * vec3(-1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_LEFT))
+		c->rotate(rotate_speed * vec3(0, 1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_RIGHT))
+		c->rotate(rotate_speed * vec3(0, -1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_M))
+		c->rotate(rotate_speed * vec3(0, 0, 1));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_N))
+		c->rotate(rotate_speed * vec3(0, 0, -1));
+
+	//movement
+	if (KEYBOARD->is_button_pressed(Key::KEY_A))
+		c->move(movement_speed * vec3(-1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_D))
+		c->move(movement_speed * vec3(1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_W))
+		c->move(movement_speed * vec3(0, 1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_S))
+		c->move(movement_speed * vec3(0, -1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_E))
+		c->move(movement_speed * vec3(0, 0, 1));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_F))
+		c->move(movement_speed * vec3(0, 0, -1));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_T))
+		CONTENT->LoadShader("EngineCore/Shaders/PostProcess")->reload();
+
+	vec3 pos = c->get_pos();
+	float height = t->get_height(pos.get_xy());
+
+	if (c->get_pos().z < height + 1.0f)
+		c->set_pos(vec3(pos.x, pos.y, height + 1.0f));
+
+	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
+
+	VIEW->update();
+
+	Raycaster r = Raycaster(c);
+	vec3 p = r.raycast(MOUSE->get_position());
 }

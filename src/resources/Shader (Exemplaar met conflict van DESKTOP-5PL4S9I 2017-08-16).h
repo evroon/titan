@@ -2,6 +2,7 @@
 
 #include <glew\glew.h>
 
+#include "types\UBO.h"
 #include "Resource.h"
 #include "File.h"
 
@@ -12,7 +13,7 @@ class Shader : public Resource
 public:
 	Shader() = default;
     Shader(const String &filename);
-	virtual ~Shader();
+    ~Shader();
 
     struct Uniform
 	{
@@ -42,7 +43,6 @@ public:
 	void unbind();
 
 	bool has_geometry_shader();
-	bool has_tesselation_shader();
 
     void set_uniform(const String &name, const bool value);
     void set_uniform(const String &name, const int value);
@@ -58,6 +58,8 @@ public:
     void set_uniform(const String &name, const mat4 &value);
 	void set_uniform(const String & name, const Array<mat4>& value);
 
+	void bind_buffer(const String& p_name, Ref<UBO> p_ubo);
+
 	int get_program() const;
 
 private:
@@ -70,8 +72,6 @@ private:
 	int vertexshader_id;
 	int fragmentshader_id;
 	int geometryshader_id;
-	int tess_control_id;
-	int tess_evaluation_id;
 
 	bool isvalid = false;
 
@@ -81,6 +81,4 @@ private:
 	File vertex_path;
 	File fragment_path;
 	File geometry_path;
-	File tess_control_path;
-	File tess_evaluation_path;
 };
