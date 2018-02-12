@@ -1,0 +1,24 @@
+#pragma once
+
+#include "core/Application.h"
+#include "Scene.h"
+#include "input/Event.h"
+
+class GameApp : public Application
+{
+	OBJ_DEFINITION(GameApp, Application);
+
+public:
+	GameApp(Platform *t) : Application(t) { }
+
+	void init() override;
+	void update() override;
+
+	void draw() override;
+
+	void start_scene(Scene *s);
+	void handle_event(Event *e);
+	
+private:
+	Scene *activescene;
+};
