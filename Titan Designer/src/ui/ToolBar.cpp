@@ -80,11 +80,6 @@ void ToolBar::handle_event(UIEvent* p_event)
 	switch (p_event->type)
 	{
 	case UIEvent::FOCUS_LOSE:
-
-		highlighted = -1;
-		update();
-		break;
-
 	case UIEvent::MOUSE_EXIT:
 
 		highlighted = -1;
@@ -198,6 +193,7 @@ void ToolBar::open_item(int p_index)
 void ToolBar::menu_closed()
 {
 	selected = -1;
+	update();
 }
 
 #undef CLASSNAME

@@ -27,6 +27,7 @@ vec2 Dock::get_required_size() const
 
 void Dock::handle_event(UIEvent * p_event)
 {
+	int h;
 	switch (p_event->type)
 	{
 	case UIEvent::FOCUS_LOSE:
@@ -53,7 +54,10 @@ void Dock::handle_event(UIEvent * p_event)
 		if (selected != -1)
 			break;
 
-		if (highlighted != (highlighted = get_item(p_event->pos)))
+		h = highlighted;
+		highlighted = get_item(p_event->pos);
+
+		if (highlighted != h)
 			update();
 
 		break;

@@ -266,7 +266,6 @@ __pycache__/
 /Titan Designer.sln
 /CodeBlocks
 /Titan Designer/PC Release/Titan Designer/Titan Designer.tlog
-/Titan Designer/assets
 /Titan Designer/zlib1.dll
 /Titan Designer/Titan Designer2.rc
 /Titan Designer/Titan Designer1.rc
@@ -300,3 +299,11 @@ __pycache__/
 /Titan Designer/freeglut.dll
 /Titan Designer/assimp.dll
 /Titan-Designer
+/Titan Designer/assets/EngineCore/Fonts
+/Titan Designer/assets/EngineCore/UI
+/Titan Designer/assets/Models
+/Titan Designer/assets/Scripts
+/Titan Designer/assets/Textures
+/Titan Designer/assets/Sounds
+/Titan Designer/assets/Stormtrooper_D.tga
+/Titan Designer/assets/type_data.xml

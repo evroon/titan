@@ -32,6 +32,7 @@ void Slider::set_slider_pos(float p_position)
 		return;
 
 	position = new_position;
+	update();
 
 	emit_signal("value_changed");
 }

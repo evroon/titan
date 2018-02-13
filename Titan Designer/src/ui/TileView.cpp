@@ -602,6 +602,7 @@ void TileView::set_selection(int p_selected)
 
 	selection_begin = 0;
 	selection_end = 0;
+	update();
 }
 
 void TileView::set_selection(int p_begin, int p_end)
@@ -713,6 +714,8 @@ void TileView::make_visible(int p_index)
 
 	if (slider)
 		slider->set_slider_pos(slider->get_value() - delta / extra_space);
+
+	update();
 }
 
 void TileView::search(const String& p_src)
