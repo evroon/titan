@@ -200,6 +200,9 @@ void Viewport::activate()
 
 void Viewport::deactivate()
 {
+	if (!return_viewport)
+		return;
+
 	return_viewport->activate();
 	return_viewport = NULL;
 }

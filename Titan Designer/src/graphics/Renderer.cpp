@@ -859,7 +859,7 @@ void DeferredRenderer::render()
 	set_viewport();
 
 	FBOMANAGER->bind_default_fbo();
-	FBOMANAGER->clear_all();
+	//FBOMANAGER->clear_all();
 
 	deferred_buffer->bind();
 

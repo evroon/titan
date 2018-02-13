@@ -88,7 +88,9 @@ void WorldView::notification(int p_notification)
 		//viewport->update();
 
 		if (viewport)
+		{
 			viewport->draw();
+		}
 
 		RENDERER->use_scissor(area);
 
@@ -415,7 +417,9 @@ void WorldView::handle_event(UIEvent *ui_event)
 void WorldView::post_draw_world()
 {
 	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
-	terrain->get_brush()->apply();
+
+	if (terrain)
+		terrain->get_brush()->apply();
 
 	if (!selected)
 		return;
