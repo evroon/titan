@@ -15,6 +15,12 @@ struct Connection
 	void register_signal(Scriptable *p_scriptable, const StringName &p_signal_name);
 	void register_lambda(Method* p_lambda);
 
+	// static versions
+	static Connection create_from_native_method(Object *p_object, const StringName &p_method_name);
+	static Connection create_from_script_method(Scriptable *p_scriptable, const StringName &p_method_name);
+	static Connection create_from_signal(Scriptable *p_scriptable, const StringName &p_signal_name);
+	static Connection create_from_lambda(Method* p_lambda);
+
 	Method* method;
 	Object* object;
 	Scriptable* scriptable;

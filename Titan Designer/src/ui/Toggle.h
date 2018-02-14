@@ -8,6 +8,7 @@ class Toggle : public Button
 
 public:
 	Toggle();
+	Toggle(const String& p_tex);
 	virtual ~Toggle();
 
 	void handle_event(UIEvent* p_event) override;

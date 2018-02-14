@@ -36,9 +36,9 @@ WorldView::WorldView(World* p_world)
 
 	selected = NULL;
 
-	cone = new Model("Models/Cone.dae");
+	cone = new Model("assets/Models/Primitives/Cone.dae");
 	plane = MeshHandler::get_singleton()->get_plane();
-	disk = new Model("Models/Cube.dae");
+	disk = new Model("assets/Models/Primitives/Cube.dae");
 
 	raycast_fbo = new FBO2D(WINDOWSIZE);
 	raycast_fbo->add_float_color_texture();
@@ -85,10 +85,11 @@ void WorldView::notification(int p_notification)
 
 		return_viewport = ACTIVE_VIEWPORT;
 
-		//viewport->update();
-
 		if (viewport)
 		{
+			if (simulating)
+				viewport->update();
+
 			viewport->draw();
 		}
 
@@ -461,6 +462,8 @@ void WorldView::post_draw_world()
 	plane->unbind();
 
 	DEFERRED_RENDERER->get_fbo(0)->bind();
+	RENDERER->stop_depth_test();
+	RENDERER->stop_culling();
 
 	float highlight = 150.0f;
 
@@ -469,7 +472,7 @@ void WorldView::post_draw_world()
 		//draw translation cones
 		//X
 		cone->set_pos(pos);
-		cone->set_size(vec3(1, 0.5f, 0.5f));
+		cone->set_size(vec3(1.0f, .5f, .5f));
 		cone->set_rotation(vec3(0, 0, 0));
 		if (highlight_type == DRAG_X)
 			cone->set_color(Color::Red);
@@ -502,7 +505,6 @@ void WorldView::post_draw_world()
 	}
 	else if (transform_type == SCALE)
 	{
-		RENDERER->stop_depth_test();
 		//draw planes
 		//X
 		disk->set_pos(pos);
@@ -532,11 +534,11 @@ void WorldView::post_draw_world()
 			disk->set_color(Color::FromRGB(vec3i(highlight, highlight, 255)));
 		disk->set_color_id(vec3(0, 0, 0.8f));
 		disk->draw();
-
-		Camera* c = ACTIVE_VIEWPORT->get_world()->get_active_camera();
-		RENDERER->use_depth_test(c->get_near(), c->get_far());
 	}
-
+	
+	Camera* c = ACTIVE_VIEWPORT->get_world()->get_active_camera();
+	RENDERER->use_depth_test(c->get_near(), c->get_far());
+	RENDERER->use_culling();
 
 	draw_grid();
 }

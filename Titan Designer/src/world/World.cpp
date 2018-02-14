@@ -114,11 +114,13 @@ void World::init()
 {
 	if (has_script())
 		run(CORE_NAMES->ready, Arguments());
-
 }
 
 void World::update()
 {
+	if (has_script())
+		run(CORE_NAMES->update, Arguments());
+
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
 			wo->notificate(WorldObject::NOTIFICATION_UPDATE);

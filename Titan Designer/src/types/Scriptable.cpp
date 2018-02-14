@@ -13,10 +13,16 @@ Scriptable::~Scriptable()
 {
 }
 
-void Scriptable::attach_script(TitanScript *p_script)
+void Scriptable::set_script(TitanScript *p_script)
 {
 	script = p_script;
-	script->Extend(this);
+	if (script)
+		script->Extend(this);
+}
+
+TitanScript* Scriptable::get_script() const
+{
+	return script;
 }
 
 Variant Scriptable::run(const StringName &name, const Arguments& args)
@@ -138,5 +144,5 @@ void Scriptable::emit_signal(const StringName & p_name, Variant arg_0)
 
 void Scriptable::bind_methods()
 {
-	REG_METHOD(attach_script);
+	REG_PROPERTY(script);
 }

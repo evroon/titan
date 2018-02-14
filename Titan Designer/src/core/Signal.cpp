@@ -48,6 +48,34 @@ void Connection::register_lambda(Method* p_lambda)
 	method = p_lambda;
 }
 
+Connection Connection::create_from_native_method(Object* p_object, const StringName& p_method_name)
+{
+	Connection c;
+	c.register_native_method(p_object, p_method_name);
+	return c;
+}
+
+Connection Connection::create_from_script_method(Scriptable* p_scriptable, const StringName& p_method_name)
+{
+	Connection c;
+	c.register_signal(p_scriptable, p_method_name);
+	return c;
+}
+
+Connection Connection::create_from_signal(Scriptable* p_scriptable, const StringName& p_signal_name)
+{
+	Connection c;
+	c.register_signal(p_scriptable, p_signal_name);
+	return c;
+}
+
+Connection Connection::create_from_lambda(Method* p_lambda)
+{
+	Connection c;
+	c.register_lambda(p_lambda);
+	return c;
+}
+
 //=========================================================================
 //Signal
 //=========================================================================
@@ -129,6 +157,11 @@ void Signal::emit_connection(const Connection& p_connection) const
 		else
 			T_ERROR("argument count does not match");
 	}
+	else if (p_connection.type == Connection::LAMBDA)
+	{
+		V_Method_0* m = reinterpret_cast<V_Method_0*>(p_connection.method);
+		m->operator()();
+	}
 	else if (p_connection.type == Connection::TITANSCRIPT)
 		p_connection.scriptable->run(p_connection.name, Arguments());
 	else if (p_connection.type == Connection::SIGNAL)
@@ -154,6 +187,11 @@ void Signal::emit_connection(const Connection& p_connection, Variant arg_0) cons
 		}
 		else
 			T_ERROR("argument count does not match");
+	}
+	else if (p_connection.type == Connection::LAMBDA)
+	{
+		V_Method_1* m = reinterpret_cast<V_Method_1*>(p_connection.method);
+		m->operator()(arg_0);
 	}
 	else if (p_connection.type == Connection::TITANSCRIPT)
 		p_connection.scriptable->run(p_connection.name, Arguments(arg_0));

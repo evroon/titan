@@ -15,7 +15,7 @@ GamePreviewTab::GamePreviewTab() : GamePreviewTab(NULL)
 
 GamePreviewTab::GamePreviewTab(World* p_world)
 {
-	ImageButton* run_button = new ImageButton("EngineCore/UI/Run.png");
+	Toggle* run_button = new Toggle("EngineCore/UI/Run.png");
 	run_button->set_tip_description("Run");
 
 	ImageButton* move_button = new ImageButton("EngineCore/UI/Move.png");

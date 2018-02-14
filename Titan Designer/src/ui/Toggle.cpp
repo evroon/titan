@@ -8,6 +8,11 @@ Toggle::Toggle()
 {
 }
 
+Toggle::Toggle(const String& p_tex) : Toggle()
+{
+	tex = CONTENT->LoadTexture(p_tex);
+}
+
 
 Toggle::~Toggle()
 {
@@ -21,6 +26,7 @@ void Toggle::handle_event(UIEvent * p_event)
 		{
 			selected = !selected;
 			emit_signal("toggled", selected);
+			update();
 			return;
 		}
 	}
@@ -30,11 +36,11 @@ void Toggle::handle_event(UIEvent * p_event)
 
 void Toggle::notification(int p_notification)
 {
+	Color color;
 	switch (p_notification)
 	{
 	case NOTIFICATION_DRAW:
 
-		Color color;
 
 		if (selected)
 			color = DEFAULT_THEME->get_selection_color();
@@ -42,12 +48,18 @@ void Toggle::notification(int p_notification)
 		draw_texture(tex, area, color);
 
 		break;
+
+	case NOTIFICATION_TRANSLATED:
+	case NOTIFICATION_RESIZED:
+
+		update();
+		break;
 	}
 }
 
 vec2 Toggle::get_required_size() const
 {
-	return vec2();
+	return tex->get_size();
 }
 
 #undef CLASSNAME

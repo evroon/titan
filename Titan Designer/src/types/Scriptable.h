@@ -16,7 +16,8 @@ public:
 	Scriptable();
 	virtual ~Scriptable();
 
-	void attach_script(TitanScript *p_script);
+	void set_script(TitanScript *p_script);
+	TitanScript* get_script() const;
 
 	Variant run(const StringName &name, const Arguments& args);
 	bool method_exists(const StringName &name);
@@ -39,7 +40,7 @@ public:
 	Dictionary<StringName, Signal> signals;
 
 protected:
-	bool has_script() const { return script ? true : false; }
+	bool has_script() const { return script != NULL; }
 
 private:
 	TitanScript *script;

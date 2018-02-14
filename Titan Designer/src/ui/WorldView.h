@@ -101,5 +101,7 @@ private:
 
 	bool handle_2d = false;
 
+	bool simulating;
+
 	int preview_type;
 };

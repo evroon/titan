@@ -870,13 +870,14 @@ void DeferredRenderer::render()
 		Camera* c = viewport->world->get_active_camera();
 		c->update_matrices();
 
-		RENDERER->use_depth_test(c->get_near(), c->get_far());
+		use_depth_test(c->get_near(), c->get_far());
 
 		activate_world_transform();
 		viewport->world->draw();
+		viewport->post_draw_world();
 		deactivate_world_transform();
 
-		RENDERER->stop_depth_test();
+		stop_depth_test();
 	}
 
 	if (viewport->canvas)
@@ -893,7 +894,6 @@ void DeferredRenderer::render()
 	render_flare();
 	//render_ssao();
 	render_second_pass();
-	viewport->post_draw_world();
 
 	deactivate();
 

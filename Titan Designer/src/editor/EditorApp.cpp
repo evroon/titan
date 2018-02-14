@@ -54,7 +54,7 @@ void EditorApp::init()
 	v->resize(WINDOWSIZE_F / 2.0f);
 	v->set_mode(Viewport::DIRECT);
 
-	active_project = new Project("Projects/second.xml");
+	active_project = new Project("Projects/jumper.xml");
 	//active_project = new Project;
 	//active_project->create();
 
@@ -62,7 +62,7 @@ void EditorApp::init()
 
 	World* world = active_scene->get_child(0)->cast_to_type<World*>();
 	world->set_name("World");
-	world->attach_script(new TitanScript("Scripts/World.ts"));
+	world->set_script(new TitanScript("Scripts/World.ts"));
 		
 	//add controls
 	main_dock = new Dock;
@@ -114,10 +114,17 @@ void EditorApp::init()
 	property_dock->set_margins(495, 4, 4, -2);
 
 	//toolbar
+	auto save_as = [this]() { active_project->save(); };
+	auto open_save_as = [&]()
+	{
+		auto f = new FileDialog;
+		f->connect("file_chosen", Connection::create_from_lambda(new V_Method_0(save_as)));
+		ACTIVE_CANVAS->set_dialog(f);
+	};
+	auto save = [this]() { active_project->save(); };
+
 	ContextMenu* file = new ContextMenu;
-	Connection save, save_as, load, exit;
-	save.register_native_method(this, "save");
-	save_as.register_native_method(this, "save_as");
+	Connection load, exit;
 	load.register_native_method(this, "load");
 	exit.register_native_method(this, "exit");
 
@@ -125,8 +132,8 @@ void EditorApp::init()
 	Connection project_options;
 	project_options.register_native_method(this, "project_options");
 
-	file->add_item("Save Project", save);
-	file->add_item("Save Project As", save_as);
+	file->add_item("Save Project", Connection::create_from_lambda(new V_Method_0(save)));
+	file->add_item("Save Project As", Connection::create_from_lambda(new V_Method_0(open_save_as)));
 	file->add_item("Load Project", load);
 	file->add_seperator();
 	file->add_item("Project Settings", project_options);
