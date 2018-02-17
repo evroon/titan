@@ -9,8 +9,6 @@ ImageButton::ImageButton(const String& tex_name) : ImageButton(CONTENT->LoadText
 ImageButton::ImageButton(Texture2D * p_texture)
 {
 	texture = p_texture;
-	texture->bind(0);
-	texture->set_filter(Texture::BILINEAR_FILTER);
 
 	for (int c = 0; c < 4; c++)
 		texture_margins[c] = 5;

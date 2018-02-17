@@ -94,7 +94,7 @@ FBO2D::FBO2D(const vec2i &p_size)
 
 FBO2D::FBO2D(const Ref<Texture2D>& p_texture)
 {
-	size = vec2i(to_int(p_texture->get_size().x), to_int(p_texture->get_size().y));
+	size = vec2i(p_texture->get_size().x, p_texture->get_size().y);
 	depth = false;
 
 	glGenFramebuffers(1, &id);

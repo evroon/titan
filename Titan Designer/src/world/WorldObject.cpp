@@ -2,9 +2,9 @@
 
 #include "graphics/RenderComponent.h"
 #include "math/TransformComponent.h"
+#include "physics/PhysicsComponent.h"
 #include "core/titanscript/ScriptComponent.h"
-#include "physics/PhysicsWorld.h"
-#include "physics/RigidBody.h"
+#include "physics/PhysicsGod.h"
 #include "World.h"
 
 WorldObject::WorldObject()
@@ -82,7 +82,11 @@ void WorldObject::notificate(int notification)
 
 void WorldObject::update()
 {
+	if (physicscomponent)
+		physicscomponent->update();
 
+	//for (Component *comp : components)
+	//	comp->update();
 }
 
 void WorldObject::set_transformcomponent(TransformComponent *c)
@@ -103,16 +107,16 @@ void WorldObject::set_rendercomponent(RenderComponent *c)
 	}
 }
 
-//void WorldObject::set_physicscomponent(PhysicsComponent2D *c)
-//{
-//	physicscomponent = c;
-//
-//	if (physicscomponent)
-//	{
-//		components.push_back(c);
-//		c->bind_parent(this);
-//	}
-//}
+void WorldObject::set_physicscomponent(PhysicsComponent *c)
+{
+	physicscomponent = c;
+
+	if (physicscomponent)
+	{
+		components.push_back(c);
+		c->bind_parent(this);
+	}
+}
 
 TransformComponent* WorldObject::get_transformcomponent() const
 {
@@ -124,10 +128,10 @@ RenderComponent* WorldObject::get_rendercomponent() const
 	return rendercomponent;
 }
 
-//PhysicsComponent2D* WorldObject::get_physicscomponent() const
-//{
-//	return physicscomponent;
-//}
+PhysicsComponent* WorldObject::get_physicscomponent() const
+{
+	return physicscomponent;
+}
 
 Transform WorldObject::get_transform() const
 {
@@ -150,8 +154,8 @@ void WorldObject::set_pos(const vec3 &p_pos)
 	transform.set_pos(p_pos);
 	transform.update();
 
-	//if (physicscomponent)
-	//	physicscomponent->set_transform(transform);
+	if (physicscomponent)
+		physicscomponent->set_transform(transform);
 }
 
 vec3 WorldObject::get_size() const
@@ -184,8 +188,8 @@ void WorldObject::set_rotation(const vec3& p_rotation)
 	transform.set_rotation(p_rotation);
 	transform.update();
 
-	//if (physicscomponent)
-	//	physicscomponent->set_transform(transform);
+	if (physicscomponent)
+		physicscomponent->set_transform(transform);
 }
 
 vec3 WorldObject::get_axis() const
@@ -267,8 +271,8 @@ void WorldObject::set_component(Component *c)
 		set_transformcomponent(reinterpret_cast<TransformComponent*>(c));
 	else if (c->is_of_type<RenderComponent>())
 		set_rendercomponent(reinterpret_cast<RenderComponent*>(c));
-	//else if (c->is_of_type<PhysicsComponent2D>())
-	//	set_physicscomponent(reinterpret_cast<PhysicsComponent2D*>(c));
+	else if (c->is_of_type<PhysicsComponent>())
+		set_physicscomponent(reinterpret_cast<PhysicsComponent*>(c));
 
 	c->bind_parent(this);
 	components.push_back(c);
@@ -301,6 +305,7 @@ void WorldObject::bind_methods()
 
 	REG_PROPERTY(transformcomponent);
 	REG_PROPERTY(rendercomponent);
+	REG_PROPERTY(physicscomponent);
 
 	REG_METHOD(move);
 	REG_METHOD(free);

@@ -61,9 +61,6 @@ public:
 	void set_transform_type(int p_transform_type);
 	int get_transform_type() const;
 
-	void set_simulating(bool p_simulating);
-	bool get_simulating() const;
-
 	WorldObject* raycast(const vec2& p_pos) const;
 
 	Viewport* get_viewport() const;

@@ -6,6 +6,7 @@
 #include "resources/Texture.h"
 #include "resources/Shader.h"
 #include "Mesh.h"
+#include "physics/PhysicsGod.h"
 
 SimpleMesh * Sprite::defaultmesh;
 

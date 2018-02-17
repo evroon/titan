@@ -24,6 +24,7 @@
 
 #include "NodeManager.h"
 
+#include "physics/PhysicsGod.h"
 #include "graphics/View.h"
 
 #include "ui/SyntaxHighlighter.h"
@@ -32,7 +33,7 @@ void Application::InitSDL()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	window = new Window(vec2i(2560, 1370));
+	window = new Window(vec2i(2400, 1200));
 	window->CreateGLContext();
 
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
@@ -52,7 +53,7 @@ void Application::InitGL()
 
 void Application::InitPhysics()
 {
-	
+	PhysicsGod::BuildWorld();
 }
 
 void Application::InitRenderer()
@@ -174,7 +175,7 @@ void Application::Loop()
 		{
 			TIME->OnUpdate();
 			update();
-			//PhysicsWorld2D::update();
+			PhysicsGod::update();
 			INPUT->Clean();
 		}
 
@@ -204,7 +205,7 @@ void Application::Quit()
 	//NodeManager::Free();
 	GC->free();
 	StringUtils::Free();
-	//PhysicsWorld2D::DestroyWorld();
+	PhysicsGod::DestroyWorld();
 	FBOMANAGER->free();
 	ERROR_HANDLER->clean();
 	Audio::Free();
