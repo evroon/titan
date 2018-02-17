@@ -91,7 +91,7 @@ public:
 
 	ContactType contact;
 
-	RigidBody *object;
+	RigidBody2D *object;
 };
 
 class UIEvent : public Event

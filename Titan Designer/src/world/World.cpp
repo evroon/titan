@@ -128,44 +128,6 @@ void World::update()
 
 void World::draw()
 {
-	/*
-	//draw shadowmap
-
-	//draw refection
-	Camera* c = get_active_camera();
-
-	vec3 p = c->get_pos();
-	c->set_pos(vec3(p.x, p.y, 0 - p.z));
-
-	vec3 r = c->get_rotation();
-	c->set_rotation(vec3(-r.x, r.y, r.z));
-
-	c->update();
-
-	RENDERER->get_reflection_buffer()->bind();
-
-	RENDERER->switch_to_camera(c);
-
-	for (Layer *l : layers)
-	{
-		for (WorldObject *wo : l->objects)
-		{
-			if (!dynamic_cast<Water*>(wo))
-				wo->notificate(WorldObject::NOTIFICATION_DRAW);
-		}
-	}
-
-	RENDERER->deactivate_camera();
-	c->set_rotation(r);
-	c->set_pos(p);
-
-	c->update();
-	*/
-
-	//draw scene
-	//RENDERER->get_render_buffer()->bind();
-	//RENDERER->set_light_matrix(light_matrix);
-
 	for (Node* o : children)
 	{
 		WorldObject* wo = o->cast_to_type<WorldObject*>();
@@ -186,6 +148,16 @@ void World::set_active_camera(Camera *p_camera)
 Camera* World::get_active_camera() const
 {
 	return active_camera;
+}
+
+PhysicsWorld2D* World::get_physics_2d() const
+{
+	return nullptr;
+}
+
+PhysicsWorld3D* World::get_physics_3d() const
+{
+	return nullptr;
 }
 
 #undef CLASSNAME

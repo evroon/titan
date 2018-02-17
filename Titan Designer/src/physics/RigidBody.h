@@ -1,63 +1,64 @@
 #pragma once
 
-#include "Box2D\Box2D.h"
+#include "Box2D/Box2D.h"
 
-#include "core/Object.h"
+#include "core/Node.h"
 
 class WorldObject;
+class PhysicsWorld2D;
+class PhysicsWorld3D;
+class CollisionShape2D;
+class CollisionShape3D;
 
-class RigidBody : public Object
+class RigidBody3D : public Node
 {
-	OBJ_DEFINITION(RigidBody, Object)
+	OBJ_DEFINITION(RigidBody3D, Node);
 
 public:
-	RigidBody() = default;
-	RigidBody(b2World *world, WorldObject *obj, bool dyn);
-	virtual ~RigidBody() { }
+
+	static void bind_methods();
+
+private:
+
+	PhysicsWorld3D* physics_3d;
+
+};
+
+class RigidBody2D : public Node
+{
+	OBJ_DEFINITION(RigidBody2D, Node)
+
+public:
+	RigidBody2D() = default;
+	RigidBody2D(b2World *world, bool dynamic);
+	virtual ~RigidBody2D() { }
 
 	void update();
 
-	void BindParent(WorldObject *p_parent) { parent = p_parent; }
+	vec2 get_velocity() const;
+	void set_velocity(const vec2 & p_velocity);
+
+	bool get_fixed_rotation() const;
+	void set_fixed_rotation(bool p_value);
+
+	void set_transform(const Transform &p_transform);
+
+	void set_as_box(bool p_dynamic);
+	void set_as_circle(bool p_dynamic);
 
 	void set_as_sensor(bool p_value);
 
-	b2Body *body;
-	WorldObject *parent;
+	WorldObject* get_colliding_objects() const;
+
+	static void bind_methods();
 
 protected:
-	b2BodyDef bodydef;
-	b2FixtureDef fixdef;
+	WorldObject* get_world_object();
+
+	CollisionShape2D* shape;
+
+	PhysicsWorld2D* physics_2d;
 
 	vec2 size;
 	bool dynamic;
-
-};
-
-
-//2D Box
-class BoxBody : public RigidBody
-{
-	OBJ_DEFINITION(BoxBody, RigidBody)
-
-public:
-	BoxBody() = default;
-	BoxBody(b2World *world, WorldObject *obj, bool dyn = true);
-	virtual ~BoxBody() { }
-
-protected:
-	b2PolygonShape shape;
-};
-
-//2D Circle
-class CircleBody : public RigidBody
-{
-	OBJ_DEFINITION(CircleBody, RigidBody)
-
-public:
-	CircleBody() = default;
-	CircleBody(b2World *world, WorldObject *obj, bool dyn = true);
-	virtual ~CircleBody() { }
-
-protected:
-	b2CircleShape shape;
 };

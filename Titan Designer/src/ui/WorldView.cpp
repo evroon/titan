@@ -615,6 +615,16 @@ int WorldView::get_transform_type() const
 	return transform_type;
 }
 
+void WorldView::set_simulating(bool p_simulating)
+{
+	simulating = p_simulating;
+}
+
+bool WorldView::get_simulating() const
+{
+	return simulating;
+}
+
 WorldObject* WorldView::raycast(const vec2& p_pos) const
 {
 	Object* o = viewport->raycast(p_pos);
