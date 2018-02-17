@@ -87,7 +87,8 @@ TypeManager* TypeManager::get_singleton()
 #include "ui/ResourceField.h"
 #include "ui/NumberField.h"
 #include "ui/VectorField.h"
-#include "physics/PhysicsComponent.h"
+#include "physics/RigidBody.h"
+#include "physics/CollisionShape.h"
 #include "math/TransformComponent.h"
 #include "graphics/RenderComponent.h"
 #include "ui/ComboBox.h"
@@ -125,7 +126,12 @@ void TypeManager::init()
 	Keyboard::init_type();
 	Key::init_type();
 	Time::init_type();
-	PhysicsComponent::init_type();
+	RigidBody2D::init_type();
+	RigidBody3D::init_type();
+	CollisionShape2D::init_type();
+	CircleShape2D::init_type();
+	BoxShape2D::init_type();
+	CollisionShape3D::init_type();
 	TransformComponent::init_type();
 	RenderComponent::init_type();
 	Component::init_type();
@@ -226,7 +232,11 @@ void TypeManager::init()
 	Keyboard::bind_methods();
 	Key::bind_methods();
 	Time::bind_methods();
-	PhysicsComponent::bind_methods();
+	RigidBody2D::bind_methods();
+	RigidBody3D::bind_methods();
+	CollisionShape2D::bind_methods();
+	CircleShape2D::bind_methods();
+	BoxShape2D::bind_methods();
 	TransformComponent::bind_methods();
 	RenderComponent::bind_methods();
 	Component::bind_methods();

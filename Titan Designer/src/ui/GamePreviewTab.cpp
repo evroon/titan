@@ -15,8 +15,11 @@ GamePreviewTab::GamePreviewTab() : GamePreviewTab(NULL)
 
 GamePreviewTab::GamePreviewTab(World* p_world)
 {
+	auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
+
 	Toggle* run_button = new Toggle("EngineCore/UI/Run.png");
 	run_button->set_tip_description("Run");
+	run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
 
 	ImageButton* move_button = new ImageButton("EngineCore/UI/Move.png");
 	move_button->set_tip_description("Move");

@@ -11,7 +11,6 @@
 class TransformComponent;
 class ScriptComponent;
 class RenderComponent;
-class PhysicsComponent;
 class World;
 
 class WorldObject : public Node
@@ -79,17 +78,14 @@ public:
 	void set_component(Component *c);
 	void set_transformcomponent(TransformComponent *c);
 	void set_rendercomponent(RenderComponent *c);
-	void set_physicscomponent(PhysicsComponent *c);
 
 	TransformComponent* get_transformcomponent() const;
 	RenderComponent* get_rendercomponent() const;
-	PhysicsComponent* get_physicscomponent() const;
 
 	//Components
 	Vector<Component> components;
 	TransformComponent *transformcomponent;
 	RenderComponent *rendercomponent;
-	PhysicsComponent *physicscomponent;
 
 	//Check Overlap of bounding box with a vector
 	virtual bool CheckOverlap(const vec2 &p) const;

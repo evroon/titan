@@ -9,19 +9,19 @@
 #include "Vec3.h"
 
 #define PI 3.14159265359f
-#define TWOPI PI * 2.0f
-#define HALFPI PI / 2.0f
-#define QUARTERPI PI / 4.0f
+#define TWOPI (PI * 2.0f)
+#define HALFPI (PI / 2.0f)
+#define QUARTERPI (PI / 4.0f)
 #define ROOT2 1.414214f
 #define EXP 2.718281828459f
 
-#define RAD_TO_DEG 180.0f / PI
-#define DEG_TO_RAD PI / 180.0f
+#define RAD_TO_DEG (180.0f / PI)
+#define DEG_TO_RAD (PI / 180.0f)
 
 #define EPSILON 1.0e-6f
 
-#define MIN(X, Y) X < Y ? X : Y
-#define MAX(X, Y) X > Y ? X : Y
+#define MIN(X, Y) (X < Y ? X : Y)
+#define MAX(X, Y) (X > Y ? X : Y)
 
 #define to_float static_cast<float>
 #define to_int static_cast<int>

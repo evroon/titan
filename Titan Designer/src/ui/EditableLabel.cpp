@@ -44,12 +44,14 @@ vec2 EditableLabel::get_required_size() const
 {
 	Font* f = CanvasData::get_singleton()->get_default_theme()->get_font();
 
-	float width = 0.0f;
+	float width1 = 0.0f;
+	float width2 = 0.0f;
+	float width3 = 0.0f;
 
-	//if (text.size() < 3)
-		width = f->get_width(String(" ") * 3);
-	//else
-	//	width = f->get_width(text);
+	width1 = f->get_width(String(" ") * 3);
+	width2 = f->get_width(text);
+	width3 = f->get_width(empty_text);
+	float width = MAX(width1, MAX(width2, width3));
 
 	return vec2(width + start_margin + end_margin, f->get_height());
 }

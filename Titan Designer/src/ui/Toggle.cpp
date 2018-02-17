@@ -40,8 +40,7 @@ void Toggle::notification(int p_notification)
 	switch (p_notification)
 	{
 	case NOTIFICATION_DRAW:
-
-
+		
 		if (selected)
 			color = DEFAULT_THEME->get_selection_color();
 		
@@ -160,6 +159,8 @@ void ToggleStrip::add_child(const String & p_tip, Ref<Texture2D> p_tex)
 	t.tex = p_tex;
 	toggles.push_back(t);
 	update();
+	t.tex->bind(0);
+	t.tex->set_filter(Texture::BILINEAR_FILTER);
 }
 
 #undef CLASSNAME

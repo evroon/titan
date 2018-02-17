@@ -6,6 +6,8 @@
 #include "core/Node.h"
 
 class Viewport;
+class PhysicsWorld2D;
+class PhysicsWorld3D;
 
 class World : public Node
 {
@@ -37,11 +39,16 @@ public:
 	void set_active_camera(Camera *p_camera);
 	Camera* get_active_camera() const;
 
+	PhysicsWorld2D* get_physics_2d() const;
+	PhysicsWorld3D* get_physics_3d() const;
+
 	Vector<Layer> layers;
 
 	static void bind_methods();
 
 private:
 	Camera *active_camera;
+	PhysicsWorld2D* physics_2d;
+	PhysicsWorld2D* physics_3d;
 };
 
