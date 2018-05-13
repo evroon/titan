@@ -2,9 +2,8 @@
 
 #include "Time.h"
 
-//#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
-
 #include "RigidBody.h"
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 
 PhysicsWorld3D::~PhysicsWorld3D()
 {
@@ -13,14 +12,13 @@ PhysicsWorld3D::~PhysicsWorld3D()
 
 void PhysicsWorld3D::init()
 {
-	/*broadphase = new btDbvtBroadphase();
-	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	btBroadphaseInterface *broadphase = new btDbvtBroadphase();
+	collision_configuration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collision_configuration);
 	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 	solver = new btSequentialImpulseConstraintSolver;
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, 0, -10.0f));*/
-
+	dynamics_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
+	dynamics_world->setGravity(btVector3(0, 0, -10.0f));
 }
 
 void PhysicsWorld3D::update()

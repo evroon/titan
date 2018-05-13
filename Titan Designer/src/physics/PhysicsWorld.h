@@ -10,7 +10,7 @@ Libraries: Box2D, Bullet
 */
 
 #include "Box2D\Box2D.h"
-#include <btBulletDynamicsCommon.h>
+#include "btBulletDynamicsCommon.h"
 
 #include "CollisionData.h"
 
@@ -19,6 +19,8 @@ class PhysicsWorld3D
 public:
 	PhysicsWorld3D() = default;
 	~PhysicsWorld3D();
+
+	friend class RigidBody3D;
 
 	void init();
 	void update();
@@ -29,11 +31,11 @@ public:
 private:
 	vec2 scale;
 
-	/*btBroadphaseInterface * broadphase;
-	btDefaultCollisionConfiguration* collisionConfiguration;
+	btBroadphaseInterface* broadphase;
+	btDefaultCollisionConfiguration* collision_configuration;
 	btCollisionDispatcher* dispatcher;
 	btSequentialImpulseConstraintSolver* solver;
-	btDiscreteDynamicsWorld* dynamicsWorld;*/
+	btDiscreteDynamicsWorld* dynamics_world;
 };
 
 class PhysicsWorld2D

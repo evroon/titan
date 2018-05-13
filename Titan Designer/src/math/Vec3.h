@@ -46,7 +46,7 @@ public:
 	//Conversion
 	String to_string() const
 	{
-		return "{ " + (std::string) std::to_string(x) + ", " + (std::string) std::to_string(y) + ", " + (std::string) std::to_string(z) + " }";
+		return "{ " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + " }";
 	}
     
     //Get info
