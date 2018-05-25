@@ -28,7 +28,8 @@ void FBOManager::clear_all()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (int c = 0; c < fbos.size(); c++)
-		fbos[c]->clear();
+		if (fbos[c]->cleared_every_frame)
+			fbos[c]->clear();
 }
 
 void FBOManager::free()

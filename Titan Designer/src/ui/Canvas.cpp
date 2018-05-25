@@ -182,7 +182,7 @@ void Canvas::handle_event(Event *e)
 	
 	if (in->type == InputEvent::MOUSEMOVE)
 	{
-		if (context_tip && !tip_shower->in_area(mouse_pos))
+		if (context_tip && tip_shower && !tip_shower->in_area(mouse_pos))
 		{
 			remove_context_tip();
 		}
@@ -213,7 +213,7 @@ void Canvas::handle_event(Event *e)
 					awaiting_tip = true;
 				}
 
-				remove_context_tip();
+				//remove_context_tip();
 			}
 			else if (hover)
 			{
@@ -227,10 +227,11 @@ void Canvas::handle_event(Event *e)
 	}
 	else if (in->type == InputEvent::MOUSEPRESS)
 	{
-		remove_context_tip();
-
 		if (in->press_type == InputEvent::DOWN && in->button_type == Mouse::LEFT)
+		{
+			remove_context_tip(); // TODO: should be checked
 			focus(hover);
+		}
 		
 		UIEvent *click = new UIEvent(UIEvent::MOUSE_PRESS);
 		click->pos = in->pos;

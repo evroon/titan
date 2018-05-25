@@ -22,6 +22,7 @@ WorldView::WorldView(World* p_world)
 	viewport->worldview = this;
 
 	FBO2D* fbo = new FBO2D(WINDOWSIZE);
+	fbo->cleared_every_frame = false;
 
 	viewport->set_canvas(new Canvas);
 	viewport->set_world(p_world);
@@ -73,9 +74,8 @@ void WorldView::notification(int p_notification)
 	case NOTIFICATION_READY:
 
 		if (viewport)
-		{
 			viewport->init();
-		}
+		
 		break;
 
 	case NOTIFICATION_UPDATE:
@@ -84,14 +84,12 @@ void WorldView::notification(int p_notification)
 	case NOTIFICATION_DRAW:
 
 		return_viewport = ACTIVE_VIEWPORT;
+		viewport->get_fbo()->clear();
 
-		if (viewport)
-		{
-			if (simulating)
-				viewport->update();
+		if (simulating)
+			viewport->update();
 
-			viewport->draw();
-		}
+		viewport->draw();
 
 		RENDERER->use_scissor(area);
 
@@ -104,25 +102,25 @@ void WorldView::notification(int p_notification)
 
 		RENDERER->stop_scissor();
 
-		for (int c = 0; c < world->get_child_count(); c++)
-		{
-			WorldObject* object = world->get_child(c)->cast_to_type<WorldObject*>();
+		//for (int c = 0; c < world->get_child_count(); c++)
+		//{
+		//	WorldObject* object = world->get_child(c)->cast_to_type<WorldObject*>();
 
-			if (object->is_of_type<Camera>())
-				continue;
+		//	if (object->is_of_type<Camera>())
+		//		continue;
 
-			vec3 size = object->get_size();
-			vec3 pos = object->get_pos();
+		//	vec3 size = object->get_size();
+		//	vec3 pos = object->get_pos();
 
-			if (handle_2d)
-			{
-				if (selected == object)
-					draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(255, 164, 66)));
+		//	if (handle_2d)
+		//	{
+		//		if (selected == object)
+		//			draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(255, 164, 66)));
 
-				if (highlighted == object)
-					draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(0, 255, 0)));
-			}
-		}
+		//		if (highlighted == object)
+		//			draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(0, 255, 0)));
+		//	}
+		//}
 
 		//viewport->deactivate_world_transform();
 		//viewport->deactivate_transform();
@@ -133,7 +131,6 @@ void WorldView::notification(int p_notification)
 			draw_highlight(area, DEFAULT_THEME->get_selection_color());
 
 		return_viewport->activate();
-
 		break;
 
 	case NOTIFICATION_RESIZED:
@@ -143,7 +140,6 @@ void WorldView::notification(int p_notification)
 			viewport->resize(area);
 
 		update();
-
 		break;
 	}
 }
@@ -422,7 +418,7 @@ void WorldView::post_draw_world()
 	if (terrain)
 		terrain->get_brush()->apply();
 
-	if (!selected)
+	if (!selected && !selected->derives_from_type<Control*>())
 		return;
 
 	vec3 pos = selected->get_pos();

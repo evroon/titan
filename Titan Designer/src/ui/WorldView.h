@@ -11,7 +11,7 @@ class WorldView : public Control
 
 public:
 	WorldView();
-	WorldView(World * p_world);
+	WorldView(World* p_world);
 	virtual ~WorldView();
 
 	enum DragType

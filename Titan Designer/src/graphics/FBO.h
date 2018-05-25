@@ -35,6 +35,8 @@ public:
 		bool type_byte;
 	};
 
+	bool cleared_every_frame = true;
+
 	Array<color_tex_def> definitions;
 	
 protected:

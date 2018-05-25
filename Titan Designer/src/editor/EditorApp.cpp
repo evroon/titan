@@ -194,7 +194,7 @@ void EditorApp::init()
 	//world->init();
 
 	cam->set_pos(vec3(0.0f, -20.0f, 50.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f); T_LOG("");
+	cam->set_projection(30.0f, 0.5f, 5000.0f);
 	
 
 	v->resize(WINDOWSIZE_F / 2.0f);
