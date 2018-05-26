@@ -5,6 +5,7 @@
 #include "graphics/Renderer.h"
 #include "Dialog.h"
 #include "ContextMenu.h"
+#include "graphics/Viewport.h"
 
 //=========================================================================
 //CanvasLayer
@@ -35,6 +36,7 @@ Canvas::Canvas()
 
 	wait_time = 500 * 1000;
 	double_click_treshold = 300 * 1000;
+	size = vec2(1000.0);
 }
 
 Canvas::~Canvas()
@@ -294,6 +296,9 @@ void Canvas::init(Viewport* p_parent)
 
 void Canvas::resize()
 {
+	if (parent)
+		size = parent->get_size();
+
 	for (Node* child : children)
 		child->cast_to_type<Control*>()->flag_size_changed();
 }
@@ -407,6 +412,7 @@ Control* Canvas::raycast_layer(const CanvasLayer& l, const vec2 &pos)
 
 void Canvas::bind_methods()
 {
+	REG_CSTR(0);
 	REG_METHOD(add_control);
 	REG_METHOD(remove_control);
 }

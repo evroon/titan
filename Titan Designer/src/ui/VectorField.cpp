@@ -160,11 +160,6 @@ vec2 Vec3Field::get_required_size() const
 
 void Vec3Field::position_items()
 {
-	float top = area.get_top();
-	float bottom = area.get_bottom();
-	float left = area.get_left();
-	float right = area.get_right();
-
 	x.set_custom_anchors(0.0f, 0.0f, 0.333f, 0.0f);
 	y.set_custom_anchors(0.333f, 0.0f, 0.667f, 0.0f);
 	z.set_custom_anchors(0.667f, 0.0f, 0.0f, 0.0f);
@@ -194,16 +189,40 @@ void Vec3Field::bind_methods()
 //Vec4Field
 //=========================================================================
 
-Vec4Field::Vec4Field()
+Vec4Field::Vec4Field() : Vec4Field(vec4())
 {
-	x.connect("value_entered", this, "value_input");
-	y.connect("value_entered", this, "value_input");
-	z.connect("value_entered", this, "value_input");
-	w.connect("value_entered", this, "value_input");
+}
+
+Vec4Field::Vec4Field(const vec4 & p_variant) : PropertyControl(p_variant)
+{
+	init();
+}
+
+Vec4Field::Vec4Field(const Variable & p_variable) : PropertyControl(p_variable)
+{
+	init();
 }
 
 void Vec4Field::init()
 {
+	add_child(&x);
+	add_child(&y);
+	add_child(&z);
+	add_child(&w);
+
+	margin[0] = 0;
+	margin[1] = 2;
+	margin[2] = 2;
+	margin[3] = 2;
+	margin[4] = 0;
+
+	position_items();
+	value_changed();
+
+	x.connect("value_entered", this, "value_input");
+	y.connect("value_entered", this, "value_input");
+	z.connect("value_entered", this, "value_input");
+	w.connect("value_entered", this, "value_input");
 }
 
 void Vec4Field::value_changed()
@@ -221,30 +240,41 @@ void Vec4Field::value_input()
 	float v_x = x.get_value();
 	float v_y = y.get_value();
 	float v_z = z.get_value();
-	float v_w = z.get_value();
+	float v_w = w.get_value();
 
-	set_value(vec4(v_x, v_y, v_z, v_w));
+	value_set(vec4(v_x, v_y, v_z, v_w));
+	emit_signal("value_entered");
 }
 
 vec2 Vec4Field::get_required_size() const
 {
-	return vec2();
+	vec2 size_x = x.get_required_size();
+	vec2 size_y = y.get_required_size();
+	vec2 size_z = z.get_required_size();
+	vec2 size_w = w.get_required_size();
+
+	return vec2(
+		size_x.x + size_y.x + size_z.x + size_w.x +
+		margin[0] + margin[1] * 2.0f + margin[2] * 2.0f + margin[3] * 2.0f + margin[4],
+		size_x.y);
 }
 
 void Vec4Field::position_items()
 {
-	float top = area.get_top();
-	float bottom = area.get_bottom();
-	float left = area.get_left();
-	float right = area.get_right();
+	x.set_custom_anchors(0.0f, 0.0f, 0.25f, 0.0f);
+	y.set_custom_anchors(0.25f, 0.0f, 0.5f, 0.0f);
+	z.set_custom_anchors(0.5f, 0.0f, 0.75f, 0.0f);
+	w.set_custom_anchors(0.75f, 0.0f, 0.0f, 0.0f);
 
-	float x1 = left + (right - left) * 0.5f;
+	x.set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_CUSTOM, ANCHOR_END);
+	y.set_anchors(ANCHOR_CUSTOM, ANCHOR_BEGIN, ANCHOR_CUSTOM, ANCHOR_END);
+	z.set_anchors(ANCHOR_CUSTOM, ANCHOR_BEGIN, ANCHOR_CUSTOM, ANCHOR_END);
+	w.set_anchors(ANCHOR_CUSTOM, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
-	x.set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_CENTER, ANCHOR_END);
-	y.set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
-	x.set_margins(margin[0], 0, -margin[1], 0);
-
-	y.set_margins(margin[1], 0, margin[2], 0);
+	x.set_margins(0, 0, -2, 0);
+	y.set_margins(2, 0, -2, 0);
+	z.set_margins(2, 0, -2, 0);
+	w.set_margins(2, 0, 0, 0);
 }
 
 #undef CLASSNAME
@@ -255,6 +285,8 @@ void Vec4Field::bind_methods()
 	REG_CSTR_OVRLD_1(vec4);
 
 	REG_METHOD(value_input);
+
+	REG_SIGNAL("value_entered");
 }
 
 //=========================================================================

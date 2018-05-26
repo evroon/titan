@@ -2,6 +2,7 @@
 
 #include "world/Sprite.h"
 #include "core/titanscript/TitanScript.h"
+#include "core/Application.h"
 
 View View::singleton;
 
@@ -64,6 +65,16 @@ void View::set_active_viewport(Viewport* p_viewport)
 Viewport* View::get_active_viewport() const
 {
 	return active_viewport;
+}
+
+void View::set_application(Application* p_application)
+{
+	application = p_application;
+}
+
+Application* View::get_application() const
+{
+	return application;
 }
 
 View* View::get_singleton()

@@ -71,11 +71,22 @@ public:
 	float get_margin(const AnchorType& p_anchor, float p_value, float p_domain, float p_custom = 0.0f) const;
 
 	void set_anchor(int p_index, const AnchorType& p_type);
+	void set_anchor_top(int p_type);
+	void set_anchor_bottom(int p_type);
+	void set_anchor_left(int p_type);
+	void set_anchor_right(int p_type);
 	void set_margin(int p_index, float p_margin);
 	void set_margins(float p_0, float p_1, float p_2, float p_3);
+	void set_margins(const vec4& p_margins);
+	vec4 get_margins() const;
 
-	void set_anchors(const AnchorType & p_0, const AnchorType & p_1, const AnchorType & p_2, const AnchorType & p_3);
+	void set_anchors(const AnchorType& p_0, const AnchorType& p_1, const AnchorType& p_2, const AnchorType& p_3);
 	void set_custom_anchors(float p_0, float p_1, float p_2, float p_3);
+
+	int get_anchor_top() const;
+	int get_anchor_bottom() const;
+	int get_anchor_left() const;
+	int get_anchor_right() const;
 
 	void span_parent();
 

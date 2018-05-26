@@ -8,6 +8,9 @@
 #define ACTIVE_VIEWPORT VIEW->get_active_viewport()
 #define ACTIVE_CANVAS ACTIVE_VIEWPORT->get_canvas()
 #define ACTIVE_WORLD ACTIVE_VIEWPORT->get_world()
+#define EDITOR_APP (reinterpret_cast<EditorApp*>(VIEW->get_application()))
+
+class Application;
 
 class View : public Object
 {
@@ -31,6 +34,9 @@ public:
 	void set_active_viewport(Viewport *p_viewport);
 	Viewport* get_active_viewport() const;
 
+	void set_application(Application* p_application);
+	Application* get_application() const;
+
 	static View* get_singleton();
 
 	static void bind_methods();
@@ -42,6 +48,8 @@ private:
 
 	Viewport* default_viewport;
 	Viewport* active_viewport;
+
+	Application* application;
 
 	bool fps_locked;
 };

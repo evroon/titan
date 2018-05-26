@@ -47,6 +47,7 @@ void Viewport::set_canvas(Canvas* p_canvas)
 
 	canvas = p_canvas;
 	add_child(canvas);
+	canvas->resize();
 }
 
 Canvas* Viewport::get_canvas() const
@@ -128,7 +129,9 @@ void Viewport::resize(const rect2 &p_area)
 	input_transform = mat4::Translate(vec3(-p_area.pos.x, -p_area.pos.y, 0));
 
 	if (canvas)
+	{
 		canvas->resize();
+	}
 
 	if (renderer)
 		renderer->resized();
@@ -213,6 +216,11 @@ mat4 Viewport::get_input_transform() const
 }
 
 void Viewport::post_draw_world()
+{
+
+}
+
+void Viewport::post_draw_canvas()
 {
 
 }
@@ -307,4 +315,9 @@ EditorViewport::EditorViewport(Renderer * p_renderer) : Viewport(p_renderer)
 void EditorViewport::post_draw_world()
 {
 	worldview->post_draw_world();
+}
+
+void EditorViewport::post_draw_canvas()
+{
+	worldview->post_draw_canvas();
 }

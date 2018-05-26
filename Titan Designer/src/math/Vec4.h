@@ -69,10 +69,10 @@ public:
 	}
 
 	//properties
-	T& get_x() { return x; }
-	T& get_y() { return y; }
-	T& get_z() { return z; }
-	T& get_w() { return w; }
+	const T& get_x() const { return x; }
+	const T& get_y() const { return y; }
+	const T& get_z() const { return z; }
+	const T& get_w() const { return w; }
 
 	void set_x(const T &p_x) { x = p_x; }
 	void set_y(const T &p_y) { y = p_y; }

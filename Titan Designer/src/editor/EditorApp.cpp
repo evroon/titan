@@ -35,6 +35,8 @@
 
 void EditorApp::init()
 {
+	VIEW->set_application(this);
+
 	Renderer* r = new ForwardRenderer;
 	Viewport *v = new Viewport(r);
 	Canvas* c = new Canvas;
@@ -59,6 +61,7 @@ void EditorApp::init()
 	//active_project->create();
 
 	active_scene = active_project->get_main_scene();
+	//active_scene->add_child(new Canvas());
 
 	World* world = active_scene->get_child(0)->cast_to_type<World*>();
 	world->set_name("World");
@@ -71,7 +74,7 @@ void EditorApp::init()
 	property_dock = new Dock;
 
 	//add tabs
-	game_preview_tab = new GamePreviewTab(world);
+	game_preview_tab = new GamePreviewTab(active_scene);
 	preview_viewport = game_preview_tab->get_world_view()->get_viewport();
 	preview_viewport->set_name("Preview");
 	preview_viewport->get_canvas()->set_name("Canvas");
@@ -194,8 +197,7 @@ void EditorApp::init()
 	//world->init();
 
 	cam->set_pos(vec3(0.0f, -20.0f, 50.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f);
-	
+	cam->set_projection(30.0f, 0.5f, 5000.0f);	
 
 	v->resize(WINDOWSIZE_F / 2.0f);
 

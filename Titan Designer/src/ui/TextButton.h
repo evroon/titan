@@ -14,6 +14,9 @@ public:
 
 	void notification(int p_notification) override;
 
+	void set_text(const String& p_text);
+	String get_text() const;
+
 	static void bind_methods();
 
 private:

@@ -65,6 +65,14 @@ Variant PropertyControl::get_value()
 	return variable.get();
 }
 
+VariantType PropertyControl::get_property_type()
+{
+	if (type == VARIABLE)
+		return variable.property->var_type;
+
+	return variant.get_type();
+}
+
 void PropertyControl::value_set(const Variant& p_value)
 {
 	if (type == VARIANT)

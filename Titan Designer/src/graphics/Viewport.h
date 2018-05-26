@@ -91,6 +91,7 @@ public:
 	mat4 get_input_transform() const;
 	
 	virtual void post_draw_world();
+	virtual void post_draw_canvas();
 	void draw();
 
 	void update();
@@ -144,6 +145,7 @@ public:
 	EditorViewport(Renderer* p_renderer);
 
 	void post_draw_world() override;
+	void post_draw_canvas() override;
 
 	WorldView* worldview;
 };

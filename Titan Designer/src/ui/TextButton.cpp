@@ -41,8 +41,20 @@ void TextButton::notification(int p_notification)
 #undef CLASSNAME
 #define CLASSNAME TextButton
 
+void TextButton::set_text(const String& p_text)
+{
+	text = p_text;
+	update();
+}
+
+String TextButton::get_text() const
+{
+	return text;
+}
+
 void TextButton::bind_methods()
 {
 	REG_CSTR(0);
 	REG_CSTR_OVRLD_1(String);
+	REG_PROPERTY(text);
 }

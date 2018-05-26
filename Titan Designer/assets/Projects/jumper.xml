@@ -3,7 +3,7 @@
 	<root type="Project">
 		<children count="1">
 			<main type="Scene">
-				<children count="1">
+				<children count="2">
 					<World type="World">
 						<children count="0"/>
 						<properties count="2">
@@ -15,6 +15,42 @@
 							<name type="String" value="World"/>
 						</properties>
 					</World>
+					<Canvas type="Canvas">
+						<children count="2">
+							<TextBox type="TextBox">
+								<children count="0"/>
+								<properties count="9">
+									<text type="String" value="test2222"/>
+									<script type="NULL"/>
+									<name type="String" value="TextBox"/>
+									<margins type="vec4" value="{ 8.000000, 200.000000, 1000.000000, 8.000000 }"/>
+									<focused type="bool" value="false"/>
+									<anchor_top type="int" value="1"/>
+									<anchor_bottom type="int" value="1"/>
+									<anchor_left type="int" value="0"/>
+									<anchor_right type="int" value="0"/>
+								</properties>
+							</TextBox>
+							<Label type="Label">
+								<children count="0"/>
+								<properties count="9">
+									<text type="String" value="1984"/>
+									<script type="NULL"/>
+									<name type="String" value="Label"/>
+									<margins type="vec4" value="{ 2.000000, 0.000000, 100.000000, 0.000000 }"/>
+									<focused type="bool" value="false"/>
+									<anchor_top type="int" value="2"/>
+									<anchor_bottom type="int" value="2"/>
+									<anchor_left type="int" value="0"/>
+									<anchor_right type="int" value="0"/>
+								</properties>
+							</Label>
+						</children>
+						<properties count="2">
+							<script type="NULL"/>
+							<name type="String" value="Canvas"/>
+						</properties>
+					</Canvas>
 				</children>
 				<properties count="2">
 					<script type="NULL"/>

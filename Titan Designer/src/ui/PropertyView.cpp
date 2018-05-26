@@ -175,10 +175,10 @@ void PropertyView::add_property(Property* p_property)
 
 		break;
 
-	case Variant::VEC4: //unimplemented
+	case Variant::VEC4:
 
-		item.control = new Label("NULL");
-		item.control->cast_to_type<Label*>()->set_color(TO_RGB(vec3i(214, 45, 36)));
+		item.control = new Vec4Field(variable);
+
 		break;
 
 	case Variant::COLOR:

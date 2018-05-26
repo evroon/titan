@@ -393,6 +393,7 @@ void ForwardRenderer::render()
 	{
 		activate_canvas_transform();
 		viewport->canvas->draw();
+		viewport->post_draw_canvas();
 		deactivate_canvas_transform();
 	}
 
@@ -884,6 +885,7 @@ void DeferredRenderer::render()
 	{
 		activate_canvas_transform();
 		viewport->canvas->draw();
+		viewport->post_draw_canvas();
 		deactivate_canvas_transform();
 	}
 

@@ -11,7 +11,7 @@ class WorldView : public Control
 
 public:
 	WorldView();
-	WorldView(World* p_world);
+	WorldView(Scene* p_scene);
 	virtual ~WorldView();
 
 	enum DragType
@@ -42,12 +42,13 @@ public:
 	void handle_event(UIEvent* ui_event) override;
 
 	void post_draw_world();
+	void post_draw_canvas();
 
 	void set_postprocess(PostProcess* p_postprocess);
 	PostProcess* get_postprocess() const;
 
-	void set_world(World* p_world);
-	World* get_world();
+	void set_scene(Scene* p_scene);
+	Scene* get_scene() const;
 
 	void select(WorldObject* p_object);
 	WorldObject* get_selected() const;
@@ -82,8 +83,8 @@ private:
 	Viewport* return_viewport;
 	Texture2D* preview_texture;
 
-	WorldObject* selected;
-	WorldObject* highlighted;
+	Object* selected;
+	Object* highlighted;
 
 	TransformType transform_type = TRANSLATE;
 	DragType drag_type = DRAG_INACTIVE;
@@ -102,7 +103,7 @@ private:
 	Model* cone;
 	Model* disk;
 
-	bool handle_2d = false;
+	bool handle_2d;
 
 	bool simulating;
 
