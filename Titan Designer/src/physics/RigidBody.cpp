@@ -13,6 +13,21 @@
 //=========================================================================
 
 
+RigidBody3D::RigidBody3D()
+{
+	btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, shape->shape, btVector3(0, 0, 0));
+	btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
+	physics_3d->dynamics_world->addRigidBody(groundRigidBody);
+
+	btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
+	btScalar mass = 1;
+	btVector3 fallInertia(0, 0, 0);
+	shape->shape->calculateLocalInertia(mass, fallInertia);
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, shape->shape, fallInertia);
+	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
+	physics_3d->dynamics_world->addRigidBody(fallRigidBody);
+}
 
 #undef CLASSNAME
 #define CLASSNAME RigidBody3D

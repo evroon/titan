@@ -15,13 +15,16 @@ class RigidBody3D : public Node
 	OBJ_DEFINITION(RigidBody3D, Node);
 
 public:
+	RigidBody3D();
+
+	friend class CollisionShape3D;
 
 	static void bind_methods();
 
 private:
-
 	PhysicsWorld3D* physics_3d;
 
+	CollisionShape3D* shape;
 };
 
 class RigidBody2D : public Node

@@ -4,7 +4,10 @@
 
 #include "Box2D/Box2D.h"
 
+#include "btBulletDynamicsCommon.h"
+
 class RigidBody2D;
+class RigidBody3D;
 class WorldObject;
 class b2Body;
 class PhysicsWorld2D;
@@ -14,11 +17,15 @@ class CollisionShape3D : public Object
 	OBJ_DEFINITION(CollisionShape3D, Object);
 
 public:
+	CollisionShape3D();
+	virtual ~CollisionShape3D();
+
+	friend class RigidBody3D;
 
 	static void bind_methods();
 
-private:
-
+protected:
+	btCollisionShape* shape;
 };
 
 class PlaneShape3D : CollisionShape3D
@@ -26,6 +33,7 @@ class PlaneShape3D : CollisionShape3D
 	OBJ_DEFINITION(PlaneShape3D, Object);
 
 public:
+	PlaneShape3D();
 
 	static void bind_methods();
 
@@ -38,6 +46,7 @@ class SphereShape3D : CollisionShape3D
 	OBJ_DEFINITION(SphereShape3D, Object);
 
 public:
+	SphereShape3D();
 
 	static void bind_methods();
 
@@ -50,6 +59,7 @@ class BoxShape3D : CollisionShape3D
 	OBJ_DEFINITION(SphereShape3D, Object);
 
 public:
+	BoxShape3D();
 
 	static void bind_methods();
 
