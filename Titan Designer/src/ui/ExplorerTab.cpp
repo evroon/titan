@@ -17,7 +17,6 @@
 #include "world/World.h"
 
 #include "graphics/Viewport.h"
-
 #include "graphics/View.h"
 
 ExplorerTab::ExplorerTab(Viewport* p_viewport)
@@ -78,17 +77,23 @@ void ExplorerTab::delete_element()
 {
 	String name = tree_view->get_selected()->get_text();
 	Node* item = viewport->get_child(name);
-	item->get_parent()->remove_child(item);
+
+	if (item)
+		item->get_parent()->remove_child(item);
+
+	viewport->get_world()->children_changed(); // to be sure
 }
 
 void ExplorerTab::right_clicked(TreeElement* p_element)
 {
 	ContextMenu* menu = new ContextMenu;
 
-	Connection del;
+	Connection del, add;
 	del.register_native_method(this, "delete_element");
+	add.register_native_method(this, "add_button_clicked");
 
 	menu->add_item("Delete " + p_element->get_text(), del);
+	menu->add_item("Add Child", add);
 
 	ACTIVE_CANVAS->set_context_menu(menu, MOUSE->get_position());
 
@@ -151,8 +156,6 @@ Viewport* ExplorerTab::get_viewport() const
 {
 	return viewport;
 }
-
-#include "graphics\View.h"
 
 void ExplorerTab::add_object(const String& p_type)
 {

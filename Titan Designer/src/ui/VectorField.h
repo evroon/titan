@@ -67,8 +67,8 @@ class Vec4Field : public PropertyControl
 
 public:
 	Vec4Field();
-	Vec4Field(const vec4& p_variant) : PropertyControl(p_variant) { }
-	Vec4Field(const Variable& p_variable) : PropertyControl(p_variable) { }
+	Vec4Field(const vec4& p_variant);
+	Vec4Field(const Variable& p_variable);
 
 	void init();
 

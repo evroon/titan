@@ -11,7 +11,7 @@ class GamePreviewTab : public Tab
 
 public:
 	GamePreviewTab();
-	GamePreviewTab(World * p_world);
+	GamePreviewTab(Scene* p_scene);
 	virtual ~GamePreviewTab();
 	
 	vec2 get_required_size() const override;

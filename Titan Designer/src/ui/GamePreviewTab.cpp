@@ -13,7 +13,7 @@ GamePreviewTab::GamePreviewTab() : GamePreviewTab(NULL)
 
 }
 
-GamePreviewTab::GamePreviewTab(World* p_world)
+GamePreviewTab::GamePreviewTab(Scene* p_scene)
 {
 	auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
 
@@ -39,7 +39,7 @@ GamePreviewTab::GamePreviewTab(World* p_world)
 	combo_box = new ComboBox;
 	combo_box->connect("selected", this, "set_preview_type");
 	
-	world_view = new WorldView(p_world);
+	world_view = new WorldView(p_scene);
 
 	buttons.add_child(run_button);
 	buttons.add_child(new Seperator);
@@ -123,7 +123,7 @@ void GamePreviewTab::set_preview_type(const String& p_type)
 
 void GamePreviewTab::world_changed()
 {
-	set_tab_title(world_view->get_world()->get_name());
+	set_tab_title(world_view->get_scene()->get_name());
 }
 
 WorldView* GamePreviewTab::get_world_view() const

@@ -5,6 +5,7 @@
 #include "graphics/Renderer.h"
 #include "Dialog.h"
 #include "ContextMenu.h"
+#include "graphics/Viewport.h"
 
 //=========================================================================
 //CanvasLayer
@@ -35,6 +36,7 @@ Canvas::Canvas()
 
 	wait_time = 500 * 1000;
 	double_click_treshold = 300 * 1000;
+	size = vec2(1000.0);
 }
 
 Canvas::~Canvas()
@@ -182,7 +184,7 @@ void Canvas::handle_event(Event *e)
 	
 	if (in->type == InputEvent::MOUSEMOVE)
 	{
-		if (context_tip && !tip_shower->in_area(mouse_pos))
+		if (context_tip && tip_shower && !tip_shower->in_area(mouse_pos))
 		{
 			remove_context_tip();
 		}
@@ -213,7 +215,7 @@ void Canvas::handle_event(Event *e)
 					awaiting_tip = true;
 				}
 
-				remove_context_tip();
+				//remove_context_tip();
 			}
 			else if (hover)
 			{
@@ -227,10 +229,11 @@ void Canvas::handle_event(Event *e)
 	}
 	else if (in->type == InputEvent::MOUSEPRESS)
 	{
-		remove_context_tip();
-
 		if (in->press_type == InputEvent::DOWN && in->button_type == Mouse::LEFT)
+		{
+			remove_context_tip(); // TODO: should be checked
 			focus(hover);
+		}
 		
 		UIEvent *click = new UIEvent(UIEvent::MOUSE_PRESS);
 		click->pos = in->pos;
@@ -293,6 +296,9 @@ void Canvas::init(Viewport* p_parent)
 
 void Canvas::resize()
 {
+	if (parent)
+		size = parent->get_size();
+
 	for (Node* child : children)
 		child->cast_to_type<Control*>()->flag_size_changed();
 }
@@ -406,6 +412,7 @@ Control* Canvas::raycast_layer(const CanvasLayer& l, const vec2 &pos)
 
 void Canvas::bind_methods()
 {
+	REG_CSTR(0);
 	REG_METHOD(add_control);
 	REG_METHOD(remove_control);
 }

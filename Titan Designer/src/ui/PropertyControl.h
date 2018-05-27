@@ -23,6 +23,7 @@ public:
 	void set_value(const Variable& p_variable);
 
 	Variant get_value();
+	VariantType get_property_type();
 
 	static void bind_methods();
 

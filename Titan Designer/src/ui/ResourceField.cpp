@@ -4,6 +4,8 @@
 #include "TextButton.h"
 #include "Dialog.h"
 
+#include "graphics/View.h"
+#include "editor/EditorApp.h"
 
 //=========================================================================
 //ColorField
@@ -243,31 +245,63 @@ void ObjectField::init()
 	textfield->set_margins(0, 0, 104, 0);
 	textfield->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
-	open_button = new TextButton("...");
+	String text = "New";
+	if (get_value().isdef())
+		text = "Open";
+
+	open_button = new TextButton(text);
 	open_button->connect("clicked", this, "open_button_clicked");
 	add_child(open_button);
 
 	open_button->set_margins(30, 0, 4, 0);
 	open_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
-	file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
 }
 
 void ObjectField::open_button_clicked()
 {
-	emit_signal("set_property", object.operator Object *());
+	VariantType type = PropertyControl::get_property_type();
+	Variant v = get_value();
+
+	if (!v)
+	{
+		Variant result;
+
+		if (MMASTER->constructor_exists(type, 0))
+			result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))->operator() ();
+
+		value_set(result);
+
+		if (result.operator Object*()->derives_from_type<Resource*>())
+			textfield->set_text(File(result.operator Resource*()->get_file()).get_name());
+		else if(result.operator Object*()->derives_from_type<Node*>())
+			textfield->set_text(result.operator Node*()->get_name());
+
+		open_button->set_text("Open");
+		return;
+	}
+
+	if (v.operator Object*()->derives_from_type<Resource*>())
+		EDITOR_APP->open_file(File(v.operator Resource*()->get_file()).get_absolute_path());
+	else if (v.operator Object*()->derives_from_type<Node*>())
+		textfield->set_text(v.operator Node*()->get_name());
+
+	//emit_signal("set_property", object.operator Object *()); 
 }
 
 void ObjectField::load_button_clicked()
 {
-	file_dialog->show();
+	file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
+	add_child(file_dialog);
 	file_dialog->connect("file_chosen", this, "file_chosen");
+	file_dialog->show();
 }
 
 void ObjectField::file_chosen(const String& p_path)
 {
 	value_set(CONTENT->Load(p_path));
 	textfield->set_text(File(p_path).get_name());
+	remove_child(file_dialog);
 }
 
 vec2 ObjectField::get_required_size() const

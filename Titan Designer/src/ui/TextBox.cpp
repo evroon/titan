@@ -651,6 +651,7 @@ void TextBox::set_text(const String &source)
 	set_caret_pos(TextPosition());
 
 	set_language(SyntaxHighlighter::GLSL);
+	update();
 }
 
 void TextBox::contextmenu_selected(int p_index)

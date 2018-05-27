@@ -11,7 +11,7 @@ void GameApp::init()
 	VIEW->set_default_viewport(v);
 	VIEW->set_active_viewport(v);
 
-	Project* project = new Project("Projects/second.xml");
+	Project* project = new Project("Projects/jumper.xml");
 	start_scene(project->get_main_scene());
 }
 
@@ -28,7 +28,7 @@ void GameApp::draw()
 void GameApp::start_scene(Scene *s)
 {
 	activescene = s;
-	ACTIVE_VIEWPORT->set_world(activescene->get_child(0)->cast_to_type<World*>());
+	ACTIVE_VIEWPORT->set_scene(activescene);
 
 	Camera* cam = ACTIVE_VIEWPORT->get_world()->get_active_camera();
 	if (!cam)
@@ -39,8 +39,7 @@ void GameApp::start_scene(Scene *s)
 	}
 	
 	cam->set_pos(vec3(0.0f, -20.0f, 0.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f);
-	
+	cam->set_projection(30.0f, 0.5f, 5000.0f);	
 }
 
 void GameApp::handle_event(Event *e)

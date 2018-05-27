@@ -77,7 +77,7 @@ void Scriptable::connect(const StringName & p_signalname, const Connection & p_c
 	}
 }
 
-void Scriptable::connect(const StringName & p_signalname, Object* p_object, const StringName& p_method)
+void Scriptable::connect(const StringName& p_signalname, Object* p_object, const StringName& p_method)
 {
 	if (!p_object)
 	{

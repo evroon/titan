@@ -70,6 +70,26 @@ void Control::set_anchor(int p_index, const AnchorType& p_type)
 	flag_size_changed();
 }
 
+void Control::set_anchor_top(int p_type)
+{
+	anchors[3] = (AnchorType) p_type;
+}
+
+void Control::set_anchor_bottom(int p_type)
+{
+	anchors[1] = (AnchorType)p_type;
+}
+
+void Control::set_anchor_left(int p_type)
+{
+	anchors[0] = (AnchorType)p_type;
+}
+
+void Control::set_anchor_right(int p_type)
+{
+	anchors[2] = (AnchorType)p_type;
+}
+
 void Control::set_margin(int p_index, float p_margin)
 {
 	margins[p_index] = p_margin;
@@ -85,6 +105,16 @@ void Control::set_margins(float p_0, float p_1, float p_2, float p_3)
 	margins[3] = p_3;
 
 	flag_size_changed();
+}
+
+void Control::set_margins(const vec4 & p_margins)
+{
+	set_margins(p_margins.x, p_margins.y, p_margins.z, p_margins.w);
+}
+
+vec4 Control::get_margins() const
+{
+	return vec4(margins[0], margins[1], margins[2], margins[3]);
 }
 
 void Control::set_anchors(const AnchorType& p_0, const AnchorType& p_1, const AnchorType& p_2, const AnchorType& p_3)
@@ -105,6 +135,26 @@ void Control::set_custom_anchors(float p_0, float p_1, float p_2, float p_3)
 	custom_anchors[1] = p_1;
 	custom_anchors[2] = p_2;
 	custom_anchors[3] = p_3;
+}
+
+int Control::get_anchor_top() const
+{
+	return anchors[3];
+}
+
+int Control::get_anchor_bottom() const
+{
+	return anchors[1];
+}
+
+int Control::get_anchor_left() const
+{
+	return anchors[0];
+}
+
+int Control::get_anchor_right() const
+{
+	return anchors[2];
 }
 
 void Control::span_parent()
@@ -359,6 +409,9 @@ void Control::size_changed()
 	bool size_changed = area.size != new_area.size;
 
 	area = new_area;
+
+	if (pos_changed || size_changed)
+		update();
 
 	if (pos_changed)
 		notification(NOTIFICATION_TRANSLATED);
@@ -714,7 +767,11 @@ void Control::render()
 
 void Control::bind_methods()
 {
-	REG_PROPERTY(pos);
-	REG_PROPERTY(size);
+	REG_PROPERTY(margins);
+	//REG_PROPERTY(size);
 	REG_PROPERTY(focused);
+	REG_PROPERTY(anchor_top);
+	REG_PROPERTY(anchor_bottom);
+	REG_PROPERTY(anchor_left);
+	REG_PROPERTY(anchor_right);
 }

@@ -13,7 +13,7 @@ WorldView::WorldView() : WorldView(NULL)
 
 }
 
-WorldView::WorldView(World* p_world)
+WorldView::WorldView(Scene* p_scene)
 {
 	Renderer* r = new DeferredRenderer;
 	r->set_draw_on_screen(false);
@@ -22,9 +22,9 @@ WorldView::WorldView(World* p_world)
 	viewport->worldview = this;
 
 	FBO2D* fbo = new FBO2D(WINDOWSIZE);
+	fbo->cleared_every_frame = false;
 
-	viewport->set_canvas(new Canvas);
-	viewport->set_world(p_world);
+	viewport->set_scene(p_scene);
 	viewport->set_mode(Viewport::FRAMEBUFFER);
 	viewport->set_fbo(fbo);
 
@@ -47,6 +47,8 @@ WorldView::WorldView(World* p_world)
 	raycast_shader = CONTENT->LoadShader("EngineCore/Shaders/RaycastPlane");
 
 	set_update_continuoulsy(true);
+
+	handle_2d = true;
 }
 
 WorldView::~WorldView()
@@ -64,6 +66,7 @@ void WorldView::notification(int p_notification)
 		return;
 
 	World* world = viewport->get_world();
+	Canvas* canvas = viewport->get_canvas();
 
 	if (world->get_active_camera())
 		T_LOG(world->get_active_camera()->get_forward().to_string());
@@ -73,9 +76,8 @@ void WorldView::notification(int p_notification)
 	case NOTIFICATION_READY:
 
 		if (viewport)
-		{
 			viewport->init();
-		}
+		
 		break;
 
 	case NOTIFICATION_UPDATE:
@@ -84,14 +86,12 @@ void WorldView::notification(int p_notification)
 	case NOTIFICATION_DRAW:
 
 		return_viewport = ACTIVE_VIEWPORT;
+		viewport->get_fbo()->clear();
 
-		if (viewport)
-		{
-			if (simulating)
-				viewport->update();
+		if (simulating)
+			viewport->update();
 
-			viewport->draw();
-		}
+		viewport->draw();
 
 		RENDERER->use_scissor(area);
 
@@ -103,37 +103,33 @@ void WorldView::notification(int p_notification)
 			postprocess->post_process();
 
 		RENDERER->stop_scissor();
-
-		for (int c = 0; c < world->get_child_count(); c++)
+		
+		for (int c = 0; c < canvas->get_child_count(); c++)
 		{
-			WorldObject* object = world->get_child(c)->cast_to_type<WorldObject*>();
+			Control* object = canvas->get_child(c)->cast_to_type<Control*>();
 
 			if (object->is_of_type<Camera>())
 				continue;
 
-			vec3 size = object->get_size();
-			vec3 pos = object->get_pos();
+			vec2 size = object->get_size();
+			vec2 pos = object->get_pos();
 
 			if (handle_2d)
 			{
 				if (selected == object)
-					draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(255, 164, 66)));
+					draw_highlight(rect2(pos, size), TO_RGB(vec3i(255, 164, 66)));
 
 				if (highlighted == object)
-					draw_highlight(rect2(pos.get_xy(), size.get_xy()), TO_RGB(vec3i(0, 255, 0)));
+					draw_highlight(rect2(pos, size), TO_RGB(vec3i(0, 255, 0)));
 			}
 		}
-
-		//viewport->deactivate_world_transform();
-		//viewport->deactivate_transform();
-
+		
 		if (get_focused())
 			draw_highlight(area, Color(0, 1, 0));
 		else
 			draw_highlight(area, DEFAULT_THEME->get_selection_color());
 
 		return_viewport->activate();
-
 		break;
 
 	case NOTIFICATION_RESIZED:
@@ -143,7 +139,6 @@ void WorldView::notification(int p_notification)
 			viewport->resize(area);
 
 		update();
-
 		break;
 	}
 }
@@ -202,7 +197,11 @@ void WorldView::handle_event(UIEvent *ui_event)
 {
 	vec2 pos = viewport->get_screen_coords(MOUSE->get_position());
 
-	Object* n = viewport->raycast(ui_event->pos);
+	Object* n = viewport->get_canvas()->raycast(ui_event->pos);
+	WorldObject* selected_worldobject = selected->cast_to_type<WorldObject*>();
+
+	if (n)
+		T_LOG("found");
 
 	if (handle_2d)
 	{
@@ -256,7 +255,7 @@ void WorldView::handle_event(UIEvent *ui_event)
 
 			vec2 drag_diff = current_drag_pos - prev_item_drag_pos;
 
-			selected->move(vec3(drag_diff, 0.0f));
+			selected_worldobject->move(vec3(drag_diff, 0.0f));
 
 			prev_item_drag_pos = current_drag_pos;
 		}
@@ -333,9 +332,9 @@ void WorldView::handle_event(UIEvent *ui_event)
 						if (selected && drag_type != DRAG_INACTIVE)
 						{
 							drag_start_grab = mouse_pos;
-							drag_start_pos = selected->get_pos();
-							drag_start_size = selected->get_size();
-							drag_start_rotation = selected->get_rotation();
+							drag_start_pos = selected_worldobject->get_pos();
+							drag_start_size = selected_worldobject->get_size();
+							drag_start_rotation = selected_worldobject->get_rotation();
 						}
 					}
 					else
@@ -359,11 +358,11 @@ void WorldView::handle_event(UIEvent *ui_event)
 					if (transform_type == TRANSLATE)
 					{
 						if (drag_type == DRAG_X)
-							selected->set_pos(drag_start_pos + vec3(mouse_pos.x - drag_start_grab.x, 0, 0));
+							selected_worldobject->set_pos(drag_start_pos + vec3(mouse_pos.x - drag_start_grab.x, 0, 0));
 						else if (drag_type == DRAG_Y)
-							selected->set_pos(drag_start_pos + vec3(0, mouse_pos.y - drag_start_grab.y, 0));
+							selected_worldobject->set_pos(drag_start_pos + vec3(0, mouse_pos.y - drag_start_grab.y, 0));
 						else if (drag_type == DRAG_Z)
-							selected->set_pos(drag_start_pos + vec3(0, 0, mouse_pos.z - drag_start_grab.z));
+							selected_worldobject->set_pos(drag_start_pos + vec3(0, 0, mouse_pos.z - drag_start_grab.z));
 					}
 					else if (transform_type == ROTATE)
 					{
@@ -372,11 +371,11 @@ void WorldView::handle_event(UIEvent *ui_event)
 					else if (transform_type == SCALE)
 					{
 						if (drag_type == DRAG_X)
-							selected->set_size(drag_start_size * vec3(mouse_pos.x / drag_start_grab.x, 1.0f, 1.0f));
+							selected_worldobject->set_size(drag_start_size * vec3(mouse_pos.x / drag_start_grab.x, 1.0f, 1.0f));
 						else if (drag_type == DRAG_Y)
-							selected->set_size(drag_start_size * vec3(1.0f, mouse_pos.y / drag_start_grab.y, 1.0f));
+							selected_worldobject->set_size(drag_start_size * vec3(1.0f, mouse_pos.y / drag_start_grab.y, 1.0f));
 						else if (drag_type == DRAG_Z)
-							selected->set_size(drag_start_size * vec3(1.0f, 1.0f, mouse_pos.z / drag_start_grab.z));
+							selected_worldobject->set_size(drag_start_size * vec3(1.0f, 1.0f, mouse_pos.z / drag_start_grab.z));
 					}
 				}
 
@@ -422,10 +421,10 @@ void WorldView::post_draw_world()
 	if (terrain)
 		terrain->get_brush()->apply();
 
-	if (!selected)
+	if (!selected && !selected->derives_from_type<Control*>())
 		return;
 
-	vec3 pos = selected->get_pos();
+	vec3 pos = selected->cast_to_type<WorldObject*>()->get_pos();
 
 	// draw invisible plane with position data
 
@@ -543,6 +542,10 @@ void WorldView::post_draw_world()
 	draw_grid();
 }
 
+void WorldView::post_draw_canvas()
+{
+}
+
 void WorldView::set_postprocess(PostProcess* p_postprocess)
 {
 	postprocess = p_postprocess;
@@ -554,14 +557,14 @@ PostProcess* WorldView::get_postprocess() const
 	return postprocess;
 }
 
-void WorldView::set_world(World* p_world)
+void WorldView::set_scene(Scene* p_scene)
 {
-	viewport->set_world(p_world);
+	viewport->set_scene(p_scene);
 }
 
-World* WorldView::get_world()
+Scene* WorldView::get_scene() const
 {
-	return viewport->get_world();
+	return viewport->get_scene();
 }
 
 void WorldView::select(WorldObject* p_object)
@@ -575,7 +578,7 @@ void WorldView::select(WorldObject* p_object)
 
 WorldObject* WorldView::get_selected() const
 {
-	return selected;
+	return selected->cast_to_type<WorldObject*>();
 }
 
 #undef CLASSNAME
@@ -591,7 +594,7 @@ void WorldView::highlight(WorldObject* p_object)
 
 WorldObject* WorldView::get_highlight() const
 {
-	return highlighted;
+	return highlighted->cast_to_type<WorldObject*>();
 }
 
 void WorldView::set_preview_type(int p_type)
