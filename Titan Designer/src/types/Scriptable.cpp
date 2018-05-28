@@ -57,6 +57,13 @@ void Scriptable::set(const StringName &name, const Variant &value)
 	p->set->operator() (Variant(this), Variant(value));
 }
 
+void Scriptable::disconnect(const StringName& p_signalname)
+{
+	if (signals.contains(p_signalname))
+		signals[p_signalname].connections.clear();
+
+}
+
 void Scriptable::connect(const StringName & p_signalname, const Connection & p_connection)
 {
 	if (!MMASTER->signal_exists(get_type(), p_signalname))

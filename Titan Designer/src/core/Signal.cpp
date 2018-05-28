@@ -44,7 +44,6 @@ void Connection::register_signal(Scriptable* p_scriptable, const StringName& p_s
 void Connection::register_lambda(Method* p_lambda)
 {
 	type = LAMBDA;
-
 	method = p_lambda;
 }
 
@@ -88,12 +87,12 @@ Signal::~Signal()
 {
 }
 
-void Signal::attach_connection(const Connection & p_connection)
+void Signal::attach_connection(const Connection& p_connection)
 {
 	connections.push_back(p_connection);
 }
 
-void Signal::attach_native_connection(Object *p_object, const StringName &p_method_name)
+void Signal::attach_native_connection(Object* p_object, const StringName& p_method_name)
 {
 	Connection connection;
 	connection.register_native_method(p_object, p_method_name);
@@ -101,7 +100,7 @@ void Signal::attach_native_connection(Object *p_object, const StringName &p_meth
 	connections.push_back(connection);
 }
 
-void Signal::attach_script_connection(Scriptable * p_scriptable, const StringName & p_name)
+void Signal::attach_script_connection(Scriptable* p_scriptable, const StringName& p_name)
 {
 	Connection connection;
 	connection.register_script_method(p_scriptable, p_name);
@@ -109,7 +108,7 @@ void Signal::attach_script_connection(Scriptable * p_scriptable, const StringNam
 	connections.push_back(connection);
 }
 
-void Signal::attach_signal_connection(Scriptable * p_scriptable, const StringName & p_name)
+void Signal::attach_signal_connection(Scriptable* p_scriptable, const StringName& p_name)
 {
 	Connection connection;
 	connection.register_signal(p_scriptable, p_name);

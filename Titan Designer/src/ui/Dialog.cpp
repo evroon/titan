@@ -136,7 +136,6 @@ ConfirmationDialog::ConfirmationDialog()
 	ok_button = new TextButton("OK");
 	ok_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER, ANCHOR_BEGIN);
 	ok_button->set_margins(-110, 10, -10, 35);
-
 	ok_button->connect("clicked", this, "chosen_exit");
 
 	add_child(ok_button);
@@ -145,7 +144,6 @@ ConfirmationDialog::ConfirmationDialog()
 	cancel_button = new TextButton("Cancel");
 	cancel_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER, ANCHOR_BEGIN);
 	cancel_button->set_margins(10, 10, 110, 35);
-
 	cancel_button->connect("clicked", this, "close");
 
 	add_child(cancel_button);

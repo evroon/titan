@@ -12,6 +12,7 @@ public:
 	Resource() = default;
 
 	virtual void load() { }
+	virtual void save() { }
 	virtual void reload() { }
 	virtual void free() { }
 

@@ -47,6 +47,37 @@ void TextFile::write(const String& p_source)
 	myfile.close();
 }
 
+void TextFile::load()
+{
+	std::string line;
+	String src;
+	std::ifstream myfile(file.get_absolute_path());
+
+	if (!myfile.is_open())
+		T_ERROR("Error loading file: " + file);
+
+	while (std::getline(myfile, line))
+		src.append(line + String("\n"));
+
+	myfile.close();
+
+	source = src;
+}
+
+void TextFile::save()
+{
+	std::ofstream myfile(file.get_absolute_path());
+
+	if (!myfile.is_open())
+	{
+		T_ERROR(String("Error loading file: ") + file);
+		return;
+	}
+
+	myfile << source.c_str();
+	myfile.close();
+}
+
 String TextFile::get_source() const
 {
 	return source;

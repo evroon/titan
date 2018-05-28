@@ -273,7 +273,17 @@ void ObjectField::open_button_clicked()
 		value_set(result);
 
 		if (result.operator Object*()->derives_from_type<Resource*>())
-			textfield->set_text(File(result.operator Resource*()->get_file()).get_name());
+		{
+			Resource* res = result.operator Resource*();
+			textfield->set_text(File(res->get_file()).get_name());
+
+			file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
+
+			auto save_as = [res, this](const String& p_path) { res->set_file(p_path); res->save(); textfield->set_text(File(res->get_file()).get_name()); };
+			file_dialog->connect("file_chosen", Connection::create_from_lambda(new V_Method_1(save_as)));
+			file_dialog->show();
+
+		}
 		else if(result.operator Object*()->derives_from_type<Node*>())
 			textfield->set_text(result.operator Node*()->get_name());
 
@@ -291,10 +301,6 @@ void ObjectField::open_button_clicked()
 
 void ObjectField::load_button_clicked()
 {
-	file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
-	add_child(file_dialog);
-	file_dialog->connect("file_chosen", this, "file_chosen");
-	file_dialog->show();
 }
 
 void ObjectField::file_chosen(const String& p_path)

@@ -12,6 +12,10 @@ public:
 	String load(const File& p_file);
 	void write(const String& p_source);
 
+	void load() override;
+	void save() override;
+
+
 	String get_source() const;
 
 private:

@@ -86,7 +86,7 @@ void TextEditorTab::open_file(const String &text)
 
 	textbox.set_text(textfile->get_source());
 
-	set_tab_title(textfile->get_file());
+	set_tab_title(File(textfile->get_file()).get_name());
 }
 
 void TextEditorTab::savebutton_pressed()
