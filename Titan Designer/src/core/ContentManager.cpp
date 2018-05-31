@@ -8,6 +8,8 @@
 
 #include "resources/File.h"
 
+#include "titanscript/TitanScript.h"
+
 ContentManager* ContentManager::singleton;
 
 ContentManager::ContentManager()
@@ -82,6 +84,7 @@ Object* ContentManager::Load(const File &p_file)
 	static StringName Font = "Font";
 	static StringName SoundEffect = "SoundEffect";
 	static StringName TextFile = "TextFile";
+	static StringName Titanscript = "TitanScript";
 
 	if (type == Texture2D)
 		return LoadTexture(p_file);
@@ -95,6 +98,8 @@ Object* ContentManager::Load(const File &p_file)
 		return LoadSoundEffect(p_file);
 	else if (type == TextFile)
 		return LoadTextFile(p_file);
+	else if (type == Titanscript)
+		return new TitanScript(p_file.get_absolute_path());
 	else
 		return 0;
 }

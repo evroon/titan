@@ -16,6 +16,8 @@ void TitanScript::open_file(const String & filepath)
 {
 	StringUtils::Init();
 
+	set_file(filepath);
+
 	textfile = CONTENT->LoadTextFile(filepath);
 
 	lexer = new Lexer(textfile->get_source());

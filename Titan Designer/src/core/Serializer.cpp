@@ -184,7 +184,7 @@ Serializer::Property Serializer::deserialize_property(const XmlNode& p_node)
 	case Variant::UNDEF:
 		result.value = NULL_VAR;
 		break;
-
+		
 	case Variant::BOOL:
 		result.value = value == "true" ? true : false;
 		break;
