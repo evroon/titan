@@ -35,7 +35,11 @@
 								<children count="0"/>
 								<properties count="9">
 									<text type="String" value="1984"/>
-									<script type="NULL"/>
+									<script type="TitanScript">
+										<properties count="1">
+											<file type="String" value="C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Titan Designer\assets\Scripts\player.ts"/>
+										</properties>
+									</script>
 									<name type="String" value="Label"/>
 									<margins type="vec4" value="{ 2.000000, 0.000000, 100.000000, 0.000000 }"/>
 									<focused type="bool" value="false"/>

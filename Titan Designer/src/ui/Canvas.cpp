@@ -93,6 +93,7 @@ void Canvas::add_control_to_top(Control * p_control)
 
 void Canvas::set_dialog(Dialog* p_dialog)
 {
+	dialog = p_dialog;
 	add_control_to_top(p_dialog);
 
 	focus(p_dialog);
@@ -103,6 +104,7 @@ void Canvas::set_dialog(Dialog* p_dialog)
 void Canvas::remove_dialog()
 {
 	remove_control(dialog);
+	dialog = NULL;
 }
 
 void Canvas::set_context_tip(const String& p_description, const vec2 &pos)
@@ -378,7 +380,7 @@ Control* Canvas::raycast(const vec2 &pos)
 	if (dialog && dialog->in_area(pos))
 		return dialog->raycast(pos);
 
-	for (int c = layers.size() - 1; c >= 0; c--)
+	/*for (int c = layers.size() - 1; c >= 0; c--)
 	{
 		CanvasLayer &l = layers[c];
 
@@ -389,6 +391,13 @@ Control* Canvas::raycast(const vec2 &pos)
 			if (r && r->get_visible())
 				return r;
 		}
+	}*/
+	for (Node *n : children)
+	{
+		Control* r = n->cast_to_type<Control*>()->raycast(pos);
+
+		if (r && r->get_visible())
+			return r;
 	}
 
 	return NULL;

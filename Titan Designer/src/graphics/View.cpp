@@ -32,8 +32,7 @@ void View::update()
 
 void View::handle_event(Event *event)
 {
-	for (int c = 0; c < viewports.size(); c++)
-		viewports[c]->handle_event(event);
+	default_viewport->handle_event(event);
 }
 
 void View::bind_viewport(Viewport *viewport)

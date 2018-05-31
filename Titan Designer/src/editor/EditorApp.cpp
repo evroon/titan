@@ -65,7 +65,6 @@ void EditorApp::init()
 
 	World* world = active_scene->get_child(0)->cast_to_type<World*>();
 	world->set_name("World");
-	world->set_script(new TitanScript("Scripts/World.ts"));
 		
 	//add controls
 	main_dock = new Dock;

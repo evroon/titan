@@ -1,12 +1,13 @@
 #include "GameApp.h"
 
 #include "core/Project.h"
-#include "graphics\View.h"
-#include "graphics\Renderer.h"
+#include "graphics/View.h"
+#include "graphics/Renderer.h"
+#include "input/Input.h"
 
 void GameApp::init()
 {
-	Renderer* r = new DeferredRenderer;
+	Renderer* r = new ForwardRenderer;
 	Viewport *v = new Viewport(r);
 	VIEW->set_default_viewport(v);
 	VIEW->set_active_viewport(v);
@@ -18,6 +19,11 @@ void GameApp::init()
 void GameApp::update()
 {
 	activescene->update();
+
+	for (Event *e : INPUT->events)
+		VIEW->handle_event(e);
+
+	VIEW->update();
 }
 
 void GameApp::draw()

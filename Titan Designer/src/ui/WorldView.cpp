@@ -104,7 +104,7 @@ void WorldView::notification(int p_notification)
 
 		RENDERER->stop_scissor();
 		
-		for (int c = 0; c < canvas->get_child_count(); c++)
+		/*for (int c = 0; c < canvas->get_child_count(); c++)
 		{
 			Control* object = canvas->get_child(c)->cast_to_type<Control*>();
 
@@ -122,7 +122,7 @@ void WorldView::notification(int p_notification)
 				if (highlighted == object)
 					draw_highlight(rect2(pos, size), TO_RGB(vec3i(0, 255, 0)));
 			}
-		}
+		}*/
 		
 		if (get_focused())
 			draw_highlight(area, Color(0, 1, 0));
@@ -200,8 +200,6 @@ void WorldView::handle_event(UIEvent *ui_event)
 	Object* n = viewport->get_canvas()->raycast(ui_event->pos);
 	WorldObject* selected_worldobject = selected->cast_to_type<WorldObject*>();
 
-	if (n)
-		T_LOG("found");
 
 	if (handle_2d)
 	{
