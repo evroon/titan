@@ -723,7 +723,7 @@ TreeElement * TreeView::create_item_from_node(Node* p_node, TreeElement* p_paren
 
 	for (int c = 0; c < p_node->get_child_count(); c++)
 	{
-		create_item_from_node(p_node->get_child(c), current);
+		create_item_from_node(p_node->get_child_by_index(c), current);
 	}
 
 	return current;

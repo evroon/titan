@@ -15,7 +15,7 @@ public:
 
 	void clean();
 
-	Node* get_child(int p_index);
+	Node* get_child_by_index(int p_index);
 	Node* get_child(const String& p_name);
 
 	
@@ -24,7 +24,7 @@ public:
 	{
 		for (int c = 0; c < children.size(); c++)
 		{
-			Node* child = get_child(c);
+			Node* child = get_child_by_index(c);
 			T t = dynamic_cast<T>(child);
 			
 			if (t)

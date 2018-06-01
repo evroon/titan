@@ -200,6 +200,10 @@ void WorldView::handle_event(UIEvent *ui_event)
 	Object* n = viewport->get_canvas()->raycast(ui_event->pos);
 	WorldObject* selected_worldobject = selected->cast_to_type<WorldObject*>();
 
+	if (simulating)
+	{
+		return;
+	}
 
 	if (handle_2d)
 	{
@@ -419,7 +423,7 @@ void WorldView::post_draw_world()
 	if (terrain)
 		terrain->get_brush()->apply();
 
-	if (!selected && !selected->derives_from_type<Control*>())
+	if (!selected || !selected->derives_from_type<WorldObject*>())
 		return;
 
 	vec3 pos = selected->cast_to_type<WorldObject*>()->get_pos();

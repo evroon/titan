@@ -46,7 +46,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	buttons.add_child(strip);
 	buttons.add_child(combo_box);
 
-	float s = buttons.get_child(0)->cast_to_type<Control*>()->get_required_size().y;
+	float s = buttons.get_child_by_index(0)->cast_to_type<Control*>()->get_required_size().y;
 
 	world_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 	world_view->set_margins(4, 4, 4, 12 + s);

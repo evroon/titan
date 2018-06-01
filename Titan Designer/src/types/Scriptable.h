@@ -39,7 +39,7 @@ public:
 	Dictionary<StringName, Signal> signals;
 
 protected:
-	bool has_script() const { return script != NULL; }
+	bool has_script() const { return script; }
 
 private:
 	TitanScript *script;

@@ -7,16 +7,12 @@
 					<World type="World">
 						<children count="0"/>
 						<properties count="2">
-							<script type="TitanScript">
-								<properties count="1">
-									<file type="String" value=""/>
-								</properties>
-							</script>
+							<script type="NULL"/>
 							<name type="String" value="World"/>
 						</properties>
 					</World>
 					<Canvas type="Canvas">
-						<children count="2">
+						<children count="3">
 							<TextBox type="TextBox">
 								<children count="0"/>
 								<properties count="9">
@@ -35,11 +31,7 @@
 								<children count="0"/>
 								<properties count="9">
 									<text type="String" value="1984"/>
-									<script type="TitanScript">
-										<properties count="1">
-											<file type="String" value="C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Titan Designer\assets\Scripts\player.ts"/>
-										</properties>
-									</script>
+									<script type="NULL"/>
 									<name type="String" value="Label"/>
 									<margins type="vec4" value="{ 2.000000, 0.000000, 100.000000, 0.000000 }"/>
 									<focused type="bool" value="false"/>
@@ -49,6 +41,24 @@
 									<anchor_right type="int" value="0"/>
 								</properties>
 							</Label>
+							<TextButton type="TextButton">
+								<children count="0"/>
+								<properties count="9">
+									<text type="String" value="PRESS"/>
+									<script type="TitanScript">
+										<properties count="1">
+											<file type="String" value="C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Titan Designer\assets\Scripts\press.ts"/>
+										</properties>
+									</script>
+									<name type="String" value="TextButton"/>
+									<margins type="vec4" value="{ 0.000000, 50.000000, 100.000000, 0.000000 }"/>
+									<focused type="bool" value="false"/>
+									<anchor_top type="int" value="2"/>
+									<anchor_bottom type="int" value="2"/>
+									<anchor_left type="int" value="0"/>
+									<anchor_right type="int" value="0"/>
+								</properties>
+							</TextButton>
 						</children>
 						<properties count="2">
 							<script type="NULL"/>

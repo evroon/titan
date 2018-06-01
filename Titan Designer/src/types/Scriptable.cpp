@@ -139,11 +139,17 @@ void Scriptable::connect_signal(const StringName& p_in, Scriptable* p_object, co
 void Scriptable::emit_signal(const StringName & p_name)
 {
 	signals[p_name].emit();
+	
+	if (method_exists(p_name))
+		run(p_name, {});
 }
 
 void Scriptable::emit_signal(const StringName & p_name, Variant arg_0)
 {
 	signals[p_name].emit(arg_0);
+
+	if (method_exists(p_name))
+		run(p_name, { arg_0 });
 }
 
 #undef CLASSNAME

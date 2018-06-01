@@ -7,12 +7,12 @@ TitanScript::TitanScript()
 	state = new State;
 }
 
-TitanScript::TitanScript(const String & p_file_name) : TitanScript()
+TitanScript::TitanScript(const String& p_file_name) : TitanScript()
 {
 	open_file(p_file_name);
 }
 
-void TitanScript::open_file(const String & filepath)
+void TitanScript::open_file(const String& filepath)
 {
 	StringUtils::Init();
 
@@ -25,7 +25,7 @@ void TitanScript::open_file(const String & filepath)
 	exe = new Executer(lexer->root, state);
 }
 
-TitanScript * TitanScript::CreateNewInstance()
+TitanScript* TitanScript::CreateNewInstance()
 {
 	TitanScript *newscript = new TitanScript;
 	Variant ext = state->extension;
@@ -47,17 +47,17 @@ void TitanScript::Extend(Variant ext)
 	state->extensiontype = ext.o->get_type();
 }
 
-bool TitanScript::FunctionExists(const StringName & name)
+bool TitanScript::FunctionExists(const StringName& name)
 {
 	return exe->state->FuncExists(name);
 }
 
-Variant TitanScript::RunFunction(const StringName & name)
+Variant TitanScript::RunFunction(const StringName& name)
 {
 	return exe->run_titan_func(name, Array<Variant>());
 }
 
-Variant TitanScript::RunFunction(const StringName & name, const Array<Variant> &paras)
+Variant TitanScript::RunFunction(const StringName& name, const Array<Variant>& paras)
 {
 	return exe->run_titan_func(name, paras);
 }

@@ -627,7 +627,7 @@ void DeferredRenderer::render_shadowmap()
 	
 	for (int c = 0; c < viewport->world->get_child_count(); c++)
 	{
-		Node* n = viewport->world->get_child(c);
+		Node* n = viewport->world->get_child_by_index(c);
 		WorldObject* wo = n->cast_to_type<WorldObject*>();
 		wo->notificate(WorldObject::NOTIFICATION_DRAW);
 	}
@@ -656,7 +656,7 @@ void DeferredRenderer::render_reflection()
 
 	for (int c = 0; c < ACTIVE_WORLD->get_child_count(); c++)
 	{
-		Node* n = ACTIVE_WORLD->get_child(c);
+		Node* n = ACTIVE_WORLD->get_child_by_index(c);
 		WorldObject* wo = n->cast_to_type<WorldObject*>();
 		wo->notificate(WorldObject::NOTIFICATION_DRAW);
 	}

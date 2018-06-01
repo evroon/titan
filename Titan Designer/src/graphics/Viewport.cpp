@@ -286,13 +286,13 @@ Object* Viewport::raycast(const vec2 &pos) const
 	{
 		for (int c = 0; c < world->get_child_count(); c++)
 		{
-			WorldObject* obj = world->get_child(c)->cast_to_type<WorldObject*>();
+			WorldObject* obj = world->get_child_by_index(c)->cast_to_type<WorldObject*>();
 
 			if (obj->is_of_type<Camera>())
 				continue;
 
 			if (obj->CheckOverlap(projected))
-				return world->get_child(c);
+				return world->get_child_by_index(c);
 		}
 	}
 

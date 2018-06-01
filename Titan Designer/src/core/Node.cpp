@@ -27,6 +27,9 @@ void Node::add_child(Node* p_child)
 
 	p_child->parent = this;
 	p_child->children_changed();
+	
+	if (p_child->has_script())
+		p_child->run("ready", {});
 }
 
 void Node::remove_child(Node* p_child)
@@ -42,13 +45,13 @@ void Node::clean()
 	int size = children.size();
 	for (int c = 0; c < size; c++)
 	{
-		Node* child = get_child(0);
+		Node* child = get_child_by_index(0);
 		GC->queue_clean(child);
 		children.clear(child);
 	}
 }
 
-Node* Node::get_child(int p_index)
+Node* Node::get_child_by_index(int p_index)
 {
 	return children[p_index];
 }
@@ -108,6 +111,8 @@ void Node::children_changed()
 void Node::bind_methods()
 {
 	REG_PROPERTY(name);
+	REG_METHOD(get_child);
+	REG_METHOD(get_parent);
 
 	REG_SIGNAL("children_changed");
 }

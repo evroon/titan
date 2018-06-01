@@ -63,7 +63,7 @@ void EditorApp::init()
 	active_scene = active_project->get_main_scene();
 	//active_scene->add_child(new Canvas());
 
-	World* world = active_scene->get_child(0)->cast_to_type<World*>();
+	World* world = active_scene->get_child_by_index(0)->cast_to_type<World*>();
 	world->set_name("World");
 		
 	//add controls

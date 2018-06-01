@@ -62,7 +62,7 @@ void Serializer::serialize_recursively(const String &p_name, const Variant &p_va
 
 			for (int c = 0; c < n->get_child_count(); c++)
 			{
-				Node* child = n->get_child(c);
+				Node* child = n->get_child_by_index(c);
 				serialize_recursively(child->get_name(), child, children_node);
 			}
 

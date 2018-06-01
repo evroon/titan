@@ -98,7 +98,7 @@ void Dialog::notification(int p_notification)
 	}
 }
 
-void Dialog::set_title(const String & p_title)
+void Dialog::set_title(const String& p_title)
 {
 	title = p_title;
 }
