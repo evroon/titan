@@ -115,7 +115,7 @@ void Dialog::show()
 
 void Dialog::close()
 {
-	get_canvas()->remove_control(this);
+	get_canvas()->remove_dialog();
 }
 
 #undef CLASSNAME

@@ -103,7 +103,9 @@ void Canvas::set_dialog(Dialog* p_dialog)
 
 void Canvas::remove_dialog()
 {
+	T_LOG(children.size());
 	remove_control(dialog);
+	T_LOG(children.size());
 	dialog = NULL;
 }
 
