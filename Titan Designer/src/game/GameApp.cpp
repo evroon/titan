@@ -31,6 +31,11 @@ void GameApp::draw()
 	VIEW->draw();
 }
 
+void GameApp::resize(const vec2i& p_size)
+{
+	VIEW->get_default_viewport()->resize(rect2(vec2(), vec2((float)p_size.x, (float)p_size.y) / 2.0f));
+}
+
 void GameApp::start_scene(Scene *s)
 {
 	activescene = s;

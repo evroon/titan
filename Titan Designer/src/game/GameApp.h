@@ -16,6 +16,8 @@ public:
 
 	void draw() override;
 
+	void resize(const vec2i& p_size) override;
+
 	void start_scene(Scene *s);
 	void handle_event(Event *e);
 	
