@@ -48,7 +48,8 @@ WorldView::WorldView(Scene* p_scene)
 
 	set_update_continuoulsy(true);
 
-	handle_2d = true;
+	handle_2d = false;
+
 }
 
 WorldView::~WorldView()
@@ -69,7 +70,7 @@ void WorldView::notification(int p_notification)
 	Canvas* canvas = viewport->get_canvas();
 
 	if (world->get_active_camera())
-		T_LOG(world->get_active_camera()->get_forward().to_string());
+		T_LOG(viewport->get_world()->get_active_camera()->get_rotation().to_string());
 
 	switch (p_notification)
 	{
@@ -628,6 +629,22 @@ void WorldView::set_simulating(bool p_simulating)
 bool WorldView::get_simulating() const
 {
 	return simulating;
+}
+
+void WorldView::set_handle_2d(bool p_handle_2d)
+{
+	handle_2d = p_handle_2d;
+
+	if (handle_2d)
+	{
+		viewport->get_world()->get_active_camera()->set_ortho_projection(0.5, 5000.0);
+		viewport->get_world()->get_active_camera()->set_rotation(vec3(-PI / 2.0, 0, 0));
+	}
+}
+
+bool WorldView::get_handle_2d() const
+{
+	return handle_2d;
 }
 
 WorldObject* WorldView::raycast(const vec2& p_pos) const

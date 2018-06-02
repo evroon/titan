@@ -8,7 +8,8 @@ class Toggle : public Button
 
 public:
 	Toggle();
-	Toggle(const String& p_tex);
+	Toggle(const String& p_text);
+	Toggle(Ref<Texture2D> p_tex);
 	virtual ~Toggle();
 
 	void handle_event(UIEvent* p_event) override;
@@ -19,6 +20,7 @@ public:
 
 private:
 	Ref<Texture2D> tex;
+	String text;
 
 	bool selected;
 };
@@ -34,6 +36,7 @@ public:
 	struct Toggle
 	{
 		Ref<Texture2D> tex;
+		String text;
 		String tip;
 		rect2 area;
 	};

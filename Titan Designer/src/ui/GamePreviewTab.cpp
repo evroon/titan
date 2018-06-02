@@ -1,6 +1,7 @@
 #include "GamePreviewTab.h"
 
 #include "ImageButton.h"
+#include "TextButton.h"
 #include "Seperator.h"
 #include "Dock.h"
 #include "ComboBox.h"
@@ -17,7 +18,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 {
 	auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
 
-	Toggle* run_button = new Toggle("EngineCore/UI/Run.png");
+	Toggle* run_button = new Toggle(CONTENT->LoadTexture("EngineCore/UI/Run.png"));
 	run_button->set_tip_description("Run");
 	run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
 
@@ -38,6 +39,20 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 
 	combo_box = new ComboBox;
 	combo_box->connect("selected", this, "set_preview_type");
+
+	TextButton* toggle_2d = new TextButton("3D");
+	toggle_2d->connect("clicked",
+	Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
+
+		bool v = world_view->get_handle_2d();
+		world_view->set_handle_2d(!v);
+		
+		if (v)
+			toggle_2d->set_text("3D");
+		else
+			toggle_2d->set_text("2D");
+	
+	})));
 	
 	world_view = new WorldView(p_scene);
 
@@ -45,6 +60,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	buttons.add_child(new Seperator);
 	buttons.add_child(strip);
 	buttons.add_child(combo_box);
+	buttons.add_child(toggle_2d);
 
 	float s = buttons.get_child_by_index(0)->cast_to_type<Control*>()->get_required_size().y;
 

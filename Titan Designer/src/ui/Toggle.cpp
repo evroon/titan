@@ -8,11 +8,15 @@ Toggle::Toggle()
 {
 }
 
-Toggle::Toggle(const String& p_tex) : Toggle()
+Toggle::Toggle(const String& p_text) : Toggle()
 {
-	tex = CONTENT->LoadTexture(p_tex);
+	text = p_text;
 }
 
+Toggle::Toggle(Ref<Texture2D> p_tex) : Toggle()
+{
+	tex = p_tex;
+}
 
 Toggle::~Toggle()
 {

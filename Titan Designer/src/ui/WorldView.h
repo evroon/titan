@@ -65,6 +65,9 @@ public:
 	void set_simulating(bool p_simulating);
 	bool get_simulating() const;
 
+	void set_handle_2d(bool p_handle_2d);
+	bool get_handle_2d() const;
+
 	WorldObject* raycast(const vec2& p_pos) const;
 
 	Viewport* get_viewport() const;
