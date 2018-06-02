@@ -367,7 +367,6 @@ void ForwardRenderer::render()
 {
 	set_viewport();
 	
-	FBOMANAGER->clear_all();
 	FBOMANAGER->bind_default_fbo();
 
 	if ((viewport->mode == Viewport::FRAMEBUFFER || viewport->mode == Viewport::POSTPROCESS) && viewport->fbo)
@@ -860,7 +859,6 @@ void DeferredRenderer::render()
 	set_viewport();
 
 	FBOMANAGER->bind_default_fbo();
-	//FBOMANAGER->clear_all();
 
 	deferred_buffer->bind();
 

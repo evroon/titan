@@ -97,7 +97,7 @@ void Application::Free()
 
 void Application::prepare_draw()
 {
-	//RENDERER->Prepare();
+	FBOMANAGER->clear_all();
 }
 
 void Application::FinishDraw()

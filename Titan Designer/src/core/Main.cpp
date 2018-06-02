@@ -13,7 +13,7 @@ Platforms: Android, Linux, Mac OS X and Windows
 #undef main
 
 #define DEBUG 1
-#define EDITOR 0
+#define EDITOR 1
 
 int main(int argc, char* argv[])
 {
