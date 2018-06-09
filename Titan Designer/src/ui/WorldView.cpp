@@ -104,19 +104,41 @@ void WorldView::notification(int p_notification)
 			postprocess->post_process();
 
 		RENDERER->stop_scissor();
-		
-		/*for (int c = 0; c < canvas->get_child_count(); c++)
+
+		/*if (handle_2d)
 		{
-			Control* object = canvas->get_child(c)->cast_to_type<Control*>();
-
-			if (object->is_of_type<Camera>())
-				continue;
-
-			vec2 size = object->get_size();
-			vec2 pos = object->get_pos();
-
-			if (handle_2d)
+			for (int c = 0; c < canvas->get_child_count(); c++)
 			{
+				Control* object = canvas->get_child_by_index(c)->cast_to_type<Control*>();
+
+				if (object->is_of_type<Camera>())
+					continue;
+
+				vec2 size = object->get_size();
+				vec2 pos = object->get_pos();
+
+				DrawCommand command;
+				command.type = DrawCommand::FRAME;
+				command.area = rect2(pos, size);
+				command.color = TO_RGB(vec3i(255, 164, 66));
+				command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();				
+
+				if (highlighted == object)
+					render_frame(command);
+
+				if (highlighted == object)
+					render_frame(command);
+			}
+			for (int c = 0; c < world->get_child_count(); c++)
+			{
+				WorldObject* object = world->get_child_by_index(c)->cast_to_type<WorldObject*>();
+
+				if (!object || object->is_of_type<Camera>())
+					continue;
+
+				vec2 size = object->get_size().get_xy();
+				vec2 pos = object->get_pos().get_xy();
+
 				if (selected == object)
 					draw_highlight(rect2(pos, size), TO_RGB(vec3i(255, 164, 66)));
 
@@ -124,6 +146,7 @@ void WorldView::notification(int p_notification)
 					draw_highlight(rect2(pos, size), TO_RGB(vec3i(0, 255, 0)));
 			}
 		}*/
+
 		
 		if (get_focused())
 			draw_highlight(area, Color(0, 1, 0));
@@ -202,9 +225,10 @@ void WorldView::handle_event(UIEvent *ui_event)
 	WorldObject* selected_worldobject = selected->cast_to_type<WorldObject*>();
 
 	if (simulating)
-	{
 		return;
-	}
+	if (n)
+		T_LOG("n");
+	T_LOG(pos.to_string());
 
 	if (handle_2d)
 	{
@@ -419,13 +443,40 @@ void WorldView::handle_event(UIEvent *ui_event)
 
 void WorldView::post_draw_world()
 {
+	if (!selected || !selected->derives_from_type<WorldObject*>())
+		return;
+
+	World* world = viewport->get_world();
+
+	vec2 item_size = selected->cast_to_type<WorldObject*>()->get_size().get_xy() + vec2(2);
+	vec2 item_pos = selected->cast_to_type<WorldObject*>()->get_pos().get_xy();
+	vec2 handle_size = vec2(4.0f);
+	vec2 offset = item_size + handle_size;
+
+	DrawCommand command;
+	command.type = DrawCommand::FRAME;
+	command.area = rect2(item_pos, item_size);
+	command.color = TO_RGB(vec3i(255, 164, 66));
+	command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
+	command.shader = CanvasData::get_singleton()->get_default_shader();
+
+	render_frame(command);
+
+	command.area = rect2(item_pos + offset, handle_size);
+	render_box(command);
+	command.area = rect2(item_pos - offset, handle_size);
+	render_box(command);
+	command.area = rect2(item_pos + offset * vec2(1, -1), handle_size);
+	render_box(command);
+	command.area = rect2(item_pos + offset * vec2(-1, 1), handle_size);
+	render_box(command);
+
+	// draw transformation handles
+	
 	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
 
 	if (terrain)
 		terrain->get_brush()->apply();
-
-	if (!selected || !selected->derives_from_type<WorldObject*>())
-		return;
 
 	vec3 pos = selected->cast_to_type<WorldObject*>()->get_pos();
 

@@ -7,6 +7,7 @@ uniform sampler2D rocks;
 uniform sampler2D look_up;
 uniform sampler2D shadow_map;
 uniform sampler2D normalmap;
+uniform sampler2D heightmap;
 
 uniform mat4 model;
 uniform vec3 ambient;
@@ -51,6 +52,13 @@ vec3 get_normal(vec2 pos)
 	vec2 position = pos / (terrain_size * terrain_count);
 	position += vec2(0.5, 0.5);
 	return texture(normalmap, position).xyz;
+}
+
+vec3 get_height(vec2 pos)
+{	
+	vec2 position = pos / (terrain_size * terrain_count);
+	position += vec2(0.5, 0.5);
+	return texture(heightmap, position).xyz;
 }
 
 void main()

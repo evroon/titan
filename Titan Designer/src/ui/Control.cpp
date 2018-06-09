@@ -584,181 +584,221 @@ void Control::update()
 	to_be_updated = true;
 }
 
+void Control::render_texture(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+	SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+	Shader* shader = CanvasData::get_singleton()->get_default_shader();
+	Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
+
+	shader->bind();
+	shader->set_uniform("texbounds", draw_command.bounds);
+	shader->set_uniform("color", draw_command.color);
+	shader->set_uniform("texture_enabled", true);
+
+	draw_command.tex->bind(0);
+
+	mat4 final = RENDERER->get_final_matrix() * transform.get_model();
+	shader->set_uniform("model", final);
+	mesh->bind();
+	mesh->draw();
+}
+
+void Control::render_font(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+	float offset = 0.0f;
+
+	vec2i parent_size = WINDOWSIZE;
+	vec2 delta;
+	vec2 pos = draw_command.pos;
+
+	pos = vec2(Math::floor(pos.x), Math::floor(pos.y)) + delta;
+
+	Texture2D* tex = draw_command.font->get_renderer()->get_texture();
+	SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+	Shader* shader = CanvasData::get_singleton()->get_default_shader();
+	Font* font = draw_command.font;
+
+	shader->bind();
+	shader->set_uniform("color", draw_command.color);
+	shader->set_uniform("texture_enabled", true);
+
+	tex->bind(0);
+
+	for (int i = 0; i < draw_command.text.size(); i++)
+	{
+		Char c = draw_command.text[i];
+
+		if (c == ' ')
+		{
+			offset += font->get_renderer()->get_space_offset();
+			continue;
+		}
+		if (c == '\t')
+		{
+			offset += font->get_renderer()->get_tab_offset();
+			continue;
+		}
+		if (c < 33 || c > 126)
+		{
+			offset += font->get_renderer()->get_space_offset();
+			continue;
+		}
+
+		vec4 bounds = font->get_renderer()->get_bounds(c);
+		vec4 b = vec4(bounds.x / tex->get_size().x, bounds.y / tex->get_size().x, 1, 0);
+
+		float delta = bounds.y - bounds.x;
+
+		Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y), vec2(delta, tex->get_size().y) / 2.0f);
+
+		shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
+		shader->set_uniform("texbounds", b);
+
+		mesh->draw();
+
+		offset += delta;
+	}
+}
+
+void Control::render_box(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+
+	SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+	Shader* shader = draw_command.shader;
+	Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
+
+	shader->bind();
+	shader->set_uniform("color", draw_command.color);
+	shader->set_uniform("texture_enabled", false);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
+	mesh->draw();
+}
+
+void Control::render_frame(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+
+	vec2 tex_size = draw_command.tex->get_size();
+	vec2 size = draw_command.area.size;
+
+	vec2 pos = draw_command.area.get_bottom_left();
+	vec2 extension = { size.x * 2 - tex_size.x * 2 / 3, size.y * 2 - tex_size.x * 2 / 3 };
+
+	Array<float> h_off = { 0, tex_size.x / 3, 2 * tex_size.x / 3, tex_size.x };
+	Array<float> v_off = { 0, tex_size.y / 3, 2 * tex_size.y / 3, tex_size.y };
+	Array<float> h_pos = { pos.x, pos.x + h_off[1], pos.x + extension.x + h_off[1], pos.x + extension.x + h_off[2] };
+	Array<float> v_pos = { pos.y, pos.y + v_off[1], pos.y + extension.y + v_off[1], pos.y + extension.y + v_off[2] };
+
+	SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+	Shader* shader = CanvasData::get_singleton()->get_default_shader();
+	Transform transform;
+
+	shader->bind();
+	shader->set_uniform("color", draw_command.color);
+	shader->set_uniform("texture_enabled", true);
+
+	draw_command.tex->bind(0);
+
+	mesh->bind();
+
+	for (int x = 0; x < 3; x++)
+	{
+		for (int y = 0; y < 3; y++)
+		{
+			vec2 horiz_bounds = vec2(h_off[x], h_off[x + 1]);
+			vec2 vert_bounds = vec2(v_off[y], v_off[y + 1]);
+
+			rect2 new_area = rect2(h_pos[x], h_pos[x + 1], v_pos[y + 1], v_pos[y]);
+
+			vec4 b = vec4(horiz_bounds, vert_bounds);
+			vec4 bounds = vec4(vec2(b.x, b.y) / draw_command.tex->get_size().x, vec2(b.z, b.w) / draw_command.tex->get_size().y);
+
+			transform = Transform(new_area.pos, new_area.size);
+
+			shader->set_uniform("texbounds", bounds);
+			shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
+
+			mesh->draw();
+		}
+	}
+}
+
+void Control::render_line(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+	SimpleMesh* mesh = MeshHandler::get_singleton()->get_line();
+	Shader* shader = CanvasData::get_singleton()->get_default_shader();
+
+	// center-like coordinates
+	vec2 start = draw_command.area.get_bottom_left();
+	vec2 end = draw_command.area.get_upper_right();
+	vec2 delta = start - end;
+	vec2 center = (end + start) / 2.0f;
+
+	float angle = delta.angle(vec2(0, -1.0f));
+	float length = delta.length() / 2.0f;
+
+	Transform transform = Transform(center, vec2(1.0f, length), angle);
+
+	shader->bind();
+	shader->set_uniform("color", draw_command.color);
+	shader->set_uniform("texture_enabled", false);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
+	mesh->bind();
+	mesh->draw();
+
+	mesh = MeshHandler::get_singleton()->get_plane();
+	mesh->bind();
+}
+
+void Control::render_polygon(const DrawCommand& p_draw_command)
+{
+
+}
+
+void Control::render_draw_command(const DrawCommand& p_draw_command)
+{
+	const DrawCommand& draw_command = p_draw_command;
+
+	if (draw_command.type == DrawCommand::TEXTURE)
+	{
+		render_texture(draw_command);
+	}
+	else if (draw_command.type == DrawCommand::FONT)
+	{
+		render_font(draw_command);
+	}
+	else if (draw_command.type == DrawCommand::BOX)
+	{
+		render_box(draw_command);
+	}
+	else if (draw_command.type == DrawCommand::FRAME)
+	{
+		render_frame(draw_command);
+	}
+	else if (draw_command.type == DrawCommand::LINE)
+	{
+		render_line(draw_command);
+	}
+	else if (draw_command.type == DrawCommand::POLYGON)
+	{
+
+	}
+}
+
 void Control::render()
 {
 	for (int c = 0; c < draw_commands.size(); c++)
-	{
-		DrawCommand& draw_command = draw_commands[c];
-
-		if (draw_command.type == DrawCommand::TEXTURE)
-		{
-			SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
-			Shader* shader = CanvasData::get_singleton()->get_default_shader();
-			Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
-
-			shader->bind();
-			shader->set_uniform("texbounds", draw_command.bounds);
-			shader->set_uniform("color", draw_command.color);
-			shader->set_uniform("texture_enabled", true);
-
-			draw_command.tex->bind(0);
-
-			mat4 final = RENDERER->get_final_matrix() * transform.get_model();
-			shader->set_uniform("model", final);
-			mesh->bind();
-			mesh->draw();
-		}
-		else if (draw_command.type == DrawCommand::FONT)
-		{
-			float offset = 0.0f;
-
-			vec2i parent_size = WINDOWSIZE;
-			vec2 delta;
-			vec2 pos = draw_command.pos;
-
-			pos = vec2(Math::floor(pos.x), Math::floor(pos.y)) + delta;
-
-			Texture2D* tex = draw_command.font->get_renderer()->get_texture();
-			SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
-			Shader* shader = CanvasData::get_singleton()->get_default_shader();
-			Font* font = draw_command.font;
-
-			shader->bind();
-			shader->set_uniform("color", draw_command.color);
-			shader->set_uniform("texture_enabled", true);
-
-			tex->bind(0);
-
-			for (int i = 0; i < draw_command.text.size(); i++)
-			{
-				Char c = draw_command.text[i];
-
-				if (c == ' ')
-				{
-					offset += font->get_renderer()->get_space_offset();
-					continue;
-				}
-				if (c == '\t')
-				{
-					offset += font->get_renderer()->get_tab_offset();
-					continue;
-				}
-				if (c < 33 || c > 126)
-				{
-					offset += font->get_renderer()->get_space_offset();
-					continue;
-				}
-
-				vec4 bounds = font->get_renderer()->get_bounds(c);
-				vec4 b = vec4(bounds.x / tex->get_size().x, bounds.y / tex->get_size().x, 1, 0);
-
-				float delta = bounds.y - bounds.x;
-
-				Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y), vec2(delta, tex->get_size().y) / 2.0f);
-
-				shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
-				shader->set_uniform("texbounds", b);
-
-				mesh->draw();
-
-				offset += delta;
-			}
-		}
-		else if (draw_command.type == DrawCommand::BOX)
-		{
-			SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
-			Shader* shader = draw_command.shader;
-			Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
-
-			shader->bind();
-			shader->set_uniform("color", draw_command.color);
-			shader->set_uniform("texture_enabled", false);
-
-			glBindTexture(GL_TEXTURE_2D, 0);
-
-			shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
-			mesh->draw();
-		}
-		else if (draw_command.type == DrawCommand::FRAME)
-		{
-			vec2 tex_size = draw_command.tex->get_size();
-			vec2 size = draw_command.area.size;
-
-			vec2 pos = draw_command.area.get_bottom_left();
-			vec2 extension = { size.x * 2 - tex_size.x * 2 / 3, size.y * 2 - tex_size.x * 2 / 3 };
-
-			Array<float> h_off = { 0, tex_size.x / 3, 2 * tex_size.x / 3, tex_size.x };
-			Array<float> v_off = { 0, tex_size.y / 3, 2 * tex_size.y / 3, tex_size.y };
-			Array<float> h_pos = { pos.x, pos.x + h_off[1], pos.x + extension.x + h_off[1], pos.x + extension.x + h_off[2] };
-			Array<float> v_pos = { pos.y, pos.y + v_off[1], pos.y + extension.y + v_off[1], pos.y + extension.y + v_off[2] };
-
-			SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
-			Shader* shader = CanvasData::get_singleton()->get_default_shader();
-			Transform transform;
-
-			shader->bind();
-			shader->set_uniform("color", draw_command.color);
-			shader->set_uniform("texture_enabled", true);
-
-			draw_command.tex->bind(0);
-
-			mesh->bind();
-
-			for (int x = 0; x < 3; x++)
-			{
-				for (int y = 0; y < 3; y++)
-				{
-					vec2 horiz_bounds = vec2(h_off[x], h_off[x + 1]);
-					vec2 vert_bounds = vec2(v_off[y], v_off[y + 1]);
-
-					rect2 new_area = rect2(h_pos[x], h_pos[x + 1], v_pos[y + 1], v_pos[y]);
-
-					vec4 b = vec4(horiz_bounds, vert_bounds);
-					vec4 bounds = vec4(vec2(b.x, b.y) / draw_command.tex->get_size().x, vec2(b.z, b.w) / draw_command.tex->get_size().y);
-
-					transform = Transform(new_area.pos, new_area.size);
-
-					shader->set_uniform("texbounds", bounds);
-					shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
-
-					mesh->draw();
-				}
-			}
-		}
-		else if (draw_command.type == DrawCommand::LINE)
-		{
-			SimpleMesh* mesh = MeshHandler::get_singleton()->get_line();
-			Shader* shader = CanvasData::get_singleton()->get_default_shader();
-
-			// center-like coordinates
-			vec2 start = draw_command.area.get_bottom_left();
-			vec2 end = draw_command.area.get_upper_right();
-			vec2 delta = start - end;
-			vec2 center = (end + start) / 2.0f;
-
-			float angle = delta.angle(vec2(0, -1.0f));
-			float length = delta.length() / 2.0f;
-
-			Transform transform = Transform(center, vec2(1.0f, length), angle);
-
-			shader->bind();
-			shader->set_uniform("color", draw_command.color);
-			shader->set_uniform("texture_enabled", false);
-
-			glBindTexture(GL_TEXTURE_2D, 0);
-
-			shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
-			mesh->bind();
-			mesh->draw();
-
-			mesh = MeshHandler::get_singleton()->get_plane();
-			mesh->bind();
-		}
-		else if (draw_command.type == DrawCommand::POLYGON)
-		{
-
-		}
-	}
+		render_draw_command(draw_commands[c]);
 }
 
 

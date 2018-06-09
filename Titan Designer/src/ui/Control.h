@@ -158,6 +158,14 @@ protected:
 
 	void update();
 
+	void render_texture(const DrawCommand& p_draw_command);
+	void render_font(const DrawCommand& p_draw_command);
+	void render_box(const DrawCommand& p_draw_command);
+	void render_frame(const DrawCommand& p_draw_command);
+	void render_line(const DrawCommand& p_draw_command);
+	void render_polygon(const DrawCommand& p_draw_command);
+	void render_draw_command(const DrawCommand& p_draw_command);
+
 	rect2 area;
 
 private:

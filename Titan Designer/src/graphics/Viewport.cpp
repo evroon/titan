@@ -147,12 +147,12 @@ vec2 Viewport::get_screen_coords(const vec2 &p_pos) const
 	if (!world)
 		return vec2();
 
-	vec4 p = { (p_pos - renderarea.pos) / get_size(), 0.0f, 1.0f };
+	vec4 p = { (p_pos - renderarea.pos), 0.0f, 1.0f };
 
 	Camera* cam = world->get_active_camera();
 	mat4 inv = cam->get_inverse();
 
-	return (inv * p).get_xy();
+	return p.get_xy();
 }
 
 bool Viewport::is_overlapping(const rect2 &area) const

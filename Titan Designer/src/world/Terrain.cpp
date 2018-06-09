@@ -12,9 +12,13 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 {
 	terrain = p_terrain;
 
-	heightmap_fbo = new FBO2D(vec2i(4096));
+	heightmap_fbo = new FBO2D(vec2i(1024));
 	heightmap_fbo->add_color_texture();
+	heightmap_fbo->clear_color = vec3(0.0f);
+	heightmap_fbo->cleared_every_frame = false;
 	heightmap_fbo->init();
+	heightmap_fbo->clear();
+
 	terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
 
 	brush_shader = CONTENT->LoadShader("EngineCore/Shaders/Brush");
@@ -25,7 +29,6 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 void TerrainBrush::apply()
 {
 	Texture2D* heightmap = terrain->get_heightmap();
-	heightmap->bind(0);
 
 	brush_shader->bind();
 	brush_shader->set_uniform("size", heightmap->get_size());

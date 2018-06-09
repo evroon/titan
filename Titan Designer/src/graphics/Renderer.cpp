@@ -881,11 +881,12 @@ void DeferredRenderer::render()
 
 	if (viewport->canvas)
 	{
-		activate_canvas_transform();
+		activate_canvas_transform(); 
 		viewport->canvas->draw();
 		viewport->post_draw_canvas();
 		deactivate_canvas_transform();
 	}
+
 
 	render_shadowmap();
 	render_reflection();

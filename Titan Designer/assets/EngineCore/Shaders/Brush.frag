@@ -7,7 +7,7 @@ out vec4 final_color;
 
 void main()
 {	
-	float height = 0.5;
+	float height = 0.8;
 	
 	final_color = vec4(height, height, height, 1.0);
 }
