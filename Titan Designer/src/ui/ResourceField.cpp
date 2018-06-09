@@ -240,14 +240,14 @@ void ObjectField::init()
 
 	load_button->set_margins(100, 0, 40, 0);
 	load_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
-	load_button->connect("clicked", this, "load_button_clicked");
+	load_button->connect("clicked", this, "open_button_clicked");
 
 	textfield->set_margins(0, 0, 104, 0);
 	textfield->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
 	String text = "New";
 	if (get_value().isdef())
-		text = "Open";
+		text = "...";
 
 	open_button = new TextButton(text);
 	open_button->connect("clicked", this, "open_button_clicked");
@@ -255,7 +255,6 @@ void ObjectField::init()
 
 	open_button->set_margins(30, 0, 4, 0);
 	open_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
-
 }
 
 void ObjectField::open_button_clicked()
@@ -287,7 +286,7 @@ void ObjectField::open_button_clicked()
 		else if(result.operator Object*()->derives_from_type<Node*>())
 			textfield->set_text(result.operator Node*()->get_name());
 
-		open_button->set_text("Open");
+		open_button->set_text("...");
 		return;
 	}
 

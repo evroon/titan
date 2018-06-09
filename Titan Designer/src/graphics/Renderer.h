@@ -212,6 +212,7 @@ private:
 	void render_godray();
 	void render_first_pass();
 	void render_second_pass();
+	void render_virtual_tex();
 
 	FBO2D* deferred_buffer;
 	FBO2D* render_buffer;
@@ -224,6 +225,7 @@ private:
 	FBO2D* bloom_buffer;
 	FBO2D* dof_buffer;
 	FBO2D* lighting_buffer;
+	FBO2D* virtual_tex_buffer;
 
 	FBO2D* blur_buffer;
 
@@ -236,6 +238,7 @@ private:
 	Shader* shader_2d;
 	Shader* ssao;
 	Shader* bloom;
+	Shader* virtual_tex;
 
 	Environment* environment;
 
