@@ -136,7 +136,7 @@ void Sprite::draw()
 	}
 	else
 		shader->set_uniform("texbounds", bounds);*/
-
+	defaultmesh->bind();
 	defaultmesh->draw();
 
 	shader->set_uniform("color", Color::White);
