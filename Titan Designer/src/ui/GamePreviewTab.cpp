@@ -108,6 +108,11 @@ void GamePreviewTab::update_textures()
 	a.push_back(DeferredRenderer::SSAO);
 	a.push_back(DeferredRenderer::SSAO_BLUR);
 	a.push_back(DeferredRenderer::GODRAY);
+	a.push_back(DeferredRenderer::BLOOM);
+	//a.push_back(DeferredRenderer::DOF);
+	//a.push_back(DeferredRenderer::LIGHTING);
+	a.push_back(DeferredRenderer::VIRTUALTEX);
+	a.push_back(DeferredRenderer::INDIRECTION);
 
 
 	for (int c = 0; c < a.size(); c++)

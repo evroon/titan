@@ -423,7 +423,9 @@ DeferredRenderer::DeferredRenderer()
 	deferred_buffer->add_float_color_texture(); // albedo
 	deferred_buffer->add_float_color_texture(); // position
 	deferred_buffer->add_float_color_texture(); // normal
+	deferred_buffer->add_float_color_texture(); // specular
 	deferred_buffer->add_color_texture(); // material
+	//deferred_buffer->add_color_texture(WINDOWSIZE / 8); // mipmap
 	deferred_buffer->add_depth_texture(); // depth
 	deferred_buffer->init();
 
@@ -464,6 +466,25 @@ DeferredRenderer::DeferredRenderer()
 	bloom_buffer->init();
 	bloom_buffer->clear_color = Color(0, 0, 0);
 
+	virtual_tex_buffer = new FBO2D(1024);
+	virtual_tex_buffer->add_color_texture();
+	virtual_tex_buffer->init();
+	virtual_tex_buffer->clear_color = Color(0, 0, 0);
+	virtual_tex_buffer->cleared_every_frame = false;
+	virtual_tex_buffer->clear();
+
+	indirection_buffer = new FBO2D(2048);
+	indirection_buffer->add_color_texture();
+	indirection_buffer->init();
+	indirection_buffer->clear_color = Color(0, 0, 0);
+	indirection_buffer->cleared_every_frame = false;
+	indirection_buffer->clear();
+
+	save_buffer = new FBO2D(1024);
+	save_buffer->add_color_texture();
+	save_buffer->init();
+	save_buffer->clear_color = Color(0, 0, 0);
+
 	buffers.push_back(deferred_buffer);
 	buffers.push_back(render_buffer);
 	buffers.push_back(final_buffer);
@@ -475,6 +496,7 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(DEFERRED_POSITION, deferred_buffer->color_textures[1]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_NORMAL, deferred_buffer->color_textures[2]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_MATERIAL, deferred_buffer->color_textures[3]->cast_to_type<Texture2D*>());
+	textures.set(DEFERRED_SPECULAR, deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_DEPTH, deferred_buffer->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(SHADOW, shadow_buffer->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(FINAL_COLOR, final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
@@ -485,6 +507,10 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(SSAO_BLUR, ssao_blur_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(GODRAY, godray_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(BLOOM, bloom_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	//textures.set(DOF, dof_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	//textures.set(LIGHTING, lighting_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(VIRTUALTEX, virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(INDIRECTION, indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 
 	first_pass = CONTENT->LoadShader("EngineCore/Shaders/FirstPass");
 	second_pass = CONTENT->LoadShader("EngineCore/Shaders/SecondPass");
@@ -492,6 +518,7 @@ DeferredRenderer::DeferredRenderer()
 	shader_2d = CanvasData::get_singleton()->get_default_shader();
 	ssao = CONTENT->LoadShader("EngineCore/Shaders/SSAO");
 	bloom = CONTENT->LoadShader("EngineCore/Shaders/Bloom");
+	tex_shader = CONTENT->LoadShader("EngineCore/Shaders/TextureShader");
 
 	reflection_camera = new Camera;
 	light_camera = new Camera;
@@ -506,6 +533,8 @@ DeferredRenderer::DeferredRenderer()
 	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex7.png"));
 	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex8.png"));
 	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex9.png"));
+
+	grid_texture = CONTENT->LoadTexture("Textures/tile.png");
 
 	generate_ssao_kernel();
 }
@@ -852,6 +881,35 @@ void DeferredRenderer::render_second_pass()
 	draw_plane();
 }
 
+void DeferredRenderer::render_virtual_tex()
+{
+	// render to physics texture
+	virtual_tex_buffer->bind();
+	grid_texture->bind(0);
+	tex_shader->bind();
+
+	vec2 texsize = virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>()->get_size();
+
+	float left = -1.0f;
+	float right = -1.0f + 2.0 * 128 / texsize.x;
+	float bottom = -1.0f;
+	float top = -1.0f + 2.0 * 128 / texsize.x;
+
+	Transform t = Transform(rect2(left, right, top, bottom));
+	tex_shader->set_uniform("model", t.get_model());
+	
+	draw_plane();
+
+	// render to indirection texture
+	indirection_buffer->bind();
+	shader_2d->bind();
+	shader_2d->set_uniform("texture_enabled", false);
+	shader_2d->set_uniform("model", mat4());
+	shader_2d->set_uniform("color", Color(0, 0, 5.0f/255));
+
+	draw_plane();
+}
+
 void DeferredRenderer::render()
 {
 	environment = ACTIVE_WORLD->get_child_by_type<Environment*>();
@@ -887,7 +945,7 @@ void DeferredRenderer::render()
 		deactivate_canvas_transform();
 	}
 
-
+	render_virtual_tex();
 	render_shadowmap();
 	render_reflection();
 	render_godray();
@@ -895,6 +953,7 @@ void DeferredRenderer::render()
 	render_flare();
 	//render_ssao();
 	render_second_pass();
+	//save_fbo(final_buffer, "test.tga");
 
 	deactivate();
 
@@ -903,6 +962,67 @@ void DeferredRenderer::render()
 
 	if (viewport->fbo)
 		viewport->fbo->unbind();
+
+	
+}
+
+// http://www.david-amador.com/2012/09/how-to-take-screenshot-in-opengl/
+void DeferredRenderer::save_tex(Ref<Texture2D> p_tex)
+{
+	save_buffer->bind();
+	
+}
+
+void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename)
+{
+	p_fbo->bind();
+
+	//This prevents the images getting padded 
+	// when the width multiplied by 3 is not a multiple of 4
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
+	int nSize = p_fbo->size.x * p_fbo->size.y * 3;
+	// First let's create our buffer, 3 channels per Pixel
+	//char* dataBuffer = (char*)malloc(nSize * sizeof(char));
+
+	//if (!dataBuffer) return;
+
+	//for (int c = 0; c < nSize; c++)
+	//	dataBuffer[c] = 255;
+
+	SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, p_fbo->size.x, p_fbo->size.y, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
+	char* pixels = new char[3 * p_fbo->size.x * p_fbo->size.y];
+
+	glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+	for (int c = 0; c < nSize; c++)
+		((char *)surface->pixels)[c] = 255;
+
+	for (int i = 0; i < p_fbo->size.y; i++)
+		std::memcpy(((char *)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
+	
+	delete[] pixels;
+
+	SDL_SaveBMP(surface, "pic.bmp");
+
+	////Now the file creation
+	//FILE* filePtr;
+	//fopen_s(&filePtr, p_filename.c_str(), "wb");
+	//if (!filePtr)
+	//	return;
+
+	//unsigned char TGAheader[12] = { 0,0,2,0,0,0,0,0,0,0,0,0 };
+	//unsigned char header[6] = { p_fbo->size.y % 256,p_fbo->size.y / 256,
+	//	p_fbo->size.y % 256, p_fbo->size.y / 256,
+	//	24,0 };
+	//// We write the headers
+	//fwrite(TGAheader, sizeof(unsigned char), 12, filePtr);
+	//fwrite(header, sizeof(unsigned char), 6, filePtr);
+	//// And finally our image data
+	//fwrite(dataBuffer, sizeof(GLubyte), nSize, filePtr);
+	//fclose(filePtr);
+
+	//free(dataBuffer);
 }
 
 #undef CASE
@@ -935,6 +1055,8 @@ String DeferredRenderer::get_texture_typename(int p_type) const
 		CASE(BLOOM);
 		CASE(DOF);
 		CASE(LIGHTING);
+		CASE(VIRTUALTEX);
+		CASE(INDIRECTION);
 	}
 }
 
@@ -957,6 +1079,8 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 	ELSEIF(BLOOM)
 	ELSEIF(DOF)
 	ELSEIF(LIGHTING)
+	ELSEIF(VIRTUALTEX)
+	ELSEIF(INDIRECTION)
 }
 
 #undef CLASSNAME

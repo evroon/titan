@@ -96,6 +96,11 @@ vec2 TerrainBrush::get_pos() const
 	return pos;
 }
 
+FBO2D* TerrainBrush::get_fbo() const
+{
+	return heightmap_fbo;
+}
+
 #undef CLASSNAME
 #define CLASSNAME TerrainBrush
 
@@ -121,7 +126,7 @@ Terrain::Terrain()
 	//heightmap->bind(0);
 	//heightmap->set_filter(Texture::BILINEAR_FILTER);
 
-	node_count = vec2i(64, 64);
+	node_count = vec2i(128, 128);
 	build();
 
 	shader = CONTENT->LoadShader("EngineCore/Shaders/TerrainEditor");
@@ -139,7 +144,7 @@ Terrain::Terrain()
 	brush->set_pos(vec2(0.0f, 0.0f));
 	brush->set_strength(5.0f);
 
-	textures.push_back(CONTENT->LoadTexture("Textures/grass2.png"));
+	textures.push_back(CONTENT->LoadTexture("Textures/tile.png"));
 	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));
 	textures.push_back(CONTENT->LoadTexture("Textures/look_up.jpg"));
 
@@ -176,7 +181,6 @@ Terrain::~Terrain()
 {
 }
 
-
 void Terrain::build()
 {
 	for (int x = -node_count.x / 2; x < node_count.x / 2; x++)
@@ -208,7 +212,6 @@ void Terrain::compute_normals()
 
 void Terrain::increase(float p_amount)
 {
-
 }
 
 void Terrain::smooth(float p_amount)
@@ -329,6 +332,12 @@ void Terrain::draw()
 
 	shader->set_uniform("normalmap", textures.size() + 1);
 	normalmap->bind(textures.size() + 1);
+
+	shader->set_uniform("virtualtex", textures.size() + 2);
+	DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->VIRTUALTEX)->bind(textures.size() + 2);
+
+	shader->set_uniform("indirection", textures.size() + 3);
+	DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->INDIRECTION)->bind(textures.size() + 3);
 
 	glBindVertexArray(VAO);
 	glEnableVertexAttribArray(0);

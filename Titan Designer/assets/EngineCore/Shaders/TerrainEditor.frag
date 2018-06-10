@@ -8,6 +8,8 @@ uniform sampler2D look_up;
 uniform sampler2D shadow_map;
 uniform sampler2D normalmap;
 uniform sampler2D heightmap;
+uniform sampler2D virtualtex;
+uniform sampler2D indirection;
 
 uniform mat4 model;
 uniform vec3 ambient;
@@ -21,7 +23,7 @@ uniform vec3 light_direction;
 in vec3 pos;
 
 const vec2 terrain_size = vec2(10, 10);
-const vec2 terrain_count = vec2(64, 64);
+const vec2 terrain_count = vec2(128, 128);
 
 float bandpass(float x, float start, float edge1, float edge2, float end)
 {
@@ -61,17 +63,26 @@ vec3 get_height(vec2 pos)
 	return texture(heightmap, position).xyz;
 }
 
+vec3 get_color()
+{
+	vec2 global_coords = pos.xy / terrain_count /terrain_size + vec2(0.5);
+	vec3 atlas = texture2D(indirection, global_coords).rgb;
+	float s = atlas.z * 255.0;
+	s = 3;
+	float split = exp2(s);
+	vec2 pagesize = vec2(1024.0 / split);
+	vec2 topleft = floor(global_coords * split) / split;
+	vec2 local_offset = global_coords - topleft;
+	
+	return texture2D(virtualtex, local_offset * split * 128.0 / 1024.0).rgb;
+}
+
 void main()
 {
 	vec3 source;
-	vec3 atlas = texture2D(look_up, pos.xy / 100.0).rgb;
 	vec2 offset = pos.xy;
 	
-	if (atlas.r < 0.5)
-		source = texture(grass, offset).rgb;
-	else
-		source = texture(rocks, offset).rgb;
-		
+	source = get_color();
 	source += editor_selection();
 	
 	vec3 normal = get_normal(pos.xy);

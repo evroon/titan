@@ -33,6 +33,8 @@ public:
 	void set_pos(const vec2& p_pos);
 	vec2 get_pos() const;
 
+	FBO2D* get_fbo() const;
+
 	static void bind_methods();
 
 private:

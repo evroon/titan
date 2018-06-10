@@ -69,9 +69,7 @@ void WorldView::notification(int p_notification)
 	World* world = viewport->get_world();
 	Canvas* canvas = viewport->get_canvas();
 
-	if (world->get_active_camera())
-		T_LOG(viewport->get_world()->get_active_camera()->get_rotation().to_string());
-
+	
 	switch (p_notification)
 	{
 	case NOTIFICATION_READY:

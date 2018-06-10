@@ -33,6 +33,7 @@ public:
 	struct color_tex_def
 	{
 		bool type_byte;
+		vec2i size;
 	};
 
 	bool cleared_every_frame = true;
@@ -55,6 +56,7 @@ public:
 
 	void add_depth_texture() override;
 	void add_color_texture() override;
+	void add_color_texture(const vec2i& p_size);
 	void add_float_color_texture() override;
 };
 

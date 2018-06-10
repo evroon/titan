@@ -187,13 +187,18 @@ public:
 		GODRAY,
 		BLOOM,
 		DOF,
-		LIGHTING
+		LIGHTING,
+		VIRTUALTEX,
+		INDIRECTION
 	};
 
 	vec3 get_position_at_pixel(const vec2& p_pos) const;
 	vec3 get_material_at_pixel(const vec2& p_pos) const;
 
 	void render() override;
+
+	void save_tex(Ref<Texture2D> p_tex);
+	void save_fbo(FBO2D* p_fbo, const String& p_filename);
 
 	String get_texture_typename(int p_type) const;
 
@@ -226,6 +231,8 @@ private:
 	FBO2D* dof_buffer;
 	FBO2D* lighting_buffer;
 	FBO2D* virtual_tex_buffer;
+	FBO2D* indirection_buffer;
+	FBO2D* save_buffer;
 
 	FBO2D* blur_buffer;
 
@@ -239,10 +246,12 @@ private:
 	Shader* ssao;
 	Shader* bloom;
 	Shader* virtual_tex;
+	Shader* tex_shader;
 
 	Environment* environment;
 
 	Vector<Texture2D> flare_textures;
+	Ref<Texture2D> grid_texture;
 
 	unsigned kernel_id;
 	unsigned noise_id;
