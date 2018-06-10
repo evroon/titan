@@ -12,6 +12,7 @@ Features:
 Libraries used:
   - SDL 2.0 (including SDL_image, SDL_mixer and SDL_ttf)
   - Box2D
+  - Bullet
   - LibNoise
   - Assimp
   - Glew
