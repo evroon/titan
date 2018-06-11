@@ -17,6 +17,7 @@ public:
 	friend class Terrain;
 
 	void apply();
+	void handle();
 
 	void set_radius(float p_radius);
 	float get_radius() const;
@@ -49,6 +50,8 @@ private:
 
 	Color color;
 	vec2 pos;
+
+	bool to_apply;
 };
 
 class Terrain :	public WorldObject

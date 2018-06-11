@@ -430,6 +430,12 @@ void WorldView::handle_event(UIEvent *ui_event)
 				terrain->get_brush()->apply();
 			else if (terrain && ui_event->key == Key::KEY_1)
 				terrain->increase(-1.0f);
+
+			/*if (terrain)
+			{
+				vec3 p = renderer->get_position_at_pixel(sp);
+				terrain->set_selection_pos(p.get_xy());
+			}*/
 		}
 	}
 
@@ -441,6 +447,11 @@ void WorldView::handle_event(UIEvent *ui_event)
 
 void WorldView::post_draw_world()
 {
+	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
+
+	if (terrain)
+		terrain->get_brush()->handle();
+
 	if (!selected || !selected->derives_from_type<WorldObject*>())
 		return;
 
@@ -470,11 +481,6 @@ void WorldView::post_draw_world()
 	render_box(command);
 
 	// draw transformation handles
-	
-	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
-
-	if (terrain)
-		terrain->get_brush()->apply();
 
 	vec3 pos = selected->cast_to_type<WorldObject*>()->get_pos();
 

@@ -24,20 +24,37 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 	brush_shader = CONTENT->LoadShader("EngineCore/Shaders/Brush");
 	brush_shader->bind();
 	brush_shader->set_uniform("heightmap", 0);
+
+	to_apply = false;
+
+	strength = 10.0f;
 }
 
 void TerrainBrush::apply()
 {
+	to_apply = true;
+}
+
+void TerrainBrush::handle()
+{
+	if (!to_apply)
+		return;
+
+	Transform t = Transform(pos / (128.0f * 10.0f * 0.5f), vec2(0.1));
+
 	Texture2D* heightmap = terrain->get_heightmap();
 
 	brush_shader->bind();
 	brush_shader->set_uniform("size", heightmap->get_size());
-	brush_shader->set_uniform("strength", 12.0f);
+	brush_shader->set_uniform("strength", strength);
+	brush_shader->set_uniform("model", t.get_model());
 
 	heightmap_fbo->bind();
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();
+
+	to_apply = false;
 }
 
 void TerrainBrush::set_radius(float p_radius)
@@ -302,9 +319,6 @@ TerrainBrush* Terrain::get_brush() const
 
 void Terrain::set_selection_pos(const vec2& p_pos)
 {
-	if (p_pos.x < 1.0f)
-		return;
-
 	brush->set_pos(p_pos);
 }
 
