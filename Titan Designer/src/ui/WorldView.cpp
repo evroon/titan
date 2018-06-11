@@ -224,9 +224,6 @@ void WorldView::handle_event(UIEvent *ui_event)
 
 	if (simulating)
 		return;
-	if (n)
-		T_LOG("n");
-	T_LOG(pos.to_string());
 
 	if (handle_2d)
 	{
@@ -345,6 +342,7 @@ void WorldView::handle_event(UIEvent *ui_event)
 					if (ui_event->press_type == UIEvent::DOWN)
 					{
 						drag_type = DRAG_INACTIVE;
+						terrain->get_brush()->apply();
 
 						if (m.z > 0.6f - alias && m.z < 0.6f + alias)
 							drag_type = DRAG_X;

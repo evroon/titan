@@ -12,8 +12,8 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 {
 	terrain = p_terrain;
 
-	heightmap_fbo = new FBO2D(vec2i(1024));
-	heightmap_fbo->add_color_texture();
+	heightmap_fbo = new FBO2D(vec2i(4096));
+	heightmap_fbo->add_float_color_texture();
 	heightmap_fbo->clear_color = vec3(0.0f);
 	heightmap_fbo->cleared_every_frame = false;
 	heightmap_fbo->init();
@@ -22,12 +22,14 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 	terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
 
 	brush_shader = CONTENT->LoadShader("EngineCore/Shaders/Brush");
-	brush_shader->bind();
-	brush_shader->set_uniform("heightmap", 0);
 
 	to_apply = false;
+	active_tex = 0;
 
-	strength = 10.0f;
+	set_radius(100.0f);
+	set_strength(.01f);
+	
+	textures.push_back(CONTENT->LoadTexture("Textures/Brushes/default.png"));
 }
 
 void TerrainBrush::apply()
@@ -40,16 +42,17 @@ void TerrainBrush::handle()
 	if (!to_apply)
 		return;
 
-	Transform t = Transform(pos / (128.0f * 10.0f * 0.5f), vec2(0.1));
+	Transform t = Transform(pos / (128.0f * 10.0f * 0.5f), vec2(radius / (128.0f * 10.0f * 0.5f)));
 
 	Texture2D* heightmap = terrain->get_heightmap();
 
 	brush_shader->bind();
+	textures[active_tex]->bind(0);
+	heightmap_fbo->bind();
+
 	brush_shader->set_uniform("size", heightmap->get_size());
 	brush_shader->set_uniform("strength", strength);
 	brush_shader->set_uniform("model", t.get_model());
-
-	heightmap_fbo->bind();
 
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();
@@ -139,10 +142,6 @@ Terrain::Terrain()
 {
 	height_factor = 1.0f;
 
-	//heightmap = CONTENT->LoadTexture("Textures/heightmap.png");
-	//heightmap->bind(0);
-	//heightmap->set_filter(Texture::BILINEAR_FILTER);
-
 	node_count = vec2i(128, 128);
 	build();
 
@@ -157,9 +156,7 @@ Terrain::Terrain()
 
 	brush = new TerrainBrush(this);
 	brush->set_color(col);
-	brush->set_radius(10.0f);
 	brush->set_pos(vec2(0.0f, 0.0f));
-	brush->set_strength(5.0f);
 
 	textures.push_back(CONTENT->LoadTexture("Textures/tile.png"));
 	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));

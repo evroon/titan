@@ -8,7 +8,7 @@ uniform sampler2D heightmap;
 
 const vec2 terrain_size = vec2(10, 10);
 const vec2 terrain_count = vec2(128, 128);
-const float max_height = 50.0;
+const float max_height = 500.0;
 
 out vec3 pos;
 

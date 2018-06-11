@@ -43,6 +43,9 @@ private:
 
 	FBO2D* heightmap_fbo;
 	Shader* brush_shader;
+	Array<Ref<Texture2D>> textures;
+
+	int active_tex;
 
 	float radius;
 	float deviation;

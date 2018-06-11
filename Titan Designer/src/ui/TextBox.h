@@ -105,6 +105,7 @@ public:
 	int get_line_size(int row);
 
 	void set_caret_pos(const TextPosition &p_pos, bool update_preferred = true);
+	void set_caret_bottom();
 
 	void update_caret();
 

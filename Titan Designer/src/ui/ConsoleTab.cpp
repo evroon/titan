@@ -32,7 +32,12 @@ void ConsoleTab::handle_event(UIEvent *ui_event)
 
 void ConsoleTab::log(int p_index)
 {
+	TMessage* msg = ERROR_HANDLER->get_message(p_index);
+
+	//if (msg->type != TMessage::T_WARNING)
 	textbox->push_back_line(ERROR_HANDLER->get_message(p_index)->description);
+
+	textbox->set_caret_bottom();
 }
 
 #undef CLASSNAME

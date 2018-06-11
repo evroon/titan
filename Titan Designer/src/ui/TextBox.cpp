@@ -821,6 +821,11 @@ void TextBox::set_caret_pos(const TextPosition &p_pos, bool update_preferred)
 	make_visible(caret_pos.row);
 }
 
+void TextBox::set_caret_bottom()
+{
+	set_caret_pos(TextPosition(lines.size() - 1, 0));
+}
+
 void TextBox::update_caret()
 {
 	TextLine* line = get_line(caret_pos.row);
@@ -1042,6 +1047,8 @@ void TextBox::make_visible(int p_index)
 
 	if (slider)
 		slider->set_slider_pos(slider->get_value() - delta / extra_space);
+
+	update();
 }
 
 void TextBox::slider_value_changed()

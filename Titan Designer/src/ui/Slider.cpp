@@ -28,8 +28,8 @@ void Slider::set_slider_pos(float p_position)
 {
 	float new_position = Math::clip(p_position, 0.0f, 1.0f);
 
-	if (new_position == position)
-		return;
+	//if (new_position == position)
+	//	return;
 
 	position = new_position;
 	update();
