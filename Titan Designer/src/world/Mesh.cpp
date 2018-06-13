@@ -276,6 +276,7 @@ BoundingBox Mesh::get_bounding_box() const
 
 void Mesh::bind_methods()
 {
+	REG_CSTR(0);
 }
 
 //=========================================================================

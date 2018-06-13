@@ -76,7 +76,7 @@ void MethodMaster::add_inherited_methods()
 			for (Property *property : object_callables[t].properties)
 			{
 				property->inherits_from = t;
-				register_property(o.second.name, property);
+				register_property(o.second.name, property); 
 			}
 		}
 	}

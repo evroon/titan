@@ -198,7 +198,7 @@ public:
 	void render() override;
 
 	void save_tex(Ref<Texture2D> p_tex);
-	void save_fbo(FBO2D* p_fbo, const String& p_filename);
+	void save_fbo(FBO2D* p_fbo, const String& p_filename, int attachment);
 
 	String get_texture_typename(int p_type) const;
 

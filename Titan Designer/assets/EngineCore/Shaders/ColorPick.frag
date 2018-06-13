@@ -1,6 +1,6 @@
 #version 330 core
 
-highp float;
+precision highp float;
 
 in vec2 pos;
 out vec4 final_color;

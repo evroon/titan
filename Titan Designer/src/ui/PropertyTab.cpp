@@ -52,6 +52,8 @@ PropertyTab::PropertyTab(Object* p_object)
 	set_property(p_object);
 
 	set_tab_title("Inspector");
+
+	set_name("Inspector");
 }
 
 PropertyTab::PropertyTab() : PropertyTab(NULL)

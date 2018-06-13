@@ -414,16 +414,19 @@ void ColorPickDialog::notification(int p_notification)
 void ColorPickDialog::set_red(float p_red)
 {
 	color.r = p_red;
+	update();
 }
 
 void ColorPickDialog::set_green(float p_green)
 {
 	color.g = p_green;
+	update();
 }
 
 void ColorPickDialog::set_blue(float p_blue)
 {
 	color.b = p_blue;
+	update();
 }
 
 #undef CLASSNAME

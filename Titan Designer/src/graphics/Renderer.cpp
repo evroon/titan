@@ -953,7 +953,7 @@ void DeferredRenderer::render()
 	render_flare();
 	//render_ssao();
 	render_second_pass();
-	//save_fbo(final_buffer, "test.tga");
+	save_fbo(final_buffer, "test.tga");
 
 	deactivate();
 
@@ -961,51 +961,36 @@ void DeferredRenderer::render()
 		viewport->postprocess->post_process();
 
 	if (viewport->fbo)
-		viewport->fbo->unbind();
-
-	
+		viewport->fbo->unbind();	
 }
 
-// http://www.david-amador.com/2012/09/how-to-take-screenshot-in-opengl/
 void DeferredRenderer::save_tex(Ref<Texture2D> p_tex)
 {
 	save_buffer->bind();
-	
+	save_fbo(save_buffer, p_tex->get_file(), 0);
 }
 
-void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename)
+// http://www.david-amador.com/2012/09/how-to-take-screenshot-in-opengl/
+void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename, int attachment)
 {
 	p_fbo->bind();
-
-	//This prevents the images getting padded 
-	// when the width multiplied by 3 is not a multiple of 4
+	glReadBuffer(GL_COLOR_ATTACHMENT0 + attachment);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
 	int nSize = p_fbo->size.x * p_fbo->size.y * 3;
-	// First let's create our buffer, 3 channels per Pixel
-	//char* dataBuffer = (char*)malloc(nSize * sizeof(char));
-
-	//if (!dataBuffer) return;
-
-	//for (int c = 0; c < nSize; c++)
-	//	dataBuffer[c] = 255;
 
 	SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, p_fbo->size.x, p_fbo->size.y, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
 	char* pixels = new char[3 * p_fbo->size.x * p_fbo->size.y];
 
 	glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-	for (int c = 0; c < nSize; c++)
-		((char *)surface->pixels)[c] = 255;
-
+	
 	for (int i = 0; i < p_fbo->size.y; i++)
-		std::memcpy(((char *)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
+		std::memcpy(((char*)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
 	
 	delete[] pixels;
 
 	SDL_SaveBMP(surface, "pic.bmp");
 
-	////Now the file creation
 	//FILE* filePtr;
 	//fopen_s(&filePtr, p_filename.c_str(), "wb");
 	//if (!filePtr)

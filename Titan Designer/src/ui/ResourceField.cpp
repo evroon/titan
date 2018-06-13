@@ -3,6 +3,7 @@
 #include "TextField.h"
 #include "TextButton.h"
 #include "Dialog.h"
+#include "PropertyTab.h"
 
 #include "graphics/View.h"
 #include "editor/EditorApp.h"
@@ -259,6 +260,12 @@ void ObjectField::init()
 
 void ObjectField::open_button_clicked()
 {
+	PropertyTab* pv = VIEW->get_default_viewport()->get_canvas()->get_child("Inspector")->cast_to_type<PropertyTab*>();
+	pv->set_property(get_value());
+}
+
+void ObjectField::load_button_clicked()
+{
 	VariantType type = PropertyControl::get_property_type();
 	Variant v = get_value();
 
@@ -283,7 +290,7 @@ void ObjectField::open_button_clicked()
 			file_dialog->show();
 
 		}
-		else if(result.operator Object*()->derives_from_type<Node*>())
+		else if (result.operator Object*()->derives_from_type<Node*>())
 			textfield->set_text(result.operator Node*()->get_name());
 
 		open_button->set_text("...");
@@ -294,12 +301,6 @@ void ObjectField::open_button_clicked()
 		EDITOR_APP->open_file(File(v.operator Resource*()->get_file()).get_absolute_path());
 	else if (v.operator Object*()->derives_from_type<Node*>())
 		textfield->set_text(v.operator Node*()->get_name());
-
-	//emit_signal("set_property", object.operator Object *()); 
-}
-
-void ObjectField::load_button_clicked()
-{
 }
 
 void ObjectField::file_chosen(const String& p_path)
