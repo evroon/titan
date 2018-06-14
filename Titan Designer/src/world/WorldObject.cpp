@@ -11,6 +11,8 @@ WorldObject::WorldObject()
 {
 	set_transformcomponent(new TransformComponent);
 	set_rendercomponent(new RenderComponent);
+
+	set_color(Color());
 }
 
 WorldObject::~WorldObject()
@@ -205,7 +207,7 @@ void WorldObject::rotate(const quat& p_quat)
 	set_rotation((get_transform().get_quat() * p_quat).get_euler());
 }
 
-Color& WorldObject::get_color() const
+Color WorldObject::get_color() const
 {
 	return rendercomponent->get_color();
 }
@@ -214,7 +216,7 @@ void WorldObject::set_color(const Color &p_color)
 	rendercomponent->set_color(p_color);
 }
 
-bool& WorldObject::get_visible() const
+bool WorldObject::get_visible() const
 {
 	return rendercomponent->isvisible;
 }

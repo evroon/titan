@@ -167,6 +167,7 @@ protected:
 	void render_draw_command(const DrawCommand& p_draw_command);
 
 	rect2 area;
+	bool use_scissor;
 
 private:
 

@@ -335,6 +335,7 @@ ColorPickDialog::ColorPickDialog() : ColorPickDialog(Color::White)
 ColorPickDialog::ColorPickDialog(const Color& p_color)
 {
 	color = p_color;
+	color.a = 1.0;
 
 	shader = CONTENT->LoadShader("EngineCore/Shaders/ColorPick");
 

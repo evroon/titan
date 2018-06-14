@@ -419,7 +419,7 @@ void WorldView::handle_event(UIEvent *ui_event)
 			if (ui_event->key == Key::KEY_P)
 				TIME->game_paused = !TIME->game_paused;
 			else if (ui_event->key == Key::KEY_K)
-				TIME->game_time -= 10e6;
+				TIME->game_time -= 10e6l;
 			else if (ui_event->key == Key::KEY_L)
 				TIME->game_time += 10e6;
 			else if (ui_event->key == Key::KEY_M)

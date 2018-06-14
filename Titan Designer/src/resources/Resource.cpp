@@ -10,7 +10,7 @@ void Resource::set_file(const String& p_file)
 
 String Resource::get_file() const
 {
-	return file;
+	return file.get_relative_path();
 }
 
 void Resource::bind_methods()

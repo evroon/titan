@@ -18,6 +18,7 @@ Control::Control()
 
 	visible = true;
 	to_be_updated = true;
+	use_scissor = false;
 }
 
 void Control::bind_parent(Control *p_parent)
@@ -797,8 +798,14 @@ void Control::render_draw_command(const DrawCommand& p_draw_command)
 
 void Control::render()
 {
+	if (use_scissor)
+		RENDERER->use_scissor(area);
+
 	for (int c = 0; c < draw_commands.size(); c++)
 		render_draw_command(draw_commands[c]);
+
+	if (use_scissor)
+		RENDERER->stop_scissor();
 }
 
 

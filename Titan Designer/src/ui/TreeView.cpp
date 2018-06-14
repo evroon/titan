@@ -830,6 +830,8 @@ void TreeView::add_slider()
 	right_margin = 24.0f;
 
 	position_items();
+
+	use_scissor = true;
 }
 
 void TreeView::remove_slider()
@@ -845,6 +847,8 @@ void TreeView::remove_slider()
 	scroll_offset = 0.0f;
 
 	position_items();
+
+	use_scissor = false;
 }
 
 void TreeView::set_selected(TreeElement* p_selected)

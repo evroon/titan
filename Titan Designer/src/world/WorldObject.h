@@ -54,10 +54,10 @@ public:
 	void move(const vec3 &p_delta);
 	void rotate(const quat& p_quat);
 
-	Color& get_color() const;
+	Color get_color() const;
 	void set_color(const Color &p_color);
 
-	bool& get_visible() const;
+	bool get_visible() const;
 	void set_visible(const bool b);
 
 	Layer* get_layer() const;

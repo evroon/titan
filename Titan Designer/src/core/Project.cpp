@@ -2,6 +2,9 @@
 
 #include "core/Serializer.h"
 
+#include "world/Terrain.h"
+#include "graphics/Renderer.h"
+
 Project::Project()
 {
 	//create();
@@ -37,6 +40,9 @@ void Project::load()
 
 void Project::save()
 {
+	FBO2D* f = default_scene->get_child("Terrain")->cast_to_type<Terrain*>()->get_brush()->get_fbo();
+	DEFERRED_RENDERER->save_fbo(f, "EngineCore/Textures", 0);
+
 	Serializer s;
 	String source = s.serialize(this);
 
@@ -47,10 +53,7 @@ void Project::save_as(const String& p_file)
 {
 	text_file = new TextFile(p_file);
 
-	Serializer s;
-	String source = s.serialize(this);
-
-	text_file->write(source);
+	save();
 }
 
 Scene* Project::get_main_scene() const

@@ -506,8 +506,6 @@ void TextBox::notification(int p_notification)
 
 		if (get_focused())
 			draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
-
-		RENDERER->use_scissor(area);
 		
 		//draw selection
 		if (selecting && !(selection_begin ==  selection_end))
@@ -574,9 +572,7 @@ void TextBox::notification(int p_notification)
 
 		if (slider)
 			slider->draw();
-
-		RENDERER->stop_scissor();
-
+		
 		break;
 	}
 }
@@ -878,6 +874,8 @@ void TextBox::add_slider()
 	Connection c;
 	c.register_native_method(this, "slider_value_changed");
 	slider->connect("value_changed", c);
+
+	use_scissor = true;
 }
 
 void TextBox::remove_slider()
@@ -893,6 +891,8 @@ void TextBox::remove_slider()
 
 	position_lines();
 	update_caret();
+
+	use_scissor = false;
 }
 
 void TextBox::move_cursor_begin()

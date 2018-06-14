@@ -54,8 +54,12 @@ void TerrainBrush::handle()
 	brush_shader->set_uniform("strength", strength);
 	brush_shader->set_uniform("model", t.get_model());
 
+	DEFERRED_RENDERER->use_additive_blending();
+
 	MeshHandler::get_singleton()->get_plane()->bind();
 	MeshHandler::get_singleton()->get_plane()->draw();
+
+	DEFERRED_RENDERER->use_blending();
 
 	to_apply = false;
 }

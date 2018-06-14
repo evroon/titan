@@ -953,7 +953,7 @@ void DeferredRenderer::render()
 	render_flare();
 	//render_ssao();
 	render_second_pass();
-	save_fbo(final_buffer, "test.tga");
+	//save_fbo(final_buffer, "test.tga", 0);
 
 	deactivate();
 

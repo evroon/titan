@@ -338,14 +338,13 @@ void TileView::position_items()
 	vec2 reduced_size = get_size() * 2.0f -vec2(left_margin + right_margin, top_margin);
 	tilecount.x = to_int(reduced_size.x / tilesize.x);
 
-	if (items.size() < tilecount.x)
-		tilecount.x = items.size();
-
-	if (tilecount.x < 1)
-		tilecount.x = 1;
+	if (tilecount.x < 1) tilecount.x = 1;
 
 	tilecount.y = int(items.size() / tilecount.x) + 1;
 
+	if (items.size() < tilecount.x)	tilecount.x = items.size();
+	if (tilecount.x < 1)			tilecount.x = 1;
+	
 	for (int c = 0; c < items.size(); c++)
 	{
 		TileElement& item = items[c];
@@ -365,11 +364,10 @@ void TileView::position_items()
 
 void TileView::check_slider_necessity()
 {
-	if (items.size() > 0 && tilecount.y * tilesize.y + 8.0f > area.get_size().y * 2.0f)
-	{
-		extra_space = tilecount.y * tilesize.y + 8.0f - area.get_size().y  * 2.0f;
+	extra_space = tilecount.y * tilesize.y + 8.0f - area.get_size().y  * 2.0f;
+
+	if (items.size() > 0 && extra_space > 0.0f)
 		add_slider();
-	}
 	else
 		remove_slider();
 }
@@ -534,6 +532,8 @@ void TileView::add_slider()
 	right_margin = 24.0f;
 
 	position_items();
+
+	use_scissor = true;
 }
 
 void TileView::remove_slider()
@@ -549,6 +549,8 @@ void TileView::remove_slider()
 	scroll_offset = 0.0f;
 
 	position_items();
+
+	use_scissor = false;
 }
 
 void TileView::set_selected(int p_row)
