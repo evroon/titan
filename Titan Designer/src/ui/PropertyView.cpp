@@ -148,43 +148,36 @@ void PropertyView::add_property(Property* p_property)
 	case Variant::BOOL:
 
 		item.control = new CheckBox(variable);
-
 		break;
 
 	case Variant::INT:
 
 		item.control = new NumberField(variable);
-
 		break;
 
 	case Variant::FLOAT:
 
 		item.control = new NumberField(variable);
-
 		break;
 
 	case Variant::VEC2:
 
 		item.control = new Vec2Field(variable);
-
 		break;
 
 	case Variant::VEC3:
 
 		item.control = new Vec3Field(variable);
-
 		break;
 
 	case Variant::VEC4:
 
 		item.control = new Vec4Field(variable);
-
 		break;
 
 	case Variant::COLOR:
 
 		item.control = new ColorField(variable);
-
 		break;
 
 	case Variant::UNDEF:
@@ -197,8 +190,6 @@ void PropertyView::add_property(Property* p_property)
 		}
 
 		item.control = new ObjectField(variable);
-		//item.control->connect("file_chosen", this, "set_property");
-
 		break;
 
 	case Variant::TRANSFORM:
@@ -211,10 +202,14 @@ void PropertyView::add_property(Property* p_property)
 		item.control = new TextField(variable);
 		break;
 
+	case Variant::ARRAY:
+
+		item.control = new TextField(variable);
+		break;
+
 	default:
 
 		item.control = new TextField(variable);
-
 		break;
 	}
 

@@ -48,7 +48,10 @@ void Toggle::notification(int p_notification)
 		if (selected)
 			color = DEFAULT_THEME->get_selection_color();
 		
-		draw_texture(tex, area, color);
+		if (tex)
+			draw_texture(tex, area, color);
+		else
+			draw_text(text, vec2(area.get_left(), area.pos.y));
 
 		break;
 
@@ -62,7 +65,10 @@ void Toggle::notification(int p_notification)
 
 vec2 Toggle::get_required_size() const
 {
-	return tex->get_size();
+	if (tex)
+		return tex->get_size();
+
+	return DEFAULT_THEME->get_font()->get_width(text);
 }
 
 #undef CLASSNAME
@@ -124,12 +130,24 @@ void ToggleStrip::notification(int p_notification)
 			if (c == selected)
 				color = DEFAULT_THEME->get_selection_color();
 
-			vec2 tex_size = toggles[c].tex->get_size();
+			if (toggles[c].tex)
+			{
+				vec2 tex_size = toggles[c].tex->get_size();
 
-			toggles[c].area = rect2(offset, offset + tex_size.x, area.pos.y + tex_size.y / 2.0f, area.pos.y - tex_size.y / 2.0f);
+				toggles[c].area = rect2(offset, offset + tex_size.x, area.pos.y + tex_size.y / 2.0f, area.pos.y - tex_size.y / 2.0f);
 
-			draw_texture(toggles[c].tex, toggles[c].area, color);
-			offset += toggles[c].tex->get_size().x;
+				draw_texture(toggles[c].tex, toggles[c].area, color);
+				offset += tex_size.x;
+			}
+			else
+			{
+				vec2 text_size = DEFAULT_THEME->get_font()->get_width(toggles[c].text);
+
+				toggles[c].area = rect2(offset, offset + text_size.x, area.pos.y + text_size.y / 2.0f, area.pos.y - text_size.y / 2.0f);
+
+				draw_text(toggles[c].text, vec2(toggles[c].area.get_left(), toggles[c].area.pos.y));
+				offset += text_size.x;
+			}
 		}
 
 		break;
@@ -148,10 +166,19 @@ vec2 ToggleStrip::get_required_size() const
 
 	for (int c = 0; c < toggles.size(); c++)
 	{
-		if (toggles[c].tex->get_size().y > size.y)
-			size.y = toggles[c].tex->get_size().y;
-		size.x += toggles[c].tex->get_size().x;
-		size.x += margin;
+		if (toggles[c].tex)
+		{
+			if (toggles[c].tex->get_size().y > size.y)
+				size.y = toggles[c].tex->get_size().y;
+
+			size.x += toggles[c].tex->get_size().x;
+			size.x += margin;
+		}
+		else
+		{
+			size.x += DEFAULT_THEME->get_font()->get_width(toggles[c].text);
+			size.x += margin;
+		}
 	}
 	return size;
 }
@@ -163,8 +190,8 @@ void ToggleStrip::add_child(const String & p_tip, Ref<Texture2D> p_tex)
 	t.tex = p_tex;
 	toggles.push_back(t);
 	update();
-	t.tex->bind(0);
-	t.tex->set_filter(Texture::BILINEAR_FILTER);
+	//t.tex->bind(0);
+	//t.tex->set_filter(Texture::BILINEAR_FILTER);
 }
 
 #undef CLASSNAME

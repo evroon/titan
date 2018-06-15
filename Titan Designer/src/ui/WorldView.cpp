@@ -342,7 +342,8 @@ void WorldView::handle_event(UIEvent *ui_event)
 					if (ui_event->press_type == UIEvent::DOWN)
 					{
 						drag_type = DRAG_INACTIVE;
-						terrain->get_brush()->apply();
+						if (terrain)
+							terrain->get_brush()->apply();
 
 						if (m.z > 0.6f - alias && m.z < 0.6f + alias)
 							drag_type = DRAG_X;

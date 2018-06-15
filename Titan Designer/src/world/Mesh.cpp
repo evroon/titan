@@ -271,12 +271,28 @@ BoundingBox Mesh::get_bounding_box() const
 	return bounding_box;
 }
 
+Array<Variant> Mesh::get_materials() const
+{
+	Array<Variant> v;
+
+	for (int c = 0; c < materials.size(); c++)
+		v.push_back(materials[c]);
+
+	return v;
+}
+
+void Mesh::set_materials(const Array<Variant>& p_materials)
+{
+}
+
 #undef CLASSNAME
 #define CLASSNAME Mesh
 
 void Mesh::bind_methods()
 {
 	REG_CSTR(0);
+
+	REG_PROPERTY(materials);
 }
 
 //=========================================================================
@@ -530,7 +546,11 @@ Mesh* Material::get_mesh() const
 
 void Material::bind_methods()
 {
-	//REG_PROPERTY()
+	REG_PROPERTY(shininess);
+	REG_PROPERTY(emissive_color);
+	REG_PROPERTY(ambient_color);
+	REG_PROPERTY(diffuse_color);
+	REG_PROPERTY(shader);
 }
 
 //=========================================================================
@@ -547,8 +567,6 @@ void MeshHandler::Init()
 
 	cube = new SimpleMesh;
 	cube->set_cube();
-
-	//plane->bind();
 }
 
 SimpleMesh* MeshHandler::get_plane() const

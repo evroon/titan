@@ -185,6 +185,9 @@ class SettingsDialog : public ConfirmationDialog
 public:
 	SettingsDialog();
 
+	void set_property_view(PropertyView* p_property_view);
+	PropertyView* get_property_view() const;
+
 	void notification(int p_notification) override;
 	void search(const String& p_search);
 	void update_list();

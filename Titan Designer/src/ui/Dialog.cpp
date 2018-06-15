@@ -540,6 +540,16 @@ SettingsDialog::SettingsDialog()
 	add_child(property_view);
 }
 
+void SettingsDialog::set_property_view(PropertyView * p_property_view)
+{
+	
+}
+
+PropertyView* SettingsDialog::get_property_view() const
+{
+	return property_view;
+}
+
 void SettingsDialog::notification(int p_notification)
 {
 	Dialog::notification(p_notification);

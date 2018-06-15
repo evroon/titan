@@ -131,6 +131,9 @@ public:
 
 	BoundingBox get_bounding_box() const;
 
+	Array<Variant> get_materials() const;
+	void set_materials(const Array<Variant>& p_materials);
+
 	static void bind_methods();
 
 private:

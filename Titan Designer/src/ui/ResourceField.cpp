@@ -241,7 +241,7 @@ void ObjectField::init()
 
 	load_button->set_margins(100, 0, 40, 0);
 	load_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
-	load_button->connect("clicked", this, "open_button_clicked");
+	load_button->connect("clicked", this, "load_button_clicked");
 
 	textfield->set_margins(0, 0, 104, 0);
 	textfield->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);

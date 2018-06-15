@@ -228,7 +228,7 @@ vec3 get_godray()
 	
 	return texture2D(godray_tex, tex_coords).rgb;
 }
-/*
+
 float get_fog()
 {
 	if (!fog_enabled)
@@ -254,7 +254,7 @@ float shadow_calc(vec4 pos_light_space)
 	float shadow = currentDepth - bias > closestDepth ? 0.6 : 0.0;
 
     return shadow;
-}*/
+}
 
 void main()
 {
@@ -266,8 +266,7 @@ void main()
 	normal = texture2D(g_normal, tex_coords).rgb;
 	
 	final_color = vec4(albedo, 1.0);
-	return;
-	/*
+	
 	if (material == vec3(1.0, 0.0, 0.0))
 	{
 		final_color = vec4(albedo, 1.0);
@@ -286,9 +285,9 @@ void main()
 		vec3 finalcolor = albedo * lighting() * shadow;
 		finalcolor = mix(sky_color, finalcolor, get_fog());
 		
-		if (clouds_enabled)
-			finalcolor = finalcolor + ray_march();
+		//if (clouds_enabled)
+		//	finalcolor = finalcolor + ray_march();
 			
 		final_color = vec4(finalcolor + get_godray(), 1.0);
-	}*/
+	}
 }
