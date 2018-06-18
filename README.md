@@ -2,6 +2,9 @@
 
 A multi-platform game engine using OpenGL and written in c++.
 
+Example of the editor:
+![alt text](misc/images/titan_preview.png "Example of the editor")
+
 Features:
   - A scripting language, TitanScript, which is fully integrated on a low level into the engine
   - Editor
