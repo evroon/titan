@@ -18,3 +18,12 @@ Libraries used:
   - Glew
   - Freeglut
   - RapidXML
+
+3D graphics features:
+  - Deferred Renderer
+  - GPU tesselation
+  - Basic lighting and shadowmapping
+  - Terrain and water
+  - Godrays and lens flare
+  - Terrain heightmap editing on GPU
+  - Virtual textures (not yet adaptive virtual textures)
