@@ -16,4 +16,5 @@ Libraries used:
   - LibNoise
   - Assimp
   - Glew
+  - Freeglut
   - RapidXML
