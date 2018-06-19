@@ -2,7 +2,6 @@
 
 /*
 2D and 3D Physics Implementation
-Erik Vroon
 Started: 24-12-2015
 Units: SI-units
 Updates in a discrete manner at 60FPS
