@@ -164,7 +164,7 @@ Terrain::Terrain()
 
 	textures.push_back(CONTENT->LoadTexture("Textures/tile.png"));
 	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));
-	textures.push_back(CONTENT->LoadTexture("Textures/look_up.jpg"));
+	//textures.push_back(CONTENT->LoadTexture("Textures/look_up.jpg"));
 
 	texture_names.push_back("grass");
 	texture_names.push_back("rocks");
