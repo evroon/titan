@@ -432,7 +432,7 @@ void Canvas::bind_methods()
 
 CanvasTheme::CanvasTheme()
 {
-	font = CONTENT->LoadFont("EngineCore/Fonts/consola.ttf", 17);
+	font = CONTENT->LoadFont("EngineCore/Fonts/Roboto-Regular.ttf", 17);
 	frame = CONTENT->LoadTexture("EngineCore/UI/ContainerTemplate.png");
 	highlight = CONTENT->LoadTexture("EngineCore/UI/Highlight.png");
 

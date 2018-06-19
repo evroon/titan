@@ -70,8 +70,6 @@ void ContentManager::setup()
 	Shader2D = LoadShader(File("EngineCore/Shaders/Shader2D"));
 	SimpleShader = LoadShader(File("EngineCore/Shaders/SimpleShader"));
 	ShadowShader = LoadShader(File("EngineCore/Shaders/ShadowShader"));
-
-	//DefaultFont = LoadFont("EngineCore/Fonts/consola.ttf", 15);
 }
 
 Object* ContentManager::Load(const File &p_file)

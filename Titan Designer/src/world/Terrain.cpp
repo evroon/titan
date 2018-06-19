@@ -442,12 +442,6 @@ Vegetation::Vegetation(Terrain* p_parent)
 void Vegetation::init()
 {
 	update_buffer();
-
-	Model* jet = new Model("Models/plants/Tree_01/tree01.dae");
-	jet->set_pos(vec3(1000.0f, 1000.0f, 15.0f));
-	jet->set_size(vec3(1.0f));
-	jet->set_size(vec3(-HALFPI, 0.0f, 0.0f));
-	jet->set_name("jet");
 }
 
 void Vegetation::draw()

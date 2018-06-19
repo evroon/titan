@@ -275,8 +275,6 @@ __pycache__/
 /Titan Designer/resource2.h
 /Titan Designer/resource1.h
 /Titan Designer/resource.h
-/Titan Designer/Regex.h
-/Titan Designer/Regex.cpp
 /Titan Designer/RCa05292
 /Titan Designer/lua5.1.dll
 /Titan Designer/libwebp-4.dll
@@ -294,13 +292,7 @@ __pycache__/
 /Titan Designer/freeglut.dll
 /Titan Designer/assimp.dll
 /Titan-Designer
-/Titan Designer/assets/EngineCore/Fonts
 /Titan Designer/assets/Models
-/Titan Designer/assets/Scripts
-/Titan Designer/assets/Textures
-/Titan Designer/assets/Sounds
-/Titan Designer/assets/Stormtrooper_D.tga
-/Titan Designer/assets/type_data.xml
 /Titan Designer/Titan Designer3.rc
 /Titan Designer/resource3.h
 /Titan Designer/RCa09900
