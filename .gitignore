@@ -259,18 +259,13 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/LibNoise
-/LibNoise
-/LibNoise/LibNoise.vcxproj.filters
 /PC Release
-/Titan Designer.sln
 /CodeBlocks
 /Titan Designer/PC Release/Titan Designer/Titan Designer.tlog
 /Titan Designer/zlib1.dll
 /Titan Designer/Titan Designer2.rc
 /Titan Designer/Titan Designer1.rc
 /Titan Designer/Titan Designer.vcxproj.filters
-/Titan Designer/Titan Designer.vcxproj
 /Titan Designer/Titan Designer.rc
 /Titan Designer/smpeg2.dll
 /Titan Designer/SDL2_ttf.dll
