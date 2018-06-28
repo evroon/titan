@@ -259,42 +259,27 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/PC Release
-/CodeBlocks
-/Titan Designer/PC Release/Titan Designer/Titan Designer.tlog
-/Titan Designer/zlib1.dll
-/Titan Designer/Titan Designer2.rc
-/Titan Designer/Titan Designer1.rc
-/Titan Designer/Titan Designer.vcxproj.filters
-/Titan Designer/Titan Designer.rc
-/Titan Designer/smpeg2.dll
-/Titan Designer/SDL2_ttf.dll
-/Titan Designer/SDL2_mixer.dll
-/Titan Designer/SDL2_image.dll
-/Titan Designer/SDL2.dll
-/Titan Designer/resource2.h
-/Titan Designer/resource1.h
-/Titan Designer/resource.h
-/Titan Designer/RCa05292
-/Titan Designer/lua5.1.dll
-/Titan Designer/libwebp-4.dll
-/Titan Designer/libvorbisfile-3.dll
-/Titan Designer/libvorbis-0.dll
-/Titan Designer/libtiff-5.dll
-/Titan Designer/libpng16-16.dll
-/Titan Designer/libogg-0.dll
-/Titan Designer/libmodplug-1.dll
-/Titan Designer/libmikmod-2.dll
-/Titan Designer/libjpeg-9.dll
-/Titan Designer/libfreetype-6.dll
-/Titan Designer/libFLAC-8.dll
-/Titan Designer/glew32.dll
-/Titan Designer/freeglut.dll
-/Titan Designer/assimp.dll
-/Titan-Designer
 /Titan Designer/assets/Models
 /Titan Designer/Titan Designer3.rc
-/Titan Designer/resource3.h
+/Titan Designer/Titan Designer.vcxproj.filters
+/Titan Designer/Titan Designer.rc
 /Titan Designer/RCa09900
-/Titan Designer/test.tga
-/Titan Designer/pic.bmp
+/Titan Designer/RCa05292
+/Titan Designer/Titan Designer3.rc
+/Titan Designer/Titan Designer.vcxproj.filters
+/Titan Designer/Titan Designer.rc
+/Titan Designer/RCa09900
+/Titan Designer/RCa05292
+/Titan Designer/Titan Designer3.rc
+/Titan Designer/Titan Designer.vcxproj.filters
+/Titan Designer/Titan Designer.rc
+/Titan Designer/RCa09900
+/Titan Designer/RCa05292
+/Titan Designer/Titan Designer3.rc
+/Titan Designer/Titan Designer.vcxproj.filters
+/Titan Designer/Titan Designer.rc
+/Titan Designer/RCa09900
+/Titan Designer/RCa05292
+/Titan Designer/Titan Designer.rc
+*.rc
+/Titan Designer/RCa02344
