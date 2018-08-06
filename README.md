@@ -30,3 +30,7 @@ Libraries used:
   - Godrays and lens flare
   - Terrain heightmap editing on GPU
   - Virtual textures (not yet adaptive virtual textures)
+
+# Installation
+The project can be build using Visual Studio.
+Unfortunately, building on Linux or Mac is not supported yet.
