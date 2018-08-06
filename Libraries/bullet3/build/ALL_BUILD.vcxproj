@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F22D78CE-1758-3451-A23F-B1E62290B79E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCCompiler.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\FindPythonLibs.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\BulletConfig.cmake.in;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCCompiler.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\FindPythonLibs.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\BulletConfig.cmake.in;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCCompiler.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\FindPythonLibs.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\BulletConfig.cmake.in;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCCompiler.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\3.11.0-rc1\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\FindPythonLibs.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\cmake\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.11\Modules\FindPackageMessage.cmake;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\BulletConfig.cmake.in;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\ZERO_CHECK.vcxproj">
+      <Project>{42A805A5-5629-3F00-8482-AE84A6FB587C}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\BasicDemo\AppBasicExampleGui.vcxproj">
+      <Project>{9854E3D3-90D4-3B65-BCB5-93E9D2BAC28D}</Project>
+      <Name>AppBasicExampleGui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\BasicDemo\App_BasicExample.vcxproj">
+      <Project>{89433497-194A-37FB-856F-76758E9433B2}</Project>
+      <Name>App_BasicExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ExampleBrowser\App_ExampleBrowser.vcxproj">
+      <Project>{BBF77B64-FC98-3222-B07D-9CBD84DD1493}</Project>
+      <Name>App_ExampleBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\HelloWorld\App_HelloWorld.vcxproj">
+      <Project>{176C0A80-5F1C-3D2A-A9E0-19D7E0B4AE3A}</Project>
+      <Name>App_HelloWorld</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\App_PhysicsServer_SharedMemory.vcxproj">
+      <Project>{A4605CE6-518A-3CC4-BC79-973F9E870BE1}</Project>
+      <Name>App_PhysicsServer_SharedMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\App_PhysicsServer_SharedMemory_GUI.vcxproj">
+      <Project>{1FA14516-6075-329D-B20E-C01C0483D35F}</Project>
+      <Name>App_PhysicsServer_SharedMemory_GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\App_PhysicsServer_SharedMemory_VR.vcxproj">
+      <Project>{383F54B9-D3B2-380A-B85A-05CE1D04CB5E}</Project>
+      <Name>App_PhysicsServer_SharedMemory_VR</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\RobotSimulator\App_RobotSimulator.vcxproj">
+      <Project>{7EB351A8-799D-3897-A723-EDDD09AE0864}</Project>
+      <Name>App_RobotSimulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\obj2sdf\App_obj2sdf.vcxproj">
+      <Project>{58765509-F0E9-3F9B-93BD-B5FE8BD35B00}</Project>
+      <Name>App_obj2sdf</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Serialize\Bullet2FileLoader\Bullet2FileLoader.vcxproj">
+      <Project>{A6A1D0E2-54B3-316A-839F-9FB486BB62AA}</Project>
+      <Name>Bullet2FileLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Collision\Bullet3Collision.vcxproj">
+      <Project>{A32ED1D0-CE26-37B8-B608-71B8837048FD}</Project>
+      <Name>Bullet3Collision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Common\Bullet3Common.vcxproj">
+      <Project>{6D9173D8-866B-3830-BA15-C1D0830AB886}</Project>
+      <Name>Bullet3Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Dynamics\Bullet3Dynamics.vcxproj">
+      <Project>{3F93293D-935C-317D-BBF1-E24390EFB8C9}</Project>
+      <Name>Bullet3Dynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Geometry\Bullet3Geometry.vcxproj">
+      <Project>{4803E9AF-7685-3EB9-B4D3-69BF5444848D}</Project>
+      <Name>Bullet3Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3OpenCL\Bullet3OpenCL_clew.vcxproj">
+      <Project>{2D3451FD-8B1D-3CFB-AEE1-91BF62DF153F}</Project>
+      <Name>Bullet3OpenCL_clew</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletCollision\BulletCollision.vcxproj">
+      <Project>{D7148422-0685-3125-A941-5CA232702B1E}</Project>
+      <Name>BulletCollision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{D2736675-51C8-300D-8AD2-ACAB4CD3EBA9}</Project>
+      <Name>BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ExampleBrowser\BulletExampleBrowserLib.vcxproj">
+      <Project>{1EE26FFB-1417-3A49-A19D-288D03D3E9C8}</Project>
+      <Name>BulletExampleBrowserLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\Serialize\BulletFileLoader\BulletFileLoader.vcxproj">
+      <Project>{87D3D3B0-0F0C-3975-99DC-1BE1AF28DA03}</Project>
+      <Name>BulletFileLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletInverseDynamics\BulletInverseDynamics.vcxproj">
+      <Project>{BB9EDAF0-2DF1-33D2-98A9-4356AC5293B8}</Project>
+      <Name>BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\InverseDynamics\BulletInverseDynamicsUtils.vcxproj">
+      <Project>{FB298B73-4AA5-3046-923B-997F79EDF619}</Project>
+      <Name>BulletInverseDynamicsUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\BulletRobotics\BulletRobotics.vcxproj">
+      <Project>{4DA5EEE6-FE9C-336F-9B43-0B106C26B469}</Project>
+      <Name>BulletRobotics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletSoftBody\BulletSoftBody.vcxproj">
+      <Project>{9844CC84-C2B9-352F-A154-1EE59ADCDA5F}</Project>
+      <Name>BulletSoftBody</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\Serialize\BulletWorldImporter\BulletWorldImporter.vcxproj">
+      <Project>{1F749467-85F9-3CCD-87A3-4243DE40E497}</Project>
+      <Name>BulletWorldImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\Serialize\BulletXmlWorldImporter\BulletXmlWorldImporter.vcxproj">
+      <Project>{C1C9145A-50F8-3426-8B7E-A10E1DF1517E}</Project>
+      <Name>BulletXmlWorldImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\BussIK\BussIK.vcxproj">
+      <Project>{FB313457-EDAC-34E2-A250-B0FD2F2ED42C}</Project>
+      <Name>BussIK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\ConvexDecomposition\ConvexDecomposition.vcxproj">
+      <Project>{85B336D5-7A64-3961-9F88-C71B21274B83}</Project>
+      <Name>ConvexDecomposition</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\GIMPACTUtils\GIMPACTUtils.vcxproj">
+      <Project>{29599D15-DB38-33E4-9D6C-3A7CF2629C58}</Project>
+      <Name>GIMPACTUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\HACD\HACD.vcxproj">
+      <Project>{5C0DA1FE-6566-3939-B100-742F158ACBDA}</Project>
+      <Name>HACD</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\LinearMath\LinearMath.vcxproj">
+      <Project>{743AE056-9C3B-360A-9472-710D068821FD}</Project>
+      <Name>LinearMath</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\OpenGLWindow\OpenGLWindow.vcxproj">
+      <Project>{3216D247-86A0-3D10-8E03-B0D0CF407AC7}</Project>
+      <Name>OpenGLWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\BulletDynamics\pendulum\Test_BulletDynamics.vcxproj">
+      <Project>{B0C8DBF0-050F-3650-B88F-56B27096DA9D}</Project>
+      <Name>Test_BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\InverseDynamics\Test_BulletInverseDynamics.vcxproj">
+      <Project>{C7D49734-6C49-3DB7-A35E-DCEC78FB1DEF}</Project>
+      <Name>Test_BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\InverseDynamics\Test_BulletInverseDynamicsJacobian.vcxproj">
+      <Project>{0578788B-A27C-386F-88C0-0CB4C0AE16E3}</Project>
+      <Name>Test_BulletInverseDynamicsJacobian</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\InverseDynamics\Test_BulletInverseForwardDynamics.vcxproj">
+      <Project>{5FF40346-44FB-3B2E-A0B9-F045FBE19C5D}</Project>
+      <Name>Test_BulletInverseForwardDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\collision\Test_Collision.vcxproj">
+      <Project>{A88D73AE-0CF9-3197-8CD9-15E9744C1783}</Project>
+      <Name>Test_Collision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\SharedMemory\Test_PhysicsClientServer.vcxproj">
+      <Project>{5E951280-8D5F-3439-807E-FFCFCB3BF6AB}</Project>
+      <Name>Test_PhysicsClientServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\BulletDynamics\Test_btKinematicCharacterController.vcxproj">
+      <Project>{5CE33EA8-CD14-3E53-8E8B-E4DCB5289B5D}</Project>
+      <Name>Test_btKinematicCharacterController</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\clsocket\clsocket.vcxproj">
+      <Project>{3CF8AB7A-DF8B-34CE-99F6-E6AEF28BB1D1}</Project>
+      <Name>clsocket</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\test\gtest-1.7.0\gtest.vcxproj">
+      <Project>{471AB34F-495B-3FE1-9DCE-62A53EBC403A}</Project>
+      <Name>gtest</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\Gwen\gwen.vcxproj">
+      <Project>{21B99515-BCEC-3FEB-B653-FDBB922770AC}</Project>
+      <Name>gwen</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{383F54B9-D3B2-380A-B85A-05CE1D04CB5E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>App_PhysicsServer_SharedMemory_VR</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">App_PhysicsServer_SharedMemory_VR.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">App_PhysicsServer_SharedMemory_VR</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">App_PhysicsServer_SharedMemory_VR.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">App_PhysicsServer_SharedMemory_VR</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">App_PhysicsServer_SharedMemory_VR.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">App_PhysicsServer_SharedMemory_VR</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">App_PhysicsServer_SharedMemory_VR.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">App_PhysicsServer_SharedMemory_VR</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>	</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/bin/win64/openvr_api.dll C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/openvr64pi.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/data C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\Bullet3Common_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletWorldImporter_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletFileLoader_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamicsUtils_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletCollision_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\LinearMath_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BussIK_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\Bullet3Common_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletWorldImporter_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamicsUtils_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletCollision_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\LinearMath_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BussIK_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\OpenGLWindow_Debug.lib;opengl32.lib;glu32.lib;openvr_api.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\Bullet3Common_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletWorldImporter_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamicsUtils_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletInverseDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletDynamics_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BulletCollision_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\LinearMath_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\BussIK_Debug.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\OpenGLWindow_Debug.lib;opengl32.lib;glu32.lib;openvr_api.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64;C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/Debug/App_PhysicsServer_SharedMemory_VR.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/Debug/App_PhysicsServer_SharedMemory_VR.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>	</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/bin/win64/openvr_api.dll C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/openvr64pi.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/data C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Common.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletWorldImporter.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletFileLoader.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamicsUtils.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletCollision.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\LinearMath.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BussIK.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Common.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletWorldImporter.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamicsUtils.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletCollision.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\LinearMath.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BussIK.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\OpenGLWindow.lib;opengl32.lib;glu32.lib;openvr_api.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Common.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletWorldImporter.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamicsUtils.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletInverseDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletCollision.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\LinearMath.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BussIK.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\OpenGLWindow.lib;opengl32.lib;glu32.lib;openvr_api.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64;C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/Release/App_PhysicsServer_SharedMemory_VR.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/Release/App_PhysicsServer_SharedMemory_VR.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>	</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/bin/win64/openvr_api.dll C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/openvr64pi.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/data C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\Bullet3Common_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletWorldImporter_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletFileLoader_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamicsUtils_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletCollision_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\LinearMath_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BussIK_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\Bullet3Common_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletWorldImporter_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamicsUtils_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletCollision_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\LinearMath_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BussIK_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\OpenGLWindow_MinsizeRel.lib;opengl32.lib;glu32.lib;openvr_api.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\Bullet3Common_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletWorldImporter_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamicsUtils_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletInverseDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletDynamics_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BulletCollision_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\LinearMath_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\BussIK_MinsizeRel.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\OpenGLWindow_MinsizeRel.lib;opengl32.lib;glu32.lib;openvr_api.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64;C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/MinSizeRel/App_PhysicsServer_SharedMemory_VR.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/MinSizeRel/App_PhysicsServer_SharedMemory_VR.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BT_ENABLE_VR;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;B3_USE_STANDALONE_EXAMPLE;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\headers;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>	</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/bin/win64/openvr_api.dll C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/openvr64pi.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/data C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\Bullet3Common_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletWorldImporter_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletFileLoader_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamicsUtils_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletCollision_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\LinearMath_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BussIK_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\Bullet3Common_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletWorldImporter_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamicsUtils_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletCollision_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\LinearMath_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BussIK_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\OpenGLWindow_RelWithDebugInfo.lib;opengl32.lib;glu32.lib;openvr_api.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\Bullet3Common_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletWorldImporter_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamicsUtils_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletInverseDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletDynamics_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BulletCollision_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\LinearMath_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\BussIK_RelWithDebugInfo.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\OpenGLWindow_RelWithDebugInfo.lib;opengl32.lib;glu32.lib;openvr_api.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64;C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/openvr/lib/win64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/RelWithDebInfo/App_PhysicsServer_SharedMemory_VR.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/RelWithDebInfo/App_PhysicsServer_SharedMemory_VR.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/SharedMemory/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/SharedMemory/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\SharedMemory\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\IKTrajectoryHelper.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\IKTrajectoryHelper.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClient.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientExample.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerExample.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerExampleBullet2.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerSharedMemory.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerSharedMemory.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServer.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServer.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientC_API.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\SharedMemoryCommands.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\SharedMemoryPublic.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PosixSharedMemory.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\Win32SharedMemory.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\InProcessMemory.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsDirect.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsDirect.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsDirectC_API.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsDirectC_API.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsLoopBack.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsLoopBack.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsLoopBackC_API.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsLoopBackC_API.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory_C_API.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory_C_API.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory2_C_API.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory2_C_API.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory2.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsClientSharedMemory2.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\SharedMemoryCommandProcessor.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\SharedMemoryCommandProcessor.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerCommandProcessor.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\PhysicsServerCommandProcessor.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\TinyRendererVisualShapeConverter.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\TinyRendererVisualShapeConverter.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\SharedMemory\b3PluginManager.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\TinyRenderer\geometry.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\TinyRenderer\model.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\TinyRenderer\tgaimage.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\TinyRenderer\our_gl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\TinyRenderer\TinyRenderer.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\OpenGLWindow\SimpleCamera.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\OpenGLWindow\SimpleCamera.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\ConvertRigidBodies2MultiBody.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\MultiBodyCreationInterface.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\BulletUrdfImporter.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\BulletUrdfImporter.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\UrdfParser.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\urdfStringSplit.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\UrdfParser.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\URDF2Bullet.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\URDF2Bullet.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\b3ResourcePath.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\b3Clock.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\RobotLoggingUtil.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\RobotLoggingUtil.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\ChromeTraceUtil.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Utils\ChromeTraceUtil.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\URDFImporterInterface.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportURDFDemo\URDFJointTypes.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportObjDemo\LoadMeshFromObj.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportSTLDemo\ImportSTLSetup.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportSTLDemo\LoadMeshFromSTL.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportColladaDemo\LoadMeshFromCollada.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportColladaDemo\ColladaGraphicsInstance.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Wavefront\tiny_obj_loader.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\tinyxml\tinystr.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\Importers\ImportMeshUtility\b3ImportMeshUtility.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\stb_image\stb_image.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\MultiThreading\b3ThreadSupportInterface.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\MultiThreading\b3ThreadSupportInterface.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\MultiThreading\b3Win32ThreadSupport.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\MultiThreading\b3Win32ThreadSupport.h" />
+    <ResourceCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build3\bullet.rc" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\StandaloneMain\hellovr_opengl_main.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ExampleBrowser\OpenGLGuiHelper.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ExampleBrowser\GL_ShapeDrawer.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ExampleBrowser\CollisionShape2TriangleMesh.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\RenderingExamples\TinyVRGui.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\RenderingExamples\TimeSeriesCanvas.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\RenderingExamples\TimeSeriesFontData.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\lodepng.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\lodepng.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\Matrices.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\Matrices.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\pathtools.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\pathtools.h" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\strtools.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\strtools.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\openvr\samples\shared\Vectors.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\ZERO_CHECK.vcxproj">
+      <Project>{42A805A5-5629-3F00-8482-AE84A6FB587C}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\Bullet3Common\Bullet3Common.vcxproj">
+      <Project>{6D9173D8-866B-3830-BA15-C1D0830AB886}</Project>
+      <Name>Bullet3Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletCollision\BulletCollision.vcxproj">
+      <Project>{D7148422-0685-3125-A941-5CA232702B1E}</Project>
+      <Name>BulletCollision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{D2736675-51C8-300D-8AD2-ACAB4CD3EBA9}</Project>
+      <Name>BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\Serialize\BulletFileLoader\BulletFileLoader.vcxproj">
+      <Project>{87D3D3B0-0F0C-3975-99DC-1BE1AF28DA03}</Project>
+      <Name>BulletFileLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\BulletInverseDynamics\BulletInverseDynamics.vcxproj">
+      <Project>{BB9EDAF0-2DF1-33D2-98A9-4356AC5293B8}</Project>
+      <Name>BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\InverseDynamics\BulletInverseDynamicsUtils.vcxproj">
+      <Project>{FB298B73-4AA5-3046-923B-997F79EDF619}</Project>
+      <Name>BulletInverseDynamicsUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\Extras\Serialize\BulletWorldImporter\BulletWorldImporter.vcxproj">
+      <Project>{1F749467-85F9-3CCD-87A3-4243DE40E497}</Project>
+      <Name>BulletWorldImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\BussIK\BussIK.vcxproj">
+      <Project>{FB313457-EDAC-34E2-A250-B0FD2F2ED42C}</Project>
+      <Name>BussIK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\src\LinearMath\LinearMath.vcxproj">
+      <Project>{743AE056-9C3B-360A-9472-710D068821FD}</Project>
+      <Name>LinearMath</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\OpenGLWindow\OpenGLWindow.vcxproj">
+      <Project>{3216D247-86A0-3D10-8E03-B0D0CF407AC7}</Project>
+      <Name>OpenGLWindow</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{21B99515-BCEC-3FEB-B653-FDBB922770AC}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>gwen</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">gwen.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">gwen_Debug</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">gwen.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">gwen</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">gwen.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">gwen_MinsizeRel</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">gwen.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">gwen_RelWithDebugInfo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WIN64;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;GWEN_COMPILE_STATIC;_HAS_EXCEPTIONS=0;_STATIC_CPPLIB;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\src;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/ThirdPartyLibs/Gwen/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\Gwen\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/ThirdPartyLibs/Gwen/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\Gwen\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/ThirdPartyLibs/Gwen/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\Gwen\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87 -BC:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build --check-stamp-file C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/build/examples/ThirdPartyLibs/Gwen/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Daniel/Desktop/OpenGL/Libraries/bullet3-2.87/examples/ThirdPartyLibs/Gwen/CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\examples\ThirdPartyLibs\Gwen\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Anim.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\BaseRender.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\DragAndDrop.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Gwen.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Hook.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Skin.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\ToolTip.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Utility.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\events.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\inputhandler.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Base.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Button.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Canvas.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\CheckBox.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ColorControls.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ColorPicker.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ComboBox.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\CrossSplitter.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\DockBase.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\DockedTabControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dragger.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\GroupBox.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HSVColorPicker.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HorizontalScrollBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HorizontalSlider.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ImagePanel.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Label.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\LabelClickable.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ListBox.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Menu.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\MenuItem.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\MenuStrip.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\NumericUpDown.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\PanelListPanel.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ProgressBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Properties.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RadioButton.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RadioButtonController.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ResizableControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Resizer.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RichLabel.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBarBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBarButton.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Slider.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\SplitterBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabButton.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabStrip.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Text.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TextBox.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TextBoxNumeric.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TreeControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TreeNode.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\VerticalScrollBar.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\VerticalSlider.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\WindowControl.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialog\FileOpen.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialog\FileSave.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialog\Query.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Platforms\Null.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Platforms\Windows.cpp" />
+    <ClCompile Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\OpenGL_DebugFont.cpp" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Align.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Anim.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\BaseRender.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Config.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\DragAndDrop.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Events.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Exports.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Font.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Gwen.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Hook.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\InputHandler.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Macros.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Platform.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Skin.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Structures.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\TextObject.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Texture.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\ToolTip.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Utility.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Base.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Button.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Canvas.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\CheckBox.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ColorControls.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ColorPicker.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ComboBox.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\CrossSplitter.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\DockBase.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\DockedTabControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dragger.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\GroupBox.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HSVColorPicker.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Highlight.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HorizontalScrollBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\HorizontalSlider.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ImagePanel.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Label.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\LabelClickable.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ListBox.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Menu.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\MenuItem.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\MenuStrip.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Modal.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\NumericUpDown.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\PanelListPanel.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ProgressBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Properties.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\PropertyTree.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RadioButton.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RadioButtonController.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ResizableControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Resizer.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\RichLabel.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBarBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollBarButton.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ScrollControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Slider.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\SplitterBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\StatusBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Symbol.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabButton.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabStrip.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TabTitleBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Text.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TextBox.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\ToolBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TreeControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\TreeNode.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\VerticalScrollBar.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\VerticalSlider.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\WindowControl.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialogs\FileOpen.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialogs\FileSave.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Dialogs\Query.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Layout\Splitter.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Layout\Table.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Property\BaseProperty.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Property\ColorSelector.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Controls\Property\Text.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Input\SDL13.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Input\SFML.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Input\Windows.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\DirectX9.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\FontData.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\GDIPlus.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\OpenGL.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\OpenGL_DebugFont.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Renderers\SFML.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Skins\Simple.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Skins\TexturedBase.h" />
+    <ClInclude Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\examples\ThirdPartyLibs\Gwen\Skins\Texturing.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Daniel\Desktop\OpenGL\Libraries\bullet3-2.87\build\ZERO_CHECK.vcxproj">
+      <Project>{42A805A5-5629-3F00-8482-AE84A6FB587C}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

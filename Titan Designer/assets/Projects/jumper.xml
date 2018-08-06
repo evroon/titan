@@ -5,7 +5,7 @@
 			<main type="Scene">
 				<children count="2">
 					<World type="World">
-						<children count="4">
+						<children count="5">
 							<Terrain type="Terrain">
 								<children count="0"/>
 								<properties count="10">
@@ -101,6 +101,31 @@
 									</rendercomponent>
 								</properties>
 							</Vegetation>
+							<Sky type="Sky">
+								<children count="0"/>
+								<properties count="12">
+									<sky_color type="Color" value="{ r = 0.257813, g = 0.710938, b = 0.953125, a = 1.000000 }"/>
+									<sun_color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+									<script type="NULL"/>
+									<name type="String" value="Sky"/>
+									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+									<size type="vec3" value="{ 10.000000, 10.000000, 10.000000 }"/>
+									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+									<visible type="bool" value="true"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transformcomponent type="TransformComponent">
+										<properties count="1">
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+										</properties>
+									</transformcomponent>
+									<rendercomponent type="RenderComponent">
+										<properties count="1">
+											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+										</properties>
+									</rendercomponent>
+								</properties>
+							</Sky>
 						</children>
 						<properties count="2">
 							<script type="NULL"/>
