@@ -881,6 +881,21 @@ void DeferredRenderer::render_second_pass()
 	draw_plane();
 }
 
+void DeferredRenderer::render_physical_tile(const vec2& p_pos, const vec2& p_size)
+{
+	vec2 texsize = virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>()->get_size();
+
+	float left = -1.0f + 2.0f * p_pos.x / texsize.x;
+	float right = -1.0f + 2.0f * (p_pos.x + p_size.x) / texsize.x;
+	float bottom = -1.0f + 2.0f * p_pos.y / texsize.y;
+	float top = -1.0f + 2.0f * (p_pos.y + p_size.y) / texsize.y;
+
+	Transform t = Transform(rect2(left, right, top, bottom));
+	tex_shader->set_uniform("model", t.get_model());
+
+	draw_plane();
+}
+
 void DeferredRenderer::render_virtual_tex()
 {
 	// render to physics texture
@@ -888,24 +903,19 @@ void DeferredRenderer::render_virtual_tex()
 	grid_texture->bind(0);
 	tex_shader->bind();
 
-	vec2 texsize = virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>()->get_size();
-
-	float left = -1.0f;
-	float right = -1.0f + 2.0 * 128 / texsize.x;
-	float bottom = -1.0f;
-	float top = -1.0f + 2.0 * 128 / texsize.x;
-
-	Transform t = Transform(rect2(left, right, top, bottom));
-	tex_shader->set_uniform("model", t.get_model());
-	
-	draw_plane();
+	render_physical_tile(vec2(), vec2(128, 128));
+	render_physical_tile(vec2(128, 0), vec2(64, 64));
+	render_physical_tile(vec2(128 + 64, 0), vec2(64, 64));
+	render_physical_tile(vec2(128, 64), vec2(64, 64));
+	render_physical_tile(vec2(128 + 64, 64), vec2(64, 64));
 
 	// render to indirection texture
+	float offset = 128.0f / 1024.0f;
 	indirection_buffer->bind();
 	shader_2d->bind();
 	shader_2d->set_uniform("texture_enabled", false);
 	shader_2d->set_uniform("model", mat4());
-	shader_2d->set_uniform("color", Color(0, 0, 5.0f/255));
+	shader_2d->set_uniform("color", Color(offset, 0, 5.0f/255));
 
 	draw_plane();
 }
@@ -930,6 +940,7 @@ void DeferredRenderer::render()
 		use_depth_test(c->get_near(), c->get_far());
 
 		activate_world_transform();
+		use_wireframe();
 		viewport->world->draw();
 		viewport->post_draw_world();
 		deactivate_world_transform();

@@ -217,6 +217,8 @@ private:
 	void render_godray();
 	void render_first_pass();
 	void render_second_pass();
+
+	void render_physical_tile(const vec2& p_pos, const vec2& p_size);
 	void render_virtual_tex();
 
 	FBO2D* deferred_buffer;
