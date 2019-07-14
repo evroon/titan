@@ -209,15 +209,15 @@ vec3 get_specular()
 
 vec3 lighting()
 {
-	if (!lighting_enabled)
-		return vec3(1.0);
+	//if (!lighting_enabled)
+	//	return vec3(1.0);
 	
 	float diff = dot(normal, vec3(0.0, 0.0, 1.0));
 	
 	vec3 diffuse = diff * vec3(1);
 	vec3 specular = get_specular();
 	
-	return vec3(1.0);
+	return diffuse;
 }
 
 
@@ -258,36 +258,32 @@ float shadow_calc(vec4 pos_light_space)
 
 void main()
 {
-	tex_coords = pos * vec2(0.5) + vec2(0.5);	
-	tex_coords.y *= -1.0f;	
-		
+	tex_coords = pos * vec2(0.5) + vec2(0.5);
+
 	albedo = texture2D(g_albedo, tex_coords).rgb;
-	position = texture2D(g_position, tex_coords).rgb;
-	normal = texture2D(g_normal, tex_coords).rgb;
-	
-	final_color = vec4(albedo, 1.0);
-	
-	if (material == vec3(1.0, 0.0, 0.0))
-	{
+
+	if (material.xy == vec2(0.0, 0.0)) {
 		final_color = vec4(albedo, 1.0);
 		return;
 	}
+
 	position = texture2D(g_position, tex_coords).rgb;
 	normal = texture2D(g_normal, tex_coords).rgb;
+	
+	if (material == vec3(1.0, 0.0, 0.0))
+	{
+		final_color = vec4(albedo * lighting(), 1.0);
+		return;
+	}
 	
     vec4 pos_light_space = light_matrix * vec4(position.xyz, 1.0);
     float shadow = 1.0 - shadow_calc(pos_light_space);
 	
-	if (material.xy == vec2(0.0, 0.0))
-		final_color = vec4(albedo, 1.0);
-	else
-	{
-		vec3 finalcolor = albedo * lighting() * shadow;
-		finalcolor = mix(sky_color, finalcolor, get_fog());
+	vec3 finalcolor = albedo * lighting() * shadow;
+	finalcolor = mix(sky_color, finalcolor, get_fog());
 		
-		//if (clouds_enabled)
-		//	finalcolor = finalcolor + ray_march();
+	//if (clouds_enabled)
+	//	finalcolor = finalcolor + ray_march();
 			
-		final_color = vec4(finalcolor + get_godray(), 1.0);
-	}
+	final_color = vec4(finalcolor + get_godray(), 1.0);
 }
