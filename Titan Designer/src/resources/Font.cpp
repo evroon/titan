@@ -84,7 +84,6 @@ int Font::get_index(const String& text, float p_offset) const
 
 float Font::get_width(const String& text) const
 {
-	float w = 0;
 	int temp = 0;
 
 	if (TTF_SizeText(font, text.c_str(), &temp, NULL))
@@ -94,11 +93,10 @@ float Font::get_width(const String& text) const
 	}
 
 	int tab_count = text.count('\t');
-
-	w = to_float(temp);
+	float w = to_float(temp);
 
 	if (tab_count > 0)
-		w += get_width(" ") * to_float(tab_count) * (3.0f - 1.0f);
+		w += get_width(" ") * 3.0f * to_float(tab_count);
 
 	return to_float(w);
 }
