@@ -97,7 +97,7 @@ void WorldView::notification(int p_notification)
 		postprocess = false;
 
 		if (!postprocess)
-			draw_texture(preview_texture, get_area(), Color::White);
+			draw_texture(preview_texture, get_area(), Color::White, vec4(0, 1, 0, 1));
 		else
 			postprocess->post_process();
 
@@ -423,12 +423,14 @@ void WorldView::handle_event(UIEvent *ui_event)
 				TIME->game_time -= 10e6l;
 			else if (ui_event->key == Key::KEY_L)
 				TIME->game_time += 10e6;
-			else if (ui_event->key == Key::KEY_M)
+			else if (ui_event->key == Key::KEY_T)
 				RENDERER->use_wireframe();
 			else if (terrain && ui_event->key == Key::KEY_0)
 				terrain->get_brush()->apply();
 			else if (terrain && ui_event->key == Key::KEY_1)
 				terrain->increase(-1.0f);
+			else if (terrain && ui_event->key == Key::KEY_2)
+				terrain->compute_normals();
 
 			/*if (terrain)
 			{
