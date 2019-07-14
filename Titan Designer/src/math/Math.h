@@ -100,7 +100,7 @@ public:
 	
 	static float floor(float value, float proj)
 	{
-		return std::floor(value / proj) * proj;
+		return ::floor(value / proj) * proj;
 	}
 	
 	static float modulo(float value, float proj)
