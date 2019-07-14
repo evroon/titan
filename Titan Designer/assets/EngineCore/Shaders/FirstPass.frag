@@ -270,7 +270,7 @@ void main()
 	position = texture2D(g_position, tex_coords).rgb;
 	normal = texture2D(g_normal, tex_coords).rgb;
 	
-	if (material == vec3(1.0, 0.0, 0.0))
+	if (material == vec3(1.0, 0.0, 0.0) || material == vec3(1.0, 0.0, 1.0))
 	{
 		final_color = vec4(albedo * lighting(), 1.0);
 		return;
