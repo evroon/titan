@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="modules">
+      <UniqueIdentifier>{c1ffbcdf-113c-4664-b4b7-c4e9c9f41001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="models">
+      <UniqueIdentifier>{8c8f6f5e-b4b0-4780-9e57-691d26f7871f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{603b146d-b3b0-4d68-9b1f-9494b18e4947}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\module\abs.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\add.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\billow.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\blend.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\cache.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\checkerboard.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\clamp.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\const.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\curve.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\cylinders.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\displace.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\exponent.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\invert.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\max.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\min.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modulebase.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\multiply.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\perlin.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\power.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\ridgedmulti.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\rotatepoint.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\scalebias.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\scalepoint.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\select.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\spheres.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\terrace.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\translatepoint.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\turbulence.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\voronoi.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\cylinder.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\line.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\plane.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\sphere.cpp">
+      <Filter>models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32\dllmain.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\latlon.cpp" />
+    <ClCompile Include="src\noisegen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\module\abs.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\add.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\billow.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\blend.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\cache.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\checkerboard.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\clamp.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\const.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\curve.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\cylinders.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\displace.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\exponent.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\invert.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\max.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\min.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modulebase.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\multiply.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\perlin.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\power.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\ridgedmulti.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\rotatepoint.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\scalebias.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\scalepoint.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\select.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\spheres.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\terrace.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\translatepoint.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\turbulence.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\voronoi.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\cylinder.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\line.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\model.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\plane.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\sphere.h">
+      <Filter>models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\basictypes.h" />
+    <ClInclude Include="src\exception.h" />
+    <ClInclude Include="src\interp.h" />
+    <ClInclude Include="src\latlon.h" />
+    <ClInclude Include="src\mathconsts.h" />
+    <ClInclude Include="src\misc.h" />
+    <ClInclude Include="src\noise.h" />
+    <ClInclude Include="src\noisegen.h" />
+    <ClInclude Include="src\vectortable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\win32\noise.rc">
+      <Filter>win32</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="src\win32\libnoise.def">
+      <Filter>win32</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

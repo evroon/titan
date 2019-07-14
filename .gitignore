@@ -266,3 +266,7 @@ __pycache__/
 /Titan Designer/RCa02344
 /Titan Designer/x64
 /x64/PC Release
+/Libraries/libnoisesrc-1.0.0/noise/x64/Release/libnoise.tlog
+/Libraries/libnoisesrc-1.0.0/noise/win32/Release/libnoise.tlog
+/Libraries/libnoisesrc-1.0.0/noise/win32/Release
+/Libraries/libnoisesrc-1.0.0/noise/x64/Release/noise.res
