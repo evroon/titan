@@ -32,24 +32,24 @@ public:
 
 	static inline int mod(int p_x, int p_y) { return p_x % p_y; }
 
-	static inline float sin(float p_x) { return ::sin(p_x); }
-	static inline float asin(float p_x) { return ::asin(p_x); }
+	static inline float sin(float p_x) { return ::sinf(p_x); }
+	static inline float asin(float p_x) { return ::asinf(p_x); }
 
-	static inline float cos(float p_x) { return ::cos(p_x); }
-	static inline float acos(float p_x) { return ::acos(p_x); }
+	static inline float cos(float p_x) { return ::cosf(p_x); }
+	static inline float acos(float p_x) { return ::acosf(p_x); }
 
-	static inline float tan(float p_x) { return ::tan(p_x); }
-	static inline float atan(float p_x) { return ::atan(p_x); }
+	static inline float tan(float p_x) { return ::tanf(p_x); }
+	static inline float atan(float p_x) { return ::atanf(p_x); }
 
 	static inline float sqrt(float p_x) { return ::sqrtf(p_x); }
 	static inline float pow(float p_x) { return p_x * p_x; }
-	static inline float pow(float p_x, float p_y) { return ::pow(p_x, p_y); }
+	static inline float pow(float p_x, float p_y) { return ::powf(p_x, p_y); }
 
-	static inline float exp(float p_x) { return ::exp(p_x); }
-	static inline float log(float p_x) { return ::log(p_x); }
+	static inline float exp(float p_x) { return ::expf(p_x); }
+	static inline float log(float p_x) { return ::logf(p_x); }
 
-	static inline float floor(float p_x) { return ::floor(p_x); }
-	static inline float ceil(float p_x) { return ::ceil(p_x); }
+	static inline float floor(float p_x) { return ::floorf(p_x); }
+	static inline float ceil(float p_x) { return ::ceilf(p_x); }
 
 	static inline float lerp(float p_x, float p_y, float p_z) { return p_x + (p_y - p_x) * p_z; }
 
@@ -95,12 +95,12 @@ public:
 			
 	static vec2 GetVector(float angle)
 	{
-		return vec2(cos(angle), sin(angle));
+		return vec2(cosf(angle), sin(angle));
 	}
 	
 	static float floor(float value, float proj)
 	{
-		return ::floor(value / proj) * proj;
+		return ::floorf(value / proj) * proj;
 	}
 	
 	static float modulo(float value, float proj)

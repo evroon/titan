@@ -50,7 +50,7 @@ public:
 	}
     
     //Get info
-    T length() const { return sqrt(x * x + y * y + z * z); }
+    T length() const { return sqrtf(x * x + y * y + z * z); }
     T angle(const Vec3<T> &v) const
     {
         T angle = fabs(acos(dot(v) / (length() * v.length())));

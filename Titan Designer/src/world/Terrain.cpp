@@ -186,7 +186,7 @@ Terrain::Terrain()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexStorage2D(GL_TEXTURE_2D, Math::log(N) / Math::log(2), GL_RGBA32F, N, N);
+	glTexStorage2D(GL_TEXTURE_2D, Math::log((float) N) / Math::log(2.0f), GL_RGBA32F, N, N);
 
 	normalmap = new Texture2D(vec2(N, N), (int)id);
 
@@ -467,7 +467,7 @@ void Vegetation::draw()
 		for (int y = -8; y <= 8; y++)
 		{
 			vec3 delta = vec3(x * 5.0f, y * 5.0f, 0.0f);
-			float dist = sqrt(x*x + y * y);
+			float dist = sqrtf(x*x + y * y);
 			int lod = 0;
 
 			if (dist < 2)

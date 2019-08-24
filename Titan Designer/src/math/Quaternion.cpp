@@ -29,7 +29,7 @@ Quaternion::Quaternion(const vec3& p_axis, float p_angle)
 	x = s * x;
 	y = s * y;
 	z = s * z;
-	w = cos(omega);
+	w = cosf(omega);
 
 	normalize();
 }
@@ -65,7 +65,7 @@ void Quaternion::slerp(const Quaternion & a, const Quaternion & b, float t)
 	{
 		if ((1.0f - cosom) > 0)
 		{
-			omega = acos(cosom);
+			omega = acosf(cosom);
 			sinom = sin(omega);
 			sclp = sin((1.0f - t)*omega) / sinom;
 			sclq = sin(t*omega) / sinom;

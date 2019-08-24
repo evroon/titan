@@ -189,8 +189,8 @@ public:
 	void rotate(const vec3 &axis, float angle)
 	{
 		//Math::DegToRad(angle);
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = cosf(angle);
+		float s = sinf(angle);
 		vec3 v = axis;
 		v.normalize();
 		/*float xx = v.x * v.x;
@@ -210,8 +210,8 @@ public:
 	}
 	void rotate_x(float angle)
 	{
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = cosf(angle);
+		float s = sinf(angle);
 		m[0] = 1.0; m[4] = 0.0; m[8] = 0.0; m[12] = 0.0;
 		m[1] = 0.0; m[5] = c;  m[9] = -s;  m[13] = 0.0;
 		m[2] = 0.0; m[6] = s;  m[10] = c;  m[14] = 0.0;
@@ -219,8 +219,8 @@ public:
 	}
 	void rotate_y(float angle)
 	{
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = cosf(angle);
+		float s = sinf(angle);
 		m[0] = c;  m[4] = 0.0; m[8] = s;  m[12] = 0.0;
 		m[1] = 0.0; m[5] = 1.0; m[9] = 0.0; m[13] = 0.0;
 		m[2] = -s;  m[6] = 0.0; m[10] = c;  m[14] = 0.0;
@@ -228,8 +228,8 @@ public:
 	}
 	void rotate_z(float angle)
 	{
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = cosf(angle);
+		float s = sinf(angle);
 		m[0] = c;	m[4] = -s;	m[8]  = 0.0; m[12] = 0.0;
 		m[1] = s;	m[5] = c;	m[9]  = 0.0; m[13] = 0.0;
 		m[2] = 0.0; m[6] = 0.0; m[10] = 1.0; m[14] = 0.0;
