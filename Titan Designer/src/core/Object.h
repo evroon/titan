@@ -88,7 +88,10 @@ public:
 	template<typename T>
 	inline T cast_to_type()
 	{
-		return reinterpret_cast<T>(this);
+		if (derives_from_type<T>())
+			return reinterpret_cast<T>(this);
+		else
+			return NULL;
 	}
 
 	virtual StringName get_type_name() const;
