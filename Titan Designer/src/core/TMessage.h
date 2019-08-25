@@ -81,7 +81,7 @@ private:
 
 	Vector<TMessage> messages;
 	Array<char> filters;
-	bool complete_description = false;
+	bool complete_description = true;
 
 	static MessageHandler *singleton;
 };

@@ -439,7 +439,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 		Constant *v = new Constant(var);
 		return v;
 	}
-	PARSE_ERROR("Unrecognized statement found while parsing");
+	PARSE_ERROR("Unrecognized statement found while parsing line: " + line.tokens[0].text);
 	return 0;
 }
 

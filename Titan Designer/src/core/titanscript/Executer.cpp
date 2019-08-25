@@ -369,8 +369,10 @@ Variant Executer::Execute(ScriptNode *node)
 		Block *block = (Block*) node;
 		returntofunc = false;
 
-		if (block->params.size() != state->argcount())
-			T_ERROR("Number of arguments does not match");
+		if (block->params.size() != state->argcount()) {
+			T_ERROR("Number of arguments does not match, expected: " + (String) block->params.size() + ", got: " + (String) state->argcount());
+			return NULL;
+		}
 
 		for (int c = 0; c < block->params.size(); c++) //Introduce parameters as local vars
 		{
