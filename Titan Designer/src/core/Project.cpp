@@ -40,8 +40,11 @@ void Project::load()
 
 void Project::save()
 {
-	FBO2D* f = default_scene->get_child("Terrain")->cast_to_type<Terrain*>()->get_brush()->get_fbo();
-	DEFERRED_RENDERER->save_fbo(f, "EngineCore/Textures", 0);
+	Node* terrain = default_scene->get_child("Terrain");
+	if (terrain) {
+		FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
+		DEFERRED_RENDERER->save_fbo(f, "EngineCore/Textures", 0);
+	}
 
 	Serializer s;
 	String source = s.serialize(this);
@@ -66,10 +69,16 @@ String Project::serialize() const
 	return String();
 }
 
+Renderer* Project::get_renderer() const
+{
+	return DEFERRED_RENDERER;
+}
+
 #undef CLASSNAME
 #define CLASSNAME Project
 
 void Project::bind_methods()
 {
+	REG_PROPERTY(renderer);
 	REG_CSTR(0);
 }

@@ -49,6 +49,11 @@ void TitanScript::Extend(Variant ext)
 
 bool TitanScript::FunctionExists(const StringName& name)
 {
+	if (!exe) {
+		T_ERROR("exe is null for function: " + name);
+		return false;
+	}
+
 	return exe->state->FuncExists(name);
 }
 

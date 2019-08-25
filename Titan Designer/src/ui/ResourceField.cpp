@@ -261,7 +261,9 @@ void ObjectField::init()
 void ObjectField::open_button_clicked()
 {
 	PropertyTab* pv = VIEW->get_default_viewport()->get_canvas()->get_child("Inspector")->cast_to_type<PropertyTab*>();
-	pv->set_property(get_value());
+
+	if (pv)
+		pv->set_property(get_value());
 }
 
 void ObjectField::load_button_clicked()
