@@ -2,6 +2,7 @@
 
 #include "core/TMessage.h"
 #include "core/CoreNames.h"
+#include "core/variant/VariantType.h"
 
 //Operators
 //Initialize
@@ -411,6 +412,11 @@ String Variant::ToString() const
 	return result;
 }
 
+void Variant::convert_error(const String& p_type) const
+{
+	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to ") + p_type);
+}
+
 //Conversions
 Variant::operator bool() const
 {
@@ -423,7 +429,7 @@ Variant::operator bool() const
 		default:
 			return isdef();
 	}
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to bool"));
+	convert_error("bool");
 	return 0;
 }
 Variant::operator int() const
@@ -436,7 +442,7 @@ Variant::operator int() const
 			return b;
 		//case STRING: return (int) s;
 	}
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to int"));
+	convert_error("int");
 	return 0;
 }
 Variant::operator float() const
@@ -451,7 +457,7 @@ Variant::operator float() const
 			return b ? 1.0f : 0.0f;
 		//case STRING: return (double)s;
 	}
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to float"));
+	convert_error("float");
 	return 0;
 }
 Variant::operator double() const
@@ -464,7 +470,7 @@ Variant::operator double() const
 		return b ? 1.0f : 0.0f;
 		//case STRING: return (double)s;
 	}
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to double"));
+	convert_error("double");
 	return 0;
 }
 Variant::operator Real() const
@@ -476,7 +482,7 @@ Variant::operator Real() const
 		case FLOAT:
 			return f;
 	}
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to Real"));
+	convert_error("Real");
 	return 0;
 }
 Variant::operator String&() const
@@ -488,7 +494,7 @@ Variant::operator vec2&() const
 	if (type == VEC2)
 		return *v2;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to vec2"));
+	convert_error("vec2");
 	return *new vec2();
 }
 Variant::operator vec3&() const
@@ -496,7 +502,7 @@ Variant::operator vec3&() const
 	if (type == VEC3)
 		return *v3;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to vec3"));
+	convert_error("vec3");
 	return *new vec3();
 }
 Variant::operator vec4&() const
@@ -504,7 +510,7 @@ Variant::operator vec4&() const
 	if (type == VEC4)
 		return *v4;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to vec4"));
+	convert_error("vec4");
 	return *new vec4();
 }
 Variant::operator mat4&() const
@@ -512,7 +518,7 @@ Variant::operator mat4&() const
 	if (type == MAT4)
 		return *m4;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to mat4"));
+	convert_error("mat4");
 	return *new mat4();
 }
 Variant::operator Color&() const
@@ -520,7 +526,7 @@ Variant::operator Color&() const
 	if (type == COLOR)
 		return *c;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to Color"));
+	convert_error("Color");
 	return *new Color;
 }
 Variant::operator Transform&() const
@@ -528,7 +534,7 @@ Variant::operator Transform&() const
 	if (type == TRANSFORM)
 		return *t;
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to Transform"));
+	convert_error("Transform");
 	return *new Transform;
 }
 Variant::operator Object*() const
@@ -541,6 +547,6 @@ Variant::operator Object*() const
 		return NULL;
 	
 
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to Object"));
+	convert_error("Object");
 	return NULL;
 }

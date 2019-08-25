@@ -244,6 +244,8 @@ public:
 	int type;
 
 private:
+	void convert_error(const String& p_type) const;
+
 	bool is_ptr() const;
 
 };
