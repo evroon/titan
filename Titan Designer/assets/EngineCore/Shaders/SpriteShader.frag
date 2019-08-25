@@ -5,6 +5,7 @@ uniform sampler2D tex;
 uniform vec3 color_id;
 uniform vec4 color;
 uniform bool texture_enabled;
+uniform vec4 texbounds;
 
 in vec2 tex_coord;
 in vec3 normal;
@@ -17,7 +18,7 @@ void main()
 		
 	if (texture_enabled)
 	{
-		vec4 c = texture2D(tex, tex_coord);
+		vec4 c = texture2D(tex, tex_coord * vec2(texbounds.y - texbounds.x, texbounds.w - texbounds.z) + texbounds.xz);
 		alpha *= c.a;
 		source = source * c.rgb;
 	}

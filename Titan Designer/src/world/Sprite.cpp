@@ -128,14 +128,15 @@ void Sprite::draw()
 	{
 		shader->set_uniform("texture_enabled", false);
 	}
-/*
+
 	if (packed)
 	{
 		vec4 b = GetTileBounds(activeindex);
 		shader->set_uniform("texbounds", b);
 	}
 	else
-		shader->set_uniform("texbounds", bounds);*/
+		shader->set_uniform("texbounds", bounds);
+
 	defaultmesh->bind();
 	defaultmesh->draw();
 
