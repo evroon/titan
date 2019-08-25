@@ -14,6 +14,7 @@ public:
 	~Keyboard();
 
 	bool is_button_pressed(Key::KeyType p_key);
+	bool is_key_pressed(Key* p_key);
 
 	static void init();
 	static Keyboard* get_singleton();
