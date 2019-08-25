@@ -5,21 +5,32 @@
 			<main type="Scene">
 				<children count="2">
 					<World type="World">
-						<children count="5">
-							<Terrain type="Terrain">
+						<children count="2">
+							<Sprite type="Sprite">
 								<children count="0"/>
-								<properties count="10">
+								<properties count="13">
+									<shader type="Shader">
+										<properties count="1">
+											<file type="String" value="/EngineCore/Shaders/SpriteShader"/>
+										</properties>
+									</shader>
+									<texture type="Texture2D">
+										<properties count="1">
+											<file type="String" value="/Textures/tile.png"/>
+										</properties>
+									</texture>
+									<bounds type="vec4" value="{ 0.000000, 5.000000, 0.000000, 1.000000 }"/>
 									<script type="NULL"/>
-									<name type="String" value="Terrain"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 10.000000, 10.000000, 10.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+									<name type="String" value="Sprite"/>
+									<pos type="vec3" value="{ -1.799999, 0.000000, 0.000000 }"/>
+									<size type="vec3" value="{ 5.000000, 1.000000, 0.000000 }"/>
+									<rotation type="vec3" value="{ -1.600000, 0.000000, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { -1.799999, 0.000000, 0.000000 }, size: { 5.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { -1.799999, 0.000000, 0.000000 }, size: { 5.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -28,22 +39,36 @@
 										</properties>
 									</rendercomponent>
 								</properties>
-							</Terrain>
-							<Model type="Model">
+							</Sprite>
+							<Player type="Sprite">
 								<children count="0"/>
-								<properties count="11">
-									<mesh type="NULL"/>
-									<script type="NULL"/>
-									<name type="String" value="Model"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+								<properties count="13">
+									<shader type="Shader">
+										<properties count="1">
+											<file type="String" value="/EngineCore/Shaders/SpriteShader"/>
+										</properties>
+									</shader>
+									<texture type="Texture2D">
+										<properties count="1">
+											<file type="String" value="/Textures/plane.png"/>
+										</properties>
+									</texture>
+									<bounds type="vec4" value="{ 0.000000, 1.000000, 0.000000, 1.000000 }"/>
+									<script type="TitanScript">
+										<properties count="1">
+											<file type="String" value="/Scripts/coin.ts"/>
+										</properties>
+									</script>
+									<name type="String" value="Player"/>
+									<pos type="vec3" value="{ 0.000000, 0.000000, 2.000000 }"/>
+									<size type="vec3" value="{ 1.000000, 1.000000, 0.000000 }"/>
+									<rotation type="vec3" value="{ -1.600000, 0.000000, 1.600000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 2.000000 }, size: { 1.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 1.600000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 2.000000 }, size: { 1.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 1.600000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -52,80 +77,7 @@
 										</properties>
 									</rendercomponent>
 								</properties>
-							</Model>
-							<Sky type="Sky">
-								<children count="0"/>
-								<properties count="12">
-									<sky_color type="Color" value="{ r = 0.257813, g = 0.710938, b = 0.953125, a = 1.000000 }"/>
-									<sun_color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<script type="NULL"/>
-									<name type="String" value="Sky"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-									<transformcomponent type="TransformComponent">
-										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-										</properties>
-									</transformcomponent>
-									<rendercomponent type="RenderComponent">
-										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-										</properties>
-									</rendercomponent>
-								</properties>
-							</Sky>
-							<Vegetation type="Vegetation">
-								<children count="0"/>
-								<properties count="10">
-									<script type="NULL"/>
-									<name type="String" value="Vegetation"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-									<transformcomponent type="TransformComponent">
-										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-										</properties>
-									</transformcomponent>
-									<rendercomponent type="RenderComponent">
-										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-										</properties>
-									</rendercomponent>
-								</properties>
-							</Vegetation>
-							<Sky type="Sky">
-								<children count="0"/>
-								<properties count="12">
-									<sky_color type="Color" value="{ r = 0.257813, g = 0.710938, b = 0.953125, a = 1.000000 }"/>
-									<sun_color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<script type="NULL"/>
-									<name type="String" value="Sky"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 10.000000, 10.000000, 10.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-									<transformcomponent type="TransformComponent">
-										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 10.000000, 10.000000, 10.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-										</properties>
-									</transformcomponent>
-									<rendercomponent type="RenderComponent">
-										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-										</properties>
-									</rendercomponent>
-								</properties>
-							</Sky>
+							</Player>
 						</children>
 						<properties count="2">
 							<script type="NULL"/>
@@ -146,7 +98,8 @@
 				</properties>
 			</main>
 		</children>
-		<properties count="2">
+		<properties count="3">
+			<renderer type="NULL"/>
 			<script type="NULL"/>
 			<name type="String" value=""/>
 		</properties>

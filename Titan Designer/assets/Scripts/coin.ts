@@ -1,15 +1,10 @@
 extends Sprite
 
-func ready()
-	pc = PhysicsComponent()
-	physicscomponent = pc
-	pc.set_as_box(false)
-	pc.set_as_sensor(true)
-	pos = vec2(200, -325)
-
-sound = ContentManager.Load("Sounds/coin.wav")
+define K_KEY Key("K")
+define L_KEY Key("L")
 
 func update()
-	if (physicscomponent.get_colliding_objects())
-		free()
-	sound.Play()
+	if (Keyboard.is_key_pressed(K_KEY))
+		pos = pos - vec3(0.1, 0, 0)
+	if (Keyboard.is_key_pressed(L_KEY))
+		pos = pos + vec3(0.1, 0, 0)
