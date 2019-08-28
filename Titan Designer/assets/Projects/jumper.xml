@@ -7,7 +7,17 @@
 					<World type="World">
 						<children count="2">
 							<Sprite type="Sprite">
-								<children count="0"/>
+								<children count="1">
+									<RigidBody2D type="RigidBody2D">
+										<children count="0"/>
+										<properties count="4">
+											<velocity type="vec2" value="{ 0.000000, 0.000000 }"/>
+											<fixed_rotation type="bool" value="false"/>
+											<script type="NULL"/>
+											<name type="String" value="RigidBody2D"/>
+										</properties>
+									</RigidBody2D>
+								</children>
 								<properties count="13">
 									<shader type="Shader">
 										<properties count="1">
@@ -16,21 +26,25 @@
 									</shader>
 									<texture type="Texture2D">
 										<properties count="1">
-											<file type="String" value="/Textures/tile.png"/>
+											<file type="String" value="////////////Textures/tile.png"/>
 										</properties>
 									</texture>
 									<bounds type="vec4" value="{ 0.000000, 5.000000, 0.000000, 1.000000 }"/>
-									<script type="NULL"/>
+									<script type="TitanScript">
+										<properties count="1">
+											<file type="String" value="////Scripts/ground.ts"/>
+										</properties>
+									</script>
 									<name type="String" value="Sprite"/>
-									<pos type="vec3" value="{ -1.799999, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 5.000000, 1.000000, 0.000000 }"/>
-									<rotation type="vec3" value="{ -1.600000, 0.000000, 0.000000 }"/>
+									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+									<size type="vec3" value="{ 50.000000, 10.000000, 0.000000 }"/>
+									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { -1.799999, 0.000000, 0.000000 }, size: { 5.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { -1.799999, 0.000000, 0.000000 }, size: { 5.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -41,7 +55,17 @@
 								</properties>
 							</Sprite>
 							<Player type="Sprite">
-								<children count="0"/>
+								<children count="1">
+									<RigidBody2D type="RigidBody2D">
+										<children count="0"/>
+										<properties count="4">
+											<velocity type="vec2" value="{ 0.000000, 0.000000 }"/>
+											<fixed_rotation type="bool" value="false"/>
+											<script type="NULL"/>
+											<name type="String" value="RigidBody2D"/>
+										</properties>
+									</RigidBody2D>
+								</children>
 								<properties count="13">
 									<shader type="Shader">
 										<properties count="1">
@@ -50,25 +74,25 @@
 									</shader>
 									<texture type="Texture2D">
 										<properties count="1">
-											<file type="String" value="/Textures/plane.png"/>
+											<file type="String" value="///////////Textures/tile.png"/>
 										</properties>
 									</texture>
 									<bounds type="vec4" value="{ 0.000000, 1.000000, 0.000000, 1.000000 }"/>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="/Scripts/coin.ts"/>
+											<file type="String" value="////////////Scripts/coin.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Player"/>
-									<pos type="vec3" value="{ 0.000000, 0.000000, 2.000000 }"/>
-									<size type="vec3" value="{ 1.000000, 1.000000, 0.000000 }"/>
-									<rotation type="vec3" value="{ -1.600000, 0.000000, 1.600000 }"/>
+									<pos type="vec3" value="{ 0.000000, 80.000000, 0.000000 }"/>
+									<size type="vec3" value="{ 10.000000, 10.000000, 0.000000 }"/>
+									<rotation type="vec3" value="{ 0.000000, 0.000181, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 2.000000 }, size: { 1.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 1.600000 } }"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 80.000000, 0.000000 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000181, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 2.000000 }, size: { 1.000000, 1.000000, 0.000000 }, rotation: { -1.600000, 0.000000, 1.600000 } }"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 80.000000, 0.000000 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000181, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
