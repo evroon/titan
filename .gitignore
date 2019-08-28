@@ -270,3 +270,7 @@ __pycache__/
 /Libraries/libnoisesrc-1.0.0/noise/win32/Release/libnoise.tlog
 /Libraries/libnoisesrc-1.0.0/noise/win32/Release
 /Libraries/libnoisesrc-1.0.0/noise/x64/Release/noise.res
+/Libraries/bullet3/out/build/x64-Debug
+/Libraries/Box2D/out/build/x64-Debug
+/Libraries/glew-2.0.0/build/cmake/out/build/x64-Debug
+/Libraries/glew-2.0.0/glew.pc

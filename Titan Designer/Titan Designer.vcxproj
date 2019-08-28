@@ -519,10 +519,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Libraries\bullet3\bin\Debug;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Debug;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;BulletDynamics.lib;Bullet3Dynamics.lib;BulletCollision.lib;Bullet3Collision.lib;LinearMath.lib;Bullet3Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -623,6 +624,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
