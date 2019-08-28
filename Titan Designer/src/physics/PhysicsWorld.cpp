@@ -40,6 +40,11 @@ void PhysicsWorld3D::clean()
 //PhysicsWorld2D
 //=========================================================================
 
+PhysicsWorld2D::PhysicsWorld2D()
+{
+	init();
+}
+
 void PhysicsWorld2D::DestroyWorld()
 {
 	boxes.clean();
@@ -59,7 +64,7 @@ void PhysicsWorld2D::update()
 
 void PhysicsWorld2D::init()
 {
-	scalefactor = 30.0f;
+	scalefactor = 1.0f;
 	scale = vec2(scalefactor);
 
 	gravity = b2Vec2(0.0f, -9.81f);

@@ -82,6 +82,11 @@ void PlaneShape3D::bind_methods()
 #undef CLASSNAME
 #define CLASSNAME CollisionShape2D
 
+CollisionShape2D::CollisionShape2D()
+{
+
+}
+
 void CollisionShape2D::bind_methods()
 {
 }
@@ -91,13 +96,20 @@ void CollisionShape2D::bind_methods()
 //BoxBody
 //=========================================================================
 
-BoxShape2D::BoxShape2D(PhysicsWorld2D *world, bool dyn)
+BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 {
-	shape.SetAsBox(1.0f, 1.0f);
+	const Transform& transform = p_object->get_transform();
+	shape.SetAsBox(transform.get_size().x, transform.get_size().y);
 
 	fixdef.shape = &shape;
 	fixdef.density = 1.0;
+
+	bodydef.type = dyn ? b2_dynamicBody : b2_staticBody;
+	bodydef.position.Set(transform.get_pos().x, transform.get_pos().y);
+
+	body = p_world->world->CreateBody(&bodydef);
 	body->CreateFixture(&fixdef);
+	body->SetUserData(p_object);
 }
 
 //=========================================================================

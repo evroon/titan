@@ -40,38 +40,40 @@ void RigidBody3D::bind_methods()
 //RigidBody2D
 //=========================================================================
 
-RigidBody2D::RigidBody2D(b2World *world, bool dyn = true)
+RigidBody2D::RigidBody2D(bool dyn)
 {
+	dynamic = dyn;
+
+	auto ready = [this]() { get_parent()->connect("parent_changed", this, "ready"); };
+	connect("parent_changed", Connection::create_from_lambda(new V_Method_0(ready)));
+}
+
+void RigidBody2D::ready()
+{
+	if (!get_world_object()) {
+		T_ERROR("World object was null");
+		return;
+	} else if (!get_world_object()->get_world()) {
+		T_ERROR("World was null");
+		return;
+	}
 	physics_2d = get_world_object()->get_world()->get_physics_2d();
 
 	Transform trans = get_world_object()->get_transform();
 
-	dynamic = dyn;
 	size = trans.get_size().get_xy() / vec2(2.0f) / physics_2d->get_scale();
 
-	//bodydef.position.Set(trans.get_pos().x / physics_2d->get_scale().x, trans.get_pos().y / physics_2d->get_scale().y);
-
-	//if (dyn)
-	///	bodydef.type = b2_dynamicBody;
-
-	//shape->body = world->CreateBody(&bodydef);
-	//shape->body->SetUserData(parent);
-	
 	physics_2d->AddBody(this);
 }
 
 void RigidBody2D::update()
 {
-	if (!parent)
-		return;
-
 	Transform &t = get_world_object()->transformcomponent->transform;
 
 	b2Vec2 pos = shape->body->GetPosition();
 
 	t.set_pos2d(vec2(pos.x, pos.y) * physics_2d->get_scale());
-	t.set_size2d(size * physics_2d->get_scale());
-	t.set_rotation(shape->body->GetAngle());
+	t.set_rotation(vec3(0.0f, 0.0f, -shape->body->GetAngle()));
 }
 
 void RigidBody2D::set_as_sensor(bool p_value)
@@ -82,12 +84,18 @@ void RigidBody2D::set_as_sensor(bool p_value)
 
 vec2 RigidBody2D::get_velocity() const
 {
+	if (!shape)
+		return vec2();
+
 	b2Vec2 velo = shape->body->GetLinearVelocity();
 	return vec2(velo.x, velo.y) * physics_2d->get_scale();
 }
 
 void RigidBody2D::set_velocity(const vec2 &p_velocity)
 {
+	if (!physics_2d)
+		return;
+
 	vec2 velo = p_velocity / physics_2d->get_scale();
 
 	shape->body->SetLinearVelocity(b2Vec2(velo.x, velo.y));
@@ -95,12 +103,16 @@ void RigidBody2D::set_velocity(const vec2 &p_velocity)
 
 bool RigidBody2D::get_fixed_rotation() const
 {
+	if (!shape)
+		return false;
+
 	return shape->body->IsFixedRotation();
 }
 
 void RigidBody2D::set_fixed_rotation(bool p_value)
 {
-	shape->body->SetFixedRotation(p_value);
+	if (shape)
+		shape->body->SetFixedRotation(p_value);
 }
 
 void RigidBody2D::set_transform(const Transform &p_transform)
@@ -116,10 +128,10 @@ void RigidBody2D::set_transform(const Transform &p_transform)
 
 void RigidBody2D::set_as_box(bool p_dynamic)
 {
-	if (parent)
-		shape = new BoxShape2D(physics_2d, p_dynamic);
+	if (physics_2d)
+		shape = new BoxShape2D(physics_2d, get_world_object(), p_dynamic);
 	else
-		T_ERROR("Component has no parent");
+		T_ERROR("Component has no parent, could not set RigidBody2D as box.");
 }
 
 void RigidBody2D::set_as_circle(bool p_dynamic)
@@ -146,6 +158,9 @@ WorldObject* RigidBody2D::get_colliding_objects() const
 void RigidBody2D::bind_methods()
 {
 	REG_CSTR(0);
+	REG_CSTR_OVRLD_1(bool);
+
+	REG_METHOD(ready);
 
 	REG_METHOD(set_as_box);
 	REG_METHOD(set_as_circle);
@@ -160,5 +175,9 @@ void RigidBody2D::bind_methods()
 
 WorldObject* RigidBody2D::get_world_object()
 {
-	return get_parent()->cast_to_type<WorldObject*>();
+	Node* parent = get_parent();
+	if (parent == NULL)
+		return NULL;
+
+	return parent->cast_to_type<WorldObject*>();
 }

@@ -40,6 +40,8 @@ private:
 class PhysicsWorld2D
 {
 public:
+	PhysicsWorld2D();
+
 	void DestroyWorld();
 	void destroy_box(RigidBody2D *body);
 	void update();
@@ -49,6 +51,8 @@ public:
 	vec2 get_scale() const;
 
 private:
+	friend class BoxShape2D;
+
 	b2World *world;
 	b2AABB universesize;
 	b2Vec2 gravity;

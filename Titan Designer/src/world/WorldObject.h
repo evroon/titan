@@ -92,6 +92,6 @@ public:
 
 	static void bind_methods();
 	
-	World *world = NULL;
-	Layer *layer = NULL;
+	World *world = nullptr;
+	Layer *layer = nullptr;
 };

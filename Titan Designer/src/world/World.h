@@ -49,6 +49,6 @@ public:
 private:
 	Camera *active_camera;
 	PhysicsWorld2D* physics_2d;
-	PhysicsWorld2D* physics_3d;
+	PhysicsWorld3D* physics_3d;
 };
 

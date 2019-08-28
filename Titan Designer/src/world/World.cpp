@@ -7,9 +7,13 @@
 
 #include "core/CoreNames.h"
 
+#include "physics/PhysicsWorld.h"
+
 World::World()
 {
 	AddLayer(new Layer(0, "DefaultLayer"));
+
+	physics_2d = new PhysicsWorld2D;
 }
 
 World::~World()
@@ -121,6 +125,8 @@ void World::update()
 	if (has_script())
 		run(CORE_NAMES->update, Arguments());
 
+	physics_2d->update();
+
 	for (Layer *l : layers)
 		for (WorldObject *wo : l->objects)
 			wo->notificate(WorldObject::NOTIFICATION_UPDATE);
@@ -152,12 +158,12 @@ Camera* World::get_active_camera() const
 
 PhysicsWorld2D* World::get_physics_2d() const
 {
-	return nullptr;
+	return physics_2d;
 }
 
 PhysicsWorld3D* World::get_physics_3d() const
 {
-	return nullptr;
+	return physics_3d;
 }
 
 #undef CLASSNAME

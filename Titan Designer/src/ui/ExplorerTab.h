@@ -22,6 +22,8 @@ public:
 
 	void add_file(const String& p_path);
 
+	Node* get_selected_object() const;
+
 	void delete_element();
 	void add_button_clicked();
 	void right_clicked(TreeElement* p_element);

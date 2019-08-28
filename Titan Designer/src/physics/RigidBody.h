@@ -32,10 +32,10 @@ class RigidBody2D : public Node
 	OBJ_DEFINITION(RigidBody2D, Node)
 
 public:
-	RigidBody2D() = default;
-	RigidBody2D(b2World *world, bool dynamic);
+	RigidBody2D(bool dynamic = false);
 	virtual ~RigidBody2D() { }
 
+	void ready();
 	void update();
 
 	vec2 get_velocity() const;

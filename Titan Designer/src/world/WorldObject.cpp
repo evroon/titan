@@ -84,7 +84,11 @@ void WorldObject::notificate(int notification)
 
 void WorldObject::update()
 {
+	auto rigid_body = get_child_by_type<RigidBody2D*>();
 
+	if (rigid_body != NULL) {
+		rigid_body->update();
+	}
 }
 
 void WorldObject::set_transformcomponent(TransformComponent *c)
@@ -152,8 +156,10 @@ void WorldObject::set_pos(const vec3 &p_pos)
 	transform.set_pos(p_pos);
 	transform.update();
 
-	//if (physicscomponent)
-	//	physicscomponent->set_transform(transform);
+	RigidBody2D* body = get_child_by_type<RigidBody2D*>();
+
+	if (body)
+		body->set_transform(transform);
 }
 
 vec3 WorldObject::get_size() const
@@ -168,10 +174,10 @@ void WorldObject::set_size(const vec3 &p_size)
 	transform.set_size(p_size);
 	transform.update();
 
+	RigidBody2D* body = get_child_by_type<RigidBody2D*>();
 
-	//if (physicscomponent)
-	//	physicscomponent->set_transform(transform);
-
+	if (body)
+		body->set_transform(transform);
 }
 
 vec3 WorldObject::get_rotation() const
@@ -242,7 +248,7 @@ void WorldObject::set_layer(Layer *l)
 
 World* WorldObject::get_world() const
 {
-	return world;
+	return world != nullptr ? world : get_parent_by_type_recursively<World*>();
 }
 
 void WorldObject::register_in_world(World *p_world)

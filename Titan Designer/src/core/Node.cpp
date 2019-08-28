@@ -26,7 +26,7 @@ void Node::add_child(Node* p_child)
 	children.push_back(p_child);
 
 	p_child->parent = this;
-	p_child->children_changed();
+	p_child->emit_signal("parent_changed");
 	
 	if (p_child->has_script())
 		p_child->run("ready", {});
@@ -71,6 +71,16 @@ Node* Node::get_child(const String& p_name)
 	return NULL;
 }
 
+Node* Node::get_parent_by_type_recursively(const String& p_typename) const
+{
+	while (Node* parent = get_parent())
+	{
+		if (parent->get_type_name() == p_typename)
+			return parent;
+	}
+	return nullptr;
+}
+
 int Node::get_child_count() const
 {
 	return children.size();
@@ -84,7 +94,6 @@ Node* Node::get_parent() const
 void Node::set_name(const String& p_name)
 {
 	name = p_name;
-	children_changed();
 }
 
 String Node::get_name() const
@@ -111,8 +120,10 @@ void Node::children_changed()
 void Node::bind_methods()
 {
 	REG_PROPERTY(name);
+	REG_METHOD(add_child);
 	REG_METHOD(get_child);
 	REG_METHOD(get_parent);
 
 	REG_SIGNAL("children_changed");
+	REG_SIGNAL("parent_changed");
 }

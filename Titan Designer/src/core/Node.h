@@ -17,21 +17,35 @@ public:
 
 	Node* get_child_by_index(int p_index);
 	Node* get_child(const String& p_name);
-
-	
+		
 	template<typename T>
-	T get_child_by_type()
+	inline T get_child_by_type()
 	{
 		for (int c = 0; c < children.size(); c++)
 		{
 			Node* child = get_child_by_index(c);
 			T t = dynamic_cast<T>(child);
-			
+
 			if (t)
 				return t;
 		}
-		return NULL;
+		return nullptr;
 	}
+
+	template<typename T>
+	inline T get_parent_by_type_recursively() const
+	{
+		while (Node * parent = get_parent())
+		{
+			T p = dynamic_cast<T>(parent);
+
+			if (p)
+				return p;
+		}
+		return nullptr;
+	}
+
+	Node* get_parent_by_type_recursively(const String& p_typename) const;
 
 	int get_child_count() const;
 

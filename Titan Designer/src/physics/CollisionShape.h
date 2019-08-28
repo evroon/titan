@@ -72,6 +72,7 @@ class CollisionShape2D : public Object
 	OBJ_DEFINITION(CollisionShape2D, Object);
 
 public:
+	CollisionShape2D();
 	static void bind_methods();
 
 	b2Body *body;
@@ -90,7 +91,7 @@ class BoxShape2D : public CollisionShape2D
 
 public:
 	BoxShape2D() = default;
-	BoxShape2D(PhysicsWorld2D *world, bool dyn = true);
+	BoxShape2D(PhysicsWorld2D *world, WorldObject* p_object, bool dyn = true);
 	virtual ~BoxShape2D() { }
 
 protected:

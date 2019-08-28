@@ -73,10 +73,15 @@ void ExplorerTab::add_file(const String& p_path)
 	
 }
 
-void ExplorerTab::delete_element()
+Node* ExplorerTab::get_selected_object() const
 {
 	String name = tree_view->get_selected()->get_text();
-	Node* item = viewport->get_child(name);
+	return viewport->get_child(name);
+}
+
+void ExplorerTab::delete_element()
+{
+	Node* item = get_selected_object();
 
 	if (item)
 		item->get_parent()->remove_child(item);
@@ -171,6 +176,9 @@ void ExplorerTab::add_object(const String& p_type)
 		else if (v.o->derives_from_type<WorldObject*>())
 		{
 			viewport->get_world()->add_child(v);
+		}
+		else {
+			get_selected_object()->add_child(v);
 		}
 		update();
 	}
