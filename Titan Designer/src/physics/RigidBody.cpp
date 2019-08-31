@@ -139,6 +139,11 @@ void RigidBody2D::set_as_circle(bool p_dynamic)
 	shape = new CircleShape2D(physics_2d, p_dynamic);
 }
 
+void RigidBody2D::apply_force(const vec2& p_force)
+{
+	shape->body->ApplyLinearImpulse(b2Vec2(p_force.x, p_force.y), shape->body->GetWorldCenter(), true);
+}
+
 WorldObject* RigidBody2D::get_colliding_objects() const
 {
 	b2ContactEdge *bce = shape->body->GetContactList();
@@ -168,6 +173,8 @@ void RigidBody2D::bind_methods()
 	REG_METHOD(set_as_sensor);
 
 	REG_METHOD(get_colliding_objects);
+
+	REG_METHOD(apply_force);
 
 	REG_PROPERTY(velocity);
 	REG_PROPERTY(fixed_rotation);

@@ -49,6 +49,8 @@ public:
 	void set_as_box(bool p_dynamic);
 	void set_as_circle(bool p_dynamic);
 
+	void apply_force(const vec2& p_force);
+
 	void set_as_sensor(bool p_value);
 
 	WorldObject* get_colliding_objects() const;
