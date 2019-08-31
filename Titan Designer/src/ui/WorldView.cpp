@@ -691,11 +691,15 @@ void WorldView::set_handle_2d(bool p_handle_2d)
 {
 	handle_2d = p_handle_2d;
 
+	Camera* camera = viewport->get_world()->get_active_camera();
+
 	if (handle_2d)
 	{
-		viewport->get_world()->get_active_camera()->set_ortho_projection(0.5, 5000.0);
-		viewport->get_world()->get_active_camera()->set_rotation(vec3(-PI / 2.0, 0, 0));
+		camera->set_ortho_projection(0.5, 5000.0);
+		camera->set_rotation(vec3(-PI / 2.0, 0, 0));
 	}
+	else
+		camera->set_projection(30.0f, 0.5f, 5000.0f);
 }
 
 bool WorldView::get_handle_2d() const

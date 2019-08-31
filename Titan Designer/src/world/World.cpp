@@ -32,10 +32,8 @@ void World::add_child(Node* p_child)
 	world_object->register_in_world(this);
 	world_object->set_layer(GetLayer(0));
 
-	//if (!active_camera && p_child->is_of_type<Camera>())
-	//{
-	//	set_active_camera(world_object->cast_to_type<Camera*>());
-	//}
+	if (!active_camera && p_child->is_of_type<Camera>())
+		set_active_camera(world_object->cast_to_type<Camera*>());
 
 	world_object->notificate(WorldObject::NOTIFICATION_READY);
 }

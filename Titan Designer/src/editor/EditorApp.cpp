@@ -147,6 +147,7 @@ void EditorApp::init()
 	bar->set_margins(0, 30, 0, 0);
 
 	world->connect("children_changed", explorer_tab, "update_items");
+	world->connect("parent_changed", explorer_tab, "update_items");
 
 	//worldview->set_postprocess(new PostProcess(CONTENT->LoadShader("EngineCore/Shaders/FinalShader")));
 
@@ -182,11 +183,9 @@ void EditorApp::init()
 
 	if (!cam)
 	{
-		cam = world->get_active_camera();
+		cam = new Camera;
 
-		if (!cam)
-			cam = new Camera;
-
+		world->add_child(cam);
 		world->set_active_camera(cam);
 	}
 
@@ -195,8 +194,8 @@ void EditorApp::init()
 
 	//world->init();
 
-	cam->set_pos(vec3(0.0f, -50.0f, 0.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f);	
+	cam->set_pos(vec3(0.0f, 0.0f, 1.0f));
+	cam->set_projection(30.0f, 0.5f, 5000.0f);
 
 	v->resize(WINDOWSIZE_F / 2.0f);
 

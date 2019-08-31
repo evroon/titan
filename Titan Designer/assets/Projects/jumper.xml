@@ -5,7 +5,7 @@
 			<main type="Scene">
 				<children count="2">
 					<World type="World">
-						<children count="2">
+						<children count="3">
 							<Sprite type="Sprite">
 								<children count="1">
 									<RigidBody2D type="RigidBody2D">
@@ -26,25 +26,25 @@
 									</shader>
 									<texture type="Texture2D">
 										<properties count="1">
-											<file type="String" value="////////////Textures/tile.png"/>
+											<file type="String" value="///////////////Textures/tile.png"/>
 										</properties>
 									</texture>
-									<bounds type="vec4" value="{ 0.000000, 5.000000, 0.000000, 1.000000 }"/>
+									<bounds type="vec4" value="{ 0.000000, 50.000000, 0.000000, 1.000000 }"/>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="////Scripts/ground.ts"/>
+											<file type="String" value="/Scripts/ground.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Sprite"/>
 									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 50.000000, 10.000000, 0.000000 }"/>
+									<size type="vec3" value="{ 1000.000000, 20.000000, 0.000000 }"/>
 									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1000.000000, 20.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1000.000000, 20.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -74,25 +74,25 @@
 									</shader>
 									<texture type="Texture2D">
 										<properties count="1">
-											<file type="String" value="///////////Textures/tile.png"/>
+											<file type="String" value="/Textures/tile.png"/>
 										</properties>
 									</texture>
 									<bounds type="vec4" value="{ 0.000000, 1.000000, 0.000000, 1.000000 }"/>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="////////////Scripts/coin.ts"/>
+											<file type="String" value="/Scripts/coin.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Player"/>
-									<pos type="vec3" value="{ 0.000000, 80.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 10.000000, 10.000000, 0.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000181, 0.000000 }"/>
+									<pos type="vec3" value="{ -36.682339, 70.017273, 0.000000 }"/>
+									<size type="vec3" value="{ 20.000000, 50.000000, 0.000000 }"/>
+									<rotation type="vec3" value="{ 0.000000, 0.000000, -0.000114 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 80.000000, 0.000000 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000181, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { -36.682339, 70.017273, 0.000000 }, size: { 20.000000, 50.000000, 0.000000 }, rotation: { 0.000000, 0.000000, -0.000114 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 80.000000, 0.000000 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000181, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { -36.682339, 70.017273, 0.000000 }, size: { 20.000000, 50.000000, 0.000000 }, rotation: { 0.000000, 0.000000, -0.000114 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -102,6 +102,33 @@
 									</rendercomponent>
 								</properties>
 							</Player>
+							<Camera type="Camera">
+								<children count="0"/>
+								<properties count="14">
+									<near type="float" value="0.5"/>
+									<far type="float" value="5000"/>
+									<fov type="float" value="30"/>
+									<zoom type="float" value="1"/>
+									<script type="NULL"/>
+									<name type="String" value="Camera"/>
+									<pos type="vec3" value="{ 0.000000, 0.000000, 42.393806 }"/>
+									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
+									<rotation type="vec3" value="{ -1.570796, 0.000000, 0.000000 }"/>
+									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+									<visible type="bool" value="true"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 42.393806 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -1.570796, 0.000000, 0.000000 } }"/>
+									<transformcomponent type="TransformComponent">
+										<properties count="1">
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 42.393806 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -1.570796, 0.000000, 0.000000 } }"/>
+										</properties>
+									</transformcomponent>
+									<rendercomponent type="RenderComponent">
+										<properties count="1">
+											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+										</properties>
+									</rendercomponent>
+								</properties>
+							</Camera>
 						</children>
 						<properties count="2">
 							<script type="NULL"/>
