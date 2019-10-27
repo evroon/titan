@@ -209,8 +209,8 @@ vec3 get_specular()
 
 vec3 lighting()
 {
-	//if (!lighting_enabled)
-	//	return vec3(1.0);
+	if (!lighting_enabled)
+		return vec3(1.0);
 	
 	float diff = dot(normal, normalize(vec3(0.0, 1.0, 1.0)));
 	
@@ -263,7 +263,7 @@ void main()
 	albedo = texture2D(g_albedo, tex_coords).rgb;
 	material = texture2D(g_material, tex_coords).rgb;
 
-	if (material == vec3(0.0)) {
+	if (material.xy == vec2(0.0) && material.z > 0.5 && material.z < 1.0) {
 		final_color = vec4(albedo, 1.0);
 		return;
 	}

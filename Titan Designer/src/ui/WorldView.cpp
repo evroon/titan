@@ -536,28 +536,34 @@ void WorldView::post_draw_world()
 		cone->set_pos(pos);
 		cone->set_size(mesh_size);
 		cone->set_rotation(vec3(0, 0, 0));
+
 		if (highlight_type == DRAG_X)
-			cone->set_color(Color::Red);
-		else
 			cone->set_color(Color::FromRGB(vec3i(255, highlight, highlight)));
+		else
+			cone->set_color(Color::Red);
+
 		cone->set_color_id(vec3(0, 0, 0.6f));
 		cone->draw();
 
 		//Y
 		cone->set_rotation(vec3(0, 0, PI / 2));
+
 		if (highlight_type == DRAG_Y)
-			cone->set_color(Color::Green);
-		else
 			cone->set_color(Color::FromRGB(vec3i(highlight, 255, highlight)));
+		else
+			cone->set_color(Color::Green);
+
 		cone->set_color_id(vec3(0, 0, 0.7f));
 		cone->draw();
 
 		//Z
 		cone->set_rotation(vec3(0, PI / 2, 0));
+
 		if (highlight_type == DRAG_Z)
-			cone->set_color(Color::Blue);
-		else
 			cone->set_color(Color::FromRGB(vec3i(highlight, highlight, 255)));
+		else
+			cone->set_color(Color::Blue);
+
 		cone->set_color_id(vec3(0, 0, 0.8f));
 		cone->draw();
 	}
