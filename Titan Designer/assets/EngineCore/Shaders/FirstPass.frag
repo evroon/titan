@@ -37,7 +37,6 @@ int step_count = 8;
 int light_samples = 5;
 float cutoff = 0.55;
 
-/*
 
 //http://prideout.net/blog/?p=64
 struct Ray
@@ -191,7 +190,7 @@ float ray_march()
     }
 	
 	return value * 20.0;
-}*/
+}
 
 vec2 tex_coords;
 vec3 albedo;
@@ -212,19 +211,19 @@ vec3 lighting()
 	if (!lighting_enabled)
 		return vec3(1.0);
 	
-	float diff = dot(normal, normalize(vec3(0.0, 1.0, 1.0)));
+	float diff = dot(normal, normalize(light_dir));
 	
-	vec3 diffuse = diff * vec3(1);
-	vec3 specular = get_specular();
+	vec3 diffuse = diff * vec3(0.5);
+	vec3 specular = get_specular() * vec3(0.001);
 	
-	return diffuse;
+	return ambient + diffuse + specular;
 }
 
 
 vec3 get_godray()
 {
-	//if (!godray_enabled)
-	//	return vec3(0.0);
+	if (!godray_enabled)
+		return vec3(0.0);
 	
 	return texture2D(godray_tex, tex_coords).rgb;
 }
@@ -284,7 +283,7 @@ void main()
 	finalcolor = mix(sky_color, finalcolor, get_fog());
 		
 	//if (clouds_enabled)
-	//	finalcolor = finalcolor + ray_march();
-			
+	//	finalcolor = finalcolor + ray_march();	
+	
 	final_color = vec4(finalcolor + get_godray(), 1.0);
 }
