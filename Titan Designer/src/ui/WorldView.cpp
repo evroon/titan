@@ -449,6 +449,7 @@ void WorldView::handle_event(UIEvent *ui_event)
 void WorldView::post_draw_world()
 {
 	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
+	Camera* camera = viewport->get_world()->get_child_by_type<Camera*>();
 
 	if (terrain)
 		terrain->get_brush()->handle();
@@ -526,12 +527,14 @@ void WorldView::post_draw_world()
 
 	float highlight = 150.0f;
 
+	vec3 mesh_size = vec3(1.0f, .5f, .5f) * (camera->get_pos() - pos).length() / 50.0f;
+
 	if (transform_type == TRANSLATE)
 	{
 		//draw translation cones
 		//X
 		cone->set_pos(pos);
-		cone->set_size(vec3(1.0f, .5f, .5f));
+		cone->set_size(mesh_size);
 		cone->set_rotation(vec3(0, 0, 0));
 		if (highlight_type == DRAG_X)
 			cone->set_color(Color::Red);
@@ -567,7 +570,7 @@ void WorldView::post_draw_world()
 		//draw planes
 		//X
 		disk->set_pos(pos);
-		disk->set_size(vec3(1, 0.5f, 0.5f));
+		disk->set_size(mesh_size);
 		disk->set_rotation(vec3(0, 0, 0));
 		if (highlight_type == DRAG_X)
 			disk->set_color(Color::Red);
