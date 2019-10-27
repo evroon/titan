@@ -194,7 +194,7 @@ bool Renderer::get_draw_on_screen() const
 
 void Renderer::use_wireframe()
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void Renderer::fill()
@@ -717,7 +717,7 @@ void DeferredRenderer::render_flare()
 	deactivate_world_transform();
 
 	sun_on_screen *= viewport->get_size();
-	sun_on_screen.y *= -1.0f;
+	sun_on_screen *= -1.0f;
 
 	stop_depth_test();
 	use_additive_blending();
