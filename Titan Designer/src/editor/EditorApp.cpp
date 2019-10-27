@@ -109,6 +109,7 @@ void EditorApp::init()
 	explorer_dock->add_tab(tool_tab);
 	explorer_dock->set_anchors(Control::ANCHOR_END, Control::ANCHOR_CENTER, Control::ANCHOR_END, Control::ANCHOR_END);
 	explorer_dock->set_margins(495, 2, 4, 35);
+	explorer_dock->set_active_tab(0);
 
 	//property_dock
 	property_dock->add_tab(property_tab);
