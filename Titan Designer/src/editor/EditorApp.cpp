@@ -190,13 +190,7 @@ void EditorApp::init()
 		world->set_active_camera(cam);
 	}
 
-	//cam->set_pos(vec3(600.0f, 2000.0f, 0.0f));
-	//cam->set_rotation(vec3(0, 0, PI));
-
 	//world->init();
-
-	cam->set_pos(vec3(0.0f, 0.0f, 1.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f);
 
 	v->resize(WINDOWSIZE_F / 2.0f);
 
