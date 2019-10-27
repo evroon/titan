@@ -578,28 +578,34 @@ void WorldView::post_draw_world()
 		disk->set_pos(pos);
 		disk->set_size(mesh_size);
 		disk->set_rotation(vec3(0, 0, 0));
+
 		if (highlight_type == DRAG_X)
-			disk->set_color(Color::Red);
-		else
 			disk->set_color(Color::FromRGB(vec3i(255, highlight, highlight)));
+		else
+			disk->set_color(Color::Red);
+
 		disk->set_color_id(vec3(0, 0, 0.6f));
 		disk->draw();
 
 		//Y
 		disk->set_rotation(vec3(0, 0, PI / 2));
+
 		if (highlight_type == DRAG_Y)
-			disk->set_color(Color::Green);
-		else
 			disk->set_color(Color::FromRGB(vec3i(highlight, 255, highlight)));
+		else
+			disk->set_color(Color::Green);
+
 		disk->set_color_id(vec3(0, 0, 0.7f));
 		disk->draw();
 
 		//Z
 		disk->set_rotation(vec3(0, PI / 2, 0));
+
 		if (highlight_type == DRAG_Z)
-			disk->set_color(Color::Blue);
-		else
 			disk->set_color(Color::FromRGB(vec3i(highlight, highlight, 255)));
+		else
+			disk->set_color(Color::Blue);
+
 		disk->set_color_id(vec3(0, 0, 0.8f));
 		disk->draw();
 	}
