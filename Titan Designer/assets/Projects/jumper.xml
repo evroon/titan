@@ -5,7 +5,7 @@
 			<main type="Scene">
 				<children count="2">
 					<World type="World">
-						<children count="7">
+						<children count="5">
 							<Camera type="Camera">
 								<children count="0"/>
 								<properties count="14">
@@ -15,15 +15,15 @@
 									<zoom type="float" value="1"/>
 									<script type="NULL"/>
 									<name type="String" value="Camera"/>
-									<pos type="vec3" value="{ 3.196697, -112.949013, 57.127007 }"/>
+									<pos type="vec3" value="{ 3.196697, -106.289513, 57.216103 }"/>
 									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
 									<rotation type="vec3" value="{ -0.296753, 0.017260, 0.001541 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 3.196697, -112.949013, 57.127007 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.296753, 0.017260, 0.001541 } }"/>
+									<transform type="Transform" value="{ pos: { 3.196697, -106.289513, 57.216103 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.296753, 0.017260, 0.001541 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 3.196697, -112.949013, 57.127007 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.296753, 0.017260, 0.001541 } }"/>
+											<transform type="Transform" value="{ pos: { 3.196697, -106.289513, 57.216103 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.296753, 0.017260, 0.001541 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -33,36 +33,6 @@
 									</rendercomponent>
 								</properties>
 							</Camera>
-							<Sprite type="Sprite">
-								<children count="0"/>
-								<properties count="13">
-									<shader type="Shader">
-										<properties count="1">
-											<file type="String" value="/EngineCore/Shaders/SpriteShader"/>
-										</properties>
-									</shader>
-									<texture type="NULL"/>
-									<bounds type="vec4" value="{ 0.000000, 1.000000, 0.000000, 1.000000 }"/>
-									<script type="NULL"/>
-									<name type="String" value="Sprite"/>
-									<pos type="vec3" value="{ 69.958763, 0.000000, 75.035118 }"/>
-									<size type="vec3" value="{ 10.000000, 10.000000, 0.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 69.958763, 0.000000, 75.035118 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-									<transformcomponent type="TransformComponent">
-										<properties count="1">
-											<transform type="Transform" value="{ pos: { 69.958763, 0.000000, 75.035118 }, size: { 10.000000, 10.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-										</properties>
-									</transformcomponent>
-									<rendercomponent type="RenderComponent">
-										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-										</properties>
-									</rendercomponent>
-								</properties>
-							</Sprite>
 							<Model type="Model">
 								<children count="0"/>
 								<properties count="11">
@@ -82,7 +52,7 @@
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="/////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="NULL"/>
@@ -90,7 +60,7 @@
 									<pos type="vec3" value="{ 0.000000, 0.000000, 12.929237 }"/>
 									<size type="vec3" value="{ 27.674728, 17.902094, 5.152141 }"/>
 									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+									<color type="Color" value="{ r = 0.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
 									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 12.929237 }, size: { 27.674728, 17.902094, 5.152141 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
@@ -100,34 +70,11 @@
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
 										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+											<color type="Color" value="{ r = 0.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 										</properties>
 									</rendercomponent>
 								</properties>
 							</Model>
-							<Water type="Water">
-								<children count="0"/>
-								<properties count="10">
-									<script type="NULL"/>
-									<name type="String" value="Water"/>
-									<pos type="vec3" value="{ 3.196697, -112.949013, 6.000000 }"/>
-									<size type="vec3" value="{ 1000.000000, 1000.000000, 0.000000 }"/>
-									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 3.196697, -112.949013, 6.000000 }, size: { 1000.000000, 1000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-									<transformcomponent type="TransformComponent">
-										<properties count="1">
-											<transform type="Transform" value="{ pos: { 3.196697, -112.949013, 6.000000 }, size: { 1000.000000, 1000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
-										</properties>
-									</transformcomponent>
-									<rendercomponent type="RenderComponent">
-										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
-										</properties>
-									</rendercomponent>
-								</properties>
-							</Water>
 							<DirectionalLight type="DirectionalLight">
 								<children count="0"/>
 								<properties count="10">
@@ -135,13 +82,13 @@
 									<name type="String" value="DirectionalLight"/>
 									<pos type="vec3" value="{ -0.277206, 0.000000, 58.411102 }"/>
 									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 0.000003, 1.559988, 1.559987 }"/>
+									<rotation type="vec3" value="{ 0.000006, 1.559993, 1.559993 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { -0.277206, 0.000000, 58.411102 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000003, 1.559988, 1.559987 } }"/>
+									<transform type="Transform" value="{ pos: { -0.277206, 0.000000, 58.411102 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000006, 1.559993, 1.559993 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { -0.277206, 0.000000, 58.411102 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000003, 1.559988, 1.559987 } }"/>
+											<transform type="Transform" value="{ pos: { -0.277206, 0.000000, 58.411102 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000006, 1.559993, 1.559993 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -183,10 +130,10 @@
 										<properties count="2">
 											<materials type="Material">
 												<properties count="6">
-													<shininess type="float" value="3.45109e-16"/>
+													<shininess type="float" value="2.3696e+11"/>
 													<emissive_color type="Color" value="{ r = 0.000000, g = 0.000000, b = 0.000000, a = 1.000000 }"/>
 													<ambient_color type="Color" value="{ r = 0.000000, g = 0.000000, b = 0.000000, a = 1.000000 }"/>
-													<diffuse_color type="Color" value="{ r = 0.600000, g = 0.600000, b = 0.600000, a = 0.000000 }"/>
+													<diffuse_color type="Color" value="{ r = 0.600000, g = 0.600000, b = 0.600000, a = 236959956992.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
 															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
@@ -195,7 +142,7 @@
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="////Models/Primitives/Sphere.dae"/>
+											<file type="String" value="Models/Primitives/Sphere.dae"/>
 										</properties>
 									</mesh>
 									<script type="NULL"/>
@@ -203,7 +150,7 @@
 									<pos type="vec3" value="{ 0.000000, 0.000000, 30.164986 }"/>
 									<size type="vec3" value="{ 5.000000, 5.000000, 5.000000 }"/>
 									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+									<color type="Color" value="{ r = 0.500000, g = 0.500000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
 									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 30.164986 }, size: { 5.000000, 5.000000, 5.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
@@ -213,7 +160,7 @@
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
 										<properties count="1">
-											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+											<color type="Color" value="{ r = 0.500000, g = 0.500000, b = 1.000000, a = 1.000000 }"/>
 										</properties>
 									</rendercomponent>
 								</properties>
