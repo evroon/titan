@@ -24,7 +24,7 @@ void SimpleMesh::init(const Array<Vertex>& p_vertices, const Array<Face>& p_face
 	vertices = new Vertex[vertices_count];
 	faces = new Face[faces_count];
 
-	for (int c = 0; c < p_vertices.size(); c++)
+	for (int c = 0; c < vertices_count; c++)
 		vertices[c] = p_vertices[c];
 
 	for (int c = 0; c < p_faces.size(); c++)
@@ -303,7 +303,7 @@ void Mesh::MeshNode::draw()
 {
 	glBindVertexArray(VAO);
 
-	if (material)
+	/*if (material)
 	{
 		material->get_shader()->bind();
 		material->get_shader()->set_uniform("color", parent->model->get_color() * material->get_diffuse_color());
@@ -319,7 +319,7 @@ void Mesh::MeshNode::draw()
 		{
 			material->get_shader()->set_uniform("texture_enabled", false);
 		}
-	}
+	}*/
 
 	RENDERER->use_blending();
 

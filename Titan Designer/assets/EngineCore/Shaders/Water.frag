@@ -18,8 +18,8 @@ void main()
 	
 	float t = time / 10000.0;
 	
-	vec3 n1 = texture2D(normals, position.xy / 5.0 + vec2(t / 1.1, t)).rgb;
-	vec3 n2 = texture2D(normals, position.xy / 5.0 + vec2(t, -t)).rgb;
+	vec3 n1 = texture2D(normals, position.xy / 25.0 + vec2(t / 1.1, t)).rgb;
+	vec3 n2 = texture2D(normals, position.xy / 25.0 + vec2(t, -t)).rgb;
 	
 	vec3 normal = (n1.xzy + n2.xzy) / 2.0;
 	normal = normal * 2.0 - 1.0;

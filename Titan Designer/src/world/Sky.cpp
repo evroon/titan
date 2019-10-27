@@ -78,7 +78,7 @@ void Sky::draw()
 		return;
 
 	vec3 light_dir = light->get_transform().get_quat().get_axis();
-	light_dir = vec3(0, 0, -1);
+	light_dir = vec3(0, 1, -1).normalize();
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());

@@ -637,9 +637,8 @@ void DeferredRenderer::render_ssao()
 void DeferredRenderer::render_shadowmap()
 {
 	Camera* c = viewport->world->get_active_camera();
-	//T_LOG(c->get_axis().to_string());
 
-	light_camera->set_pos(vec3(0.0f, 0.0f, 50.0f));
+	light_camera->set_pos(vec3(0.0f, 0.0f, 75.0f));
 	light_camera->set_rotation(vec3(-PI / 2.0f, 0.0f, 0.0f));
 	light_camera->set_projection(30.0f, 1.0f, 100.0f);
 
@@ -940,7 +939,6 @@ void DeferredRenderer::render()
 		use_depth_test(c->get_near(), c->get_far());
 
 		activate_world_transform();
-		use_wireframe();
 		viewport->world->draw();
 		viewport->post_draw_world();
 		deactivate_world_transform();

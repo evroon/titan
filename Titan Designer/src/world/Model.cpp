@@ -29,12 +29,13 @@ Model::~Model()
 void Model::draw()
 {
 	if (!mesh)
-		return;
+		load_mesh("assets/Models/Primitives/Box.dae");
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("color_id", color_id);
+	shader->set_uniform("color", get_color());
 
 	mesh->draw();
 }
@@ -47,7 +48,7 @@ void Model::shadow_draw()
 	shader->set_uniform("color", get_color());
 	shader->set_uniform("texture_enabled", true);
 	shader->set_uniform("ambient", vec3(0.3f));
-
+	
 	mesh->draw();
 
 	shader->set_uniform("color", Color::White);
@@ -55,6 +56,7 @@ void Model::shadow_draw()
 
 void Model::load_mesh(const String& p_path)
 {
+	T_LOG("Loading mesh " + p_path);
 	set_mesh(new Mesh(p_path));
 }
 

@@ -212,7 +212,7 @@ vec3 lighting()
 	//if (!lighting_enabled)
 	//	return vec3(1.0);
 	
-	float diff = dot(normal, vec3(0.0, 0.0, 1.0));
+	float diff = dot(normal, normalize(vec3(0.0, 1.0, 1.0)));
 	
 	vec3 diffuse = diff * vec3(1);
 	vec3 specular = get_specular();
@@ -261,8 +261,9 @@ void main()
 	tex_coords = pos * vec2(0.5) + vec2(0.5);
 
 	albedo = texture2D(g_albedo, tex_coords).rgb;
+	material = texture2D(g_material, tex_coords).rgb;
 
-	if (material.xy == vec2(0.0, 0.0)) {
+	if (material == vec3(0.0)) {
 		final_color = vec4(albedo, 1.0);
 		return;
 	}
@@ -272,7 +273,7 @@ void main()
 	
 	if (material == vec3(1.0, 0.0, 0.0) || material == vec3(1.0, 0.0, 1.0))
 	{
-		final_color = vec4(albedo * lighting(), 1.0);
+		final_color = vec4(albedo, 1.0);
 		return;
 	}
 	
