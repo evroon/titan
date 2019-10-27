@@ -127,7 +127,12 @@ Variant Serializer::deserialize_recursively(const XmlNode& p_node)
 	VariantType type = p_node.get_attributes()[0].get_value();
 	if (type.derives_from_type<Resource>())
 	{
-		Serializer::Property p = deserialize_property(properties[0]);
+		XmlNode file_property;
+		for (XmlNode p : properties) {
+			if (p.get_name() == "file")
+				file_property = p;
+		}
+		Serializer::Property p = deserialize_property(file_property);
 		result = CONTENT->Load(p.value.ToString());
 		return result;
 	}

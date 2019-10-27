@@ -22,6 +22,7 @@ public:
 	static void bind_methods();
 
 protected:
+	virtual void file_loaded() { }
 
 	File file;
 };

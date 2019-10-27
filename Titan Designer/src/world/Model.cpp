@@ -29,7 +29,7 @@ Model::~Model()
 void Model::draw()
 {
 	if (!mesh)
-		load_mesh("assets/Models/Primitives/Box.dae");
+		return;
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());

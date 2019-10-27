@@ -98,8 +98,10 @@ Object* ContentManager::Load(const File &p_file)
 		return LoadTextFile(p_file);
 	else if (type == Titanscript)
 		return new TitanScript(p_file.get_absolute_path());
-	else
+	else {
+		T_ERROR("Unkonwn Resource type: " + String(p_file.get_name()));
 		return 0;
+	}
 }
 
 Mesh* ContentManager::load_mesh(const File & p_file)
