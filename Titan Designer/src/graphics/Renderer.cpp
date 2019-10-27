@@ -523,16 +523,16 @@ DeferredRenderer::DeferredRenderer()
 	reflection_camera = new Camera;
 	light_camera = new Camera;
 
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex0.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex1.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex2.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex3.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex4.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex5.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex6.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex7.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex8.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/lens_flare/tex9.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex0.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex1.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex2.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex3.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex4.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex5.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex6.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex7.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex8.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex9.png"));
 
 	grid_texture = CONTENT->LoadTexture("Textures/tile.png");
 

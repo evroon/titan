@@ -391,7 +391,7 @@ Water::Water()
 	set_pos(vec3(0, 0, 12.0f));
 
 	shader = CONTENT->LoadShader("EngineCore/Shaders/Water");
-	normals = CONTENT->LoadTexture("Textures/dudv.jpg");
+	normals = CONTENT->LoadTexture("Textures/oreon/dudv.jpg");
 }
 
 void Water::draw()
