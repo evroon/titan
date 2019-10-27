@@ -849,7 +849,7 @@ void DeferredRenderer::render_first_pass()
 	}
 	else
 	{
-		first_pass->set_uniform("ambient", vec3(0.3f));
+		first_pass->set_uniform("ambient", vec3(0.4f));
 		first_pass->set_uniform("fog_enabled", false);
 	}
 
