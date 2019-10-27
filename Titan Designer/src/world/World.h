@@ -8,6 +8,7 @@
 class Viewport;
 class PhysicsWorld2D;
 class PhysicsWorld3D;
+class DirectionalLight;
 
 class World : public Node
 {
@@ -38,6 +39,8 @@ public:
 	
 	void set_active_camera(Camera *p_camera);
 	Camera* get_active_camera() const;
+
+	DirectionalLight* get_active_light() const;
 
 	PhysicsWorld2D* get_physics_2d() const;
 	PhysicsWorld3D* get_physics_3d() const;

@@ -637,9 +637,10 @@ void DeferredRenderer::render_ssao()
 void DeferredRenderer::render_shadowmap()
 {
 	Camera* c = viewport->world->get_active_camera();
+	DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 
-	light_camera->set_pos(vec3(0.0f, 0.0f, 75.0f));
-	light_camera->set_rotation(vec3(-PI / 2.0f, 0.0f, 0.0f));
+	light_camera->set_pos(light->get_pos());
+	light_camera->set_rotation(light->get_rotation());
 	light_camera->set_projection(30.0f, 1.0f, 100.0f);
 
 	light_camera->update_matrices();
@@ -807,7 +808,7 @@ void DeferredRenderer::render_first_pass()
 	vec3 light_dir = vec3(0, 0, -1);
 	Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
 	vec3 view_pos = ACTIVE_WORLD->get_active_camera()->get_pos();
-	DirectionalLight* light = ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
+	DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 	bool lighting_enabled = false;
 
 	if (sky)

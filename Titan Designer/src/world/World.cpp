@@ -4,6 +4,7 @@
 #include "graphics/Renderer.h"
 
 #include "world/Terrain.h"
+#include "world/Light.h"
 
 #include "core/CoreNames.h"
 
@@ -152,6 +153,11 @@ void World::set_active_camera(Camera *p_camera)
 Camera* World::get_active_camera() const
 {
 	return active_camera;
+}
+
+DirectionalLight* World::get_active_light() const
+{
+	return ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 }
 
 PhysicsWorld2D* World::get_physics_2d() const
