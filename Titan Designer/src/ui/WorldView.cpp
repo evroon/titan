@@ -458,35 +458,36 @@ void WorldView::post_draw_world()
 
 	World* world = viewport->get_world();
 
-	vec2 item_size = selected->cast_to_type<WorldObject*>()->get_size().get_xy() + vec2(2);
-	vec2 item_pos = selected->cast_to_type<WorldObject*>()->get_pos().get_xy();
-	vec2 handle_size = vec2(4.0f);
-	vec2 offset = item_size + handle_size;
+	if (handle_2d)
+	{
+		vec2 item_size = selected->cast_to_type<WorldObject*>()->get_size().get_xy() + vec2(2);
+		vec2 item_pos = selected->cast_to_type<WorldObject*>()->get_pos().get_xy();
+		vec2 handle_size = vec2(4.0f);
+		vec2 offset = item_size + handle_size;
 
-	DrawCommand command;
-	command.type = DrawCommand::FRAME;
-	command.area = rect2(item_pos, item_size);
-	command.color = TO_RGB(vec3i(255, 164, 66));
-	command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
-	command.shader = CanvasData::get_singleton()->get_default_shader();
+		DrawCommand command;
+		command.type = DrawCommand::FRAME;
+		command.area = rect2(item_pos, item_size);
+		command.color = TO_RGB(vec3i(255, 164, 66));
+		command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
+		command.shader = CanvasData::get_singleton()->get_default_shader();
 
-	render_frame(command);
+		render_frame(command);
 
-	command.area = rect2(item_pos + offset, handle_size);
-	render_box(command);
-	command.area = rect2(item_pos - offset, handle_size);
-	render_box(command);
-	command.area = rect2(item_pos + offset * vec2(1, -1), handle_size);
-	render_box(command);
-	command.area = rect2(item_pos + offset * vec2(-1, 1), handle_size);
-	render_box(command);
+		command.area = rect2(item_pos + offset, handle_size);
+		render_box(command);
+		command.area = rect2(item_pos - offset, handle_size);
+		render_box(command);
+		command.area = rect2(item_pos + offset * vec2(1, -1), handle_size);
+		render_box(command);
+		command.area = rect2(item_pos + offset * vec2(-1, 1), handle_size);
+		render_box(command);
+	}
 
 	// draw transformation handles
-
 	vec3 pos = selected->cast_to_type<WorldObject*>()->get_pos();
 
 	// draw invisible plane with position data
-
 	raycast_fbo->bind();
 
 	Transform t1, t2;
