@@ -214,17 +214,20 @@ float Camera::get_focal_length() const
 
 vec3 Camera::get_forward() const
 {
-	return (get_view_matrix() * vec4(0, 1, 0, 0)).get_xyz();
+	// TODO: Has to be optimized. Need to use quaternion.
+	return (view_matrix.inverse() * vec4(0, 0, -1, 0)).get_xyz();
 }
 
 vec3 Camera::get_up() const
 {
-	return vec3();
+	// TODO: Has to be optimized. Need to use quaternion.
+	return (view_matrix.inverse() * vec4(0, 1, 0, 0)).get_xyz();
 }
 
 vec3 Camera::get_right() const
 {
-	return vec3();
+	// TODO: Has to be optimized. Need to use quaternion.
+	return (view_matrix.inverse() * vec4(1, 0, 0, 0)).get_xyz();
 }
 
 void Camera::handle_input()
@@ -260,22 +263,22 @@ void Camera::handle_input()
 
 	//movement
 	if (KEYBOARD->is_button_pressed(Key::KEY_A))
-		c->move(movement_speed * vec3(-1, 0, 0));
+		c->move(movement_speed * c->get_right().normalize() * -1.0f);
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_D))
-		c->move(movement_speed * vec3(1, 0, 0));
+		c->move(movement_speed * c->get_right().normalize());
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_W))
-		c->move(movement_speed * vec3(0, 1, 0));
+		c->move(movement_speed * c->get_forward().normalize());
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_S))
-		c->move(movement_speed * vec3(0, -1, 0));
+		c->move(movement_speed * c->get_forward().normalize() * -1.0f);
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_E))
-		c->move(movement_speed * vec3(0, 0, 1));
+		c->move(movement_speed * c->get_up().normalize());
 
 	if (KEYBOARD->is_button_pressed(Key::KEY_F))
-		c->move(movement_speed * vec3(0, 0, -1));
+		c->move(movement_speed * c->get_up().normalize() * -1.0f);
 
 	if (t)
 	{

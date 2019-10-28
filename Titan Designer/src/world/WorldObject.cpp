@@ -198,9 +198,7 @@ void WorldObject::set_rotation(const vec3& p_rotation)
 
 vec3 WorldObject::get_axis() const
 {
-	vec3 p = get_pos();
-	vec3 t = (transformcomponent->get_transform().get_model() * vec4(0, 1, 0, 1)).get_xyz();
-	return t - vec3(0, 0, 0);
+	return (transformcomponent->get_transform().get_model() * vec4(0, 1, 0, 1)).get_xyz();
 }
 
 void WorldObject::move(const vec3 & p_delta)

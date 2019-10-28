@@ -8,6 +8,8 @@
 #include "world/Model.h"
 #include "world/Terrain.h"
 
+#include "input/Keyboard.h"
+
 WorldView::WorldView() : WorldView(NULL)
 {
 
@@ -310,13 +312,42 @@ void WorldView::handle_event(UIEvent *ui_event)
 	}
 	else
 	{
-		if (ui_event->type == UIEvent::MOUSE_PRESS && ui_event->button_type == Mouse::CENTER)
+		if (ui_event->type == UIEvent::MOUSE_PRESS && (ui_event->button_type == Mouse::RIGHT || ui_event->button_type == Mouse::CENTER))
 		{
-			if (ui_event->button_type == Mouse::CENTER)
-			{
-				cam_dragging = ui_event->press_type == UIEvent::DOWN;
-				prev_cam_drag_pos = ui_event->pos;
-			}
+			cam_dragging = ui_event->press_type == UIEvent::DOWN;
+			prev_cam_drag_pos = ui_event->pos;
+		}
+		else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::RIGHT) && cam_dragging)
+		{
+			vec2 current_drag_pos = MOUSE->get_position();
+			vec2 drag_diff = current_drag_pos - prev_cam_drag_pos;
+			Camera* cam = viewport->get_world()->get_active_camera();
+
+			vec3 up = cam->get_up();
+			vec3 right = cam->get_right();
+			vec3 x = right * vec3(drag_diff * cam->get_zoom(), 0.0f).x;
+			vec3 y = up * vec3(drag_diff * cam->get_zoom(), 0.0f).y;
+			vec3 speed = 1.0 / 25.0f;
+
+			if (KEYBOARD->is_button_pressed(Key::KEY_LSHIFT))
+				speed *= 3.0f;
+
+			if (KEYBOARD->is_button_pressed(Key::KEY_LCONTROL))
+				speed /= 3.0f;
+
+			cam->move((x + y) * speed);
+			prev_cam_drag_pos = current_drag_pos;
+		}
+		else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::CENTER) && cam_dragging)
+		{
+			vec2 current_drag_pos = MOUSE->get_position();
+			vec2 drag_diff = current_drag_pos - prev_cam_drag_pos;
+			Camera* cam = viewport->get_world()->get_active_camera();
+			float speed = 1.0 / 500.0f;
+			drag_diff *= speed;
+
+			cam->rotate(Quaternion(vec3(drag_diff.y, -drag_diff.x, 0)));
+			prev_cam_drag_pos = current_drag_pos;
 		}
 		else if (ui_event->type == UIEvent::MOUSE_PRESS || ui_event->type == UIEvent::MOUSE_HOVER)
 		{
