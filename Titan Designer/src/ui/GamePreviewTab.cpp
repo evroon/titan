@@ -53,6 +53,19 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 			toggle_2d->set_text("2D");
 	
 	})));
+
+	TextButton* toggle_wireframe = new TextButton("F");
+	toggle_wireframe->connect("clicked",
+		Connection::create_from_lambda(new V_Method_0([this, toggle_wireframe]() {
+			bool v = world_view->get_viewport()->get_wireframe_enabled();
+			world_view->get_viewport()->set_wireframe_enabled(!v);
+
+			if (v)
+				toggle_wireframe->set_text("F");
+			else
+				toggle_wireframe->set_text("W");
+
+			})));
 	
 	world_view = new WorldView(p_scene);
 
@@ -61,6 +74,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	buttons.add_child(strip);
 	buttons.add_child(combo_box);
 	buttons.add_child(toggle_2d);
+	buttons.add_child(toggle_wireframe);
 
 	float s = buttons.get_child_by_index(0)->cast_to_type<Control*>()->get_required_size().y;
 

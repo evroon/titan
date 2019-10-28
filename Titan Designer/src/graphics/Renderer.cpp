@@ -192,14 +192,12 @@ bool Renderer::get_draw_on_screen() const
 	return draw_on_screen;
 }
 
-void Renderer::use_wireframe()
+void Renderer::use_wireframe(bool p_wireframe)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-}
-
-void Renderer::fill()
-{
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (p_wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 Texture2D* Renderer::get_texture(int p_type) const
@@ -938,11 +936,14 @@ void DeferredRenderer::render()
 		c->update_matrices();
 
 		use_depth_test(c->get_near(), c->get_far());
+		use_wireframe(viewport->get_wireframe_enabled());
 
 		activate_world_transform();
 		viewport->world->draw();
 		viewport->post_draw_world();
 		deactivate_world_transform();
+
+		use_wireframe(false);
 
 		stop_depth_test();
 	}

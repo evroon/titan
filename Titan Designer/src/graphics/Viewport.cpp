@@ -65,6 +65,16 @@ int Viewport::get_mode() const
 	return destination;
 }
 
+void Viewport::set_wireframe_enabled(bool p_wireframe_enabled)
+{
+	wireframe_enabled = p_wireframe_enabled;
+}
+
+bool Viewport::get_wireframe_enabled() const
+{
+	return wireframe_enabled;
+}
+
 void Viewport::set_fbo(FBO2D *p_fbo)
 {
 	fbo = p_fbo;
@@ -306,6 +316,7 @@ void Viewport::bind_methods()
 {
 	REG_PROPERTY(world);
 	REG_PROPERTY(canvas);
+	REG_PROPERTY(wireframe_enabled);
 }
 
 EditorViewport::EditorViewport(Renderer * p_renderer) : Viewport(p_renderer)

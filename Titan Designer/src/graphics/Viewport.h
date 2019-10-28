@@ -77,6 +77,9 @@ public:
 	void set_mode(DrawDestination p_mode);
 	int get_mode() const;
 
+	void set_wireframe_enabled(bool p_wireframe_enabled);
+	bool get_wireframe_enabled() const;
+
 	void set_fbo(FBO2D *p_fbo);
 	FBO2D* get_fbo() const;
 
@@ -135,6 +138,7 @@ private:
 	rect2 renderarea;
 
 	bool fps_locked;
+	bool wireframe_enabled;
 };
 
 class EditorViewport : public Viewport

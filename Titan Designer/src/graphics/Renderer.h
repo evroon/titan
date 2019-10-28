@@ -87,8 +87,7 @@ public:
 	void set_draw_on_screen(bool p_draw_on_screen);
 	bool get_draw_on_screen() const;
 
-	void use_wireframe();
-	void fill();
+	void use_wireframe(bool p_wireframe);
 
 	Texture2D* get_texture(int p_type) const;
 	FBO2D* get_fbo(int p_type) const;
