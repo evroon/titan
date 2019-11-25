@@ -184,6 +184,9 @@ void Dock::add_tab(Tab *p_tab)
 
 void Dock::remove_tab(int p_index)
 {
+	if (p_index >= tabs.size() - 1 || p_index < 0)
+		return;
+
 	set_active_tab(0);
 
 	GC->queue_clean(tabs[p_index]);
@@ -196,7 +199,7 @@ void Dock::remove_tab(int p_index)
 
 void Dock::set_active_tab(int p_index)
 {
-	if (p_index == -1)
+	if (p_index < 0)
 		return;
 
 	active = p_index;
