@@ -63,6 +63,71 @@ vec2 WorldView::get_required_size() const
 	return vec2(200);
 }
 
+void WorldView::update_camera()
+{
+	if (KEYBOARD->is_button_pressed(Key::KEY_P))
+		set_simulating(!simulating);
+
+	if (!viewport || !viewport->get_world() || simulating)
+		return;
+
+	World* world = viewport->get_world();
+	Camera* c = world->get_active_camera();
+	Terrain* t = world->get_worldobject("terrain")->cast_to_type<Terrain*>();
+
+	vec3 rotate_speed = TWOPI * 0.0000001f * TIME->get_deltatime();
+	vec3 movement_speed = 1.0f * 0.0001f * TIME->get_deltatime();
+
+	// Rotation
+	if (KEYBOARD->is_button_pressed(Key::KEY_UP))
+		c->rotate(rotate_speed * vec3(1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_DOWN))
+		c->rotate(rotate_speed * vec3(-1, 0, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_LEFT))
+		c->rotate(rotate_speed * vec3(0, 1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_RIGHT))
+		c->rotate(rotate_speed * vec3(0, -1, 0));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_M))
+		c->rotate(rotate_speed * vec3(0, 0, -1));
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_N))
+		c->rotate(rotate_speed * vec3(0, 0, 1));
+
+	// Movement
+	if (KEYBOARD->is_button_pressed(Key::KEY_A))
+		c->move(movement_speed * c->get_right().normalize() * -1.0f);
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_D))
+		c->move(movement_speed * c->get_right().normalize());
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_W))
+		c->move(movement_speed * c->get_forward().normalize());
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_S))
+		c->move(movement_speed * c->get_forward().normalize() * -1.0f);
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_E))
+		c->move(movement_speed * c->get_up().normalize());
+
+	if (KEYBOARD->is_button_pressed(Key::KEY_F))
+		c->move(movement_speed * c->get_up().normalize() * -1.0f);
+
+	if (t)
+	{
+		vec3 pos = c->get_pos();
+		float height = t->get_height(pos.get_xy());
+
+		if (c->get_pos().z < height + 1.0f)
+			c->set_pos(vec3(pos.x, pos.y, height + 1.0f));
+	}
+
+	c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
+}
+
 void WorldView::notification(int p_notification)
 {
 	if (!viewport)
@@ -85,6 +150,7 @@ void WorldView::notification(int p_notification)
 		break;
 
 	case NOTIFICATION_DRAW:
+		update_camera();
 
 		return_viewport = ACTIVE_VIEWPORT;
 		viewport->get_fbo()->clear();

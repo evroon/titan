@@ -44,6 +44,8 @@ public:
 	void post_draw_world();
 	void post_draw_canvas();
 
+	void update_camera();
+
 	void set_postprocess(PostProcess* p_postprocess);
 	PostProcess* get_postprocess() const;
 
