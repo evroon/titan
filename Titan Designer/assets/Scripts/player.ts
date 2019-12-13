@@ -2,23 +2,20 @@ extends Sprite
 
 define W_KEY Key("W")
 define S_KEY Key("S")
-define D_KEY Key("D")
-define A_KEY Key("A")
 
-define up_vector vec2(0, 1)
-define down_vector vec2(0, -1)
-define right_vector vec2(1, 0)
-define left_vector vec2(-1, 0)
-
-define SPEED 2.0
+define speed 1.0
 
 func ready()
-	pos = vec2(0, 400)
+	body = get_child("RigidBody2D")
+	body.set_as_box(false)
 	
-	pc = PhysicsComponent()
-	physicscomponent = pc
-	pc.set_as_box(true)
-	pc.fixed_rotation = true
+	body2 = get_parent().get_child("Opponent").get_child("RigidBody2D")
+	body2.set_as_box(false)
+	
 
 func update()
-	print("test22")
+	if (Keyboard.is_key_pressed(W_KEY))
+		pos = vec3(pos.x, min(+32.0, pos.y + speed), pos.z)
+
+	if (Keyboard.is_key_pressed(S_KEY))
+		pos = vec3(pos.x, max(-32.0, pos.y - speed), pos.z)

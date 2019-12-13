@@ -12,7 +12,7 @@ void GameApp::init()
 	VIEW->set_default_viewport(v);
 	VIEW->set_active_viewport(v);
 
-	Project* project = new Project("Projects/jumper.xml");
+	Project* project = new Project("Projects/pong.xml");
 	start_scene(project->get_main_scene());
 }
 

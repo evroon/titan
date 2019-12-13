@@ -56,7 +56,7 @@ void EditorApp::init()
 	v->resize(WINDOWSIZE_F / 2.0f);
 	v->set_mode(Viewport::DIRECT);
 
-	active_project = new Project("Projects/jumper.xml");
+	active_project = new Project("Projects/pong.xml");
 	//active_project = new Project;
 	//active_project->create();
 
