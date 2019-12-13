@@ -84,6 +84,9 @@ Object* ContentManager::Load(const File &p_file)
 	static StringName TextFile = "TextFile";
 	static StringName Titanscript = "TitanScript";
 
+	if (p_file.get_relative_path() == "/")
+		return nullptr;
+
 	if (type == Texture2D)
 		return LoadTexture(p_file);
 	else if (type == Mesh)
@@ -100,7 +103,7 @@ Object* ContentManager::Load(const File &p_file)
 		return new TitanScript(p_file.get_absolute_path());
 	else {
 		T_ERROR("Unkonwn Resource type: " + String(p_file.get_name()));
-		return 0;
+		return nullptr;
 	}
 }
 
