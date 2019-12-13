@@ -18,7 +18,7 @@ void PhysicsWorld3D::init()
 	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 	solver = new btSequentialImpulseConstraintSolver;
 	dynamics_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
-	dynamics_world->setGravity(btVector3(0, 0, -10.0f));
+	dynamics_world->setGravity(btVector3(0, 0, 0));
 }
 
 void PhysicsWorld3D::update()
@@ -67,7 +67,7 @@ void PhysicsWorld2D::init()
 	scalefactor = 1.0f;
 	scale = vec2(scalefactor);
 
-	gravity = b2Vec2(0.0f, -9.81f);
+	gravity = b2Vec2(0.0f, 0.0f);
 	world = new b2World(gravity);
 
 	world->SetContactListener(&collisiondata);
