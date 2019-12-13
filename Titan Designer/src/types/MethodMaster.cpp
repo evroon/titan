@@ -182,11 +182,10 @@ void MethodMaster::add_fundamental_methods()
 
 void MethodMaster::add_static_functions()
 {
-	//register_static_func(StringName("sin"), new R_Method_1([](float f) { return ::sin(f); }));
-	//register_static_func(StringName("sgn"), new R_Method_1([](Variant f) { return Math::sgn<float>(f); }));
-	//register_static_func(StringName("print"), new V_Method_1([](const String &s) { new TLog(s); }));
-
-	//REG_STATIC_FUNC("sin", Math::sgn<float>);
+	register_static_func(StringName("sin"), new R_Method_1([](float f) { return ::sin(f); }));
+	register_static_func(StringName("min"), new R_Method_2([](float f1, float f2) { return f1 > f2 ? f2 : f1; }));
+	register_static_func(StringName("max"), new R_Method_2([](float f1, float f2) { return f1 < f2 ? f2 : f1; }));
+	register_static_func(StringName("sgn"), new R_Method_1([](Variant f) { return Math::sgn(f); }));
 }
 
 void MethodMaster::register_constant(VariantType type, const ConstantMember &p_constant)
@@ -220,7 +219,7 @@ void MethodMaster::register_constructor(VariantType type, TConstructor *cstr)
 
 void MethodMaster::register_static_func(StringName name, Method *method)
 {
-	static_funcs[name] = method;
+	static_funcs.set(name, method);
 }
 
 void MethodMaster::register_signal(const VariantType &p_type, const StringName &p_signal)
