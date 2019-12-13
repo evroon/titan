@@ -437,8 +437,8 @@ Variant Executer::Execute(ScriptNode *node)
 
 		for (int c = 0; c < call->params.size(); c++)
 			state->addparam(Execute(call->params[c]));		//Add parameters to stack
-
-		state->addreturn(run_method(MMASTER->static_funcs[call->name], Array<Variant>(state->getval(0))));
+		
+		state->addreturn(run_method(MMASTER->static_funcs[call->name], state->GetArgs()));
 
 		state->pushparas();
 		return state->GetReturns();

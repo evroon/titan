@@ -91,7 +91,7 @@ Block* Parser::ParseBlock(const Line &line)
 
 ScriptNode* Parser::ParsePart(const Line &line)
 {
-	if (line.StartsWith("else"))
+	if (line.tokens.size() < 1 || line.StartsWith("else"))
 		return NULL;
 	else if (line.StartsWith("elseif"))
 		return NULL;
