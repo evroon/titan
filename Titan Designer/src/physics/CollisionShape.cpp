@@ -103,6 +103,8 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 
 	fixdef.shape = &shape;
 	fixdef.density = 1.0;
+	fixdef.restitution = 1.0f;
+	fixdef.friction = 0.0f;
 
 	bodydef.type = dyn ? b2_dynamicBody : b2_staticBody;
 	bodydef.position.Set(transform.get_pos().x, transform.get_pos().y);
@@ -116,11 +118,20 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 //CircleBody
 //=========================================================================
 
-CircleShape2D::CircleShape2D(PhysicsWorld2D *world, bool dyn)
+CircleShape2D::CircleShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 {
-	shape.m_radius = 1.0f;
+	const Transform& transform = p_object->get_transform();
+	shape.m_radius = transform.get_size().x;
 
 	fixdef.shape = &shape;
 	fixdef.density = 1.0;
+	fixdef.restitution = 1.0f;
+	fixdef.friction = 0.0f;
+
+	bodydef.type = dyn ? b2_dynamicBody : b2_staticBody;
+	bodydef.position.Set(transform.get_pos().x, transform.get_pos().y);
+
+	body = p_world->world->CreateBody(&bodydef);
 	body->CreateFixture(&fixdef);
+	body->SetUserData(p_object);
 }

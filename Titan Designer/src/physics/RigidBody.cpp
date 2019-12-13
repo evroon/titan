@@ -70,7 +70,7 @@ void RigidBody2D::update()
 {
 	if (!shape)
 		return;
-	
+		
 	b2Vec2 pos = shape->body->GetPosition();
 	vec2 new_pos = vec2(pos.x, pos.y) * physics_2d->get_scale();
 	
@@ -138,7 +138,7 @@ void RigidBody2D::set_as_box(bool p_dynamic)
 
 void RigidBody2D::set_as_circle(bool p_dynamic)
 {
-	shape = new CircleShape2D(physics_2d, p_dynamic);
+	shape = new CircleShape2D(physics_2d, get_world_object(), p_dynamic);
 }
 
 void RigidBody2D::apply_force(const vec2& p_force)

@@ -52,6 +52,7 @@ public:
 
 private:
 	friend class BoxShape2D;
+	friend class CircleShape2D;
 
 	b2World *world;
 	b2AABB universesize;
