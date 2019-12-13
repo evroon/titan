@@ -68,12 +68,14 @@ void RigidBody2D::ready()
 
 void RigidBody2D::update()
 {
-	Transform &t = get_world_object()->transformcomponent->transform;
-
+	if (!shape)
+		return;
+	
 	b2Vec2 pos = shape->body->GetPosition();
-
-	t.set_pos2d(vec2(pos.x, pos.y) * physics_2d->get_scale());
-	t.set_rotation(vec3(0.0f, 0.0f, -shape->body->GetAngle()));
+	vec2 new_pos = vec2(pos.x, pos.y) * physics_2d->get_scale();
+	
+	get_world_object()->set_pos(vec3(new_pos, get_world_object()->get_pos().z));
+	get_world_object()->set_rotation(vec3(0.0f, 0.0f, -shape->body->GetAngle()));
 }
 
 void RigidBody2D::set_as_sensor(bool p_value)
@@ -119,7 +121,7 @@ void RigidBody2D::set_transform(const Transform &p_transform)
 {
 	vec2 pos = p_transform.get_pos().get_xy() / physics_2d->get_scale();
 
-	if (shape->body)
+	if (shape && shape->body)
 	{
 		shape->body->SetTransform(b2Vec2(pos.x, pos.y), p_transform.get_rotation().z);
 		shape->body->SetAwake(true);
