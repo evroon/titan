@@ -27,9 +27,6 @@ void Node::add_child(Node* p_child)
 
 	p_child->parent = this;
 	p_child->emit_signal("parent_changed");
-	
-	if (p_child->has_script())
-		p_child->run("ready", {});
 }
 
 void Node::remove_child(Node* p_child)
