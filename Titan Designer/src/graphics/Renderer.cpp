@@ -711,11 +711,14 @@ void DeferredRenderer::render_flare()
 
 	activate_world_transform();
 	vec4 s = (final_matrix * vec4(light_position, 1.0f));
+
+	if (s.w < 0)
+		return;
+
 	vec2 sun_on_screen = s.get_xy() / s.w;
 	deactivate_world_transform();
 
 	sun_on_screen *= viewport->get_size();
-	sun_on_screen *= -1.0f;
 
 	stop_depth_test();
 	use_additive_blending();
@@ -735,8 +738,6 @@ void DeferredRenderer::render_flare()
 	float max_length = viewport->get_size().x;
 	shader_2d->set_uniform("color", vec4(1.0f, 1.0f, 1.0f, 1.0f - length / max_length));
 	shader_2d->set_uniform("texbounds", vec4(0.0f, 1.0f, 0.0f, 1.0f));
-
-	sun_on_screen *= -1.0f;
 
 	for (int c = 0; c < count; c++)
 	{
