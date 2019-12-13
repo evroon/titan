@@ -522,6 +522,8 @@ void WorldView::handle_event(UIEvent *ui_event)
 				TIME->game_time += 10e6;
 			else if (ui_event->key == Key::KEY_T)
 				RENDERER->use_wireframe(true);
+			else if (ui_event->key == Key::KEY_F5)
+				set_simulating(!get_simulating());
 			else if (terrain && ui_event->key == Key::KEY_0)
 				terrain->get_brush()->apply();
 			else if (terrain && ui_event->key == Key::KEY_1)
