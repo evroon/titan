@@ -96,7 +96,7 @@ float Font::get_width(const String& text) const
 	float w = to_float(temp);
 
 	if (tab_count > 0)
-		w += get_width(" ") * 3.0f * to_float(tab_count);
+		w += get_width(" ") * 2.0f * to_float(tab_count);
 
 	return to_float(w);
 }
