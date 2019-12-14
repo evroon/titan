@@ -14,7 +14,7 @@ ComboBox::~ComboBox()
 
 vec2 ComboBox::get_required_size() const
 {
-	return vec2(200, 20);
+	return vec2(200, get_default_font()->get_height() / 2.0f + 6);
 }
 
 void ComboBox::notification(int p_notification)
@@ -24,7 +24,7 @@ void ComboBox::notification(int p_notification)
 	case NOTIFICATION_DRAW:
 
 		rect2 work_area = area;
-		work_area.size.y = get_default_font()->get_height() / 2.0f + 8;
+		work_area.size.y = get_default_font()->get_height() / 2.0f + 6;
 
 		draw_frame(work_area, TO_RGB(80));
 

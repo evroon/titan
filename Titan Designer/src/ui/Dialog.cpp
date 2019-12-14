@@ -16,7 +16,7 @@
 
 Dialog::Dialog()
 {
-	close_button = new ImageButton("EngineCore/UI/Close.png");
+	close_button = new IconButton("solid/times", vec2i(32));
 	close_button->set_anchors(Control::ANCHOR_END, Control::ANCHOR_END, Control::ANCHOR_END, Control::ANCHOR_END);
 	close_button->set_margins(30, 31, 1, 1);
 
@@ -200,11 +200,11 @@ FileDialog::FileDialog() : FileDialog("")
 
 FileDialog::FileDialog(const String& p_file)
 {
-	directory_icon = CONTENT->LoadTexture("EngineCore/UI/Directory.png");
-	file_icon = CONTENT->LoadTexture("EngineCore/UI/Picture.png");
+	directory_icon = CONTENT->LoadFontAwesomeIcon("solid/folder");
+	file_icon = CONTENT->LoadFontAwesomeIcon("regular/file");
 
-	back_button = new ImageButton("EngineCore/UI/Back.png");
-	forward_button = new ImageButton("EngineCore/UI/Forward.png");
+	back_button = new IconButton("solid/arrow-left");
+	forward_button = new IconButton("solid/arrow-right");
 	buttons = new Container;
 	path_label = new TextField;
 	list = new ListView;

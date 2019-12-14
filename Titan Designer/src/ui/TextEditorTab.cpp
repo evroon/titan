@@ -10,16 +10,16 @@ TextEditorTab::TextEditorTab() : TextEditorTab("")
 
 TextEditorTab::TextEditorTab(const File& p_file)
 {
-	save_button = new ImageButton("EngineCore/UI/Save.png");
+	save_button = new IconButton("regular/save");
 	save_button->connect("clicked", this, "savebutton_pressed");
 
-	save_all_button = new ImageButton("EngineCore/UI/SaveAll.png");
+	save_all_button = new IconButton("regular/save");
 	save_all_button->connect("clicked", this, "savebutton_pressed");
 
-	new_button = new ImageButton("EngineCore/UI/New.png");
+	new_button = new IconButton("solid/plus");
 	new_button->connect("clicked", this, "open_file");
 
-	open_button = new ImageButton("EngineCore/UI/Open.png");
+	open_button = new IconButton("regular/folder-open");
 	open_button->connect("clicked", this, "show_dialog");
 
 	add_child(&textbox);
@@ -37,7 +37,7 @@ TextEditorTab::TextEditorTab(const File& p_file)
 	buttons.add_child(open_button);
 	buttons.add_child(new Seperator);
 	buttons.add_child(save_button);
-	buttons.add_child(new ImageButton("EngineCore/UI/SaveAll.png"));
+	buttons.add_child(new IconButton("regular/save"));
 
 	if (p_file.is_file())
 		open_file(p_file);
@@ -141,7 +141,7 @@ ShaderEditorTab::~ShaderEditorTab()
 
 void ShaderEditorTab::init()
 {
-	compile_button = new ImageButton("EngineCore/UI/SaveAll.png");
+	compile_button = new IconButton("regular/save");
 	compile_button->connect("clicked", this, "compile");
 	buttons.add_child(compile_button);
 }

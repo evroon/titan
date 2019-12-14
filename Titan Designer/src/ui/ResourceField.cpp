@@ -113,14 +113,14 @@ Texture2DField::~Texture2DField()
 
 void Texture2DField::init()
 {
-	load_button = new TextButton("Load");
+	load_button = new IconButton("solid/folder-open");
 	add_child(load_button);
 	
-	load_button->set_margins(100, 0, 40, 0);
+	load_button->set_margins(64, 0, 34, 0);
 	load_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 	load_button->connect("clicked", this, "load_texture");
 
-	open_button = new TextButton("...");
+	open_button = new IconButton("solid/folder-open");
 	open_button->connect("clicked", this, "open_button_clicked");
 	add_child(open_button);
 
@@ -234,23 +234,23 @@ ObjectField::~ObjectField()
 void ObjectField::init()
 {	
 	textfield = new TextField;
-	load_button = new TextButton("Load");
+	load_button = new IconButton("solid/folder-open");
 	
 	add_child(textfield);
 	add_child(load_button);
 
-	load_button->set_margins(90, 0, 34, 0);
+	load_button->set_margins(64, 0, 34, 0);
 	load_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 	load_button->connect("clicked", this, "load_button_clicked");
 
-	textfield->set_margins(0, 0, 94, 0);
+	textfield->set_margins(0, 0, 68, 0);
 	textfield->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
-	String image_path = "EngineCore/UI/New.png";
+	String image_path = "solid/plus";
 	if (get_value().isdef())
-		image_path = "EngineCore/UI/Forward.png";
+		image_path = "solid/wrench";
 
-	open_button = new ImageButton(image_path);
+	open_button = new IconButton(image_path);
 	open_button->connect("clicked", this, "open_button_clicked");
 	add_child(open_button);
 
@@ -306,7 +306,7 @@ void ObjectField::load_button_clicked()
 	else if (result.operator Object*()->derives_from_type<Node*>())
 		textfield->set_text(result.operator Node*()->get_name());
 
-	open_button->set_image(CONTENT->LoadTexture("EngineCore/UI/Forward.png"));
+	open_button->set_image(CONTENT->LoadFontAwesomeIcon("solid/wrench"));
 	return;
 }
 
@@ -319,7 +319,7 @@ void ObjectField::file_chosen(const String& p_path)
 
 vec2 ObjectField::get_required_size() const
 {
-	return vec2(100, textfield->get_required_size().y);
+	return vec2(100, MAX(textfield->get_required_size().y, open_button->get_required_size().y));
 }
 
 #undef CLASSNAME

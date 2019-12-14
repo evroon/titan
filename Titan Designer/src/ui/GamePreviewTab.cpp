@@ -18,18 +18,9 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 {
 	auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
 
-	Toggle* run_button = new Toggle(CONTENT->LoadTexture("EngineCore/UI/Run.png"));
+	Toggle* run_button = new Toggle(CONTENT->LoadFontAwesomeIcon("solid/play"));
 	run_button->set_tip_description("Run");
 	run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
-
-	ImageButton* move_button = new ImageButton("EngineCore/UI/Move.png");
-	move_button->set_tip_description("Move");
-
-	ImageButton* rotate_button = new ImageButton("EngineCore/UI/Rotate.png");
-	rotate_button->set_tip_description("Rotate");
-
-	ImageButton* scale_button = new ImageButton("EngineCore/UI/Scale.png");
-	scale_button->set_tip_description("Scale");
 	
 	ToggleStrip* strip = new ToggleStrip;
 	strip->add_child("Move", CONTENT->LoadTexture("EngineCore/UI/Move.png"));
@@ -76,7 +67,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	buttons.add_child(toggle_2d);
 	buttons.add_child(toggle_wireframe);
 
-	float s = buttons.get_child_by_index(0)->cast_to_type<Control*>()->get_required_size().y;
+	float s = buttons.get_required_size().y;
 
 	world_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 	world_view->set_margins(4, 4, 4, 12 + s);

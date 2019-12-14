@@ -23,7 +23,7 @@ ExplorerTab::ExplorerTab(Viewport* p_viewport)
 {
 	tree_view = new TreeView;
 	buttons = new Container;
-	add_button = new ImageButton("EngineCore/UI/New.png");
+	add_button = new IconButton("solid/plus");
 	search_field = new TextField;
 
 	buttons->add_child(add_button);

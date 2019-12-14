@@ -136,6 +136,21 @@ Texture2D* ContentManager::LoadTexture(const File &p_file)
 	return tex;
 }
 
+Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name, const vec2i& p_size, const Color& p_color)
+{
+	File file = "EngineCore/FontAwesome/svgs/" + p_name + ".svg";
+
+	for (int c = 0; c < textures.size(); c++)
+		if (textures[c]->get_file() == file)
+			return textures[c];
+
+	Texture2D* tex = new Texture2D(file, p_size, p_color);
+	tex->set_file(file);
+
+	textures.push_back(tex);
+	return tex;
+}
+
 RawTexture2D* ContentManager::LoadRawTexture(const File &p_file)
 {
 	RawTexture2D *tex = new RawTexture2D(p_file);

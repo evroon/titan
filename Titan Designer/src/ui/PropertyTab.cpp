@@ -15,9 +15,9 @@ PropertyTab::PropertyTab(Object* p_object)
 	property_view->set_margins(4, 4, 4, 40);
 
 	name_field = new TextField;
-	back_button = new ImageButton("EngineCore/UI/Back.png");
-	forward_button = new ImageButton("EngineCore/UI/Forward.png");
-	down_button = new ImageButton("EngineCore/UI/Down.png");
+	back_button = new IconButton("solid/arrow-left");
+	forward_button = new IconButton("solid/arrow-right");
+	down_button = new IconButton("solid/arrow-down");
 	bar = new Container;
 
 	//back_button

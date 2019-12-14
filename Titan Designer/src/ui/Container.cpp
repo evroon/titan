@@ -31,10 +31,10 @@ void Container::position_childs()
 	if (!is_vert)
 	{
 		//childs are placed from left to right
-		float top = get_area().get_top() - left_margin;
+		float top = get_area().get_top() - top_margin;
 		float bottom = get_area().get_bottom() + bottom_margin;
 
-		float offset_x = 0 + left_margin;
+		float offset_x = left_margin;
 
 		for (int c = 0; c < children.size(); c++)
 		{
@@ -45,7 +45,7 @@ void Container::position_childs()
 			control->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN, Control::ANCHOR_END);
 			control->set_margins(offset_x, 3, offset_x + minimum_size.x, 3);
 
-			offset_x += minimum_size.x;
+			offset_x += minimum_size.x + left_margin;
 		}
 	}
 	else

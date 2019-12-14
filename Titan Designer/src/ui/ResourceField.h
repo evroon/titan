@@ -62,8 +62,8 @@ public:
 private:
 	Ref<Texture2D> texture;
 
-	TextButton* load_button;
-	TextButton* open_button;
+	ImageButton* load_button;
+	ImageButton* open_button;
 
 	FileDialog* file_dialog;
 };
@@ -96,7 +96,7 @@ private:
 
 	TextField* textfield;
 
-	TextButton* load_button;
+	ImageButton* load_button;
 	ImageButton* open_button;
 
 	FileDialog* file_dialog;

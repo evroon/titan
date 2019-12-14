@@ -17,8 +17,8 @@ CheckBox::CheckBox(const Variable & p_variable) : PropertyControl(p_variable)
 
 void CheckBox::init()
 {
-	tex_checked = CONTENT->LoadTexture("EngineCore/UI/BoxChecked.png");
-	tex_unchecked = CONTENT->LoadTexture("EngineCore/UI/BoxUnChecked.png");
+	tex_checked = CONTENT->LoadFontAwesomeIcon("solid/check-square");
+	tex_unchecked = CONTENT->LoadFontAwesomeIcon("regular/square");
 }
 
 void CheckBox::switch_checked()

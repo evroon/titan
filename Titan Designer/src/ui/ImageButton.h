@@ -2,6 +2,8 @@
 
 #include "FramedButton.h"
 
+#define IconButton(X) ImageButton(CONTENT->LoadFontAwesomeIcon(X))
+
 class ImageButton : public FramedButton
 {
 	OBJ_DEFINITION(ImageButton, FramedButton);

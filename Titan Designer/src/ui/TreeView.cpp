@@ -406,8 +406,8 @@ TreeView::TreeView()
 	selected = NULL;
 	highlighted = NULL;
 
-	collapsed_tex = CONTENT->LoadTexture("EngineCore/UI/UnCollapsed.png");
-	expanded_tex = CONTENT->LoadTexture("EngineCore/UI/Collapsed.png");
+	collapsed_tex = CONTENT->LoadFontAwesomeIcon("solid/plus-square", vec2i(13));
+	expanded_tex = CONTENT->LoadFontAwesomeIcon("solid/minus-square", vec2i(13));
 
 }
 
@@ -632,7 +632,7 @@ void TreeView::notification(int p_notification)
 				if (item_numbers_enabled)
 					draw_text(font, c, vec2(item_area.get_left() + 4, item_area.pos.y), item_numbers_color);
 
-				float left = item_area.get_left() + internal_left_margin + depth_offset * item->depth;
+				float left = item_area.get_left() + internal_left_margin + depth_offset * item->depth + 4;
 
 				if (item->childs)
 				{
@@ -641,11 +641,11 @@ void TreeView::notification(int p_notification)
 					left += size.x;
 
 					if (item->expanded)
-						draw_texture(expanded_tex, rect2(vec2(left, item_area.pos.y), size * 2.0f), Color::White);
+						draw_texture(expanded_tex, rect2(vec2(left, item_area.pos.y), collapsed_tex->get_size() / 2.0f), Color::White);
 					else
-						draw_texture(collapsed_tex, rect2(vec2(left, item_area.pos.y), size * 2.0f), Color::White);
+						draw_texture(collapsed_tex, rect2(vec2(left, item_area.pos.y), collapsed_tex->get_size() / 2.0f), Color::White);
 
-					left += size.x + 4;
+					left += size.x + 8;
 				}
 				else
 				{

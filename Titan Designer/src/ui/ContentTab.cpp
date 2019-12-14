@@ -16,13 +16,13 @@ ContentTab::ContentTab(const File& p_file)
 	file = p_file;
 	home = file;
 
-	directory_icon = CONTENT->LoadTexture(File("EngineCore/UI/Directory.png"));
-	file_icon = CONTENT->LoadTexture(File("EngineCore/UI/Picture.png"));
+	directory_icon = CONTENT->LoadFontAwesomeIcon("regular/folder-open", vec2i(128, 128));
+	file_icon = CONTENT->LoadFontAwesomeIcon("solid/portrait", vec2i(128, 128));
 
-	back_button = new ImageButton("EngineCore/UI/Back.png");
-	forward_button = new ImageButton("EngineCore/UI/Forward.png");
-	home_button = new ImageButton("EngineCore/UI/Home.png");
-	up_button = new ImageButton("EngineCore/UI/Up.png");
+	back_button = new IconButton("solid/arrow-left");
+	forward_button = new IconButton("solid/arrow-right");
+	home_button = new IconButton("solid/home");
+	up_button = new IconButton("solid/arrow-up");
 
 	buttons = new Container;
 	path_label = new TextField;

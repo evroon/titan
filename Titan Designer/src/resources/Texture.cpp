@@ -12,8 +12,8 @@ void Texture::generate_gl_texture()
 	glGenTextures(1, &id);
 	glBindTexture(type, id);
 	set_filter(NO_FILTER);
-	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		
 	loaded = true;
 }
@@ -143,6 +143,48 @@ Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 	SDL_FreeSurface(image);
 }
 
+Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size, const Color& p_color) : Texture2D()
+{
+	SDL_Surface* image = IMG_Load((p_filepath).c_str());
+
+	if (!image)
+	{
+		T_ERROR("Failed to load svg: " + p_filepath + ", reason: " + IMG_GetError());
+		return;
+	}
+
+	SDL_Rect dst = { 0, 0, p_size.x, p_size.y };
+	SDL_Surface* processed = SDL_CreateRGBSurface(image->flags, p_size.x, p_size.y, 32, image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
+	SDL_UpperBlitScaled(image, NULL, processed, &dst);
+
+	if (!processed)
+	{
+		T_ERROR("Failed to resize svg: " + p_filepath + ", reason: " + SDL_GetError());
+		return;
+	}
+
+	unsigned char* pixels = (unsigned char*)processed->pixels;
+
+	for (int x = 0; x < processed->w; x++) {
+		for (int y = 0; y < processed->h; y++) {
+			pixels[4 * (y * processed->w + x) + 0] = p_color.r * 255;
+			pixels[4 * (y * processed->w + x) + 1] = p_color.g * 255;
+			pixels[4 * (y * processed->w + x) + 2] = p_color.b * 255;
+		}
+	}
+
+	generate_gl_texture();
+
+	int texture_format = processed->format->Amask ? GL_RGBA : GL_RGB;
+	glTexImage2D(GL_TEXTURE_2D, 0, texture_format, processed->w, processed->h, 0, texture_format, GL_UNSIGNED_BYTE, processed->pixels);
+	set_filter(BILINEAR_FILTER);
+
+	size = vec2(to_float(processed->w), to_float(processed->h));
+
+	SDL_FreeSurface(image);
+	SDL_FreeSurface(processed);
+}
+
 Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D()
 {
 	generate_gl_texture();
@@ -225,9 +267,7 @@ void RawTexture2D::free()
 Color RawTexture2D::read_pixel(const vec2i & p_pos)
 {
 	Uint32* pixels = (Uint32*)surface->pixels;
-
 	Uint32 pixel = pixels[p_pos.y * surface->pitch / 4 + p_pos.x];
-
 	Uint8 r, g, b;
 
 	SDL_GetRGB(pixel, surface->format, &r, &g, &b);

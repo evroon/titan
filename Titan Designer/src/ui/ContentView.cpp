@@ -19,8 +19,8 @@ vec2 ContentTile::get_required_size() const
 
 ContentView::ContentView()
 {
-	buttons.add_child(back = new ImageButton("EngineCore/UI/Back.png"));
-	buttons.add_child(forward = new ImageButton("EngineCore/UI/Forward.png"));
+	buttons.add_child(back = new IconButton("solid/arrow-left"));
+	buttons.add_child(forward = new IconButton("solid/arrow-right"));
 
 	go_home();
 }

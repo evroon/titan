@@ -77,6 +77,7 @@ public:
 	Texture2D(const vec2i& p_size, bool p_byte = true) : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y)), p_byte) { }
 	Texture2D(const vec2& p_size, int p_index);
 	Texture2D(const String &p_filepath);
+	Texture2D(const String& p_filepath, const vec2i& p_size, const Color& p_color);
 	Texture2D(SDL_Surface *p_surface);
 	Texture2D(aiTexture* p_texture);
 

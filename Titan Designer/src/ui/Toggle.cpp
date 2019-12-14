@@ -49,7 +49,7 @@ void Toggle::notification(int p_notification)
 			color = DEFAULT_THEME->get_selection_color();
 		
 		if (tex)
-			draw_texture(tex, area, color);
+			draw_texture(tex, rect2(area.pos, tex->get_size() / 2.0f), color);
 		else
 			draw_text(text, vec2(area.get_left(), area.pos.y));
 
@@ -66,7 +66,7 @@ void Toggle::notification(int p_notification)
 vec2 Toggle::get_required_size() const
 {
 	if (tex)
-		return tex->get_size();
+		return tex->get_size() + 4;
 
 	return DEFAULT_THEME->get_font()->get_width(text);
 }
