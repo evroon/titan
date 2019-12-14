@@ -503,13 +503,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;lua5.1.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Debug;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Debug;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -518,11 +518,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Libraries\bullet3\bin\Debug;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Debug;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Libraries\bullet3\bin\Debug;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Debug;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;BulletDynamics.lib;Bullet3Dynamics.lib;BulletCollision.lib;Bullet3Collision.lib;LinearMath.lib;Bullet3Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -533,7 +533,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
@@ -541,7 +541,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -552,7 +552,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
@@ -560,7 +560,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\lua\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -571,7 +571,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\include;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\include;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glm\glm;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\include;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\include;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
@@ -579,7 +579,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.1\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Erik\Desktop\OpenGL\Libraries\assimp\lib32;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 MIXER\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\Box2D\Build\vs2013\bin\x32\Release;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 TTF\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\SDL2\SDL2-2.0.10\lib\x86;C:\Users\Erik\Desktop\OpenGL\Libraries\glew\lib;C:\Users\Erik\Desktop\OpenGL\Libraries\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -590,12 +590,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletDynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\BulletCollision.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\LinearMath.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Dynamics.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Collision.lib;C:\Users\Daniel\Dropbox\Programming\Titan\Titan Designer\Bullet\lib\Release\Bullet3Common.lib;BulletDynamics.lib;Bullet3Dynamics.lib;BulletCollision.lib;Bullet3Collision.lib;LinearMath.lib;BulletCommon.lib;Bullet3Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -606,12 +606,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;LibNoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -622,24 +622,24 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\x64\Release;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\x64\Release;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;Bullet3Collision.lib;Bullet3Dynamics.lib;LinearMath.lib;Bullet3Common.lib;BulletCollision.lib;BulletDynamics.lib;libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PC Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\assimp\include;$(SolutionDir)Libraries\SDL2 MIXER\include;$(SolutionDir)Libraries\Box2D;$(SolutionDir)Libraries\SDL2 TTF/include;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\include;$(SolutionDir)Libraries\glm\glm;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\include;$(SolutionDir)Libraries\freeglut\include;$(SolutionDir)Libraries\glew-2.0.0\include;$(SolutionDir)Libraries\libnoisesrc-1.0.0\noise\src;$(SolutionDir)Libraries\bullet3\src;$(SolutionDir)Titan Designer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.0\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.1\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libraries\bullet3\bin;$(SolutionDir)Libraries\assimp\lib64;$(SolutionDir)Libraries\SDL2 MIXER\lib\x64;$(SolutionDir)Libraries\Box2D\Build\vs2013\bin\x64\Release;$(SolutionDir)Libraries\SDL2 TTF\lib\x64;$(SolutionDir)Libraries\SDL2 IMAGE\SDL2_image-2.0.5\lib\x64;$(SolutionDir)Libraries\SDL2\SDL2-2.0.10\lib\x64;$(SolutionDir)Libraries\glew-2.0.0\lib\Release\x64;$(SolutionDir)Libraries\freeglut\lib\x64;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;SDL2.lib;Box2D.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
