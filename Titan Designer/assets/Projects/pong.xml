@@ -46,13 +46,13 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="//////////////////////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="NULL"/>
@@ -140,24 +140,24 @@
 										<properties count="2">
 											<materials type="Material">
 												<properties count="6">
-													<shininess type="float" value="-1.794e-33"/>
+													<shininess type="float" value="9.65948e+07"/>
 													<emissive_color type="Color" value="{ r = 0.000000, g = 0.000000, b = 0.000000, a = 1.000000 }"/>
 													<ambient_color type="Color" value="{ r = 0.000000, g = 0.000000, b = 0.000000, a = 1.000000 }"/>
-													<diffuse_color type="Color" value="{ r = 0.600000, g = 0.600000, b = 0.600000, a = -0.000000 }"/>
+													<diffuse_color type="Color" value="{ r = 0.600000, g = 0.600000, b = 0.600000, a = 96594816.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="//////////////////////Models/Primitives/Sphere.dae"/>
+											<file type="String" value="Models/Primitives/Sphere.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///////////////Scripts/ball.ts"/>
+											<file type="String" value="Scripts/ball.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Sphere"/>
@@ -202,18 +202,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="//////////////////////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///////////////////Scripts/player.ts"/>
+											<file type="String" value="Scripts/player.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Player"/>
@@ -258,18 +258,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="//////////////////////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="/////////////Scripts/opponent.ts"/>
+											<file type="String" value="Scripts/opponent.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Opponent"/>
@@ -314,18 +314,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="//////////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///Scripts/wall.ts"/>
+											<file type="String" value="Scripts/wall.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Wall"/>
@@ -370,18 +370,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="///////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///Scripts/wall.ts"/>
+											<file type="String" value="Scripts/wall.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Wall2"/>
@@ -426,18 +426,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="///////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///Scripts/wall.ts"/>
+											<file type="String" value="Scripts/wall.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Wall3"/>
@@ -482,18 +482,18 @@
 													<diffuse_color type="Color" value="{ r = 0.640000, g = 0.640000, b = 0.640000, a = 1.000000 }"/>
 													<shader type="Shader">
 														<properties count="1">
-															<file type="String" value="/EngineCore/Shaders/Shader3D"/>
+															<file type="String" value="EngineCore/Shaders/Shader3D"/>
 														</properties>
 													</shader>
 													<file type="String" value=""/>
 												</properties>
 											</materials>
-											<file type="String" value="///////Models/Primitives/Box.dae"/>
+											<file type="String" value="Models/Primitives/Box.dae"/>
 										</properties>
 									</mesh>
 									<script type="TitanScript">
 										<properties count="1">
-											<file type="String" value="///Scripts/wall.ts"/>
+											<file type="String" value="Scripts/wall.ts"/>
 										</properties>
 									</script>
 									<name type="String" value="Wall4"/>

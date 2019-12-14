@@ -70,6 +70,9 @@ String File::get_relative_path() const
 		String new_path = path.substr(size, path.size() - size);
 		new_path.replace('\\', '/');
 
+		while (new_path.starts_with("/"))
+			new_path = new_path.substr(1, -1);
+
 		if (new_path.size() == 0)
 			new_path = "/";
 
@@ -100,7 +103,8 @@ bool File::is_file() const
 
 String File::get_extension() const
 {
-	return String();
+	auto elements = path.split('.');
+	return elements[elements.size() - 1];
 }
 
 File File::operator+(const String & r)
