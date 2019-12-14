@@ -37,6 +37,17 @@ void ImageButton::notification(int p_notification)
 	}
 }
 
+void ImageButton::set_image(Texture2D* p_texture)
+{
+	texture = p_texture;
+	update();
+}
+
+Texture2D* ImageButton::get_image() const
+{
+	return texture;
+}
+
 vec2 ImageButton::get_required_size() const
 {
 	return texture->get_size() + vec2(texture_margins[0] + texture_margins[2], texture_margins[1] + texture_margins[3]);

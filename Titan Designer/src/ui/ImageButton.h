@@ -12,6 +12,9 @@ public:
 
 	void notification(int p_notification) override;
 
+	void set_image(Texture2D* p_texture);
+	Texture2D* get_image() const;
+
 	vec2 get_required_size() const override;
 
 protected:
