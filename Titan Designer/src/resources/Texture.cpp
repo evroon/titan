@@ -125,11 +125,11 @@ Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D()
 
 Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 {
-	SDL_Surface *image = IMG_Load((p_filepath).c_str());
+	SDL_Surface* image = IMG_Load((p_filepath).c_str());
 
 	if (!image)
 	{
-		T_ERROR("Failed to load Image: " + p_filepath);
+		T_ERROR("Failed to load Image: " + p_filepath + ", reason: " + IMG_GetError());
 		return;
 	}
 
