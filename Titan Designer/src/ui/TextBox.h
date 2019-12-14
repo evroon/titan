@@ -146,6 +146,7 @@ public:
 
 	void give_color_to_word(const String& p_src, const Color& p_color);
 
+	void handle_extension(const String& p_extension);
 	void set_language(SyntaxHighlighter::Language p_language);
 
 	static void bind_methods();

@@ -35,6 +35,8 @@ struct SyntaxMaster
 
 	static void init();
 
+	static SyntaxHighlighter* get_highlighter(SyntaxHighlighter::Language p_language);
+
 private:
 	static SyntaxMaster* singleton;
 

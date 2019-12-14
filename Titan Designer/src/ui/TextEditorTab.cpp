@@ -80,11 +80,14 @@ void TextEditorTab::show_dialog()
 	dialog->show();
 }
 
-void TextEditorTab::open_file(const String &text)
+void TextEditorTab::open_file(const String &p_path)
 {
-	textfile = CONTENT->LoadTextFile(text);
+	textfile = CONTENT->LoadTextFile(p_path);
 
 	textbox.set_text(textfile->get_source());
+
+	String extension = File(p_path).get_extension();
+	textbox.handle_extension(extension);
 
 	set_tab_title(File(textfile->get_file()).get_name());
 }

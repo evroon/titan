@@ -240,6 +240,9 @@ int String::length() const
 
 String String::substr(int s, int e) const
 {
+	if (e == -1)
+		e = length() - 1;
+
 	return String(src.substr(s, e));
 }
 

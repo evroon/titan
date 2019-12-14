@@ -18,7 +18,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 {
 	auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
 
-	Toggle* run_button = new Toggle(CONTENT->LoadFontAwesomeIcon("solid/play"));
+	Toggle* run_button = new Toggle(CONTENT->LoadFontAwesomeIcon("solid/play", vec2i(26)));
 	run_button->set_tip_description("Run");
 	run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
 	

@@ -567,8 +567,7 @@ void TextBox::notification(int p_notification)
 		if (line_numbers_enabled)
 			draw_line(area.get_upper_left() + vec2(left_margin - 3, 0), area.get_bottom_left() + vec2(left_margin - 3, 0), TO_RGB(200));
 		
-		if (ibeam_blinks)
-			draw_box(cursor, Color::White);
+		draw_box(cursor, Color::White);
 
 		if (slider)
 			slider->draw();
@@ -646,7 +645,6 @@ void TextBox::set_text(const String &source)
 
 	set_caret_pos(TextPosition());
 
-	set_language(SyntaxHighlighter::GLSL);
 	update();
 }
 
@@ -1109,15 +1107,23 @@ void TextBox::give_color_to_word(const String& p_src, const Color& p_color)
 	}
 }
 
+void TextBox::handle_extension(const String& p_extension)
+{
+	if (p_extension == "ts")
+		set_language(SyntaxHighlighter::TITANSCRIPT);
+	else if (p_extension == "geom" || p_extension == "frag" || p_extension == "vert")
+		set_language(SyntaxHighlighter::GLSL);
+}
+
 void TextBox::set_language(SyntaxHighlighter::Language p_language)
 {
 	language = p_language;
-	SyntaxHighlighter highlighter = SyntaxMaster::get_singleton()->glsl;
+	SyntaxHighlighter* highlighter = SyntaxMaster::get_singleton()->get_highlighter(p_language);
 
-	for (int c = 0; c < highlighter.definitions.size(); c++)
-	{
-		give_color_to_word(highlighter.definitions[c].word, highlighter.definitions[c].color);
-	}
+	for (int c = 0; c < highlighter->definitions.size(); c++)
+		give_color_to_word(highlighter->definitions[c].word, highlighter->definitions[c].color);
+
+	update();
 }
 
 bool TextBox::is_in_text(TextLine *line, const vec2 &pos)
