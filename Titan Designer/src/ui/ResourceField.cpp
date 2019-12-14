@@ -239,70 +239,75 @@ void ObjectField::init()
 	add_child(textfield);
 	add_child(load_button);
 
-	load_button->set_margins(100, 0, 40, 0);
+	load_button->set_margins(90, 0, 34, 0);
 	load_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 	load_button->connect("clicked", this, "load_button_clicked");
 
-	textfield->set_margins(0, 0, 104, 0);
+	textfield->set_margins(0, 0, 94, 0);
 	textfield->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 
-	String text = "New";
+	String image_path = "EngineCore/UI/New.png";
 	if (get_value().isdef())
-		text = "...";
+		image_path = "EngineCore/UI/Forward.png";
 
-	open_button = new TextButton(text);
+	open_button = new ImageButton(image_path);
 	open_button->connect("clicked", this, "open_button_clicked");
 	add_child(open_button);
 
-	open_button->set_margins(30, 0, 4, 0);
+	open_button->set_margins(30, 0, 0, 0);
 	open_button->set_anchors(ANCHOR_END, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
 }
 
 void ObjectField::open_button_clicked()
 {
-	PropertyTab* pv = VIEW->get_default_viewport()->get_canvas()->get_child("Inspector")->cast_to_type<PropertyTab*>();
+	VariantType type = PropertyControl::get_property_type();
+	Variant v = get_value();
 
-	if (pv)
-		pv->set_property(get_value());
+	if (v.operator Object * ()->derives_from_type<Resource*>())
+		EDITOR_APP->open_file(File(v.operator Resource * ()->get_file()).get_absolute_path());
+	else if (v.operator Object * ()->derives_from_type<Node*>())
+		textfield->set_text(v.operator Node* ()->get_name());
+	else {
+		PropertyTab* pv = VIEW->get_default_viewport()->get_canvas()->get_child("Inspector")->cast_to_type<PropertyTab*>();
+
+		if (pv)
+			pv->set_property(get_value());
+	}
 }
 
 void ObjectField::load_button_clicked()
 {
 	VariantType type = PropertyControl::get_property_type();
 	Variant v = get_value();
+	Variant result;
 
 	if (!v)
 	{
-		Variant result;
-
 		if (MMASTER->constructor_exists(type, 0))
 			result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))->operator() ();
 
 		value_set(result);
-
-		if (result.operator Object*()->derives_from_type<Resource*>())
-		{
-			Resource* res = result.operator Resource*();
-			textfield->set_text(File(res->get_file()).get_name());
-
-			file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
-
-			auto save_as = [res, this](const String& p_path) { res->set_file(p_path); res->save(); textfield->set_text(File(res->get_file()).get_name()); };
-			file_dialog->connect("file_chosen", Connection::create_from_lambda(new V_Method_1(save_as)));
-			file_dialog->show();
-
-		}
-		else if (result.operator Object*()->derives_from_type<Node*>())
-			textfield->set_text(result.operator Node*()->get_name());
-
-		open_button->set_text("...");
-		return;
 	}
+	else
+		result = get_value();
 
-	if (v.operator Object*()->derives_from_type<Resource*>())
-		EDITOR_APP->open_file(File(v.operator Resource*()->get_file()).get_absolute_path());
-	else if (v.operator Object*()->derives_from_type<Node*>())
-		textfield->set_text(v.operator Node*()->get_name());
+	if (result.operator Object*()->derives_from_type<Resource*>())
+	{
+		Resource* res = result.operator Resource*();
+		textfield->set_text(File(res->get_file()).get_name());
+
+		file_dialog = new FileDialog(CONTENT->get_assets_dir() + "/");
+
+		auto save_as = [res, this](const String& p_path) { res->set_file(p_path); res->save(); textfield->set_text(File(res->get_file()).get_name()); };
+		file_dialog->connect("file_chosen", Connection::create_from_lambda(new V_Method_1(save_as)));
+		file_dialog->show();
+
+	}
+	else if (result.operator Object*()->derives_from_type<Node*>())
+		textfield->set_text(result.operator Node*()->get_name());
+
+	open_button->set_image(CONTENT->LoadTexture("EngineCore/UI/Forward.png"));
+	return;
 }
 
 void ObjectField::file_chosen(const String& p_path)

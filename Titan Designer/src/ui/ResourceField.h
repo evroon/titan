@@ -97,7 +97,7 @@ private:
 	TextField* textfield;
 
 	TextButton* load_button;
-	TextButton* open_button;
+	ImageButton* open_button;
 
 	FileDialog* file_dialog;
 };
