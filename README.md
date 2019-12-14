@@ -1,16 +1,15 @@
 # Titan-Designer
 
-A multi-platform game engine using OpenGL and written in c++.
+A graphics engine using OpenGL and written in C++.
 
-Example of the editor:
-![alt text](misc/images/titan_preview.png "Example of the editor")
+Preview of the editor:
+![alt text](misc/images/titan_preview.png "Preview of the editor")
 
 Features:
   - A scripting language, TitanScript, which is fully integrated on a low level into the engine
   - Editor
   - UI system
   - 2D and 3D support
-  - Designed to build on Windows, Linux, Mac OS X and Android
 
 Libraries used:
   - SDL 2.0 (including SDL_image, SDL_mixer and SDL_ttf)
@@ -21,6 +20,7 @@ Libraries used:
   - Glew
   - Freeglut
   - RapidXML
+  - FontAwesome
 
 3D graphics features:
   - Deferred Renderer
@@ -29,7 +29,6 @@ Libraries used:
   - Terrain and water
   - Godrays and lens flare
   - Terrain heightmap editing on GPU
-  - Virtual textures (not yet adaptive virtual textures)
 
 # Installation
 The project can be build using Visual Studio.
