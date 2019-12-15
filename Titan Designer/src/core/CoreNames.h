@@ -1,6 +1,6 @@
 #pragma once
 
-#include "String.h"
+#include "core/String.h"
 
 #define CORE_NAMES CoreNames::get_singleton()
 #define CORE_TYPE(X) CORE_NAMES->X

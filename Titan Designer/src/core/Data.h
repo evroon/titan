@@ -8,7 +8,7 @@
 #include "TsVariable.h"
 #include "CoreNames.h"
 #include "Memory.h"
-#include "String.h"
+#include "core/String.h"
 #include "Map.h"
 
 class Line;

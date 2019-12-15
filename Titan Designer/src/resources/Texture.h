@@ -4,12 +4,19 @@
 #include <stdio.h>
 #include <cassert>
 
-#include <GL\glew.h>
-#include <GL\freeglut.h>
-
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
+#include <GL/glew.h>
+#include <GL/glu.h>
+#else
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include <GL\glew.h>
+#include <GL\freeglut.h>
+#endif
 
 #include "math/Vec3.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Math.h"
+#include "math/Math.h"
 
 class ArrayMath
 {

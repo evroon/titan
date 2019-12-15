@@ -1,4 +1,4 @@
-#include "Signal.h"
+#include "core/Signal.h"
 
 #include "types/TypeManager.h"
 #include "types/MethodMaster.h"

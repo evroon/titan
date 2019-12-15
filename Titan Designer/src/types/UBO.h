@@ -1,6 +1,6 @@
 #pragma once
 
-#include "resources\Resource.h"
+#include "resources/Resource.h"
 
 class UBO :	public Resource
 {

@@ -4,7 +4,7 @@
 #include <sstream>
 
 #include "core/Vector.h"
-#include "Math.h"
+#include "math/Math.h"
 
 class String;
 

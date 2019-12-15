@@ -1,5 +1,6 @@
 #pragma once
 
+#if 0
 #include <GL\glew.h>
 
 #include "TMessage.h"
@@ -15,3 +16,5 @@ public:
 			T_ERROR(String("GLEW Error: " + err));
 	}
 };
+
+#endif

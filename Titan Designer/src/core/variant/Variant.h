@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "String.h"
+#include "core/String.h"
 #include "math/Vec2.h"
 #include "math/Vec3.h"
 #include "math/Vec4.h"

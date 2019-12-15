@@ -1,7 +1,12 @@
 #pragma once
 
-#include <SDL.h>
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_mixer.h"
+#else
+#include "SDL.h"
 #include "SDL_mixer.h"
+#endif
 
 #include "Resource.h"
 

@@ -2,12 +2,17 @@
 
 #include <functional>
 
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
+#else
 #include "SDL.h"
 #include "SDL_ttf.h"
+#endif
 
 #include "core/ContentManager.h"
 
-#include "String.h"
+#include "core/String.h"
 #include "TChar.h"
 
 #include "math/ArrayMath.h"

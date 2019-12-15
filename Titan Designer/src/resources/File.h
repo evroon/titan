@@ -2,7 +2,10 @@
 
 #include "core/Object.h"
 
+#if PLATFORM == WINDOWS
 #include "core/platform/dirent.h"
+#endif
+
 
 class File : public Object
 {

@@ -2,7 +2,11 @@
 
 #include <string>
 
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#else
 #include "SDL.h"
+#endif
 
 #include "core/Object.h"
 

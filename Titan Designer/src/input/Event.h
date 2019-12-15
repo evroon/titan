@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Key.h"
-#include "Math.h"
+#include "math/Math.h"
 #include "utility/StringUtils.h"
 #include "physics/RigidBody.h"
 #include "Mouse.h"

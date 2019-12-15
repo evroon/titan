@@ -2,10 +2,15 @@
 
 #include <string>
 
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#include <GL/glew.h>
+#include <GL/glu.h>
+#else
+#include "SDL.h"
 #include <GL\glew.h>
 #include <GL\freeglut.h>
-
-#include "SDL.h"
+#endif
 
 #include "resources/Shader.h"
 #include "resources/Texture.h"

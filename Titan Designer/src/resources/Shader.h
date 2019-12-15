@@ -1,6 +1,11 @@
 #pragma once
 
-#include <glew\glew.h>
+
+#if PLATFORM == LINUX
+#include <GL/glew.h>
+#else
+#include <GL\glew.h>
+#endif
 
 #include "types/UBO.h"
 

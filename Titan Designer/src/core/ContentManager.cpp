@@ -4,7 +4,9 @@
 #include <iostream>
 #include <fstream>
 
+#if PLATFORM == WINDOWS
 #include "core/platform/dirent.h"
+#endif
 
 #include "resources/File.h"
 

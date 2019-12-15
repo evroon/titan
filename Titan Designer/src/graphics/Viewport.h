@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FBO.h"
-#include "Math.h"
+#include "math/Math.h"
 #include "world/World.h"
 #include "math/Rect.h"
 #include "world/Camera.h"

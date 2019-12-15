@@ -3,7 +3,11 @@
 #include <algorithm>
 #include <chrono>
 
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#else
 #include "SDL.h"
+#endif
 
 #include "Vector.h"
 #include "ContentManager.h"

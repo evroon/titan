@@ -2,7 +2,7 @@
 
 #include "core/Object.h"
 #include "MethodMaster.h"
-#include "Signal.h"
+#include "core/Signal.h"
 
 class Variant;
 class TitanScript;

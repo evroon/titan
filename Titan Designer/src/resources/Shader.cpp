@@ -4,13 +4,19 @@
 #include <algorithm>
 #include <fstream>
 
+#if PLATFORM == LINUX
+#include "SDL2/SDL.h"
+#include <GL/glew.h>
+#include <GL/glu.h>
+#else
+#include "SDL.h"
 #include <GL\glew.h>
 #include <GL\freeglut.h>
-#include "SDL.h"
+#endif
 
 #include "math/Math.h"
 #include "math/Color.h"
-#include "String.h"
+#include "core/String.h"
 
 #include "core/TMessage.h"
 

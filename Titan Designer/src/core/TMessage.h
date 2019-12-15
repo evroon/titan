@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "String.h"
+#include "core/String.h"
 #include "Vector.h"
 #include "Array.h"
 

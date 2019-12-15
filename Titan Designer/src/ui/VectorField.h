@@ -5,7 +5,7 @@
 #include "Container.h"
 #include "NumberField.h"
 
-#include "String.h"
+#include "core/String.h"
 
 class Vec2Field : public PropertyControl
 {

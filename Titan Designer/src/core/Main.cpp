@@ -12,6 +12,8 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 #undef main
 
+#define PLATFORM LINUX
+
 #define DEBUG 1
 #define EDITOR 1
 

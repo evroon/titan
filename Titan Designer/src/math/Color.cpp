@@ -1,6 +1,6 @@
 #include "Color.h"
 
-#include "Math.h"
+#include "math/Math.h"
 
 Color Color::White	= Color();
 Color Color::Black = Color(vec4(0.0f, 0.0f, 0.0f, 1.0f));

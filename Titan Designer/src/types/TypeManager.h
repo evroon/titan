@@ -1,6 +1,6 @@
 #pragma once
 
-#include "String.h"
+#include "core/String.h"
 #include "core/Dictionary.h"
 #include "core/variant/Variant.h"
 

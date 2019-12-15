@@ -1,6 +1,6 @@
 #include "Quaternion.h"
 
-#include "Math.h"
+#include "math/Math.h"
 #include "Mat4.h"
 
 #include "core/TMessage.h"

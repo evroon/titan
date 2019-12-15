@@ -4,7 +4,7 @@
 #include "core/Map.h"
 #include "core/Vector.h"
 
-#include "Signal.h"
+#include "core/Signal.h"
 #include "core/Property.h"
 #include "TConstructor.h"
 

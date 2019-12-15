@@ -1,6 +1,6 @@
 #pragma once
 
-#include "String.h"
+#include "core/String.h"
 
 #include "types/TypeManager.h"
 #include "types/MethodBuilder.h"

@@ -4,8 +4,13 @@
 #include <stdio.h>
 #include <string>
 
+#if PLATFORM == LINUX
+#include <GL/glew.h>
+#include <GL/glu.h>
+#else
 #include <GL\glew.h>
 #include <GL\freeglut.h>
+#endif
 
 #include "resources/Texture.h"
 #include "resources/Shader.h"
