@@ -8,7 +8,6 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 #include "game/GameApp.h"
 #include "editor/EditorApp.h"
-#include "core/platform/Windows.h"
 
 #undef main
 
@@ -17,13 +16,21 @@ Platforms: Android, Linux, Mac OS X and Windows
 #define DEBUG 1
 #define EDITOR 1
 
+#if PLATFORM == LINUX
+#define NEW_PLATFORM new Linux
+#include "core/platform/Linux.h"
+#else
+#define NEW_PLATFORM new Windows
+#include "core/platform/Windows.h"
+#endif
+
 int main(int argc, char* argv[])
 {
 #if EDITOR
-	EditorApp editor(new Windows);
+	EditorApp editor(NEW_PLATFORM);
 	editor.Loop();
 #else
-	GameApp game(new Windows);
+	GameApp game(NEW_PLATFORM);
 	game.Loop();
 #endif
 

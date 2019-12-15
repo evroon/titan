@@ -73,7 +73,7 @@ public:
 		ARRAY = 12
 	};
 
-	const enum EvaluationType
+	enum EvaluationType
 	{
 		LESS,
 		LEQUAL,
@@ -86,7 +86,7 @@ public:
 		OR
 	};
 
-	const enum OperatorType
+	enum OperatorType
 	{
 		ADD,
 		SUBTRACT,
@@ -221,9 +221,9 @@ public:
 		switch (type)
 		{
 		case BOOL:
-			return *b;
-		case REAL:
-			return *r;
+			return b;
+		// case REAL:
+		// 	return *r;
 		case STRING:
 			return *s;
 		case VEC2:
@@ -234,8 +234,6 @@ public:
 			return *v4;
 		case MAT4:
 			return *m4;
-		case VEC3:
-			return *r;
 		case OBJECT:
 			return *o;
 		}

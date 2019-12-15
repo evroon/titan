@@ -1,5 +1,6 @@
 #pragma once
 
+#include <math.h>
 #include <string>
 #include "core/String.h"
 
@@ -47,7 +48,7 @@ public:
 	}
     
     //Get info
-    T length() const { return Math::sqrt(x * x + y * y); }
+    T length() const { return sqrt(x * x + y * y); }
 	T angle(const Vec2 &v) const
 	{
 		T angle = fabs(acos(dot(v) / (length() * v.length())));

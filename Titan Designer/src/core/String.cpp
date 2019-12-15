@@ -58,6 +58,11 @@ String::String(float d)
 	src = ss.str();
 }
 
+String::String(const Variant& v)
+{
+	std::cout << "TODO: String(var)" << std::endl; 
+}
+
 
 //Operators
 bool String::operator==(const String &r) const

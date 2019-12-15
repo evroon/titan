@@ -10,6 +10,7 @@
 
 class Real;
 struct TMessage;
+class Variant;
 
 class String
 {
@@ -24,6 +25,7 @@ public:
 	String(unsigned i);
 	String(int i);
 	String(float d);
+	String(const Variant& v);
 
 	typename std::string::iterator begin() { return src.begin(); }
 	typename std::string::iterator end() { return src.end(); }
@@ -112,6 +114,8 @@ public:
 	float StringTofloat();
 	int CountTabs();
 	String RemoveTabs();
+
+	static String get_type_name_static() { return "String"; };
 	
 private:
 	std::string src;

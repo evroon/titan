@@ -50,7 +50,7 @@ private:
 
 	bool is_absolute_path() const;
 
-	DWORD get_attributes() const;
+	unsigned int get_attributes() const;
 
 
 	bool directory;

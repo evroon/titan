@@ -2,10 +2,10 @@
 
 #include "Vector.h"
 
-#include "ScriptNode.h"
+#include "core/titanscript/ScriptNode.h"
+#include "core/titanscript/TsVariable.h"
 #include "Globals.h"
 #include "TMessage.h"
-#include "TsVariable.h"
 #include "CoreNames.h"
 #include "Memory.h"
 #include "core/String.h"

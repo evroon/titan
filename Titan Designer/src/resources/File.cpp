@@ -137,8 +137,9 @@ bool File::is_absolute_path() const
 	return path.size() > 2 && path[1] == ':' && path[2] == '\\';
 }
 
-DWORD File::get_attributes() const
+unsigned int File::get_attributes() const
 {
+	#if 0
 	DWORD attributes = GetFileAttributes(path.c_str());
 
 	if (attributes == INVALID_FILE_ATTRIBUTES)
@@ -153,8 +154,11 @@ DWORD File::get_attributes() const
 		T_ERROR(message);
 
 	}
-
 	return attributes;
+
+	#else
+	return 0;
+	#endif
 }
 
 void File::correct_path()

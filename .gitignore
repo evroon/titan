@@ -274,3 +274,4 @@ __pycache__/
 /Libraries/Box2D/out/build/x64-Debug
 /Libraries/glew-2.0.0/build/cmake/out/build/x64-Debug
 /Libraries/glew-2.0.0/glew.pc
+.vscode/settings.json

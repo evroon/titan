@@ -30,7 +30,7 @@ public:
 	}
 	void clean()
 	{
-		for_each(map.begin(), map.end(), [](pair<const KEY&, VAL*> p_pair) { delete p_pair.second; });
+		for_each(map.begin(), map.end(), [](std::pair<const KEY&, VAL*> p_pair) { delete p_pair.second; });
 
 		map.clear();
 	}

@@ -13,27 +13,27 @@ void Primitives::Destroy()
 
 }
 
-void Primitives::DrawRectangle(Shader* shader, Transform &trans)
+void Primitives::DrawRectangle(Shader* shader, const Transform &trans)
 {
 
 }
 
-void Primitives::DrawBox(Transform &trans)
+void Primitives::DrawBox(const Transform &trans)
 {
 
 }
 
-void Primitives::DrawBoxDark(Transform &trans)
+void Primitives::DrawBoxDark(const Transform &trans)
 {
 
 }
 
-void Primitives::DrawBoxLight(Transform &trans)
+void Primitives::DrawBoxLight(const Transform &trans)
 {
 
 }
 
-void Primitives::DrawCircle(Shader* shader, Transform &trans)
+void Primitives::DrawCircle(Shader* shader, const Transform &trans)
 {
 
 }

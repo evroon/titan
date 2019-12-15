@@ -72,7 +72,7 @@ public:
 		struct { T r, g, b, a; };
 		T v[4];
 		vec4 rgba;
-		struct { vec3 rgb; float a; };
+		// struct { vec3 rgb; float a; };
 	};
 };
 

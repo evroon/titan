@@ -19,9 +19,13 @@ struct aiNode;
 struct aiMesh;
 struct aiScene;
 struct aiMaterial;
-enum aiTextureType;
+
+// Will give an error, should be enum
+struct aiTextureType;
+// enum aiTextureType;
 
 class Material;
+class Model;
 
 struct BoundingBox
 {

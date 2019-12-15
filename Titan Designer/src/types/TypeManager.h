@@ -77,44 +77,44 @@ static String GetType()
 	return std::remove_pointer<T>::type::get_type_name_static();
 }
 
-#define REGISTER_GETTYPE(X)\
-template<>\
-static String GetType<X>()\
-{\
-	return String(#X);\
-}\
-template<>\
-static String GetType<const X>()\
-{\
-	return String(#X);\
-}\
-template<>\
-static String GetType<const X&>()\
-{\
-	return String(#X);\
-}\
-template<>\
-static String GetType<X&>()\
-{\
-	return String(#X);\
-}\
-template<>\
-static String GetType<X*>()\
-{\
-	return String(#X);\
-}
+// #define REGISTER_GETTYPE(X)\
+// template<>\
+// String GetType<X>()\
+// {\
+// 	return String(#X);\
+// }\
+// template<>\
+// String GetType<const X>()\
+// {\
+// 	return String(#X);\
+// }\
+// template<>\
+// String GetType<const X&>()\
+// {\
+// 	return String(#X);\
+// }\
+// template<>\
+// String GetType<X&>()\
+// {\
+// 	return String(#X);\
+// }\
+// template<>\
+// String GetType<X*>()\
+// {\
+// 	return String(#X);\
+// }
 
 
-REGISTER_GETTYPE(bool)
-REGISTER_GETTYPE(unsigned)
-REGISTER_GETTYPE(int)
-REGISTER_GETTYPE(float)
-REGISTER_GETTYPE(double)
-REGISTER_GETTYPE(String)
-REGISTER_GETTYPE(Transform)
-REGISTER_GETTYPE(Array<Variant>)
-REGISTER_GETTYPE(vec2)
-REGISTER_GETTYPE(vec3)
-REGISTER_GETTYPE(vec4)
-REGISTER_GETTYPE(mat4)
-REGISTER_GETTYPE(Color)
+// REGISTER_GETTYPE(bool)
+// REGISTER_GETTYPE(unsigned)
+// REGISTER_GETTYPE(int)
+// REGISTER_GETTYPE(float)
+// REGISTER_GETTYPE(double)
+// REGISTER_GETTYPE(String)
+// REGISTER_GETTYPE(Transform)
+// REGISTER_GETTYPE(Array<Variant>)
+// REGISTER_GETTYPE(vec2)
+// REGISTER_GETTYPE(vec3)
+// REGISTER_GETTYPE(vec4)
+// REGISTER_GETTYPE(mat4)
+// REGISTER_GETTYPE(Color)

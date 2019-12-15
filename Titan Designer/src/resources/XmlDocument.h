@@ -1,7 +1,14 @@
 #pragma once
 
+
+#if PLATFORM == LINUX
+#include "rapidxml/rapidxml.hpp"
+#include "rapidxml/rapidxml_print.hpp"
+#else
 #include "Utility\RapidXml\rapidxml.hpp"
 #include "Utility\RapidXml\rapidxml_print.hpp"
+#endif
+
 
 #include "core/String.h"
 

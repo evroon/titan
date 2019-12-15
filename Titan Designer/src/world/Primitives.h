@@ -16,11 +16,11 @@ public:
 	static void Init();
 	static void Destroy();
 
-	static void DrawRectangle(Shader *shader, Transform &trans);
-	static void DrawBox(Transform &trans);
-	static void DrawBoxDark(Transform &trans);
-	static void DrawBoxLight(Transform &trans);
-	static void DrawCircle(Shader *shader, Transform &trans);
+	static void DrawRectangle(Shader *shader, const Transform &trans);
+	static void DrawBox(const Transform &trans);
+	static void DrawBoxDark(const Transform &trans);
+	static void DrawBoxLight(const Transform &trans);
+	static void DrawCircle(Shader *shader, const Transform &trans);
 };
 
 class Plane : public WorldObject
