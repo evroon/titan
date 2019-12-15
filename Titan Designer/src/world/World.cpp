@@ -136,7 +136,8 @@ void World::draw()
 	for (Node* o : children)
 	{
 		WorldObject* wo = o->cast_to_type<WorldObject*>();
-		wo->notificate(WorldObject::NOTIFICATION_DRAW);
+		if (wo->get_visible())
+			wo->notificate(WorldObject::NOTIFICATION_DRAW);
 	}
 }
 
