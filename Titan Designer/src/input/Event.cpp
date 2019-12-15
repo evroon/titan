@@ -1,6 +1,7 @@
 #include "Event.h"
 
 #include "EventManager.h"
+#include "world/WorldObject.h"
 
 //Event
 Event::Event()
@@ -27,8 +28,8 @@ String Event::to_string() const
 
 void Event::bind_methods()
 {
-	//REG_METHOD(get_name);
-	//REG_METHOD(to_string);
+	REG_METHOD(get_name);
+	REG_METHOD(to_string);
 }
 
 //InputEvent
@@ -127,5 +128,58 @@ void InputEvent::bind_methods()
 {
 	REG_PROPERTY(pos);
 
-	//REG_METHOD(to_string);
+	REG_METHOD(to_string);
+}
+
+WorldObject* CollisionEvent::get_object() const
+{
+	return object;
+}
+
+String CollisionEvent::to_string() const
+{
+	String result = "CollisionEvent: " + (contact == ContactType::BEGIN) ? "begin" : "end";
+	
+	return result;
+}
+
+#undef CLASSNAME
+#define CLASSNAME CollisionEvent
+
+void CollisionEvent::bind_methods()
+{
+	REG_METHOD(get_object);
+	REG_METHOD(to_string);
+}
+
+
+String UIEvent::to_string() const
+{
+	String result = get_name() + ": ";
+
+	switch (type)
+	{
+	case MOUSE_PRESS:
+		result += "pos: " + pos.to_string();
+
+		result += ", presstype: ";
+		result += press_type ? "UP" : "DOWN";
+
+		if (button_type == Mouse::LEFT)
+			result += ", buttontype: LEFT";
+		else if (button_type == Mouse::CENTER)
+			result += ", buttontype: CENTER";
+		else if (button_type == Mouse::RIGHT)
+			result += ", buttontype: RIGHT";
+		break;
+	}
+	return result;
+}
+
+#undef CLASSNAME
+#define CLASSNAME UIEvent
+
+void UIEvent::bind_methods()
+{
+	REG_METHOD(to_string);
 }

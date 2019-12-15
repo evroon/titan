@@ -83,7 +83,7 @@ class CollisionEvent : public Event
 public:
 	CollisionEvent() { }
 	
-	enum ContactType
+	enum class ContactType
 	{
 		BEGIN,
 		END
@@ -91,7 +91,12 @@ public:
 
 	ContactType contact;
 
-	RigidBody2D *object;
+	WorldObject* object;
+
+	WorldObject* get_object() const;
+	String to_string() const override;
+
+	static void bind_methods();
 };
 
 class UIEvent : public Event
@@ -126,6 +131,8 @@ public:
 	UIEvent() { }
 	UIEvent(Type p_type) { type = p_type; }
 	~UIEvent() {}
+
+	String to_string() const override;
 	
 	// event data
 	Type type;
@@ -142,6 +149,8 @@ public:
 	// text data
 	String text;
 	int start, length;
+
+	static void bind_methods();
 };
 
 class DropEvent : public Event
