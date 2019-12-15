@@ -123,6 +123,8 @@ void TypeManager::init()
 	Mouse::init_type();
 	Event::init_type();
 	InputEvent::init_type();
+	UIEvent::init_type();
+	CollisionEvent::init_type();
 	Keyboard::init_type();
 	Key::init_type();
 	Time::init_type();
@@ -200,6 +202,7 @@ void TypeManager::init()
 	TextFile::init_type();
 
 
+	// Bind all methods.
 	MethodMaster::init();
 
 	Project::bind_methods();
@@ -229,6 +232,8 @@ void TypeManager::init()
 	Mouse::bind_methods();
 	Event::bind_methods();
 	InputEvent::bind_methods();
+	UIEvent::bind_methods();
+	CollisionEvent::bind_methods();
 	Keyboard::bind_methods();
 	Key::bind_methods();
 	Time::bind_methods();

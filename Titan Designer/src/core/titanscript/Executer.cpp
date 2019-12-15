@@ -89,7 +89,8 @@ Variant Executer::run_member_func(Variant &object, MemberFunc *mf)
 
 	if (!m)
 	{
-		T_ERROR("Could not find method: " + mf->method_name);
+		auto methods = MMASTER->list_method_names(t).to_string();
+		T_ERROR("Could not find method: " + mf->method_name + " for type: " + t.get_type_name() + ", registered methods: " + methods + ", make sure to init the type and bind the methods in TypeManager");
 		return Variant();
 	}
 

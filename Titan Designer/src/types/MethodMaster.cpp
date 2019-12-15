@@ -186,6 +186,7 @@ void MethodMaster::add_static_functions()
 	register_static_func(StringName("min"), new R_Method_2([](float f1, float f2) { return f1 > f2 ? f2 : f1; }));
 	register_static_func(StringName("max"), new R_Method_2([](float f1, float f2) { return f1 < f2 ? f2 : f1; }));
 	register_static_func(StringName("sgn"), new R_Method_1([](Variant f) { return Math::sgn(f); }));
+	register_static_func(StringName("get_type"), new R_Method_1([](Variant v) { return v.get_type().get_type_name().get_source(); }));
 }
 
 void MethodMaster::register_constant(VariantType type, const ConstantMember &p_constant)
@@ -284,6 +285,10 @@ Method* MethodMaster::get_method(VariantType type, const StringName &name)
 {
 	if (object_callables.contains(type))
 	{
+		if (name == "CollisionEvent")
+			for (auto m : object_callables[type].methods)
+				std::cout << (m->name).get_source() << std::endl;
+
 		Method* m = object_callables[type].get_method_by_name(name);
 		return object_callables[type].get_method_by_name(name);
 	}
