@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
 
 template<class VAL> class Array
 {
@@ -153,4 +154,16 @@ public:
 
 		return true;
 	}
+	operator std::string() const
+	{
+		if (size() < 1)
+			return "";
+
+		std::string result;
+		for (int c = 0; c < size() - 1; c++)
+			result += vec[c] + ", ";
+
+		return result + vec[size() - 1];
+	}
+	std::string to_string() const { return operator std::string(); }
 };
