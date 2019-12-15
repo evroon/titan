@@ -191,7 +191,7 @@ void ExplorerTab::add_object(const String& p_type)
 void ExplorerTab::emit_selected(TreeElement* p_element)
 {
 	if (p_element)
-		emit_signal("selected", viewport->get_child(p_element->get_text())->cast_to_type<WorldObject*>());
+		emit_signal("selected", viewport->get_child(p_element->get_text())->cast_to_type<Node*>());
 	else
 		emit_signal("selected", Variant());
 }
