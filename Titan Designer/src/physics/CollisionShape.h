@@ -4,7 +4,11 @@
 
 #include "Box2D/Box2D.h"
 
+#if 0
 #include "btBulletDynamicsCommon.h"
+#else
+#include "bullet/btBulletDynamicsCommon.h"
+#endif
 
 class RigidBody2D;
 class RigidBody3D;

@@ -35,7 +35,7 @@ public:
 	template<typename T>
 	bool derives_from_type() const
 	{
-		return TYPEMAN->get_object_type(type_name).path.Contains(T::get_type_name_static());
+		return TYPEMAN->get_object_type(type_name).path.Contains(T::get_type_name_static().get_source());
 	}
 
 	//operators

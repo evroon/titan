@@ -55,13 +55,16 @@ void ContentManager::setup()
 	extensions["3ds"] = GETTYPE(StringName("Mesh"));
 
 	char buffer[256];
-	DWORD len = 256;
+
+	#if 0
+	unsigned int len = 256;
 
 	int bytes = GetModuleFileName(NULL, buffer, len);
 	if (bytes == 0)
 	{
 		T_ERROR("Could not find directory, error: " + GetLastError());
 	}
+	#endif
 
 	File temp = buffer;
 	temp.go_up(3);

@@ -29,9 +29,9 @@
 
 #include "core/WindowManager.h"
 
-#include "core\titanscript\TitanScript.h"
+#include "core/titanscript/TitanScript.h"
 
-#include "core\Serializer.h"
+#include "core/Serializer.h"
 
 void EditorApp::init()
 {

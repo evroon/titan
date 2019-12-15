@@ -1,6 +1,6 @@
 #include "WindowManager.h"
 
-#include "math\Math.h"
+#include "math/Math.h"
 
 WindowManager WindowManager::window_manager;
 

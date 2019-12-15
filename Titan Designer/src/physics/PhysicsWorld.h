@@ -8,8 +8,13 @@ Updates in a discrete manner at 60FPS
 Libraries: Box2D, Bullet
 */
 
-#include "Box2D\Box2D.h"
+#include "Box2D/Box2D.h"
+
+#if 0
 #include "btBulletDynamicsCommon.h"
+#else
+#include "bullet/btBulletDynamicsCommon.h"
+#endif
 
 #include "CollisionData.h"
 

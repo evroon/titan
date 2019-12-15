@@ -2,7 +2,11 @@
 
 #include "core/Object.h"
 
+#if 0
 #include "module/perlin.h"
+#else
+#include "libnoise/module/perlin.h"
+#endif
 #include "noise.h"
 
 class Texture2D;

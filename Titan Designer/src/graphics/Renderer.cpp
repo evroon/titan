@@ -1,12 +1,14 @@
 #include "Renderer.h"
 
+#include <stdio.h>
+
 #include "core/WindowManager.h"
 #include "View.h"
 
 #include "world/Sky.h"
 #include "world/Terrain.h"
 #include "world/Environment.h"
-#include "world\Light.h"
+#include "world/Light.h"
 
 MasterRenderer* MasterRenderer::singleton;
 
@@ -857,7 +859,7 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("light_color", vec3(1.0f));
 	first_pass->set_uniform("specular_strength", .1f);
 	first_pass->set_uniform("specular_power", 32.0f);
-	first_pass->set_uniform("sky_color", sky_color.rgb);
+	first_pass->set_uniform("sky_color", sky_color.get_rgb());
 
 	final_buffer->bind();
 
@@ -999,7 +1001,7 @@ void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename, int atta
 	glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 	
 	for (int i = 0; i < p_fbo->size.y; i++)
-		std::memcpy(((char*)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
+		memcpy(((char*)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
 	
 	delete[] pixels;
 

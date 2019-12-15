@@ -1,6 +1,6 @@
 #include "core/Object.h"
 
-#include "variant\VariantType.h"
+#include "variant/VariantType.h"
 #include "CoreNames.h"
 
 Object::Object(Object *base)

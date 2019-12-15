@@ -1,6 +1,6 @@
 #include "Node.h"
 
-#include "Memory.h"
+#include "core/Memory.h"
 
 Node::Node()
 {

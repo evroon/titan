@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Scene.h"
-#include "Time.h"
+#include "core/Time.h"
 #include "graphics/PostProcess.h"
 #include "graphics/Renderer.h"
-#include "Memory.h"
+#include "core/Memory.h"
 #include "input/Input.h"
 
 #include "core/Window.h"
-#include "Windows.h"
+#include "core/platform/Windows.h"
 #include "core/platform/Android.h"
 
 #include "graphics/Viewport.h"

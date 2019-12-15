@@ -1,6 +1,10 @@
 #pragma once
 
+#if 0
 #include "SDL_mouse.h"
+#else
+#include "SDL2/SDL_mouse.h"
+#endif
 
 class Cursor;
 

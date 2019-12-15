@@ -7,10 +7,10 @@
 #include "resources/XmlDocument.h"
 
 #include "game/Scene.h"
-#include "Time.h"
+#include "core/Time.h"
 #include "graphics/PostProcess.h"
 #include "graphics/Renderer.h"
-#include "Memory.h"
+#include "core/Memory.h"
 #include "input/Input.h"
 
 #include "Window.h"

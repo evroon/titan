@@ -1,6 +1,6 @@
 #include "UBO.h"
 
-#include "resources\Texture.h"
+#include "resources/Texture.h"
 
 UBO::UBO()
 {

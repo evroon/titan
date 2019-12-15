@@ -21,7 +21,7 @@ void Connection::register_native_method(Object *p_object, const StringName &p_me
 	if (!method)
 	{
 		String type = object->get_type_name().get_source();
-		T_ERROR("Could not find method: " + p_method_name + " for object of type: " + type);
+		T_ERROR("Could not find method: " + p_method_name.get_source() + " for object of type: " + type);
 	}
 }
 
@@ -142,7 +142,7 @@ void Signal::emit_connection(const Connection& p_connection) const
 
 	if (!p_connection.method)
 	{
-		T_ERROR("connection " + p_connection.name + " has no method for signal: " + name);
+		T_ERROR("connection " + p_connection.name.get_source() + " has no method for signal: " + name.get_source());
 		return;
 	}
 
@@ -173,7 +173,7 @@ void Signal::emit_connection(const Connection& p_connection, Variant arg_0) cons
 {
 	if (!p_connection.method)
 	{
-		T_ERROR("connection " + p_connection.name + " has no method for signal: " + name);
+		T_ERROR("connection " + p_connection.name.get_source() + " has no method for signal: " + name.get_source());
 		return;
 	}
 

@@ -1,6 +1,6 @@
 #include "Reference.h"
 
-#include "Memory.h"
+#include "core/Memory.h"
 
 Referenced::Referenced()
 {

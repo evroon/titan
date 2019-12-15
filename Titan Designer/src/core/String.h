@@ -114,8 +114,6 @@ public:
 	float StringTofloat();
 	int CountTabs();
 	String RemoveTabs();
-
-	static String get_type_name_static() { return "String"; };
 	
 private:
 	std::string src;

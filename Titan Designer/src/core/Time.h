@@ -50,7 +50,7 @@ public:
 private:
 	int get_time_since_start();
 
-	std::chrono::steady_clock::time_point start_time;
+	std::chrono::high_resolution_clock::time_point start_time;
 
 	static Time *singleton;
 

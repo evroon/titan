@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box2D\Box2D.h"
+#include "Box2D/Box2D.h"
 #include "world/WorldObject.h"
 #include "RigidBody.h"
 

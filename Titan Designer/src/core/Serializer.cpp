@@ -5,7 +5,7 @@
 #include "Node.h"
 
 #include "ContentManager.h"
-#include "resources\Texture.h"
+#include "resources/Texture.h"
 
 Serializer *Serializer::singleton;
 TypeSerializer *TypeSerializer::singleton;
@@ -140,7 +140,7 @@ Variant Serializer::deserialize_recursively(const XmlNode& p_node)
 		result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))->operator() ();
 	else
 	{
-		T_ERROR("type " + type.get_type_name() + " has no default constructor that takes one parameter");
+		T_ERROR("type " + type.get_type_name().get_source() + " has no default constructor that takes one parameter");
 		return NULL_VAR;
 	}
 	

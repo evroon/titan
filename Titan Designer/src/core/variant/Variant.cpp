@@ -1,6 +1,6 @@
 #include "Variant.h"
 
-#include "Memory.h"
+#include "core/Memory.h"
 
 #include "core/Object.h"
 #include "input/Key.h"

@@ -6,7 +6,7 @@
 #include "TextButton.h"
 #include "TextField.h"
 
-#include "core\Dictionary.h"
+#include "core/Dictionary.h"
 
 class Container;
 class ListView;

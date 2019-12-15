@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TitanScript.h"
+#include "core/titanscript/TitanScript.h"
 #include "Vector.h"
 
 class ScriptManager

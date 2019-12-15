@@ -7,7 +7,7 @@
 
 #include "core/WindowManager.h"
 
-#include "ui/worldview.h"
+#include "ui/WorldView.h"
 
 Viewport::Viewport()
 {
