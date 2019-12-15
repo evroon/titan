@@ -7,7 +7,7 @@
 
 void GameApp::init()
 {
-	Renderer* r = new ForwardRenderer;
+	Renderer* r = new DeferredRenderer;
 	Viewport *v = new Viewport(r);
 	VIEW->set_default_viewport(v);
 	VIEW->set_active_viewport(v);
@@ -41,16 +41,14 @@ void GameApp::start_scene(Scene *s)
 	activescene = s;
 	ACTIVE_VIEWPORT->set_scene(activescene);
 
-	Camera* cam = ACTIVE_VIEWPORT->get_world()->get_active_camera();
-	if (!cam)
+	Camera* active_camera = ACTIVE_VIEWPORT->get_world()->get_child_by_type<Camera*>();
+
+	if (!active_camera)
 	{
-		cam = new Camera;
-		ACTIVE_VIEWPORT->get_world()->add_child(cam);
-		ACTIVE_VIEWPORT->get_world()->set_active_camera(cam);
+		active_camera = new Camera;
+		ACTIVE_VIEWPORT->get_world()->add_child(active_camera);
 	}
-	
-	cam->set_pos(vec3(0.0f, -20.0f, 0.0f));
-	cam->set_projection(30.0f, 0.5f, 5000.0f);	
+	ACTIVE_VIEWPORT->get_world()->set_active_camera(active_camera);
 }
 
 void GameApp::handle_event(Event *e)
