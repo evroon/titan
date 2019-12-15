@@ -60,6 +60,7 @@ String TextLine::get_text() const
 void TextLine::set_text(const String & p_text)
 {
 	text = p_text;
+	textbox->update_highlighting(*this);
 }
 
 float TextLine::get_height() const
@@ -1056,55 +1057,81 @@ void TextBox::slider_value_changed()
 	position_lines();
 }
 
-void TextBox::give_color_to_word(const String& p_src, const Color& p_color)
+void TextBox::set_colors_on_line(TextLine& p_line, const Array<int>& p_starts, const Array<String>& p_matches, const Color& p_color)
 {
-	for (int i = 0; i < lines.size(); i++)
+	Array<Color> colors;
+	if (p_starts.size() < 1)
+		return;
+
+	for (int c = 0; c < p_line.styles.size(); c++)
 	{
-		TextLine& l = lines[i];
+		int end = p_line.get_text().size() + 1;
+		if (c < p_line.styles.size() - 1)
+			end = p_line.styles[c + 1].start - 1;
 
-		if (l.get_text().size() < 1)
-			continue;
-
-		String s = l.get_text();
-		Array<int> starts = s.find(p_src);
-		Array<Color> colors;
-
-		if (starts.size() < 1)
-			continue;
-				
-		for (int c = 0; c < l.styles.size(); c++)
-		{
-			int end = l.get_text().size();
-			if (c < l.styles.size() - 1)
-				end = l.styles[c + 1].start - 1;
-			
-			for (int k = 0; k < end - l.styles[c].start; k++)
-				colors.push_back(l.styles[c].color);
-		}
-
-		for (int c = 0; c < starts.size(); c++)
-		{
-			for (int k = starts[c]; k < starts[c] + p_src.size(); k++)
-				colors[k] = p_color;
-		}
-
-		l.styles.clear();
-		Color& last_color = colors[0];
-		TextStyle t = { last_color, 0 };
-		TextStyle& last_style = t;
-
-		for (int c = 1; c < colors.size(); c++)
-		{
-			if (last_color != colors[c])
-			{
-				l.styles.push_back(last_style);
-				last_color = colors[c];
-				last_style = TextStyle({ last_color, c });
-			}
-		}
-
-		l.styles.push_back(last_style);
+		for (int k = 0; k < end - p_line.styles[c].start; k++)
+			colors.push_back(p_line.styles[c].color);
 	}
+
+	for (int c = 0; c < p_starts.size(); c++)
+	{
+		for (int k = p_starts[c]; k < p_starts[c] + p_matches[c].size(); k++)
+			colors[k] = p_color;
+	}
+
+	p_line.styles.clear();
+	Color& last_color = colors[0];
+	TextStyle t = { last_color, 0 };
+	TextStyle& last_style = t;
+
+	for (int c = 1; c < colors.size(); c++)
+	{
+		if (last_color != colors[c])
+		{
+			p_line.styles.push_back(last_style);
+			last_color = colors[c];
+			last_style = TextStyle({ last_color, c });
+		}
+	}
+
+	p_line.styles.push_back(last_style);
+}
+
+void TextBox::give_color_to_word(TextLine& p_line, const String& p_src, const Color& p_color)
+{
+	if (p_line.get_text().size() < 1)
+		return;
+
+	String s = p_line.get_text();
+	Array<int> starts = s.find(p_src);
+	Array<String> matches;
+
+	for (int c = 0; c < starts.size(); c++)
+		matches.push_back(p_src);
+
+	set_colors_on_line(p_line, starts, matches, p_color);
+}
+
+void TextBox::give_color_to_patterns(TextLine& p_line)
+{
+	if (p_line.get_text().size() < 1)
+		return;
+
+	String s = p_line.get_text();
+	Array<int> starts = s.find("\"");
+	
+	if (starts.size() % 2 == 1)
+		starts.push_back(p_line.get_text().length() - 1);
+
+	Array<String> matches;
+
+	for (int c = 0; c < starts.size(); c+=2)
+		matches.push_back(p_line.get_text().substr(starts[c], starts[c + 1] - starts[c] + 1));
+
+	for (int c = 1; c < starts.size(); c++)
+		starts.clear(c);
+	
+	set_colors_on_line(p_line, starts, matches, Color::Red);
 }
 
 void TextBox::handle_extension(const String& p_extension)
@@ -1118,11 +1145,25 @@ void TextBox::handle_extension(const String& p_extension)
 void TextBox::set_language(SyntaxHighlighter::Language p_language)
 {
 	language = p_language;
-	SyntaxHighlighter* highlighter = SyntaxMaster::get_singleton()->get_highlighter(p_language);
+	update_highlighting();
+}
+
+void TextBox::update_highlighting()
+{
+	for (TextLine& l : lines)
+		update_highlighting(l);
+}
+
+void TextBox::update_highlighting(TextLine& p_line)
+{
+	p_line.styles.clear();
+	p_line.styles.push_back({ Color::White, 0 });
+	SyntaxHighlighter* highlighter = SyntaxMaster::get_singleton()->get_highlighter(language);
 
 	for (int c = 0; c < highlighter->definitions.size(); c++)
-		give_color_to_word(highlighter->definitions[c].word, highlighter->definitions[c].color);
+		give_color_to_word(p_line, highlighter->definitions[c].word, highlighter->definitions[c].color);
 
+	give_color_to_patterns(p_line);
 	update();
 }
 

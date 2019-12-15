@@ -144,14 +144,19 @@ public:
 
 	void slider_value_changed();
 
-	void give_color_to_word(const String& p_src, const Color& p_color);
+	void give_color_to_word(TextLine& p_line, const String& p_src, const Color& p_color);
+	void give_color_to_patterns(TextLine& p_line);
 
 	void handle_extension(const String& p_extension);
 	void set_language(SyntaxHighlighter::Language p_language);
+	void update_highlighting();
+	void update_highlighting(TextLine& p_line);
 
 	static void bind_methods();
 
 private:
+	void set_colors_on_line(TextLine& p_line, const Array<int>& p_starts, const Array<String>& p_matches, const Color& p_color);
+
 	rect2 box, cursor;
 	TextPosition caret_pos;
 
