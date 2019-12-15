@@ -46,15 +46,16 @@ SyntaxMaster::SyntaxMaster()
 	titanscript.definitions.push_back({ "while ", Color::FromRGB(vec3i(255, 32, 125)) });
 	titanscript.definitions.push_back({ "define ", Color::FromRGB(vec3i(255, 32, 125)) });
 
+	titanscript.definitions.push_back({ "true", Color::FromRGB(vec3i(255, 187, 40)) });
+	titanscript.definitions.push_back({ "false", Color::FromRGB(vec3i(255, 187, 40)) });
+
 	titanscript.definitions.push_back({ "func ", Color::LightBlue });
 	titanscript.definitions.push_back({ "extends ", Color::LightBlue });
-	titanscript.definitions.push_back({ "bool ", Color::LightBlue });
-	titanscript.definitions.push_back({ "int ", Color::LightBlue });
-	titanscript.definitions.push_back({ "float ", Color::LightBlue });
+	titanscript.definitions.push_back({ "bool", Color::LightBlue });
 	titanscript.definitions.push_back({ "vec2", Color::LightBlue });
 	titanscript.definitions.push_back({ "vec3", Color::LightBlue });
 	titanscript.definitions.push_back({ "vec4", Color::LightBlue });
-	titanscript.definitions.push_back({ "mat4 ", Color::LightBlue });
+	titanscript.definitions.push_back({ "mat4", Color::LightBlue });
 }
 
 
