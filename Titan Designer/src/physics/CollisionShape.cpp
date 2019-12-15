@@ -99,7 +99,7 @@ void CollisionShape2D::bind_methods()
 BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 {
 	const Transform& transform = p_object->get_transform();
-	shape.SetAsBox(transform.get_size().x, transform.get_size().y);
+	shape.SetAsBox(transform.get_size().x / p_world->scale.x, transform.get_size().y / p_world->scale.y);
 
 	fixdef.shape = &shape;
 	fixdef.density = 1.0;
@@ -107,7 +107,7 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 	fixdef.friction = 0.0f;
 
 	bodydef.type = dyn ? b2_dynamicBody : b2_staticBody;
-	bodydef.position.Set(transform.get_pos().x, transform.get_pos().y);
+	bodydef.position.Set(transform.get_pos().x / p_world->scale.x, transform.get_pos().y / p_world->scale.y);
 
 	body = p_world->world->CreateBody(&bodydef);
 	body->CreateFixture(&fixdef);
@@ -121,7 +121,7 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 CircleShape2D::CircleShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, bool dyn)
 {
 	const Transform& transform = p_object->get_transform();
-	shape.m_radius = transform.get_size().x;
+	shape.m_radius = transform.get_size().x / p_world->scale.x;
 
 	fixdef.shape = &shape;
 	fixdef.density = 1.0;
@@ -129,7 +129,7 @@ CircleShape2D::CircleShape2D(PhysicsWorld2D *p_world, WorldObject* p_object, boo
 	fixdef.friction = 0.0f;
 
 	bodydef.type = dyn ? b2_dynamicBody : b2_staticBody;
-	bodydef.position.Set(transform.get_pos().x, transform.get_pos().y);
+	bodydef.position.Set(transform.get_pos().x / p_world->scale.x, transform.get_pos().y / p_world->scale.y);
 
 	body = p_world->world->CreateBody(&bodydef);
 	body->CreateFixture(&fixdef);

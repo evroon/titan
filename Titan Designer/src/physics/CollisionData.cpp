@@ -5,24 +5,24 @@
 
 void CollisionData::BeginContact(b2Contact* contact)
 {
-	RigidBody2D* A = static_cast<RigidBody2D*>(contact->GetFixtureA()->GetBody()->GetUserData());
-	RigidBody2D* B = static_cast<RigidBody2D*>(contact->GetFixtureB()->GetBody()->GetUserData());
+	WorldObject* A = static_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	WorldObject* B = static_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	CollisionEvent *e = new CollisionEvent;
-	e->object = B;
-	e->contact = CollisionEvent::BEGIN;
+	e->object = A;
+	e->contact = CollisionEvent::ContactType::BEGIN;
 
-	WorldObject *woB = dynamic_cast<WorldObject*>(B->get_parent());
+	B->handle_event(e);
 }
 
 void CollisionData::EndContact(b2Contact* contact)
 {
-	RigidBody2D* A = static_cast<RigidBody2D*>(contact->GetFixtureA()->GetBody()->GetUserData());
-	RigidBody2D* B = static_cast<RigidBody2D*>(contact->GetFixtureB()->GetBody()->GetUserData());
+	WorldObject* A = static_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	WorldObject* B = static_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	CollisionEvent *e = new CollisionEvent;
-	e->object = B;
-	e->contact = CollisionEvent::END;
+	e->object = A;
+	e->contact = CollisionEvent::ContactType::END;
 
-	WorldObject *woB = dynamic_cast<WorldObject*>(B->get_parent());
+	B->handle_event(e);
 }

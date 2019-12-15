@@ -64,7 +64,7 @@ void PhysicsWorld2D::update()
 
 void PhysicsWorld2D::init()
 {
-	scalefactor = 1.0f;
+	scalefactor = 10.0f;
 	scale = vec2(scalefactor);
 
 	gravity = b2Vec2(0.0f, 0.0f);
