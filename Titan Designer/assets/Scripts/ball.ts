@@ -27,10 +27,10 @@ func handle_event(event)
 		object = event.get_object().get_name()
 	
 		if (object == "Wall3")
-			print("Player lost")
+			get_parent().get_parent().get_child("Label").text = "Player lost"
 			reset_flag = true
 		if (object == "Wall4")
-			print("Player won")
+			get_parent().get_parent().get_child("Label").text = "Player won"
 			reset_flag = true
 		if (object == "Player" || object == "Opponent")
 			acc_flag = true
