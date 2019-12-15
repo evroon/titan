@@ -624,7 +624,7 @@ void WorldView::post_draw_world()
 	RENDERER->stop_depth_test();
 	RENDERER->stop_culling();
 
-	float highlight = 150.0f;
+	int highlight = 150;
 
 	vec3 mesh_size = vec3(1.0f, .5f, .5f) * (camera->get_pos() - pos).length() / 50.0f;
 
