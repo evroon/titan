@@ -388,6 +388,7 @@ void ForwardRenderer::render()
 
 	if (viewport->canvas)
 	{
+		MeshHandler::get_singleton()->get_plane()->bind();
 		activate_canvas_transform();
 		viewport->canvas->draw();
 		viewport->post_draw_canvas();
@@ -951,6 +952,7 @@ void DeferredRenderer::render()
 
 	if (viewport->canvas)
 	{
+		MeshHandler::get_singleton()->get_plane()->bind();
 		activate_canvas_transform(); 
 		viewport->canvas->draw();
 		viewport->post_draw_canvas();
