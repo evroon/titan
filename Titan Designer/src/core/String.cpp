@@ -83,6 +83,12 @@ String String::operator+(const String &r) const
 	res += r;
 	return res;
 }
+String String::operator+(const StringName &r) const
+{
+	String res = *this;
+	res += r.get_source();
+	return res;
+}
 String& String::operator+=(const String &r)
 {
 	src += r.src;

@@ -15,18 +15,18 @@
 
 RigidBody3D::RigidBody3D()
 {
-	btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-	btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, shape->shape, btVector3(0, 0, 0));
-	btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
-	physics_3d->dynamics_world->addRigidBody(groundRigidBody);
+	// btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+	// btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, shape->shape, btVector3(0, 0, 0));
+	// btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
+	// physics_3d->dynamics_world->addRigidBody(groundRigidBody);
 
-	btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
-	btScalar mass = 1;
-	btVector3 fallInertia(0, 0, 0);
-	shape->shape->calculateLocalInertia(mass, fallInertia);
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, shape->shape, fallInertia);
-	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
-	physics_3d->dynamics_world->addRigidBody(fallRigidBody);
+	// btDefaultMotionState* fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
+	// btScalar mass = 1;
+	// btVector3 fallInertia(0, 0, 0);
+	// shape->shape->calculateLocalInertia(mass, fallInertia);
+	// btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, shape->shape, fallInertia);
+	// btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
+	// physics_3d->dynamics_world->addRigidBody(fallRigidBody);
 }
 
 #undef CLASSNAME
@@ -151,7 +151,7 @@ WorldObject* RigidBody2D::get_colliding_objects() const
 	b2ContactEdge *bce = shape->body->GetContactList();
 
 	if (!bce)
-		return NULL;
+		return nullptr;
 
 	b2Contact *c = bce->contact;
 	WorldObject *o = reinterpret_cast<WorldObject*>(c->GetFixtureB()->GetBody()->GetUserData());
@@ -186,7 +186,7 @@ WorldObject* RigidBody2D::get_world_object()
 {
 	Node* parent = get_parent();
 	if (parent == NULL)
-		return NULL;
+		return nullptr;
 
 	return parent->cast_to_type<WorldObject*>();
 }

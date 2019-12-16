@@ -7,6 +7,7 @@
 
 #include "Sky.h"
 #include "Model.h"
+#include "math/Noise.h"
 
 TerrainBrush::TerrainBrush(Terrain* p_terrain)
 {
@@ -551,8 +552,6 @@ void Vegetation::bind_methods()
 //=========================================================================
 //Clouds
 //=========================================================================
-
-#include "math\Noise.h"
 
 Clouds::Clouds()
 {

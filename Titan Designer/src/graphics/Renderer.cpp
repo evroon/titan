@@ -369,7 +369,7 @@ void ForwardRenderer::render()
 	
 	FBOMANAGER->bind_default_fbo();
 
-	if ((viewport->mode == Viewport::FRAMEBUFFER || viewport->mode == Viewport::POSTPROCESS) && viewport->fbo)
+	if ((viewport->destination == Viewport::FRAMEBUFFER || viewport->destination == Viewport::POSTPROCESS) && viewport->fbo)
 		viewport->fbo->bind();
 
 	activate();
@@ -399,7 +399,7 @@ void ForwardRenderer::render()
 
 	deactivate();
 
-	if (viewport->mode == Viewport::POSTPROCESS && viewport->postprocess)
+	if (viewport->destination == Viewport::POSTPROCESS && viewport->postprocess)
 		viewport->postprocess->post_process();
 
 	if (viewport->fbo)
@@ -973,7 +973,7 @@ void DeferredRenderer::render()
 
 	deactivate();
 
-	if (viewport->mode == Viewport::POSTPROCESS && viewport->postprocess)
+	if (viewport->destination == Viewport::POSTPROCESS && viewport->postprocess)
 		viewport->postprocess->post_process();
 
 	if (viewport->fbo)
@@ -1059,6 +1059,8 @@ String DeferredRenderer::get_texture_typename(int p_type) const
 		CASE(VIRTUALTEX);
 		CASE(INDIRECTION);
 	}
+	T_LOG("Invalid texture type: " + p_type);
+	return "invalid";
 }
 
 int DeferredRenderer::get_texture_type(const String& p_typename) const
@@ -1082,6 +1084,9 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 	ELSEIF(LIGHTING)
 	ELSEIF(VIRTUALTEX)
 	ELSEIF(INDIRECTION)
+	
+	T_LOG("Invalid texture typename: " + p_typename);
+	return -1;
 }
 
 #undef CLASSNAME

@@ -14,7 +14,7 @@ class File : public Object
 public:
 	File();
 	File(const String& p_path);
-	File(char* p_path); //helper
+	File(const char* p_path); //helper
 
 	virtual ~File();
 

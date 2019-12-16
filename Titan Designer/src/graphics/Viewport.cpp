@@ -306,7 +306,7 @@ Object* Viewport::raycast(const vec2 &pos) const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 #undef CLASSNAME

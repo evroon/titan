@@ -91,7 +91,7 @@ public:
 		if (derives_from_type<T>())
 			return reinterpret_cast<T>(this);
 		else
-			return NULL;
+			return nullptr;
 	}
 
 	virtual StringName get_type_name() const;

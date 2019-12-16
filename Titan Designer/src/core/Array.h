@@ -154,16 +154,16 @@ public:
 
 		return true;
 	}
-	operator std::string() const
-	{
-		if (size() < 1)
-			return "";
+	// inline operator std::string() const
+	// {
+	// 	if (size() < 1)
+	// 		return "";
 
-		std::string result;
-		for (int c = 0; c < size() - 1; c++)
-			result += vec[c] + ", ";
+	// 	std::string result;
+	// 	for (int c = 0; c < size() - 1; c++)
+	// 		result += vec[c] + ", ";
 
-		return result + vec[size() - 1];
-	}
-	std::string to_string() const { return operator std::string(); }
+	// 	return result + vec[size() - 1];
+	// }
+	// inline std::string to_string() const { return operator std::string(); }
 };

@@ -21,7 +21,7 @@ ColorField::~ColorField()
 {
 }
 
-ColorField::ColorField(Color& p_color) : PropertyControl(p_color)
+ColorField::ColorField(const Color& p_color) : PropertyControl(p_color)
 {
 	init();
 }

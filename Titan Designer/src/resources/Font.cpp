@@ -13,7 +13,7 @@
 #include "core/ContentManager.h"
 
 #include "core/String.h"
-#include "TChar.h"
+#include "core/TChar.h"
 
 #include "math/ArrayMath.h"
 

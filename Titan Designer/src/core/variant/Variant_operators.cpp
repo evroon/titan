@@ -489,6 +489,30 @@ Variant::operator String&() const
 {
 	return *s;
 }
+Variant::operator vec2()
+{
+	return operator vec2 &();
+}
+Variant::operator vec3()
+{
+	return operator vec3 &();	
+}
+Variant::operator vec4()
+{
+	return operator vec4 &();
+}
+Variant::operator mat4()
+{
+	return operator mat4 &();
+}
+Variant::operator Color()
+{
+	return operator Color &();
+}
+Variant::operator Transform()
+{
+	return operator Transform &();
+}
 Variant::operator vec2&() const
 {
 	if (type == VEC2)
@@ -537,16 +561,20 @@ Variant::operator Transform&() const
 	convert_error("Transform");
 	return *new Transform;
 }
+Variant::operator Variant() const
+{
+	return this;
+}
 Variant::operator Object*() const
 {
 	if (type == OBJECT)
 		return o;
 	else if (type == UNDEF)
-		return NULL;
+		return nullptr;
 	else if (type == INT && i == NULL)
-		return NULL;
+		return nullptr;
 	
 
 	convert_error("Object");
-	return NULL;
+	return nullptr;
 }

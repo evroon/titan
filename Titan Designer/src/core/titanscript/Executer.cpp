@@ -89,8 +89,7 @@ Variant Executer::run_member_func(Variant &object, MemberFunc *mf)
 
 	if (!m)
 	{
-		auto methods = MMASTER->list_method_names(t).to_string();
-		T_ERROR("Could not find method: " + mf->method_name + " for type: " + t.get_type_name() + ", registered methods: " + methods + ", make sure to init the type and bind the methods in TypeManager");
+		T_ERROR("Could not find method: " + mf->method_name.get_source() + " for type: " + t.get_type_name() + ", make sure to init the type and bind the methods in TypeManager");
 		return Variant();
 	}
 
@@ -287,24 +286,24 @@ Variant Executer::Execute(ScriptNode *node)
 	}
 	else if (type == ScriptNode::AND)
 	{
-		And *and = (And*)node;
-		bool l = Execute(and->left);
+		And *a = (And*)node;
+		bool l = Execute(a->left);
 
 		if (!l)
 			return false;
 		else
-			return Execute(and->right);
+			return Execute(a->right);
 	}
 	else if (type == ScriptNode::OR)
 	{
-		Or *and = (Or*)node;
-		bool l = Execute(and->left);
+		Or *o = (Or*)node;
+		bool l = Execute(o->left);
 
 		if (l)
 			return true;
 		else
 		{
-			Variant right = Execute(and->right);
+			Variant right = Execute(o->right);
 			if (right)
 				return true;
 		}
@@ -372,7 +371,7 @@ Variant Executer::Execute(ScriptNode *node)
 
 		if (block->params.size() != state->argcount()) {
 			T_ERROR("Number of arguments does not match, expected: " + (String) block->params.size() + ", got: " + (String) state->argcount());
-			return NULL;
+			return NULL_VAR;
 		}
 
 		for (int c = 0; c < block->params.size(); c++) //Introduce parameters as local vars

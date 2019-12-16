@@ -1,10 +1,10 @@
 #include "Control.h"
 
-#include "Container.h"
+#include "ui/Container.h"
 #include "graphics/View.h"
 #include "graphics/Renderer.h"
 #include "resources/Texture.h"
-#include "TChar.h"
+#include "core/TChar.h"
 
 #include "core/WindowManager.h"
 
@@ -280,7 +280,7 @@ Control* Control::raycast(const vec2& pos) const
 	if (in_area(pos))
 		return const_cast<Control*>(this);
 
-	return NULL;
+	return nullptr;
 }
 
 bool Control::in_area(const vec2 &pos) const

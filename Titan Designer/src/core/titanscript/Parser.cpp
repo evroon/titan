@@ -92,9 +92,9 @@ Block* Parser::ParseBlock(const Line &line)
 ScriptNode* Parser::ParsePart(const Line &line)
 {
 	if (line.tokens.size() < 1 || line.StartsWith("else"))
-		return NULL;
+		return nullptr;
 	else if (line.StartsWith("elseif"))
-		return NULL;
+		return nullptr;
 	else if (line.StartsWith("define"))
 	{
 		ScriptNode *node = ParsePart(line.tokens.getrest(2));
@@ -103,7 +103,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 		Variant value = SimpleExecuter::execute(node);
 
 		definitions.push_back({ name, value });
-		return NULL;
+		return nullptr;
 	}
 	else if (line.StartsWith("extends"))															//Inheritance
 	{
@@ -272,17 +272,17 @@ ScriptNode* Parser::ParsePart(const Line &line)
 	}
 	else if (line.ContainsOutside("&&"))															//And
 	{
-		And *and = new And;
-		and->left = ParsePart(line.tokens.split(0, line.Search("&&") - 1));
-		and->right = ParsePart(line.tokens.getrest(line.Search("&&") + 1));
-		return and;
+		And *a = new And;
+		a->left = ParsePart(line.tokens.split(0, line.Search("&&") - 1));
+		a->right = ParsePart(line.tokens.getrest(line.Search("&&") + 1));
+		return a;
 	}
 	else if (line.ContainsOutside("||"))															//Or
 	{
-		Or * or = new Or;
-		or ->left = ParsePart(line.tokens.split(0, line.Search("||") - 1));
-		or ->right = ParsePart(line.tokens.getrest(line.Search("||") + 1));
-		return or ;
+		Or * o = new Or;
+		o->left = ParsePart(line.tokens.split(0, line.Search("||") - 1));
+		o->right = ParsePart(line.tokens.getrest(line.Search("||") + 1));
+		return o;
 	}
 	else if (line.ContainsOutside("<=") || line.ContainsOutside(">=") ||
 		line.ContainsOutside("==") || line.ContainsOutside("!=") ||
@@ -470,7 +470,7 @@ ScriptNode *Parser::ParseMember(const Line &line)
 	else if(line.StartsWith(Token::WORD) && line.size() == 1)
 		return ParseMemberVar(line);
 
-	return NULL;
+	return nullptr;
 }
 
 ScriptNode *Parser::ParseMemberFunc(const Line &line)
@@ -521,5 +521,5 @@ Parser::Definition* Parser::get_definition(const StringName &p_name)
 		if (def.name == p_name)
 			return &def;
 
-	return NULL;
+	return nullptr;
 }

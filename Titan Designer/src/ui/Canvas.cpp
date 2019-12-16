@@ -400,7 +400,7 @@ Control* Canvas::raycast(const vec2 &pos)
 			return r;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 Control* Canvas::raycast_layer(const CanvasLayer& l, const vec2 &pos)
@@ -413,7 +413,7 @@ Control* Canvas::raycast_layer(const CanvasLayer& l, const vec2 &pos)
 			return r;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 #undef CLASSNAME

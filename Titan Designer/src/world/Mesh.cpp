@@ -1,10 +1,7 @@
 #include "Mesh.h"
 
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
-
 #include "core/ContentManager.h"
+#include "resources/File.h"
 
 #include "graphics/Renderer.h"
 #include "Model.h"
@@ -434,7 +431,6 @@ void Material::load_material(const aiMaterial* p_material)
 	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader3D");
 }
 
-#include "resources\File.h"
 
 Texture2D* Material::load_texture(const aiMaterial* p_material, const aiTextureType &p_type)
 {
@@ -453,7 +449,7 @@ Texture2D* Material::load_texture(const aiMaterial* p_material, const aiTextureT
 			return CONTENT->LoadTexture(path);
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 #undef CLASSNAME

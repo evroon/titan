@@ -181,6 +181,12 @@ public:
 	operator std::string() const { return operator String&(); }
 	operator String() const { return operator String&(); }
 	operator String&() const;
+	operator vec2();
+	operator vec3();
+	operator vec4();
+	operator mat4();
+	operator Color();
+	operator Transform();
 	operator vec2&() const;
 	operator vec3&() const;
 	operator vec4&() const;
@@ -188,6 +194,7 @@ public:
 	operator Color&() const;
 	operator Transform&() const;
 	operator Object*() const;
+	operator Variant() const;
 
 	//operator bool*() const { return b; }
 	//operator int*() const { return &i; }
@@ -205,7 +212,7 @@ public:
 		if (isdef())
 			return reinterpret_cast<T>(o);
 		else
-			return NULL;
+			return 0;
 	}
 
 	template<typename T>

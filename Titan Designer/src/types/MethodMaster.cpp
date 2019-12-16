@@ -13,7 +13,7 @@ Method* ObjectCallables::get_method_by_name(const StringName &name)
 		if (methods[c]->name == name)
 			return methods[c];
 
-	return NULL;
+	return nullptr;
 }
 
 Property* ObjectCallables::get_getsetter_by_name(const StringName &name)
@@ -22,7 +22,7 @@ Property* ObjectCallables::get_getsetter_by_name(const StringName &name)
 		if (properties[c]->var_name == name)
 			return properties[c];
 
-	return NULL;
+	return nullptr;
 }
 
 TConstructor* ObjectCallables::get_constructor_by_params(int param_count)
@@ -31,7 +31,7 @@ TConstructor* ObjectCallables::get_constructor_by_params(int param_count)
 		if (constructors[c]->arg_count == param_count)
 			return constructors[c];
 
-	return NULL;
+	return nullptr;
 }
 
 void ObjectCallables::free()
@@ -293,21 +293,21 @@ Method* MethodMaster::get_method(VariantType type, const StringName &name)
 		return object_callables[type].get_method_by_name(name);
 	}
 	else
-		return NULL;
+		return nullptr;
 }
 Property* MethodMaster::get_property(VariantType type, const StringName &name)
 {
 	if (object_callables.contains(type))
 		return object_callables[type].get_getsetter_by_name(name);
 	else
-		return NULL;
+		return nullptr;
 }
 TConstructor* MethodMaster::get_constructor(VariantType type, int param_count)
 {
 	if (object_callables.contains(type))
 		return object_callables[type].get_constructor_by_params(param_count);
 	else
-		return NULL;
+		return nullptr;
 }
 
 Variant MethodMaster::get_singleton(VariantType p_type)
@@ -315,7 +315,7 @@ Variant MethodMaster::get_singleton(VariantType p_type)
 	if (object_callables.contains(p_type))
 		return object_callables[p_type].singleton;
 	else
-		return NULL;
+		return NULL_VAR;
 }
 
 void MethodMaster::clean()

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 class TemplateUtils
 {
 public:
@@ -39,7 +41,7 @@ public:
 	template <typename T>
 	static bool is_void_method()
 	{
-		return is_same<get_return_type<T>, void>::value;
+		return std::is_same<get_return_type<T>, void>::value;
 	}
 };
 

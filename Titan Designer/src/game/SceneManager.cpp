@@ -22,7 +22,7 @@ Scene* SceneManager::get_scene(const String &p_name)
 		if (scenes[c]->get_name() == p_name)
 			return scenes[c];
 
-	return NULL;
+	return nullptr;
 }
 
 void SceneManager::remove_scene(const String &p_name)

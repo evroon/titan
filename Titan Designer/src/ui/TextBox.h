@@ -82,7 +82,7 @@ public:
 
 	//unique methods
 	void push_back_line(const String& p_source);
-	void push_back_line(TextLine& line);
+	void push_back_line(TextLine line);
 
 	void set_font(Font* p_font);
 	Font* get_font() const;
@@ -132,7 +132,7 @@ public:
 
 	void insert_at_index(const TextPosition &index, const String &text);
 	void insert_at_selection(char c);
-	void insert_line_at_index(int index, TextLine& line);
+	void insert_line_at_index(int index, TextLine line);
 
 	void set_selection(const TextPosition &begin, const TextPosition &end);
 	void delete_selection();

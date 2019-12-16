@@ -19,7 +19,7 @@ String TextFile::load(const File& p_file)
 
 	if (!myfile.is_open())
 	{
-		T_ERROR("Error loading file: " + file);
+		T_ERROR("Error loading file: " + file.get_relative_path());
 		return "";
 	}
 
@@ -54,7 +54,7 @@ void TextFile::load()
 	std::ifstream myfile(file.get_absolute_path());
 
 	if (!myfile.is_open())
-		T_ERROR("Error loading file: " + file);
+		T_ERROR("Error loading file: " + file.get_relative_path());
 
 	while (std::getline(myfile, line))
 		src.append(line + String("\n"));
@@ -70,7 +70,7 @@ void TextFile::save()
 
 	if (!myfile.is_open())
 	{
-		T_ERROR(String("Error loading file: ") + file);
+		T_ERROR("Error loading file: " + file.get_relative_path());
 		return;
 	}
 

@@ -16,7 +16,7 @@
 
 Dialog::Dialog()
 {
-	close_button = new IconButton("solid/times", vec2i(32));
+	close_button = new IconButtonSized("solid/times", vec2i(32));
 	close_button->set_anchors(Control::ANCHOR_END, Control::ANCHOR_END, Control::ANCHOR_END, Control::ANCHOR_END);
 	close_button->set_margins(30, 31, 1, 1);
 

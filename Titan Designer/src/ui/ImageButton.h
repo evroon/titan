@@ -3,6 +3,7 @@
 #include "FramedButton.h"
 
 #define IconButton(X) ImageButton(CONTENT->LoadFontAwesomeIcon(X))
+#define IconButtonSized(X, Y) ImageButton(CONTENT->LoadFontAwesomeIcon(X, Y))
 
 class ImageButton : public FramedButton
 {

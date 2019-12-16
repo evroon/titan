@@ -4,10 +4,11 @@
 
 #if 0
 #include "module/perlin.h"
+#include "noise.h"
 #else
 #include "libnoise/module/perlin.h"
+#include "libnoise/noise.h"
 #endif
-#include "noise.h"
 
 class Texture2D;
 class Texture3D;

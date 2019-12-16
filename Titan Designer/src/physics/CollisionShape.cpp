@@ -48,7 +48,7 @@ void BoxShape3D::bind_methods()
 
 SphereShape3D::SphereShape3D()
 {
-	shape = new btSphereShape(1);
+	// shape = new btSphereShape(1);
 }
 
 #undef CLASSNAME

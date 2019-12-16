@@ -65,7 +65,7 @@ Node* Node::get_child(const String& p_name)
 			return n;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 Node* Node::get_parent_by_type_recursively(const String& p_typename) const

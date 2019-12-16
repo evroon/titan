@@ -13,7 +13,7 @@ class ColorField : public PropertyControl
 
 public:
 	ColorField();
-	ColorField(Color& p_color);
+	ColorField(const Color& p_color);
 	ColorField(const Variable& p_variable);
 
 	void init();

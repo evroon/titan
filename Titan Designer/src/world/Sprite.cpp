@@ -1,7 +1,7 @@
 #include "Sprite.h"
 
 #include "core/ContentManager.h"
-#include "graphics\Renderer.h"
+#include "graphics/Renderer.h"
 
 #include "resources/Texture.h"
 #include "resources/Shader.h"

@@ -60,7 +60,7 @@ Color Color::from_hsv(vec3i val)
 
 vec3 Color::get_hsv() const
 {
-	vec3 in = rgb;
+	vec3 in = get_rgb();
 	vec3 out;
 	double min, max, delta;
 

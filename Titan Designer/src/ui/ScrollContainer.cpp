@@ -72,7 +72,7 @@ void ScrollContainer::draw()
 //	else if (vert_slider_area.is_in_box(pos))
 //		return vert_slider;
 //	else
-//		return NULL;
+//		return nullptr;
 //}
 
 void ScrollContainer::set_position(const vec2 &p_position)

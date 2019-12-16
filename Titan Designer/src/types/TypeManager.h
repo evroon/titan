@@ -72,37 +72,39 @@ private:
 //helper structs for returning the type name of a type
 
 template<typename T>
-String GetType()
+inline String GetType()
 {
 	return std::remove_pointer<T>::type::get_type_name_static();
 }
 
+#ifndef GET_TYPE
+#define GET_TYPE
 #define REGISTER_GETTYPE(X)\
 template<>\
-String GetType<X>()\
+inline String GetType<X>()\
+{\
+	return String(#X);\
+}\
+template<>\
+inline String GetType<const X>()\
+{\
+	return String(#X);\
+}\
+template<>\
+inline String GetType<const X&>()\
+{\
+	return String(#X);\
+}\
+template<>\
+inline String GetType<X&>()\
+{\
+	return String(#X);\
+}\
+template<>\
+inline String GetType<X*>()\
 {\
 	return String(#X);\
 }
-// template<typename X>\
-// String GetType<const X>()\
-// {\
-// 	return String(#X);\
-// }\
-// template<typename X>\
-// String GetType<const X&>()\
-// {\
-// 	return String(#X);\
-// }\
-// template<typename X>\
-// String GetType<X&>()\
-// {\
-// 	return String(#X);\
-// }\
-// template<typename X>\
-// String GetType<X*>()\
-// {\
-// 	return String(#X);\
-// }
 
 
 REGISTER_GETTYPE(bool)
@@ -118,3 +120,4 @@ REGISTER_GETTYPE(vec3)
 REGISTER_GETTYPE(vec4)
 REGISTER_GETTYPE(mat4)
 REGISTER_GETTYPE(Color)
+#endif

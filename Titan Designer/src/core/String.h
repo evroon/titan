@@ -2,15 +2,16 @@
 
 #include <string>
 
-#include "Vector.h"
-#include "Array.h"
-#include "TChar.h"
+#include "core/Vector.h"
+#include "core/Array.h"
+#include "core/TChar.h"
 
 #define to_String(X) static_cast<String>(X)
 
 class Real;
 struct TMessage;
 class Variant;
+class StringName;
 
 class String
 {
@@ -42,6 +43,7 @@ public:
 	friend String operator+(const char* p_l, const String &p_r);
 
 	String operator+(const String &r) const;
+	String operator+(const StringName &r) const;
 	String& operator+=(const String &r);
 	String operator+(char r) const;
 	String& operator+=(char r);

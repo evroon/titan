@@ -8,8 +8,6 @@
 #include "world/WorldObject.h"
 #include "core/Object.h"
 
-#include "physics/PhysicsComponent.h"
-
 #if 0
 
 Array<string> Variant::ListFuncsForObject(ObjectType type)

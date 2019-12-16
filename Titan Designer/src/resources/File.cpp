@@ -14,7 +14,7 @@ File::File(const String & p_path)
 	go_to(p_path);
 }
 
-File::File(char * p_path) : File(String(p_path))
+File::File(const char* p_path) : File(String(p_path))
 {
 }
 
@@ -89,18 +89,6 @@ String File::get_name() const
 	return elements[elements.size() - 1];
 }
 
-bool File::is_directory() const
-{
-	return (get_attributes() & FILE_ATTRIBUTE_DIRECTORY) != 0;
-}
-
-bool File::is_file() const
-{
-	DWORD attributes = GetFileAttributes(path.c_str());
-
-	return (attributes != INVALID_FILE_ATTRIBUTES && !(attributes & FILE_ATTRIBUTE_DIRECTORY));
-}
-
 String File::get_extension() const
 {
 	auto elements = path.split('.');
@@ -137,9 +125,21 @@ bool File::is_absolute_path() const
 	return path.size() > 2 && path[1] == ':' && path[2] == '\\';
 }
 
+
+#if 0
+bool File::is_directory() const
+{
+	return (get_attributes() & FILE_ATTRIBUTE_DIRECTORY) != 0;
+}
+
+bool File::is_file() const
+{
+	DWORD attributes = GetFileAttributes(path.c_str());
+
+	return (attributes != INVALID_FILE_ATTRIBUTES && !(attributes & FILE_ATTRIBUTE_DIRECTORY));
+}
 unsigned int File::get_attributes() const
 {
-	#if 0
 	DWORD attributes = GetFileAttributes(path.c_str());
 
 	if (attributes == INVALID_FILE_ATTRIBUTES)
@@ -155,12 +155,7 @@ unsigned int File::get_attributes() const
 
 	}
 	return attributes;
-
-	#else
-	return 0;
-	#endif
 }
-
 void File::correct_path()
 {
 	if (is_absolute_path())
@@ -200,3 +195,29 @@ Array<File> File::listdir() const
 
 	return result;
 }
+#else
+bool File::is_directory() const
+{
+	return false;
+}
+
+bool File::is_file() const
+{
+	return false;
+}
+
+unsigned int File::get_attributes() const
+{
+	return 0;
+}
+
+void File::correct_path()
+{
+	
+}
+
+Array<File> File::listdir() const
+{
+	return {};
+}
+#endif

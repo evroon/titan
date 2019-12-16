@@ -6,10 +6,10 @@
 class ScriptManager
 {
 public:
-	static TitanScript* GetScript(const String &name) { return NULL; }
+	static TitanScript* GetScript(const String &name) { return nullptr; }
 
 private:
-	static TitanScript* AddScript(const String &name) { return NULL; }
+	static TitanScript* AddScript(const String &name) { return nullptr; }
 
 	static Vector<TitanScript> scripts;
 };

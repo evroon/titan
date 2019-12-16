@@ -6,23 +6,20 @@
 #include "SDL2/SDL.h"
 #include <GL/glew.h>
 #include <GL/glu.h>
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
 #else
 #include "SDL.h"
 #include <GL\glew.h>
 #include <GL\freeglut.h>
+#include <assimp\Importer.hpp>
+#include <assimp\scene.h>
+#include <assimp\postprocess.h>
 #endif
 
 #include "resources/Shader.h"
 #include "resources/Texture.h"
-
-struct aiNode;
-struct aiMesh;
-struct aiScene;
-struct aiMaterial;
-
-// Will give an error, should be enum
-struct aiTextureType;
-// enum aiTextureType;
 
 class Material;
 class Model;

@@ -40,7 +40,7 @@ public:
 
 	vec2 get_required_size() const override;
 
-	vec2& get_texture_size() const;
+	vec2 get_texture_size() const;
 	float get_texture_ratio() const;
 	vec2 get_texture_upscale() const;
 

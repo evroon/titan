@@ -52,7 +52,7 @@ WorldObject* World::get_worldobject(const String &name)
 			return obj->cast_to_type<WorldObject*>();
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 Viewport* World::get_viewport() const
@@ -66,7 +66,7 @@ Layer* World::GetLayer(const String &name)
 		if (layers[c]->name == name)
 			return layers[c];
 
-	return NULL;
+	return nullptr;
 }
 
 Layer* World::GetLayer(int depth)
@@ -75,7 +75,7 @@ Layer* World::GetLayer(int depth)
 		if (layers[c]->depth == depth)
 			return layers[c];
 
-	return NULL;
+	return nullptr;
 }
 
 void World::AddLayer(Layer *l)

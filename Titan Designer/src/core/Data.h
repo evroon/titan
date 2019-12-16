@@ -188,7 +188,7 @@ public:
 			return &vars[name.get_source()]->value;
 		
 		T_ERROR("Var: " + name.operator std::string() + " does not exist!");
-		return NULL;
+		return nullptr;
 	}
 	TsVariable* DeleteVar(const StringName &name)
 	{

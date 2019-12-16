@@ -2,6 +2,10 @@
 
 #include "resources/Texture.h"
 
+#ifndef BYTE
+#define BYTE char
+#endif
+
 Noise::Noise()
 {
 }
@@ -74,7 +78,7 @@ Texture3D* PerlinNoise::create_3d_texture()
 		BYTE a;
 	};
 
-	ColorByte* colors = new ColorByte[size.x * size.y * size.z];
+	ColorByte* colors = new ColorByte[to_int(size.x) * to_int(size.y) * to_int(size.z)];
 
 	WorleyNoise w1 = WorleyNoise(8);
 	WorleyNoise w2 = WorleyNoise(16);

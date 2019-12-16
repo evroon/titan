@@ -1,7 +1,7 @@
 #include "WorldView.h"
 
 #include "graphics/Renderer.h"
-#include "Core/WindowManager.h"
+#include "core/WindowManager.h"
 #include "graphics/View.h"
 
 #include "world/Raycaster.h"
@@ -162,7 +162,7 @@ void WorldView::notification(int p_notification)
 
 		RENDERER->use_scissor(area);
 
-		postprocess = false;
+		postprocess = nullptr;
 
 		if (!postprocess)
 			draw_texture(preview_texture, get_area(), Color::White, vec4(0, 1, 0, 1));

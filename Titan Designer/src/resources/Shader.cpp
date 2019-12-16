@@ -196,7 +196,7 @@ void Shader::create_program()
 
     if (linkStatus != GL_TRUE)
     {
-        T_ERROR("Program link failed for shader: " + file);
+        T_ERROR("Program link failed for shader: " + file.get_relative_path());
 
         glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &infologlength);
         infolog = new GLchar(infologlength + 1);

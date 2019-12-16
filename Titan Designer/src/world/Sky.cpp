@@ -2,11 +2,11 @@
 
 #include "Mesh.h"
 
-#include "Core/ContentManager.h"
-#include "Graphics/Renderer.h"
-#include "Graphics/View.h"
+#include "core/ContentManager.h"
+#include "graphics/Renderer.h"
+#include "graphics/View.h"
 
-#include "core/time.h"
+#include "core/Time.h"
 
 Sky::Sky()
 {
@@ -83,8 +83,8 @@ void Sky::draw()
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("sun_direction", light_dir);
-	shader->set_uniform("sun_color", get_sun_color().rgb);
-	shader->set_uniform("sky_color", get_sky_color().rgb);
+	shader->set_uniform("sun_color", get_sun_color().get_rgb());
+	shader->set_uniform("sky_color", get_sky_color().get_rgb());
 	shader->set_uniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
 
 	MeshHandler::get_singleton()->get_cube()->bind();

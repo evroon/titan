@@ -4,7 +4,7 @@
 #include "input/Input.h"
 #include "input/Cursor.h"
 #include "graphics/Renderer.h"
-#include "Graphics/View.h"
+#include "graphics/View.h"
 #include "ContextMenu.h"
 
 //=========================================================================
@@ -582,7 +582,7 @@ void TextBox::push_back_line(const String& p_source)
 	push_back_line(TextLine(p_source));
 }
 
-void TextBox::push_back_line(TextLine& line)
+void TextBox::push_back_line(TextLine line)
 {
 	int index = lines.size();
 
@@ -634,8 +634,7 @@ void TextBox::set_text(const String &source)
 
 		if (c == '\n' || c == '\r')
 		{
-			//if (buffer != "")
-				push_back_line(TextLine(buffer));
+			push_back_line(TextLine(buffer));
 
 			buffer = "";
 		}
@@ -1239,7 +1238,7 @@ void TextBox::insert_at_selection(char c)
 	move_cursor_right();
 }
 
-void TextBox::insert_line_at_index(int index, TextLine& line)
+void TextBox::insert_line_at_index(int index, TextLine line)
 {
 	line.bind_textbox(this);
 

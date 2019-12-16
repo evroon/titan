@@ -69,20 +69,20 @@ vec2 Image::get_required_size() const
 	return get_texture_size();
 }
 
-vec2& Image::get_texture_size() const
+vec2 Image::get_texture_size() const
 {
 	return texture->get_size();
 }
 
 float Image::get_texture_ratio() const
 {
-	vec2 &size = get_texture_size();
+	vec2 size = get_texture_size();
 	return size.y / size.x;
 }
 
 vec2 Image::get_texture_upscale() const
 {
-	vec2 &size = get_texture_size();
+	vec2 size = get_texture_size();
 	return{ size.x / get_area().size.x, size.y / get_area().size.y };
 }
 

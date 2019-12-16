@@ -250,7 +250,7 @@ TreeElement* TreeElement::get_item(const String& p_name)
 		current = current->next;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 float TreeElement::position(float p_top)
@@ -290,13 +290,13 @@ TreeElement * TreeElement::get_prev()
 	if (!parent)
 	{
 		if (treeview->roots[0] == this)
-			return NULL;
+			return nullptr;
 		else
 			return treeview->roots[treeview->roots.getindex(this) - 1];
 	}
 
 	if (parent->childs == this)
-		return NULL;
+		return nullptr;
 
 	TreeElement *prev = parent->childs;
 
@@ -350,10 +350,10 @@ TreeElement* TreeElement::get_next_visible()
 		}
 
 		if (!current)
-			return NULL;
+			return nullptr;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 TreeElement * TreeElement::get_prev_visible()
@@ -774,7 +774,7 @@ void TreeView::clear()
 TreeElement* TreeView::get_item(const vec2& p_pos)
 {
 	if (!area.is_in_box(p_pos) || roots.size() < 1)
-		return NULL;
+		return nullptr;
 
 
 	TreeElement* current = roots[0];
@@ -787,7 +787,7 @@ TreeElement* TreeView::get_item(const vec2& p_pos)
 		current = current->get_next_visible();
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 TreeElement* TreeView::get_item(const String& p_name)

@@ -102,7 +102,7 @@ Viewport* Camera::get_viewport() const
 	else
 	{
 		T_ERROR("Could not get viewport");
-		return NULL;
+		return nullptr;
 	}
 }
 
