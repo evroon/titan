@@ -25,14 +25,14 @@ File::~File()
 
 void File::go_up()
 {
-	int last = path.find_last('\\');
+	int last = path.find_last('/');
 
 	go_to(path.substr(0, last));
 }
 
 void File::go_up(int p_times)
 {
-	Array<String> elements = path.split('\\');
+	Array<String> elements = path.split('/');
 
 	int length = 0;
 	
@@ -44,7 +44,7 @@ void File::go_up(int p_times)
 
 void File::go_into(const String & p_name)
 {
-	go_to(path + "\\" + p_name);
+	go_to(path + "/" + p_name);
 }
 
 void File::go_to(const String & p_path)
@@ -84,7 +84,7 @@ String File::get_relative_path() const
 
 String File::get_name() const
 {
-	Array<String> elements = path.split('\\');
+	Array<String> elements = path.split('/');
 
 	return elements[elements.size() - 1];
 }
@@ -97,7 +97,7 @@ String File::get_extension() const
 
 File File::operator+(const String & r)
 {
-	return File(path + '\\' + r);
+	return File(path + '/' + r);
 }
 
 void File::operator+=(const String & r)
@@ -122,7 +122,7 @@ File::operator String() const
 
 bool File::is_absolute_path() const
 {
-	return path.size() > 2 && path[1] == ':' && path[2] == '\\';
+	return path.size() > 2 && path[1] == ':' && path[2] == '/';
 }
 
 
@@ -165,9 +165,9 @@ void File::correct_path()
 	else
 		path = ASSETS_DIR + path;
 
-	path.replace('/', '\\');
+	path.replace('\\', '/');
 
-	if (path.find_last('\\') == path.length() - 1)
+	if (path.find_last('/') == path.length() - 1)
 		path = path.substr(0, path.length() - 1);
 
 	directory = GetFileAttributes(path.c_str()) == FILE_ATTRIBUTE_DIRECTORY;
@@ -188,7 +188,7 @@ Array<File> File::listdir() const
 	while ((r = readdir(d)) != NULL)
 	{
 		if (String(r->d_name) != ".." && String(r->d_name) != ".")
-			result.push_back(path + "\\" + r->d_name);
+			result.push_back(path + "/" + r->d_name);
 	}
 
 	closedir(d);
