@@ -5,6 +5,10 @@
 TitanScript::TitanScript()
 {
 	state = new State;
+	textfile = NULL;
+	lexer = NULL;
+	parser = NULL;
+	exe = NULL;
 }
 
 TitanScript::TitanScript(const String& p_file_name) : TitanScript()
@@ -49,7 +53,7 @@ void TitanScript::Extend(Variant ext)
 
 bool TitanScript::FunctionExists(const StringName& name)
 {
-	if (!exe) {
+	if (!exe || !exe->state) {
 		T_ERROR("exe is null for function: " + name);
 		return false;
 	}

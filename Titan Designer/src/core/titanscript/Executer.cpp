@@ -5,7 +5,8 @@
 
 Executer::Executer()
 {
-
+	state = NULL;
+	activefunc = NULL;
 }
 
 Executer::Executer(Line line, State *state)

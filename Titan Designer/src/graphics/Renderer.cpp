@@ -49,6 +49,9 @@ MasterRenderer* MasterRenderer::get_singleton()
 
 Renderer::Renderer()
 {
+	camera = NULL;
+	viewport = NULL;
+
 	init();
 }
 
@@ -326,6 +329,9 @@ ForwardRenderer::ForwardRenderer() : Renderer()
 	reflection_buffer->add_color_texture();
 	reflection_buffer->add_depth_texture();
 	reflection_buffer->init();
+
+	activecamera = nullptr;
+	activeshader = nullptr;
 }
 
 ForwardRenderer::ForwardRenderer(Viewport* p_viewport) : ForwardRenderer()
@@ -420,6 +426,11 @@ void ForwardRenderer::bind_methods()
 
 DeferredRenderer::DeferredRenderer()
 {
+	blur_buffer = nullptr;
+	reflection_camera = nullptr;
+	light_camera = nullptr;
+	environment = nullptr;
+
 	deferred_buffer = new FBO2D(WINDOWSIZE);
 	deferred_buffer->add_float_color_texture(); // albedo
 	deferred_buffer->add_float_color_texture(); // position
@@ -640,6 +651,9 @@ void DeferredRenderer::render_shadowmap()
 	Camera* c = viewport->world->get_active_camera();
 	DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 
+	if (!light || !c)
+		return;
+
 	light_camera->set_pos(light->get_pos());
 	light_camera->set_rotation(light->get_rotation());
 	light_camera->set_projection(30.0f, 1.0f, 100.0f);
@@ -669,6 +683,9 @@ void DeferredRenderer::render_shadowmap()
 void DeferredRenderer::render_reflection()
 {
 	Camera* c = ACTIVE_WORLD->get_active_camera();
+
+	if (!c)
+		return;
 
 	vec3 p = c->get_pos();
 	vec3 r = c->get_rotation();

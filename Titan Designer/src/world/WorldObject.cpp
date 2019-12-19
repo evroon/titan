@@ -13,6 +13,9 @@ WorldObject::WorldObject()
 	set_rendercomponent(new RenderComponent);
 
 	set_color(Color());
+	
+	world = NULL;
+	layer = NULL;
 }
 
 WorldObject::~WorldObject()

@@ -30,9 +30,12 @@ Canvas::Canvas()
 {
 	layers.push_back(CanvasLayer(0));	// default layer
 
+	parent = NULL;
 	context_menu = NULL;
 	context_tip = NULL;
 	dialog = NULL;
+	last_hover = NULL;
+	focused = NULL;
 
 	wait_time = 500 * 1000;
 	double_click_treshold = 300 * 1000;

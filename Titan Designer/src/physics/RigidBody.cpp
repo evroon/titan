@@ -42,6 +42,9 @@ void RigidBody3D::bind_methods()
 
 RigidBody2D::RigidBody2D(bool dyn)
 {
+	shape = NULL;
+	physics_2d = NULL;
+	
 	dynamic = dyn;
 
 	auto ready = [this]() { get_parent()->connect("parent_changed", this, "ready"); };
@@ -68,7 +71,7 @@ void RigidBody2D::ready()
 
 void RigidBody2D::update()
 {
-	if (!shape)
+	if (!shape || !shape->body)
 		return;
 		
 	b2Vec2 pos = shape->body->GetPosition();
@@ -86,7 +89,7 @@ void RigidBody2D::set_as_sensor(bool p_value)
 
 vec2 RigidBody2D::get_velocity() const
 {
-	if (!shape)
+	if (!physics_2d || !shape || !shape->body)
 		return vec2();
 
 	b2Vec2 velo = shape->body->GetLinearVelocity();
@@ -95,7 +98,7 @@ vec2 RigidBody2D::get_velocity() const
 
 void RigidBody2D::set_velocity(const vec2 &p_velocity)
 {
-	if (!physics_2d)
+	if (!physics_2d || physics_2d == nullptr || !shape || !shape->body)
 		return;
 
 	vec2 velo = p_velocity / physics_2d->get_scale();
@@ -105,7 +108,7 @@ void RigidBody2D::set_velocity(const vec2 &p_velocity)
 
 bool RigidBody2D::get_fixed_rotation() const
 {
-	if (!shape)
+	if (!shape || !shape->body)
 		return false;
 
 	return shape->body->IsFixedRotation();
@@ -113,7 +116,7 @@ bool RigidBody2D::get_fixed_rotation() const
 
 void RigidBody2D::set_fixed_rotation(bool p_value)
 {
-	if (shape)
+	if (shape && shape->body)
 		shape->body->SetFixedRotation(p_value);
 }
 

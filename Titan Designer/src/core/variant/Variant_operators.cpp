@@ -567,7 +567,7 @@ Variant::operator Object*() const
 		return o;
 	else if (type == UNDEF)
 		return nullptr;
-	else if (type == INT && i == NULL)
+	else if (type == INT && i == 0)
 		return nullptr;
 	
 

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "core/Object.h"
+#include "core/platform/Platform.h"
 
 class Window;
 struct RenderTarget;
-class Platform;
 
 class Application : public Object
 {
@@ -16,6 +16,7 @@ public:
 	Application(Platform *t)
 	{
 		platform = t;
+		default_target = NULL;
 	}
 
 	virtual void init() { }

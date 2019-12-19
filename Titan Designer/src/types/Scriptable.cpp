@@ -6,6 +6,7 @@
 
 Scriptable::Scriptable()
 {
+	script = NULL;
 }
 
 

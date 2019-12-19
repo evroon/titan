@@ -15,6 +15,8 @@ World::World()
 	AddLayer(new Layer(0, "DefaultLayer"));
 
 	physics_2d = new PhysicsWorld2D;
+	physics_3d = NULL;
+	active_camera = NULL;
 }
 
 World::~World()

@@ -12,7 +12,19 @@
 Viewport::Viewport()
 {
 	VIEW->bind_viewport(this);
+
 	fbo = NULL;
+	postprocess = NULL;
+	parentview = NULL;
+	camera = NULL;
+	scene = NULL;
+	world = NULL;
+	canvas = NULL;
+	renderer = NULL;
+	return_viewport = NULL;
+	wireframe_enabled = false;
+	fps_locked = false;
+
 }
 
 
@@ -42,6 +54,11 @@ World* Viewport::get_world() const
 
 void Viewport::set_canvas(Canvas* p_canvas)
 {
+	if (p_canvas == NULL) {
+		T_ERROR("Canvas is null...");
+		return;
+	}
+
 	if (canvas)
 		remove_child(canvas);
 

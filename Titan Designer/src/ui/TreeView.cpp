@@ -798,6 +798,7 @@ TreeElement* TreeView::get_item(const String& p_name)
 		if (e)
 			return e;
 	}
+	return nullptr;
 }
 
 void TreeView::set_item_numbers_enabled(bool p_value)
