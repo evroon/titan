@@ -194,7 +194,6 @@ public:
 	operator Color&() const;
 	operator Transform&() const;
 	operator Object*() const;
-	operator Variant() const;
 
 	//operator bool*() const { return b; }
 	//operator int*() const { return &i; }
@@ -344,3 +343,19 @@ struct VariantValue
 	GETVALUE(Object*)
 };
 #endif
+
+// Helper classes to avoid the use of Variant::operator Variant() const.
+template<typename T> struct VariantCaster
+{
+   static inline T get(Variant& v) { return v.operator T(); }
+};
+
+template<> struct VariantCaster<Variant>
+{
+   static inline Variant get(Variant& v) { return v; }
+};
+
+template<typename T> T cast(Variant& v )
+{
+   return VariantCaster<T>::get(v);
+}

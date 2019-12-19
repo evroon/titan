@@ -177,22 +177,22 @@ struct ConstructorBuilder
 	template<typename T, typename ARG_0>
 	static std::function<Variant(Variant)> build_1_overloaded()
 	{
-		return [](Variant arg_0) { return new T(arg_0.operator ARG_0()); };
+		return [](Variant arg_0) { return new T(cast<ARG_0>(arg_0)); };
 	}
 	template<typename T, typename ARG_0, typename ARG_1>
 	static std::function<Variant(Variant, Variant)> build_2_overloaded()
 	{
-		return [](Variant arg_0, Variant arg_1) { return new T(arg_0.operator ARG_0(), arg_1.operator ARG_1()); };
+		return [](Variant arg_0, Variant arg_1) { return new T(cast<ARG_0>(arg_0), cast<ARG_1>(arg_1)); };
 	}
 	template<typename T, typename ARG_0, typename ARG_1, typename ARG_2>
 	static std::function<Variant(Variant, Variant, Variant)> build_3_overloaded()
 	{
-		return [](Variant arg_0, Variant arg_1, Variant arg_2) { return new T(arg_0.operator ARG_0(), arg_1.operator ARG_1(), arg_2.operator ARG_2()); };
+		return [](Variant arg_0, Variant arg_1, Variant arg_2) { return new T(cast<ARG_0>(arg_0), cast<ARG_1>(arg_1), cast<ARG_2>(arg_2)); };
 	}
 	template<typename T, typename ARG_0, typename ARG_1, typename ARG_2, typename ARG_3>
 	static std::function<Variant(Variant, Variant, Variant, Variant)> build_4_overloaded()
 	{
-		return [](Variant arg_0, Variant arg_1, Variant arg_2, Variant arg_3) { return new T(arg_0.operator ARG_0(), arg_1.operator ARG_1(), arg_2.operator ARG_2(), arg_3.operator ARG_3()); };
+		return [](Variant arg_0, Variant arg_1, Variant arg_2, Variant arg_3) { return new T(cast<ARG_0>(arg_0), cast<ARG_1>(arg_1), cast<ARG_2>(arg_2), cast<ARG_3>(arg_3)); };
 	}
 };
 

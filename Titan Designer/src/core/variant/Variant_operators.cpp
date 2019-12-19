@@ -561,10 +561,6 @@ Variant::operator Transform&() const
 	convert_error("Transform");
 	return *new Transform;
 }
-Variant::operator Variant() const
-{
-	return this;
-}
 Variant::operator Object*() const
 {
 	if (type == OBJECT)
