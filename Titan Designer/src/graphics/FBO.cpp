@@ -121,7 +121,7 @@ void FBO2D::init()
 		for (int c = 0; c < definitions.size(); c++)
 			DrawBuffers[c] = GL_COLOR_ATTACHMENT0 + c;
 		glDrawBuffers(definitions.size(), DrawBuffers);
-		delete DrawBuffers;
+		delete[] DrawBuffers;
 	}
 	else
 		glDrawBuffer(GL_NONE);

@@ -38,9 +38,9 @@ WorldView::WorldView(Scene* p_scene)
 
 	selected = NULL;
 
-	cone = new Model("assets/Models/Primitives/Cone.dae");
+	cone = new Model("Models/Primitives/Cone.dae");
 	plane = MeshHandler::get_singleton()->get_plane();
-	disk = new Model("assets/Models/Primitives/Cube.dae");
+	disk = new Model("Models/Primitives/Cube.dae");
 
 	raycast_fbo = new FBO2D(WINDOWSIZE);
 	raycast_fbo->add_float_color_texture();

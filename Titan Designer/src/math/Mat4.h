@@ -189,8 +189,8 @@ public:
 	void rotate(const vec3 &axis, float angle)
 	{
 		//Math::DegToRad(angle);
-		float c = cosf(angle);
-		float s = sinf(angle);
+		// float c = cosf(angle);
+		// float s = sinf(angle);
 		vec3 v = axis;
 		v.normalize();
 		/*float xx = v.x * v.x;

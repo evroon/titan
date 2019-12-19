@@ -145,6 +145,12 @@ GLint Shader::create_shader(const String& p_path, GLenum ShaderType)
 	TextFile* file = CONTENT->LoadTextFile(p_path);
 
 	String s = file->get_source();
+
+	if (s == "") {
+		T_ERROR("File is empty: " + p_path);
+		return -1;
+	}
+
 	shadersource = s.c_str();
 
     glShaderSource(shader_id, 1, &shadersource, NULL);
@@ -202,7 +208,7 @@ void Shader::create_program()
         infolog = new GLchar(infologlength + 1);
         glGetProgramInfoLog(program_id, infologlength + 1, NULL, infolog);
 
-        SDL_Log(infolog);
+        T_ERROR(infolog);
         delete infolog;
 		return;
     } 

@@ -35,8 +35,6 @@
 
 void EditorApp::init()
 {
-	VIEW->set_application(this);
-
 	Renderer* r = new ForwardRenderer;
 	Viewport *v = new Viewport(r);
 	Canvas* c = new Canvas;

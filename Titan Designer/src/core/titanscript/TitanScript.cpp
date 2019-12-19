@@ -18,6 +18,7 @@ TitanScript::TitanScript(const String& p_file_name) : TitanScript()
 
 void TitanScript::open_file(const String& filepath)
 {
+	T_LOG("Loading: " + filepath);
 	StringUtils::Init();
 
 	set_file(filepath);

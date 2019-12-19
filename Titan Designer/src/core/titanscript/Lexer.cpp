@@ -17,10 +17,9 @@ void Lexer::Free()
 
 void Lexer::LexBlock()
 {
-	Line *l;
 	while(index < lines.size() && !finishedlexing)
 	{
-		l = new Line(LexLine(lines[index]));
+		Line* l = new Line(LexLine(lines[index]));
 
 		if (l->tokens.size() == 0 || l->StartsWith("//"))
 			continue;		//Skip if line is comment or empty
@@ -144,7 +143,7 @@ Line Lexer::SplitLine(const String &txt)
 			continue;
 		}
 
-		if (kar == '/' && txt[c + 1] == '/')
+		if (kar == '/' && c < txt.length() - 1 && txt[c + 1] == '/')
 			return line;
 
 		if (kar == '\t')

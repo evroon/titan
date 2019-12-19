@@ -107,6 +107,7 @@ void Application::FinishDraw()
 
 void Application::Loop()
 {
+	VIEW->set_application(this);
 	Time::Init();
 	InitEngine();
 	InitRenderer();
