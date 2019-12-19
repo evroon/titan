@@ -3,24 +3,26 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <unistd.h>
 
-#if PLATFORM == WINDOWS
-#include "core/platform/dirent.h"
-#endif
-
+#include "graphics/View.h"
+#include "core/Application.h"
+#include "core/platform/Platform.h"
 #include "resources/File.h"
-
 #include "titanscript/TitanScript.h"
 
 ContentManager* ContentManager::singleton;
 
 ContentManager::ContentManager()
 {
+	Shader2D = NULL;
+	SimpleShader = NULL;
+	ShadowShader = NULL;
+	DefaultFont = NULL;
 }
 
 void ContentManager::Init()
 {
-
 	singleton = new ContentManager;
 }
 
@@ -54,23 +56,15 @@ void ContentManager::setup()
 	extensions["obj"] = GETTYPE(StringName("Mesh"));
 	extensions["3ds"] = GETTYPE(StringName("Mesh"));
 
-	char buffer[256];
+	File base_path = View::get_singleton()->get_application()->platform->get_cwd();
+	base_path += "Titan Designer/assets";
+	
 
-	#if 0
-	unsigned int len = 256;
-
-	int bytes = GetModuleFileName(NULL, buffer, len);
-	if (bytes == 0)
-	{
-		T_ERROR("Could not find directory, error: " + GetLastError());
-	}
-	#endif
-
-	File temp = buffer;
-	temp.go_up(3);
-	temp.go_into("Titan Designer\\assets");
-
-	assets_directory = temp;
+	int result = chdir (base_path.get_absolute_path().c_str());
+	if (result == -1)
+		T_ERROR("Could not set working directory");
+	
+	assets_directory = base_path;
 
 	Shader2D = LoadShader(File("EngineCore/Shaders/Shader2D"));
 	SimpleShader = LoadShader(File("EngineCore/Shaders/SimpleShader"));

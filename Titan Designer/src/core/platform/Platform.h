@@ -1,4 +1,7 @@
 #pragma once
+
+#include "resources/File.h"
+
 class Platform
 {
 public:
@@ -15,5 +18,7 @@ public:
 
 	virtual void InitSDL() { }
 	virtual void InitGL() { }
+	
+	virtual File get_cwd() { return ""; }
 };
 
