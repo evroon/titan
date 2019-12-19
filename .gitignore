@@ -275,3 +275,9 @@ __pycache__/
 /Libraries/glew-2.0.0/build/cmake/out/build/x64-Debug
 /Libraries/glew-2.0.0/glew.pc
 .vscode/settings.json
+
+CMakeFiles
+Titan Designer/src/titan
+Titan Designer/src/Makefile
+Titan Designer/src/CMakeCache.txt
+Titan Designer/src/cmake_install.cmake
