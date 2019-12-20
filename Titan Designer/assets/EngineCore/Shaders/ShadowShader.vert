@@ -8,12 +8,12 @@ varying vec2 pos;
 void main()
 {
 	vec4 newpos;
-	if (Position.y > 0)
+	if (Position.y > 0.0)
 	{
-		newpos = model * vec4(Position.x, -1, Position.zw);
+		newpos = model * vec4(Position.x, -1.0, Position.zw);
 		newpos.xy -= lightpos;
 		newpos.xy = normalize(newpos.xy);
-		newpos.xy *= 100;
+		newpos.xy *= 100.0;
 	}
 	else
 		newpos = model * Position;
