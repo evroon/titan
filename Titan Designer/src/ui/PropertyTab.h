@@ -15,7 +15,7 @@ public:
 
 	virtual ~PropertyTab();
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void set_property(Object* p_object);
 	Object* get_property() const;

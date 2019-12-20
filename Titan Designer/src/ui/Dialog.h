@@ -26,9 +26,9 @@ public:
 	Dialog();
 	virtual ~Dialog();
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
-	void handle_event(UIEvent * p_event);
+	void handle_event(UIEvent * p_event) override;
 
 	void notification(int p_notification) override;
 

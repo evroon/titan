@@ -120,7 +120,7 @@ public:
 	RawTexture2D(const String &p_filepath);
 	RawTexture2D(SDL_Surface *p_surface);
 
-	void free();
+	void free() override;
 
 	Color read_pixel(const vec2i& p_pos);
 

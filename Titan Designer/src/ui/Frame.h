@@ -8,7 +8,7 @@ public:
 	Frame();
 	virtual ~Frame();
 
-	void notification(int p_notification);
+	void notification(int p_notification) override;
 
 	void build();
 

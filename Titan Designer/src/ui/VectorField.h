@@ -21,7 +21,7 @@ public:
 	void value_changed() override;
 	void value_input() override;
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void position_items();
 
@@ -48,7 +48,7 @@ public:
 	void value_changed() override;
 	void value_input() override;
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void position_items();
 
@@ -75,7 +75,7 @@ public:
 	void value_changed() override;
 	void value_input() override;
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void position_items();
 
@@ -102,7 +102,7 @@ public:
 	void value_changed() override;
 	void value_input() override;
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void position_items();
 

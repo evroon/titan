@@ -24,7 +24,7 @@ public:
 
 	vec2 get_required_size() const override;
 
-	void handle_event(UIEvent *e);
+	void handle_event(UIEvent *e) override;
 	void notification(int p_notification) override;
 
 	void move_cursor_begin();

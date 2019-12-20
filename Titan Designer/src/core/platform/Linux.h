@@ -19,7 +19,7 @@ public:
 			T_ERROR(String("GLEW Error: " + err));
 	}
 
-	File get_cwd()
+	File get_cwd() override
 	{
         char arg1[20];
         char exepath[PATH_MAX + 1] = {0};

@@ -32,7 +32,7 @@ public:
 
 	vec2 get_required_size() const override;
 	void handle_event(UIEvent *ui_event) override;
-	void notification(int p_notification);
+	void notification(int p_notification) override;
 
 	void set_viewport(Viewport* p_viewport);
 	Viewport* get_viewport() const;

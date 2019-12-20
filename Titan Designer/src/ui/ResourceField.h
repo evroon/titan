@@ -49,7 +49,7 @@ public:
 
 	vec2 get_required_size() const override;
 
-	void notification(int p_notification);
+	void notification(int p_notification) override;
 
 	void load_texture();
 

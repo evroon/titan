@@ -34,7 +34,7 @@ public:
 	PropertyView();
 	~PropertyView();
 
-	vec2 get_required_size() const;
+	vec2 get_required_size() const override;
 
 	void handle_event(UIEvent *ui_event) override;
 
