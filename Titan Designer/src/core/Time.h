@@ -62,11 +62,10 @@ private:
 class Timer
 {
 public:
-	Timer(int wt)
+	Timer(int p_waittime)
 	{
-		waittime = wt;
+		waittime = p_waittime;
 		start();
-		//Time::timers.push_back(this);
 	}
 
 	bool update()

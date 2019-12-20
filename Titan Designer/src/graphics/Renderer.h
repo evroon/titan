@@ -37,6 +37,7 @@ class MasterRenderer : public Object
 	OBJ_DEFINITION(MasterRenderer, Object);
 
 public:
+	MasterRenderer();
 
 	void init();
 

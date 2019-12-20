@@ -2,16 +2,16 @@
 
 #include "Canvas.h"
 
-TextButton::TextButton()
+TextButton::TextButton() : TextButton("")
 {
-	left_margin = right_margin = 5;
-
-	font = CanvasData::get_singleton()->get_default_theme()->get_font();
 }
 
-TextButton::TextButton(const String & p_text) : TextButton()
+TextButton::TextButton(const String & p_text)
 {
+	font = CanvasData::get_singleton()->get_default_theme()->get_font();
+	
 	text = p_text;
+	left_margin = right_margin = 5;
 }
 
 vec2 TextButton::get_required_size() const

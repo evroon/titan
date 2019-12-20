@@ -8,6 +8,13 @@ View View::singleton;
 
 View::View()
 {
+	viewports = Vector<Viewport>();
+
+	default_viewport = nullptr;
+	active_viewport = nullptr;
+	application = nullptr;
+
+	fps_locked = false;
 }
 
 View::~View()

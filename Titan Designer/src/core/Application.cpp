@@ -28,6 +28,13 @@
 
 #include "ui/SyntaxHighlighter.h"
 
+Application::Application(Platform *p_platform)
+{
+	platform = p_platform;
+	window = nullptr;
+	default_target = nullptr;
+}
+
 void Application::InitSDL()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -102,7 +109,7 @@ void Application::prepare_draw()
 
 void Application::FinishDraw()
 {
-	//RENDERER->Finish();
+	RENDERER->finish();
 }
 
 void Application::Loop()
@@ -175,7 +182,6 @@ void Application::Loop()
 		{
 			TIME->OnUpdate();
 			update();
-			//PhysicsWorld2D::update();
 			INPUT->Clean();
 		}
 
@@ -202,10 +208,8 @@ void Application::Quit()
 	NodeManager::Free();
 	CONTENT->FreeAll();
 	Primitives::Destroy();
-	//NodeManager::Free();
 	GC->free();
 	StringUtils::Free();
-	//PhysicsWorld2D::DestroyWorld();
 	FBOMANAGER->free();
 	ERROR_HANDLER->clean();
 	Audio::Free();

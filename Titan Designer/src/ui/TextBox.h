@@ -42,7 +42,7 @@ struct TextLine
 	Array<TextStyle> styles;
 
 private:
-	int index = 0;
+	int index;
 	TextBox *textbox;
 
 	String text;

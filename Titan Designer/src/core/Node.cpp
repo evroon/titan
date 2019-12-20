@@ -5,6 +5,8 @@
 Node::Node()
 {
 	parent = nullptr;
+	children = Vector<Node>();
+	name = "";
 }
 
 Node::~Node()

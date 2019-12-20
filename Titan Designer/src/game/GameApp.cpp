@@ -5,6 +5,11 @@
 #include "graphics/Renderer.h"
 #include "input/Input.h"
 
+GameApp::GameApp(Platform *p_platform) : Application(p_platform)
+{
+	activescene = nullptr;
+}
+
 void GameApp::init()
 {
 	Renderer* r = new DeferredRenderer;

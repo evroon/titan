@@ -5,8 +5,13 @@
 Slider::Slider()
 {
 	inner_height = 30;
+	inner_box = rect2();
+	
+	space = 0.0f;
+	position = 0.0f;
 
-	space = 0;
+	grab_pos = vec2();
+	is_dragging = false;
 }
 
 void Slider::step_down()

@@ -35,10 +35,10 @@ public:
 
 	struct Toggle
 	{
-		Ref<Texture2D> tex;
-		String text;
-		String tip;
-		rect2 area;
+		Ref<Texture2D> tex = nullptr;
+		String text = "";
+		String tip = "";
+		rect2 area = rect2();
 	};
 
 	void handle_event(UIEvent* p_event) override;

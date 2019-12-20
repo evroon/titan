@@ -394,6 +394,24 @@ void Mesh::MeshNode::setup_buffers()
 //Material
 //=========================================================================
 
+Material::Material()
+{
+	shader = nullptr;
+	mesh = nullptr;
+	diffuse_texture = nullptr;
+	specular_texture = nullptr;
+	ambient_texture = nullptr;
+
+	diffuse_color = Color();
+	specular_color = Color();
+	ambient_color = Color();
+	emissive_color = Color();
+
+	name = "";
+
+	textures = Vector<Texture2D>();
+	shininess = 0.0f;
+}
 
 void Material::load_material(const aiMaterial* p_material)
 {

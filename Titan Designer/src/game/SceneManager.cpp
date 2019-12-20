@@ -4,8 +4,8 @@ SceneManager* SceneManager::singleton;
 
 SceneManager::SceneManager()
 {
+	scenes = Vector<Scene>();
 }
-
 
 SceneManager::~SceneManager()
 {

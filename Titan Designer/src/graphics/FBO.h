@@ -21,7 +21,7 @@ public:
 	virtual void add_float_color_texture();
 
 	GLuint id;
-	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+	GLenum DrawBuffers[1];
 	vec2i size;
 
 	bool depth;
@@ -36,7 +36,7 @@ public:
 		vec2i size;
 	};
 
-	bool cleared_every_frame = true;
+	bool cleared_every_frame;
 
 	Array<color_tex_def> definitions;
 	

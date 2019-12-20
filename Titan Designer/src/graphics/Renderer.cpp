@@ -16,6 +16,11 @@ MasterRenderer* MasterRenderer::singleton;
 //MasterRenderer
 //=========================================================================
 
+MasterRenderer::MasterRenderer()
+{
+	active_renderer = nullptr;
+}
+
 void MasterRenderer::init()
 {
 	FBOMANAGER->bind_default_fbo();
@@ -49,8 +54,16 @@ MasterRenderer* MasterRenderer::get_singleton()
 
 Renderer::Renderer()
 {
-	camera = NULL;
-	viewport = NULL;
+	camera = nullptr;
+	viewport = nullptr;
+
+	buffers = Vector<FBO2D>();
+	textures = Map<int, Texture2D>();
+
+	projection_matrix = mat4();
+	view_matrix = mat4();
+	final_matrix = mat4();
+	canvas_matrix = mat4();
 
 	init();
 }
@@ -61,8 +74,6 @@ Renderer::~Renderer()
 
 void Renderer::init()
 {
-	//use_depth_test(0.5f, 1000.0f);
-	//use_culling();
 	use_blending();
 
 	draw_on_screen = true;

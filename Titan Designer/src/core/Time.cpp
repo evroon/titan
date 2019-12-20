@@ -13,6 +13,11 @@ Time::Time()
 	start_time = std::chrono::high_resolution_clock::now();
 
 	LastTime = get_time_since_start();
+
+	game_paused = false;
+	absolute_time = 0;
+	game_time = 0;
+	delta_time = 0;
 }
 
 Time* Time::get_singleton()
@@ -164,8 +169,11 @@ void TimedCaller::update()
 RenderTarget::RenderTarget()
 {
 	fps_locked = true;
-	fps_lock = 60;
 	is_default_target = true;
+	fps_lock = 60;
+	fps_measured = 0;
+	fps_guessed = 0;
+	delta_time = 0.0f;
 
 	limiter = FPSLimiter(1000 / fps_lock);
 }

@@ -25,6 +25,20 @@ Viewport::Viewport()
 	wireframe_enabled = false;
 	fps_locked = false;
 
+	destination = DrawDestination::DIRECT;
+	mode = DrawMode::FORWARD_RENDERING;
+
+	graphics_transform = mat4();
+	input_transform = mat4();
+
+	limiter = RenderTarget();
+	updatelim = FPSLimiter();
+
+	delta_time = 0.0f;
+	fps = 0.0f;
+	fps_guess = 0.0f;
+
+	renderarea = rect2();
 }
 
 

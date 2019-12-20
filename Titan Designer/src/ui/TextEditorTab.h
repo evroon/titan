@@ -22,7 +22,7 @@ public:
 
 	void handle_event(UIEvent *ui_event) override;
 
-	void notification(int p_notification);
+	void notification(int p_notification) override;
 
 	void show_dialog();
 
@@ -34,12 +34,11 @@ public:
 
 protected:
 	ImageButton* save_button;
-	ImageButton* save_all_button;
 	ImageButton* open_button;
 	ImageButton* new_button;
 
-	TextBox textbox;
-	Container buttons;
+	TextBox* textbox;
+	Container* buttons;
 
 	rect2 textbox_area;
 	TextFile* textfile;

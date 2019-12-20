@@ -28,6 +28,7 @@ CanvasLayer::~CanvasLayer()
 
 Canvas::Canvas()
 {
+	layers = Array<CanvasLayer>();
 	layers.push_back(CanvasLayer(0));	// default layer
 
 	parent = NULL;
@@ -36,10 +37,19 @@ Canvas::Canvas()
 	dialog = NULL;
 	last_hover = NULL;
 	focused = NULL;
+	last_clicked = nullptr;
+	tip_shower = nullptr;
 
 	wait_time = 500 * 1000;
 	double_click_treshold = 300 * 1000;
+	tip_time = 0;
+	click_time = 0;
+
 	size = vec2(1000.0);
+
+	scheduled_updates = Vector<Control>();
+
+	awaiting_tip = false;
 }
 
 Canvas::~Canvas()

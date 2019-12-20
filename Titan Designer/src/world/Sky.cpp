@@ -16,6 +16,8 @@ Sky::Sky()
 	set_pos(vec3(0, 0, 0.0f));
 
 	sky_color = Color::FromRGB(vec3i(66, 182, 244)).get_rgb();
+
+	sun_direction = vec3(0, -1, 0);
 }
 
 Sky::~Sky()

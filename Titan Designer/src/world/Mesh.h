@@ -163,6 +163,8 @@ class Material : public Resource
 	friend class Mesh;
 
 public:
+	Material();
+	
 	void set_shader(Shader* p_shader);
 	Shader* get_shader() const;
 

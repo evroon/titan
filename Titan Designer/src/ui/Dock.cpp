@@ -18,6 +18,15 @@ Dock::Dock()
 
 	left_margin = 6.0f;
 	text_offset = 4.0f;
+
+	tabs = Vector<Tab>();
+	selectors = Array<Selector>();
+
+	selected = -1;
+	highlighted = -1;
+	active = -1;
+
+	tab_area, selectors_area = rect2();
 }
 
 vec2 Dock::get_required_size() const

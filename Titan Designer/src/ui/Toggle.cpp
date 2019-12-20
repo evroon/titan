@@ -4,16 +4,18 @@
 //Toggle
 //=========================================================================
 
-Toggle::Toggle()
+Toggle::Toggle() : Toggle("")
 {
 }
 
-Toggle::Toggle(const String& p_text) : Toggle()
+Toggle::Toggle(const String& p_text)
 {
 	text = p_text;
+	tex = nullptr;
+	selected = false;
 }
 
-Toggle::Toggle(Ref<Texture2D> p_tex) : Toggle()
+Toggle::Toggle(Ref<Texture2D> p_tex) : Toggle("")
 {
 	tex = p_tex;
 }
@@ -87,6 +89,9 @@ void Toggle::bind_methods()
 
 ToggleStrip::ToggleStrip()
 {
+	toggles = Array<Toggle>();
+
+	selected = -1;
 	margin = 4;
 	left_margin = 4;
 }

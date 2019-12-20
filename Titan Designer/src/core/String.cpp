@@ -9,6 +9,11 @@
 
 #include <sstream>
 
+String::String()
+{
+	src = "";
+}
+
 String::String(char *v)
 {
 	src = std::string(v);

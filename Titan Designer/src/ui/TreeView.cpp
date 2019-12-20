@@ -8,23 +8,32 @@
 #include "Slider.h"
 
 
-TreeElement::TreeElement(const String &p_text)
+TreeElement::TreeElement(const String &p_text): TreeElement(nullptr)
 {
 	text = p_text;
-	icon = NULL;
-	depth = 0;
-	visible = true;
-	expanded = treeview->init_expanded;
 }
 
-TreeElement::TreeElement(TreeView * p_treeview)
+TreeElement::TreeElement(TreeView* p_treeview)
 {
 	treeview = p_treeview;
 
-	icon = NULL;
+	if (treeview)
+		expanded = treeview->init_expanded;
+	else
+		expanded = true;
+
+	text = "";
 	depth = 0;
+	index = 0;
+	parent = nullptr;
+	next = nullptr;
+	childs = nullptr;
+	icon = nullptr;
+	text = "";
+	secondary_text = "";
+	area = rect2();
 	visible = true;
-	expanded = treeview->init_expanded;
+	selected = false;
 }
 
 TreeElement::~TreeElement()
@@ -389,26 +398,33 @@ TreeView::TreeView()
 	left_margin = 4;
 	right_margin = 4;
 	top_margin = 3;
-
 	internal_left_margin = 4;
 	secondary_margin = 200;
+	extra_space = 100;
+	depth_offset = 20.0f;
 
 	background_color = TO_RGB(50);
 	selection_color = TO_RGB(170);
 	item_numbers_color = TO_RGB(200);
 
+	slider = nullptr;
+	selected = nullptr;
+	highlighted = nullptr;
+
 	font = CanvasData::get_singleton()->get_default_theme()->get_font();
-
-	extra_space = 100;
-
-	slider = NULL;
-
-	selected = NULL;
-	highlighted = NULL;
-
 	collapsed_tex = CONTENT->LoadFontAwesomeIcon("solid/plus-square", vec2i(13));
 	expanded_tex = CONTENT->LoadFontAwesomeIcon("solid/minus-square", vec2i(13));
 
+	scroll_offset = 0.0f;
+	search_text = "";
+	
+	box = rect2();
+	selection_box = rect2();
+
+	roots = Vector<TreeElement>();
+
+	item_numbers_enabled = false;
+	init_expanded = false;
 }
 
 TreeView::~TreeView()

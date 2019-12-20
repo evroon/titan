@@ -11,13 +11,7 @@ class Application : public Object
 	OBJ_DEFINITION(Application, Object);
 
 public:
-	Platform *platform;
-
-	Application(Platform *t)
-	{
-		platform = t;
-		default_target = NULL;
-	}
+	Application(Platform *p_platform);
 
 	virtual void init() { }
 	virtual void update() { }
@@ -38,4 +32,5 @@ public:
 
 	Window *window;
 	RenderTarget* default_target;
+	Platform *platform;
 };

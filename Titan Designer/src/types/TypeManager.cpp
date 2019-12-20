@@ -51,6 +51,13 @@ bool TypeManager::type_exists(const StringName &name) const
 	return types.contains(name);
 }
 
+void TypeManager::set_object_type(const ObjectType& p_object_type)
+{
+	object_types[p_object_type.name] = p_object_type;
+	types[p_object_type.name] = p_object_type.name;
+	names[p_object_type.ptr] = p_object_type.name;
+}
+
 TypeManager* TypeManager::get_singleton()
 {
 	return singleton;

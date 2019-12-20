@@ -2,6 +2,10 @@
 
 Lexer::Lexer(const String &src)
 {
+	parentstack = Vector<Line>();
+	lines = Array<String>();
+
+	finishedlexing = false;
 	source = src;
 	Lex();
 }

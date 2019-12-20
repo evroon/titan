@@ -66,6 +66,10 @@ public:
 	{
 		push_back(v_10);
 	}
+	~Array()
+	{
+		clear();
+	}
 
 	//Constructor function
 	void buildarray(VAL *arr, int size)

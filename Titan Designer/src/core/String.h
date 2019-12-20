@@ -16,7 +16,7 @@ class StringName;
 class String
 {
 public:
-	String() = default;
+	String();
 	String(char v);
 	String(char *v);
 	String(const char *v);

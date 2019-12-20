@@ -61,6 +61,8 @@ class Signal;
 
 class MessageHandler
 {
+	MessageHandler();
+
 public:
 	void Log(TMessage *msg);
 	void clean();
@@ -81,7 +83,7 @@ private:
 
 	Vector<TMessage> messages;
 	Array<char> filters;
-	bool complete_description = true;
+	bool complete_description;
 
 	static MessageHandler *singleton;
 };

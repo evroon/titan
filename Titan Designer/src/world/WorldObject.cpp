@@ -9,13 +9,13 @@
 
 WorldObject::WorldObject()
 {
+	components = Vector<Component>();
+	world = nullptr;
+	layer = nullptr;
+
 	set_transformcomponent(new TransformComponent);
 	set_rendercomponent(new RenderComponent);
-
 	set_color(Color());
-	
-	world = NULL;
-	layer = NULL;
 }
 
 WorldObject::~WorldObject()

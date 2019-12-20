@@ -9,7 +9,7 @@ class GameApp : public Application
 	OBJ_DEFINITION(GameApp, Application);
 
 public:
-	GameApp(Platform *t) : Application(t) { }
+	GameApp(Platform *p_platform);
 
 	void init() override;
 	void update() override;

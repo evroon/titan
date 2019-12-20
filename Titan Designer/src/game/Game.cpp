@@ -4,6 +4,11 @@
 
 Game *Game::activegame;
 
+Game::Game()
+{
+	activescene = nullptr;
+}
+
 void Game::Start()
 {
 	LoadScene("main");

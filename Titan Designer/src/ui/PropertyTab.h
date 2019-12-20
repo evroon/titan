@@ -34,7 +34,7 @@ private:
 	ImageButton* forward_button;
 	ImageButton* down_button;
 
-	float buttons_height = 30.0f;
+	float buttons_height;
 	rect2 bar_area;
 	rect2 work_area;
 

@@ -48,13 +48,13 @@ public:
 		} type;
 
 		String text = "";
-		rect2 area;
-		vec4 bounds;
-		vec2 pos;
-		Texture2D* tex = NULL;
-		Shader* shader = NULL;
-		Font* font = NULL;
-		Color color;
+		rect2 area = rect2();
+		vec4 bounds = vec4();
+		vec2 pos = vec2();
+		Texture2D* tex = nullptr;
+		Shader* shader = nullptr;
+		Font* font = nullptr;
+		Color color = Color();
 	};
 
 	void bind_parent(Control *p_parent);
@@ -170,7 +170,6 @@ protected:
 	bool use_scissor;
 
 private:
-
 	void render();
 
 	Array<DrawCommand> draw_commands;

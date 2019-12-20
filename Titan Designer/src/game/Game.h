@@ -20,7 +20,7 @@
 class Game
 {
 public:
-	Game() { }
+	Game();
 
 	Scene* LoadScene(const String &name);
 	void StartScene(Scene *s);

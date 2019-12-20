@@ -4,7 +4,7 @@
 
 Tab::Tab()
 {
-
+	title = "";
 }
 
 
@@ -12,11 +12,11 @@ Tab::~Tab()
 {
 }
 
-void Tab::set_tab_title(const String & p_title)
+void Tab::set_tab_title(const String& p_title)
 {
 	title = p_title;
 
-	if (parent)
+	if (parent && parent->derives_from_type<Dock*>())
 		parent->cast_to_type<Dock*>()->position_items();
 }
 

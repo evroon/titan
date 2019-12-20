@@ -17,17 +17,17 @@ class PropertyView : public Control
 public:
 	struct PropertyItem
 	{
-		String name;
-		Variant var;
-		Property* property;
-		Control* control;
-		rect2 area;
+		String name = "";
+		Variant var = NULL_VAR;
+		Property* property = nullptr;
+		Control* control = nullptr;
+		rect2 area = rect2();
 	};
 	struct GroupItem
 	{
-		String name;
-		rect2 area;
-		Array<PropertyItem> children;
+		String name = "";
+		rect2 area = rect2();
+		Array<PropertyItem> children = {};
 	};
 
 	PropertyView(const Variant &p_var);

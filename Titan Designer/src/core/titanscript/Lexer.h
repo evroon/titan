@@ -30,5 +30,5 @@ private:
 	Token lasttoken = Token("", 0);
 	Token thistoken = Token("", 0);
 
-	bool finishedlexing = false;
+	bool finishedlexing;
 };

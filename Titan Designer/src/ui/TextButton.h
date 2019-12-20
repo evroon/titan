@@ -20,7 +20,6 @@ public:
 	static void bind_methods();
 
 private:
-
 	int left_margin, right_margin;
 
 	String text;

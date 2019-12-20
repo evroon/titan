@@ -88,7 +88,7 @@ private:
 	rect2 area;
 
 	bool visible;
-	bool expanded = true;
+	bool expanded;
 };
 
 class TreeView : public Control
@@ -186,7 +186,7 @@ private:
 
 	rect2 selection_box;
 
-	float depth_offset = 20.0f;
+	float depth_offset;
 
 	bool init_expanded;
 

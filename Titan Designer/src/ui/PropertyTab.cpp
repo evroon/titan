@@ -50,10 +50,14 @@ PropertyTab::PropertyTab(Object* p_object)
 	add_child(name_field);
 
 	set_property(p_object);
-
 	set_tab_title("Inspector");
-
 	set_name("Inspector");
+
+	buttons_height = 30.0f;
+	bar_area = rect2();
+	work_area = rect2();
+
+	history = History<Object*>();
 }
 
 PropertyTab::PropertyTab() : PropertyTab(NULL)

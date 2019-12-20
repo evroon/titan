@@ -17,6 +17,15 @@ FBO::FBO()
 {
 	FBOMANAGER->register_fbo(this);
 	clear_color = TO_RGB(vec3i(80, 80, 80));
+	depth_tex = nullptr;
+
+	id = 0;
+	DrawBuffers[0] = GL_COLOR_ATTACHMENT0;
+	size = vec2i();
+	depth = false;
+	color_textures = Vector<Texture>();
+	cleared_every_frame = true;
+	definitions = Array<color_tex_def>();
 }
 
 FBO::~FBO()

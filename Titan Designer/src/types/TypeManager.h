@@ -16,8 +16,8 @@ struct ObjectType
 	ObjectType(const ObjectType &p_objecttype) = default;
 
 	StringName name  = "";
-	String path;
-	void *ptr;
+	String path = "";
+	void *ptr = nullptr;
 
 	template <typename T>
 	bool is_of_type() const
@@ -42,9 +42,7 @@ public:
 		type.path = T::get_type_path_static();
 		type.ptr = T::get_type_ptr_static();
 
-		object_types[type.name] = type;
-		types[type.name] = type.name;
-		names[type.ptr] = type.name;
+		set_object_type(type);
 	}
 
 	void add_type(const StringName &name);
@@ -65,7 +63,7 @@ public:
 	Dictionary<void*, StringName> names;
 
 private:
-
+	void set_object_type(const ObjectType& p_object_type);
 	static TypeManager *singleton;
 };
 

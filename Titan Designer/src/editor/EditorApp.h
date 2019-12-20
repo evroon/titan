@@ -59,10 +59,8 @@ private:
 	Dock* content_dock;
 	Dock* explorer_dock;
 	Dock* property_dock;
-	Dock* console_dock;
 
 	//add tabs
-	TextEditorTab* text_edit_tab;
 	GamePreviewTab* game_preview_tab;
 	ContentTab* content_tab;
 	ExplorerTab* explorer_tab;
@@ -76,7 +74,5 @@ private:
 	WorldObject* selected;
 
 	Viewport* preview_viewport;
-
-	FileDialog* file_dialog;
 };
 

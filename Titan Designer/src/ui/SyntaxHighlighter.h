@@ -9,7 +9,8 @@ struct SyntaxHighlighter
 		C_PLUS_PLUS,
 		GLSL,
 		XML,
-		TITANSCRIPT
+		TITANSCRIPT,
+		UNDEFINED
 	} language;
 
 	struct Highlight

@@ -13,6 +13,7 @@ TMessage::TMessage(const String &p_description, const String &p_file_name, int p
 	description = p_description;
 	file_name = p_file_name;
 	line_number = p_line_number;
+	count = 0;
 }
 
 void TMessage::log()
@@ -63,6 +64,15 @@ TInfo::TInfo(const String &p_description, const String &p_file_name, int p_line_
 //=========================================================================
 //ErrorHandler
 //=========================================================================
+
+MessageHandler::MessageHandler()
+{
+	signal = nullptr;
+
+	messages = Vector<TMessage>();
+	filters = Array<char>();
+	complete_description = true;
+}
 
 void MessageHandler::Log(TMessage *msg)
 {

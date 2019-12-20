@@ -55,11 +55,7 @@ void EditorApp::init()
 	v->set_mode(Viewport::DIRECT);
 
 	active_project = new Project("Projects/pong.xml");
-	//active_project = new Project;
-	//active_project->create();
-
 	active_scene = active_project->get_main_scene();
-	//active_scene->add_child(new Canvas());
 
 	World* world = active_scene->get_child_by_index(0)->cast_to_type<World*>();
 	world->set_name("World");
@@ -148,35 +144,12 @@ void EditorApp::init()
 	world->connect("children_changed", explorer_tab, "update_items");
 	world->connect("parent_changed", explorer_tab, "update_items");
 
-	//worldview->set_postprocess(new PostProcess(CONTENT->LoadShader("EngineCore/Shaders/FinalShader")));
-
 	content_tab->connect("file_chosen", this, "open_file");
 
 	explorer_tab->connect("selected", game_preview_tab->get_world_view(), "select");
 	explorer_tab->connect("selected", property_tab, "set_property");
-	
-	//Model* m = new Model("Models/a10/A10.dae");
-	//m->set_pos(vec3(1000.0f, 1100.0f, 15.0f));
-	//m->set_size(vec3(1.0f / 100.0f));
-	//m->set_name("A10");
 
-	//Water* water = new Water;
-	//water->set_name("water");
-
-	//Sky* sky = new Sky;
-	//sky->set_name("sky");
-
-	////Clouds* clouds = new Clouds;
-	////clouds->set_name("clouds");
-
-	//Vegetation* veg = new Vegetation(t);
-	//veg->set_name("vegetation");
-
-	/*world->add_worldobject(sky);
-	world->add_worldobject(m);
-	world->add_worldobject(t);
-	world->add_worldobject(water);
-	world->add_worldobject(veg);*/
+	selected = nullptr;
 
 	Camera* cam = world->get_active_camera();
 
@@ -188,11 +161,7 @@ void EditorApp::init()
 		world->set_active_camera(cam);
 	}
 
-	//world->init();
-
 	v->resize(WINDOWSIZE_F / 2.0f);
-
-	//active_project->save_as("Projects/second.xml");
 }
 
 void EditorApp::update()

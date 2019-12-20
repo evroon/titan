@@ -10,11 +10,11 @@ TextEditorTab::TextEditorTab() : TextEditorTab("")
 
 TextEditorTab::TextEditorTab(const File& p_file)
 {
+	textbox = new TextBox;
+	buttons = new Container;
+
 	save_button = new IconButton("regular/save");
 	save_button->connect("clicked", this, "savebutton_pressed");
-
-	save_all_button = new IconButton("regular/save");
-	save_all_button->connect("clicked", this, "savebutton_pressed");
 
 	new_button = new IconButton("solid/plus");
 	new_button->connect("clicked", this, "open_file");
@@ -22,25 +22,29 @@ TextEditorTab::TextEditorTab(const File& p_file)
 	open_button = new IconButton("regular/folder-open");
 	open_button->connect("clicked", this, "show_dialog");
 
-	add_child(&textbox);
-	add_child(&buttons);
+	add_child(textbox);
+	add_child(buttons);
 
-	textbox.set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
-	textbox.set_margins(4, 4, 4, 42);
-	textbox.set_line_numbers_enabled(true);
+	textbox->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
+	textbox->set_margins(4, 4, 4, 42);
+	textbox->set_line_numbers_enabled(true);
 
-	buttons.set_glue_vert(false);
-	buttons.set_anchors(ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END, ANCHOR_END);
-	buttons.set_margins(4, 4 + 34, 4, 4);
+	buttons->set_glue_vert(false);
+	buttons->set_anchors(ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END, ANCHOR_END);
+	buttons->set_margins(4, 4 + 34, 4, 4);
 
-	buttons.add_child(new_button);
-	buttons.add_child(open_button);
-	buttons.add_child(new Seperator);
-	buttons.add_child(save_button);
-	buttons.add_child(new IconButton("regular/save"));
+	buttons->add_child(new_button);
+	buttons->add_child(open_button);
+	buttons->add_child(new Seperator);
+	buttons->add_child(save_button);
 
 	if (p_file.is_file())
 		open_file(p_file);
+
+	textbox_area = rect2();
+
+	textfile = nullptr;
+	dialog = nullptr;
 }
 
 TextEditorTab::~TextEditorTab()
@@ -84,10 +88,10 @@ void TextEditorTab::open_file(const String &p_path)
 {
 	textfile = CONTENT->LoadTextFile(p_path);
 
-	textbox.set_text(textfile->get_source());
+	textbox->set_text(textfile->get_source());
 
 	String extension = File(p_path).get_extension();
-	textbox.handle_extension(extension);
+	textbox->handle_extension(extension);
 
 	set_tab_title(File(textfile->get_file()).get_name());
 }
@@ -95,7 +99,7 @@ void TextEditorTab::open_file(const String &p_path)
 void TextEditorTab::savebutton_pressed()
 {
 	if (textfile)
-		textfile->write(textbox.get_text());
+		textfile->write(textbox->get_text());
 }
 
 #undef CLASSNAME
@@ -146,7 +150,7 @@ void ShaderEditorTab::init()
 {
 	compile_button = new IconButton("regular/save");
 	compile_button->connect("clicked", this, "compile");
-	buttons.add_child(compile_button);
+	buttons->add_child(compile_button);
 }
 
 void ShaderEditorTab::compile()

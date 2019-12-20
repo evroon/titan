@@ -16,6 +16,15 @@ Control::Control()
 		margins[c] = 0.0f;
 	}
 
+	draw_commands = Array<DrawCommand>();
+	tip_description = "";
+	level = 0;
+	area = rect2();
+
+	update_continuoulsy = false;
+	drawing = false;
+	enabled = false;
+	flagged_size_changed = false;
 	visible = true;
 	to_be_updated = true;
 	use_scissor = false;

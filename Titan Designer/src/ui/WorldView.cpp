@@ -10,7 +10,7 @@
 
 #include "input/Keyboard.h"
 
-WorldView::WorldView() : WorldView(NULL)
+WorldView::WorldView() : WorldView(nullptr)
 {
 
 }
@@ -36,7 +36,10 @@ WorldView::WorldView(Scene* p_scene)
 
 	preview_texture = r->get_texture(DeferredRenderer::FINAL_COLOR)->cast_to_type<Texture2D*>();
 
-	selected = NULL;
+	selected = nullptr;
+	postprocess = nullptr;
+	highlighted = nullptr;
+	return_viewport = nullptr;
 
 	cone = new Model("Models/Primitives/Cone.dae");
 	plane = MeshHandler::get_singleton()->get_plane();
@@ -51,7 +54,18 @@ WorldView::WorldView(Scene* p_scene)
 	set_update_continuoulsy(true);
 
 	handle_2d = false;
+	simulating = false;
+	item_dragging = false;
+	cam_dragging = false;
 
+	transform_type = TRANSLATE;
+	drag_type = DRAG_INACTIVE;
+	highlight_type = DRAG_INACTIVE;
+
+	prev_item_drag_pos = vec2();
+	prev_cam_drag_pos = vec2();
+	
+	preview_type = 0;
 }
 
 WorldView::~WorldView()
