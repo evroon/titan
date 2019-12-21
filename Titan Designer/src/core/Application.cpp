@@ -70,6 +70,7 @@ void Application::InitRenderer()
 
 void Application::InitEngine()
 {
+	ContentManager::Init();
 	Serializer::init();
 	CoreNames::init();
 	StringUtils::init();
@@ -77,7 +78,6 @@ void Application::InitEngine()
 	Mouse::init();
 	Keyboard::init();
 	MessageHandler::init();
-	ContentManager::Init();
 	TypeManager::init();
 	GarbageCollector::init();
 	Input::init();

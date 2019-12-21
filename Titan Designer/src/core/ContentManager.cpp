@@ -15,6 +15,7 @@ ContentManager* ContentManager::singleton;
 
 ContentManager::ContentManager()
 {
+	assets_directory = File();
 	Shader2D = NULL;
 	SimpleShader = NULL;
 	ShadowShader = NULL;
