@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Titan Designer", "Titan Designer\Titan Designer.vcxproj", "{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Tegra-Android = Debug|Tegra-Android
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Tegra-Android = Release|Tegra-Android
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|Tegra-Android.ActiveCfg = Debug|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|Tegra-Android.Build.0 = Debug|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|x64.ActiveCfg = Debug|x64
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|x64.Build.0 = Debug|x64
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|x86.ActiveCfg = Debug|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Debug|x86.Build.0 = Debug|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Release|Tegra-Android.ActiveCfg = Release|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Release|x64.ActiveCfg = PC Release|x64
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Release|x64.Build.0 = PC Release|x64
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Release|x86.ActiveCfg = PC Release|Win32
+		{C3CC1802-5CF0-4B6C-B065-A107BE2AD11F}.Release|x86.Build.0 = PC Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E5B1F2B-36D1-4571-86DC-FC0D1B167A96}
+	EndGlobalSection
+EndGlobal
