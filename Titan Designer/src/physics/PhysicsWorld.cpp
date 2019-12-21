@@ -8,7 +8,7 @@
 #if PLATFORM == WINDOWS
 #include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #else
-// #include "bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
+#include "bullet/btBulletDynamicsCommon.h"
 #endif
 
 PhysicsWorld3D::~PhysicsWorld3D()
@@ -18,28 +18,27 @@ PhysicsWorld3D::~PhysicsWorld3D()
 
 void PhysicsWorld3D::init()
 {
-	// btBroadphaseInterface *broadphase = new btDbvtBroadphase();
-	// collision_configuration = new btDefaultCollisionConfiguration();
-	// dispatcher = new btCollisionDispatcher(collision_configuration);
-	// btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
-	// solver = new btSequentialImpulseConstraintSolver;
-	// dynamics_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
-	// dynamics_world->setGravity(btVector3(0, 0, 0));
+	btBroadphaseInterface *broadphase = new btDbvtBroadphase();
+	collision_configuration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collision_configuration);
+	solver = new btSequentialImpulseConstraintSolver;
+	dynamics_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
+	dynamics_world->setGravity(btVector3(0, 0, 0));
 }
 
 void PhysicsWorld3D::update()
 {
-	//btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
-	//btCollisionShape* fallShape = new btSphereShape(1);
+	btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
+	btCollisionShape* fallShape = new btSphereShape(1);
 }
 
 void PhysicsWorld3D::clean()
 {
-	/*delete dynamicsWorld;
+	delete dynamics_world;
 	delete solver;
 	delete dispatcher;
-	delete collisionConfiguration;
-	delete broadphase;*/
+	delete collision_configuration;
+	delete broadphase;
 }
 
 //=========================================================================

@@ -7,7 +7,7 @@
 #if PLATFORM == WINDOWS
 #include "btBulletDynamicsCommon.h"
 #else
-// #include "bullet/btBulletDynamicsCommon.h"
+#include "bullet/btBulletDynamicsCommon.h"
 #endif
 
 class RigidBody2D;
@@ -29,7 +29,7 @@ public:
 	static void bind_methods();
 
 protected:
-	// btCollisionShape* shape;
+	btCollisionShape* shape;
 };
 
 class PlaneShape3D : CollisionShape3D
