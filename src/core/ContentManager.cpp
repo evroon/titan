@@ -147,7 +147,7 @@ Texture2D* ContentManager::LoadTexture(const File &p_file)
 
 Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name, const vec2i& p_size, const Color& p_color)
 {
-	File file = "engine/fontawesome/svgs/" + p_name + ".svg";
+	File file = "../thirdparty/fontawesome/svgs/" + p_name + ".svg";
 
 	for (int c = 0; c < textures.size(); c++)
 		if (textures[c]->get_file() == file)
