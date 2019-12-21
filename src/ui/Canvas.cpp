@@ -445,9 +445,9 @@ void Canvas::bind_methods()
 
 CanvasTheme::CanvasTheme()
 {
-	font = CONTENT->LoadFont("EngineCore/Fonts/Roboto-Regular.ttf", 17);
-	frame = CONTENT->LoadTexture("EngineCore/UI/ContainerTemplate.png");
-	highlight = CONTENT->LoadTexture("EngineCore/UI/Highlight.png");
+	font = CONTENT->LoadFont("engine/fonts/Roboto-Regular.ttf", 17);
+	frame = CONTENT->LoadTexture("engine/ui/ContainerTemplate.png");
+	highlight = CONTENT->LoadTexture("engine/ui/Highlight.png");
 
 	highlight_color = TO_RGB(100);
 	selection_color = TO_RGB(vec3i(65, 133, 165));
@@ -487,7 +487,7 @@ CanvasData* CanvasData::singleton;
 
 CanvasData::CanvasData()
 {
-	default_shader = CONTENT->LoadShader("EngineCore/Shaders/Shader2D");
+	default_shader = CONTENT->LoadShader("engine/shaders/Shader2D");
 
 	default_theme = new CanvasTheme;
 }

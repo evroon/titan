@@ -40,7 +40,7 @@ void Primitives::DrawCircle(Shader* shader, const Transform &trans)
 
 Plane::Plane()
 {
-	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader3D");
+	shader = CONTENT->LoadShader("engine/shaders/Shader3D");
 	mesh = MeshHandler::get_singleton()->get_plane();
 }
 

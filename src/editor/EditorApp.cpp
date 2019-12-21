@@ -54,7 +54,7 @@ void EditorApp::init()
 	v->resize(WINDOWSIZE_F / 2.0f);
 	v->set_mode(Viewport::DIRECT);
 
-	active_project = new Project("Projects/pong.xml");
+	active_project = new Project("projects/pong.xml");
 	active_scene = active_project->get_main_scene();
 
 	World* world = active_scene->get_child_by_index(0)->cast_to_type<World*>();

@@ -111,7 +111,7 @@ TextBox::TextBox(const String& p_source)
 	ibeam_blinker = new UITimer(new UICallback(std::bind(&TextBox::switch_blink, this)), 500000);
 	ibeam_blinker->set_enabled(false);
 
-	font = CONTENT->LoadFont("EngineCore/Fonts/Hack-Regular.ttf", 17);
+	font = CONTENT->LoadFont("engine/fonts/Hack-Regular.ttf", 17);
 
 	slider = nullptr;
 

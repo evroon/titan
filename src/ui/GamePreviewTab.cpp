@@ -23,9 +23,9 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
 	
 	ToggleStrip* strip = new ToggleStrip;
-	strip->add_child("Move", CONTENT->LoadTexture("EngineCore/UI/Move.png"));
-	strip->add_child("Rotate", CONTENT->LoadTexture("EngineCore/UI/Rotate.png"));
-	strip->add_child("Scale", CONTENT->LoadTexture("EngineCore/UI/Scale.png"));
+	strip->add_child("Move", CONTENT->LoadTexture("engine/ui/Move.png"));
+	strip->add_child("Rotate", CONTENT->LoadTexture("engine/ui/Rotate.png"));
+	strip->add_child("Scale", CONTENT->LoadTexture("engine/ui/Scale.png"));
 	strip->connect("toggled", this, "transform_toggled");
 
 	combo_box = new ComboBox;

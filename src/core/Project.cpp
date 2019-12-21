@@ -43,7 +43,7 @@ void Project::save()
 	Node* terrain = default_scene->get_child_by_type<Terrain*>();
 	if (terrain) {
 		FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
-		DEFERRED_RENDERER->save_fbo(f, "EngineCore/Textures", 0);
+		DEFERRED_RENDERER->save_fbo(f, "engine/Textures", 0);
 	}
 
 	Serializer s;

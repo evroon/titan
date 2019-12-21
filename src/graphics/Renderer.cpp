@@ -535,29 +535,29 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(VIRTUALTEX, virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(INDIRECTION, indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 
-	first_pass = CONTENT->LoadShader("EngineCore/Shaders/FirstPass");
-	second_pass = CONTENT->LoadShader("EngineCore/Shaders/SecondPass");
-	godray = CONTENT->LoadShader("EngineCore/Shaders/Godray");
+	first_pass = CONTENT->LoadShader("engine/shaders/FirstPass");
+	second_pass = CONTENT->LoadShader("engine/shaders/SecondPass");
+	godray = CONTENT->LoadShader("engine/shaders/Godray");
 	shader_2d = CanvasData::get_singleton()->get_default_shader();
-	ssao = CONTENT->LoadShader("EngineCore/Shaders/SSAO");
-	bloom = CONTENT->LoadShader("EngineCore/Shaders/Bloom");
-	tex_shader = CONTENT->LoadShader("EngineCore/Shaders/TextureShader");
+	ssao = CONTENT->LoadShader("engine/shaders/SSAO");
+	bloom = CONTENT->LoadShader("engine/shaders/Bloom");
+	tex_shader = CONTENT->LoadShader("engine/shaders/TextureShader");
 
 	reflection_camera = new Camera;
 	light_camera = new Camera;
 
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex0.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex1.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex2.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex3.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex4.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex5.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex6.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex7.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex8.png"));
-	flare_textures.push_back(CONTENT->LoadTexture("Textures/oreon/lens_flare/tex9.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex0.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex1.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex2.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex3.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex4.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex5.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex6.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex7.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex8.png"));
+	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex9.png"));
 
-	grid_texture = CONTENT->LoadTexture("Textures/tile.png");
+	grid_texture = CONTENT->LoadTexture("textures/tile.png");
 
 	generate_ssao_kernel();
 }

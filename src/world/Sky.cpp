@@ -10,7 +10,7 @@
 
 Sky::Sky()
 {
-	shader = CONTENT->LoadShader("EngineCore/Shaders/Sky");
+	shader = CONTENT->LoadShader("engine/shaders/Sky");
 
 	set_size(vec3(10.0f, 10.0f, 10.0f));
 	set_pos(vec3(0, 0, 0.0f));

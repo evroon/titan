@@ -9,7 +9,7 @@ bool Optics::lightingenabled;
 
 void Optics::Init()
 {
-	lightshader = ContentManager::LoadShader("EngineCore/Shaders/Light");
+	lightshader = ContentManager::LoadShader("engine/shaders/Light");
 	shadowshader = ContentManager::ShadowShader;
 
 	ContentManager::ShadowShader = shadowshader;

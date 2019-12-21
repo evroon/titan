@@ -7,7 +7,7 @@
 
 #include "graphics/View.h"
 
-PostProcess::PostProcess() : PostProcess(CONTENT->LoadShader("EngineCore/Shaders/PostProcess"))
+PostProcess::PostProcess() : PostProcess(CONTENT->LoadShader("engine/shaders/PostProcess"))
 {
 
 }
@@ -103,7 +103,7 @@ void WorldPostProcess::post_process()
 
 BlurPostProcess::BlurPostProcess()
 {
-	blurshader = CONTENT->LoadShader("EngineCore/Shaders/Blur");
+	blurshader = CONTENT->LoadShader("engine/shaders/Blur");
 }
 
 BlurPostProcess::~BlurPostProcess()

@@ -7,7 +7,7 @@
 UIBox::UIBox()
 {
 	mesh_2d = MeshHandler::get_singleton()->get_plane();
-	shader = CONTENT->LoadShader("EngineCore/Shaders/SimpleShader");
+	shader = CONTENT->LoadShader("engine/shaders/SimpleShader");
 	transform = Transform(vec2(), vec2(100));
 	set_color(Color::Blue);
 }

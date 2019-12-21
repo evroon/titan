@@ -22,7 +22,7 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 
 	terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
 
-	brush_shader = CONTENT->LoadShader("EngineCore/Shaders/Brush");
+	brush_shader = CONTENT->LoadShader("engine/shaders/Brush");
 
 	to_apply = false;
 	active_tex = 0;
@@ -30,7 +30,7 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 	set_radius(100.0f);
 	set_strength(.01f);
 	
-	textures.push_back(CONTENT->LoadTexture("Textures/Brushes/default.png"));
+	textures.push_back(CONTENT->LoadTexture("textures/brushes/default.png"));
 }
 
 void TerrainBrush::apply()
@@ -150,11 +150,11 @@ Terrain::Terrain()
 	node_count = vec2i(128, 128);
 	build();
 
-	shader = CONTENT->LoadShader("EngineCore/Shaders/TerrainEditor");
+	shader = CONTENT->LoadShader("engine/shaders/TerrainEditor");
 	shader->bind();
 	shader->set_uniform("selection_width", 2.0f);
 
-	normal_map_compute = CONTENT->LoadShader("EngineCore/Shaders/NormalMap");
+	normal_map_compute = CONTENT->LoadShader("engine/shaders/NormalMap");
 
 	Color col = Color::LightBlue;
 	col.a = 0.8f;
@@ -163,9 +163,9 @@ Terrain::Terrain()
 	brush->set_color(col);
 	brush->set_pos(vec2(0.0f, 0.0f));
 
-	textures.push_back(CONTENT->LoadTexture("Textures/tile.png"));
-	textures.push_back(CONTENT->LoadTexture("Textures/Ground_11_DIF.jpg"));
-	//textures.push_back(CONTENT->LoadTexture("Textures/look_up.jpg"));
+	textures.push_back(CONTENT->LoadTexture("textures/tile.png"));
+	textures.push_back(CONTENT->LoadTexture("textures/Ground_11_DIF.jpg"));
+	//textures.push_back(CONTENT->LoadTexture("textures/look_up.jpg"));
 
 	texture_names.push_back("grass");
 	texture_names.push_back("rocks");
@@ -391,8 +391,8 @@ Water::Water()
 	set_size(vec3(1000.0f, 1000.0f, 0.0f));
 	set_pos(vec3(0, 0, 12.0f));
 
-	shader = CONTENT->LoadShader("EngineCore/Shaders/Water");
-	normals = CONTENT->LoadTexture("Textures/oreon/dudv.jpg");
+	shader = CONTENT->LoadShader("engine/shaders/Water");
+	normals = CONTENT->LoadTexture("textures/oreon/dudv.jpg");
 }
 
 void Water::draw()
@@ -496,7 +496,7 @@ void Vegetation::draw()
 
 void Vegetation::update_buffer()
 {
-	grass_tex = CONTENT->LoadTexture("Textures/grass_0.png");
+	grass_tex = CONTENT->LoadTexture("textures/grass_0.png");
 	shader = CONTENT->LoadShader("Shaders/Grass/Grass");
 
 	UBO* ubo = new UBO;

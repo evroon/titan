@@ -66,7 +66,7 @@ void Sprite::set_shader(Shader *p_shader)
 {
 	shader = p_shader;
 	if (!shader)
-		shader = CONTENT->LoadShader("EngineCore/Shaders/SpriteShader");
+		shader = CONTENT->LoadShader("engine/shaders/SpriteShader");
 }
 
 Shader* Sprite::get_shader() const
@@ -187,7 +187,7 @@ void Sprite::DrawMap()
 void Sprite::Init()
 {
 	defaultmesh = MeshHandler::get_singleton()->get_plane();
-	defaultmesh->SetAttributes(CONTENT->LoadShader("EngineCore/Shaders/Shader2D"));
+	defaultmesh->SetAttributes(CONTENT->LoadShader("engine/shaders/Shader2D"));
 }
 
 void Sprite::update()

@@ -41,15 +41,15 @@ WorldView::WorldView(Scene* p_scene)
 	highlighted = nullptr;
 	return_viewport = nullptr;
 
-	cone = new Model("Models/Primitives/Cone.dae");
+	cone = new Model("models/primitives/cone.dae");
 	plane = MeshHandler::get_singleton()->get_plane();
-	disk = new Model("Models/Primitives/Cube.dae");
+	disk = new Model("models/primitives/cube.dae");
 
 	raycast_fbo = new FBO2D(WINDOWSIZE);
 	raycast_fbo->add_float_color_texture();
 	raycast_fbo->init();
 
-	raycast_shader = CONTENT->LoadShader("EngineCore/Shaders/RaycastPlane");
+	raycast_shader = CONTENT->LoadShader("engine/shaders/RaycastPlane");
 
 	set_update_continuoulsy(true);
 

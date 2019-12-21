@@ -8,7 +8,7 @@
 
 Model::Model()
 {
-	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader3D");
+	shader = CONTENT->LoadShader("engine/shaders/Shader3D");
 	color_id = vec3(0.0, 1.0, 0.5);
 }
 

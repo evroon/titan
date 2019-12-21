@@ -61,7 +61,7 @@ void Frame::set_texture(Texture2D *p_texture)
 
 void Frame::set_default_texture()
 {
-	set_texture(CONTENT->LoadTexture("EngineCore/UI/Container.png"));
+	set_texture(CONTENT->LoadTexture("engine/ui/Container.png"));
 }
 
 void Frame::set_color(const Color &p_color)
@@ -76,6 +76,6 @@ void Frame::set_color(const Color &p_color)
 
 Highlighter::Highlighter()
 {
-	set_texture(CONTENT->LoadTexture("EngineCore/UI/Highlight.png"));
+	set_texture(CONTENT->LoadTexture("engine/ui/Highlight.png"));
 	set_color(Color::FromRGB(vec3i(0, 110, 250)));
 }

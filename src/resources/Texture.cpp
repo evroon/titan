@@ -126,8 +126,6 @@ Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D()
 Texture2D::Texture2D(const String &p_filepath) : Texture2D()
 {
 	String path = File(p_filepath).get_absolute_path();
-	path.replace('/', '\\');
-
 	SDL_Surface* image = IMG_Load(path.c_str());
 
 	if (!image)

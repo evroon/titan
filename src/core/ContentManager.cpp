@@ -67,7 +67,7 @@ void ContentManager::setup()
 	extensions["3ds"] = GETTYPE(StringName("Mesh"));
 
 	File base_path = View::get_singleton()->get_application()->platform->get_cwd();
-	base_path += "Titan Designer/assets";
+	base_path += "titan/assets";
 	
 
 	int result = chdir (base_path.get_absolute_path().c_str());
@@ -76,9 +76,9 @@ void ContentManager::setup()
 	
 	assets_directory = base_path;
 
-	Shader2D = LoadShader(File("EngineCore/Shaders/Shader2D"));
-	SimpleShader = LoadShader(File("EngineCore/Shaders/SimpleShader"));
-	ShadowShader = LoadShader(File("EngineCore/Shaders/ShadowShader"));
+	Shader2D = LoadShader(File("engine/shaders/Shader2D"));
+	SimpleShader = LoadShader(File("engine/shaders/SimpleShader"));
+	ShadowShader = LoadShader(File("engine/shaders/ShadowShader"));
 }
 
 Object* ContentManager::Load(const File &p_file)
@@ -147,7 +147,7 @@ Texture2D* ContentManager::LoadTexture(const File &p_file)
 
 Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name, const vec2i& p_size, const Color& p_color)
 {
-	File file = "EngineCore/FontAwesome/svgs/" + p_name + ".svg";
+	File file = "engine/fontawesome/svgs/" + p_name + ".svg";
 
 	for (int c = 0; c < textures.size(); c++)
 		if (textures[c]->get_file() == file)

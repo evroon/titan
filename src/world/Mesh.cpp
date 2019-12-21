@@ -446,7 +446,7 @@ void Material::load_material(const aiMaterial* p_material)
 	specular_texture = load_texture(p_material, aiTextureType_SPECULAR);
 	ambient_texture = load_texture(p_material, aiTextureType_AMBIENT);
 
-	shader = CONTENT->LoadShader("EngineCore/Shaders/Shader3D");
+	shader = CONTENT->LoadShader("engine/shaders/Shader3D");
 }
 
 
