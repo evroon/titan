@@ -1,6 +1,8 @@
 #pragma once
 
-#if 0
+#include "core/Definitions.h"
+
+#if PLATFORM == WINDOWS
 #include "core/platform/dirent.h"
 #include <GL\glew.h>
 

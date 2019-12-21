@@ -9,8 +9,9 @@ Libraries: Box2D, Bullet
 */
 
 #include "Box2D/Box2D.h"
+#include "core/Definitions.h"
 
-#if 0
+#if PLATFORM == WINDOWS
 #include "btBulletDynamicsCommon.h"
 #else
 // #include "bullet/btBulletDynamicsCommon.h"

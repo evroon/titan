@@ -7,10 +7,10 @@ class Platform
 public:
 	enum PlatformType
 	{
-		UNDEF,
-		WINDOWS,
-		ANDROID,
-		LINUX
+		PLATFORM_UNDEF,
+		PLATFORM_WINDOWS,
+		PLATFORM_ANDROID,
+		PLATFORM_LINUX
 	};
 
 	Platform() { }

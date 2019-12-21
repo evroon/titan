@@ -1,8 +1,9 @@
 #pragma once
 
 #include "core/Object.h"
+#include "core/Definitions.h"
 
-#if 0
+#if PLATFORM == WINDOWS
 #include "module/perlin.h"
 #include "noise.h"
 #else

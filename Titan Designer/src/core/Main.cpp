@@ -8,10 +8,9 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 #include "game/GameApp.h"
 #include "editor/EditorApp.h"
+#include "core/Definitions.h"
 
 #undef main
-
-#define PLATFORM LINUX
 
 #define DEBUG 1
 #define EDITOR 1

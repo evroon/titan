@@ -3,8 +3,9 @@
 #include "core/Time.h"
 
 #include "RigidBody.h"
+#include "core/Definitions.h"
 
-#if 0
+#if PLATFORM == WINDOWS
 #include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #else
 // #include "bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"

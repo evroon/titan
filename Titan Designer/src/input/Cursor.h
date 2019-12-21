@@ -1,6 +1,8 @@
 #pragma once
 
-#if 0
+#include "core/Definitions.h"
+
+#if PLATFORM == WINDOWS
 #include "SDL_mouse.h"
 #else
 #include "SDL2/SDL_mouse.h"

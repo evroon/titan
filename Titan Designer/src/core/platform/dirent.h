@@ -7,10 +7,11 @@
  * under the MIT license.  For all details and documentation, see
  * https://github.com/tronkko/dirent
  */
-#ifndef DIRENT_H
-#define DIRENT_H
+#pragma once
 
-#if 0
+#include "core/Definitions.h"
+
+#if PLATFORM == WINDOWS
 
 /*
  * Define architecture flags so we don't need to include windows.h.
@@ -916,5 +917,3 @@ dirent_set_errno(
 }
 #endif
 #endif /*DIRENT_H*/
-
-#endif

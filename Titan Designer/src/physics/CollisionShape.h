@@ -1,10 +1,10 @@
 #pragma once
 
 #include "core/Object.h"
-
+#include "core/Definitions.h"
 #include "Box2D/Box2D.h"
 
-#if 0
+#if PLATFORM == WINDOWS
 #include "btBulletDynamicsCommon.h"
 #else
 // #include "bullet/btBulletDynamicsCommon.h"
