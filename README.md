@@ -3,7 +3,7 @@
 A graphics engine using OpenGL and written in C++.
 
 Preview of the editor:
-![alt text](misc/images/titan_preview.png "Preview of the editor")
+![alt text](misc/titan_preview.png "Preview of the editor")
 
 Features:
   - A scripting language, TitanScript, which is fully integrated on a low level into the engine
