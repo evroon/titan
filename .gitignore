@@ -1,5 +1,6 @@
 .vscode
 CMakeFiles
+build
 
 src/titan
 src/Makefile
