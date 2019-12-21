@@ -147,7 +147,7 @@ Array<File> File::listdir() const
 	while ((r = readdir(d)) != nullptr)
 	{
 		if (String(r->d_name) != ".." && String(r->d_name) != ".")
-			result.push_back(path + "/" + r->d_name);
+			result.push_back(path + "/" + String(r->d_name));
 	}
 
 	closedir(d);
