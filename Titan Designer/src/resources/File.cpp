@@ -1,12 +1,19 @@
 #include "File.h"
 
+#if PLATFORM == WINDOWS
 #include "core/platform/dirent.h"
+#elif PLATFORM == LINUX
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <dirent.h>
+#endif
 #include "core/ContentManager.h"
 #include "core/Definitions.h"
 
-File::File() : File("")
+File::File()
 {
-	
+	path = "";
 }
 
 File::File(const String& p_path)
@@ -55,7 +62,7 @@ void File::go_to(const String & p_path)
 
 String File::get_absolute_path() const
 {
-	if (!path.starts_with(ASSETS_DIR))
+	if (!is_absolute_path())
 		return ASSETS_DIR + path;
 
 	return path;
@@ -122,7 +129,30 @@ File::operator String() const
 
 bool File::is_absolute_path() const
 {
-	return path.size() > 2 && path[1] == ':' && path[2] == '/';
+	return path.starts_with(ASSETS_DIR);
+}
+
+Array<File> File::listdir() const
+{
+	Array<File> result = Array<File>();
+	return result;
+
+	DIR *d = opendir(path.c_str());
+
+	if (!d)
+		return result;
+
+	dirent *r;
+
+	while ((r = readdir(d)) != nullptr)
+	{
+		if (String(r->d_name) != ".." && String(r->d_name) != ".")
+			result.push_back(path + "/" + r->d_name);
+	}
+
+	closedir(d);
+
+	return result;
 }
 
 #if PLATFORM == WINDOWS
@@ -157,11 +187,7 @@ unsigned int File::get_attributes() const
 }
 void File::correct_path()
 {
-	if (is_absolute_path())
-	{
-
-	}
-	else
+	if (!is_absolute_path())
 		path = ASSETS_DIR + path;
 
 	path.replace('\\', '/');
@@ -172,51 +198,41 @@ void File::correct_path()
 	directory = GetFileAttributes(path.c_str()) == FILE_ATTRIBUTE_DIRECTORY;
 	hidden = GetFileAttributes(path.c_str()) == FILE_ATTRIBUTE_HIDDEN;
 }
-
-Array<File> File::listdir() const
-{
-	Array<File> result;
-
-	DIR *d = opendir(path.c_str());
-
-	if (!d)
-		return{};
-
-	dirent *r;
-
-	while ((r = readdir(d)) != NULL)
-	{
-		if (String(r->d_name) != ".." && String(r->d_name) != ".")
-			result.push_back(path + "/" + r->d_name);
-	}
-
-	closedir(d);
-
-	return result;
-}
-#else
+#elif PLATFORM == LINUX
 bool File::is_directory() const
 {
-	return false;
+    struct stat path_stat;
+	if (stat(path.c_str(), &path_stat) != 0)
+		return false;
+	
+    return S_ISDIR(path_stat.st_mode);
 }
 
 bool File::is_file() const
 {
-	return false;
+    struct stat path_stat;
+	if (stat(path.c_str(), &path_stat) != 0)
+		return false;
+
+    return S_ISREG(path_stat.st_mode);
 }
 
 unsigned int File::get_attributes() const
 {
+	// Not relevant for Linux.
 	return 0;
 }
 
 void File::correct_path()
 {
-	
+	path = get_absolute_path();
+	path.replace('\\', '/');
+
+	if (path.find_last('/') == path.length() - 1)
+		path = path.substr(0, path.length() - 1);
+
+	directory = is_directory();
+	hidden = get_name()[0] == '.';	
 }
 
-Array<File> File::listdir() const
-{
-	return {};
-}
 #endif
