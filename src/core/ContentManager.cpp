@@ -8,8 +8,10 @@
 
 #if PLATFORM == LINUX
 #include <unistd.h>
+#define chdir chdir
 #elif PLATFORM == WINDOWS
 #include <direct.h>
+#define chdir _chdir
 #endif
 
 #include "graphics/View.h"
@@ -68,7 +70,7 @@ void ContentManager::setup()
 	base_path += "Titan Designer/assets";
 	
 
-	int result = _chdir (base_path.get_absolute_path().c_str());
+	int result = chdir (base_path.get_absolute_path().c_str());
 	if (result == -1)
 		T_ERROR("Could not set working directory");
 	

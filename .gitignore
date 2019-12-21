@@ -277,7 +277,7 @@ __pycache__/
 .vscode/settings.json
 
 CMakeFiles
-Titan Designer/src/titan
-Titan Designer/src/Makefile
-Titan Designer/src/CMakeCache.txt
-Titan Designer/src/cmake_install.cmake
+src/titan
+src/Makefile
+src/CMakeCache.txt
+src/cmake_install.cmake
