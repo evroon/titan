@@ -1,4 +1,4 @@
-# Titan
+# Titan Engine
 
 A graphics engine using OpenGL and written in C++.
 
