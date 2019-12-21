@@ -75,7 +75,9 @@ void Dock::handle_event(UIEvent * p_event)
 
 		if (p_event->button_type == Mouse::CENTER)
 		{
+			selected = -1;
 			remove_tab(get_item(p_event->pos));
+			return;
 		}
 
 		if (p_event->press_type == Event::DOWN)
@@ -193,17 +195,16 @@ void Dock::add_tab(Tab *p_tab)
 
 void Dock::remove_tab(int p_index)
 {
-	if (p_index >= tabs.size() - 1 || p_index < 0)
+	if (p_index > tabs.size() - 1 || p_index < 1)
 		return;
 
-	set_active_tab(0);
 
 	GC->queue_clean(tabs[p_index]);
 
 	tabs.clear(p_index);
 	selectors.clear(p_index);
 
-	position_items();
+	set_active_tab(0);
 }
 
 void Dock::set_active_tab(int p_index)
