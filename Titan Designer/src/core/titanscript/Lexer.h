@@ -27,8 +27,8 @@ private:
 	Vector<Line> parentstack;
 	Array<String> lines;
 
-	Token lasttoken = Token("", 0);
-	Token thistoken = Token("", 0);
+	Token lasttoken = Token("", Token::Type::UNDEF);
+	Token thistoken = Token("", Token::Type::UNDEF);
 
 	bool finishedlexing;
 };

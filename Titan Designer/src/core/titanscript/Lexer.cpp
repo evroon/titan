@@ -5,6 +5,8 @@ Lexer::Lexer(const String &src)
 	parentstack = Vector<Line>();
 	lines = Array<String>();
 
+	Line root = Line();
+	index = 0;
 	finishedlexing = false;
 	source = src;
 	Lex();
@@ -12,45 +14,48 @@ Lexer::Lexer(const String &src)
 
 void Lexer::Free()
 {
-	//tokens.clean();
-	//lines.clean();
-	root.Free();
-	source = "";
-	//delete root;
+	parentstack.clean();
 }
 
 void Lexer::LexBlock()
 {
-	while(index < lines.size() && !finishedlexing)
+	while (index < lines.size() && !finishedlexing)
 	{
-		Line* l = new Line(LexLine(lines[index]));
+		Line l = LexLine(lines[index]);
 
-		if (l->tokens.size() == 0 || l->StartsWith("//"))
-			continue;		//Skip if line is comment or empty
+		// Skip if line is comment or empty
+		if (l.tokens.size() == 0 || l.StartsWith("//"))
+			continue;
 
-		l->level = StringUtils::CountTabs(lines[index]);				//Indentation
+		// Indentation
+		l.level = StringUtils::CountTabs(lines[index]);				
 
-		for (int c = 0; c < l->level; c++)								//Remove Tabs
-			l->tokens.clear(0);
+		// Remove Tabs
+		for (int c = 0; c < l.level; c++)								
+			l.tokens.clear(0);
 
-		parentstack.getlast()->sub.push_back(l);
+		parentstack.getlast()->sub.push_back(new Line(l));
 
-		if (index + 1 == lines.size())									//Return at End of File
+		// Return at End of File
+		if (index + 1 == lines.size())
 		{
 			finishedlexing = true;
 			return;
 		}
 
-		int tabcount = StringUtils::CountTabs(lines[++index]);			//#tabs of next line
+		// Number of tabs of next line
+		int tabcount = StringUtils::CountTabs(lines[++index]);
 
-		if (tabcount > l->level)										//Lex new block
+		// Lex new block
+		if (tabcount > l.level)
 		{
-			parentstack.push_back(l);
+			parentstack.push_back(new Line(l));
 			LexBlock();
 		}
-		else if (tabcount < l->level)									//End Block
+		else if (tabcount < l.level)
 		{
-			for (int c = 0; c < l->level - tabcount; c++)
+			// End Block
+			for (int c = 0; c < l.level - tabcount; c++)
 				parentstack.removelast();
 
 			return;
@@ -63,7 +68,7 @@ void Lexer::GetLines()
 	String line = "";
 	for (int c = 0; c < source.length(); c++)
 	{
-		if (source[c] == '/' && source[c + 1] == '/')
+		if (source[c] == '/' && c < source.length() - 1 && -source[c + 1] == '/')
 		{
 			for(; true; c++)
 			{
@@ -72,8 +77,11 @@ void Lexer::GetLines()
 			}
 		}
 
-		line += source[c]; //Fill line
-		if (source[c] == '\n' || source[c] == '\r' /*|| source[c] == ';' || (source[c] == '/' && source[c + 1] == '/')*/) //Pass line
+		// Fill line
+		line += source[c];
+
+		// Pass line
+		if (source[c] == '\n' || source[c] == '\r')
 		{
 			if (StringUtils::Trim(line) != "")
 				lines.push_back(line);
@@ -99,7 +107,7 @@ Line Lexer::LexLine(const String &txt)
 
 	for (int c = 0; c < line.strings.size(); c++)
 	{
-		if (StringUtils::IsTab((line.strings[c])[0]))
+		if (line.strings[c].size() > 0 && StringUtils::IsTab((line.strings[c])[0]))
 			line.tokens.push_back(Token(line.strings[c], Token::TAB));		//Add Tab
 		else if (StringUtils::IsNumber(line.strings[c]))
 			line.tokens.push_back(Token(line.strings[c], Token::NUMBER));	//Add Number
@@ -114,11 +122,13 @@ Line Lexer::LexLine(const String &txt)
 	}
 	return line;
 }
+
 Line Lexer::SplitLine(const String &txt)
 {
 	char prev = '\n';
 	String buf = "";
-	Line line;
+	Line line = Line();
+
 	for (int c = 0; c < txt.length(); c++)
 	{
 		char kar = txt[c];
@@ -140,8 +150,7 @@ Line Lexer::SplitLine(const String &txt)
 		if (thisdot && !StringUtils::IsNumber(prev))
 		{
 			line.strings.push_back(buf);
-			buf = ".";
-			line.strings.push_back(buf);
+			line.strings.push_back(".");
 			buf = "";
 			prev = kar;
 			continue;
@@ -170,7 +179,7 @@ Line Lexer::SplitLine(const String &txt)
 			buf += kar;
 		else if (prevop && thisop)																//Check for double operators
 		{
-			line.strings.push_back(special ? buf += kar : buf);
+			line.strings.push_back(special ? buf + kar : buf);
 			if (special)	buf = "";
 			else			buf = kar;
 		}

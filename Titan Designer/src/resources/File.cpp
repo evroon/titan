@@ -1,15 +1,15 @@
 #include "File.h"
 
 #include "core/platform/dirent.h"
-
 #include "core/ContentManager.h"
+#include "core/Definitions.h"
 
-File::File()
+File::File() : File("")
 {
 	
 }
 
-File::File(const String & p_path)
+File::File(const String& p_path)
 {
 	go_to(p_path);
 }
@@ -125,8 +125,7 @@ bool File::is_absolute_path() const
 	return path.size() > 2 && path[1] == ':' && path[2] == '/';
 }
 
-
-#if 0
+#if PLATFORM == WINDOWS
 bool File::is_directory() const
 {
 	return (get_attributes() & FILE_ATTRIBUTE_DIRECTORY) != 0;

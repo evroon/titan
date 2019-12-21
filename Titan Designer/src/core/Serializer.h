@@ -31,9 +31,9 @@ public:
 private:
 	struct Property
 	{
-		String name;
-		VariantType type;
-		Variant value;
+		String name = "";
+		VariantType type = VariantType();
+		Variant value = NULL_VAR;
 	};
 
 	Serializer::Property deserialize_property(const XmlNode& p_node);

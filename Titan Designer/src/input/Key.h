@@ -125,8 +125,7 @@ public:
 
 	String to_string() const
 	{
-		String s = SDL_GetKeyName(key_type);
-		return s;
+		return SDL_GetKeyName(key_type);
 	}
 
 	void set_using_name(const String &p_name)
@@ -186,9 +185,9 @@ public:
 		KEY_MOD_CTRL,
 		KEY_MOD_SHIFT,
 		KEY_MOD_ALT
-	};
+	} type;
 	
-	ModKey() { }
+	ModKey() : ModKey(KEY_MOD_NONE) { }
 	ModKey(KeyType p_type)
 	{
 		type = p_type;
@@ -215,8 +214,7 @@ public:
 
 			default:
 				type = KEY_MOD_NONE;
+				break;
 		}
 	}
-
-	KeyType type;
 };

@@ -20,7 +20,8 @@ String TextFile::load(const File& p_file)
 	if (!myfile.is_open())
 	{
 		T_ERROR("Error loading file: " + file.get_relative_path());
-		return "";
+		source = "";
+		return source;
 	}
 
 	while (std::getline(myfile, line))

@@ -72,6 +72,7 @@ void Application::InitEngine()
 {
 	Serializer::init();
 	CoreNames::init();
+	StringUtils::init();
 
 	Mouse::init();
 	Keyboard::init();

@@ -37,7 +37,6 @@ struct SimpleExecuter
 {
 	static Variant execute(ScriptNode *p_node)
 	{
-		Executer exe;
-		return exe.Execute(p_node);
+		return Executer().Execute(p_node);
 	}
 };

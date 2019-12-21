@@ -165,7 +165,7 @@ Variant Serializer::deserialize_recursively(const XmlNode& p_node)
 
 Serializer::Property Serializer::deserialize_property(const XmlNode& p_node)
 {
-	Serializer::Property result;
+	Serializer::Property result = Serializer::Property();
 
 	Array<XmlAttribute> attributes = p_node.get_attributes();
 	XmlAttribute a_type = attributes[0];

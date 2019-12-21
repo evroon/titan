@@ -233,6 +233,9 @@ ObjectField::~ObjectField()
 
 void ObjectField::init()
 {	
+	object = nullptr;
+	file_dialog = nullptr;
+
 	textfield = new TextField;
 	load_button = new IconButton("solid/folder-open");
 	
@@ -263,9 +266,9 @@ void ObjectField::open_button_clicked()
 	VariantType type = PropertyControl::get_property_type();
 	Variant v = get_value();
 
-	if (v.operator Object * ()->derives_from_type<Resource*>())
+	if (v.operator Object* ()->derives_from_type<Resource*>())
 		EDITOR_APP->open_file(File(v.operator Resource * ()->get_file()).get_absolute_path());
-	else if (v.operator Object * ()->derives_from_type<Node*>())
+	else if (v.operator Object* ()->derives_from_type<Node*>())
 		textfield->set_text(v.operator Node* ()->get_name());
 	else {
 		PropertyTab* pv = VIEW->get_default_viewport()->get_canvas()->get_child("Inspector")->cast_to_type<PropertyTab*>();

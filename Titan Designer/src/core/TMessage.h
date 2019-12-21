@@ -6,10 +6,10 @@
 #include "Vector.h"
 #include "Array.h"
 
-#define T_ERROR(X) new TError(X, __FILE__, __LINE__)
-#define T_WARNING(X) new TWarning(X, __FILE__, __LINE__)
-#define T_LOG(X) new TLog(X, __FILE__, __LINE__)
-#define T_INFO(X) new TInfo(X, __FILE__, __LINE__)
+#define T_ERROR(X) TError(X, __FILE__, __LINE__)
+#define T_WARNING(X) TWarning(X, __FILE__, __LINE__)
+#define T_LOG(X) TLog(X, __FILE__, __LINE__)
+#define T_INFO(X) TInfo(X, __FILE__, __LINE__)
 
 #define ERROR_HANDLER MessageHandler::get_singleton()
 
@@ -30,7 +30,7 @@ struct TMessage
 	int line_number;
 	int count;
 
-	TMessage(const String &p_description, const String &p_file_name, int p_line_number);
+	TMessage(String p_description, const String &p_file_name, int p_line_number);
 
 protected:
 	void log();
@@ -64,7 +64,7 @@ class MessageHandler
 	MessageHandler();
 
 public:
-	void Log(TMessage *msg);
+	void Log(const TMessage& p_message);
 	void clean();
 
 	TMessage* get_message(int p_index) const;

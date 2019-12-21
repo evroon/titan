@@ -5,10 +5,10 @@
 TitanScript::TitanScript()
 {
 	state = new State;
-	textfile = NULL;
-	lexer = NULL;
-	parser = NULL;
-	exe = NULL;
+	textfile = nullptr;
+	lexer = nullptr;
+	parser = nullptr;
+	exe = nullptr;
 }
 
 TitanScript::TitanScript(const String& p_file_name) : TitanScript()
@@ -19,7 +19,6 @@ TitanScript::TitanScript(const String& p_file_name) : TitanScript()
 void TitanScript::open_file(const String& filepath)
 {
 	T_LOG("Loading: " + filepath);
-	StringUtils::Init();
 
 	set_file(filepath);
 

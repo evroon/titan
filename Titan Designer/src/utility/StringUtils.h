@@ -11,7 +11,7 @@ class String;
 class StringUtils
 {
 public:
-	static void Init();
+	static void init();
 	static void Free();
 	static bool is_underscore(char kar);
 	static bool IsTab(const char kar);

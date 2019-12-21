@@ -13,8 +13,14 @@
 
 TextLine::TextLine(const String &p_text)
 {
-	text = p_text;
+	styles = Array<TextStyle>();
 	styles.push_back({ Color::White, 0 });
+
+	text = p_text;
+
+	index = 0;
+	textbox = nullptr;
+	area = rect2();
 }
 
 TextLine::~TextLine()
@@ -90,7 +96,7 @@ TextBox::TextBox() : TextBox("")
 	
 }
 
-TextBox::TextBox(const String & p_source)
+TextBox::TextBox(const String& p_source)
 {
 	left_margin = 5;
 	top_margin = 3;
@@ -107,7 +113,7 @@ TextBox::TextBox(const String & p_source)
 
 	font = CONTENT->LoadFont("EngineCore/Fonts/Hack-Regular.ttf", 17);
 
-	slider = NULL;
+	slider = nullptr;
 
 	menu = new ContextMenu;
 
@@ -120,6 +126,26 @@ TextBox::TextBox(const String & p_source)
 	menu->add_item("Cut", cut);
 	menu->add_item("Paste", paste);
 
+	lines = Array<TextLine>();
+
+	box = rect2();
+	cursor = rect2();
+	area = rect2();
+
+	caret_pos = TextPosition();
+	selection_begin = TextPosition();
+	selection_end = TextPosition();
+	selection_first = TextPosition();
+
+	scroll_offset = 0.0f;
+	extra_space = 0.0f;
+	preferred_offset_x = 0.0f;
+
+	selecting = false;
+	ibeam_blinks = false;
+	line_numbers_enabled = false;
+
+	language = SyntaxHighlighter::Language::UNDEFINED;
 	set_text(p_source);
 }
 
@@ -630,7 +656,7 @@ void TextBox::set_text(const String &source)
 
 	for (int i  = 0; i < source.size(); i++)
 	{
-		char c = source[i];
+		const char& c = source[i];
 
 		if (c == '\n' || c == '\r')
 		{
@@ -746,9 +772,11 @@ TextPosition TextBox::get_position(const vec2 &pos)
 
 		line = get_line(textpos.row);
 
+		if (!line)
+			return TextPosition();
+
 		if (pos.x >= area.get_right())
 			textpos.column = line->get_text().size();
-
 		else if (pos.x <= area.get_left())
 			textpos.column = 0;
 		else
@@ -765,9 +793,12 @@ TextPosition TextBox::get_position(const vec2 &pos)
 
 TextLine* TextBox::get_line(int row)
 {
+	if (lines.size() < 1)
+		return nullptr;
+	
 	if (row < 0)
 		row = 0;
-	else if (row > int(lines.size()) - 1)
+	else if (row > lines.size() - 1)
 		row = lines.size() - 1;
 
 	return &lines[row];
@@ -799,6 +830,10 @@ void TextBox::set_caret_pos(const TextPosition &p_pos, bool update_preferred)
 		caret_pos.row = row_count - 1;
 
 	TextLine* line = get_line(caret_pos.row);
+
+	if (!line)
+		return;
+
 	int column_count = line->get_text().size() + 1;
 
 	if (caret_pos.column < 0)
@@ -823,6 +858,10 @@ void TextBox::set_caret_bottom()
 void TextBox::update_caret()
 {
 	TextLine* line = get_line(caret_pos.row);
+
+	if (!line)
+		return;
+
 	float position_x = line->get_position_x(caret_pos.column);
 
 	cursor = rect2(
@@ -849,9 +888,12 @@ void TextBox::set_line_numbers_enabled(bool p_value)
 
 void TextBox::check_slider_necessity()
 {
+	if (lines.size() < 1)
+		return;
+	
 	extra_space = area.get_bottom() - lines[lines.size() - 1].get_area().get_bottom();
 
-	if (lines.size() > 0 && extra_space > 0)
+	if (extra_space > 0)
 		add_slider();
 	else
 		remove_slider();
@@ -905,8 +947,11 @@ void TextBox::move_cursor_end()
 
 void TextBox::move_cursor_left()
 {
-	if (caret_pos.column <= 0)
-		set_caret_pos({ caret_pos.row - 1, get_line(caret_pos.row - 1)->get_text().size() });
+	if (caret_pos.column <= 0) {
+		TextLine* textline = get_line(caret_pos.row - 1);
+		if (textline)
+			set_caret_pos({ caret_pos.row - 1, textline->get_text().size() });
+	}
 	else
 		set_caret_pos({ caret_pos.row, caret_pos.column - 1});
 }
@@ -1265,5 +1310,8 @@ void TextBox::bind_methods()
 	REG_CSTR(0);
 	REG_METHOD(slider_value_changed);
 	REG_METHOD(contextmenu_selected);
+	REG_METHOD(cut_text);
+	REG_METHOD(copy_text);
+	REG_METHOD(paste_text);
 	REG_PROPERTY(text);
 }

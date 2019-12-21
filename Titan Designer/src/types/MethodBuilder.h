@@ -147,7 +147,7 @@ struct ConstructorBuilder
 	template<typename T>
 	static std::function<Variant()> build_0()
 	{
-		return []() { return new T(); };
+		return []() { return new T; };
 	}
 	template<typename T>
 	static std::function<Variant(Variant)> build_1()

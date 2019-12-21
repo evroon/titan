@@ -11,7 +11,6 @@ PropertyView::PropertyView(const Variant &p_var)
 {
 	roots = Array<GroupItem>();
 	buttons = Container();
-	set_property(p_var);
 
 	background_color = TO_RGB(40);
 
@@ -27,6 +26,8 @@ PropertyView::PropertyView(const Variant &p_var)
 
 	split_pos = 0.0f;
 	offset = 0.0f;
+
+	set_property(p_var);
 }
 
 PropertyView::PropertyView() : PropertyView(NULL_VAR)

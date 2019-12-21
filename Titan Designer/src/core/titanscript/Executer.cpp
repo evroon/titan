@@ -5,13 +5,16 @@
 
 Executer::Executer()
 {
-	state = NULL;
-	activefunc = NULL;
+	state = nullptr;
+	activefunc = nullptr;
+	returntofunc = false;
 }
 
 Executer::Executer(Line line, State *state)
 {
 	this->state = state;
+	activefunc = nullptr;
+	returntofunc = false;
 
 	for (int c = 0; c < line.sub.size(); c++)
 		Execute(line.sub[c]->node);

@@ -8,7 +8,7 @@
 const String StringUtils::operators = "+-=?><|&*/[](),";
 Vector<String> StringUtils::keywords;
 
-void StringUtils::Init()
+void StringUtils::init()
 {
 	keywords.push_back(new String("var"));
 	keywords.push_back(new String("if"));

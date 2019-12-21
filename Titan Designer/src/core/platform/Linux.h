@@ -16,7 +16,7 @@ public:
 	{
 		GLenum err = glewInit();
 		if (GLEW_OK != err)
-			T_ERROR(String("GLEW Error: " + err));
+			T_ERROR("GLEW Error: " + String(err));
 	}
 
 	File get_cwd() override

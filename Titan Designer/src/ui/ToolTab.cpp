@@ -4,7 +4,7 @@
 
 #include "PropertyView.h"
 
-ToolTab::ToolTab() : ToolTab(NULL)
+ToolTab::ToolTab() : ToolTab(nullptr)
 {
 }
 

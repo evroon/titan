@@ -47,9 +47,6 @@ public:
 	void ReloadAll();
 	void FreeAll();
 
-	// reload
-
-
 	// free
 	void free_textfile(const File& p_file);
 

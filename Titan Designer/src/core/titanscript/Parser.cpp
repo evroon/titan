@@ -6,6 +6,14 @@
 
 Parser::Parser(State *_state, Line &root)
 {
+	parent = nullptr;
+	state = nullptr;
+	warnings = Array<ParseWarning>();
+	errors = Array<ParseError>();
+	definitions = Array<Definition>();
+	parent_type = VariantType();
+	subindex = 0;
+
 	state = _state;
 	parent = &root;
 	Parse(root);
@@ -72,7 +80,7 @@ Composition* Parser::GetComposition(const Line &line)
 Block* Parser::ParseBlock(const Line &line)
 {
 	Line l = line;
-	Vector<ScriptNode> nodes;
+	Vector<ScriptNode> nodes = Vector<ScriptNode>();
 	int count = l.sub.size();
 
 	if (l.sub.size() == 0)

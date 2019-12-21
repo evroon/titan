@@ -18,14 +18,6 @@ class Class;
 
 struct Token
 {
-	Token(const String &txt, int t)
-	{
-		text = txt;
-		type = t;
-	}
-	String text;
-	int type = 0;
-
 	enum Type
 	{
 		UNDEF,
@@ -35,27 +27,29 @@ struct Token
 		NUMBER,
 		STRING, 
 		TAB
-	};
+	} type = UNDEF;
+	
+	String text;
+
+	Token(const String &txt, Type t)
+	{
+		text = txt;
+		type = t;
+	}
 };
 
 class Line
 {
 public:
-	Line() { };
-	Line(Array<Token> t) { tokens = t; }
-	~Line() {  };
-
-	void Free()
-	{
-		/*
-		for (int c = 0; c < sub.size(); c++)
-		{
-			sub[c]->Free();
-			delete sub[c];
-		}
-		sub.clear();
-		*/
+	Line() : Line(Array<Token>()) { }
+	Line(Array<Token> p_tokens) {
+		tokens = p_tokens; 
+		strings = Array<String>();
+		sub = Vector<Line>();
+		node = nullptr;
+		level = 0;
 	}
+	~Line() { sub.clean(); };
 
 	int size() const { return tokens.size(); }
 	bool StartsWith(const String &txt) const { return tokens[0].text == txt; }
@@ -151,7 +145,18 @@ public:
 class State
 {
 public:
-	State() {}
+	State()
+	{
+		extension = NULL_VAR;
+		extensiontype = VariantType();
+
+		arg_stack = Array<Variant>();
+		returnstack = Array<Variant>();
+		poppara = Array<Variant>();
+		popreturn = Array<Variant>();
+		vars = Map<String, TsVariable>();
+		funcs = Map<String, Function>();
+	}
 
 	void Free()
 	{

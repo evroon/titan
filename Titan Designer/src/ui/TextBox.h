@@ -169,16 +169,18 @@ private:
 	Font* font;
 	Slider* slider;
 
-	TextPosition selection_begin, selection_end;
+	TextPosition selection_begin;
+	TextPosition selection_end;
 	TextPosition selection_first;
 	bool selecting;
 
 	float scroll_offset;
 
-	//the space in y direction not drawn on screen (if scrolling)
+	// The space in y direction not drawn on screen (if scrolling)
 	float extra_space;
 
-	float preferred_offset_x; // used when pressing up/down button
+	// Used when pressing up/down button
+	float preferred_offset_x;
 
 	ContextMenu* menu;
 

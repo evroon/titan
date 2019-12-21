@@ -8,7 +8,7 @@ MessageHandler* MessageHandler::singleton;
 //TMessage
 //=========================================================================
 
-TMessage::TMessage(const String &p_description, const String &p_file_name, int p_line_number)
+TMessage::TMessage(String p_description, const String &p_file_name, int p_line_number)
 {
 	description = p_description;
 	file_name = p_file_name;
@@ -18,7 +18,7 @@ TMessage::TMessage(const String &p_description, const String &p_file_name, int p
 
 void TMessage::log()
 {
-	ERROR_HANDLER->Log(this);
+	ERROR_HANDLER->Log(*this);
 }
 
 //=========================================================================
@@ -71,11 +71,13 @@ MessageHandler::MessageHandler()
 
 	messages = Vector<TMessage>();
 	filters = Array<char>();
-	complete_description = true;
+	complete_description = false;
 }
 
-void MessageHandler::Log(TMessage *msg)
+void MessageHandler::Log(const TMessage& p_message)
 {
+	TMessage* msg = new TMessage(p_message);
+
 	for (int c = 0; c < messages.size(); c++)
 	{
 		if (messages[c]->description == msg->description)
@@ -84,6 +86,7 @@ void MessageHandler::Log(TMessage *msg)
 			return;
 		}
 	}
+
 	messages.push_back(msg);
 
 	emit(messages.size() - 1);

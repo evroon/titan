@@ -59,7 +59,7 @@ Variant PropertyControl::get_value()
 		if (variant.isdef())
 			return variant;
 		
-		return Variant();
+		return NULL_VAR;
 	}
 
 	return variable.get();

@@ -60,7 +60,7 @@ PropertyTab::PropertyTab(Object* p_object)
 	history = History<Object*>();
 }
 
-PropertyTab::PropertyTab() : PropertyTab(NULL)
+PropertyTab::PropertyTab() : PropertyTab(nullptr)
 {
 
 }
