@@ -428,24 +428,36 @@ void TileView::notification(int p_notification)
 
 		for (int c = 0; c < items.size(); c++)
 		{
-			if (items[c].get_area().get_bottom() > area.get_top())
+			const rect2& area = items[c].get_area();
+
+			if (area.get_bottom() > area.get_top())
 				continue;
 
 			if (item_numbers_enabled)
-				draw_text(font, c, vec2(area.get_left() + 4, items[c].get_area().pos.y), item_numbers_color);
+				draw_text(font, c, vec2(area.get_left() + 4, area.pos.y), item_numbers_color);
 
-			if (items[c].get_icon())
+			Texture2D* icon = items[c].get_icon();
+
+			if (icon)
 			{
-				vec2 size = items[c].get_icon()->get_size() / 2.0f;
-				vec2 pos = vec2(items[c].get_area().get_left() + internal_left_margin, items[c].get_area().get_bottom() + get_font()->get_height());
+				vec2 icon_size = icon->get_size() / 2.0f;
+				vec2 pos = vec2(area.get_left() + internal_left_margin, area.get_bottom() + get_font()->get_height());
 
-				rect2 a = rect2(pos.x, items[c].get_area().get_right() - 4.0f, items[c].get_area().get_top(), pos.y + get_font()->get_height());
+				float text_width = get_font()->get_width(items[c].get_text());
 
-				draw_texture(items[c].get_icon(), a, Color::White);
-				draw_text(items[c].get_text(), vec2(pos.x, pos.y));
+				rect2 a = rect2(pos.x, area.get_right() - 4.0f, area.get_top(), pos.y + get_font()->get_height());
+
+				// Keep aspect ratio and don't exceed asssigned tile size.
+				float scaling = MIN(a.size.x / icon_size.x, a.size.y / icon_size.y);
+				vec2 rescaled_size = vec2(icon_size.x * scaling, icon_size.y * scaling);
+
+				a.set_size(rescaled_size);
+
+				draw_texture(icon, a, Color::White);
+				draw_text(items[c].get_text(), vec2(area.get_pos().x - text_width / 2.0f, pos.y));
 			}
 			else
-				draw_text(items[c].get_text(), vec2(items[c].get_area().get_left() + internal_left_margin, items[c].get_area().pos.y));
+				draw_text(items[c].get_text(), vec2(area.get_left() + internal_left_margin, area.pos.y));
 		}
 
 		if (items.size() == 0)
@@ -774,7 +786,7 @@ void TileView::remove_item(int p_index)
 	position_items();
 }
 
-void TileView::push_back_item(const String & p_text, Texture2D* p_icon)
+void TileView::push_back_item(const String& p_text, Texture2D* p_icon)
 {
 	int index = items.size();
 
@@ -797,15 +809,12 @@ void TileView::insert_item_at_index(int index, TileElement& item)
 	item.set_index(index);
 
 	if (index >= items.size())
-	{
 		push_back_item(item);
-	}
 	else
 	{
 		TileElement& old = items[index];
 
 		items.replace(index, item);
-
 		items.push_back(old);
 	}
 }

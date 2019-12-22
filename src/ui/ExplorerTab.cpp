@@ -40,7 +40,7 @@ ExplorerTab::ExplorerTab(Viewport* p_viewport)
 	tree_view->set_margins(4, 4, 4, offset.y + 4);
 	tree_view->connect("selected", this, "emit_selected");
 	tree_view->connect("right_clicked", this, "right_clicked");
-	tree_view->set_init_expanded(true);
+	tree_view->set_init_expanded_depth(2);
 
 	//add_button
 	add_button->set_tip_description("Add Item");
