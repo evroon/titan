@@ -8,12 +8,10 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 #include "game/GameApp.h"
 #include "editor/EditorApp.h"
+#include "core/titanscript/ScriptApp.h"
 #include "core/Definitions.h"
 
 #undef main
-
-#define DEBUG 1
-#define EDITOR 1
 
 #if PLATFORM == LINUX
 #define NEW_PLATFORM new Linux
@@ -25,13 +23,20 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 int main(int argc, char* argv[])
 {
-#if EDITOR
+	Array<String> args = Array<String>(argc - 1);
+	
+	for (int c = 1; c < argc; c++)
+		args[c - 1] = argv[c];
+
+#if APP_TYPE == APP_TYPE_EDITOR
 	EditorApp editor(NEW_PLATFORM);
 	editor.Loop();
-#else
+#elif APP_TYPE == APP_TYPE_GAME
 	GameApp game(NEW_PLATFORM);
 	game.Loop();
+#else
+	ScriptApp scriptapp(NEW_PLATFORM);
+	scriptapp.execute(args);
 #endif
-
 	return 0;
 }

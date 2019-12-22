@@ -4,6 +4,12 @@
 #define ANDROID 3
 #define MACOSX 4
 
+#define APP_TYPE_EDITOR 0
+#define APP_TYPE_GAME 1
+#define APP_TYPE_SCRIPT 2
+
+#define APP_TYPE APP_TYPE_EDITOR
+
 #ifdef __linux__
 #define PLATFORM LINUX
 #elif defined(_WIN64)

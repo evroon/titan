@@ -6,8 +6,6 @@
 
 Parser::Parser(State *_state, Line &root)
 {
-	parent = nullptr;
-	state = nullptr;
 	warnings = Array<ParseWarning>();
 	errors = Array<ParseError>();
 	definitions = Array<Definition>();
@@ -83,7 +81,7 @@ Block* Parser::ParseBlock(const Line &line)
 	Vector<ScriptNode> nodes = Vector<ScriptNode>();
 	int count = l.sub.size();
 
-	if (l.sub.size() == 0)
+	if (count == 0)
 		PARSE_WARNING("Expected a block");
 
 	parent = const_cast<Line*>(&line);

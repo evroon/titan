@@ -235,8 +235,9 @@ Variant Executer::run_titan_func(const String &name, Array<Variant> paras)
 
 Variant Executer::Execute(ScriptNode *node)
 {
-	if (!node)											//Ignore else and elseif statments
-		return 0;
+	// Ignore else and elseif statments
+	if (!node)
+		return NULL_VAR;
 
 	int type = node->GetType();
 
@@ -372,6 +373,10 @@ Variant Executer::Execute(ScriptNode *node)
 	{
 		Block *block = (Block*) node;
 		returntofunc = false;
+
+		if (block->lines.size() == 0) {
+			T_ERROR("Block is empty");
+		}
 
 		if (block->params.size() != state->argcount()) {
 			T_ERROR("Number of arguments does not match, expected: " + (String) block->params.size() + ", got: " + (String) state->argcount());

@@ -70,6 +70,9 @@ void Application::InitRenderer()
 
 void Application::InitEngine()
 {
+	VIEW->set_application(this);
+
+	Time::Init();
 	ContentManager::Init();
 	Serializer::init();
 	CoreNames::init();
@@ -96,6 +99,8 @@ void Application::InitEngine()
 	CONTENT->setup();	
 
 	CanvasData::init();
+
+	InitRenderer();
 }
 
 void Application::Free()
@@ -115,10 +120,7 @@ void Application::FinishDraw()
 
 void Application::Loop()
 {
-	VIEW->set_application(this);
-	Time::Init();
 	InitEngine();
-	InitRenderer();
 	init();
 	VIEW->init(WINDOWSIZE_F / 2.0f);
 
