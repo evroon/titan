@@ -5,6 +5,8 @@
 class Scriptable;
 class TitanScript;
 
+#define LAMBDA_CONNECTION_0(X) Connection::create_from_lambda(new V_Method_0(X))
+
 struct Connection
 {
 	Connection() { type = UNDEF; }

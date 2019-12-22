@@ -15,6 +15,8 @@ public:
 
 	void clean();
 
+	Node* duplicate();
+
 	Node* get_child_by_index(int p_index);
 	Node* get_child(const String& p_name);
 		

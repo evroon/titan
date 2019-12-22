@@ -1,6 +1,7 @@
 #include "Node.h"
 
 #include "core/Memory.h"
+#include "Serializer.h"
 
 Node::Node()
 {
@@ -29,6 +30,8 @@ void Node::add_child(Node* p_child)
 
 	p_child->parent = this;
 	p_child->emit_signal("parent_changed");
+
+	children_changed();
 }
 
 void Node::remove_child(Node* p_child)
@@ -48,6 +51,15 @@ void Node::clean()
 		GC->queue_clean(child);
 		children.clear(child);
 	}
+}
+
+Node* Node::duplicate()
+{
+	Serializer serializer;
+	String source = serializer.serialize(this);
+	Node* result = serializer.deserialize(source);
+	get_parent()->add_child(result);
+	return result;
 }
 
 Node* Node::get_child_by_index(int p_index)

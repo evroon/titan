@@ -730,6 +730,11 @@ TreeElement* TreeView::create_item(TreeElement* p_parent)
 void TreeView::push_node(Node* p_node)
 {
 	clear();
+	p_node->connect("children_changed", 
+		Connection::create_from_lambda(new V_Method_0([this, p_node](){
+			push_node(p_node);
+		}))
+	);
 
 	TreeElement* root = create_item_from_node(p_node, NULL);
 }

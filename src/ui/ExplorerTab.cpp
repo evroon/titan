@@ -85,8 +85,6 @@ void ExplorerTab::delete_element()
 
 	if (item)
 		item->get_parent()->remove_child(item);
-
-	viewport->get_world()->children_changed(); // to be sure
 }
 
 void ExplorerTab::right_clicked(TreeElement* p_element)
@@ -95,9 +93,13 @@ void ExplorerTab::right_clicked(TreeElement* p_element)
 
 	Connection del, add;
 	del.register_native_method(this, "delete_element");
+	Connection duplicate = LAMBDA_CONNECTION_0([this]() {
+		get_selected_object()->duplicate();
+	});
 	add.register_native_method(this, "add_button_clicked");
 
 	menu->add_item("Delete " + p_element->get_text(), del);
+	menu->add_item("Duplicate " + p_element->get_text(), duplicate);
 	menu->add_item("Add Child", add);
 
 	ACTIVE_CANVAS->set_context_menu(menu, MOUSE->get_position());
