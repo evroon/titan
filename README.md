@@ -31,10 +31,7 @@ Libraries used:
   - Terrain heightmap editing on GPU
 
 # Building
-Building has been tested on Windows and Linux. Mac OS X is not supported at the moment.
-
-## Windows
-The project can be build using Visual Studio simply by opening the solution file and building the solution.
+Building has been tested on Linux. Windows and Mac OS X is not supported at the moment.
 
 ## Linux
 Building on Linux is possible using CMake. First, make sure that the above libraries are installed. On Debian-based systems, this command can be used:
@@ -47,7 +44,7 @@ sudo apt install cmake librapidxml-dev libglew-dev libassimp-dev libnoise-dev li
 When the libraries are installed, clone and build the project:
 ```bash
 git clone git@github.com:evroon/titan.git
-cd "titan/src"
+cd titan/src
 cmake ./
 cmake --build . -- -j8
 ```
