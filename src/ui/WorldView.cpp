@@ -732,6 +732,36 @@ void WorldView::post_draw_world()
 
 void WorldView::post_draw_canvas()
 {
+	if (!selected || !selected->derives_from_type<Control*>())
+		return;
+	
+	Control* selected_control = selected->cast_to_type<Control*>();
+
+	if (display_mode == DISPLAY_CANVAS)
+	{
+		vec2 item_size = selected_control->get_size() + vec2(2);
+		vec2 item_pos = selected_control->get_pos();
+		vec2 handle_size = vec2(4.0f);
+		vec2 offset = item_size + handle_size;
+
+		DrawCommand command;
+		command.type = DrawCommand::FRAME;
+		command.area = rect2(item_pos, item_size);
+		command.color = TO_RGB(vec3i(255, 164, 66));
+		command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
+		command.shader = CanvasData::get_singleton()->get_default_shader();
+
+		render_frame(command);
+
+		command.area = rect2(item_pos + offset, handle_size);
+		render_box(command);
+		command.area = rect2(item_pos - offset, handle_size);
+		render_box(command);
+		command.area = rect2(item_pos + offset * vec2(1, -1), handle_size);
+		render_box(command);
+		command.area = rect2(item_pos + offset * vec2(-1, 1), handle_size);
+		render_box(command);
+	}
 }
 
 void WorldView::set_postprocess(PostProcess* p_postprocess)
@@ -755,7 +785,7 @@ Scene* WorldView::get_scene() const
 	return viewport->get_scene();
 }
 
-void WorldView::select(WorldObject* p_object)
+void WorldView::select(Node* p_object)
 {
 	if (selected == p_object)
 		return;
@@ -764,15 +794,15 @@ void WorldView::select(WorldObject* p_object)
 	emit_signal("selected", selected);
 }
 
-WorldObject* WorldView::get_selected() const
+Node* WorldView::get_selected() const
 {
-	return selected->cast_to_type<WorldObject*>();
+	return selected;
 }
 
 #undef CLASSNAME
 #define CLASSNAME WorldView
 
-void WorldView::highlight(WorldObject* p_object)
+void WorldView::highlight(Node* p_object)
 {
 	if (highlighted == p_object)
 		return;
@@ -780,7 +810,7 @@ void WorldView::highlight(WorldObject* p_object)
 	highlighted = p_object;
 }
 
-WorldObject* WorldView::get_highlight() const
+Node* WorldView::get_highlight() const
 {
 	return highlighted->cast_to_type<WorldObject*>();
 }
@@ -809,6 +839,7 @@ int WorldView::get_transform_type() const
 void WorldView::set_simulating(bool p_simulating)
 {
 	simulating = p_simulating;
+	display_mode = DISPLAY_WORLD;
 }
 
 bool WorldView::get_simulating() const
@@ -831,6 +862,21 @@ void WorldView::set_handle_2d(bool p_handle_2d)
 bool WorldView::get_handle_2d() const
 {
 	return handle_2d;
+}
+
+void WorldView::set_display_mode(int p_display_mode)
+{
+	display_mode = DisplayMode(p_display_mode);
+	
+	viewport->get_renderer()->set_draw_world(display_mode == DISPLAY_WORLD);
+	viewport->get_renderer()->set_draw_canvas(display_mode == DISPLAY_CANVAS);
+
+	update();
+}
+
+int WorldView::get_display_mode() const
+{
+	return display_mode;
 }
 
 WorldObject* WorldView::raycast(const vec2& p_pos) const

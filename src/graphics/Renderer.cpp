@@ -57,6 +57,9 @@ Renderer::Renderer()
 	camera = nullptr;
 	viewport = nullptr;
 
+	draw_canvas = true;
+	draw_world = true;
+
 	buffers = Vector<FBO2D>();
 	textures = Map<int, Texture2D>();
 
@@ -206,6 +209,26 @@ void Renderer::set_draw_on_screen(bool p_draw_on_screen)
 bool Renderer::get_draw_on_screen() const
 {
 	return draw_on_screen;
+}
+
+void Renderer::set_draw_world(bool p_draw_world)
+{
+	draw_world = p_draw_world;
+}
+
+bool Renderer::get_draw_world() const
+{
+	return draw_world;
+}
+
+void Renderer::set_draw_canvas(bool p_draw_canvas)
+{
+	draw_canvas = p_draw_canvas;
+}
+
+bool Renderer::get_draw_canvas() const
+{
+	return draw_canvas;
 }
 
 void Renderer::use_wireframe(bool p_wireframe)
@@ -869,7 +892,6 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("light_dir", light_dir);
 	first_pass->set_uniform("light_color", vec3(1.0));
 
-
 	if (environment)
 	{
 		first_pass->set_uniform("ambient", environment->get_ambient_color().get_rgb());
@@ -962,7 +984,7 @@ void DeferredRenderer::render()
 
 	activate();
 
-	if (viewport->world)
+	if (viewport->world && draw_world)
 	{
 		Camera* c = viewport->world->get_active_camera();
 		c->update_matrices();
@@ -980,7 +1002,7 @@ void DeferredRenderer::render()
 		stop_depth_test();
 	}
 
-	if (viewport->canvas)
+	if (viewport->canvas && draw_canvas)
 	{
 		MeshHandler::get_singleton()->get_plane()->bind();
 		activate_canvas_transform(); 
@@ -989,12 +1011,16 @@ void DeferredRenderer::render()
 		deactivate_canvas_transform();
 	}
 
+	
 	render_virtual_tex();
 	render_shadowmap();
 	render_reflection();
 	render_godray();
 	render_first_pass();
-	render_flare();
+
+	if (draw_world)
+		render_flare();
+
 	//render_ssao();
 	render_second_pass();
 	//save_fbo(final_buffer, "test.tga", 0);

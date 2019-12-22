@@ -33,17 +33,17 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 
 	TextButton* toggle_2d = new TextButton("3D");
 	toggle_2d->connect("clicked",
-	Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
-
-		bool v = world_view->get_handle_2d();
-		world_view->set_handle_2d(!v);
-		
-		if (v)
-			toggle_2d->set_text("3D");
-		else
-			toggle_2d->set_text("2D");
-	
-	})));
+		Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
+			bool v = world_view->get_handle_2d();
+			world_view->set_handle_2d(!v);
+			
+			if (v)
+				toggle_2d->set_text("3D");
+			else
+				toggle_2d->set_text("2D");
+			})
+		)
+	);
 
 	TextButton* toggle_wireframe = new TextButton("F");
 	toggle_wireframe->connect("clicked",
@@ -55,8 +55,27 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 				toggle_wireframe->set_text("F");
 			else
 				toggle_wireframe->set_text("W");
+			})
+		)
+	);
 
-			})));
+	ImageButton* toggle_display_mode = new IconButton("solid/globe-europe");
+	toggle_display_mode->connect("clicked",
+		Connection::create_from_lambda(new V_Method_0([this, toggle_display_mode]() {
+			int v = world_view->get_display_mode();
+
+			if (v == WorldView::DISPLAY_CANVAS)
+				world_view->set_display_mode(WorldView::DISPLAY_WORLD);
+			else
+				world_view->set_display_mode(WorldView::DISPLAY_CANVAS);
+
+			if (v)
+				toggle_display_mode->set_icon("solid/globe-europe");
+			else
+				toggle_display_mode->set_icon("solid/tv");
+			})
+		)
+	);
 	
 	world_view = new WorldView(p_scene);
 
@@ -66,6 +85,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	buttons.add_child(combo_box);
 	buttons.add_child(toggle_2d);
 	buttons.add_child(toggle_wireframe);
+	buttons.add_child(toggle_display_mode);
 
 	float s = buttons.get_required_size().y;
 
@@ -80,6 +100,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	add_child(world_view);
 
 	world_view->connect_signal("world_changed", this, "world_changed");
+	world_view->set_display_mode(WorldView::DISPLAY_CANVAS);
 
 	set_tab_title("Preview");
 

@@ -93,6 +93,12 @@ public:
 	void set_draw_on_screen(bool p_draw_on_screen);
 	bool get_draw_on_screen() const;
 
+	void set_draw_world(bool p_draw_world);
+	bool get_draw_world() const;
+
+	void set_draw_canvas(bool p_draw_canvas);
+	bool get_draw_canvas() const;
+
 	void use_wireframe(bool p_wireframe);
 
 	Texture2D* get_texture(int p_type) const;
@@ -130,6 +136,8 @@ protected:
 	mat4 canvas_matrix;
 
 	bool draw_on_screen;
+	bool draw_world;
+	bool draw_canvas;
 };
 
 class ForwardRenderer : public Renderer

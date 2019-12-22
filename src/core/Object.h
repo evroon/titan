@@ -82,7 +82,7 @@ public:
 	template<typename T>
 	bool derives_from_type()
 	{
-		return dynamic_cast<T>(this) != NULL;
+		return dynamic_cast<T>(this) != nullptr;
 	}
 
 	template<typename T>

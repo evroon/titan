@@ -35,6 +35,12 @@ public:
 		WIREFRAME
 	};
 
+	enum DisplayMode
+	{
+		DISPLAY_WORLD,
+		DISPLAY_CANVAS
+	};
+
 	vec2 get_required_size() const override;
 
 	void notification(int p_notification) override;
@@ -52,11 +58,11 @@ public:
 	void set_scene(Scene* p_scene);
 	Scene* get_scene() const;
 
-	void select(WorldObject* p_object);
-	WorldObject* get_selected() const;
+	void select(Node* p_object);
+	Node* get_selected() const;
 
-	void highlight(WorldObject* p_object);
-	WorldObject* get_highlight() const;
+	void highlight(Node* p_object);
+	Node* get_highlight() const;
 
 	void set_preview_type(int p_type);
 	int get_preview_type();
@@ -69,6 +75,9 @@ public:
 
 	void set_handle_2d(bool p_handle_2d);
 	bool get_handle_2d() const;
+
+	void set_display_mode(int p_display_mode);
+	int get_display_mode() const;
 
 	WorldObject* raycast(const vec2& p_pos) const;
 
@@ -88,12 +97,14 @@ private:
 	Viewport* return_viewport;
 	Texture2D* preview_texture;
 
-	Object* selected;
-	Object* highlighted;
+	Node* selected;
+	Node* highlighted;
 
 	TransformType transform_type = TRANSLATE;
 	DragType drag_type = DRAG_INACTIVE;
 	DragType highlight_type = DRAG_INACTIVE;
+	DisplayMode display_mode = DISPLAY_WORLD;
+
 	vec3 drag_start_pos;
 	vec3 drag_start_size;
 	vec3 drag_start_rotation;
