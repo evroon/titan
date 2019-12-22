@@ -732,6 +732,8 @@ void WorldView::post_draw_world()
 
 void WorldView::post_draw_canvas()
 {
+	draw_fps_info();
+
 	if (!selected || !selected->derives_from_type<Control*>())
 		return;
 	
@@ -762,6 +764,24 @@ void WorldView::post_draw_canvas()
 		command.area = rect2(item_pos + offset * vec2(-1, 1), handle_size);
 		render_box(command);
 	}
+}
+
+void WorldView::draw_fps_info()
+{
+	DrawCommand command;
+	command.type = DrawCommand::FONT;
+	command.shader = CanvasData::get_singleton()->get_default_shader();
+	command.color = Color();
+	command.font = get_default_font();
+	command.text = "R: " + StringUtils::FloatToString(viewport->get_rendering_time() * 1000) + " ms";
+	command.pos = viewport->get_size() / 1.0f - vec2(110, 10);
+	command.area = rect2(command.pos, vec2());
+
+	render_font(command);
+
+	command.text = "U: " + StringUtils::FloatToString(viewport->get_updating_time() * 1000) + " ms";
+	command.pos.y -= 20.0f;
+	render_font(command);
 }
 
 void WorldView::set_postprocess(PostProcess* p_postprocess)

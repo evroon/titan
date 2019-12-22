@@ -86,7 +86,8 @@ public:
 	void set_postprocess(PostProcess* p_postprocess);
 	PostProcess* get_postprocess() const;
 
-	int get_delta_time() const;
+	float get_rendering_time() const;
+	float get_updating_time() const;
 
 	void activate();
 	void deactivate();
@@ -126,6 +127,8 @@ private:
 
 	RenderTarget limiter;
 	FPSLimiter updatelim;
+	Stopwatch rendering_stopwatch;
+	Stopwatch updating_stopwatch;
 
 	float delta_time;
 	float fps;

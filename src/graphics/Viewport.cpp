@@ -127,9 +127,14 @@ PostProcess* Viewport::get_postprocess() const
 	return postprocess;
 }
 
-int Viewport::get_delta_time() const
+float Viewport::get_rendering_time() const
 {
-	return 0;
+	return rendering_stopwatch.result_averaged;
+}
+
+float Viewport::get_updating_time() const
+{
+	return updating_stopwatch.result_averaged;
 }
 
 void Viewport::init()
@@ -274,9 +279,11 @@ void Viewport::draw()
 
 	if (s && renderer)
 	{
+		rendering_stopwatch.start();
 		activate();
 		renderer->render();
 		deactivate();
+		rendering_stopwatch.stop();
 	}
 }
 
@@ -289,6 +296,7 @@ void Viewport::update()
 
 	if (i.needsupdate)
 	{
+		updating_stopwatch.start();
 		activate();
 
 		if (world)
@@ -298,6 +306,7 @@ void Viewport::update()
 			canvas->update();
 
 		deactivate();
+		updating_stopwatch.stop();
 	}
 }
 

@@ -61,6 +61,23 @@ private:
 	Vector<UITimer> uitimers;
 };
 
+class Stopwatch
+{
+public:
+	Stopwatch();
+
+	void start();
+
+	// Return delta time in seconds.
+	float stop();
+
+	Array<float> history;
+
+	float result;
+	float result_averaged;
+	std::chrono::high_resolution_clock::time_point start_time;
+};
+
 class Timer
 {
 public:

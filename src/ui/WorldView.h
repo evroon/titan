@@ -49,6 +49,7 @@ public:
 
 	void post_draw_world();
 	void post_draw_canvas();
+	void draw_fps_info();
 
 	void update_camera();
 

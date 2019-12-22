@@ -346,7 +346,7 @@ String Variant::ToString() const
 		break;
 
 	case FLOAT:
-		result = f;
+		result = StringUtils::FloatToString(f);
 		break;
 
 	case BOOL:
@@ -382,8 +382,6 @@ String Variant::ToString() const
 		break;
 
 	case OBJECT:
-		
-		//result = "ptr: " + String((int) o);
 		break;
 
 	case ARRAY:
@@ -392,7 +390,7 @@ String Variant::ToString() const
 			result = "{ }";
 			break;
 		}
-		if (a->size() == 1)
+		else if (a->size() == 1)
 		{
 			result = a->operator[] (0).ToString();
 			break;

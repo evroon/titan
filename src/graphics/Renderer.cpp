@@ -1002,15 +1002,14 @@ void DeferredRenderer::render()
 		stop_depth_test();
 	}
 
-	if (viewport->canvas && draw_canvas)
-	{
-		MeshHandler::get_singleton()->get_plane()->bind();
-		activate_canvas_transform(); 
-		viewport->canvas->draw();
-		viewport->post_draw_canvas();
-		deactivate_canvas_transform();
-	}
+	MeshHandler::get_singleton()->get_plane()->bind();
+	activate_canvas_transform();
 
+	if (viewport->canvas && draw_canvas)
+		viewport->canvas->draw();
+	
+	viewport->post_draw_canvas();
+	deactivate_canvas_transform();
 	
 	render_virtual_tex();
 	render_shadowmap();

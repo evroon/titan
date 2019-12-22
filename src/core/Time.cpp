@@ -101,6 +101,38 @@ void Time::bind_methods()
 	REG_METHOD(get_gametime);
 
 }
+//=========================================================================
+//Stopwatch
+//=========================================================================
+Stopwatch::Stopwatch()
+{
+	history = Array<float>();
+	for (int c = 0; c < 100; c++)
+		history.push_back(0.0f);
+}
+
+void Stopwatch::start()
+{
+	start_time = std::chrono::high_resolution_clock::now();
+}
+
+float Stopwatch::stop()
+{
+	auto now = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<float> diff = now - start_time;
+	result = diff.count();
+	result_averaged = 0.0f;
+
+	for (int c = 1; c < history.size(); c++)
+		result_averaged += history[c];
+
+	history.clear(0);
+	history.push_back(result);
+
+	result_averaged /= to_float(history.size());
+
+	return result;
+}
 
 //=========================================================================
 //FPSLimiter
@@ -185,16 +217,10 @@ bool RenderTarget::should_update()
 		FPSLimiter::FPSInfo i = limiter.update();
 
 		if (i.passedsec)
-		{
 			fps_measured = i.FPS;
-		}
 
 		if (i.needsupdate)
-		{
 			delta_time = i.delta_time;
-
-			//T_LOG(delta_time);
-		}
 
 		return i.needsupdate;
 	}

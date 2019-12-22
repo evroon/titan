@@ -153,7 +153,7 @@ String StringUtils::CharToString(const char c)
 String StringUtils::FloatToString(const float f)
 {
 	std::stringstream ss;
-	ss << f << std::setprecision(4);
+	ss << std::fixed << std::setprecision(3) << f;
 
 	return ss.str();
 }

@@ -168,7 +168,7 @@ void Application::Loop()
 				INPUT->HandleEvent(event);
 		}
 
-		if (timer.update())						//Print FPS each time after 1.0s
+		if (timer.update())
 		{
 			GC->clean();
 
@@ -176,10 +176,11 @@ void Application::Loop()
 			timer.start();
 		}
 
-		//Handle Update Loop
+		// Handle Update Loop
 		i = updatelim.update();
 
-		if (i.needsupdate)						//Sync Update Loop to 60 FPS
+		// Sync Update Loop to 60 FPS
+		if (i.needsupdate)						
 		{
 			TIME->OnUpdate();
 			update();
