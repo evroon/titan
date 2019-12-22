@@ -75,7 +75,10 @@ void ContentManager::setup()
 		T_ERROR("Could not set working directory");
 	
 	assets_directory = base_path;
+}
 
+void ContentManager::load_default_resources()
+{
 	Shader2D = LoadShader(File("engine/shaders/Shader2D"));
 	SimpleShader = LoadShader(File("engine/shaders/SimpleShader"));
 	ShadowShader = LoadShader(File("engine/shaders/ShadowShader"));

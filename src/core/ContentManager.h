@@ -29,6 +29,7 @@ public:
 	static void bind_methods();
 
 	void setup();
+	void load_default_resources();
 
 	void AddTexture(Texture2D *tex);
 

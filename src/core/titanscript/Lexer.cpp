@@ -19,43 +19,40 @@ void Lexer::Free()
 
 void Lexer::LexBlock()
 {
-	while (index < lines.size() && !finishedlexing)
+	while (index < lines.size())
 	{
-		Line l = LexLine(lines[index]);
+		Line* l = new Line(LexLine(lines[index]));
 
 		// Skip if line is comment or empty
-		if (l.tokens.size() == 0 || l.StartsWith("//"))
+		if (l->tokens.size() == 0 || l->StartsWith("//"))
 			continue;
 
 		// Indentation
-		l.level = StringUtils::CountTabs(lines[index]);				
+		l->level = StringUtils::CountTabs(lines[index]);
 
 		// Remove Tabs
-		for (int c = 0; c < l.level; c++)								
-			l.tokens.clear(0);
+		for (int c = 0; c < l->level; c++)
+			l->tokens.clear(0);
 
-		parentstack.getlast()->sub.push_back(new Line(l));
+		parentstack.getlast()->sub.push_back(l);
 
 		// Return at End of File
-		if (index + 1 == lines.size())
-		{
-			finishedlexing = true;
+		if (index == lines.size() - 1)
 			return;
-		}
 
 		// Number of tabs of next line
 		int tabcount = StringUtils::CountTabs(lines[++index]);
 
 		// Lex new block
-		if (tabcount > l.level)
+		if (tabcount > l->level)
 		{
-			parentstack.push_back(new Line(l));
+			parentstack.push_back(l);
 			LexBlock();
 		}
-		else if (tabcount < l.level)
+		else if (tabcount < l->level)
 		{
 			// End Block
-			for (int c = 0; c < l.level - tabcount; c++)
+			for (int c = 0; c < l->level - tabcount; c++)
 				parentstack.removelast();
 
 			return;
@@ -107,7 +104,7 @@ Line Lexer::LexLine(const String &txt)
 
 	for (int c = 0; c < line.strings.size(); c++)
 	{
-		if (line.strings[c].size() > 0 && StringUtils::IsTab((line.strings[c])[0]))
+		if (StringUtils::IsTab(line.strings[c][0]))
 			line.tokens.push_back(Token(line.strings[c], Token::TAB));		//Add Tab
 		else if (StringUtils::IsNumber(line.strings[c]))
 			line.tokens.push_back(Token(line.strings[c], Token::NUMBER));	//Add Number

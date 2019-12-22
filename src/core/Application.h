@@ -33,4 +33,5 @@ public:
 	Window *window;
 	RenderTarget* default_target;
 	Platform *platform;
+	bool graphics_enabled;
 };

@@ -33,6 +33,7 @@ Application::Application(Platform *p_platform)
 	platform = p_platform;
 	window = nullptr;
 	default_target = nullptr;
+	graphics_enabled = true;
 }
 
 void Application::InitSDL()
@@ -90,17 +91,23 @@ void Application::InitEngine()
 	SyntaxMaster::init();
 
 	INPUT->parent = this;
-	InitGL();
-	InitSDL();
-	platform->InitGL();
-	InitPhysics();
+
+	if (graphics_enabled) {
+		InitGL();
+		InitSDL();
+		platform->InitGL();
+		InitPhysics();
+	}
+	
 	Audio::init();
 	Font::Init();
-	CONTENT->setup();	
+	CONTENT->setup();
 
-	CanvasData::init();
-
-	InitRenderer();
+	if (graphics_enabled) {
+		CONTENT->load_default_resources();
+		CanvasData::init();
+		InitRenderer();
+	}
 }
 
 void Application::Free()

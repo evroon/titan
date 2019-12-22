@@ -412,7 +412,7 @@ String Variant::ToString() const
 
 void Variant::convert_error(const String& p_type) const
 {
-	T_ERROR(String("Invalid Conversion, could not convert ") + operator String() + String(" to ") + p_type);
+	T_ERROR(String("Invalid Conversion, could not convert ") + ToString() + String(" to ") + p_type);
 }
 
 //Conversions

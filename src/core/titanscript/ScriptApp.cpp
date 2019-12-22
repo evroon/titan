@@ -6,6 +6,7 @@
 ScriptApp::ScriptApp(Platform *p_platform) : Application(p_platform)
 {
 	script = nullptr;
+	graphics_enabled = false;
 }
 
 Variant ScriptApp::execute(const Array<String>& p_args)
@@ -15,10 +16,12 @@ Variant ScriptApp::execute(const Array<String>& p_args)
 
 	InitEngine();
 
-	script = CONTENT->Load(p_args[0])->cast_to_type<TitanScript*>();
+	Variant result;
+
+	script = new TitanScript(File(p_args[0]).get_absolute_path());
 	if (script && script->FunctionExists(p_args[1]))
-		return script->RunFunction(p_args[1]);
+		result = script->RunFunction(p_args[1]);
 	
 	delete script;
-	return NULL_VAR;
+	return result;
 }

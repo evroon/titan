@@ -49,7 +49,7 @@ public:
 		node = nullptr;
 		level = 0;
 	}
-	~Line() { sub.clean(); };
+	~Line() { };// sub.clean(); };
 
 	int size() const { return tokens.size(); }
 	bool StartsWith(const String &txt) const { return tokens[0].text == txt; }
