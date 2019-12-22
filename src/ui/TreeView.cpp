@@ -16,11 +16,7 @@ TreeElement::TreeElement(const String &p_text): TreeElement(nullptr)
 TreeElement::TreeElement(TreeView* p_treeview)
 {
 	treeview = p_treeview;
-
-	if (treeview)
-		expanded = treeview->init_expanded;
-	else
-		expanded = true;
+	update_init_expanded();
 
 	text = "";
 	depth = 0;
@@ -65,6 +61,8 @@ void TreeElement::push_child(TreeElement * p_child)
 
 	p_child->parent = this;
 	p_child->depth = depth + 1;
+
+	update_init_expanded();
 }
 
 void TreeElement::remove_child(TreeElement * p_child)
@@ -105,6 +103,14 @@ void TreeElement::clear()
 void TreeElement::bind_treeview(TreeView *p_textbox)
 {
 	treeview = p_textbox;
+}
+
+void TreeElement::update_init_expanded()
+{
+	if (treeview)
+		expanded = depth < treeview->get_init_expanded_depth();
+	else
+		expanded = true;
 }
 
 void TreeElement::set_index(int p_index)
@@ -241,7 +247,7 @@ void TreeElement::clear_search()
 		current = current->next;
 	}
 	visible = true;
-	expanded = treeview->init_expanded;
+	update_init_expanded();
 }
 
 TreeElement* TreeElement::get_item(const String& p_name)
@@ -424,7 +430,7 @@ TreeView::TreeView()
 	roots = Vector<TreeElement>();
 
 	item_numbers_enabled = false;
-	init_expanded = false;
+	set_init_expanded(false);
 }
 
 TreeView::~TreeView()
@@ -707,9 +713,7 @@ TreeElement* TreeView::create_item(TreeElement* p_parent)
 	TreeElement* item = new TreeElement(this);
 
 	if (p_parent)
-	{
 		p_parent->push_child(item);
-	}
 	else
 	{
 		if (roots.size() > 0)
@@ -730,7 +734,7 @@ void TreeView::push_node(Node* p_node)
 	TreeElement* root = create_item_from_node(p_node, NULL);
 }
 
-TreeElement * TreeView::create_item_from_node(Node* p_node, TreeElement* p_parent)
+TreeElement* TreeView::create_item_from_node(Node* p_node, TreeElement* p_parent)
 {
 	TreeElement* current = create_item(p_parent);
 
@@ -738,9 +742,7 @@ TreeElement * TreeView::create_item_from_node(Node* p_node, TreeElement* p_paren
 	current->secondary_text = p_node->get_type_name();
 
 	for (int c = 0; c < p_node->get_child_count(); c++)
-	{
 		create_item_from_node(p_node->get_child_by_index(c), current);
-	}
 
 	return current;
 }
@@ -958,12 +960,17 @@ void TreeView::make_visible(TreeElement* p_item)
 
 void TreeView::set_init_expanded(bool p_init_expanded)
 {
-	init_expanded = p_init_expanded;
+	init_expanded_depth = p_init_expanded * INT_MAX;
 }
 
-bool TreeView::get_init_expanded() const
+void TreeView::set_init_expanded_depth(int p_init_expanded_depth)
 {
-	return init_expanded;
+	init_expanded_depth = p_init_expanded_depth;
+}
+
+int TreeView::get_init_expanded_depth() const
+{
+	return init_expanded_depth;
 }
 
 void TreeView::search(const String& p_src)

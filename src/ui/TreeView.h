@@ -24,6 +24,8 @@ public:
 
 	void bind_treeview(TreeView *p_textbox);
 
+	void update_init_expanded();
+
 	void set_index(int p_index);
 	int get_index();
 
@@ -142,7 +144,10 @@ public:
 	void make_visible(TreeElement* p_item);
 
 	void set_init_expanded(bool p_init_expanded);
-	bool get_init_expanded() const;
+
+	// Set the depth until which the nodes are expanded initially.
+	void set_init_expanded_depth(int p_init_expanded_depth);
+	int get_init_expanded_depth() const;
 
 	void search(const String& p_src);
 	void stop_search();
@@ -188,7 +193,7 @@ private:
 
 	float depth_offset;
 
-	bool init_expanded;
+	int init_expanded_depth;
 
 	Ref<Texture2D> collapsed_tex;
 	Ref<Texture2D> expanded_tex;
