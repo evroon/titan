@@ -6,3 +6,8 @@ src/titan
 src/Makefile
 src/CMakeCache.txt
 src/cmake_install.cmake
+
+tests/titan_test
+tests/Makefile
+tests/CMakeCache.txt
+tests/cmake_install.cmake

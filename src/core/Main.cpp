@@ -11,8 +11,6 @@ Platforms: Android, Linux, Mac OS X and Windows
 #include "core/titanscript/ScriptApp.h"
 #include "core/Definitions.h"
 
-#undef main
-
 #if PLATFORM == LINUX
 #define NEW_PLATFORM new Linux
 #include "core/platform/Linux.h"
@@ -21,12 +19,16 @@ Platforms: Android, Linux, Mac OS X and Windows
 #include "core/platform/Windows.h"
 #endif
 
+#if !TESTING
+
+#undef main
+
 int main(int argc, char* argv[])
 {
-	Array<String> args = Array<String>(argc - 1);
+	Array<String> args = Array<String>();
 	
 	for (int c = 1; c < argc; c++)
-		args[c - 1] = argv[c];
+		args.push_back(argv[c]);
 
 #if APP_TYPE == APP_TYPE_EDITOR
 	EditorApp editor(NEW_PLATFORM);
@@ -40,3 +42,5 @@ int main(int argc, char* argv[])
 #endif
 	return 0;
 }
+
+#endif

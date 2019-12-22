@@ -8,7 +8,7 @@
 #define APP_TYPE_GAME 1
 #define APP_TYPE_SCRIPT 2
 
-#define APP_TYPE APP_TYPE_EDITOR
+#define APP_TYPE APP_TYPE_SCRIPT
 
 #ifdef __linux__
 #define PLATFORM LINUX
@@ -21,3 +21,5 @@
 #else
 #define PLATFORM UNKNOWN
 #endif
+
+#define TESTING 1

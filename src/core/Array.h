@@ -11,8 +11,8 @@ private:
 	V vec;
 
 public:
-	Array() { }
-	Array(const VAL &v_0)
+	Array() { vec = V(); }
+	Array(const VAL &v_0) : Array()
 	{
 		push_back(v_0);
 	}

@@ -9,7 +9,7 @@ class ScriptApp : public Application
 public:
 	ScriptApp(Platform *p_platform);
 
-	void execute(const Array<String>& p_args);
+	Variant execute(const Array<String>& p_args);
 	
 private:
 	TitanScript* script;

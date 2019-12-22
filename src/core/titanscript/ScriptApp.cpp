@@ -8,16 +8,17 @@ ScriptApp::ScriptApp(Platform *p_platform) : Application(p_platform)
 	script = nullptr;
 }
 
-void ScriptApp::execute(const Array<String>& p_args)
+Variant ScriptApp::execute(const Array<String>& p_args)
 {
-	if (p_args.size() < 1)
-		return;
+	if (p_args.size() < 2)
+		return NULL_VAR;
 
 	InitEngine();
 
 	script = CONTENT->Load(p_args[0])->cast_to_type<TitanScript*>();
-	if (script && script->FunctionExists("main")) {
-		T_LOG("Executing main...");
-		T_LOG(script->RunFunction("main"));
-	}
+	if (script && script->FunctionExists(p_args[1]))
+		return script->RunFunction(p_args[1]);
+	
+	delete script;
+	return NULL_VAR;
 }

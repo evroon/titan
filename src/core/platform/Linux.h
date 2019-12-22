@@ -7,7 +7,7 @@
 
 #include "resources/File.h"
 #include "core/TMessage.h"
-#include "Platform.h"
+#include "core/platform/Platform.h"
 
 class Linux : public Platform
 {

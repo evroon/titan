@@ -403,8 +403,8 @@ String Variant::ToString() const
 
 		result += a->operator[](a->size() - 1).ToString() + " }";
 		break;
+
 	default:
-		result = String("");
 		break;
 	}
 	return result;
