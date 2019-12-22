@@ -85,7 +85,7 @@ void Sky::draw()
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("sun_direction", light_dir);
-	shader->set_uniform("sun_color", get_sun_color().get_rgb());
+	// shader->set_uniform("sun_color", get_sun_color().get_rgb());
 	shader->set_uniform("sky_color", get_sky_color().get_rgb());
 	shader->set_uniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
 

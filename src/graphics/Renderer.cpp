@@ -817,7 +817,7 @@ void DeferredRenderer::render_godray()
 
 	godray->bind();
 	godray->set_uniform("g_material", 0);
-	godray->set_uniform("sun_color", sky->get_sun_color().get_rgb());
+	// godray->set_uniform("sun_color", sky->get_sun_color().get_rgb());
 	godray->set_uniform("sun_pos", sun_on_screen);
 	
 	draw_plane();
@@ -855,7 +855,7 @@ void DeferredRenderer::render_first_pass()
 	}
 
 	first_pass->bind();
-	first_pass->set_uniform("clouds_enabled", false);
+	// first_pass->set_uniform("clouds_enabled", false);
 	first_pass->set_uniform("godray_enabled", true);
 	first_pass->set_uniform("g_albedo", 0);
 	first_pass->set_uniform("g_position", 1);

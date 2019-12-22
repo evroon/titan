@@ -16,5 +16,5 @@ void main()
     vec3 mapped = vec3(1.0) - exp(-hdr * exposure);
     mapped = pow(mapped, vec3(1.0 / gamma));
 	
-	final_color = vec4(hdr, 1.0);
+	final_color = vec4(mapped, 1.0);
 }
