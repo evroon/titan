@@ -135,7 +135,6 @@ bool File::is_absolute_path() const
 Array<File> File::listdir() const
 {
 	Array<File> result = Array<File>();
-	return result;
 
 	DIR *d = opendir(path.c_str());
 
@@ -146,8 +145,9 @@ Array<File> File::listdir() const
 
 	while ((r = readdir(d)) != nullptr)
 	{
-		if (String(r->d_name) != ".." && String(r->d_name) != ".")
-			result.push_back(path + "/" + String(r->d_name));
+		String s = r->d_name;
+		if (s != ".." && s != ".")
+			result.push_back(path + "/" + s);
 	}
 
 	closedir(d);
