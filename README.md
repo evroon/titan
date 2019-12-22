@@ -31,7 +31,7 @@ Libraries used:
   - Terrain heightmap editing on GPU
 
 # Building
-Building has been tested on Linux. Windows and Mac OS X is not supported at the moment.
+Building has been tested on Linux. Windows and Mac OS X are not supported at the moment.
 
 ## Linux
 Building on Linux is possible using CMake. First, make sure that the above libraries are installed. On Debian-based systems, this command can be used:
