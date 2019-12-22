@@ -355,19 +355,19 @@ Variant Executer::Execute(ScriptNode *node)
 
 			if (e->name == "if" || e->name == "elseif")
 			{
-				Variant res = Execute(e->passtest);
+				bool res = Execute(e->passtest);
 
 				if (res)
 				{
 					Execute(e->node);
-					break;
+					return NULL_VAR;
 				}
 			}
 			else
-				Execute(e->node); //e->name == "else"
+				Execute(e->node);
 		}
 
-		return 0;
+		return NULL_VAR;
 	}
 	else if (type == ScriptNode::BLOCK)
 	{
