@@ -154,8 +154,12 @@ Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size, const Color&
 		return;
 	}
 
-	SDL_Rect dst = { 0, 0, p_size.x, p_size.y };
-	SDL_Surface* processed = SDL_CreateRGBSurface(image->flags, p_size.x, p_size.y, 32, image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
+	// Keep aspect ratio.
+	float scaling = MIN(to_float(p_size.x) / to_float(image->w), to_float(p_size.y) / to_float(image->h));
+	vec2i rescaled_size = vec2i(image->w * scaling, image->h * scaling);
+
+	SDL_Rect dst = { 0, 0, rescaled_size.x, rescaled_size.y };
+	SDL_Surface* processed = SDL_CreateRGBSurface(image->flags, rescaled_size.x, rescaled_size.y, 32, image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
 	SDL_UpperBlitScaled(image, NULL, processed, &dst);
 
 	if (!processed)
