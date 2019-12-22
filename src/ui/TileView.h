@@ -36,7 +36,7 @@ struct TileElement
 	float get_position_x(int index) const;
 
 private:
-	int index = 0;
+	int index;
 	TileView *tileview;
 	Texture2D* icon;
 

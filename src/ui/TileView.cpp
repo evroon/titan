@@ -11,7 +11,11 @@
 TileElement::TileElement(const String &p_text)
 {
 	text = p_text;
-	icon = NULL;
+	icon = nullptr;
+	tileview = nullptr;
+	icon = nullptr;
+	area = rect2();
+	visible = true;
 }
 
 TileElement::~TileElement()
@@ -103,11 +107,12 @@ float TileElement::get_position_x(int index) const
 
 TileView::TileView()
 {
-	left_margin = 4;
-	right_margin = 4;
-	top_margin = 3;
+	left_margin = 4.0f;
+	right_margin = 4.0f;
+	top_margin = 3.0f;
 
-	internal_left_margin = 4;
+	internal_left_margin = 4.0f;
+	scroll_offset = 0.0f;
 
 	background_color = TO_RGB(50);
 	selection_color = TO_RGB(170);
@@ -119,12 +124,24 @@ TileView::TileView()
 
 	extra_space = 100;
 
-	slider = NULL;
+	slider = nullptr;
 
 	selected = -1;
 	highlighted = -1;
 	selection_begin = -1;
 	selection_end = -1;
+	selection_first = 0;
+
+	selecting = false;
+	item_numbers_enabled = false;
+
+	box = rect2();
+	selection_box = rect2();
+
+	tilesize = vec2();
+	tilecount = vec2i();
+
+	items = Array<TileElement>();
 }
 
 TileView::~TileView()
