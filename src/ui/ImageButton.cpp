@@ -37,6 +37,11 @@ void ImageButton::notification(int p_notification)
 	}
 }
 
+void ImageButton::set_icon(const String& p_icon)
+{
+	set_image(CONTENT->LoadFontAwesomeIcon(p_icon));
+}
+
 void ImageButton::set_image(Texture2D* p_texture)
 {
 	texture = p_texture;

@@ -15,6 +15,8 @@ public:
 
 	void notification(int p_notification) override;
 
+	void set_icon(const String& p_icon);
+
 	void set_image(Texture2D* p_texture);
 	Texture2D* get_image() const;
 
