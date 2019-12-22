@@ -112,18 +112,20 @@ void Dock::notification(int p_notification)
 			vec2 pos = vec2(selectors[c].area.get_left(), selectors[c].area.pos.y);
 
 			Color color = inactive_color;
+			Color text_color;
 
 			if (active == c)
 				color = TO_RGB(90);
-
+			else
+				text_color = Color::Grey;
+			
 			if (selected == c)
 				color = selected_color;
-
 			else if (highlighted == c)
 				color = highlight_color;
 
 			draw_box(selectors[c].area, color);
-			draw_text(selectors[c].name, pos + vec2(text_offset, 0.0f));
+			draw_text(get_default_font(), selectors[c].name, pos + vec2(text_offset, 0.0f), text_color);
 		}
 
 		break;
