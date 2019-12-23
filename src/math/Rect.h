@@ -185,7 +185,7 @@ public:
 	//conversions
 	operator String() const
 	{
-		return "{ pos: " + to_String(pos) + ", size: " + to_String(size) + " }";
+		return "{ pos: " + pos.to_string() + ", size: " + size.to_string() + " }";
 	}
 
 	//getters and setters

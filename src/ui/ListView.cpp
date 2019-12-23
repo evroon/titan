@@ -12,6 +12,7 @@ ListElement::ListElement(const String &p_text)
 {
 	text = p_text;
 	icon = NULL;
+	visible = true;
 }
 
 ListElement::~ListElement()
@@ -125,6 +126,8 @@ ListView::ListView()
 	highlighted = -1;
 	selection_begin = -1;
 	selection_end = -1;
+
+	item_numbers_enabled = false;
 }
 
 ListView::~ListView()
@@ -346,7 +349,7 @@ void ListView::position_items()
 		rect2 a = rect2(offset_x, area.get_right() - right_margin, offset_y, offset_y - item.get_height());
 		item.set_area(a);
 
-		offset_y -= items[c].get_height();
+		offset_y -= item.get_height();
 	}
 	check_slider_necessity();
 	update();

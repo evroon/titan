@@ -462,7 +462,7 @@ Texture2D* Material::load_texture(const aiMaterial* p_material, const aiTextureT
 			f.go_up();
 			String p = String(Path.C_Str());
 			p.remove('/');
-			String path = f.operator String() + "\\" + p;
+			String path = f.operator String() + "/" + p;
 
 			return CONTENT->LoadTexture(path);
 		}

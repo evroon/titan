@@ -65,6 +65,8 @@ void ContentManager::setup()
 	extensions["dae"] = GETTYPE(StringName("Mesh"));
 	extensions["obj"] = GETTYPE(StringName("Mesh"));
 	extensions["3ds"] = GETTYPE(StringName("Mesh"));
+	extensions["egg"] = GETTYPE(StringName("Mesh"));
+	extensions["fbx"] = GETTYPE(StringName("Mesh"));
 
 	File base_path = View::get_singleton()->get_application()->platform->get_cwd();
 	base_path += "titan/assets";

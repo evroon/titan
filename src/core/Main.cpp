@@ -19,8 +19,6 @@ Platforms: Android, Linux, Mac OS X and Windows
 #include "core/platform/Windows.h"
 #endif
 
-#if !TESTING
-
 #undef main
 
 int main(int argc, char* argv[])
@@ -42,5 +40,3 @@ int main(int argc, char* argv[])
 #endif
 	return 0;
 }
-
-#endif

@@ -12,6 +12,7 @@ Scriptable::Scriptable()
 
 Scriptable::~Scriptable()
 {
+	signals.clear();
 }
 
 void Scriptable::set_script(TitanScript *p_script)

@@ -100,7 +100,7 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	add_child(world_view);
 
 	world_view->connect_signal("world_changed", this, "world_changed");
-	world_view->set_display_mode(WorldView::DISPLAY_CANVAS);
+	world_view->set_display_mode(WorldView::DISPLAY_WORLD);
 
 	set_tab_title("Preview");
 
