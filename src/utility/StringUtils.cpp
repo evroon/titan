@@ -155,7 +155,11 @@ String StringUtils::FloatToString(const float f)
 	std::stringstream ss;
 	ss << std::fixed << std::setprecision(3) << f;
 
-	return ss.str();
+	std::string str = ss.str();
+	str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+	str.erase(str.find_last_not_of('.') + 1, std::string::npos);
+
+	return str;
 }
 String StringUtils::IntToString(int i)
 {
