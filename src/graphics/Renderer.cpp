@@ -164,8 +164,6 @@ void Renderer::stop_scissor()
 void Renderer::use_depth_test(float p_near, float p_far)
 {
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-	glDepthRange(p_near, p_far);
 }
 
 void Renderer::stop_depth_test()
@@ -355,7 +353,7 @@ ForwardRenderer::ForwardRenderer() : Renderer()
 	render_buffer->add_depth_texture();
 	render_buffer->init();
 
-	shadow_buffer = new FBO2D(1024);
+	shadow_buffer = new FBO2D(WINDOWSIZE);
 	shadow_buffer->add_depth_texture();
 	shadow_buffer->init();
 
@@ -485,7 +483,7 @@ DeferredRenderer::DeferredRenderer()
 	final_buffer->add_depth_texture();
 	final_buffer->init();
 	
-	shadow_buffer = new FBO2D(1024);
+	shadow_buffer = new FBO2D(WINDOWSIZE);
 	shadow_buffer->add_depth_texture();
 	shadow_buffer->init();
 
@@ -690,15 +688,14 @@ void DeferredRenderer::render_shadowmap()
 
 	light_camera->set_pos(light->get_pos());
 	light_camera->set_rotation(light->get_rotation());
-	light_camera->set_projection(30.0f, 1.0f, 100.0f);
+	light_camera->set_projection(30.0f, 5.0f, 500.0f);
 
 	light_camera->update_matrices();
 
 	shadow_buffer->bind();
 	set_camera(light_camera);
-	//set_camera(c);
 
-	light_matrix = light_camera->get_final_matrix(); 
+	light_matrix = light_camera->get_final_matrix();
 
 	RENDERER->use_depth_test(c->get_near(), c->get_far());
 	
@@ -711,7 +708,7 @@ void DeferredRenderer::render_shadowmap()
 	
 	RENDERER->stop_depth_test();
 
-	set_camera(NULL);
+	set_camera(c);
 }
 
 void DeferredRenderer::render_reflection()

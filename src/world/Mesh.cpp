@@ -208,6 +208,7 @@ bool Mesh::import(const String& p_filepath)
 	Assimp::Importer importer;
 
 	const aiScene* scene = importer.ReadFile(p_filepath,
+		aiProcess_FlipUVs |
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
@@ -288,6 +289,7 @@ void Mesh::set_materials(const Array<Variant>& p_materials)
 void Mesh::bind_methods()
 {
 	REG_CSTR(0);
+	REG_CSTR_OVRLD_1(String);
 
 	REG_PROPERTY(materials);
 }
@@ -300,12 +302,8 @@ void Mesh::MeshNode::draw()
 {
 	glBindVertexArray(VAO);
 
-	/*if (material)
+	if (material)
 	{
-		material->get_shader()->bind();
-		material->get_shader()->set_uniform("color", parent->model->get_color() * material->get_diffuse_color());
-		material->get_shader()->set_uniform("color_id", parent->model->color_id);
-
 		if (material->get_diffuse_texture())
 		{
 			RENDERER->use_blending();
@@ -316,7 +314,7 @@ void Mesh::MeshNode::draw()
 		{
 			material->get_shader()->set_uniform("texture_enabled", false);
 		}
-	}*/
+	}
 
 	RENDERER->use_blending();
 
@@ -343,7 +341,7 @@ void Mesh::MeshNode::init(aiMesh * p_mesh)
 
 		vertex.position = vec3(v.x, v.y, v.z);
 		vertex.normal = vec3(n.x, n.y, n.z);
-		vertex.texcoords = vec2(t.x, 1.0f - t.y);
+		vertex.texcoords = vec2(t.x, t.y - 1.0);
 
 		vertices.push_back(vertex);
 	}

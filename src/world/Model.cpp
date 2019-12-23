@@ -28,8 +28,10 @@ Model::~Model()
 
 void Model::draw()
 {
-	if (!mesh)
+	if (!mesh) {
+		T_ERROR("No mesh defined");
 		return;
+	}
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());

@@ -241,16 +241,15 @@ float get_fog()
 
 float shadow_calc(vec4 pos_light_space)
 {
-    vec3 projCoords = pos_light_space.xyz / pos_light_space.w;
-    projCoords = projCoords * 0.5 + 0.5;
+    vec3 projCoords = pos_light_space.xyz / pos_light_space.w * vec3(0.5) + vec3(0.5);
 	
-	//if (projCoords.x < 0.0 || projCoords.x > 1.0 || projCoords.y < 0.0 || projCoords.y > 1.0)
-	//	return 0.0;
+	if (projCoords.x < 0.0 || projCoords.x > 1.0 || projCoords.y < 0.0 || projCoords.y > 1.0)
+		return 0.0;
 	
     float closestDepth = texture2D(shadow_map, projCoords.xy).r;
     float currentDepth = projCoords.z;
-    float bias = 0.0;
-	float shadow = currentDepth - bias > closestDepth ? 0.6 : 0.0;
+    float bias = 0.001;
+	float shadow = currentDepth - bias > closestDepth ? 0.4 : 0.0;
 
     return shadow;
 }
