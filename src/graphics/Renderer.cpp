@@ -604,7 +604,7 @@ void DeferredRenderer::generate_ssao_kernel()
 
 	for (unsigned int i = 0; i < 64; ++i)
 	{
-		vec3 sample = vec3(Math::random() * 2.0f - 1.0f,	Math::random() * 2.0f - 1.0f,	Math::random());
+		vec3 sample = vec3(Math::random() * 2.0f - 1.0f, Math::random() * 2.0f - 1.0f, Math::random());
 		sample = sample.normalize();
 
 		float scale = i / 64.0f;
@@ -616,7 +616,7 @@ void DeferredRenderer::generate_ssao_kernel()
 
 	glGenTextures(1, &kernel_id);
 	glBindTexture(GL_TEXTURE_2D, kernel_id);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, 8, 8, 0, GL_RGB, GL_FLOAT, &kernel_buffer[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, 8, 8, 0, GL_RGB, GL_FLOAT, &kernel_buffer);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -852,6 +852,7 @@ void DeferredRenderer::render_first_pass()
 	textures[SHADOW]->bind(4);
 	textures[GODRAY]->bind(5);
 	textures[BLOOM]->bind(6);
+	textures[SSAO]->bind(7);
 
 	Color sky_color;
 	Color light_color;
@@ -883,6 +884,7 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("g_material", 3);
 	first_pass->set_uniform("shadow_map", 4);
 	first_pass->set_uniform("godray_tex", 5);
+	first_pass->set_uniform("ssao_tex", 7);
 
 	first_pass->set_uniform("light_matrix", light_matrix);
 	first_pass->set_uniform("lighting_enabled", lighting_enabled);
@@ -1012,14 +1014,13 @@ void DeferredRenderer::render()
 	render_shadowmap();
 	render_reflection();
 	render_godray();
+	render_ssao();
 	render_first_pass();
 
 	if (draw_world)
 		render_flare();
 
-	//render_ssao();
 	render_second_pass();
-	//save_fbo(final_buffer, "test.tga", 0);
 
 	deactivate();
 
@@ -1056,24 +1057,6 @@ void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename, int atta
 	delete[] pixels;
 
 	SDL_SaveBMP(surface, "pic.bmp");
-
-	//FILE* filePtr;
-	//fopen_s(&filePtr, p_filename.c_str(), "wb");
-	//if (!filePtr)
-	//	return;
-
-	//unsigned char TGAheader[12] = { 0,0,2,0,0,0,0,0,0,0,0,0 };
-	//unsigned char header[6] = { p_fbo->size.y % 256,p_fbo->size.y / 256,
-	//	p_fbo->size.y % 256, p_fbo->size.y / 256,
-	//	24,0 };
-	//// We write the headers
-	//fwrite(TGAheader, sizeof(unsigned char), 12, filePtr);
-	//fwrite(header, sizeof(unsigned char), 6, filePtr);
-	//// And finally our image data
-	//fwrite(dataBuffer, sizeof(GLubyte), nSize, filePtr);
-	//fclose(filePtr);
-
-	//free(dataBuffer);
 }
 
 #undef CASE

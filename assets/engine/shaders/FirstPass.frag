@@ -7,6 +7,7 @@ uniform sampler2D g_normal;
 uniform sampler2D g_material;
 uniform sampler2D shadow_map;
 uniform sampler2D godray_tex;
+uniform sampler2D ssao_tex;
 
 uniform mat4 inv_proj;
 uniform mat4 inv_view;
@@ -215,8 +216,10 @@ vec3 lighting()
 	
 	vec3 diffuse = diff * vec3(0.5);
 	vec3 specular = get_specular() * vec3(0.001);
+
+  	float ssao = texture(ssao_tex, tex_coords).r;
 	
-	return ambient + diffuse + specular;
+	return ambient * ssao + diffuse + specular;
 }
 
 
