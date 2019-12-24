@@ -56,6 +56,8 @@ void Application::InitGL()
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+
+	SDL_GL_SetSwapInterval(0);
 }
 
 void Application::InitPhysics()
