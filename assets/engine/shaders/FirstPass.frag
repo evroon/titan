@@ -28,6 +28,7 @@ uniform float fog_density;
 uniform float fog_gradient;
 uniform vec3 sky_color;
 uniform bool godray_enabled;
+uniform bool ssao_enabled;
 
 in vec2 pos;
 out vec4 final_color;
@@ -216,8 +217,10 @@ vec3 lighting()
 	
 	vec3 diffuse = diff * vec3(0.5);
 	vec3 specular = get_specular() * vec3(0.001);
+	float ssao = 1.0;
 
-  	float ssao = texture(ssao_tex, tex_coords).r;
+	if (ssao_enabled)
+  		ssao = texture(ssao_tex, tex_coords).r;
 	
 	return ambient * ssao + diffuse + specular;
 }

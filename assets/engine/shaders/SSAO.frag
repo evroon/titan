@@ -10,7 +10,7 @@ uniform mat4 projection;
 uniform vec2 window_size;
 
 uniform int kernel_size;
-// uniform float radius;
+uniform float radius;
 
 in vec2 pos;
 out vec4 final_color;
@@ -33,7 +33,6 @@ void main()
 	
 	float bias = 0.0;	
 	float occlusion = kernel_size;
-	float radius = 0.1;
 	
 	for (float x = 0; x < 8; x += 1.0)
 	{

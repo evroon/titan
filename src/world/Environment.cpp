@@ -10,9 +10,8 @@ Environment::Environment()
 	fog_enabled = false;
 	fog_density = 0.001f;
 	fog_gradient = 1.0f;
-	T_LOG("");
+	ssao_enabled = true;
 }
-
 
 Environment::~Environment()
 {
@@ -80,5 +79,7 @@ void Environment::bind_methods()
 	REG_PROPERTY(fog_enabled);
 	REG_PROPERTY(fog_density);
 	REG_PROPERTY(fog_gradient);
+	REG_PROPERTY(ssao_enabled);
+	REG_PROPERTY(ssao_radius);
 
 }

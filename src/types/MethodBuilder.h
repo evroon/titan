@@ -4,6 +4,10 @@
 
 #define CLASSNAME
 
+#define SIMPLE_GET_SET(TYPE, NAME) \
+	void set_##NAME(TYPE p_##NAME) { NAME = p_##NAME; } \
+	TYPE get_##NAME() const { return NAME; }
+
 //build functions referring to functions below
 
 //register constructor

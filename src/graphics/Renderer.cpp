@@ -669,7 +669,13 @@ void DeferredRenderer::render_ssao()
 
 	ssao->set_uniform("window_size", WINDOWSIZE_F);
 	ssao->set_uniform("kernel_size", 64);
-	ssao->set_uniform("radius", 0.5f);
+
+	float radius = 0.1f;
+
+	if (environment)
+		radius = environment->get_ssao_radius();
+	
+	ssao->set_uniform("radius", radius);
 
 	activate_world_transform();
 	ssao->set_uniform("projection", final_matrix);
@@ -909,6 +915,7 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("specular_strength", .1f);
 	first_pass->set_uniform("specular_power", 32.0f);
 	first_pass->set_uniform("sky_color", sky_color.get_rgb());
+	first_pass->set_uniform("ssao_enabled", environment->get_ssao_enabled());
 
 	final_buffer->bind();
 
@@ -1014,7 +1021,10 @@ void DeferredRenderer::render()
 	render_shadowmap();
 	render_reflection();
 	render_godray();
-	render_ssao();
+
+	if (environment->get_ssao_enabled())
+		render_ssao();
+	
 	render_first_pass();
 
 	if (draw_world)
