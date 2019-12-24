@@ -25,7 +25,9 @@ Libraries used:
 3D graphics features:
   - Deferred Renderer
   - GPU tesselation
-  - Basic lighting and shadowmapping
+  - Basic lighting
+  - Shadowmapping
+  - SSAO
   - Terrain and water
   - Godrays and lens flare
   - Terrain heightmap editing on GPU
