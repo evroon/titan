@@ -917,7 +917,7 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("sky_color", sky_color.get_rgb());
 	first_pass->set_uniform("ssao_enabled", environment->get_ssao_enabled());
 
-	final_buffer->bind();
+	render_buffer->bind();
 
 	draw_plane();
 }
@@ -929,12 +929,12 @@ void DeferredRenderer::render_second_pass()
 	second_pass->set_uniform("render_buffer", 0);
 	second_pass->set_uniform("exposure", 1.0f);
 
-	textures[FINAL_COLOR]->bind(0);
+	textures[RENDER_COLOR]->bind(0);
 
 	if (draw_on_screen)
-		render_buffer->unbind();
+		final_buffer->unbind();
 	else
-		render_buffer->bind();
+		final_buffer->bind();
 
 	draw_plane();
 }
