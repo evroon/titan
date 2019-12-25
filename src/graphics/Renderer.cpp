@@ -903,11 +903,13 @@ void DeferredRenderer::render_first_pass()
 		first_pass->set_uniform("fog_enabled", environment->get_fog_enabled());
 		first_pass->set_uniform("fog_density", environment->get_fog_density());
 		first_pass->set_uniform("fog_gradient", environment->get_fog_gradient());
+		first_pass->set_uniform("ssao_enabled", environment->get_ssao_enabled());
 	}
 	else
 	{
 		first_pass->set_uniform("ambient", vec3(0.4f));
 		first_pass->set_uniform("fog_enabled", false);
+		first_pass->set_uniform("ssao_enabled", false);
 	}
 
 	first_pass->set_uniform("view_pos", view_pos);
@@ -915,7 +917,6 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("specular_strength", .1f);
 	first_pass->set_uniform("specular_power", 32.0f);
 	first_pass->set_uniform("sky_color", sky_color.get_rgb());
-	first_pass->set_uniform("ssao_enabled", environment->get_ssao_enabled());
 
 	render_buffer->bind();
 
@@ -1022,7 +1023,7 @@ void DeferredRenderer::render()
 	render_reflection();
 	render_godray();
 
-	if (environment->get_ssao_enabled())
+	if (environment && environment->get_ssao_enabled())
 		render_ssao();
 	
 	render_first_pass();

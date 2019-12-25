@@ -86,6 +86,7 @@ public:
 	void set_postprocess(PostProcess* p_postprocess);
 	PostProcess* get_postprocess() const;
 
+	float get_fps() const;
 	float get_rendering_time() const;
 	float get_updating_time() const;
 

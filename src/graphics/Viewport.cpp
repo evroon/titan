@@ -127,6 +127,11 @@ PostProcess* Viewport::get_postprocess() const
 	return postprocess;
 }
 
+float Viewport::get_fps() const
+{
+	return fps;
+}
+
 float Viewport::get_rendering_time() const
 {
 	return rendering_stopwatch.result_averaged;

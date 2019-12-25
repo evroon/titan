@@ -25,6 +25,8 @@ public:
 	void set_fog_gradient(float p_fog_gradient);
 	float get_fog_gradient() const;
 
+	SIMPLE_GET_SET(bool, dof_enabled);
+
 	SIMPLE_GET_SET(bool, ssao_enabled);
 	SIMPLE_GET_SET(float, ssao_radius);
 

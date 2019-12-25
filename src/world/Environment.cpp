@@ -79,6 +79,7 @@ void Environment::bind_methods()
 	REG_PROPERTY(fog_enabled);
 	REG_PROPERTY(fog_density);
 	REG_PROPERTY(fog_gradient);
+	REG_PROPERTY(dof_enabled);
 	REG_PROPERTY(ssao_enabled);
 	REG_PROPERTY(ssao_radius);
 
