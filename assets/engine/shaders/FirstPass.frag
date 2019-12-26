@@ -199,13 +199,17 @@ vec3 albedo;
 vec3 position;
 vec3 normal;
 vec3 material;
+float distance_from_camera;
 
 vec3 get_specular()
 {
-	vec3 view_dir = normalize(view_pos - position);
-	vec3 reflect_dir = reflect(-vec3(0, 0, -1), normal);
-	float spec = pow(max(dot(view_dir, reflect_dir), 0.0), specular_power);
-	return specular_strength * spec * light_color;
+	if (material == vec3(1.0, 0.0, 0.0))
+		return vec3(1.0);
+	
+	vec3 view_dir = (view_pos - position) / distance_from_camera;
+	vec3 reflect_dir = reflect(light_dir, normal);
+	float spec = pow(max(dot(view_dir, reflect_dir), 0.0), 32);
+	return 200.0 * spec * light_color;
 }
 
 vec3 lighting()
@@ -213,10 +217,9 @@ vec3 lighting()
 	if (!lighting_enabled)
 		return vec3(1.0);
 	
-	float diff = dot(normal, normalize(light_dir));
-	
-	vec3 diffuse = diff * vec3(0.5);
-	vec3 specular = get_specular() * vec3(0.001);
+	float diff = dot(normal, light_dir);
+	vec3 diffuse = diff * vec3(1.5);
+	vec3 specular = get_specular() * vec3(0.01);
 	float ssao = 1.0;
 
 	if (ssao_enabled)
@@ -224,7 +227,6 @@ vec3 lighting()
 	
 	return ambient * ssao + diffuse + specular;
 }
-
 
 vec3 get_godray()
 {
@@ -239,25 +241,24 @@ float get_fog()
 	if (!fog_enabled)
 		return 1.0;
 	
-	float distance = length(view_pos - position);
-	float visibility = exp(-pow((distance * fog_density), fog_gradient));
-	visibility = clamp(visibility, 0.0, 1.0);
-	return visibility;
+	float visibility = exp(-pow((distance_from_camera * fog_density), fog_gradient));
+	return clamp(visibility, 0.0, 1.0);
 }
 
-float shadow_calc(vec4 pos_light_space)
+float shadow_calc()
 {
+    vec4 pos_light_space = light_matrix * vec4(position.xyz, 1.0);
     vec3 projCoords = pos_light_space.xyz / pos_light_space.w * vec3(0.5) + vec3(0.5);
 	
-	if (projCoords.x < 0.0 || projCoords.x > 1.0 || projCoords.y < 0.0 || projCoords.y > 1.0)
-		return 0.0;
+	if (projCoords.x < 0.0 || projCoords.x > 1.0 || projCoords.y < 0.0 || projCoords.y > 1.0 || projCoords.z < 0.0 || projCoords.z > 1.0)
+		return 1.0;
 	
     float closestDepth = texture2D(shadow_map, projCoords.xy).r;
     float currentDepth = projCoords.z;
     float bias = 0.001;
-	float shadow = currentDepth - bias > closestDepth ? 0.4 : 0.0;
+	float shadow = currentDepth - bias > closestDepth ? 0.6 : 0.0;
 
-    return shadow;
+    return 1.0 - shadow;
 }
 
 void main()
@@ -274,21 +275,19 @@ void main()
 
 	position = texture2D(g_position, tex_coords).rgb;
 	normal = texture2D(g_normal, tex_coords).rgb;
+	distance_from_camera = length(view_pos - position);
 	
-	if (material == vec3(1.0, 0.0, 0.0) || material == vec3(1.0, 0.0, 1.0) || material == vec3(0.2, 0.2, 0.2))
+	if (material == vec3(0.2, 0.2, 0.2))
 	{
 		final_color = vec4(albedo, 1.0);
 		return;
 	}
 	
-    vec4 pos_light_space = light_matrix * vec4(position.xyz, 1.0);
-    float shadow = 1.0 - shadow_calc(pos_light_space);
-	
-	vec3 finalcolor = albedo * lighting() * shadow;
-	finalcolor = mix(sky_color, finalcolor, get_fog());
+	vec3 finalcolor = albedo * lighting() * shadow_calc();
+	// finalcolor = mix(sky_color, finalcolor, get_fog());
 		
 	//if (clouds_enabled)
-	//	finalcolor = finalcolor + ray_march();	
+	//	finalcolor = finalcolor + ray_march();
 	
 	final_color = vec4(finalcolor + get_godray(), 1.0);
 }

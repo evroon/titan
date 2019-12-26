@@ -71,6 +71,11 @@ DirectionalLight::~DirectionalLight()
 {
 }
 
+vec3 DirectionalLight::get_direction() const
+{
+	return vec3(0, -1, -0.2).normalize();
+}
+
 #undef CLASSNAME
 #define CLASSNAME DirectionalLight
 

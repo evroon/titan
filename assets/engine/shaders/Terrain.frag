@@ -42,7 +42,7 @@ void main()
 	else
 		source = texture2D(rocks, offset).rgb;
 			
-	gl_FragData[0] = vec4(vec3(0.01, 1.0, 0.01), alpha);
+	gl_FragData[0] = vec4(source, alpha);
 	gl_FragData[1] = vec4(position, 1.0);
 	gl_FragData[2] = vec4(normal, 1.0);
 	gl_FragData[3] = vec4(vec3(1.0, 0.0, 0.0), 1.0);

@@ -483,7 +483,7 @@ DeferredRenderer::DeferredRenderer()
 	final_buffer->add_depth_texture();
 	final_buffer->init();
 	
-	shadow_buffer = new FBO2D(WINDOWSIZE);
+	shadow_buffer = new FBO2D(vec2i(4096));
 	shadow_buffer->add_depth_texture();
 	shadow_buffer->init();
 
@@ -577,6 +577,10 @@ DeferredRenderer::DeferredRenderer()
 	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex7.png"));
 	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex8.png"));
 	flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex9.png"));
+
+	for (int c = 0; c < flare_textures.size(); c++) {
+		flare_textures[c]->set_filter(Texture2D::BILINEAR_FILTER);
+	}
 
 	grid_texture = CONTENT->LoadTexture("textures/tile.png");
 
@@ -692,9 +696,14 @@ void DeferredRenderer::render_shadowmap()
 	if (!light || !c)
 		return;
 
-	light_camera->set_pos(light->get_pos());
+	light_camera->set_pos(light->get_direction() * -300.0f + c->get_pos());
 	light_camera->set_rotation(light->get_rotation());
-	light_camera->set_projection(30.0f, 5.0f, 500.0f);
+
+	if (true) {
+		light_camera->set_projection(30.0f, 5.0f, 5000.0f);
+	} else {
+		light_camera->set_ortho_projection(5.0f, 1000.0f);
+	}
 
 	light_camera->update_matrices();
 
@@ -760,9 +769,7 @@ void DeferredRenderer::render_flare()
 	if (!camera || !sky || !light)
 		return;
 
-	vec3 light_dir = light->get_transform().get_quat().get_axis();
-	light_dir = vec3(0, 0, 10);
-
+	vec3 light_dir = light->get_direction();
 	vec3 view_pos = camera->get_pos();
 	vec3 light_position = light_dir + view_pos;
 
@@ -784,7 +791,7 @@ void DeferredRenderer::render_flare()
 	shader_2d->set_uniform("texture_enabled", true);
 	shader_2d->set_uniform("tex", 0);
 
-	final_buffer->bind();
+	render_buffer->bind();
 
 	activate_canvas_transform();
 
@@ -803,7 +810,7 @@ void DeferredRenderer::render_flare()
 		vec2 size = vec2(100.0f);
 
 		t.set_size(vec3(size, 1.0f));
-		t.set_pos(vec3(sun_on_screen + dir * to_float(c) * stepsize, 0.0f));
+		t.set_pos(vec3(sun_on_screen - dir * to_float(c) * stepsize, 0.0f));
 		t.update();
 
 		flare_textures[c]->bind(0);
@@ -827,8 +834,7 @@ void DeferredRenderer::render_godray()
 	if (!camera || !sky || !light)
 		return;
 
-	vec3 light_dir = light->get_transform().get_quat().get_axis();
-	light_dir = vec3(0, 0, 1);
+	vec3 light_dir = light->get_direction();
 	vec3 view_pos = camera->get_pos();
 	vec3 light_position = light_dir + view_pos;
 
@@ -843,7 +849,6 @@ void DeferredRenderer::render_godray()
 
 	godray->bind();
 	godray->set_uniform("g_material", 0);
-	// godray->set_uniform("sun_color", sky->get_sun_color().get_rgb());
 	godray->set_uniform("sun_pos", sun_on_screen);
 	
 	draw_plane();
@@ -862,21 +867,20 @@ void DeferredRenderer::render_first_pass()
 
 	Color sky_color;
 	Color light_color;
-	vec3 light_dir = vec3(0, 0, -1);
 	Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
 	vec3 view_pos = ACTIVE_WORLD->get_active_camera()->get_pos();
 	DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 	bool lighting_enabled = false;
+	vec3 light_dir = vec3(0, 0, -1);
 
 	if (sky)
 	{
-		vec3 light_position = sky->get_sun_direction() + view_pos;
-		Color sky_color = sky->get_sky_color();
+		sky_color = sky->get_sky_color();
 	}
 
 	if (light)
 	{
-		light_dir = light->get_transform().get_quat().get_axis();
+		light_dir = light->get_direction();
 		lighting_enabled = true;
 		light_color = light->get_color();
 	}
@@ -1064,10 +1068,12 @@ void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename, int atta
 	
 	for (int i = 0; i < p_fbo->size.y; i++)
 		memcpy(((char*)surface->pixels) + surface->pitch * i, pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
+
+	SDL_SaveBMP(surface, p_filename.c_str());
 	
 	delete[] pixels;
 
-	SDL_SaveBMP(surface, "pic.bmp");
+	T_LOG("saved fbo to: " + p_filename);
 }
 
 #undef CASE

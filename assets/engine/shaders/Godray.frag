@@ -11,25 +11,24 @@ out vec4 final_color;
 void main()
 {
 	float stepsize = 0.01;
+	
+	vec2 delta = (pos - sun_pos) * stepsize;
+	float radius = length(delta);
 	int steps = 100;
 	
-	vec2 tex_coords = pos * vec2(0.5) + vec2(0.5);
-	
-	vec2 l = pos - sun_pos;
-	vec2 delta = l * stepsize;
-	
 	vec2 p = sun_pos;
-	float intensity = 0.0;
+	float intensity = (1.0 / radius) / 10.0 / steps;
+	int hits = 0;
 	
 	for (int c = 0; c < steps; c++)
-	{	
+	{
 		vec3 material = texture2D(g_material, p * vec2(0.5) + vec2(0.5)).rgb;
 		
-		if (material.z < 0.2 && material.x == 0.0 && material.y == 0.0)
-			intensity += 0.02;
-		
+		if (material.b != 0.0 || material.g != 0.0)
+			hits++;
+
 		p += delta;
 	}
 	
-	final_color = vec4(vec3(intensity), 1.0);
+	final_color = vec4(vec3(intensity * hits / steps), 1.0);
 }

@@ -79,13 +79,11 @@ void Sky::draw()
 	if (!light)
 		return;
 
-	vec3 light_dir = light->get_transform().get_quat().get_axis();
-	light_dir = vec3(0, 1, -1).normalize();
+	vec3 light_dir = light->get_direction();
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("sun_direction", light_dir);
-	// shader->set_uniform("sun_color", get_sun_color().get_rgb());
 	shader->set_uniform("sky_color", get_sky_color().get_rgb());
 	shader->set_uniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
 
@@ -94,16 +92,6 @@ void Sky::draw()
 	MeshHandler::get_singleton()->get_cube()->unbind();
 
 	RENDERER->use_culling();
-}
-
-void Sky::set_sun_direction(const vec3& p_dir)
-{
-	sun_direction = p_dir;
-}
-
-vec3 Sky::get_sun_direction() const
-{
-	return sun_direction;
 }
 
 void Sky::set_sun_color(const Color & p_sun_color)

@@ -17,16 +17,18 @@ void main()
 	vec3 light_dir = light_direction;
 	
 	float t = time / 10000.0;
+	float scale_xy = 5.0f;
 	
-	vec3 n1 = texture2D(normals, position.xy / 25.0 + vec2(t / 1.1, t)).rgb;
-	vec3 n2 = texture2D(normals, position.xy / 25.0 + vec2(t, -t)).rgb;
+	vec3 n1 = texture2D(normals, position.xy / scale_xy + vec2(t / 1.1, t)).rgb;
+	vec3 n2 = texture2D(normals, position.xy / scale_xy + vec2(t, -t)).rgb;
 	
-	vec3 normal = (n1.xzy + n2.xzy) / 2.0;
+	vec3 normal = (n1.xyz + n2.xyz) / 2.0;
 	normal = normal * 2.0 - 1.0;
 	normal *= -1.0;
+	normal = normalize(normal);
 	
 	vec2 ndc = (screenspace_position.xy / screenspace_position.w) * 0.5 + 0.5;
-	ndc -= abs(normal.xy) / 500.0;
+	ndc -= abs(normal.xy) / 1000.0;
 	
 	vec4 reflect_color = texture2D(reflection_tex, ndc * vec2(1, -1));
 	

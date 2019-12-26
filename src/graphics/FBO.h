@@ -32,6 +32,7 @@ public:
 
 	struct color_tex_def
 	{
+		Texture2D* tex;
 		bool type_byte;
 		vec2i size;
 	};
@@ -58,6 +59,7 @@ public:
 	void add_color_texture() override;
 	void add_color_texture(const vec2i& p_size);
 	void add_float_color_texture() override;
+	void add_texture(Texture2D* p_texture);
 };
 
 class FBO1D : public FBO

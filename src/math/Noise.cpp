@@ -1,5 +1,7 @@
 #include "Noise.h"
 
+#include <thread>
+
 #include "resources/Texture.h"
 
 #ifndef BYTE
@@ -21,7 +23,9 @@ Noise::~Noise()
 
 PerlinNoise::PerlinNoise()
 {
-	
+	perlin_noise.SetOctaveCount(8);
+	perlin_noise.SetFrequency(1);
+	perlin_noise.SetPersistence(0.5);
 }
 
 float PerlinNoise::get_value(const vec3& p_pos)
@@ -29,29 +33,38 @@ float PerlinNoise::get_value(const vec3& p_pos)
 	return to_float(perlin_noise.GetValue(p_pos.x, p_pos.y, p_pos.z));
 }
 
-Texture2D* PerlinNoise::create_2d_texture()
+void PerlinNoise::fill_partition(PerlinNoise* p_noise, vec4* p_heights, int p_x, int p_y, const vec2i& p_partition_size, const vec2i& p_size)
+{
+	for (int x = p_x; x < p_x + p_partition_size.x; x++)
+	{
+		for (int y = p_y; y < p_y + p_partition_size.y; y++)
+		{
+			float value = p_noise->get_value(vec3(x, y, 0.0f) / 2000.0f) / 2.0f;
+			p_heights[x + y * p_size.x] = vec4(vec3(value), 1.0f);
+		}
+	}
+}
+
+Texture2D* PerlinNoise::create_2d_texture(const vec2i& p_size)
 {
 	unsigned id;
-	vec2i size = 512;
+	vec2 size = vec2(p_size.x, p_size.y);
+	int num_threads = 8;
 
-	struct ColorByte
-	{
-		BYTE r;
-		BYTE g;
-		BYTE b;
-	};
+	vec4* heights = new vec4[p_size.x * p_size.y];
 
-	ColorByte* colors = new ColorByte[size.x * size.y];
+	std::thread threads[num_threads];
 
-	for (int c = 0; c < size.x * size.y; c++)
-	{
-		int x = c / size.x;
-		int y = c % size.y;
+	for (int c = 0; c < num_threads; c++) {
+		vec2i partition_size = vec2i(p_size.x, p_size.y / num_threads);
+		int y = partition_size.y * c;
 
-		float value = get_value(vec3(x / 100.0f, y / 100.0f, 0));
-
-		colors[c] = { (BYTE) ((value + 2.0f) / 4.0f * 255), 0, 0 };
+		threads[c] = std::thread(fill_partition, this, heights, 0, y, partition_size, p_size);
 	}
+
+	for (int c = 0; c < num_threads; c++) {
+		threads[c].join();
+	}	
 
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -59,9 +72,9 @@ Texture2D* PerlinNoise::create_2d_texture()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, (GLsizei) p_size.x, (GLsizei) p_size.y, 0, GL_RGBA, GL_FLOAT, heights);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, (GLsizei) GL_RGB, size.x, size.y, 0, (GLsizei) GL_RGB, GL_UNSIGNED_BYTE, colors);
-
+	delete[] heights;
 	return new Texture2D(size, to_int(id));
 }
 

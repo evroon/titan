@@ -10,7 +10,7 @@ const int CD = 0;
 const int DA = 1;
 
 const float tess_factor = 10000;
-const float tess_slope = 2.2;
+const float tess_slope = 1.8;
 const float tess_shift = 0.0;
 
 

@@ -140,7 +140,12 @@ void FBO2D::init()
 
 	for (int c = 0; c < definitions.size(); c++)
 	{
-		Texture2D* color = new Texture2D(definitions[c].size, definitions[c].type_byte);
+		Texture2D* color;
+		if (definitions[c].tex) {
+			color = definitions[c].tex;
+		} else {
+			color = new Texture2D(definitions[c].size, definitions[c].type_byte);
+		}
 		color_textures.push_back(color);
 		
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + c, GL_TEXTURE_2D, color->get_id(), 0);
@@ -183,17 +188,23 @@ void FBO2D::add_depth_texture()
 
 void FBO2D::add_color_texture()
 {
-	definitions.push_back({ true, size });
+	definitions.push_back({ nullptr, true, size });
 }
 
 void FBO2D::add_color_texture(const vec2i& p_size)
 {
-	definitions.push_back({ true, p_size });
+	definitions.push_back({ nullptr, true, p_size });
 }
 
 void FBO2D::add_float_color_texture()
 {
-	definitions.push_back({ false, size });
+	definitions.push_back({ nullptr, false, size });
+}
+
+void FBO2D::add_texture(Texture2D* p_texture)
+{
+	vec2 size = p_texture->get_size();
+	definitions.push_back({ p_texture, false, vec2i(size.x, size.y) });
 }
 
 //=========================================================================

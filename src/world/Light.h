@@ -23,6 +23,8 @@ public:
 	DirectionalLight();
 	virtual ~DirectionalLight();
 
+	vec3 get_direction() const;
+
 	static void bind_methods();
 
 private:

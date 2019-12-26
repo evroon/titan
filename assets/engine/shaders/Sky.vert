@@ -9,11 +9,6 @@ out vec3 position;
 
 void main()
 {
-	vec4 pos = vec4(a_position * 500.0, 1.0);
-	
-	position = pos.xyz;
-	
-	pos = pos + vec4(camera_position, 0.0);
-	
-	gl_Position = view * pos;
+	position = a_position * 5000.0;
+	gl_Position = view * vec4(position + camera_position, 1.0);
 }

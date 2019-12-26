@@ -13,12 +13,23 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 {
 	terrain = p_terrain;
 
-	heightmap_fbo = new FBO2D(vec2i(4096));
-	heightmap_fbo->add_float_color_texture();
+	vec2i tex_size = vec2i(4096);
+	
+	heightmap_fbo = new FBO2D(tex_size);
+
+	if (false)
+	{
+		heightmap_fbo->add_float_color_texture();
+	} else {
+		PerlinNoise n;
+		Texture2D* tex = n.create_2d_texture(tex_size);
+		heightmap_fbo->add_texture(tex);
+	}
+
 	heightmap_fbo->clear_color = vec3(0.0f);
 	heightmap_fbo->cleared_every_frame = false;
 	heightmap_fbo->init();
-	heightmap_fbo->clear();
+	// heightmap_fbo->clear();
 
 	terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
 
@@ -27,7 +38,7 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain)
 	to_apply = false;
 	active_tex = 0;
 
-	set_radius(100.0f);
+	set_radius(50.0f);
 	set_strength(.01f);
 	
 	textures.push_back(CONTENT->LoadTexture("textures/brushes/default.png"));
@@ -43,7 +54,7 @@ void TerrainBrush::handle()
 	if (!to_apply)
 		return;
 
-	Transform t = Transform(pos / (128.0f * 10.0f * 0.5f), vec2(radius / (128.0f * 10.0f * 0.5f)));
+	Transform t = Transform(pos / (8.0f * terrain->get_size().x * 0.5f), vec2(radius / (8.0f * terrain->get_size().y * 0.5f)));
 
 	Texture2D* heightmap = terrain->get_heightmap();
 
@@ -147,7 +158,7 @@ Terrain::Terrain()
 {
 	height_factor = 1.0f;
 
-	node_count = vec2i(128, 128);
+	node_count = vec2i(8, 8);
 	build();
 
 	shader = CONTENT->LoadShader("engine/shaders/TerrainEditor");
@@ -163,8 +174,8 @@ Terrain::Terrain()
 	brush->set_color(col);
 	brush->set_pos(vec2(0.0f, 0.0f));
 
-	textures.push_back(CONTENT->LoadTexture("textures/tile.png"));
-	textures.push_back(CONTENT->LoadTexture("textures/Ground_11_DIF.jpg"));
+	textures.push_back(CONTENT->LoadTexture("textures/oreon/grass0_DIF.jpg"));
+	textures.push_back(CONTENT->LoadTexture("textures/oreon/Ground_11_DIF.jpg"));
 	//textures.push_back(CONTENT->LoadTexture("textures/look_up.jpg"));
 
 	texture_names.push_back("grass");
@@ -221,7 +232,7 @@ void Terrain::compute_normals()
 
 	normal_map_compute->bind();
 	normal_map_compute->set_uniform("N", N);
-	normal_map_compute->set_uniform("strength", 12.0f);
+	normal_map_compute->set_uniform("strength", 100.0f);
 	normal_map_compute->set_uniform("heightmap", 0);
 
 	glBindImageTexture(0, normalmap->get_id(), 0, false, 0, GL_WRITE_ONLY, GL_RGBA32F);
@@ -326,16 +337,21 @@ void Terrain::set_selection_pos(const vec2& p_pos)
 
 void Terrain::draw()
 {
+	shader->bind();
 	//brush->apply();
 	//apparently not needed on some intel drivers  
 	//glEnable(GL_CLIP_DISTANCE0);
 
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	shader->bind();
+	Water* water = get_parent()->get_child_by_type<Water*>();
+	if (water)
+		shader->set_uniform("water_height", water->get_pos().z);
+
 	shader->set_uniform("view", RENDERER->get_final_matrix());
 	shader->set_uniform("model", get_transform().get_model());
 	shader->set_uniform("camera_pos", ACTIVE_WORLD->get_active_camera()->get_pos());
+	shader->set_uniform("terrain_size", get_size());
 
 	for (int c = 0; c < textures.size(); c++)
 	{
@@ -403,7 +419,7 @@ void Water::draw()
 	Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
 	Camera* cam = ACTIVE_WORLD->get_active_camera();
 
-	set_pos(vec3(cam->get_pos().get_xy(), 6.0f));
+	set_pos(vec3(cam->get_pos().get_xy(), get_pos().z));
 
 	shader->bind();
 	shader->set_uniform("view", RENDERER->get_final_matrix());

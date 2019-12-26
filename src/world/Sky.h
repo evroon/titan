@@ -17,9 +17,6 @@ public:
 	void update() override;
 	void draw() override;
 
-	void set_sun_direction(const vec3& p_dir);
-	vec3 get_sun_direction() const;
-
 	void set_sun_color(const Color & p_sun_color);
 	Color get_sun_color() const;
 
