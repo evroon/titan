@@ -2,6 +2,7 @@
 
 #include "core/Serializer.h"
 
+#include "world/World.h"
 #include "world/Terrain.h"
 #include "graphics/Renderer.h"
 
@@ -40,10 +41,10 @@ void Project::load()
 
 void Project::save()
 {
-	Node* terrain = default_scene->get_child_by_type<Terrain*>();
+	Node* terrain = default_scene->get_child_by_type<World*>()->get_child_by_type<Terrain*>();
 	if (terrain) {
 		FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
-		DEFERRED_RENDERER->save_fbo(f, "engine/Textures", 0);
+		// DEFERRED_RENDERER->save_fbo(f, "engine/heightmap.bmp", 0);
 	}
 
 	Serializer s;

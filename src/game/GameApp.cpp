@@ -17,7 +17,7 @@ void GameApp::init()
 	VIEW->set_default_viewport(v);
 	VIEW->set_active_viewport(v);
 
-	Project* project = new Project("projects/pong.xml");
+	Project* project = new Project("projects/terrain.xml");
 	start_scene(project->get_main_scene());
 }
 
