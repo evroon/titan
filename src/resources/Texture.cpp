@@ -12,8 +12,8 @@ void Texture::generate_gl_texture()
 	glGenTextures(1, &id);
 	glBindTexture(type, id);
 	set_filter(NO_FILTER);
-	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		
 	loaded = true;
 }
@@ -291,8 +291,8 @@ DepthTexture2D::DepthTexture2D(const vec2i& p_size)
 
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 

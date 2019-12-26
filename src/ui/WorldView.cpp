@@ -445,7 +445,7 @@ void WorldView::handle_event(UIEvent *ui_event)
 				sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)->get_size();
 
 				vec3 m = renderer->get_material_at_pixel(sp);
-				vec3 mouse_pos = raycast_fbo->read_pixel(sp, 0).get_rgb();
+				vec3 mouse_pos = get_click_position_in_world();
 				float alias = 0.01f;
 
 				if (ui_event->type == UIEvent::MOUSE_PRESS)
@@ -544,6 +544,8 @@ void WorldView::handle_event(UIEvent *ui_event)
 				terrain->increase(-1.0f);
 			else if (terrain && ui_event->key == Key::KEY_2)
 				terrain->compute_normals();
+			else if (terrain && ui_event->key == Key::KEY_3)
+				CONTENT->ReloadAll();
 
 			/*if (terrain)
 			{
@@ -779,6 +781,10 @@ void WorldView::draw_fps_info()
 
 	render_font(command);
 
+	command.text = "R: " + StringUtils::FloatToString(viewport->get_fps()) + " fps";
+	command.pos.y -= 20.0f;
+	render_font(command);
+
 	command.text = "U: " + StringUtils::FloatToString(viewport->get_updating_time() * 1000) + " ms";
 	command.pos.y -= 20.0f;
 	render_font(command);
@@ -897,6 +903,28 @@ void WorldView::set_display_mode(int p_display_mode)
 int WorldView::get_display_mode() const
 {
 	return display_mode;
+}
+
+vec3 WorldView::get_click_position_in_world()
+{
+	DeferredRenderer* renderer = viewport->get_renderer()->cast_to_type<DeferredRenderer*>();
+	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
+	Raycaster r(viewport);
+	vec3 p;
+	vec2 sp = vec2(MOUSE->get_position() - viewport->get_area().get_pos());
+	sp /= viewport->get_size();
+
+	if (rect2(vec2(), vec2(1.0f)).is_in_box(sp))
+	{
+		sp += 1.0f;
+		sp /= 2.0f;
+		sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)->get_size();
+
+		vec3 m = renderer->get_material_at_pixel(sp);
+		vec3 mouse_pos = raycast_fbo->read_pixel(sp, 0).get_rgb();
+		return mouse_pos;
+	}
+	return vec3();
 }
 
 WorldObject* WorldView::raycast(const vec2& p_pos) const

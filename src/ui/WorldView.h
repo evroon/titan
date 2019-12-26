@@ -80,6 +80,8 @@ public:
 	void set_display_mode(int p_display_mode);
 	int get_display_mode() const;
 
+	vec3 get_click_position_in_world();
+
 	WorldObject* raycast(const vec2& p_pos) const;
 
 	Viewport* get_viewport() const;

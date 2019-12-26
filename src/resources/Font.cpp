@@ -72,6 +72,7 @@ Texture2D* Font::DrawToTex(const String& src)
 		T_ERROR("Could not render text: " + std::string(TTF_GetError()));
 
 	Texture2D *tex = new Texture2D(text);
+	tex->set_filter(Texture2D::BILINEAR_FILTER);
 	CONTENT->AddTexture(tex);
 	return tex;
 }

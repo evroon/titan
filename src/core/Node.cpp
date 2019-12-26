@@ -31,7 +31,7 @@ void Node::add_child(Node* p_child)
 	p_child->parent = this;
 	p_child->emit_signal("parent_changed");
 
-	children_changed();
+	// children_changed();
 }
 
 void Node::remove_child(Node* p_child)
@@ -39,7 +39,7 @@ void Node::remove_child(Node* p_child)
 	p_child->clean();
 	GC->queue_clean(p_child);
 	children.clear(p_child);
-	children_changed();
+	// children_changed();
 }
 
 void Node::clean()
