@@ -38,7 +38,7 @@ void main()
 	{
 		for (float y = 0; y < 8; y += 1.0)
 		{
-			vec3 s = texture2D(kernel, vec2(x, y) / 8.0).rgb;
+			vec3 s = TBN * texture2D(kernel, vec2(x, y) / 8.0).rgb;
 			vec3 sample = position + s * radius;
 			
 			vec4 offset = vec4(sample, 1.0);
