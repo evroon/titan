@@ -120,3 +120,4 @@ public:
 typedef Vec4<double> vec4d;
 typedef Vec4<float> vec4;
 typedef Vec4<int> vec4i;
+typedef Vec4<char> vec4b;

@@ -89,3 +89,4 @@ typedef Vec2<double> vec2d;
 typedef Vec2<float> vec2;
 typedef Vec2<int> vec2i;
 typedef Vec2<int> vec2ui;
+typedef Vec2<char> vec2b;

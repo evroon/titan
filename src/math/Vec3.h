@@ -114,3 +114,4 @@ public:
 typedef Vec3<double> vec3d;
 typedef Vec3<float> vec3;
 typedef Vec3<int> vec3i;
+typedef Vec3<char> vec3b;
