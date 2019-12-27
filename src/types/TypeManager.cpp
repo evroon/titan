@@ -66,6 +66,7 @@ TypeManager* TypeManager::get_singleton()
 #include "world/Sprite.h"
 #include "world/World.h"
 #include "world/Terrain.h"
+#include "world/TerrainNoise.h"
 #include "world/Sky.h"
 #include "world/Model.h"
 #include "world/Light.h"
@@ -115,6 +116,7 @@ void TypeManager::init()
 	World::init_type();
 	Camera::init_type();
 	Terrain::init_type();
+	TerrainNoise::init_type();
 	TerrainBrush::init_type();
 	Water::init_type();
 	Sky::init_type();
@@ -224,6 +226,7 @@ void TypeManager::init()
 	World::bind_methods();
 	Camera::bind_methods();
 	Terrain::bind_methods();
+	TerrainNoise::bind_methods();
 	TerrainBrush::bind_methods();
 	Water::bind_methods();
 	Sky::bind_methods();
