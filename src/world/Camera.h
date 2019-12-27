@@ -32,7 +32,7 @@ public:
 	void look_at(float p_pitch, float p_yaw, float p_roll);
 
 	void set_projection(float p_fov, float p_near, float p_far);
-	void set_ortho_projection(float p_near, float p_far);
+	void set_ortho_projection(float p_near, float p_far, const vec2& p_size);
 
 	void set_fov(float p_fov);
 	float get_fov() const;
@@ -64,6 +64,8 @@ public:
 	vec3 get_up() const;
 	vec3 get_right() const;
 
+	SIMPLE_GET_SET(vec2, ortho_size);
+
 	static void bind_methods();
 
 private:
@@ -80,6 +82,7 @@ private:
 	float far;
 
 	bool orthogonal;
+	vec2 ortho_size;
 
 	//view data
 	vec3 target;

@@ -696,14 +696,9 @@ void DeferredRenderer::render_shadowmap()
 	if (!light || !c)
 		return;
 
-	light_camera->set_pos(light->get_direction() * -300.0f + c->get_pos());
+	light_camera->set_pos(light->get_direction() * -400.0f + vec3(c->get_pos().get_xy(), 0.0f));
 	light_camera->set_rotation(light->get_rotation());
-
-	if (true) {
-		light_camera->set_projection(30.0f, 5.0f, 5000.0f);
-	} else {
-		light_camera->set_ortho_projection(5.0f, 1000.0f);
-	}
+	light_camera->set_ortho_projection(1.0f, 1000.0f, vec2(200.0f));
 
 	light_camera->update_matrices();
 

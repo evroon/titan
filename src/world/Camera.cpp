@@ -30,6 +30,7 @@ Camera::Camera()
 	pos = vec2();
 
 	orthogonal = false;
+	ortho_size = vec2(100.0f);
 }
 
 void Camera::update()
@@ -80,12 +81,13 @@ void Camera::set_projection(float p_fov, float p_near, float p_far)
 	update_final_matrix();
 }
 
-void Camera::set_ortho_projection(float p_near, float p_far)
+void Camera::set_ortho_projection(float p_near, float p_far, const vec2& p_size)
 {
 	near = p_near;
 	far = p_far;
 
 	orthogonal = true;
+	ortho_size = p_size;
 
 	update_projection_matrix();
 	update_final_matrix();
@@ -117,7 +119,7 @@ void Camera::update_projection_matrix()
 	if (!orthogonal)
 		projection_matrix.perspective(window, fov, window.size.y / window.size.x, near, far);
 	else
-		projection_matrix.orthographic(window, near, far);
+		projection_matrix.orthographic(rect2(ortho_size), near, far);
 }
 
 void Camera::update_view_matrix()
@@ -246,5 +248,6 @@ void Camera::bind_methods()
 	REG_PROPERTY(far);
 	REG_PROPERTY(fov);
 	REG_PROPERTY(zoom);
+	REG_PROPERTY(ortho_size);
 
 }
