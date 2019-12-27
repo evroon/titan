@@ -284,7 +284,7 @@ void main()
 	}
 	
 	vec3 finalcolor = albedo * lighting() * shadow_calc();
-	// finalcolor = mix(sky_color, finalcolor, get_fog());
+	finalcolor = mix(sky_color, finalcolor, get_fog());
 		
 	//if (clouds_enabled)
 	//	finalcolor = finalcolor + ray_march();

@@ -8,30 +8,35 @@
 #include "Sky.h"
 #include "Model.h"
 #include "math/Noise.h"
+#include "TerrainNoise.h"
 
 TerrainBrush::TerrainBrush(Terrain* p_terrain)
 {
 	terrain = p_terrain;
+	// TerrainNoise* noise = p_terrain->get_child_by_type<TerrainNoise*>();
+	bool noise = true;
 
 	vec2i tex_size = vec2i(4096);
-	
 	heightmap_fbo = new FBO2D(tex_size);
 
-	if (false)
+	if (noise)
 	{
-		heightmap_fbo->add_float_color_texture();
-	} else {
 		PerlinNoise n;
 		Texture2D* tex = n.create_2d_texture(tex_size);
 		heightmap_fbo->add_texture(tex);
+	} else {
+		heightmap_fbo->add_float_color_texture();
 	}
 
 	heightmap_fbo->clear_color = vec3(0.0f);
 	heightmap_fbo->cleared_every_frame = false;
 	heightmap_fbo->init();
-	// heightmap_fbo->clear();
+
+	if (!noise)
+		heightmap_fbo->clear();
 
 	terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
+	terrain->heightmap->set_filter(Texture::BILINEAR_FILTER);
 
 	brush_shader = CONTENT->LoadShader("engine/shaders/Brush");
 
@@ -159,6 +164,16 @@ Terrain::Terrain()
 	height_factor = 1.0f;
 
 	node_count = vec2i(8, 8);
+	init();
+}
+
+
+Terrain::~Terrain()
+{
+}
+
+void Terrain::init()
+{
 	build();
 
 	shader = CONTENT->LoadShader("engine/shaders/TerrainEditor");
@@ -204,11 +219,6 @@ Terrain::Terrain()
 
 	setup_buffers();
 	compute_normals();
-}
-
-
-Terrain::~Terrain()
-{
 }
 
 void Terrain::build()
@@ -335,14 +345,14 @@ void Terrain::set_selection_pos(const vec2& p_pos)
 	brush->set_pos(p_pos);
 }
 
+void Terrain::ready()
+{
+	
+}
+
 void Terrain::draw()
 {
 	shader->bind();
-	//brush->apply();
-	//apparently not needed on some intel drivers  
-	//glEnable(GL_CLIP_DISTANCE0);
-
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	Water* water = get_parent()->get_child_by_type<Water*>();
 	if (water)
@@ -360,7 +370,6 @@ void Terrain::draw()
 
 	shader->set_uniform("heightmap", textures.size());
 	heightmap->bind(textures.size());
-	heightmap->set_filter(Texture::BILINEAR_FILTER);
 
 	shader->set_uniform("normalmap", textures.size() + 1);
 	normalmap->bind(textures.size() + 1);

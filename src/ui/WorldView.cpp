@@ -880,7 +880,7 @@ void WorldView::set_handle_2d(bool p_handle_2d)
 	Camera* camera = viewport->get_world()->get_active_camera();
 
 	if (handle_2d)
-		camera->set_ortho_projection(0.5, 5000.0);
+		camera->set_ortho_projection(0.5, 5000.0, WINDOWSIZE_F);
 	else
 		camera->set_projection(30.0f, 0.5f, 5000.0f);
 }

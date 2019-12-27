@@ -72,6 +72,7 @@ public:
 
 	friend class TerrainBrush;
 
+	void init();
 	void build();
 	void compute_normals();
 
@@ -90,6 +91,7 @@ public:
 
 	void set_selection_pos(const vec2& p_pos);
 	
+	void ready() override;
 	void draw() override;
 
 	void set_tex_name(int p_index, const String& p_tex_name);
