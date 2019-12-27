@@ -458,7 +458,6 @@ void ForwardRenderer::bind_methods()
 
 DeferredRenderer::DeferredRenderer()
 {
-	blur_buffer = nullptr;
 	reflection_camera = nullptr;
 	light_camera = nullptr;
 	environment = nullptr;
@@ -491,9 +490,9 @@ DeferredRenderer::DeferredRenderer()
 	ssao_buffer->add_color_texture();
 	ssao_buffer->init();
 
-	ssao_blur_buffer = new FBO2D(WINDOWSIZE);
-	ssao_blur_buffer->add_color_texture();
-	ssao_blur_buffer->init();
+	ssao_blur_horiz_buffer = new FBO2D(WINDOWSIZE);
+	ssao_blur_horiz_buffer->add_color_texture();
+	ssao_blur_horiz_buffer->init();
 
 	reflection_buffer = new FBO2D(512);
 	reflection_buffer->add_color_texture();
@@ -509,6 +508,16 @@ DeferredRenderer::DeferredRenderer()
 	bloom_buffer->add_color_texture();
 	bloom_buffer->init();
 	bloom_buffer->clear_color = Color(0, 0, 0);
+
+	blur_horiz_buffer = new FBO2D(WINDOWSIZE / 2);
+	blur_horiz_buffer->add_color_texture();
+	blur_horiz_buffer->init();
+	blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
+
+	blur_vert_buffer = new FBO2D(WINDOWSIZE / 2);
+	blur_vert_buffer->add_color_texture();
+	blur_vert_buffer->init();
+	blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
 
 	virtual_tex_buffer = new FBO2D(1024);
 	virtual_tex_buffer->add_color_texture();
@@ -548,13 +557,12 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(RENDER_DEPTH, render_buffer->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(REFLECTION, reflection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(SSAO, ssao_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	textures.set(SSAO_BLUR, ssao_blur_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(SSAO_BLUR, ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(GODRAY, godray_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(BLOOM, bloom_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	//textures.set(DOF, dof_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	//textures.set(LIGHTING, lighting_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(VIRTUALTEX, virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(INDIRECTION, indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(BLUR, blur_vert_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 
 	first_pass = CONTENT->LoadShader("engine/shaders/FirstPass");
 	second_pass = CONTENT->LoadShader("engine/shaders/SecondPass");
@@ -563,6 +571,7 @@ DeferredRenderer::DeferredRenderer()
 	ssao = CONTENT->LoadShader("engine/shaders/SSAO");
 	bloom = CONTENT->LoadShader("engine/shaders/Bloom");
 	tex_shader = CONTENT->LoadShader("engine/shaders/TextureShader");
+	blur_shader	= CONTENT->LoadShader("engine/shaders/Blur");
 
 	reflection_camera = new Camera;
 	light_camera = new Camera;
@@ -643,12 +652,31 @@ void DeferredRenderer::generate_ssao_kernel()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
+void DeferredRenderer::render_blur()
+{
+	vec2 step = vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
+	blur_horiz_buffer->bind();
+	blur_shader->bind();
+
+	textures[RENDER_COLOR]->bind(0);
+	blur_shader->set_uniform("step", vec2(0.0f, step.y));
+	blur_shader->set_uniform("tex", 0);
+
+	draw_plane();
+
+	blur_vert_buffer->bind();
+	blur_horiz_buffer->color_textures[0]->bind(0);
+	blur_shader->set_uniform("step", vec2(step.x, 0.0f));
+
+	draw_plane();
+}
+
 void DeferredRenderer::render_bloom()
 {
 	bloom->bind();
 	bloom_buffer->bind();
 
-	textures[FINAL_COLOR]->bind(0);
+	textures[RENDER_COLOR]->bind(0);
 	bloom->set_uniform("input", 0);
 }
 
@@ -927,9 +955,19 @@ void DeferredRenderer::render_second_pass()
 	second_pass->bind();
 	second_pass->set_uniform("gamma", 1.0f);
 	second_pass->set_uniform("render_buffer", 0);
+	second_pass->set_uniform("blur_buffer", 1);
+	second_pass->set_uniform("depth_buffer", 2);
 	second_pass->set_uniform("exposure", 1.0f);
+	bool dof_enabled = false;
+
+	if (environment)
+		dof_enabled = environment->get_dof_enabled();
+
+	second_pass->set_uniform("dof_enabled", dof_enabled);
 
 	textures[RENDER_COLOR]->bind(0);
+	textures[BLUR]->bind(1);
+	textures[DEFERRED_DEPTH]->bind(2);
 
 	if (draw_on_screen)
 		final_buffer->unbind();
@@ -1026,6 +1064,7 @@ void DeferredRenderer::render()
 		render_ssao();
 	
 	render_first_pass();
+	render_blur();
 
 	if (draw_world)
 		render_flare();
@@ -1103,7 +1142,9 @@ String DeferredRenderer::get_texture_typename(int p_type) const
 		CASE(LIGHTING);
 		CASE(VIRTUALTEX);
 		CASE(INDIRECTION);
+		CASE(BLUR);
 	}
+	
 	T_LOG("Invalid texture type: " + p_type);
 	return "invalid";
 }
@@ -1112,6 +1153,7 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 {
 	if (p_typename == "FINAL_COLOR")
 		return FINAL_COLOR;
+	
 	ELSEIF(RENDER_COLOR)
 	ELSEIF(RENDER_DEPTH)
 	ELSEIF(DEFERRED_ALBEDO)
@@ -1129,6 +1171,7 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 	ELSEIF(LIGHTING)
 	ELSEIF(VIRTUALTEX)
 	ELSEIF(INDIRECTION)
+	ELSEIF(BLUR)
 	
 	T_LOG("Invalid texture typename: " + p_typename);
 	return -1;

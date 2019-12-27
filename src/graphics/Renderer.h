@@ -202,7 +202,8 @@ public:
 		DOF,
 		LIGHTING,
 		VIRTUALTEX,
-		INDIRECTION
+		INDIRECTION,
+		BLUR
 	};
 
 	vec3 get_position_at_pixel(const vec2& p_pos) const;
@@ -222,6 +223,7 @@ public:
 private:
 	void generate_ssao_kernel();
 
+	void render_blur();
 	void render_bloom();
 	void render_ssao();
 	void render_shadowmap();
@@ -240,7 +242,7 @@ private:
 	FBO2D* reflection_buffer;
 	FBO2D* final_buffer;
 	FBO2D* ssao_buffer;
-	FBO2D* ssao_blur_buffer;
+	FBO2D* ssao_blur_horiz_buffer;
 	FBO2D* godray_buffer;
 	FBO2D* bloom_buffer;
 	FBO2D* dof_buffer;
@@ -249,7 +251,8 @@ private:
 	FBO2D* indirection_buffer;
 	FBO2D* save_buffer;
 
-	FBO2D* blur_buffer;
+	FBO2D* blur_horiz_buffer;
+	FBO2D* blur_vert_buffer;
 
 	Camera* reflection_camera;
 	Camera* light_camera;
@@ -262,6 +265,7 @@ private:
 	Shader* bloom;
 	Shader* virtual_tex;
 	Shader* tex_shader;
+	Shader* blur_shader;
 
 	Environment* environment;
 

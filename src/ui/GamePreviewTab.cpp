@@ -139,6 +139,7 @@ void GamePreviewTab::update_textures()
 	//a.push_back(DeferredRenderer::LIGHTING);
 	a.push_back(DeferredRenderer::VIRTUALTEX);
 	a.push_back(DeferredRenderer::INDIRECTION);
+	a.push_back(DeferredRenderer::BLUR);
 
 
 	for (int c = 0; c < a.size(); c++)
