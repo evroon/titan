@@ -24,7 +24,7 @@ uniform float water_height;
 
 in vec3 pos;
 
-const vec2 terrain_count = vec2(8, 8);
+const vec2 terrain_count = vec2(16);
 const vec2 page_size = vec2(128, 128);
 const vec2 physical_tex_size = vec2(1024, 1024);
 

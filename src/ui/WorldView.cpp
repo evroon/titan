@@ -910,7 +910,6 @@ int WorldView::get_display_mode() const
 vec3 WorldView::get_click_position_in_world()
 {
 	DeferredRenderer* renderer = viewport->get_renderer()->cast_to_type<DeferredRenderer*>();
-	Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
 	Raycaster r(viewport);
 	vec3 p;
 	vec2 sp = vec2(MOUSE->get_position() - viewport->get_area().get_pos());

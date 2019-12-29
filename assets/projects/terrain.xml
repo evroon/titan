@@ -8,22 +8,23 @@
 						<children count="6">
 							<Camera type="Camera">
 								<children count="0"/>
-								<properties count="14">
+								<properties count="15">
 									<near type="float" value="0.5"/>
 									<far type="float" value="50000"/>
 									<fov type="float" value="30"/>
 									<zoom type="float" value="1"/>
+									<ortho_size type="vec2" value="{ 100.000000, 100.000000 }"/>
 									<script type="NULL"/>
 									<name type="String" value="Camera"/>
-									<pos type="vec3" value="{ 61.445587, -180.558487, 3.452640 }"/>
+									<pos type="vec3" value="{ -41.783775, -303.477936, 17.157837 }"/>
 									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 0.021558, 0.189930, -0.008240 }"/>
+									<rotation type="vec3" value="{ -0.072917, -0.039222, 0.003813 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 61.445587, -180.558487, 3.452640 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.021558, 0.189930, -0.008240 } }"/>
+									<transform type="Transform" value="{ pos: { -41.783775, -303.477936, 17.157837 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.072917, -0.039222, 0.003813 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 61.445587, -180.558487, 3.452640 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.021558, 0.189930, -0.008240 } }"/>
+											<transform type="Transform" value="{ pos: { -41.783775, -303.477936, 17.157837 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { -0.072917, -0.039222, 0.003813 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -40,13 +41,13 @@
 									<name type="String" value="DirectionalLight"/>
 									<pos type="vec3" value="{ 80.000000, 300.000000, 60.000000 }"/>
 									<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
-									<rotation type="vec3" value="{ 2.900000, 0.000000, 3.100000 }"/>
+									<rotation type="vec3" value="{ 3.000000, -0.000000, 3.100000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 80.000000, 300.000000, 60.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 2.900000, 0.000000, 3.100000 } }"/>
+									<transform type="Transform" value="{ pos: { 80.000000, 300.000000, 60.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 3.000000, -0.000000, 3.100000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 80.000000, 300.000000, 60.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 2.900000, 0.000000, 3.100000 } }"/>
+											<transform type="Transform" value="{ pos: { 80.000000, 300.000000, 60.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 3.000000, -0.000000, 3.100000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -83,15 +84,21 @@
 							</Sky>
 							<Environment type="Environment">
 								<children count="0"/>
-								<properties count="18">
+								<properties count="24">
 									<ambient_color type="Color" value="{ r = 2.000000, g = 2.000000, b = 2.000000, a = 1.000000 }"/>
 									<auto_exposure_enabled type="bool" value="true"/>
+									<exposure type="float" value="3.3"/>
+									<gamma type="float" value="0.4"/>
 									<fog_enabled type="bool" value="true"/>
-									<fog_density type="float" value="0.003"/>
-									<fog_gradient type="float" value="3"/>
-									<dof_enabled type="bool" value="true"/>
+									<fog_density type="float" value="0.002"/>
+									<fog_gradient type="float" value="2"/>
+									<dof_enabled type="bool" value="false"/>
+									<dof_rate type="float" value="5"/>
+									<dof_focus type="float" value="0.05"/>
+									<bloom_threshold type="float" value="0.9"/>
 									<ssao_enabled type="bool" value="false"/>
 									<ssao_radius type="float" value="0.1"/>
+									<bloom_enabled type="bool" value="true"/>
 									<script type="NULL"/>
 									<name type="String" value="Environment"/>
 									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
@@ -113,19 +120,43 @@
 								</properties>
 							</Environment>
 							<Terrain type="Terrain">
-								<children count="0"/>
+								<children count="1">
+									<TerrainNoise type="TerrainNoise">
+										<children count="0"/>
+										<properties count="10">
+											<script type="NULL"/>
+											<name type="String" value="TerrainNoise"/>
+											<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+											<size type="vec3" value="{ 1.000000, 1.000000, 1.000000 }"/>
+											<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
+											<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+											<visible type="bool" value="true"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transformcomponent type="TransformComponent">
+												<properties count="1">
+													<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 1.000000, 1.000000, 1.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+												</properties>
+											</transformcomponent>
+											<rendercomponent type="RenderComponent">
+												<properties count="1">
+													<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
+												</properties>
+											</rendercomponent>
+										</properties>
+									</TerrainNoise>
+								</children>
 								<properties count="10">
 									<script type="NULL"/>
 									<name type="String" value="Terrain"/>
 									<pos type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
-									<size type="vec3" value="{ 50.000000, 50.000000, 50.000000 }"/>
+									<size type="vec3" value="{ 50.000000, 50.000000, 100.000000 }"/>
 									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 50.000000, 50.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 50.000000, 100.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 50.000000, 50.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { 0.000000, 0.000000, 0.000000 }, size: { 50.000000, 50.000000, 100.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">
@@ -140,15 +171,15 @@
 								<properties count="10">
 									<script type="NULL"/>
 									<name type="String" value="Water"/>
-									<pos type="vec3" value="{ 61.445587, -180.558487, 0.000000 }"/>
-									<size type="vec3" value="{ 1000.000000, 1000.000000, 0.000000 }"/>
+									<pos type="vec3" value="{ -41.783775, -303.477936, -35.000000 }"/>
+									<size type="vec3" value="{ 10000.000000, 10000.000000, 0.000000 }"/>
 									<rotation type="vec3" value="{ 0.000000, 0.000000, 0.000000 }"/>
 									<color type="Color" value="{ r = 1.000000, g = 1.000000, b = 1.000000, a = 1.000000 }"/>
 									<visible type="bool" value="true"/>
-									<transform type="Transform" value="{ pos: { 61.445587, -180.558487, 0.000000 }, size: { 1000.000000, 1000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+									<transform type="Transform" value="{ pos: { -41.783775, -303.477936, -35.000000 }, size: { 10000.000000, 10000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 									<transformcomponent type="TransformComponent">
 										<properties count="1">
-											<transform type="Transform" value="{ pos: { 61.445587, -180.558487, 0.000000 }, size: { 1000.000000, 1000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
+											<transform type="Transform" value="{ pos: { -41.783775, -303.477936, -35.000000 }, size: { 10000.000000, 10000.000000, 0.000000 }, rotation: { 0.000000, 0.000000, 0.000000 } }"/>
 										</properties>
 									</transformcomponent>
 									<rendercomponent type="RenderComponent">

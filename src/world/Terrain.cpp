@@ -59,7 +59,7 @@ void TerrainBrush::handle()
 	if (!to_apply)
 		return;
 
-	Transform t = Transform(pos / (8.0f * terrain->get_size().x * 0.5f), vec2(radius / (8.0f * terrain->get_size().y * 0.5f)));
+	Transform t = Transform(pos / (terrain->node_count.x * terrain->get_size().x * 0.5f), vec2(radius / (terrain->node_count.y * terrain->get_size().y * 0.5f)));
 
 	Texture2D* heightmap = terrain->get_heightmap();
 
@@ -163,7 +163,7 @@ Terrain::Terrain()
 {
 	height_factor = 1.0f;
 
-	node_count = vec2i(8, 8);
+	node_count = vec2i(16);
 	init();
 }
 

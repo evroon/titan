@@ -21,6 +21,7 @@ void Window::Init()
 void Window::CreateGLContext()
 {
 	SDL_GL_CreateContext(window);
+	SDL_GL_SetSwapInterval(0);
 }
 
 void Window::SwapBuffer()
