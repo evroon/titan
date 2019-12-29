@@ -67,6 +67,12 @@ void Texture::set_filter(FilterType p_filter_type)
 	}
 }
 
+void Texture::set_shadow_parameters()
+{
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+}
+
 unsigned Texture::get_id() const
 {
 	return id;

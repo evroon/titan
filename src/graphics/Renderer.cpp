@@ -482,9 +482,13 @@ DeferredRenderer::DeferredRenderer()
 	final_buffer->add_depth_texture();
 	final_buffer->init();
 	
-	shadow_buffer = new FBO2D(vec2i(4096));
-	shadow_buffer->add_depth_texture();
-	shadow_buffer->init();
+	for (int c= 0; c < 3; c++) {
+		shadow_buffers.push_back(new FBO2D(vec2i(4096)));
+		shadow_buffers[c]->add_depth_texture();
+		shadow_buffers[c]->init();
+		shadow_buffers[c]->depth_tex->bind(0);
+		shadow_buffers[c]->depth_tex->set_shadow_parameters();
+	}
 
 	ssao_buffer = new FBO2D(WINDOWSIZE);
 	ssao_buffer->add_color_texture();
@@ -499,22 +503,27 @@ DeferredRenderer::DeferredRenderer()
 	reflection_buffer->add_depth_texture();
 	reflection_buffer->init();
 
-	godray_buffer = new FBO2D(WINDOWSIZE / 2);
+	godray_buffer = new FBO2D(WINDOWSIZE);
 	godray_buffer->add_color_texture();
 	godray_buffer->init();
 	godray_buffer->clear_color = Color(0, 0, 0);
 
-	bloom_buffer = new FBO2D(WINDOWSIZE / 2);
-	bloom_buffer->add_color_texture();
-	bloom_buffer->init();
-	bloom_buffer->clear_color = Color(0, 0, 0);
+	bloom_horiz_buffer = new FBO2D(WINDOWSIZE);
+	bloom_horiz_buffer->add_color_texture();
+	bloom_horiz_buffer->init();
+	bloom_horiz_buffer->clear_color = Color(0, 0, 0);
 
-	blur_horiz_buffer = new FBO2D(WINDOWSIZE / 2);
+	bloom_vert_buffer = new FBO2D(WINDOWSIZE);
+	bloom_vert_buffer->add_color_texture();
+	bloom_vert_buffer->init();
+	bloom_vert_buffer->clear_color = Color(0, 0, 0);
+
+	blur_horiz_buffer = new FBO2D(WINDOWSIZE);
 	blur_horiz_buffer->add_color_texture();
 	blur_horiz_buffer->init();
 	blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
 
-	blur_vert_buffer = new FBO2D(WINDOWSIZE / 2);
+	blur_vert_buffer = new FBO2D(WINDOWSIZE);
 	blur_vert_buffer->add_color_texture();
 	blur_vert_buffer->init();
 	blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
@@ -538,12 +547,17 @@ DeferredRenderer::DeferredRenderer()
 	save_buffer->init();
 	save_buffer->clear_color = Color(0, 0, 0);
 
+	for (int c = 0; c < 3; c++)
+		light_matrices.push_back(mat4());
+
 	buffers.push_back(deferred_buffer);
 	buffers.push_back(render_buffer);
 	buffers.push_back(final_buffer);
-	buffers.push_back(shadow_buffer);
 	buffers.push_back(reflection_buffer);
-	buffers.push_back(bloom_buffer);
+	buffers.push_back(bloom_vert_buffer);
+
+	for (int c = 0; c < 3; c++)
+		buffers.push_back(shadow_buffers[0]);
 
 	textures.set(DEFERRED_ALBEDO, deferred_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_POSITION, deferred_buffer->color_textures[1]->cast_to_type<Texture2D*>());
@@ -551,7 +565,9 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(DEFERRED_MATERIAL, deferred_buffer->color_textures[3]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_SPECULAR, deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_DEPTH, deferred_buffer->depth_tex->cast_to_type<Texture2D*>());
-	textures.set(SHADOW, shadow_buffer->depth_tex->cast_to_type<Texture2D*>());
+	textures.set(SHADOW_FAR, shadow_buffers[0]->depth_tex->cast_to_type<Texture2D*>());
+	textures.set(SHADOW_MIDDLE, shadow_buffers[1]->depth_tex->cast_to_type<Texture2D*>());
+	textures.set(SHADOW_NEAR, shadow_buffers[2]->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(FINAL_COLOR, final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(RENDER_COLOR, render_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(RENDER_DEPTH, render_buffer->depth_tex->cast_to_type<Texture2D*>());
@@ -559,7 +575,7 @@ DeferredRenderer::DeferredRenderer()
 	textures.set(SSAO, ssao_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(SSAO_BLUR, ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(GODRAY, godray_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	textures.set(BLOOM, bloom_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(BLOOM, bloom_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(VIRTUALTEX, virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(INDIRECTION, indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(BLUR, blur_vert_buffer->color_textures[0]->cast_to_type<Texture2D*>());
@@ -661,6 +677,7 @@ void DeferredRenderer::render_blur()
 	textures[RENDER_COLOR]->bind(0);
 	blur_shader->set_uniform("step", vec2(0.0f, step.y));
 	blur_shader->set_uniform("tex", 0);
+	blur_shader->set_uniform("range", 4.0);
 
 	draw_plane();
 
@@ -673,11 +690,38 @@ void DeferredRenderer::render_blur()
 
 void DeferredRenderer::render_bloom()
 {
+	vec2 step = vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
+
+	float threshold = 0.6f;
+	if (environment)
+		threshold = environment->get_bloom_threshold();
+
+	// First draw bloom to horizontal buffer.
 	bloom->bind();
-	bloom_buffer->bind();
+	bloom_horiz_buffer->bind();
 
 	textures[RENDER_COLOR]->bind(0);
-	bloom->set_uniform("input", 0);
+	bloom->set_uniform("tex", 0);
+	bloom->set_uniform("threshold", threshold);
+
+	draw_plane();
+
+	// Now blur the bloom vertically to vertical buffer.
+	bloom_horiz_buffer->color_textures[0]->bind(0);
+	bloom_vert_buffer->bind();
+	blur_shader->bind();
+	blur_shader->set_uniform("step", vec2(0.0f, step.y));
+	blur_shader->set_uniform("tex", 0);
+	blur_shader->set_uniform("range", 8.0);
+
+	draw_plane();
+
+	// Now blur the bloom horizontally to horizontal buffer.
+	bloom_horiz_buffer->bind();
+	bloom_vert_buffer->color_textures[0]->bind(0);
+	blur_shader->set_uniform("step", vec2(step.x, 0.0f));
+
+	draw_plane();
 }
 
 void DeferredRenderer::render_ssao()
@@ -716,37 +760,44 @@ void DeferredRenderer::render_ssao()
 	draw_plane();
 }
 
-void DeferredRenderer::render_shadowmap()
+void DeferredRenderer::render_shadowmaps()
 {
-	Camera* c = viewport->world->get_active_camera();
+	Camera* camera = viewport->world->get_active_camera();
 	DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 
-	if (!light || !c)
+	if (!light || !camera)
 		return;
 
-	light_camera->set_pos(light->get_direction() * -400.0f + vec3(c->get_pos().get_xy(), 0.0f));
+	Array<float> view_size = Array<float>(600, 200, 50);
+
 	light_camera->set_rotation(light->get_rotation());
-	light_camera->set_ortho_projection(1.0f, 1000.0f, vec2(200.0f));
 
-	light_camera->update_matrices();
-
-	shadow_buffer->bind();
-	set_camera(light_camera);
-
-	light_matrix = light_camera->get_final_matrix();
-
-	RENDERER->use_depth_test(c->get_near(), c->get_far());
-	
-	for (int c = 0; c < viewport->world->get_child_count(); c++)
+	for (int i = 0; i < 3; i++)
 	{
-		Node* n = viewport->world->get_child_by_index(c);
-		WorldObject* wo = n->cast_to_type<WorldObject*>();
-		wo->notificate(WorldObject::NOTIFICATION_DRAW);
+		light_camera->set_pos(light->get_direction() * -800 + vec3(camera->get_pos().get_xy(), 0.0f));
+		light_camera->set_ortho_projection(1.0f, 2000.0f, vec2(view_size[i]));
+		light_camera->update_matrices();
+		set_camera(light_camera);
+
+		shadow_buffers[i]->bind();
+		light_matrices[i] = light_camera->get_final_matrix();
+
+		RENDERER->use_depth_test(camera->get_near(), camera->get_far());
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		
+		for (int c = 0; c < viewport->world->get_child_count(); c++)
+		{
+			Node* n = viewport->world->get_child_by_index(c);
+			WorldObject* wo = n->cast_to_type<WorldObject*>();
+			wo->notificate(WorldObject::NOTIFICATION_DRAW);
+		}
 	}
 	
 	RENDERER->stop_depth_test();
 
-	set_camera(c);
+	set_camera(camera);
 }
 
 void DeferredRenderer::render_reflection()
@@ -883,10 +934,11 @@ void DeferredRenderer::render_first_pass()
 	textures[DEFERRED_POSITION]->bind(1);
 	textures[DEFERRED_NORMAL]->bind(2);
 	textures[DEFERRED_MATERIAL]->bind(3);
-	textures[SHADOW]->bind(4);
-	textures[GODRAY]->bind(5);
-	textures[BLOOM]->bind(6);
-	textures[SSAO]->bind(7);
+	textures[SHADOW_FAR]->bind(4);
+	textures[SHADOW_MIDDLE]->bind(5);
+	textures[SHADOW_NEAR]->bind(6);
+	textures[GODRAY]->bind(7);
+	textures[SSAO]->bind(8);
 
 	Color sky_color;
 	Color light_color;
@@ -915,11 +967,15 @@ void DeferredRenderer::render_first_pass()
 	first_pass->set_uniform("g_position", 1);
 	first_pass->set_uniform("g_normal", 2);
 	first_pass->set_uniform("g_material", 3);
-	first_pass->set_uniform("shadow_map", 4);
-	first_pass->set_uniform("godray_tex", 5);
-	first_pass->set_uniform("ssao_tex", 7);
+	first_pass->set_uniform("shadow_map_far", 4);
+	first_pass->set_uniform("shadow_map_middle", 5);
+	first_pass->set_uniform("shadow_map_near", 6);
+	first_pass->set_uniform("godray_tex", 7);
+	first_pass->set_uniform("ssao_tex", 8);
 
-	first_pass->set_uniform("light_matrix", light_matrix);
+	first_pass->set_uniform("light_matrix_far", light_matrices[0]);
+	first_pass->set_uniform("light_matrix_middle", light_matrices[1]);
+	first_pass->set_uniform("light_matrix_near", light_matrices[2]);
 	first_pass->set_uniform("lighting_enabled", lighting_enabled);
 	first_pass->set_uniform("light_dir", light_dir);
 	first_pass->set_uniform("light_color", vec3(1.0));
@@ -953,21 +1009,38 @@ void DeferredRenderer::render_first_pass()
 void DeferredRenderer::render_second_pass()
 {
 	second_pass->bind();
-	second_pass->set_uniform("gamma", 1.0f);
 	second_pass->set_uniform("render_buffer", 0);
 	second_pass->set_uniform("blur_buffer", 1);
 	second_pass->set_uniform("depth_buffer", 2);
-	second_pass->set_uniform("exposure", 1.0f);
-	bool dof_enabled = false;
+	second_pass->set_uniform("bloom_buffer", 3);
 
-	if (environment)
+	bool dof_enabled = false;
+	float dof_rate = 4.0f;
+	float dof_focus = 0.0f;
+	bool bloom_enabled = false;
+	float exposure = 1.0f;
+	float gamma = 1.0f;
+
+	if (environment) {
 		dof_enabled = environment->get_dof_enabled();
+		dof_rate = environment->get_dof_rate();
+		dof_focus = environment->get_dof_focus();
+		bloom_enabled = environment->get_bloom_enabled();
+		exposure = environment->get_exposure();
+		gamma = environment->get_gamma();
+	}
 
 	second_pass->set_uniform("dof_enabled", dof_enabled);
+	second_pass->set_uniform("bloom_enabled", bloom_enabled);
+	second_pass->set_uniform("dof_rate", dof_rate);
+	second_pass->set_uniform("dof_focus", dof_focus);
+	second_pass->set_uniform("exposure", exposure);
+	second_pass->set_uniform("gamma", gamma);
 
 	textures[RENDER_COLOR]->bind(0);
 	textures[BLUR]->bind(1);
 	textures[DEFERRED_DEPTH]->bind(2);
+	textures[BLOOM]->bind(3);
 
 	if (draw_on_screen)
 		final_buffer->unbind();
@@ -1056,7 +1129,7 @@ void DeferredRenderer::render()
 	deactivate_canvas_transform();
 	
 	render_virtual_tex();
-	render_shadowmap();
+	render_shadowmaps();
 	render_reflection();
 	render_godray();
 
@@ -1064,6 +1137,10 @@ void DeferredRenderer::render()
 		render_ssao();
 	
 	render_first_pass();
+
+	if (environment && environment->get_bloom_enabled())
+		render_bloom();
+	
 	render_blur();
 
 	if (draw_world)
@@ -1133,7 +1210,9 @@ String DeferredRenderer::get_texture_typename(int p_type) const
 		CASE(DEFERRED_MATERIAL);
 		CASE(DEFERRED_DEPTH);
 		CASE(REFLECTION);
-		CASE(SHADOW);
+		CASE(SHADOW_FAR);
+		CASE(SHADOW_MIDDLE);
+		CASE(SHADOW_NEAR);
 		CASE(SSAO);
 		CASE(SSAO_BLUR);
 		CASE(GODRAY);
@@ -1162,7 +1241,9 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 	ELSEIF(DEFERRED_MATERIAL)
 	ELSEIF(DEFERRED_DEPTH)
 	ELSEIF(REFLECTION)
-	ELSEIF(SHADOW)
+	ELSEIF(SHADOW_FAR)
+	ELSEIF(SHADOW_MIDDLE)
+	ELSEIF(SHADOW_NEAR)
 	ELSEIF(SSAO)
 	ELSEIF(SSAO_BLUR)
 	ELSEIF(GODRAY)

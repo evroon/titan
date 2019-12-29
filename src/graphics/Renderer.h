@@ -194,7 +194,9 @@ public:
 		DEFERRED_DEPTH,
 		DEFERRED_SPECULAR,
 		REFLECTION,
-		SHADOW,
+		SHADOW_FAR,
+		SHADOW_MIDDLE,
+		SHADOW_NEAR,
 		SSAO,
 		SSAO_BLUR,
 		GODRAY,
@@ -226,7 +228,7 @@ private:
 	void render_blur();
 	void render_bloom();
 	void render_ssao();
-	void render_shadowmap();
+	void render_shadowmaps();
 	void render_reflection();
 	void render_flare();
 	void render_godray();
@@ -238,21 +240,23 @@ private:
 
 	FBO2D* deferred_buffer;
 	FBO2D* render_buffer;
-	FBO2D* shadow_buffer;
 	FBO2D* reflection_buffer;
 	FBO2D* final_buffer;
 	FBO2D* ssao_buffer;
 	FBO2D* ssao_blur_horiz_buffer;
 	FBO2D* godray_buffer;
-	FBO2D* bloom_buffer;
 	FBO2D* dof_buffer;
 	FBO2D* lighting_buffer;
 	FBO2D* virtual_tex_buffer;
 	FBO2D* indirection_buffer;
 	FBO2D* save_buffer;
+	Vector<FBO2D> shadow_buffers;
 
 	FBO2D* blur_horiz_buffer;
 	FBO2D* blur_vert_buffer;
+
+	FBO2D* bloom_horiz_buffer;
+	FBO2D* bloom_vert_buffer;
 
 	Camera* reflection_camera;
 	Camera* light_camera;
@@ -277,5 +281,5 @@ private:
 
 	Array<vec4> kernel;
 
-	mat4 light_matrix;
+	Array<mat4> light_matrices;
 };

@@ -76,11 +76,18 @@ void Environment::bind_methods()
 
 	REG_PROPERTY(ambient_color);
 	REG_PROPERTY(auto_exposure_enabled);
+	REG_PROPERTY(exposure);
+	REG_PROPERTY(gamma);
 	REG_PROPERTY(fog_enabled);
 	REG_PROPERTY(fog_density);
 	REG_PROPERTY(fog_gradient);
 	REG_PROPERTY(dof_enabled);
+	REG_PROPERTY(dof_rate);
+	REG_PROPERTY(dof_focus);
+	REG_PROPERTY(bloom_threshold);
 	REG_PROPERTY(ssao_enabled);
 	REG_PROPERTY(ssao_radius);
+	REG_PROPERTY(bloom_enabled);
+	REG_PROPERTY(bloom_threshold);
 
 }

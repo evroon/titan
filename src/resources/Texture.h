@@ -46,6 +46,7 @@ public:
 	void unbind(int p_unit);
 
 	void set_filter(FilterType p_filter_type);
+	void set_shadow_parameters();
 
 	unsigned get_id() const;
 

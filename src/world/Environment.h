@@ -26,44 +26,56 @@ public:
 	float get_fog_gradient() const;
 
 	SIMPLE_GET_SET(bool, dof_enabled);
+	SIMPLE_GET_SET(float, dof_rate);
+	SIMPLE_GET_SET(float, dof_focus);
 
 	SIMPLE_GET_SET(bool, ssao_enabled);
 	SIMPLE_GET_SET(float, ssao_radius);
 
+	SIMPLE_GET_SET(bool, bloom_enabled);
+	SIMPLE_GET_SET(float, bloom_threshold);
+
+	SIMPLE_GET_SET(float, exposure);
+	SIMPLE_GET_SET(float, gamma);
+
 	static void bind_methods();
 
 private:
-	//ambient
+	// Ambient
 	Color ambient_color;
 
-	//auto exposure
+	// Auto exposure
 	bool auto_exposure_enabled;
 	float auto_exposure_speed;
 	float auto_exposure_max;
 	float auto_exposure_min;
+	float exposure;
+	float gamma;
 
-	//bloom
+	// Bloom
 	bool bloom_enabled;
+	float bloom_threshold;
 
-	//fog
+	// Fog
 	bool fog_enabled;
 	float fog_density;
 	float fog_gradient;
 	Color fog_color;
 
-	//dof
+	// DoF
 	bool dof_enabled;
+	float dof_rate;
+	float dof_focus;
 
-	//godrays
+	// Godrays
 	bool godrays_enabled;
 
-	//lighting
+	// Lighting
 	bool lighting_enabled;
 	bool volumetric_lighting_enabled;
 
-	//tonemapping
+	// Tonemapping
 	int tonemap_type;
-	float exposure;
 
 	// SSAO
 	bool ssao_enabled;

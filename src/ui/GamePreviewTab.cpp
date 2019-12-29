@@ -125,12 +125,13 @@ void GamePreviewTab::update_textures()
 	a.push_back(DeferredRenderer::DEFERRED_NORMAL);
 	a.push_back(DeferredRenderer::DEFERRED_MATERIAL);
 	a.push_back(DeferredRenderer::DEFERRED_DEPTH);
-	a.push_back(DeferredRenderer::SHADOW);
+	a.push_back(DeferredRenderer::SHADOW_FAR);
+	a.push_back(DeferredRenderer::SHADOW_MIDDLE);
+	a.push_back(DeferredRenderer::SHADOW_NEAR);
 	a.push_back(DeferredRenderer::FINAL_COLOR);
 	a.push_back(DeferredRenderer::RENDER_COLOR);
 	a.push_back(DeferredRenderer::RENDER_DEPTH);
 	a.push_back(DeferredRenderer::REFLECTION);
-	a.push_back(DeferredRenderer::SHADOW);
 	a.push_back(DeferredRenderer::SSAO);
 	a.push_back(DeferredRenderer::SSAO_BLUR);
 	a.push_back(DeferredRenderer::GODRAY);

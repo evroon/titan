@@ -5,13 +5,17 @@ uniform sampler2D g_albedo;
 uniform sampler2D g_position;
 uniform sampler2D g_normal;
 uniform sampler2D g_material;
-uniform sampler2D shadow_map;
 uniform sampler2D godray_tex;
 uniform sampler2D ssao_tex;
+uniform sampler2DShadow shadow_map_far;
+uniform sampler2DShadow shadow_map_middle;
+uniform sampler2DShadow shadow_map_near;
 
 uniform mat4 inv_proj;
 uniform mat4 inv_view;
-uniform mat4 light_matrix;
+uniform mat4 light_matrix_far;
+uniform mat4 light_matrix_middle;
+uniform mat4 light_matrix_near;
 
 uniform vec3 cam_pos;
 uniform vec3 light_pos;
@@ -39,6 +43,7 @@ int step_count = 8;
 int light_samples = 5;
 float cutoff = 0.55;
 
+const vec2 shadow_map_size = vec2(4096);
 
 //http://prideout.net/blog/?p=64
 struct Ray
@@ -245,20 +250,40 @@ float get_fog()
 	return clamp(visibility, 0.0, 1.0);
 }
 
-float shadow_calc()
+bool is_in_bounding_box(const vec3 position)
 {
-    vec4 pos_light_space = light_matrix * vec4(position.xyz, 1.0);
-    vec3 projCoords = pos_light_space.xyz / pos_light_space.w * vec3(0.5) + vec3(0.5);
-	
-	if (projCoords.x < 0.0 || projCoords.x > 1.0 || projCoords.y < 0.0 || projCoords.y > 1.0 || projCoords.z < 0.0 || projCoords.z > 1.0)
-		return 1.0;
-	
-    float closestDepth = texture2D(shadow_map, projCoords.xy).r;
-    float currentDepth = projCoords.z;
-    float bias = 0.001;
-	float shadow = currentDepth - bias > closestDepth ? 0.6 : 0.0;
+	return position.x > 0.0 && position.x < 1.0 && position.y > 0.0 && position.y < 1.0 && position.z > 0.0 && position.z < 1.0;
+}
 
-    return 1.0 - shadow;
+float get_shadow()
+{
+    float bias = -0.0005;
+	float factor = 0.0;
+	
+	vec4 pos_light_space_far = light_matrix_far * vec4(position, 1.0);
+	vec4 pos_light_space_middle = light_matrix_middle * vec4(position, 1.0);
+	vec4 pos_light_space_near = light_matrix_near * vec4(position, 1.0);
+
+	vec3 proj_coords_far = pos_light_space_far.xyz / pos_light_space_far.w * vec3(0.5) + vec3(0.5);
+	vec3 proj_coords_middle = pos_light_space_middle.xyz / pos_light_space_middle.w * vec3(0.5) + vec3(0.5);
+	vec3 proj_coords_near = pos_light_space_near.xyz / pos_light_space_near.w * vec3(0.5) + vec3(0.5);
+
+	for (int x = -1; x <= 1; x++)
+	{
+		for (int y = -1; y <= 1; y++)
+		{
+			vec3 offset = vec3(x / shadow_map_size.x, y / shadow_map_size.y, bias);
+
+			if (is_in_bounding_box(proj_coords_near))
+				factor += texture(shadow_map_near, proj_coords_near + offset);
+			else if (is_in_bounding_box(proj_coords_middle))
+				factor += texture(shadow_map_middle, proj_coords_middle + offset);
+			else
+				factor += texture(shadow_map_far, proj_coords_far + offset);
+		}
+	}
+
+    return factor / 18.0 + 0.5;
 }
 
 void main()
@@ -283,7 +308,7 @@ void main()
 		return;
 	}
 	
-	vec3 finalcolor = albedo * lighting() * shadow_calc();
+	vec3 finalcolor = albedo * lighting() * get_shadow();
 	finalcolor = mix(sky_color, finalcolor, get_fog());
 		
 	//if (clouds_enabled)

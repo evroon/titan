@@ -1,9 +1,11 @@
+#version 330 core
+
 uniform sampler2D tex;
-varying vec2 texcoords;
+
+in vec2 texcoords;
 
 uniform vec2 step;
-
-const float range = 4.0;
+uniform float range;
 
 void main()
 {
