@@ -149,6 +149,7 @@ void WorldView::notification(int p_notification)
 
 	World* world = viewport->get_world();
 	Canvas* canvas = viewport->get_canvas();
+	Terrain* terrain = world->get_child_by_type<Terrain*>();
 
 	
 	switch (p_notification)
@@ -165,6 +166,9 @@ void WorldView::notification(int p_notification)
 
 	case NOTIFICATION_DRAW:
 		update_camera();
+
+		if (MOUSE->is_pressed(Mouse::LEFT) && terrain && get_focused())
+			terrain->get_brush()->apply();
 
 		return_viewport = ACTIVE_VIEWPORT;
 		viewport->get_fbo()->clear();
@@ -453,8 +457,6 @@ void WorldView::handle_event(UIEvent *ui_event)
 					if (ui_event->press_type == UIEvent::DOWN)
 					{
 						drag_type = DRAG_INACTIVE;
-						if (terrain)
-							terrain->get_brush()->apply();
 
 						if (m.z > 0.6f - alias && m.z < 0.6f + alias)
 							drag_type = DRAG_X;
