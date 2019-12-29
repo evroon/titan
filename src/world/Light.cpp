@@ -73,7 +73,7 @@ DirectionalLight::~DirectionalLight()
 
 vec3 DirectionalLight::get_direction() const
 {
-	return vec3(0, -1, -0.4).normalize();
+	return (get_transform().get_model().inverse() * vec4(0.0f, 1.0f, 0.0f, 0.0f)).get_xyz().normalize();
 }
 
 #undef CLASSNAME

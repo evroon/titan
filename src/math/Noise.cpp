@@ -23,7 +23,7 @@ Noise::~Noise()
 
 PerlinNoise::PerlinNoise()
 {
-	perlin_noise.SetOctaveCount(8);
+	perlin_noise.SetOctaveCount(10);
 	perlin_noise.SetFrequency(1);
 	perlin_noise.SetPersistence(0.5);
 }

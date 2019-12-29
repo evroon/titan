@@ -548,12 +548,12 @@ void WorldView::handle_event(UIEvent *ui_event)
 				terrain->compute_normals();
 			else if (terrain && ui_event->key == Key::KEY_3)
 				CONTENT->ReloadAll();
-
-			/*if (terrain)
-			{
-				vec3 p = renderer->get_position_at_pixel(sp);
-				terrain->set_selection_pos(p.get_xy());
-			}*/
+			else if (terrain && ui_event->key == Key::KEY_4) {
+				set_preview_type(get_preview_type() - 1);
+			}
+			else if (terrain && ui_event->key == Key::KEY_5) {
+				set_preview_type(get_preview_type() + 1);
+			}
 		}
 	}
 
@@ -846,7 +846,15 @@ Node* WorldView::get_highlight() const
 void WorldView::set_preview_type(int p_type)
 {
 	preview_type = p_type;
-	preview_texture = viewport->get_renderer()->get_texture(p_type);
+	
+	int last_texture_index = viewport->get_renderer()->get_textures_count() - 1;
+
+	if (preview_type > last_texture_index)
+		preview_type = 0;
+	else if (preview_type < 0)
+		preview_type = last_texture_index;
+	
+	preview_texture = viewport->get_renderer()->get_texture(preview_type);
 }
 
 int WorldView::get_preview_type()

@@ -101,6 +101,8 @@ public:
 
 	void use_wireframe(bool p_wireframe);
 
+	int get_textures_count() const;
+
 	Texture2D* get_texture(int p_type) const;
 	FBO2D* get_fbo(int p_type) const;
 
@@ -193,16 +195,14 @@ public:
 		DEFERRED_MATERIAL,
 		DEFERRED_DEPTH,
 		DEFERRED_SPECULAR,
-		REFLECTION,
 		SHADOW_FAR,
 		SHADOW_MIDDLE,
 		SHADOW_NEAR,
+		REFLECTION,
 		SSAO,
 		SSAO_BLUR,
 		GODRAY,
 		BLOOM,
-		DOF,
-		LIGHTING,
 		VIRTUALTEX,
 		INDIRECTION,
 		BLUR

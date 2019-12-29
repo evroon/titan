@@ -31,16 +31,16 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene)
 	combo_box = new ComboBox;
 	combo_box->connect("selected", this, "set_preview_type");
 
-	TextButton* toggle_2d = new TextButton("3D");
+	ImageButton* toggle_2d = new IconButton("solid/cube");
 	toggle_2d->connect("clicked",
 		Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
 			bool v = world_view->get_handle_2d();
 			world_view->set_handle_2d(!v);
 			
 			if (v)
-				toggle_2d->set_text("3D");
+				toggle_2d->set_icon("solid/cube");
 			else
-				toggle_2d->set_text("2D");
+				toggle_2d->set_icon("solid/vector-square");
 			})
 		)
 	);

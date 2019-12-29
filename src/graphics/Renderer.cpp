@@ -242,6 +242,11 @@ Texture2D* Renderer::get_texture(int p_type) const
 	return textures[p_type];
 }
 
+int Renderer::get_textures_count() const
+{
+	return textures.size();
+}
+
 FBO2D* Renderer::get_fbo(int p_type) const
 {
 	return buffers[p_type];
@@ -559,18 +564,18 @@ DeferredRenderer::DeferredRenderer()
 	for (int c = 0; c < 3; c++)
 		buffers.push_back(shadow_buffers[0]);
 
+	textures.set(FINAL_COLOR, final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(RENDER_COLOR, render_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+	textures.set(RENDER_DEPTH, render_buffer->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_ALBEDO, deferred_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_POSITION, deferred_buffer->color_textures[1]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_NORMAL, deferred_buffer->color_textures[2]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_MATERIAL, deferred_buffer->color_textures[3]->cast_to_type<Texture2D*>());
-	textures.set(DEFERRED_SPECULAR, deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
 	textures.set(DEFERRED_DEPTH, deferred_buffer->depth_tex->cast_to_type<Texture2D*>());
+	textures.set(DEFERRED_SPECULAR, deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
 	textures.set(SHADOW_FAR, shadow_buffers[0]->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(SHADOW_MIDDLE, shadow_buffers[1]->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(SHADOW_NEAR, shadow_buffers[2]->depth_tex->cast_to_type<Texture2D*>());
-	textures.set(FINAL_COLOR, final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	textures.set(RENDER_COLOR, render_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-	textures.set(RENDER_DEPTH, render_buffer->depth_tex->cast_to_type<Texture2D*>());
 	textures.set(REFLECTION, reflection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(SSAO, ssao_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 	textures.set(SSAO_BLUR, ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
@@ -774,8 +779,8 @@ void DeferredRenderer::render_shadowmaps()
 
 	for (int i = 0; i < 3; i++)
 	{
-		light_camera->set_pos(light->get_direction() * -800 + vec3(camera->get_pos().get_xy(), 0.0f));
-		light_camera->set_ortho_projection(1.0f, 2000.0f, vec2(view_size[i]));
+		light_camera->set_pos(light->get_direction() * -2000 + vec3(camera->get_pos().get_xy(), 0.0f));
+		light_camera->set_ortho_projection(1.0f, 5000.0f, vec2(view_size[i]));
 		light_camera->update_matrices();
 		set_camera(light_camera);
 
@@ -1217,8 +1222,6 @@ String DeferredRenderer::get_texture_typename(int p_type) const
 		CASE(SSAO_BLUR);
 		CASE(GODRAY);
 		CASE(BLOOM);
-		CASE(DOF);
-		CASE(LIGHTING);
 		CASE(VIRTUALTEX);
 		CASE(INDIRECTION);
 		CASE(BLUR);
@@ -1248,8 +1251,6 @@ int DeferredRenderer::get_texture_type(const String& p_typename) const
 	ELSEIF(SSAO_BLUR)
 	ELSEIF(GODRAY)
 	ELSEIF(BLOOM)
-	ELSEIF(DOF)
-	ELSEIF(LIGHTING)
 	ELSEIF(VIRTUALTEX)
 	ELSEIF(INDIRECTION)
 	ELSEIF(BLUR)

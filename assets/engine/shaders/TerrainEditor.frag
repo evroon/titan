@@ -99,6 +99,9 @@ vec3 get_color(vec3 normal)
 
 void main()
 {
+	if (pos.z < water_height)
+		discard;
+	
 	vec3 source;
 	vec2 offset = pos.xy;
 	

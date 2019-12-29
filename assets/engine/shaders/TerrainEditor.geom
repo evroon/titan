@@ -7,7 +7,7 @@ uniform mat4 view;
 uniform sampler2D heightmap;
 uniform vec3 terrain_size;
 
-const vec2 terrain_count = vec2(8, 8);
+const vec2 terrain_count = vec2(16);
 
 out vec3 pos;
 
