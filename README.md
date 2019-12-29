@@ -23,13 +23,14 @@ Libraries used:
   - FontAwesome
 
 3D graphics features:
-  - Deferred Renderer
-  - GPU tesselation
-  - Basic lighting
-  - Shadowmapping
+  - Deferred renderer
+  - GPU terrain tesselation
+  - Cascaded PCF shadowmapping
   - SSAO
-  - Terrain and water
   - Godrays and lens flare
+  - Bloom
+  - Depth of Field
+  - HDR tonemapping
   - Terrain heightmap editing on GPU
 
 # Building
