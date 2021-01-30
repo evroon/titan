@@ -1,4 +1,5 @@
 # Titan Engine
+![build](https://github.com/evroon/titan/workflows/build/badge.svg)
 
 A graphics engine using OpenGL and written in C++.
 
