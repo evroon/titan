@@ -19,9 +19,9 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y cmake librapidxml-dev libglew-dev libassimp-dev libnoise-dev libbullet-dev libbox2d-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev
 
-    - name: Build
+    - name: Configure
       run: cd src && cmake .
 
-    - name: Launch
-      run: cmake --build . -- -j8
+    - name: Build
+      run: cd src && cmake --build . -- -j8
 
