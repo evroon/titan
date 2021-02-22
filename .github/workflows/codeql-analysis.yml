@@ -1,0 +1,43 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: master
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: master
+  schedule:
+    - cron: '40 4 * * 3'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'cpp' ]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
+        # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+      
+    - name: Install dependencies
+      run: sudo apt-get install -y cmake librapidxml-dev libglew-dev libassimp-dev libnoise-dev libbullet-dev libbox2d-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev
+
+    - name: Configure
+      run: cd src && cmake .
+
+    - name: Build
+      run: cd src && cmake --build . -- -j8
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
