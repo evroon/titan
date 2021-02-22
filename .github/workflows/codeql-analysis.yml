@@ -36,6 +36,15 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: sudo apt-get install -y cmake librapidxml-dev libglew-dev libassimp-dev libnoise-dev libbullet-dev libbox2d-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev
+
+    - name: Configure
+      run: cd src && cmake .
+
+    - name: Build
+      run: cd src && cmake --build . -- -j8
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
