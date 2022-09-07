@@ -1,6 +1,6 @@
-#include "ScriptComponent.h"
+#include "scriptcomponent.h"
 
-#include "input/EventHandler.h"
+#include "input/eventhandler.h"
 
 ScriptComponent::ScriptComponent(const String &name)
 {

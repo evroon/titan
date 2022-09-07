@@ -1,6 +1,6 @@
-#include "TitanScript.h"
+#include "titanscript.h"
 
-#include "core/ContentManager.h"
+#include "core/contentmanager.h"
 
 TitanScript::TitanScript()
 {

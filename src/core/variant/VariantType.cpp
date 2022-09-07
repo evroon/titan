@@ -1,6 +1,6 @@
-#include "VariantType.h"
+#include "varianttype.h"
 
-#include "core/CoreNames.h"
+#include "core/corenames.h"
 
 VariantType::VariantType(Variant::Type type) : VariantType()
 {
@@ -102,7 +102,7 @@ bool VariantType::is_object_type() const
 }
 
 void VariantType::set_object_type(ObjectTypeRef p_object_type)
-{	
+{
 	type_name = p_object_type->name;
 }
 
@@ -159,5 +159,5 @@ VariantType::operator Variant::Type() const
 		return Variant::ARRAY;
 	else
 		return Variant::OBJECT;
-	
+
 }

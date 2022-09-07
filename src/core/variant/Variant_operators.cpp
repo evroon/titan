@@ -1,8 +1,8 @@
-#include "Variant.h"
+#include "variant.h"
 
-#include "core/TMessage.h"
-#include "core/CoreNames.h"
-#include "core/variant/VariantType.h"
+#include "core/tmessage.h"
+#include "core/corenames.h"
+#include "core/variant/varianttype.h"
 
 //Operators
 //Initialize
@@ -145,7 +145,7 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 					return i / right.i;
 				}
 				break;
-				
+
 			case VEC2:
 				switch (OPType)
 				{
@@ -201,13 +201,13 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec2(*v2 + *right.v2);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec2(*v2 - *right.v2);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec2(*v2 * *right.v2);
-					case DIVIDE: 
+					case DIVIDE:
 						return new vec2(*v2 / *right.v2);
 				}
 			}
@@ -215,13 +215,13 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec2(*v2 + right.f);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec2(*v2 - right.f);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec2(*v2 * right.f);
-					case DIVIDE: 
+					case DIVIDE:
 						return new vec2(*v2 / right.f);
 				}
 			}
@@ -231,11 +231,11 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec3(*v3 + *right.v3);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec3(*v3 - *right.v3);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec3(*v3 * *right.v3);
 					case DIVIDE:
 						return new vec3(*v3 / *right.v3);
@@ -245,29 +245,29 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec3(*v3 + right.f);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec3(*v3 - right.f);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec3(*v3 * right.f);
-					case DIVIDE: 
+					case DIVIDE:
 						return new vec3(*v3 / right.f);
 				}
-			}		
+			}
 			break;
 		case VEC4:
 			if (right.type == VEC4)
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec4(*v4 + *right.v4);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec4(*v4 - *right.v4);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec4(*v4 * *right.v4);
-					case DIVIDE: 
+					case DIVIDE:
 						return new vec4(*v4 / *right.v4);
 				}
 			}
@@ -275,13 +275,13 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new vec4(*v4 + right.f);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new vec4(*v4 - right.f);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new vec4(*v4 * right.f);
-					case DIVIDE: 
+					case DIVIDE:
 						return new vec4(*v4 / right.f);
 				}
 			}
@@ -291,11 +291,11 @@ Variant Variant::operate(const int OPType, const Variant &right) const
 			{
 				switch (OPType)
 				{
-					case ADD: 
+					case ADD:
 						return new mat4(*m4 + *right.m4);
-					case SUBTRACT: 
+					case SUBTRACT:
 						return new mat4(*m4 - *right.m4);
-					case MULTIPLY: 
+					case MULTIPLY:
 						return new mat4(*m4 * *right.m4);
 				}
 				break;
@@ -493,7 +493,7 @@ Variant::operator vec2()
 }
 Variant::operator vec3()
 {
-	return operator vec3 &();	
+	return operator vec3 &();
 }
 Variant::operator vec4()
 {
@@ -567,7 +567,7 @@ Variant::operator Object*() const
 		return nullptr;
 	else if (type == INT && i == 0)
 		return nullptr;
-	
+
 
 	convert_error("Object");
 	return nullptr;

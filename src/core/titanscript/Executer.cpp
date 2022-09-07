@@ -1,7 +1,7 @@
-#include "Executer.h"
+#include "executer.h"
 
-#include "core/Memory.h"
-#include "types/MethodMaster.h"
+#include "core/memory.h"
+#include "types/methodmaster.h"
 
 Executer::Executer()
 {
@@ -110,7 +110,7 @@ Variant Executer::GetMemberMinusOne(const Path &var)
 Variant Executer::GetMember(const Path &var)
 {
 	Variant cur = Execute(var.origin->node);
-	
+
 	for (int c = 0; c < var.path.size(); c++)		//Get each member
 	{
 		ScriptNode *n = var.path[c];
@@ -142,8 +142,8 @@ Variant Executer::GetMember(const Path &var)
 			cur = run_member_func(cur, fc);
 		}
 	}
-		
-	return cur; 
+
+	return cur;
 }
 
 Property* Executer::get_property(const Path &var)
@@ -225,7 +225,7 @@ Variant Executer::run_titan_func(const String &name, Array<Variant> paras)
 
 	for (int c = 0; c < paras.size(); c++)
 		state->addparam(paras[c]);						//Add parameters to stack
-	
+
 	if (state->FuncExists(StringName(name)))
 		Execute(state->GetFunc(StringName(name))->block);			//Execute user-defined function
 
@@ -332,7 +332,7 @@ Variant Executer::Execute(ScriptNode *node)
 	else if (type == ScriptNode::VARIABLE)
 	{
 		VariableNode *var = (VariableNode*)node;
-		
+
 		Variant* value = state->GetVar(var->name);
 
 		if (value)
@@ -446,7 +446,7 @@ Variant Executer::Execute(ScriptNode *node)
 
 		for (int c = 0; c < call->params.size(); c++)
 			state->addparam(Execute(call->params[c]));		//Add parameters to stack
-		
+
 		state->addreturn(run_method(MMASTER->static_funcs[call->name], state->GetArgs()));
 
 		state->pushparas();
@@ -462,7 +462,7 @@ Variant Executer::Execute(ScriptNode *node)
 
 		for (int c = 0; c < call->params.size(); c++)
 			state->addparam(Execute(call->params[c]));		//Add parameters to stack
-		
+
 		Method *m = MMASTER->get_method(state->extensiontype, call->name);
 		Variant result = run_method(m, state->GetArgs());
 

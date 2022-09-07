@@ -1,12 +1,12 @@
-#include "Variant.h"
+#include "variant.h"
 
-#include "resources/Font.h"
-#include "game/Scene.h"
+#include "resources/font.h"
+#include "game/scene.h"
 
-#include "input/Event.h"
+#include "input/event.h"
 
-#include "world/WorldObject.h"
-#include "core/Object.h"
+#include "world/worldobject.h"
+#include "core/object.h"
 
 #if 0
 

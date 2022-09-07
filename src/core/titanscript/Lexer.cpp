@@ -1,4 +1,4 @@
-#include "Lexer.h"
+#include "lexer.h"
 
 Lexer::Lexer(const String &src)
 {
@@ -135,7 +135,7 @@ Line Lexer::SplitLine(const String &txt)
 
 		bool prevnumber = StringUtils::IsNumber(prev);
 		bool thisnumber = StringUtils::IsNumber(kar);
-		
+
 		bool prevletter = StringUtils::IsLetter(prev) || prevnumber || (thisdot && thisnumber) || (prevdot && thisnumber);
 		bool thisletter = StringUtils::IsLetter(kar) || thisnumber || (thisdot && prevnumber) || (prevdot && thisnumber);
 
