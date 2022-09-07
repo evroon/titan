@@ -1,10 +1,10 @@
-#include "Variant.h"
+#include "variant.h"
 
-#include "core/Memory.h"
+#include "core/memory.h"
 
-#include "core/Object.h"
-#include "input/Key.h"
-#include "VariantType.h"
+#include "core/object.h"
+#include "input/key.h"
+#include "varianttype.h"
 
 Variant::Variant()
 {

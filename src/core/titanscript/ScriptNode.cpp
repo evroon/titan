@@ -1,6 +1,6 @@
-#include "ScriptNode.h"
+#include "scriptnode.h"
 
-#include "core/NodeManager.h"
+#include "core/nodemanager.h"
 
 ScriptNode::ScriptNode()
 {

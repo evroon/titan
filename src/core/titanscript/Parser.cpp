@@ -1,8 +1,8 @@
-#include "Parser.h"
+#include "parser.h"
 
-#include "core/Array.h"
-#include "types/MethodMaster.h"
-#include "Executer.h"
+#include "core/array.h"
+#include "types/methodmaster.h"
+#include "executer.h"
 
 Parser::Parser(State *_state, Line &root)
 {
@@ -34,7 +34,7 @@ int Parser::GetFirstIndex(const Array<Token> &tokens, const String src[], int sr
 
 		for (int i = 0; i < srccount; i++)
 			if ((tokens[c].text == src[i]) && level == 0)
-			{ 
+			{
 				ind = c;
 				break;
 			}
@@ -151,7 +151,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 		Line l = line.tokens.split(1, line.tokens.size() - 2);
 
 		Composition *comp = GetComposition(l);
-		
+
 		ai->nodes = comp->nodes;
 		return ai;
 	}
@@ -361,7 +361,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 
 			for (ScriptNode *n : comp->nodes)
 				sf->params.push_back(n);
-			
+
 			return sf;
 		}
 		else
@@ -373,7 +373,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 				call->params.push_back(n);
 
 			return call;
-		}		
+		}
 	}
 	else if (line.EndsWith("++") || line.EndsWith("--"))											//Add or subtract one
 	{
@@ -408,7 +408,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 		if (def)
 			return new Constant(def->value);
 
-		//Is it a member variable? 
+		//Is it a member variable?
 		else if (!line.ContainsOutside(".") && MethodMaster::get_method_master()->property_exists(VariantType(state->extensiontype), StringName(line.tokens[0].text)))
 		{
 			SuperVariable *super_var = new SuperVariable;
@@ -426,7 +426,7 @@ ScriptNode* Parser::ParsePart(const Line &line)
 				return new VariableNode(line.tokens[0].text);
 		}
 
-		//It is more complicated		
+		//It is more complicated
 		return ParsePath(line);
 	}
 	else if (line.StartsWith("!"))																	//Not
@@ -505,7 +505,7 @@ ScriptNode *Parser::ParseMemberVar(const Line &line)
 {
 	MemberVar *mem_var = new MemberVar;
 	String name = line.tokens[0].text;
-	
+
 	mem_var->variable_name = name;
 
 	return mem_var;

@@ -1,7 +1,7 @@
-#include "Variant.h"
+#include "variant.h"
 
-#include "core/TMessage.h"
-#include "core/CoreNames.h"
+#include "core/tmessage.h"
+#include "core/corenames.h"
 
 //Array methods
 Variant Variant::GetElement(const Variant &index)
@@ -47,6 +47,6 @@ int Variant::size()
 {
 	if (type == ARRAY)
 		return a->size();
-	else 
+	else
 		return 1;
 }
