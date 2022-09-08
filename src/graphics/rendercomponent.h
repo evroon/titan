@@ -1,25 +1,24 @@
 #pragma once
 
-#include "math/color.h"
 #include "core/component.h"
+#include "math/color.h"
 
-class RenderComponent : public Component
-{
-	OBJ_DEFINITION(RenderComponent, Component)
+class RenderComponent : public Component {
+    OBJ_DEFINITION(RenderComponent, Component)
 
-public:
-	RenderComponent() { }
+   public:
+    RenderComponent() {}
 
-	bool isvisible = true;
-	bool isstatic = false;
+    bool isvisible = true;
+    bool isstatic = false;
 
-	int layer = 0;
+    int layer = 0;
 
-	void set_color(const Color& p_color);
-	Color get_color() const;
+    void set_color(const Color &p_color);
+    Color get_color() const;
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Color color = Color::White;
+   private:
+    Color color = Color::White;
 };

@@ -11,10 +11,9 @@
 #include "sdl.h"
 #endif
 
-#include "vector.h"
 #include "contentmanager.h"
-
 #include "object.h"
+#include "vector.h"
 
 #define TIME Time::get_singleton()
 
@@ -22,142 +21,132 @@ class UITimer;
 class Timer;
 class TimedCaller;
 
-class Time : public Object
-{
-	OBJ_DEFINITION(Time, Object);
+class Time : public Object {
+    OBJ_DEFINITION(Time, Object);
 
-public:
-	Time();
+   public:
+    Time();
 
-	static void Init();
-	static Time* get_singleton();
+    static void Init();
+    static Time *get_singleton();
 
-	void register_timedcaller(TimedCaller *timed_caller);
-	void register_timer(Timer *timer);
-	void register_uitimer(UITimer *timer);
+    void register_timedcaller(TimedCaller *timed_caller);
+    void register_timer(Timer *timer);
+    void register_uitimer(UITimer *timer);
 
-	void Update();
-	void OnUpdate();
-	void restart();
+    void Update();
+    void OnUpdate();
+    void restart();
 
-	int get_deltatime() const;
-	int get_absolutetime() const;
-	int get_gametime() const;
+    int get_deltatime() const;
+    int get_absolutetime() const;
+    int get_gametime() const;
 
-	bool game_paused;
-	long absolute_time, game_time, LastTime, delta_time;
+    bool game_paused;
+    long absolute_time, game_time, LastTime, delta_time;
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	int get_time_since_start();
+   private:
+    int get_time_since_start();
 
-	std::chrono::high_resolution_clock::time_point start_time;
+    std::chrono::high_resolution_clock::time_point start_time;
 
-	static Time *singleton;
+    static Time *singleton;
 
-	Vector<TimedCaller> timed_callers;
-	Vector<Timer> timers;
-	Vector<UITimer> uitimers;
+    Vector<TimedCaller> timed_callers;
+    Vector<Timer> timers;
+    Vector<UITimer> uitimers;
 };
 
-class Stopwatch
-{
-public:
-	Stopwatch();
+class Stopwatch {
+   public:
+    Stopwatch();
 
-	void start();
+    void start();
 
-	// Return delta time in seconds.
-	float stop();
+    // Return delta time in seconds.
+    float stop();
 
-	Array<float> history;
+    Array<float> history;
 
-	float result;
-	float result_averaged;
-	std::chrono::high_resolution_clock::time_point start_time;
+    float result;
+    float result_averaged;
+    std::chrono::high_resolution_clock::time_point start_time;
 };
 
-class Timer
-{
-public:
-	Timer(int p_waittime)
-	{
-		waittime = p_waittime;
-		start();
-	}
+class Timer {
+   public:
+    Timer(int p_waittime) {
+        waittime = p_waittime;
+        start();
+    }
 
-	bool update()
-	{
-		if (enabled && TIME->absolute_time - starttime >= waittime)
-		{
-			running = false;
-			return true;
-		}
-		return false;
-	}
+    bool update() {
+        if (enabled && TIME->absolute_time - starttime >= waittime) {
+            running = false;
+            return true;
+        }
+        return false;
+    }
 
-	void start()
-	{
-		starttime = TIME->absolute_time;
-		enabled = true;
-		running = true;
-	}
+    void start() {
+        starttime = TIME->absolute_time;
+        enabled = true;
+        running = true;
+    }
 
-	int waittime, starttime;
-	bool running, enabled;
+    int waittime, starttime;
+    bool running, enabled;
 };
 
-struct FPSLimiter
-{
-	FPSLimiter(int tar = 16667);
+struct FPSLimiter {
+    FPSLimiter(int tar = 16667);
 
-	struct FPSInfo
-	{
-		bool needsupdate = false;
-		bool passedsec = false;
-		float delta_time = 0.0f;
-		int FPS = 0;
-	};
+    struct FPSInfo {
+        bool needsupdate = false;
+        bool passedsec = false;
+        float delta_time = 0.0f;
+        int FPS = 0;
+    };
 
-	FPSInfo update();
+    FPSInfo update();
 
-private:
-	int counter = 0;
-	int target = 0;
-	int lastupdatetime = 0;
-	int lastsectime = 0;
-	int AbsoluteTime = 0;
+   private:
+    int counter = 0;
+    int target = 0;
+    int lastupdatetime = 0;
+    int lastsectime = 0;
+    int AbsoluteTime = 0;
 };
 
-class TimedCaller
-{
-public:
-	TimedCaller() : timer(1000) { }
-	TimedCaller(std::function<void()> p_on_call) : TimedCaller(1000, p_on_call) { }
-	TimedCaller(int repeat_time, std::function<void()> p_on_call);
+class TimedCaller {
+   public:
+    TimedCaller() : timer(1000) {}
+    TimedCaller(std::function<void()> p_on_call)
+        : TimedCaller(1000, p_on_call) {}
+    TimedCaller(int repeat_time, std::function<void()> p_on_call);
 
-	void update();
+    void update();
 
-private:
-	std::function<void()> on_call;
-	Timer timer;
+   private:
+    std::function<void()> on_call;
+    Timer timer;
 };
 
-struct RenderTarget
-{
-	RenderTarget();
+struct RenderTarget {
+    RenderTarget();
 
-	bool should_update();
+    bool should_update();
 
-	bool is_default_target;
-	bool fps_locked;
+    bool is_default_target;
+    bool fps_locked;
 
-	int fps_lock;
-	int fps_measured;
-	int fps_guessed;
+    int fps_lock;
+    int fps_measured;
+    int fps_guessed;
 
-	float delta_time;
+    float delta_time;
 
-	FPSLimiter limiter;
+    FPSLimiter limiter;
 };

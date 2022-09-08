@@ -1,24 +1,22 @@
 #pragma once
 
-#include "worldobject.h"
-
 #include "mesh.h"
+#include "worldobject.h"
 
 class Terrain;
 
-class TerrainNoise : public WorldObject
-{
-	OBJ_DEFINITION(TerrainNoise, WorldObject);
+class TerrainNoise : public WorldObject {
+    OBJ_DEFINITION(TerrainNoise, WorldObject);
 
-public:
-	TerrainNoise();
+   public:
+    TerrainNoise();
 
-	SIMPLE_GET_SET(float, octaves);
+    SIMPLE_GET_SET(float, octaves);
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Terrain* terrain;
+   private:
+    Terrain *terrain;
 
-	float octaves;
+    float octaves;
 };

@@ -4,29 +4,28 @@
 
 #define SCENEMANAGER SceneManager::get_singleton()
 
-class SceneManager : public Object
-{
-	OBJ_DEFINITION(SceneManager, Object);
+class SceneManager : public Object {
+    OBJ_DEFINITION(SceneManager, Object);
 
-public:
-	SceneManager();
-	~SceneManager();
+   public:
+    SceneManager();
+    ~SceneManager();
 
-	void add_scene(Scene *ps_scene);
-	Scene* get_scene(const String &p_name);
-	void remove_scene(const String &p_name);
-	bool DoesSceneExist(const String &p_name);
+    void add_scene(Scene *ps_scene);
+    Scene *get_scene(const String &p_name);
+    void remove_scene(const String &p_name);
+    bool DoesSceneExist(const String &p_name);
 
-	void Free();
+    void Free();
 
-	Vector<Scene> scenes;
+    Vector<Scene> scenes;
 
-	static void init();
+    static void init();
 
-	static SceneManager* get_singleton();
+    static SceneManager *get_singleton();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	static SceneManager* singleton;
+   private:
+    static SceneManager *singleton;
 };

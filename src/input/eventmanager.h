@@ -2,22 +2,21 @@
 
 #include "event.h"
 
-class EventManager
-{
-public:
-	EventManager();
-	~EventManager();
+class EventManager {
+   public:
+    EventManager();
+    ~EventManager();
 
-	void register_event(Event *e);
-	void clear_event(Event *e);
+    void register_event(Event *e);
+    void clear_event(Event *e);
 
-	void clean();
+    void clean();
 
-	static void init();
-	static EventManager& get_manager();
+    static void init();
+    static EventManager &get_manager();
 
-private:
-	static EventManager *default_manager;
+   private:
+    static EventManager *default_manager;
 
-	Vector<Event> events;
+    Vector<Event> events;
 };

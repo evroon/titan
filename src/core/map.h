@@ -1,69 +1,59 @@
 #pragma once
 
-#include <map>
 #include <algorithm>
+#include <map>
 
-template<class KEY, class VAL> class Map
-{
-private:
-	typedef std::map<KEY, VAL*> M;
-	M map;
+template <class KEY, class VAL>
+class Map {
+   private:
+    typedef std::map<KEY, VAL *> M;
+    M map;
 
-public:
-	Map() = default;
-	Map(M p_val) { map = p_val; }
+   public:
+    Map() = default;
+    Map(M p_val) { map = p_val; }
 
-	//Methods
-	typename M::iterator begin() { return map.begin(); }
-	typename M::iterator end() { return map.end(); }
+    // Methods
+    typename M::iterator begin() { return map.begin(); }
+    typename M::iterator end() { return map.end(); }
 
-	void clear() { map.clear(); }
+    void clear() { map.clear(); }
 
-	void clear(const KEY &p_key) { map.erase(p_key); }
-	void clean(const KEY &p_key) { delete map[p_key]; }
-	int size() const { return to_int(map.size()); }
+    void clear(const KEY &p_key) { map.erase(p_key); }
+    void clean(const KEY &p_key) { delete map[p_key]; }
+    int size() const { return to_int(map.size()); }
 
-	//Cleaning
-	int count(const KEY &p_key)
-	{
-		return static_cast<int>(map.count(p_key));
-	}
-	void clean()
-	{
-		for_each(map.begin(), map.end(), [](std::pair<const KEY&, VAL*> p_pair) { delete p_pair.second; });
+    // Cleaning
+    int count(const KEY &p_key) { return static_cast<int>(map.count(p_key)); }
+    void clean() {
+        for_each(
+            map.begin(), map.end(),
+            [](std::pair<const KEY &, VAL *> p_pair) { delete p_pair.second; });
 
-		map.clear();
-	}
-	bool contains(const KEY &p_key) const
-	{
-		if (map.count(p_key) > 0)
-			return true;
+        map.clear();
+    }
+    bool contains(const KEY &p_key) const {
+        if (map.count(p_key) > 0) return true;
 
-		return false;
-	}
-	bool contains(VAL *p_val) const
-	{
-		for (VAL* e : map) 
-			if (p_val == e)
-				return true;
+        return false;
+    }
+    bool contains(VAL *p_val) const {
+        for (VAL *e : map)
+            if (p_val == e) return true;
 
-		return false;
-	}
+        return false;
+    }
 
-	VAL* set(const KEY &p_key, VAL* p_val)
-	{
-		map[p_key] = p_val;
-		return p_val;
-	}
+    VAL *set(const KEY &p_key, VAL *p_val) {
+        map[p_key] = p_val;
+        return p_val;
+    }
 
-	VAL* get(const KEY &p_key) const
-	{
-		return map.at(p_key);
-	}
+    VAL *get(const KEY &p_key) const { return map.at(p_key); }
 
-	//Operators
-	VAL*& operator[](const KEY &p_key) { return map.at(p_key); }
-	VAL* operator[](const KEY &p_key) const { return map.at(p_key); }
+    // Operators
+    VAL *&operator[](const KEY &p_key) { return map.at(p_key); }
+    VAL *operator[](const KEY &p_key) const { return map.at(p_key); }
 };
 
 #if 0

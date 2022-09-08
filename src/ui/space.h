@@ -2,18 +2,14 @@
 
 #include "control.h"
 
-class Space : public Control
-{
-	OBJ_DEFINITION(Space, Control)
+class Space : public Control {
+    OBJ_DEFINITION(Space, Control)
 
-public:
-	Space(vec2 p_size) { size = p_size; }
+   public:
+    Space(vec2 p_size) { size = p_size; }
 
-	vec2 get_required_size() const override
-	{
-		return size;
-	}
+    vec2 get_required_size() const override { return size; }
 
-private:
-	vec2 size;
+   private:
+    vec2 size;
 };

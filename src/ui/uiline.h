@@ -2,9 +2,8 @@
 
 #include "control.h"
 
-class UILine : public Control
-{
-public:
-	UILine();
-	~UILine();
+class UILine : public Control {
+   public:
+    UILine();
+    ~UILine();
 };

@@ -2,43 +2,40 @@
 
 #include "worldobject.h"
 
-class PointLight : public WorldObject
-{
-	OBJ_DEFINITION(PointLight, WorldObject);
+class PointLight : public WorldObject {
+    OBJ_DEFINITION(PointLight, WorldObject);
 
-public:
-	PointLight();
-	virtual ~PointLight();
+   public:
+    PointLight();
+    virtual ~PointLight();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
+   private:
 };
 
-class DirectionalLight : public WorldObject
-{
-	OBJ_DEFINITION(DirectionalLight, WorldObject);
+class DirectionalLight : public WorldObject {
+    OBJ_DEFINITION(DirectionalLight, WorldObject);
 
-public:
-	DirectionalLight();
-	virtual ~DirectionalLight();
+   public:
+    DirectionalLight();
+    virtual ~DirectionalLight();
 
-	vec3 get_direction() const;
+    vec3 get_direction() const;
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
+   private:
 };
 
-class ConeLight : public WorldObject
-{
-	OBJ_DEFINITION(ConeLight, WorldObject);
+class ConeLight : public WorldObject {
+    OBJ_DEFINITION(ConeLight, WorldObject);
 
-public:
-	ConeLight();
-	virtual ~ConeLight();
+   public:
+    ConeLight();
+    virtual ~ConeLight();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
+   private:
 };

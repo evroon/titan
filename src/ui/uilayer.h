@@ -1,13 +1,12 @@
 #pragma once
 
-#include "core/vector.h"
 #include "control.h"
+#include "core/vector.h"
 
-class UILayer
-{
-public:
-	UILayer();
-	~UILayer();
+class UILayer {
+   public:
+    UILayer();
+    ~UILayer();
 
-	Vector<Control> controls;
+    Vector<Control> controls;
 };

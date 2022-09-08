@@ -1,38 +1,23 @@
 #include "seperator.h"
 
+Seperator::Seperator() { color = Color::FromRGB(vec3i(50)); }
 
+Seperator::~Seperator() {}
 
-Seperator::Seperator()
-{
-	color = Color::FromRGB(vec3i(50));
-}
+vec2 Seperator::get_required_size() const { return vec2(2); }
 
+void Seperator::notification(int p_notification) {
+    switch (p_notification) {
+        case NOTIFICATION_DRAW:
 
-Seperator::~Seperator()
-{
-}
+            draw_box(area, color);
 
+            break;
 
-vec2 Seperator::get_required_size() const
-{
-	return vec2(2);
-}
+        case NOTIFICATION_TRANSLATED:
+        case NOTIFICATION_RESIZED:
 
-void Seperator::notification(int p_notification)
-{
-	switch (p_notification)
-	{
-	case NOTIFICATION_DRAW:
-
-		draw_box(area, color);
-
-		break;
-
-	case NOTIFICATION_TRANSLATED:
-	case NOTIFICATION_RESIZED:
-
-		update();
-		break;
-	}
-
+            update();
+            break;
+    }
 }

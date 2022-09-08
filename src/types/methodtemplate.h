@@ -5,7 +5,6 @@
 #include <functional>
 
 #include "methoddefinition.h"
-
 #include "variant.h"
 
 using namespace std;

@@ -1,76 +1,71 @@
 #pragma once
 
-#include "control.h"
 #include "container.h"
+#include "control.h"
+#include "core/property.h"
 #include "core/variant/variant.h"
+#include "imagebutton.h"
 #include "label.h"
 #include "textfield.h"
-#include "imagebutton.h"
 
-#include "core/property.h"
+class PropertyView : public Control {
+    OBJ_DEFINITION(PropertyView, Control);
 
+   public:
+    struct PropertyItem {
+        String name = "";
+        Variant var = NULL_VAR;
+        Property *property = nullptr;
+        Control *control = nullptr;
+        rect2 area = rect2();
+    };
+    struct GroupItem {
+        String name = "";
+        rect2 area = rect2();
+        Array<PropertyItem> children = {};
+    };
 
-class PropertyView : public Control
-{
-	OBJ_DEFINITION(PropertyView, Control);
+    PropertyView(const Variant &p_var);
+    PropertyView();
+    ~PropertyView();
 
-public:
-	struct PropertyItem
-	{
-		String name = "";
-		Variant var = NULL_VAR;
-		Property* property = nullptr;
-		Control* control = nullptr;
-		rect2 area = rect2();
-	};
-	struct GroupItem
-	{
-		String name = "";
-		rect2 area = rect2();
-		Array<PropertyItem> children = {};
-	};
+    vec2 get_required_size() const override;
 
-	PropertyView(const Variant &p_var);
-	PropertyView();
-	~PropertyView();
+    void handle_event(UIEvent *ui_event) override;
 
-	vec2 get_required_size() const override;
+    void draw_item(const PropertyItem &p_item);
+    void draw_item(const GroupItem &p_item);
 
-	void handle_event(UIEvent *ui_event) override;
+    void notification(int p_notification) override;
 
-	void draw_item(const PropertyItem& p_item);
-	void draw_item(const GroupItem& p_item);
+    void set_property(Object *p_var);
+    Object *get_property() const;
 
-	void notification(int p_notification) override;
+    static void bind_methods();
 
-	void set_property(Object* p_var);
-	Object* get_property() const;
+   private:
+    void add_property(Property *p_property);
 
-	static void bind_methods();
+    int get_item(const vec2 &p_pos) const;
 
-private:
-	void add_property(Property* p_property);
+    void position_item(GroupItem &p_item);
+    void position_items();
 
-	int get_item(const vec2& p_pos) const;
+    Array<GroupItem> roots;
 
-	void position_item(GroupItem& p_item);
-	void position_items();
+    Container buttons;
 
-	Array<GroupItem> roots;
+    ImageButton *back;
+    ImageButton *forward;
 
-	Container buttons;
+    Object *var;
 
-	ImageButton* back;
-	ImageButton* forward;
+    float split_pos;
+    float split_percentage;
 
-	Object* var;
+    float margin[3];
 
-	float split_pos;
-	float split_percentage;
+    Color background_color;
 
-	float margin[3];
-
-	Color background_color;
-
-	float offset;
+    float offset;
 };

@@ -1,49 +1,41 @@
 #pragma once
 
-#include "core/string.h"
 #include "core/stack.h"
+#include "core/string.h"
 
-template<typename T>
-class History
-{
-public:
+template <typename T>
+class History {
+   public:
+    void go_to(const T &p_current) {
+        history.push(current);
+        current = p_current;
+        future.clear();
+    }
 
-	void go_to(const T& p_current)
-	{
-		history.push(current);
-		current = p_current;
-		future.clear();
-	}
+    T go_back() {
+        if (history.size() == 0) return T();
 
-	T go_back()
-	{
-		if (history.size() == 0)
-			return T();
+        future.push(current);
 
-		future.push(current);
+        return history.pop();
+    }
 
-		return history.pop();
-	}
+    T go_forward() {
+        if (future.size() == 0) return T();
 
-	T go_forward()
-	{
-		if (future.size() == 0)
-			return T();
+        history.push(current);
 
-		history.push(current);
+        return future.pop();
+    }
 
-		return future.pop();
-	}
+    void clear() {
+        history.clear();
+        future.clear();
+    }
 
-	void clear()
-	{
-		history.clear();
-		future.clear();
-	}
+   private:
+    Stack<T> history;
+    Stack<T> future;
 
-private:
-	Stack<T> history;
-	Stack<T> future;
-
-	T current;
+    T current;
 };

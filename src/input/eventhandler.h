@@ -1,8 +1,7 @@
 #pragma once
 
-#include "input.h"
-
 #include "core/titanscript/titanscript.h"
+#include "input.h"
 
 #if 0
 

@@ -1,36 +1,33 @@
 #pragma once
 
-#include <string>
 #include <functional>
+#include <string>
 
 #include "control.h"
-
-#include "image.h"
 #include "frame.h"
+#include "image.h"
 #include "label.h"
-
 #include "uicallback.h"
 
-class Button : public Control
-{
-	OBJ_DEFINITION(Button, Control);
+class Button : public Control {
+    OBJ_DEFINITION(Button, Control);
 
-public:
-	Button();
+   public:
+    Button();
 
-	void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent *ui_event) override;
 
-	static void bind_methods();
+    static void bind_methods();
 
-protected:
-	bool highlighted = false, selected = false;
+   protected:
+    bool highlighted = false, selected = false;
 
-	vec2 inner_border = vec2(4);
+    vec2 inner_border = vec2(4);
 
-	virtual void start_highlight();
-	virtual void start_selection();
-	virtual void end_highlight();
-	virtual void end_selection();
+    virtual void start_highlight();
+    virtual void start_selection();
+    virtual void end_highlight();
+    virtual void end_selection();
 
-private:
+   private:
 };

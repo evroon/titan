@@ -4,11 +4,10 @@
 
 #include "core/time.h"
 
-class UICallback
-{
-public:
-	UICallback();
-	UICallback(const std::function<void()> &p_on_call);
+class UICallback {
+   public:
+    UICallback();
+    UICallback(const std::function<void()> &p_on_call);
 
 #if 0
 	template<typename T>
@@ -20,23 +19,22 @@ public:
 	}
 #endif
 
-	void operator ()();
+    void operator()();
 
-private:
-	bool is_init = false;
-	std::function<void()> on_call;
+   private:
+    bool is_init = false;
+    std::function<void()> on_call;
 };
 
-class UITimer
-{
-public:
-	UITimer() : timer(1000) { }
-	UITimer(UICallback *p_callback, int time);
+class UITimer {
+   public:
+    UITimer() : timer(1000) {}
+    UITimer(UICallback *p_callback, int time);
 
-	void update();
-	void set_enabled(bool enabled);
+    void update();
+    void set_enabled(bool enabled);
 
-private:
-	UICallback *callback;
-	Timer timer;
+   private:
+    UICallback *callback;
+    Timer timer;
 };

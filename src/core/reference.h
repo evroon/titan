@@ -2,114 +2,73 @@
 
 #include "core/object.h"
 
-class Referenced : public Object
-{
-	OBJ_DEFINITION(Referenced, Object);
+class Referenced : public Object {
+    OBJ_DEFINITION(Referenced, Object);
 
-public:
-	Referenced();
+   public:
+    Referenced();
 
-	void increase_ref_count();
-	void decrease_ref_count();
+    void increase_ref_count();
+    void decrease_ref_count();
 
-
-private:
-	int ref_count;
+   private:
+    int ref_count;
 };
 
-//T derives from Referenced
-template<typename T>
-class Ref
-{
-public:
+// T derives from Referenced
+template <typename T>
+class Ref {
+   public:
+    inline Ref(T *p_ref) { referenced = p_ref; }
 
-	inline Ref(T* p_ref)
-	{
-		referenced = p_ref;
-	}
+    inline Ref() : Ref(NULL) {}
 
-	inline Ref() : Ref(NULL)
-	{
+    inline ~Ref() {
+        if (referenced) {
+            Referenced *ref = reinterpret_cast<Referenced *>(referenced);
 
-	}
+            ref->decrease_ref_count();
+        }
+    }
 
-	inline ~Ref()
-	{
-		if (referenced)
-		{
-			Referenced* ref = reinterpret_cast<Referenced*>(referenced);
+    inline void ref(const Ref &p_new) {}
 
-			ref->decrease_ref_count();
-		}
-	}
+    inline void operator=(const Ref<T> &p_r) {
+        referenced = p_r.referenced;
 
-	inline void ref(const Ref& p_new)
-	{
+        if (!referenced) return;
 
-	}
+        Referenced *ref = reinterpret_cast<Referenced *>(referenced);
 
-	inline void operator=(const Ref<T>& p_r)
-	{
-		referenced = p_r.referenced;
+        ref->increase_ref_count();
+    }
 
-		if (!referenced)
-			return;
+    inline bool operator<(const Ref<T> &p_r) const {
+        return referenced < p_r.referenced;
+    }
 
-		Referenced* ref = reinterpret_cast<Referenced*>(referenced);
+    inline bool operator==(const Ref<T> &p_r) const {
+        return referenced == p_r.referenced;
+    }
 
-		ref->increase_ref_count();
-	}
+    inline bool operator!=(const Ref<T> &p_r) const {
+        return referenced != p_r.referenced;
+    }
 
-	inline bool operator<(const Ref<T>& p_r) const
-	{
-		return referenced < p_r.referenced;
-	}
+    inline T *operator->() { return referenced; }
 
-	inline bool operator==(const Ref<T>& p_r) const
-	{
-		return referenced == p_r.referenced;
-	}
+    inline T *operator*() { return referenced; }
 
-	inline bool operator!=(const Ref<T>& p_r) const
-	{
-		return referenced != p_r.referenced;
-	}
+    inline const T *operator->() const { return referenced; }
 
-	inline T* operator->()
-	{
-		return referenced;
-	}
+    inline const T *ptr() const { return referenced; }
 
-	inline T* operator*()
-	{
-		return referenced;
-	}
+    inline T *ptr() { return referenced; }
 
-	inline const T* operator->() const
-	{
-		return referenced;
-	}
+    inline const T *operator*() const { return referenced; }
 
-	inline const T* ptr() const
-	{
-		return referenced;
-	}
+    inline operator T *() const { return referenced; }
 
-	inline T* ptr()
-	{
-		return referenced;
-	}
-
-	inline const T* operator*() const
-	{
-		return referenced;
-	}
-
-	inline operator T*() const
-	{
-		return referenced;
-	}
-
-private:
-	T* referenced;
+   private:
+    T *referenced;
 };

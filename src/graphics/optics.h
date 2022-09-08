@@ -1,10 +1,10 @@
 #pragma once
 
-#include "resources/shader.h"
 #include "core/contentmanager.h"
-#include "world/light.h"
 #include "fbo.h"
 #include "fbomanager.h"
+#include "resources/shader.h"
+#include "world/light.h"
 
 #if 0
 

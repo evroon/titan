@@ -1,4 +1,4 @@
-name: build
+name: style check
 
 on: [push, workflow_dispatch]
 
@@ -11,8 +11,5 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y cmake clang-format librapidxml-dev libglew-dev libassimp-dev libnoise-dev libbullet-dev libbox2d-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev
 
-    - name: Configure
-      run: cd src && cmake .
-
-    - name: Build
-      run: cd src && cmake --build . -- -j8
+    - name: Check style
+      run: cd src && clang-format -style=file --dry-run --Werror **/*.h **/*.cpp

@@ -1,561 +1,391 @@
 #include "core/string.h"
 
-#include "vector.h"
-#include "array.h"
-
-#include "tmessage.h"
-
-#include "math/real.h"
-
 #include <sstream>
 
-String::String()
-{
-	src = "";
+#include "array.h"
+#include "math/real.h"
+#include "tmessage.h"
+#include "vector.h"
+
+String::String() { src = ""; }
+
+String::String(char *v) { src = std::string(v); }
+
+String::String(const char *v) { src = std::string(v); }
+
+String::String(std::string v) { src = v; }
+
+String::String(char v) {
+    src = "";
+    src += v;
 }
 
-String::String(char *v)
-{
-	src = std::string(v);
+String::String(Char v) {
+    src = "";
+    src += v.kar;
 }
 
-String::String(const char *v)
-{
-	src = std::string(v);
+String::String(const Real &r) { src = (std::string)r.to_string(); }
+
+String::String(unsigned i) { src = std::to_string(i); }
+
+String::String(int i) { src = std::to_string(i); }
+
+String::String(float d) {
+    std::stringstream ss;
+    ss << d;
+    src = ss.str();
 }
 
-String::String(std::string v)
-{
-	src = v;
+String::String(const Variant &v) {
+    std::cout << "TODO: String(var)" << std::endl;
 }
 
-String::String(char v)
-{
-	src = "";
-	src += v;
+// Operators
+bool String::operator==(const String &r) const {
+    return src == r.src;
+} /*
+ bool String::operator==(const string &r) const
+ {
+         return src == r;
+ }*/
+bool String::operator!=(const String &r) const { return src != r.src; }
+String String::operator+(const String &r) const {
+    String res = *this;
+    res += r;
+    return res;
+}
+String String::operator+(const StringName &r) const {
+    String res = *this;
+    res += r.get_source();
+    return res;
+}
+String &String::operator+=(const String &r) {
+    src += r.src;
+    return *this;
+}
+String String::operator+(char r) const {
+    String res = *this;
+    res += r;
+    return res;
+}
+String &String::operator+=(char r) {
+    src += r;
+    return *this;
+}
+String String::operator+(const char *r) const {
+    String res = *this;
+    res += r;
+    return res;
+}
+String &String::operator+=(const char *r) {
+    src += r;
+    return *this;
+}
+String String::operator*(const int &r) const {
+    String res = *this;
+    res *= r;
+    return res;
+}
+String &String::operator*=(const int &r) {
+    String t = *this;
+    for (int c = 0; c < r; c++) *this += t;
+
+    return *this;
 }
 
-String::String(Char v)
-{
-	src = "";
-	src += v.kar;
+char String::operator[](const int i) const { return src[i]; }
+
+String::operator char() const {
+    if (size() != 1) T_ERROR("Invalid Conversion");
+    return src[0];
+}
+String::operator std::string() const { return src; }
+String::operator bool() const {
+    if (src == "true")
+        return true;
+    else if (src != "false")
+        T_ERROR("Invalid Conversion");
+    return false;
+}
+String::operator int() const { return std::stoi(c_str()); }
+String::operator float() const { return std::stof(c_str()); }
+
+// Methods
+const char *String::c_str() const { return src.c_str(); }
+size_t String::get_hash() const {
+    return std::hash<std::string>{}((std::string)src);
+}
+void String::set(int i, char c) { src[i] = c; }
+bool String::is_white() const {
+    for (char c : src) {
+        Char tc = c;
+
+        if (!tc.iswhite()) return false;
+    }
+    return true;
 }
 
-String::String(const Real &r)
-{
-	src = (std::string) r.to_string();
+bool String::contains(const String &s) const {
+    int index = 0;
+
+    for (int c = 0; c < size(); c++) {
+        if (s[index] == src[c]) {
+            if (index == s.size() - 1) return true;
+            index++;
+        } else
+            index = 0;
+    }
+
+    return false;
+}
+void String::append(const String &p_src) { src += p_src.src; }
+
+void String::replace(Char p_original, Char p_new) {
+    for (int c = 0; c < size(); c++)
+        if (src[c] == p_original) src[c] = p_new;
 }
 
-String::String(unsigned i)
-{
-	src = std::to_string(i);
+void String::remove(Char p_original) {
+    for (int c = 0; c < size(); c++)
+        if (src[c] == p_original) src.erase(c, 1);
 }
 
-String::String(int i)
-{
-	src = std::to_string(i);
+void String::trim_left() {}
+
+void String::trim_right() {}
+
+void String::trim() { src = StringUtils::Trim(src).src; }
+
+int String::size() const { return length(); }
+
+int String::length() const { return to_int(src.length()); }
+
+String String::substr(int s, int e) const {
+    if (e == -1) e = length() - 1;
+
+    return String(src.substr(s, e));
 }
 
-String::String(float d)
-{
-	std::stringstream ss;
-	ss << d;
-	src = ss.str();
+Array<String> String::split(const char kar) const {
+    Array<String> res;
+    std::string buf = "";
+    for (int c = 0; c < size(); c++) {
+        if (src[c] != kar)
+            buf += src[c];
+        else {
+            res.push_back(buf);
+            buf = "";
+        }
+    }
+    res.push_back(buf);
+    return res;
 }
 
-String::String(const Variant& v)
-{
-	std::cout << "TODO: String(var)" << std::endl;
+Array<int> String::find(const String &p_src) const {
+    Array<int> result;
+    int index = 0;
+
+    for (int c = 0; c < size(); c++) {
+        if (src[c] == p_src[index]) {
+            if (index == p_src.length() - 1) {
+                result.push_back(c - p_src.length() + 1);
+                index = 0;
+            }
+
+            index++;
+        } else
+            index = 0;
+    }
+
+    return result;
 }
 
+Array<int> String::find(Char p_char) const {
+    Array<int> result;
 
-//Operators
-bool String::operator==(const String &r) const
-{
-	return src == r.src;
-}/*
-bool String::operator==(const string &r) const
-{
-	return src == r;
-}*/
-bool String::operator!=(const String &r) const
-{
-	return src != r.src;
-}
-String String::operator+(const String &r) const
-{
-	String res = *this;
-	res += r;
-	return res;
-}
-String String::operator+(const StringName &r) const
-{
-	String res = *this;
-	res += r.get_source();
-	return res;
-}
-String& String::operator+=(const String &r)
-{
-	src += r.src;
-	return *this;
-}
-String String::operator+(char r) const
-{
-	String res = *this;
-	res += r;
-	return res;
-}
-String& String::operator+=(char r)
-{
-	src += r;
-	return *this;
-}
-String String::operator+(const char *r) const
-{
-	String res = *this;
-	res += r;
-	return res;
-}
-String& String::operator+=(const char *r)
-{
-	src += r;
-	return *this;
-}
-String String::operator*(const int &r) const
-{
-	String res = *this;
-	res *= r;
-	return res;
-}
-String& String::operator*=(const int &r)
-{
-	String t = *this;
-	for (int c = 0; c < r; c++)
-		*this += t;
+    for (int c = 0; c < length(); c++) {
+        if (src[c] == p_char) result.push_back(c);
+    }
 
-	return *this;
+    return result;
 }
 
-char String::operator[](const int i) const
-{
-	return src[i];
+int String::find_first(Char p_char) const {
+    for (int c = 0; c < length(); c++) {
+        if (src[c] == p_char) return c;
+    }
+
+    return -1;
 }
 
-String::operator char() const
-{
-	if (size() != 1)
-		T_ERROR("Invalid Conversion");
-	return src[0];
-}
-String::operator std::string() const
-{
-	return src;
-}
-String::operator bool() const
-{
-	if (src == "true")
-		return true;
-	else if (src != "false")
-		T_ERROR("Invalid Conversion");
-	return false;
-}
-String::operator int() const
-{
-	return std::stoi(c_str());
-}
-String::operator float() const
-{
-	return std::stof(c_str());
+int String::find_last(Char p_char) const {
+    for (int c = length() - 1; c >= 0; c--) {
+        if (src[c] == p_char) return c;
+    }
+
+    return -1;
 }
 
-//Methods
-const char* String::c_str() const
-{
-	return src.c_str();
-}
-size_t String::get_hash() const
-{
-	return std::hash<std::string>{}((std::string)src);
-}
-void String::set(int i, char c)
-{
-	src[i] = c;
-}
-bool String::is_white() const
-{
-	for (char c : src)
-	{
-		Char tc = c;
+int String::count(Char p_char) const {
+    int result = 0;
 
-		if (!tc.iswhite())
-			return false;
-	}
-	return true;
+    for (int c = 0; c < size(); c++) {
+        if (p_char == src[c]) result++;
+    }
+
+    return result;
 }
 
-bool String::contains(const String &s) const
-{
-	int index = 0;
-
-	for (int c = 0; c < size(); c++)
-	{
-		if (s[index] == src[c])
-		{
-			if (index == s.size() - 1)
-				return true;
-			index++;
-		}
-		else index = 0;
-	}
-
-	return false;
+String String::insert(int index, const String &text) {
+    return src.insert(index, text);
 }
-void String::append(const String & p_src)
-{
-	src += p_src.src;
+String String::insert(int start, int end, char kar) {
+    return src.insert(start, end, kar);
 }
+String String::erase(int start, int end) { return src.erase(start, end); }
 
-void String::replace(Char p_original, Char p_new)
-{
-	for (int c = 0; c < size(); c++)
-		if (src[c] == p_original)
-			src[c] = p_new;
+bool String::IsString() {
+    return src[0] == '"' && src[src.length() - 1] == '"';
 }
-
-void String::remove(Char p_original)
-{
-	for (int c = 0; c < size(); c++)
-		if (src[c] == p_original)
-			src.erase(c, 1);
+bool String::IsKeyword() {
+    return src == "var" || src == "if" || src == "else" || src == "elseif" ||
+           src == "var" || src == "func" || src == "return" || src == "while";
 }
+bool String::IsVariable() {
+    Char k(' ');
+    for (int c = 0; c < size(); c++) {
+        k = Char(src[c]);
+        if (!k.ischar() && !k.isnumber() && !k.isdot()) return false;
+    }
 
-void String::trim_left()
-{
-
+    return true;
 }
+bool String::IsNumber() {
+    Char k(' ');
+    for (int c = 0; c < size(); c++) {
+        k = Char(src[c]);
+        if (!k.isdot() && !k.isnumber()) return false;
+    }
 
-void String::trim_right()
-{
-
+    return true;
 }
+bool String::starts_with(const String &p_str) const {
+    for (int c = 0; c < p_str.size(); c++)
+        if (src[c] != p_str[c]) return false;
 
-void String::trim()
-{
-	src = StringUtils::Trim(src).src;
+    return true;
 }
+bool String::ends_with(const String &p_str) const {
+    for (int c = 0; c < p_str.size(); c++)
+        if (src[src.length() - 1 - c] != p_str[p_str.length() - 1 - c])
+            return false;
 
-int String::size() const
-{
-	return length();
+    return true;
 }
+bool String::ContainsOutsideParentheses(const char elm) {
+    int level = 0;
+    for (int c = 0; c < size(); c++) {
+        if (src[c] == '(' || src[c] == '[') level++;
+        if (src[c] == ')' || src[c] == ']') level--;
 
-int String::length() const
-{
-	return to_int(src.length());
+        if (src[c] == elm && level == 0) return true;
+    }
+    return false;
 }
+bool String::Contains(const String &elm) {
+    int index = 0;
 
-String String::substr(int s, int e) const
-{
-	if (e == -1)
-		e = length() - 1;
+    for (int c = 0; c < size(); c++) {
+        if (src[c] == elm[index]) {
+            if (index == elm.length() - 1) return true;
+            index++;
+        } else
+            index = 0;
+    }
 
-	return String(src.substr(s, e));
+    return false;
 }
+bool String::Contains(const char elm) {
+    for (int c = 0; c < size(); c++)
+        if (src[c] == elm) return true;
+    return false;
+}
+int String::SearchChars(const String elm) {
+    String str(elm);
+    for (int c = 0; c < size(); c++) {
+        if (str.Contains(src[c])) return c;
+    }
 
-Array<String> String::split(const char kar) const
-{
-	Array<String> res;
-	std::string buf = "";
-	for (int c = 0; c < size(); c++)
-	{
-		if (src[c] != kar)	buf += src[c];
-		else
-		{
-			res.push_back(buf);
-			buf = "";
-		}
-	}
-	res.push_back(buf);
-	return res;
+    return false;
 }
 
-Array<int> String::find(const String& p_src) const
-{
-	Array<int> result;
-	int index = 0;
+String String::CharToString(const char c) {
+    Char k(c);
+    String s(k);
+    return s;
+}
+String String::FloatToString(const float d) { return std::to_string(d); }
+String String::IntToString(int i) { return std::to_string(i); }
+float String::StringTofloat() { return stof(src); }
 
-	for (int c = 0; c < size(); c++)
-	{
-		if (src[c] == p_src[index])
-		{
-			if (index == p_src.length() - 1)
-			{
-				result.push_back(c - p_src.length() + 1);
-				index = 0;
-			}
-
-			index++;
-		}
-		else index = 0;
-	}
-
-	return result;
+int String::CountTabs() {
+    int count = 0;
+    for (int c = 0; c < size(); c++) {
+        if (src[c] == '\t')
+            count++;
+        else
+            break;
+    }
+    return count;
 }
 
-Array<int> String::find(Char p_char) const
-{
-	Array<int> result;
+String String::RemoveTabs() {
+    String result;
+    for (int c = 0; c < size(); c++)
+        if (src[c] != '\t') result += String(src[c]);
 
-	for (int c = 0; c < length(); c++)
-	{
-		if (src[c] == p_char)
-			result.push_back(c);
-	}
-
-	return result;
-}
-
-int String::find_first(Char p_char) const
-{
-	for (int c = 0; c < length(); c++)
-	{
-		if (src[c] == p_char)
-			return c;
-	}
-
-	return -1;
-}
-
-int String::find_last(Char p_char) const
-{
-	for (int c = length() - 1; c >= 0; c--)
-	{
-		if (src[c] == p_char)
-			return c;
-	}
-
-	return -1;
-}
-
-int String::count(Char p_char) const
-{
-	int result = 0;
-
-	for (int c = 0; c < size(); c++)
-	{
-		if (p_char == src[c])
-			result++;
-	}
-
-	return result;
-}
-
-String String::insert(int index, const String &text)
-{
-	return src.insert(index, text);
-}
-String String::insert(int start, int end, char kar)
-{
-	return src.insert(start, end, kar);
-}
-String String::erase(int start, int end)
-{
-	return src.erase(start, end);
-}
-
-
-bool String::IsString()
-{
-	return src[0] == '"' && src[src.length() - 1] == '"';
-}
-bool String::IsKeyword()
-{
-	return src == "var" || src == "if" || src == "else" ||
-		src == "elseif" || src == "var" || src == "func" ||
-		src == "return" || src == "while";
-}
-bool String::IsVariable()
-{
-	Char k(' ');
-	for (int c = 0; c < size(); c++)
-	{
-		k = Char(src[c]);
-		if (!k.ischar() && !k.isnumber() && !k.isdot())
-			return false;
-	}
-
-	return true;
-}
-bool String::IsNumber()
-{
-	Char k(' ');
-	for (int c = 0; c < size(); c++)
-	{
-		k = Char(src[c]);
-		if (!k.isdot() && !k.isnumber())
-			return false;
-	}
-
-	return true;
-}
-bool String::starts_with(const String & p_str) const
-{
-	for (int c = 0; c < p_str.size(); c++)
-		if (src[c] != p_str[c])
-			return false;
-
-	return true;
-}
-bool String::ends_with(const String& p_str) const
-{
-	for (int c = 0; c < p_str.size(); c++)
-		if (src[src.length() - 1 - c] != p_str[p_str.length() - 1 - c])
-			return false;
-
-	return true;
-}
-bool String::ContainsOutsideParentheses(const char elm)
-{
-	int level = 0;
-	for (int c = 0; c < size(); c++)
-	{
-		if (src[c] == '(' || src[c] == '[') level++;
-		if (src[c] == ')' || src[c] == ']') level--;
-
-		if (src[c] == elm && level == 0)
-			return true;
-	}
-	return false;
-}
-bool String::Contains(const String& elm)
-{
-	int index = 0;
-
-	for (int c = 0; c < size(); c++)
-	{
-		if (src[c] == elm[index])
-		{
-			if (index == elm.length() - 1)
-				return true;
-			index++;
-		}
-		else index = 0;
-	}
-
-	return false;
-}
-bool String::Contains(const char elm)
-{
-	for (int c = 0; c < size(); c++)
-		if (src[c] == elm)
-			return true;
-	return false;
-}
-int String::SearchChars(const String elm)
-{
-	String str(elm);
-	for (int c = 0; c < size(); c++)
-	{
-		if (str.Contains(src[c]))
-			return c;
-	}
-
-	return false;
-}
-
-String String::CharToString(const char c)
-{
-	Char k(c);
-	String s(k);
-	return s;
-}
-String String::FloatToString(const float d)
-{
-	return std::to_string(d);
-}
-String String::IntToString(int i)
-{
-	return std::to_string(i);
-}
-float String::StringTofloat()
-{
-	return stof(src);
-}
-
-int String::CountTabs()
-{
-	int count = 0;
-	for (int c = 0; c < size(); c++)
-	{
-		if (src[c] == '\t')count++;
-		else break;
-	}
-	return count;
-}
-
-String String::RemoveTabs()
-{
-	String result;
-	for (int c = 0; c < size(); c++)
-		if (src[c] != '\t')
-			result += String(src[c]);
-
-	return result;
+    return result;
 }
 
 //=========================================================================
-//StringName
+// StringName
 //=========================================================================
 
-StringName::StringName(const String &p_src)
-{
-	set_source(p_src);
+StringName::StringName(const String &p_src) { set_source(p_src); }
+
+void StringName::update_hash() {
+    hash = std::hash<std::string>{}((std::string)src);
 }
 
-void StringName::update_hash()
-{
-	hash = std::hash<std::string>{}((std::string)src);
-}
+size_t StringName::get_hash() const { return hash; }
 
-size_t StringName::get_hash() const
-{
-	return hash;
+void StringName::set_source(const String &p_src) {
+    src = p_src;
+    update_hash();
 }
+String StringName::get_source() const { return src; }
 
-void StringName::set_source(const String &p_src)
-{
-	src = p_src;
-	update_hash();
-}
-String StringName::get_source() const
-{
-	return src;
-}
-
-bool StringName::operator==(const StringName &r) const
-{
-	return hash == r.hash;
+bool StringName::operator==(const StringName &r) const {
+    return hash == r.hash;
 }
 
 /*
 StringName::operator String() const
 {
-	return src;
+        return src;
 }
 */
 
-std::ostream& operator<<(std::ostream &p_stream, const String &p_str)
-{
-	p_stream << p_str.src;
-	return p_stream;
+std::ostream &operator<<(std::ostream &p_stream, const String &p_str) {
+    p_stream << p_str.src;
+    return p_stream;
 }
 
-String operator+(std::string& p_l, const String& p_r)
-{
-	return String(p_l) + p_r.src;
+String operator+(std::string &p_l, const String &p_r) {
+    return String(p_l) + p_r.src;
 }
 
-String operator+(const char* p_l, const String& p_r)
-{
-	return String(p_l) + p_r;
+String operator+(const char *p_l, const String &p_r) {
+    return String(p_l) + p_r;
 }
