@@ -3,25 +3,24 @@
 #include "button.h"
 #include "uibox.h"
 
-class LabelButton : public Button
-{
-	OBJ_DEFINITION(LabelButton, Button);
+class LabelButton : public Button {
+    OBJ_DEFINITION(LabelButton, Button);
 
-public:
-	LabelButton();
-	LabelButton(const String &text);
+   public:
+    LabelButton();
+    LabelButton(const String& text);
 
-	vec2 get_required_size() const override;
-	void draw();
+    vec2 get_required_size() const override;
+    void draw();
 
-	void start_highlight() override;
-	void start_selection() override;
-	void end_highlight() override;
-	void end_selection() override;
+    void start_highlight() override;
+    void start_selection() override;
+    void end_highlight() override;
+    void end_selection() override;
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	UIBox box;
-	Label label;
+   private:
+    UIBox box;
+    Label label;
 };

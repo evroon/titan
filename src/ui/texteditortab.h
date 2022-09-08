@@ -1,69 +1,64 @@
 #pragma once
 
+#include "container.h"
+#include "dialog.h"
+#include "imagebutton.h"
+#include "tab.h"
 #include "textbox.h"
 
-#include "imagebutton.h"
-#include "container.h"
+class TextEditorTab : public Tab {
+    OBJ_DEFINITION(TextEditorTab, Tab);
 
-#include "dialog.h"
+   public:
+    TextEditorTab();
+    TextEditorTab(const File& p_file);
+    virtual ~TextEditorTab();
 
-#include "tab.h"
+    vec2 get_required_size() const override;
 
-class TextEditorTab : public Tab
-{
-	OBJ_DEFINITION(TextEditorTab, Tab);
+    void handle_event(UIEvent* ui_event) override;
 
-public:
-	TextEditorTab();
-	TextEditorTab(const File& p_file);
-	virtual ~TextEditorTab();
+    void notification(int p_notification) override;
 
-	vec2 get_required_size() const override;
+    void show_dialog();
 
-	void handle_event(UIEvent *ui_event) override;
+    void open_file(const String& text);
 
-	void notification(int p_notification) override;
+    void savebutton_pressed();
 
-	void show_dialog();
+    static void bind_methods();
 
-	void open_file(const String &text);
+   protected:
+    ImageButton* save_button;
+    ImageButton* open_button;
+    ImageButton* new_button;
 
-	void savebutton_pressed();
+    TextBox* textbox;
+    Container* buttons;
 
-	static void bind_methods();
+    rect2 textbox_area;
+    TextFile* textfile;
 
-protected:
-	ImageButton* save_button;
-	ImageButton* open_button;
-	ImageButton* new_button;
-
-	TextBox* textbox;
-	Container* buttons;
-
-	rect2 textbox_area;
-	TextFile* textfile;
-
-	FileDialog* dialog;
+    FileDialog* dialog;
 };
 
-class ShaderEditorTab : public TextEditorTab
-{
-	OBJ_DEFINITION(ShaderEditorTab, TextEditorTab);
+class ShaderEditorTab : public TextEditorTab {
+    OBJ_DEFINITION(ShaderEditorTab, TextEditorTab);
 
-public:
-	ShaderEditorTab();
-	ShaderEditorTab(const File& p_file);
-	ShaderEditorTab(Shader* p_shader);
-	virtual ~ShaderEditorTab();
+   public:
+    ShaderEditorTab();
+    ShaderEditorTab(const File& p_file);
+    ShaderEditorTab(Shader* p_shader);
+    virtual ~ShaderEditorTab();
 
-	void init();
+    void init();
 
-	void compile();
+    void compile();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Shader* shader;
+   private:
+    Shader* shader;
 
-	ImageButton* compile_button;
+    ImageButton* compile_button;
 };

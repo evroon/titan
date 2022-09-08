@@ -1,35 +1,34 @@
 #pragma once
 
+#include "contextmenu.h"
 #include "control.h"
 #include "core/reference.h"
-#include "contextmenu.h"
 
-class ComboBox : public Control
-{
-	OBJ_DEFINITION(ComboBox, Control);
+class ComboBox : public Control {
+    OBJ_DEFINITION(ComboBox, Control);
 
-public:
-	ComboBox();
-	virtual ~ComboBox();
+   public:
+    ComboBox();
+    virtual ~ComboBox();
 
-	vec2 get_required_size() const override;
-	void notification(int p_notification) override;
+    vec2 get_required_size() const override;
+    void notification(int p_notification) override;
 
-	void add_item(const String& p_text);
+    void add_item(const String& p_text);
 
-	void set_text(const String& p_text);
+    void set_text(const String& p_text);
 
-	void selected();
+    void selected();
 
-	void clear();
+    void clear();
 
-	void handle_event(UIEvent *p_ui_event) override;
+    void handle_event(UIEvent* p_ui_event) override;
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Ref<Texture2D> texture;
-	String text;
+   private:
+    Ref<Texture2D> texture;
+    String text;
 
-	ContextMenu* menu;
+    ContextMenu* menu;
 };

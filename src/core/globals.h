@@ -1,9 +1,8 @@
 #pragma once
 
-class Globals
-{
-public:
-	//static Map<string, Variant> globals;
+class Globals {
+   public:
+    // static Map<string, Variant> globals;
 
-	//static Variant* get(const string name);
+    // static Variant* get(const string name);
 };

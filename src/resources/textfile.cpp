@@ -1,85 +1,70 @@
 #include "textfile.h"
 
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <string>
 
-TextFile::TextFile(const File& p_file)
-{
-	load(p_file);
+TextFile::TextFile(const File& p_file) { load(p_file); }
+
+String TextFile::load(const File& p_file) {
+    file = p_file;
+
+    std::string line;
+    String src;
+    std::ifstream myfile(file.get_absolute_path());
+
+    if (!myfile.is_open()) {
+        T_ERROR("Error loading file: " + file.get_relative_path());
+        source = "";
+        return source;
+    }
+
+    while (std::getline(myfile, line)) src.append(line + String("\n"));
+
+    myfile.close();
+
+    source = src;
+
+    return source;
 }
 
-String TextFile::load(const File& p_file)
-{
-	file = p_file;
+void TextFile::write(const String& p_source) {
+    std::ofstream myfile(file.get_absolute_path());
 
-	std::string line;
-	String src;
-	std::ifstream myfile(file.get_absolute_path());
+    if (!myfile.is_open()) {
+        T_ERROR(String("Error loading file: ") + file);
+        return;
+    }
 
-	if (!myfile.is_open())
-	{
-		T_ERROR("Error loading file: " + file.get_relative_path());
-		source = "";
-		return source;
-	}
-
-	while (std::getline(myfile, line))
-		src.append(line + String("\n"));
-
-	myfile.close();
-
-	source = src;
-
-	return source;
+    myfile << p_source.c_str();
+    myfile.close();
 }
 
-void TextFile::write(const String& p_source)
-{
-	std::ofstream myfile(file.get_absolute_path());
+void TextFile::load() {
+    std::string line;
+    String src;
+    std::ifstream myfile(file.get_absolute_path());
 
-	if (!myfile.is_open())
-	{
-		T_ERROR(String("Error loading file: ") + file);
-		return;
-	}
+    if (!myfile.is_open())
+        T_ERROR("Error loading file: " + file.get_relative_path());
 
-	myfile << p_source.c_str();
-	myfile.close();
+    while (std::getline(myfile, line)) src.append(line + String("\n"));
+
+    myfile.close();
+
+    source = src;
 }
 
-void TextFile::load()
-{
-	std::string line;
-	String src;
-	std::ifstream myfile(file.get_absolute_path());
+void TextFile::save() {
+    std::ofstream myfile(file.get_absolute_path());
 
-	if (!myfile.is_open())
-		T_ERROR("Error loading file: " + file.get_relative_path());
+    if (!myfile.is_open()) {
+        T_ERROR("Error loading file: " + file.get_relative_path());
+        return;
+    }
 
-	while (std::getline(myfile, line))
-		src.append(line + String("\n"));
-
-	myfile.close();
-
-	source = src;
+    myfile << source.c_str();
+    myfile.close();
 }
 
-void TextFile::save()
-{
-	std::ofstream myfile(file.get_absolute_path());
-
-	if (!myfile.is_open())
-	{
-		T_ERROR("Error loading file: " + file.get_relative_path());
-		return;
-	}
-
-	myfile << source.c_str();
-	myfile.close();
-}
-
-String TextFile::get_source() const
-{
-	return source;
-}
+String TextFile::get_source() const { return source; }

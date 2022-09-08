@@ -1,8 +1,6 @@
 #pragma once
-class Regex
-{
-public:
-	Regex();
-	~Regex();
+class Regex {
+   public:
+    Regex();
+    ~Regex();
 };
-

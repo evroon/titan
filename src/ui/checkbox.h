@@ -1,36 +1,34 @@
 #pragma once
 
-#include "resources/font.h"
 #include "core/contentmanager.h"
-#include "propertycontrol.h"
 #include "image.h"
+#include "propertycontrol.h"
+#include "resources/font.h"
 
+class CheckBox : public PropertyControl {
+    OBJ_DEFINITION(CheckBox, PropertyControl);
 
-class CheckBox : public PropertyControl
-{
-	OBJ_DEFINITION(CheckBox, PropertyControl);
+   public:
+    CheckBox();
+    CheckBox(bool p_value);
+    CheckBox(const Variable& p_variable);
+    virtual ~CheckBox() {}
 
-public:
-	CheckBox();
-	CheckBox(bool p_value);
-	CheckBox(const Variable& p_variable);
-	virtual ~CheckBox() { }
+    void init();
 
-	void init();
+    void switch_checked();
+    void set_checked(bool p_value);
 
-	void switch_checked();
-	void set_checked(bool p_value);
+    vec2 get_required_size() const override;
 
-	vec2 get_required_size() const override;
+    void notification(int p_notification) override;
 
-	void notification(int p_notification) override;
+    void handle_event(UIEvent* ui_event) override;
 
-	void handle_event(UIEvent *ui_event) override;
+    void draw();
 
-	void draw();
+   private:
+    Texture2D *tex_checked, *tex_unchecked;
 
-private:
-	Texture2D *tex_checked, *tex_unchecked;
-
-	vec2 boxoffset, boxsize, textoffset;
+    vec2 boxoffset, boxsize, textoffset;
 };

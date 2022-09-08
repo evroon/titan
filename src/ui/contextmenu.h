@@ -1,100 +1,98 @@
 #pragma once
 
-#include "labelbutton.h"
-#include "control.h"
 #include "container.h"
+#include "control.h"
+#include "labelbutton.h"
 #include "uibox.h"
 
-class ContextMenu : public Control
-{
-	OBJ_DEFINITION(ContextMenu, Control);
+class ContextMenu : public Control {
+    OBJ_DEFINITION(ContextMenu, Control);
 
-public:
-	struct ContextMenuItem
-	{
-		bool seperator;
-		String text;
-		rect2 area;
-		Texture2D* icon;
-		Signal signal;
-	};
+   public:
+    struct ContextMenuItem {
+        bool seperator;
+        String text;
+        rect2 area;
+        Texture2D* icon;
+        Signal signal;
+    };
 
-	ContextMenu();
-	virtual ~ContextMenu();
+    ContextMenu();
+    virtual ~ContextMenu();
 
-	vec2 get_required_size() const override;
-	void handle_event(UIEvent *p_event) override;
+    vec2 get_required_size() const override;
+    void handle_event(UIEvent* p_event) override;
 
-	void position_items();
+    void position_items();
 
-	int get_item(const vec2& p_pos) const;
+    int get_item(const vec2& p_pos) const;
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-	void add_item(const String& p_text, const Connection& p_connection);
-	void add_item(Texture2D* p_icon, const String& p_text, const Connection& p_connection);
-	void add_seperator();
+    void add_item(const String& p_text, const Connection& p_connection);
+    void add_item(Texture2D* p_icon, const String& p_text,
+                  const Connection& p_connection);
+    void add_seperator();
 
-	void set_text(int p_index, const String& p_text);
-	String get_text(int p_index) const;
+    void set_text(int p_index, const String& p_text);
+    String get_text(int p_index) const;
 
-	int get_selected() const;
+    int get_selected() const;
 
-	void clear();
+    void clear();
 
-	bool is_empty();
+    bool is_empty();
 
-	void close();
+    void close();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	int selected;
-	int highlighted;
+   private:
+    int selected;
+    int highlighted;
 
-	float left_margin;
-	float right_margin;
+    float left_margin;
+    float right_margin;
 
-	float seperator_height;
-	float option_height;
+    float seperator_height;
+    float option_height;
 
-	Array<ContextMenuItem> items;
+    Array<ContextMenuItem> items;
 
-	Color background_color;
-	Color selection_color;
-	Color highlight_color;
-	Color border_color;
-	Color seperator_color;
+    Color background_color;
+    Color selection_color;
+    Color highlight_color;
+    Color border_color;
+    Color seperator_color;
 
-	Font* font;
+    Font* font;
 };
 
-class ContextTip : public Control
-{
-	OBJ_DEFINITION(ContextTip, Control);
+class ContextTip : public Control {
+    OBJ_DEFINITION(ContextTip, Control);
 
-public:
-	ContextTip();
-	ContextTip(const String& p_description);
-	virtual ~ContextTip();
+   public:
+    ContextTip();
+    ContextTip(const String& p_description);
+    virtual ~ContextTip();
 
-	vec2 get_required_size() const override;
-	void handle_event(UIEvent *p_event) override;
+    vec2 get_required_size() const override;
+    void handle_event(UIEvent* p_event) override;
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-	void close();
+    void close();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	String description;
+   private:
+    String description;
 
-	float left_margin;
-	float right_margin;
-	float top_margin;
-	float bottom_margin;
+    float left_margin;
+    float right_margin;
+    float top_margin;
+    float bottom_margin;
 
-	Color background_color;
-	Color border_color;
+    Color background_color;
+    Color border_color;
 };

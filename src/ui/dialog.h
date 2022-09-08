@@ -1,12 +1,10 @@
 #pragma once
 
 #include "control.h"
-
+#include "core/dictionary.h"
 #include "imagebutton.h"
 #include "textbutton.h"
 #include "textfield.h"
-
-#include "core/dictionary.h"
 
 class Container;
 class ListView;
@@ -18,201 +16,188 @@ class NumberField;
 class Shader;
 class PropertyView;
 
-class Dialog : public Control
-{
-	OBJ_DEFINITION(Dialog, Control);
+class Dialog : public Control {
+    OBJ_DEFINITION(Dialog, Control);
 
-public:
-	Dialog();
-	virtual ~Dialog();
+   public:
+    Dialog();
+    virtual ~Dialog();
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void handle_event(UIEvent * p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-	void set_title(const String& p_title);
-	String get_title() const;
+    void set_title(const String& p_title);
+    String get_title() const;
 
-	void show();
-	void close();
+    void show();
+    void close();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	rect2 bar;
+   private:
+    rect2 bar;
 
-	ImageButton* close_button;
+    ImageButton* close_button;
 
-	float header_offset;
+    float header_offset;
 
-	String title;
+    String title;
 
-	vec2 grab_pos;
-	vec2 orig_pos;
-	bool is_grabbing;
+    vec2 grab_pos;
+    vec2 orig_pos;
+    bool is_grabbing;
 };
 
-class ConfirmationDialog : public Dialog
-{
-	OBJ_DEFINITION(ConfirmationDialog, Dialog);
+class ConfirmationDialog : public Dialog {
+    OBJ_DEFINITION(ConfirmationDialog, Dialog);
 
-public:
-	ConfirmationDialog();
+   public:
+    ConfirmationDialog();
 
-	virtual void chosen_exit();
+    virtual void chosen_exit();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	TextButton* ok_button;
-	TextButton* cancel_button;
+   private:
+    TextButton* ok_button;
+    TextButton* cancel_button;
 };
 
-class MessageDialog : public Dialog
-{
-	OBJ_DEFINITION(MessageDialog, Dialog);
+class MessageDialog : public Dialog {
+    OBJ_DEFINITION(MessageDialog, Dialog);
 
-public:
-	MessageDialog();
-	MessageDialog(const String& p_text);
+   public:
+    MessageDialog();
+    MessageDialog(const String& p_text);
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Label* desciption_label;
+   private:
+    Label* desciption_label;
 
-	String desciption;
+    String desciption;
 };
 
-class FileDialog : public ConfirmationDialog
-{
-	OBJ_DEFINITION(FileDialog, Dialog);
+class FileDialog : public ConfirmationDialog {
+    OBJ_DEFINITION(FileDialog, Dialog);
 
-public:
-	FileDialog();
-	FileDialog(const String& p_file);
+   public:
+    FileDialog();
+    FileDialog(const String& p_file);
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void update_list();
+    void update_list();
 
-	void list_chosen(int p_index);
+    void list_chosen(int p_index);
 
-	void go_to(const String& p_file);
-	void go_back();
-	void go_forward();
+    void go_to(const String& p_file);
+    void go_back();
+    void go_forward();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	Container* buttons;
-	ListView* list;
+   private:
+    Container* buttons;
+    ListView* list;
 
-	ImageButton* back_button;
-	ImageButton* forward_button;
+    ImageButton* back_button;
+    ImageButton* forward_button;
 
-	TextField* path_label;
+    TextField* path_label;
 
-	Texture2D* directory_icon;
-	Texture2D* file_icon;
+    Texture2D* directory_icon;
+    Texture2D* file_icon;
 
-	String file;
+    String file;
 };
 
-class ColorPickDialog : public ConfirmationDialog
-{
-	OBJ_DEFINITION(ColorPickDialog, ConfirmationDialog);
+class ColorPickDialog : public ConfirmationDialog {
+    OBJ_DEFINITION(ColorPickDialog, ConfirmationDialog);
 
-public:
-	ColorPickDialog();
-	ColorPickDialog(const Color& p_color);
+   public:
+    ColorPickDialog();
+    ColorPickDialog(const Color& p_color);
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void chosen_exit() override;
+    void chosen_exit() override;
 
-	static void bind_methods();
+    static void bind_methods();
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-private:
+   private:
+    void set_red(float p_red);
+    void set_green(float p_green);
+    void set_blue(float p_blue);
 
-	void set_red(float p_red);
-	void set_green(float p_green);
-	void set_blue(float p_blue);
+    Color color;
 
-	Color color;
+    Shader* shader;
 
-	Shader* shader;
+    Label* r_label;
+    Label* g_label;
+    Label* b_label;
 
-	Label* r_label;
-	Label* g_label;
-	Label* b_label;
-
-	NumberField* r_field;
-	NumberField* g_field;
-	NumberField* b_field;
+    NumberField* r_field;
+    NumberField* g_field;
+    NumberField* b_field;
 };
 
-class TypePickDialog : public ConfirmationDialog
-{
-	OBJ_DEFINITION(TypePickDialog, Dialog);
+class TypePickDialog : public ConfirmationDialog {
+    OBJ_DEFINITION(TypePickDialog, Dialog);
 
-public:
-	TypePickDialog();
+   public:
+    TypePickDialog();
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-	void search(const String& p_search);
+    void search(const String& p_search);
 
-	void update_list();
+    void update_list();
 
-	void tree_chosen(TreeElement* p_element);
+    void tree_chosen(TreeElement* p_element);
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	TreeView* tree;
-	TextField* search_field;
+   private:
+    TreeView* tree;
+    TextField* search_field;
 };
 
-class SettingsDialog : public ConfirmationDialog
-{
-	OBJ_DEFINITION(SettingsDialog, ConfirmationDialog);
+class SettingsDialog : public ConfirmationDialog {
+    OBJ_DEFINITION(SettingsDialog, ConfirmationDialog);
 
-public:
-	SettingsDialog();
+   public:
+    SettingsDialog();
 
-	void set_property_view(PropertyView* p_property_view);
-	PropertyView* get_property_view() const;
+    void set_property_view(PropertyView* p_property_view);
+    PropertyView* get_property_view() const;
 
-	void notification(int p_notification) override;
-	void search(const String& p_search);
-	void update_list();
-	void list_chosen(int p_element);
+    void notification(int p_notification) override;
+    void search(const String& p_search);
+    void update_list();
+    void list_chosen(int p_element);
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	PropertyView* property_view;
-	TextField* search_field;
-	Dictionary<String, Variant> dictionary;
+   private:
+    PropertyView* property_view;
+    TextField* search_field;
+    Dictionary<String, Variant> dictionary;
 };
 
-class ProjectSettingsDialog : public SettingsDialog
-{
-	OBJ_DEFINITION(ProjectSettingsDialog, SettingsDialog);
+class ProjectSettingsDialog : public SettingsDialog {
+    OBJ_DEFINITION(ProjectSettingsDialog, SettingsDialog);
 
-public:
-	ProjectSettingsDialog();
+   public:
+    ProjectSettingsDialog();
 
-private:
-
+   private:
 };
 
-class EditorSettingsDialog : public SettingsDialog
-{
-
-};
+class EditorSettingsDialog : public SettingsDialog {};

@@ -1,37 +1,33 @@
 #pragma once
 
-#include "types/method.h"
 #include "types/callable.h"
+#include "types/method.h"
 
-class Property : public Callable
-{
-public:
-	Property();
-	~Property();
+class Property : public Callable {
+   public:
+    Property();
+    ~Property();
 
-	StringName var_name = "";
-	VariantType inherits_from;
-	VariantType var_type;
+    StringName var_name = "";
+    VariantType inherits_from;
+    VariantType var_type;
 
-	R_Method_1 *get;
-	V_Method_2 *set;
+    R_Method_1* get;
+    V_Method_2* set;
 };
 
-struct Variable
-{
-	Property* property;
-	Variant variant;
+struct Variable {
+    Property* property;
+    Variant variant;
 
-	Variant get()
-	{
-		if (property->get)
-			return property->get->operator() (variant);
-		else
-			return NULL_VAR;
-	}
+    Variant get() {
+        if (property->get)
+            return property->get->operator()(variant);
+        else
+            return NULL_VAR;
+    }
 
-	void set(const Variant& p_new)
-	{
-		property->set->operator() (variant, p_new);
-	}
+    void set(const Variant& p_new) {
+        property->set->operator()(variant, p_new);
+    }
 };

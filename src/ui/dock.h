@@ -1,54 +1,51 @@
 #pragma once
 
-#include "tab.h"
-#include "control.h"
 #include "button.h"
+#include "control.h"
+#include "tab.h"
 #include "uibox.h"
 
-class Dock : public Control
-{
-	OBJ_DEFINITION(Dock, Control);
+class Dock : public Control {
+    OBJ_DEFINITION(Dock, Control);
 
-public:
+   public:
+    struct Selector {
+        String name;
+        rect2 area;
+        bool is_adder;
+    };
 
-	struct Selector
-	{
-		String name;
-		rect2 area;
-		bool is_adder;
-	};
+    Dock();
 
-	Dock();
+    vec2 get_required_size() const override;
 
-	vec2 get_required_size() const override;
+    void handle_event(UIEvent* p_event) override;
 
-	void handle_event(UIEvent * p_event) override;
+    void notification(int p_notification) override;
 
-	void notification(int p_notification) override;
+    int get_item(const vec2& p_pos) const;
 
-	int get_item(const vec2 & p_pos) const;
+    void position_items();
 
-	void position_items();
+    void add_tab(Tab* tab);
+    void remove_tab(int p_index);
+    void set_active_tab(int p_index);
 
-	void add_tab(Tab *tab);
-	void remove_tab(int p_index);
-	void set_active_tab(int p_index);
+   private:
+    Vector<Tab> tabs;
 
-private:
-	Vector<Tab> tabs;
+    Array<Selector> selectors;
 
-	Array<Selector> selectors;
+    int selected = -1;
+    int highlighted = -1;
+    int active = -1;
 
-	int selected = -1;
-	int highlighted = -1;
-	int active = -1;
+    float left_margin;
+    float text_offset;
 
-	float left_margin;
-	float text_offset;
+    rect2 tab_area, selectors_area;
 
-	rect2 tab_area, selectors_area;
-
-	Color selected_color;
-	Color highlight_color;
-	Color inactive_color;
+    Color selected_color;
+    Color highlight_color;
+    Color inactive_color;
 };

@@ -1,8 +1,6 @@
 #pragma once
-class TFunction
-{
-public:
-	TFunction();
-	~TFunction();
+class TFunction {
+   public:
+    TFunction();
+    ~TFunction();
 };
-

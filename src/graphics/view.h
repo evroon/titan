@@ -1,7 +1,6 @@
 #pragma once
 
 #include "core/object.h"
-
 #include "viewport.h"
 
 #define VIEW View::get_singleton()
@@ -12,44 +11,43 @@
 
 class Application;
 
-class View : public Object
-{
-	OBJ_DEFINITION(View, Object);
+class View : public Object {
+    OBJ_DEFINITION(View, Object);
 
-public:
-	View();
-	virtual ~View();
+   public:
+    View();
+    virtual ~View();
 
-	void init(const vec2& p_default_size);
+    void init(const vec2& p_default_size);
 
-	void draw();
-	void update();
-	void bind_viewport(Viewport *viewport);
-	void handle_event(Event *event);
-	void free();
+    void draw();
+    void update();
+    void bind_viewport(Viewport* viewport);
+    void handle_event(Event* event);
+    void free();
 
-	void set_default_viewport(Viewport *p_viewport);
-	Viewport* get_default_viewport() const;
+    void set_default_viewport(Viewport* p_viewport);
+    Viewport* get_default_viewport() const;
 
-	void set_active_viewport(Viewport *p_viewport);
-	Viewport* get_active_viewport() const;
+    void set_active_viewport(Viewport* p_viewport);
+    Viewport* get_active_viewport() const;
 
-	void set_application(Application* p_application);
-	Application* get_application() const;
+    void set_application(Application* p_application);
+    Application* get_application() const;
 
-	static View* get_singleton();
+    static View* get_singleton();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	static View singleton;
+   private:
+    static View singleton;
 
-	Vector<Viewport> viewports;
+    Vector<Viewport> viewports;
 
-	Viewport* default_viewport;
-	Viewport* active_viewport;
+    Viewport* default_viewport;
+    Viewport* active_viewport;
 
-	Application* application;
+    Application* application;
 
-	bool fps_locked;
+    bool fps_locked;
 };

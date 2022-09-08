@@ -1,16 +1,8 @@
 #include "terrainnoise.h"
 
-
-
-TerrainNoise::TerrainNoise()
-{
-
-}
+TerrainNoise::TerrainNoise() {}
 
 #undef CLASSNAME
 #define CLASSNAME TerrainNoise
 
-void TerrainNoise::bind_methods()
-{
-    REG_CSTR(0);
-}
+void TerrainNoise::bind_methods() { REG_CSTR(0); }

@@ -2,18 +2,17 @@
 
 #include "uibox.h"
 
-class Seperator : public Control
-{
-	OBJ_DEFINITION(Seperator, Control);
+class Seperator : public Control {
+    OBJ_DEFINITION(Seperator, Control);
 
-public:
-	Seperator();
-	~Seperator();
+   public:
+    Seperator();
+    ~Seperator();
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-private:
-	Color color;
+   private:
+    Color color;
 };

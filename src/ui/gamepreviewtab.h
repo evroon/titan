@@ -1,38 +1,37 @@
 #pragma once
 
+#include "combobox.h"
+#include "container.h"
 #include "tab.h"
 #include "worldview.h"
-#include "container.h"
-#include "combobox.h"
 
-class GamePreviewTab : public Tab
-{
-	OBJ_DEFINITION(GamePreviewTab, Tab);
+class GamePreviewTab : public Tab {
+    OBJ_DEFINITION(GamePreviewTab, Tab);
 
-public:
-	GamePreviewTab();
-	GamePreviewTab(Scene* p_scene);
-	virtual ~GamePreviewTab();
+   public:
+    GamePreviewTab();
+    GamePreviewTab(Scene* p_scene);
+    virtual ~GamePreviewTab();
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void update_textures();
+    void update_textures();
 
-	void transform_toggled(int p_index);
+    void transform_toggled(int p_index);
 
-	void set_preview_type(const String& p_type);
+    void set_preview_type(const String& p_type);
 
-	void notification(int p_notification) override;
+    void notification(int p_notification) override;
 
-	static void bind_methods();
+    static void bind_methods();
 
-	void world_changed();
+    void world_changed();
 
-	WorldView* get_world_view() const;
+    WorldView* get_world_view() const;
 
-private:
-	Container buttons;
-	WorldView* world_view;
-	ComboBox* combo_box;
-	ComboBox* draw_mode;
+   private:
+    Container buttons;
+    WorldView* world_view;
+    ComboBox* combo_box;
+    ComboBox* draw_mode;
 };

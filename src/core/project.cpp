@@ -1,85 +1,66 @@
 #include "project.h"
 
 #include "core/serializer.h"
-
-#include "world/world.h"
-#include "world/terrain.h"
 #include "graphics/renderer.h"
+#include "world/terrain.h"
+#include "world/world.h"
 
-Project::Project()
-{
-	//create();
+Project::Project() {
+    // create();
 }
 
-Project::Project(const String& p_file)
-{
-	text_file = new TextFile(p_file);
-	load();
+Project::Project(const String& p_file) {
+    text_file = new TextFile(p_file);
+    load();
 }
 
-Project::~Project()
-{
+Project::~Project() {}
 
+void Project::create() {
+    default_scene = new Scene("main");
+    scenes.push_back(default_scene);
+    add_child(default_scene);
 }
 
-void Project::create()
-{
-	default_scene = new Scene("main");
-	scenes.push_back(default_scene);
-	add_child(default_scene);
+void Project::load() {
+    Serializer s;
+
+    Variant project = s.deserialize(text_file->get_source());
+
+    default_scene = project.operator Project*()->get_child_by_type<Scene*>();
+    add_child(default_scene);
 }
 
-void Project::load()
-{
-	Serializer s;
+void Project::save() {
+    Node* terrain = default_scene->get_child_by_type<World*>()
+                        ->get_child_by_type<Terrain*>();
+    if (terrain) {
+        FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
+        // DEFERRED_RENDERER->save_fbo(f, "engine/heightmap.bmp", 0);
+    }
 
-	Variant project = s.deserialize(text_file->get_source());
+    Serializer s;
+    String source = s.serialize(this);
 
-	default_scene = project.operator Project*()->get_child_by_type<Scene*>();
-	add_child(default_scene);
+    text_file->write(source);
 }
 
-void Project::save()
-{
-	Node* terrain = default_scene->get_child_by_type<World*>()->get_child_by_type<Terrain*>();
-	if (terrain) {
-		FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
-		// DEFERRED_RENDERER->save_fbo(f, "engine/heightmap.bmp", 0);
-	}
+void Project::save_as(const String& p_file) {
+    text_file = new TextFile(p_file);
 
-	Serializer s;
-	String source = s.serialize(this);
-
-	text_file->write(source);
+    save();
 }
 
-void Project::save_as(const String& p_file)
-{
-	text_file = new TextFile(p_file);
+Scene* Project::get_main_scene() const { return default_scene; }
 
-	save();
-}
+String Project::serialize() const { return String(); }
 
-Scene* Project::get_main_scene() const
-{
-	return default_scene;
-}
-
-String Project::serialize() const
-{
-	return String();
-}
-
-Renderer* Project::get_renderer() const
-{
-	return DEFERRED_RENDERER;
-}
+Renderer* Project::get_renderer() const { return DEFERRED_RENDERER; }
 
 #undef CLASSNAME
 #define CLASSNAME Project
 
-void Project::bind_methods()
-{
-	REG_PROPERTY(renderer);
-	REG_CSTR(0);
+void Project::bind_methods() {
+    REG_PROPERTY(renderer);
+    REG_CSTR(0);
 }

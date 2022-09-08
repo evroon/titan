@@ -1,8 +1,8 @@
 #include "globals.h"
 //
-//Map<string, Variant> Globals::globals;
+// Map<string, Variant> Globals::globals;
 //
-//TsValue* Globals::get(const string name)
+// TsValue* Globals::get(const string name)
 //{
 //	if (globals.contains(name))
 //		return globals[name];

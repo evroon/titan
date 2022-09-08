@@ -1,24 +1,23 @@
 #pragma once
 
-#include "textbox.h"
 #include "tab.h"
+#include "textbox.h"
 
-class ConsoleTab : public Tab
-{
-	OBJ_DEFINITION(ConsoleTab, Tab);
+class ConsoleTab : public Tab {
+    OBJ_DEFINITION(ConsoleTab, Tab);
 
-public:
-	ConsoleTab();
-	~ConsoleTab();
+   public:
+    ConsoleTab();
+    ~ConsoleTab();
 
-	vec2 get_required_size() const override;
+    vec2 get_required_size() const override;
 
-	void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
-	void log(int p_index);
+    void log(int p_index);
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-	TextBox *textbox;
+   private:
+    TextBox* textbox;
 };

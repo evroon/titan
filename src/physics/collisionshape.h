@@ -1,8 +1,8 @@
 #pragma once
 
-#include "core/object.h"
-#include "core/definitions.h"
 #include "Box2D/Box2D.h"
+#include "core/definitions.h"
+#include "core/object.h"
 
 #if PLATFORM == WINDOWS
 #include "btbulletdynamicscommon.h"
@@ -16,102 +16,93 @@ class WorldObject;
 class b2Body;
 class PhysicsWorld2D;
 
-class CollisionShape3D : public Object
-{
-	OBJ_DEFINITION(CollisionShape3D, Object);
+class CollisionShape3D : public Object {
+    OBJ_DEFINITION(CollisionShape3D, Object);
 
-public:
-	CollisionShape3D();
-	virtual ~CollisionShape3D();
+   public:
+    CollisionShape3D();
+    virtual ~CollisionShape3D();
 
-	friend class RigidBody3D;
+    friend class RigidBody3D;
 
-	static void bind_methods();
+    static void bind_methods();
 
-protected:
-	btCollisionShape* shape;
+   protected:
+    btCollisionShape* shape;
 };
 
-class PlaneShape3D : CollisionShape3D
-{
-	OBJ_DEFINITION(PlaneShape3D, Object);
+class PlaneShape3D : CollisionShape3D {
+    OBJ_DEFINITION(PlaneShape3D, Object);
 
-public:
-	PlaneShape3D();
+   public:
+    PlaneShape3D();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-
+   private:
 };
 
-class SphereShape3D : CollisionShape3D
-{
-	OBJ_DEFINITION(SphereShape3D, Object);
+class SphereShape3D : CollisionShape3D {
+    OBJ_DEFINITION(SphereShape3D, Object);
 
-public:
-	SphereShape3D();
+   public:
+    SphereShape3D();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-
+   private:
 };
 
-class BoxShape3D : CollisionShape3D
-{
-	OBJ_DEFINITION(SphereShape3D, Object);
+class BoxShape3D : CollisionShape3D {
+    OBJ_DEFINITION(SphereShape3D, Object);
 
-public:
-	BoxShape3D();
+   public:
+    BoxShape3D();
 
-	static void bind_methods();
+    static void bind_methods();
 
-private:
-
+   private:
 };
 
-class CollisionShape2D : public Object
-{
-	OBJ_DEFINITION(CollisionShape2D, Object);
+class CollisionShape2D : public Object {
+    OBJ_DEFINITION(CollisionShape2D, Object);
 
-public:
-	CollisionShape2D();
-	static void bind_methods();
+   public:
+    CollisionShape2D();
+    static void bind_methods();
 
-	b2Body *body;
+    b2Body* body;
 
-protected:
-	b2BodyDef bodydef;
-	b2FixtureDef fixdef;
+   protected:
+    b2BodyDef bodydef;
+    b2FixtureDef fixdef;
 
-private:
+   private:
 };
 
-//2D Box
-class BoxShape2D : public CollisionShape2D
-{
-	OBJ_DEFINITION(BoxShape2D, CollisionShape2D)
+// 2D Box
+class BoxShape2D : public CollisionShape2D {
+    OBJ_DEFINITION(BoxShape2D, CollisionShape2D)
 
-public:
-	BoxShape2D() = default;
-	BoxShape2D(PhysicsWorld2D *world, WorldObject* p_object, bool dyn = true);
-	virtual ~BoxShape2D() { }
+   public:
+    BoxShape2D() = default;
+    BoxShape2D(PhysicsWorld2D* world, WorldObject* p_object, bool dyn = true);
+    virtual ~BoxShape2D() {}
 
-protected:
-	b2PolygonShape shape;
+   protected:
+    b2PolygonShape shape;
 };
 
-//2D Circle
-class CircleShape2D : public CollisionShape2D
-{
-	OBJ_DEFINITION(CircleShape2D, CollisionShape2D)
+// 2D Circle
+class CircleShape2D : public CollisionShape2D {
+    OBJ_DEFINITION(CircleShape2D, CollisionShape2D)
 
-public:
-	CircleShape2D() = default;
-	CircleShape2D(PhysicsWorld2D *world, WorldObject* p_object, bool dyn = true);
-	virtual ~CircleShape2D() { }
+   public:
+    CircleShape2D() = default;
+    CircleShape2D(PhysicsWorld2D* world, WorldObject* p_object,
+                  bool dyn = true);
+    virtual ~CircleShape2D() {}
 
-protected:
-	b2CircleShape shape;
+   protected:
+    b2CircleShape shape;
 };

@@ -4,19 +4,18 @@
 
 class WorldObject;
 
-class Component : public Object
-{
-	OBJ_DEFINITION(Component, Object)
+class Component : public Object {
+    OBJ_DEFINITION(Component, Object)
 
-public:
-	Component();
-	virtual ~Component();
+   public:
+    Component();
+    virtual ~Component();
 
-	virtual void update() { }
+    virtual void update() {}
 
-	virtual void bind_parent(WorldObject *pa);
+    virtual void bind_parent(WorldObject* pa);
 
-	static void bind_methods();
+    static void bind_methods();
 
-	WorldObject *parent;
+    WorldObject* parent;
 };

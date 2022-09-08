@@ -1,42 +1,22 @@
 #include "particlesystem.h"
 
 //=========================================================================
-//ParticleSystem
+// ParticleSystem
 //=========================================================================
 
-ParticleSystem::ParticleSystem()
-{
-	ubo = new UBO;
-}
+ParticleSystem::ParticleSystem() { ubo = new UBO; }
 
-ParticleSystem::~ParticleSystem()
-{
-}
+ParticleSystem::~ParticleSystem() {}
 
-void ParticleSystem::init()
-{
+void ParticleSystem::init() {}
 
-}
+void ParticleSystem::start() {}
 
-void ParticleSystem::start()
-{
+void ParticleSystem::update() {}
 
-}
-
-void ParticleSystem::update()
-{
-
-}
-
-void ParticleSystem::draw()
-{
-
-}
+void ParticleSystem::draw() {}
 
 #undef CLASSNAME
 #define CLASSNAME ParticleSystem
 
-void ParticleSystem::bind_methods()
-{
-
-}
+void ParticleSystem::bind_methods() {}

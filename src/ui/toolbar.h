@@ -1,58 +1,53 @@
 #pragma once
 
 #include "container.h"
-#include "uibox.h"
-#include "labelbutton.h"
 #include "contextmenu.h"
+#include "labelbutton.h"
+#include "uibox.h"
 
+class ToolBar : public Control {
+    OBJ_DEFINITION(ToolBar, Control);
 
+   public:
+    struct ToolBarItem {
+        ContextMenu* menu;
+        rect2 area;
+        String text;
+    };
 
-class ToolBar : public Control
-{
-	OBJ_DEFINITION(ToolBar, Control);
+    ToolBar();
+    virtual ~ToolBar();
 
-public:
-	struct ToolBarItem
-	{
-		ContextMenu *menu;
-		rect2 area;
-		String text;
-	};
+    vec2 get_required_size() const override;
+    void notification(int p_notification) override;
 
-	ToolBar();
-	virtual ~ToolBar();
+    void handle_event(UIEvent* p_ui_event) override;
 
-	vec2 get_required_size() const override;
-	void notification(int p_notification) override;
+    void position_items();
 
-	void handle_event(UIEvent* p_ui_event) override;
+    int get_item(const vec2& p_pos) const;
 
-	void position_items();
+    void add_item(const String& p_text);
+    void set_menu(int p_index, ContextMenu* p_menu);
 
-	int get_item(const vec2& p_pos) const;
+    void open_item(int p_index);
 
-	void add_item(const String& p_text);
-	void set_menu(int p_index, ContextMenu* p_menu);
+    static void bind_methods();
 
-	void open_item(int p_index);
+   private:
+    void menu_closed();
 
-	static void bind_methods();
+    Font* font;
 
-private:
-	void menu_closed();
+    Array<ToolBarItem> items;
 
-	Font* font;
+    float left_margin;
+    float right_margin;
+    float seperation;
 
-	Array<ToolBarItem> items;
+    int highlighted;
+    int selected;
 
-	float left_margin;
-	float right_margin;
-	float seperation;
-
-	int highlighted;
-	int selected;
-
-	Color selection_color;
-	Color highlight_color;
-
+    Color selection_color;
+    Color highlight_color;
 };

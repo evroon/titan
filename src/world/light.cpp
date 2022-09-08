@@ -42,64 +42,44 @@ void Light::Draw()
 
 #endif
 
-PointLight::PointLight()
-{
+PointLight::PointLight() {}
 
-}
-
-PointLight::~PointLight()
-{
-}
+PointLight::~PointLight() {}
 
 #undef CLASSNAME
 #define CLASSNAME PointLight
 
-void PointLight::bind_methods()
-{
-	REG_CSTR(0);
-}
+void PointLight::bind_methods() { REG_CSTR(0); }
 
 //=========================================================================
-//DirectionalLight
+// DirectionalLight
 //=========================================================================
 
-DirectionalLight::DirectionalLight()
-{
-}
+DirectionalLight::DirectionalLight() {}
 
-DirectionalLight::~DirectionalLight()
-{
-}
+DirectionalLight::~DirectionalLight() {}
 
-vec3 DirectionalLight::get_direction() const
-{
-	return (get_transform().get_model().inverse() * vec4(0.0f, 1.0f, 0.0f, 0.0f)).get_xyz().normalize();
+vec3 DirectionalLight::get_direction() const {
+    return (get_transform().get_model().inverse() *
+            vec4(0.0f, 1.0f, 0.0f, 0.0f))
+        .get_xyz()
+        .normalize();
 }
 
 #undef CLASSNAME
 #define CLASSNAME DirectionalLight
 
-void DirectionalLight::bind_methods()
-{
-	REG_CSTR(0);
-}
+void DirectionalLight::bind_methods() { REG_CSTR(0); }
 
 //=========================================================================
-//ConeLight
+// ConeLight
 //=========================================================================
 
-ConeLight::ConeLight()
-{
-}
+ConeLight::ConeLight() {}
 
-ConeLight::~ConeLight()
-{
-}
+ConeLight::~ConeLight() {}
 
 #undef CLASSNAME
 #define CLASSNAME ConeLight
 
-void ConeLight::bind_methods()
-{
-	REG_CSTR(0);
-}
+void ConeLight::bind_methods() { REG_CSTR(0); }
