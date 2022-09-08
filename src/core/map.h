@@ -21,7 +21,7 @@ class Map {
 
     void clear(const KEY &p_key) { map.erase(p_key); }
     void clean(const KEY &p_key) { delete map[p_key]; }
-    int size() const { return to_int(map.size()); }
+    int size() const { return static_cast<int>(map.size()); }
 
     // Cleaning
     int count(const KEY &p_key) { return static_cast<int>(map.count(p_key)); }
