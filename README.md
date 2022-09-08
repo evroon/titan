@@ -1,5 +1,6 @@
 # Titan Engine
 [![build](https://github.com/evroon/titan/actions/workflows/main.yml/badge.svg)](https://github.com/evroon/titan/actions/workflows/main.yml)
+[![clang-format](https://github.com/evroon/titan/actions/workflows/clang-format.yml/badge.svg)](https://github.com/evroon/titan/actions/workflows/clang-format.yml)
 
 A graphics engine using OpenGL and written in C++.
 
