@@ -12,8 +12,8 @@ class EditableLabel : public PropertyControl {
 
    public:
     EditableLabel();
-    EditableLabel(const String &name);
-    EditableLabel(const Variable &p_variable);
+    EditableLabel(const String& name);
+    EditableLabel(const Variable& p_variable);
 
     void init();
 
@@ -21,7 +21,7 @@ class EditableLabel : public PropertyControl {
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *e) override;
+    void handle_event(UIEvent* e) override;
     void notification(int p_notification) override;
 
     void move_cursor_begin();
@@ -31,7 +31,7 @@ class EditableLabel : public PropertyControl {
     void set_cursor_index(int p_cursor_index);
 
     void insert_at_index(int index, char kar);
-    void insert_at_index(int index, const String &kar);
+    void insert_at_index(int index, const String& kar);
     void remove_at_index(int index);
 
     bool cursor_is_at_end();
@@ -39,10 +39,10 @@ class EditableLabel : public PropertyControl {
     void value_changed() override;
 
     inline String get_text() const;
-    virtual void set_text(const String &p_text);
+    virtual void set_text(const String& p_text);
 
     String get_empty_text() const;
-    void set_empty_text(const String &p_empty_text);
+    void set_empty_text(const String& p_empty_text);
 
     int get_index(float x) const;
     float get_position_x(int index) const;
@@ -82,5 +82,5 @@ class EditableLabel : public PropertyControl {
 
     Color selection_color;
 
-    UITimer *ibeam_blinker;
+    UITimer* ibeam_blinker;
 };

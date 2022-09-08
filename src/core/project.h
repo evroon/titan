@@ -10,27 +10,27 @@ class Project : public Node {
 
    public:
     Project();
-    Project(const String &p_file);
+    Project(const String& p_file);
 
     virtual ~Project();
 
     void create();
     void load();
     void save();
-    void save_as(const String &p_file);
+    void save_as(const String& p_file);
 
-    Scene *get_main_scene() const;
+    Scene* get_main_scene() const;
 
     String serialize() const;
 
-    Renderer *get_renderer() const;
-    void set_renderer(Renderer *p_renderer) const {}
+    Renderer* get_renderer() const;
+    void set_renderer(Renderer* p_renderer) const {}
 
     static void bind_methods();
 
    private:
     Vector<Scene> scenes;
-    Scene *default_scene;
+    Scene* default_scene;
 
-    TextFile *text_file;
+    TextFile* text_file;
 };

@@ -16,15 +16,15 @@
 
 class GarbageCollector {
    public:
-    void queue_clean(const Variant &p_var);
-    void queue_free(const Variant &p_var);
+    void queue_clean(const Variant& p_var);
+    void queue_free(const Variant& p_var);
 
     void free();
     void clean();
 
     static void init();
 
-    static GarbageCollector *singleton;
+    static GarbageCollector* singleton;
 
    private:
     Array<Variant> clean_queue, free_queue;

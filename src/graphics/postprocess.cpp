@@ -8,17 +8,17 @@
 PostProcess::PostProcess()
     : PostProcess(CONTENT->LoadShader("engine/shaders/PostProcess")) {}
 
-PostProcess::PostProcess(Shader *p_shader) { shader = p_shader; }
+PostProcess::PostProcess(Shader* p_shader) { shader = p_shader; }
 
 PostProcess::~PostProcess() {}
 
-void PostProcess::set_area(const rect2 &p_area) { area = p_area; }
+void PostProcess::set_area(const rect2& p_area) { area = p_area; }
 
 rect2 PostProcess::get_area() const { return area; }
 
-void PostProcess::set_fbo(FBO2D *p_fbo) { fbo = p_fbo; }
+void PostProcess::set_fbo(FBO2D* p_fbo) { fbo = p_fbo; }
 
-FBO2D *PostProcess::get_fbo() const { return fbo; }
+FBO2D* PostProcess::get_fbo() const { return fbo; }
 
 void PostProcess::post_process() {
     fbo->color_textures[0]->bind(0);
@@ -44,13 +44,13 @@ WorldPostProcess::~WorldPostProcess() {}
 void WorldPostProcess::post_process() {
     FORWARD_RENDERER->get_render_buffer()->color_textures[0]->bind(0);
 
-    Clouds *c = VIEW->get_active_viewport()
+    Clouds* c = VIEW->get_active_viewport()
                     ->get_world()
                     ->get_worldobject("clouds")
-                    ->cast_to_type<Clouds *>();
+                    ->cast_to_type<Clouds*>();
     // c->texture->bind(1);
 
-    Camera *cam = VIEW->get_active_viewport()->get_world()->get_active_camera();
+    Camera* cam = VIEW->get_active_viewport()->get_world()->get_active_camera();
 
     FBOMANAGER->bind_default_fbo();
     RENDERER->stop_depth_test();

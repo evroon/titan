@@ -7,8 +7,8 @@ class PropertyControl : public Control {
 
    public:
     PropertyControl();
-    PropertyControl(const Variant &p_variant);
-    PropertyControl(const Variable &p_variable);
+    PropertyControl(const Variant& p_variant);
+    PropertyControl(const Variable& p_variable);
 
     virtual ~PropertyControl();
 
@@ -18,8 +18,8 @@ class PropertyControl : public Control {
     virtual void value_input() {}
 
     // use externally to bind a value or variable to the control
-    void set_value(const Variant &p_value);
-    void set_value(const Variable &p_variable);
+    void set_value(const Variant& p_value);
+    void set_value(const Variable& p_variable);
 
     Variant get_value();
     VariantType get_property_type();
@@ -29,7 +29,7 @@ class PropertyControl : public Control {
    protected:
     // use when the value has been set by user input
     // note: prevents an infinite loop
-    void value_set(const Variant &p_value);
+    void value_set(const Variant& p_value);
 
    private:
     union {

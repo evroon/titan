@@ -59,8 +59,8 @@ void Sky::update() {
 void Sky::draw() {
     RENDERER->stop_culling();
 
-    DirectionalLight *light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight *>();
+    DirectionalLight* light =
+        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!light) return;
 
@@ -80,11 +80,11 @@ void Sky::draw() {
     RENDERER->use_culling();
 }
 
-void Sky::set_sun_color(const Color &p_sun_color) { sun_color = p_sun_color; }
+void Sky::set_sun_color(const Color& p_sun_color) { sun_color = p_sun_color; }
 
 Color Sky::get_sun_color() const { return sun_color; }
 
-void Sky::set_sky_color(const Color &p_sky_color) { sky_color = p_sky_color; }
+void Sky::set_sky_color(const Color& p_sky_color) { sky_color = p_sky_color; }
 
 Color Sky::get_sky_color() const { return sky_color; }
 

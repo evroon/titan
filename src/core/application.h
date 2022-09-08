@@ -10,12 +10,12 @@ class Application : public Object {
     OBJ_DEFINITION(Application, Object);
 
    public:
-    Application(Platform *p_platform);
+    Application(Platform* p_platform);
 
     virtual void init() {}
     virtual void update() {}
     virtual void draw() {}
-    virtual void resize(const vec2i &p_size) {}
+    virtual void resize(const vec2i& p_size) {}
 
     void prepare_draw();
     void FinishDraw();
@@ -29,8 +29,8 @@ class Application : public Object {
     void Quit();
     void Free();
 
-    Window *window;
-    RenderTarget *default_target;
-    Platform *platform;
+    Window* window;
+    RenderTarget* default_target;
+    Platform* platform;
     bool graphics_enabled;
 };

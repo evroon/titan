@@ -24,7 +24,7 @@
 
 #define MAX_LOG_LENGTH 1000
 
-Shader::Shader(const String &p_path) {
+Shader::Shader(const String& p_path) {
     program_id = -1;
     vertexshader_id = -1;
     fragmentshader_id = -1;
@@ -118,14 +118,14 @@ void Shader::free() {
 
 void Shader::start() { glUseProgram(program_id); }
 
-GLint Shader::create_shader(const String &p_path, GLenum ShaderType) {
+GLint Shader::create_shader(const String& p_path, GLenum ShaderType) {
     GLint shader_id = glCreateShader(ShaderType);
     GLchar infolog[MAX_LOG_LENGTH];
-    const GLchar *shadersource;
+    const GLchar* shadersource;
     GLint infologlength;
     GLint compilestatus;
 
-    TextFile *file = CONTENT->LoadTextFile(p_path);
+    TextFile* file = CONTENT->LoadTextFile(p_path);
 
     String s = file->get_source();
 
@@ -158,7 +158,7 @@ GLint Shader::create_shader(const String &p_path, GLenum ShaderType) {
 
 void Shader::create_program() {
     GLint linkStatus, infologlength;
-    GLchar *infolog;
+    GLchar* infolog;
     program_id = glCreateProgram();
 
     if (compute_id != -1)
@@ -247,92 +247,92 @@ void Shader::set_info() {
         return;                                                \
     }
 
-void Shader::set_uniform(const String &name, bool value) {
+void Shader::set_uniform(const String& name, bool value) {
     CHECK_NAME
 
     glUniform1i(uniforms[name].location, value ? 1 : 0);
 }
 
-void Shader::set_uniform(const String &name, const int value) {
+void Shader::set_uniform(const String& name, const int value) {
     CHECK_NAME
 
     glUniform1i(uniforms[name].location, value);
 }
 
-void Shader::set_uniform(const String &name, const float value) {
+void Shader::set_uniform(const String& name, const float value) {
     CHECK_NAME
 
     glUniform1f(uniforms[name].location, value);
 }
 
-void Shader::set_uniform(const String &name, const double value)  // BETA
+void Shader::set_uniform(const String& name, const double value)  // BETA
 {
     CHECK_NAME
 
     glUniform1f(uniforms[name].location, (float)value);
 }
 
-void Shader::set_uniform(const String &name, const vec2 &value) {
+void Shader::set_uniform(const String& name, const vec2& value) {
     CHECK_NAME
 
     glUniform2f(uniforms[name].location, value.x, value.y);
 }
 
-void Shader::set_uniform(const String &name, const vec2i &value) {
+void Shader::set_uniform(const String& name, const vec2i& value) {
     CHECK_NAME
 
     glUniform2i(uniforms[name].location, value.x, value.y);
 }
 
-void Shader::set_uniform(const String &name, const vec3 &value) {
+void Shader::set_uniform(const String& name, const vec3& value) {
     CHECK_NAME
 
     glUniform3f(uniforms[name].location, value.x, value.y, value.z);
 }
 
-void Shader::set_uniform(const String &name, const vec3i &value) {
+void Shader::set_uniform(const String& name, const vec3i& value) {
     CHECK_NAME
 
     glUniform3i(uniforms[name].location, value.x, value.y, value.z);
 }
 
-void Shader::set_uniform(const String &name, const vec4 &value) {
+void Shader::set_uniform(const String& name, const vec4& value) {
     CHECK_NAME
 
     glUniform4f(uniforms[name].location, value.x, value.y, value.z, value.w);
 }
 
-void Shader::set_uniform(const String &name, const vec4i &value) {
+void Shader::set_uniform(const String& name, const vec4i& value) {
     CHECK_NAME
 
     glUniform4i(uniforms[name].location, value.x, value.y, value.z, value.w);
 }
-void Shader::set_uniform(const String &name, const Color &value) {
+void Shader::set_uniform(const String& name, const Color& value) {
     CHECK_NAME
 
     glUniform4f(uniforms[name].location, value.x, value.y, value.z, value.w);
 }
 
-void Shader::set_uniform(const String &name, const mat4 &value) {
+void Shader::set_uniform(const String& name, const mat4& value) {
     CHECK_NAME
 
     glUniformMatrix4fv(uniforms[name].location, 1, false, &value.m[0]);
 }
 
-void Shader::set_uniform(const String &name, const Array<vec4> &value) {
+void Shader::set_uniform(const String& name, const Array<vec4>& value) {
     CHECK_NAME
 
     glUniform4fv(uniforms[name].location, value.size(), &(&value[0])->x);
 }
 
-void Shader::set_uniform(const String &name, const Array<mat4> &value) {
+void Shader::set_uniform(const String& name, const Array<mat4>& value) {
     CHECK_NAME
 
     glUniformMatrix4fv(uniforms[name].location, value.size(), false,
                        &(&value[0])->m[0]);
 }
 
-void Shader::bind_block(const String &p_var_name, UBO *p_ubo) {
+void Shader::bind_block(const String& p_var_name, UBO* p_ubo) {
     glUniformBlockBinding(program_id, blocks[p_var_name].location,
                           p_ubo->get_bound_index());
 }

@@ -19,15 +19,15 @@ class Dock : public Control {
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
     void notification(int p_notification) override;
 
-    int get_item(const vec2 &p_pos) const;
+    int get_item(const vec2& p_pos) const;
 
     void position_items();
 
-    void add_tab(Tab *tab);
+    void add_tab(Tab* tab);
     void remove_tab(int p_index);
     void set_active_tab(int p_index);
 

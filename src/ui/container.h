@@ -16,8 +16,8 @@ class Container : public Control {
 
     void notification(int p_notification) override;
 
-    virtual void add_child(Control *p_child);
-    void remove_child(Control *p_child);
+    virtual void add_child(Control* p_child);
+    void remove_child(Control* p_child);
 
     int get_child_count() const;
 

@@ -3,13 +3,13 @@
 #include "core/application.h"
 #include "core/windowmanager.h"
 
-Input *Input::singleton;
+Input* Input::singleton;
 
 Input::Input() {}
 
 void Input::init() { singleton = new Input; }
 
-void Input::HandleEvent(const SDL_Event &event) {
+void Input::HandleEvent(const SDL_Event& event) {
     vec2i sizei = parent->window->size;
     vec2 size = vec2(to_float(sizei.x), to_float(sizei.y));
     vec2 button_pos = vec2(to_float(event.button.x), to_float(event.button.y));
@@ -22,14 +22,14 @@ void Input::HandleEvent(const SDL_Event &event) {
         else if (event.type == SDL_FINGERUP)
             pt = InputEvent::UP;
 
-        InputEvent *e = new InputEvent(InputEvent::FINGERPRESS);
+        InputEvent* e = new InputEvent(InputEvent::FINGERPRESS);
         e->accept_finger_pos(size, button_pos);
         e->press_type = pt;
         e->index = (int)event.tfinger.fingerId;
 
         AddEvent(e);
     } else if (event.type == SDL_FINGERMOTION) {
-        InputEvent *e = new InputEvent(InputEvent::FINGERMOVE);
+        InputEvent* e = new InputEvent(InputEvent::FINGERMOVE);
         e->accept_finger_pos(size, button_pos);
         e->index = (int)event.tfinger.fingerId;
 
@@ -43,20 +43,20 @@ void Input::HandleEvent(const SDL_Event &event) {
         else if (event.type == SDL_MOUSEBUTTONUP)
             pt = InputEvent::UP;
 
-        InputEvent *e = new InputEvent(InputEvent::MOUSEPRESS);
+        InputEvent* e = new InputEvent(InputEvent::MOUSEPRESS);
         e->accept_mouse_pos(size, button_pos);
         e->button_type = MOUSE->get_ButtonType(event.button.button);
         e->press_type = pt;
 
         AddEvent(e);
     } else if (event.type == SDL_MOUSEMOTION) {
-        InputEvent *e = new InputEvent(InputEvent::MOUSEMOVE);
+        InputEvent* e = new InputEvent(InputEvent::MOUSEMOVE);
         e->accept_mouse_pos(
             size, vec2(to_float(event.motion.x), to_float(event.motion.y)));
 
         AddEvent(e);
     } else if (event.type == SDL_MOUSEWHEEL) {
-        InputEvent *e = new InputEvent(InputEvent::MOUSE_SCROLL);
+        InputEvent* e = new InputEvent(InputEvent::MOUSE_SCROLL);
 
         if (event.wheel.x > 0)
             e->scroll_type = Event::SCROLL_RIGHT;
@@ -79,7 +79,7 @@ void Input::HandleEvent(const SDL_Event &event) {
         else if (event.type == SDL_KEYUP)
             pt = InputEvent::UP;
 
-        InputEvent *e = new InputEvent(InputEvent::KEYPRESS);
+        InputEvent* e = new InputEvent(InputEvent::KEYPRESS);
         e->key = Key(event.key.keysym.sym);
         e->mod = ModKey(event.key.keysym.mod);
         e->press_type = pt;
@@ -87,7 +87,7 @@ void Input::HandleEvent(const SDL_Event &event) {
 
         AddEvent(e);
     } else if (event.type == SDL_TEXTINPUT) {
-        InputEvent *e = new InputEvent(InputEvent::TEXT_INPUT);
+        InputEvent* e = new InputEvent(InputEvent::TEXT_INPUT);
         e->key = Key(event.key.keysym.sym);
         e->mod = ModKey(event.key.keysym.mod);
         e->text = event.text.text;
@@ -97,7 +97,7 @@ void Input::HandleEvent(const SDL_Event &event) {
     }
 }
 
-void Input::AddEvent(Event *e) { events.push_back(e); }
+void Input::AddEvent(Event* e) { events.push_back(e); }
 
 void Input::Clean() { events.clean(); }
 

@@ -26,13 +26,13 @@ class Mouse : public Object {
     bool is_pressed(int type);
     vec2 get_position();
 
-    void set_position(const vec2i &p_pos);
+    void set_position(const vec2i& p_pos);
 
     static void init();
-    static Mouse *get_singleton();
+    static Mouse* get_singleton();
 
     static void bind_methods();
 
    private:
-    static Mouse *singleton;
+    static Mouse* singleton;
 };

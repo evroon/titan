@@ -13,12 +13,12 @@
 
 class Window {
    public:
-    Window(const vec2i &p_size);
+    Window(const vec2i& p_size);
 
     void Init();
     void SwapBuffer();
     void CreateGLContext();
 
     vec2i size;
-    SDL_Window *window;
+    SDL_Window* window;
 };

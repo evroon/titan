@@ -17,65 +17,65 @@ class Vec2 {
     }
 
     // General operators
-    bool operator==(const Vec2 &r) const { return x == r.x && y == r.y; }
-    bool operator!=(const Vec2 &r) const { return x != r.x || y != r.y; }
+    bool operator==(const Vec2& r) const { return x == r.x && y == r.y; }
+    bool operator!=(const Vec2& r) const { return x != r.x || y != r.y; }
 
     // Vec2 operators
-    Vec2 operator+(const Vec2 &r) const { return Vec2(x + r.x, y + r.y); }
-    Vec2 operator-(const Vec2 &r) const { return Vec2(x - r.x, y - r.y); }
-    Vec2 operator*(const Vec2 &r) const { return Vec2(x * r.x, y * r.y); }
-    Vec2 operator/(const Vec2 &r) const { return Vec2(x / r.x, y / r.y); }
+    Vec2 operator+(const Vec2& r) const { return Vec2(x + r.x, y + r.y); }
+    Vec2 operator-(const Vec2& r) const { return Vec2(x - r.x, y - r.y); }
+    Vec2 operator*(const Vec2& r) const { return Vec2(x * r.x, y * r.y); }
+    Vec2 operator/(const Vec2& r) const { return Vec2(x / r.x, y / r.y); }
 
-    Vec2 &operator+=(const Vec2 &r) {
+    Vec2& operator+=(const Vec2& r) {
         x += r.x;
         y += r.y;
         return *this;
     }
-    Vec2 &operator-=(const Vec2 &r) {
+    Vec2& operator-=(const Vec2& r) {
         x -= r.x;
         y -= r.y;
         return *this;
     }
-    Vec2 &operator*=(const Vec2 &r) {
+    Vec2& operator*=(const Vec2& r) {
         x *= r.x;
         y *= r.y;
         return *this;
     }
-    Vec2 &operator/=(const Vec2 &r) {
+    Vec2& operator/=(const Vec2& r) {
         x /= r.x;
         y /= r.y;
         return *this;
     }
 
     // Scalar operators
-    Vec2 operator+(const T &r) const { return Vec2(x + r, y + r); }
-    Vec2 operator-(const T &r) const { return Vec2(x - r, y - r); }
-    Vec2 operator*(const T &r) const { return Vec2(x * r, y * r); }
-    Vec2 operator/(const T &r) const { return Vec2(x / r, y / r); }
+    Vec2 operator+(const T& r) const { return Vec2(x + r, y + r); }
+    Vec2 operator-(const T& r) const { return Vec2(x - r, y - r); }
+    Vec2 operator*(const T& r) const { return Vec2(x * r, y * r); }
+    Vec2 operator/(const T& r) const { return Vec2(x / r, y / r); }
 
-    Vec2 &operator+=(const T &r) {
+    Vec2& operator+=(const T& r) {
         x += r;
         y += r;
         return *this;
     }
-    Vec2 &operator-=(const T &r) {
+    Vec2& operator-=(const T& r) {
         x -= r;
         y -= r;
         return *this;
     }
-    Vec2 &operator*=(const T &r) {
+    Vec2& operator*=(const T& r) {
         x *= r;
         y *= r;
         return *this;
     }
-    Vec2 &operator/=(const T &r) {
+    Vec2& operator/=(const T& r) {
         x /= r;
         y /= r;
         return *this;
     }
 
     // Index operator
-    T &operator[](const int &i) { return v[i]; }
+    T& operator[](const int& i) { return v[i]; }
     operator String() const { return to_string(); }
 
     // Conversion
@@ -86,21 +86,21 @@ class Vec2 {
 
     // Get info
     T length() const { return sqrt(x * x + y * y); }
-    T angle(const Vec2 &v) const {
+    T angle(const Vec2& v) const {
         T angle = fabs(acos(dot(v) / (length() * v.length())));
         return angle;
     }
-    T dot(const Vec2<T> &v) const {
+    T dot(const Vec2<T>& v) const {
         T result = x * v.x + y * v.y;
         return result;
     }
 
     // properties
-    T &get_x() { return x; }
-    T &get_y() { return y; }
+    T& get_x() { return x; }
+    T& get_y() { return y; }
 
-    void set_x(const T &p_x) { x = p_x; }
-    void set_y(const T &p_y) { y = p_y; }
+    void set_x(const T& p_x) { x = p_x; }
+    void set_y(const T& p_y) { y = p_y; }
 
     // Set
     Vec2<T> normalize() {

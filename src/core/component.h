@@ -13,9 +13,9 @@ class Component : public Object {
 
     virtual void update() {}
 
-    virtual void bind_parent(WorldObject *pa);
+    virtual void bind_parent(WorldObject* pa);
 
     static void bind_methods();
 
-    WorldObject *parent;
+    WorldObject* parent;
 };

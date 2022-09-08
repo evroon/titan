@@ -2,7 +2,7 @@
 
 Button::Button() {}
 
-void Button::handle_event(UIEvent *ui_event) {
+void Button::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_ENTER:
 

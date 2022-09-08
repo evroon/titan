@@ -11,7 +11,7 @@ class Tab : public Control {
     Tab();
     virtual ~Tab();
 
-    void set_tab_title(const String &p_title);
+    void set_tab_title(const String& p_title);
     String get_tab_title() const;
 
     vec2 get_required_size() const override;

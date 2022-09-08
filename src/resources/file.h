@@ -11,15 +11,15 @@ class File : public Object {
 
    public:
     File();
-    File(const String &p_path);
-    File(const char *p_path);  // helper
+    File(const String& p_path);
+    File(const char* p_path);  // helper
 
     virtual ~File();
 
     void go_up();
     void go_up(int p_times);
-    void go_into(const String &p_name);
-    void go_to(const String &p_path);
+    void go_into(const String& p_name);
+    void go_to(const String& p_path);
 
     String get_absolute_path() const;
     String get_relative_path() const;
@@ -33,11 +33,11 @@ class File : public Object {
 
     Array<File> listdir() const;
 
-    File operator+(const String &r);
-    void operator+=(const String &r);
+    File operator+(const String& r);
+    void operator+=(const String& r);
 
-    bool operator==(const File &r);
-    bool operator!=(const File &r);
+    bool operator==(const File& r);
+    bool operator!=(const File& r);
 
     operator String() const;
 

@@ -22,13 +22,13 @@ struct SyntaxMaster {
     SyntaxHighlighter xml;
     SyntaxHighlighter titanscript;
 
-    static SyntaxMaster *get_singleton();
+    static SyntaxMaster* get_singleton();
 
     static void init();
 
-    static SyntaxHighlighter *get_highlighter(
+    static SyntaxHighlighter* get_highlighter(
         SyntaxHighlighter::Language p_language);
 
    private:
-    static SyntaxMaster *singleton;
+    static SyntaxMaster* singleton;
 };

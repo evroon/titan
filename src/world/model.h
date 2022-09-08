@@ -8,8 +8,8 @@ class Model : public WorldObject {
 
    public:
     Model();
-    Model(const String &p_path);
-    Model(Mesh *p_mesh);
+    Model(const String& p_path);
+    Model(Mesh* p_mesh);
 
     virtual ~Model();
 
@@ -18,12 +18,12 @@ class Model : public WorldObject {
     void draw() override;
     void shadow_draw() override;
 
-    void load_mesh(const String &p_path);
+    void load_mesh(const String& p_path);
 
-    void set_mesh(Mesh *p_mesh);
-    Mesh *get_mesh() const;
+    void set_mesh(Mesh* p_mesh);
+    Mesh* get_mesh() const;
 
-    void set_color_id(const vec3 &p_color_id);
+    void set_color_id(const vec3& p_color_id);
     vec3 get_color_id() const;
 
     BoundingBox get_bounding_box() const;
@@ -31,8 +31,8 @@ class Model : public WorldObject {
     static void bind_methods();
 
    private:
-    Mesh *mesh;
-    Shader *shader;
+    Mesh* mesh;
+    Shader* shader;
 
     vec3 color_id;
 };

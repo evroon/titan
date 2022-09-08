@@ -46,7 +46,7 @@ Canvas::Canvas() {
 
 Canvas::~Canvas() {}
 
-void Canvas::schedule_update(Control *p_control) {
+void Canvas::schedule_update(Control* p_control) {
     scheduled_updates.push_back(p_control);
 }
 
@@ -54,7 +54,7 @@ void Canvas::add_layer() { layers.push_back(CanvasLayer(layers.size() - 1)); }
 
 void Canvas::remove_layer(int p_index) { layers.clear(p_index); }
 
-void Canvas::add_control(Control *p_control, int p_level) {
+void Canvas::add_control(Control* p_control, int p_level) {
     int level;
 
     if (p_level < layers.size())
@@ -72,17 +72,17 @@ void Canvas::add_control(Control *p_control, int p_level) {
     p_control->init();
 }
 
-void Canvas::remove_control(Control *p_control) {
+void Canvas::remove_control(Control* p_control) {
     layers[p_control->get_level()].controls.clear(p_control);
 
     remove_child(p_control);
 }
 
-void Canvas::add_control_to_top(Control *p_control) {
+void Canvas::add_control_to_top(Control* p_control) {
     add_control(p_control, layers.size());
 }
 
-void Canvas::set_dialog(Dialog *p_dialog) {
+void Canvas::set_dialog(Dialog* p_dialog) {
     dialog = p_dialog;
     add_control_to_top(p_dialog);
 
@@ -96,10 +96,10 @@ void Canvas::remove_dialog() {
     dialog = NULL;
 }
 
-void Canvas::set_context_tip(const String &p_description, const vec2 &pos) {
+void Canvas::set_context_tip(const String& p_description, const vec2& pos) {
     if (p_description.length() == 0) return;
 
-    ContextTip *tip = new ContextTip(p_description);
+    ContextTip* tip = new ContextTip(p_description);
 
     if (context_tip) remove_context_tip();
 
@@ -123,7 +123,7 @@ void Canvas::remove_context_tip() {
     awaiting_tip = false;
 }
 
-void Canvas::set_context_menu(ContextMenu *p_context_menu, const vec2 &pos) {
+void Canvas::set_context_menu(ContextMenu* p_context_menu, const vec2& pos) {
     if (p_context_menu->is_empty()) return;
 
     if (context_menu) remove_context_menu();
@@ -146,8 +146,8 @@ void Canvas::remove_context_menu() {
     context_menu = NULL;
 }
 
-void Canvas::handle_event(Event *e) {
-    InputEvent *in = dynamic_cast<InputEvent *>(e);
+void Canvas::handle_event(Event* e) {
+    InputEvent* in = dynamic_cast<InputEvent*>(e);
 
     if (!in) return;
 
@@ -158,7 +158,7 @@ void Canvas::handle_event(Event *e) {
     else
         mouse_pos = MOUSE->get_position();
 
-    Control *hover = raycast(mouse_pos);
+    Control* hover = raycast(mouse_pos);
 
     if (in->type == InputEvent::MOUSEMOVE) {
         if (context_tip && tip_shower && !tip_shower->in_area(mouse_pos)) {
@@ -167,7 +167,7 @@ void Canvas::handle_event(Event *e) {
 
         if (MOUSE->is_pressed(Mouse::LEFT)) {
             if (focused) {
-                UIEvent *hover_event = new UIEvent(UIEvent::MOUSE_HOVER);
+                UIEvent* hover_event = new UIEvent(UIEvent::MOUSE_HOVER);
                 hover_event->pos = in->pos;
                 focused->handle_event(hover_event);
             }
@@ -187,7 +187,7 @@ void Canvas::handle_event(Event *e) {
 
                 // remove_context_tip();
             } else if (hover) {
-                UIEvent *hover_event = new UIEvent(UIEvent::MOUSE_HOVER);
+                UIEvent* hover_event = new UIEvent(UIEvent::MOUSE_HOVER);
                 hover_event->pos = in->pos;
                 hover->handle_event(hover_event);
             }
@@ -201,7 +201,7 @@ void Canvas::handle_event(Event *e) {
             focus(hover);
         }
 
-        UIEvent *click = new UIEvent(UIEvent::MOUSE_PRESS);
+        UIEvent* click = new UIEvent(UIEvent::MOUSE_PRESS);
         click->pos = in->pos;
         click->press_type = in->press_type;
         click->button_type = in->button_type;
@@ -209,7 +209,7 @@ void Canvas::handle_event(Event *e) {
         if (click->press_type == InputEvent::DOWN) {
             if (hover == last_clicked &&
                 TIME->get_absolutetime() < click_time + double_click_treshold) {
-                UIEvent *double_click =
+                UIEvent* double_click =
                     new UIEvent(UIEvent::MOUSE_DOUBLE_CLICK);
                 click->pos = in->pos;
 
@@ -223,26 +223,26 @@ void Canvas::handle_event(Event *e) {
         } else if (focused)
             focused->handle_event(click);
     } else if (in->type == InputEvent::MOUSE_SCROLL) {
-        UIEvent *scroll = new UIEvent(UIEvent::MOUSE_SCROLL);
+        UIEvent* scroll = new UIEvent(UIEvent::MOUSE_SCROLL);
         scroll->scroll_type = in->scroll_type;
 
         if (hover) hover->handle_event(scroll);
     } else if (in->type == InputEvent::KEYPRESS) {
-        UIEvent *press = new UIEvent(UIEvent::KEY_PRESS);
+        UIEvent* press = new UIEvent(UIEvent::KEY_PRESS);
         press->key = in->key;
         press->press_type = in->press_type;
         press->mod = in->mod;
 
         if (focused) focused->handle_event(press);
     } else if (in->type == InputEvent::TEXT_INPUT) {
-        UIEvent *press = new UIEvent(UIEvent::TEXT_INPUT);
+        UIEvent* press = new UIEvent(UIEvent::TEXT_INPUT);
         press->text = in->text;
 
         if (focused) focused->handle_event(press);
     }
 }
 
-void Canvas::init(Viewport *p_parent) {
+void Canvas::init(Viewport* p_parent) {
     parent = p_parent;
     // main_container->init(parent->renderarea);
 }
@@ -250,13 +250,13 @@ void Canvas::init(Viewport *p_parent) {
 void Canvas::resize() {
     if (parent) size = parent->get_size();
 
-    for (Node *child : children)
-        child->cast_to_type<Control *>()->flag_size_changed();
+    for (Node* child : children)
+        child->cast_to_type<Control*>()->flag_size_changed();
 }
 
 void Canvas::draw() {
-    for (Node *child : children)
-        child->cast_to_type<Control *>()->check_size_changed();
+    for (Node* child : children)
+        child->cast_to_type<Control*>()->check_size_changed();
 
     if (context_tip) context_tip->check_size_changed();
 
@@ -264,7 +264,7 @@ void Canvas::draw() {
 
     if (context_menu) context_menu->check_size_changed();
 
-    for (Node *child : children) child->cast_to_type<Control *>()->draw();
+    for (Node* child : children) child->cast_to_type<Control*>()->draw();
 
     if (context_tip) context_tip->draw();
 
@@ -285,13 +285,13 @@ void Canvas::update() {
 
 void Canvas::free() {}
 
-Control *Canvas::get_focused() const { return focused; }
+Control* Canvas::get_focused() const { return focused; }
 
-void Canvas::focus(Control *ctrl) {
+void Canvas::focus(Control* ctrl) {
     if (ctrl == focused) return;
 
-    UIEvent *win = new UIEvent(UIEvent::FOCUS_START);
-    UIEvent *lose = new UIEvent(UIEvent::FOCUS_LOSE);
+    UIEvent* win = new UIEvent(UIEvent::FOCUS_START);
+    UIEvent* lose = new UIEvent(UIEvent::FOCUS_LOSE);
 
     if (focused) {
         focused->handle_event(lose);
@@ -302,7 +302,7 @@ void Canvas::focus(Control *ctrl) {
     focused = ctrl;
 }
 
-Control *Canvas::raycast(const vec2 &pos) {
+Control* Canvas::raycast(const vec2& pos) {
     if (context_menu && context_menu->in_area(pos)) return context_menu;
 
     if (dialog && dialog->in_area(pos)) return dialog->raycast(pos);
@@ -319,8 +319,8 @@ Control *Canvas::raycast(const vec2 &pos) {
                             return r;
             }
     }*/
-    for (Node *n : children) {
-        Control *r = n->cast_to_type<Control *>()->raycast(pos);
+    for (Node* n : children) {
+        Control* r = n->cast_to_type<Control*>()->raycast(pos);
 
         if (r && r->get_visible()) return r;
     }
@@ -328,9 +328,9 @@ Control *Canvas::raycast(const vec2 &pos) {
     return nullptr;
 }
 
-Control *Canvas::raycast_layer(const CanvasLayer &l, const vec2 &pos) {
+Control* Canvas::raycast_layer(const CanvasLayer& l, const vec2& pos) {
     for (int i = 0; i < l.controls.size(); i++) {
-        Control *r = l.controls[i]->raycast(pos);
+        Control* r = l.controls[i]->raycast(pos);
 
         if (r) return r;
     }
@@ -360,11 +360,11 @@ CanvasTheme::CanvasTheme() {
     selection_color = TO_RGB(vec3i(65, 133, 165));
 }
 
-Font *CanvasTheme::get_font() const { return font; }
+Font* CanvasTheme::get_font() const { return font; }
 
-Texture2D *CanvasTheme::get_frame() const { return frame; }
+Texture2D* CanvasTheme::get_frame() const { return frame; }
 
-Texture2D *CanvasTheme::get_highlight() const { return highlight; }
+Texture2D* CanvasTheme::get_highlight() const { return highlight; }
 
 Color CanvasTheme::get_highlight_color() const { return highlight_color; }
 
@@ -374,7 +374,7 @@ Color CanvasTheme::get_selection_color() const { return selection_color; }
 // CanvasData
 //=========================================================================
 
-CanvasData *CanvasData::singleton;
+CanvasData* CanvasData::singleton;
 
 CanvasData::CanvasData() {
     default_shader = CONTENT->LoadShader("engine/shaders/Shader2D");
@@ -384,8 +384,8 @@ CanvasData::CanvasData() {
 
 void CanvasData::init() { singleton = new CanvasData; }
 
-CanvasData *CanvasData::get_singleton() { return singleton; }
+CanvasData* CanvasData::get_singleton() { return singleton; }
 
-Shader *CanvasData::get_default_shader() const { return default_shader; }
+Shader* CanvasData::get_default_shader() const { return default_shader; }
 
-CanvasTheme *CanvasData::get_default_theme() const { return default_theme; }
+CanvasTheme* CanvasData::get_default_theme() const { return default_theme; }

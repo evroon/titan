@@ -7,16 +7,16 @@ class EventManager {
     EventManager();
     ~EventManager();
 
-    void register_event(Event *e);
-    void clear_event(Event *e);
+    void register_event(Event* e);
+    void clear_event(Event* e);
 
     void clean();
 
     static void init();
-    static EventManager &get_manager();
+    static EventManager& get_manager();
 
    private:
-    static EventManager *default_manager;
+    static EventManager* default_manager;
 
     Vector<Event> events;
 };

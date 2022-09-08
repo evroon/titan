@@ -21,7 +21,7 @@
 #include "window.h"
 #include "windowmanager.h"
 
-Application::Application(Platform *p_platform) {
+Application::Application(Platform* p_platform) {
     platform = p_platform;
     window = nullptr;
     default_target = nullptr;

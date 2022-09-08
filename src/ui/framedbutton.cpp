@@ -20,7 +20,7 @@ void FramedButton::notification(int p_notification) {
     }
 }
 
-void FramedButton::set_color(const Color &p_color) { color = p_color; }
+void FramedButton::set_color(const Color& p_color) { color = p_color; }
 
 void FramedButton::start_highlight() {
     Button::start_highlight();

@@ -35,11 +35,11 @@ class PhysicsWorld3D {
    private:
     vec2 scale;
 
-    btBroadphaseInterface *broadphase;
-    btDefaultCollisionConfiguration *collision_configuration;
-    btCollisionDispatcher *dispatcher;
-    btSequentialImpulseConstraintSolver *solver;
-    btDiscreteDynamicsWorld *dynamics_world;
+    btBroadphaseInterface* broadphase;
+    btDefaultCollisionConfiguration* collision_configuration;
+    btCollisionDispatcher* dispatcher;
+    btSequentialImpulseConstraintSolver* solver;
+    btDiscreteDynamicsWorld* dynamics_world;
 };
 
 class PhysicsWorld2D {
@@ -47,10 +47,10 @@ class PhysicsWorld2D {
     PhysicsWorld2D();
 
     void DestroyWorld();
-    void destroy_box(RigidBody2D *body);
+    void destroy_box(RigidBody2D* body);
     void update();
     void init();
-    void AddBody(RigidBody2D *body);
+    void AddBody(RigidBody2D* body);
 
     vec2 get_scale() const;
 
@@ -58,7 +58,7 @@ class PhysicsWorld2D {
     friend class BoxShape2D;
     friend class CircleShape2D;
 
-    b2World *world;
+    b2World* world;
     b2AABB universesize;
     b2Vec2 gravity;
 

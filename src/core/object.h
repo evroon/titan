@@ -8,11 +8,11 @@
 
 #define OBJ_DEFINITION(NAME, INHERITS)                                        \
    public:                                                                    \
-    bool is_type(const String &name) const override { return name == #NAME; } \
-    void *get_type_ptr() const override {                                     \
+    bool is_type(const String& name) const override { return name == #NAME; } \
+    void* get_type_ptr() const override {                                     \
         return NAME::get_type_ptr_static();                                   \
     }                                                                         \
-    bool is_type_ptr(void *ptr) const override {                              \
+    bool is_type_ptr(void* ptr) const override {                              \
         return ptr == get_type_ptr();                                         \
     }                                                                         \
     VariantType get_type() const override {                                   \
@@ -31,11 +31,11 @@
     static String get_type_path_static() {                                    \
         return INHERITS::get_type_path_static() + "/" + #NAME;                \
     }                                                                         \
-    static void *get_type_ptr_static() {                                      \
+    static void* get_type_ptr_static() {                                      \
         static int ptr;                                                       \
         return &ptr;                                                          \
     }                                                                         \
-    static bool is_type_static(void *ptr) {                                   \
+    static bool is_type_static(void* ptr) {                                   \
         return ptr == get_type_ptr_static();                                  \
     }                                                                         \
                                                                               \
@@ -49,7 +49,7 @@ class Object {
     virtual ~Object() = default;
 
     // Construct with a base pointer
-    Object(Object *base);
+    Object(Object* base);
 
     template <typename T>
     bool is_of_type() const {
@@ -73,14 +73,14 @@ class Object {
 
     // virtual
     virtual String get_type_path() const;
-    virtual bool is_type(const String &name) const;
-    virtual void *get_type_ptr() const;
-    virtual bool is_type_ptr(void *ptr) const;
+    virtual bool is_type(const String& name) const;
+    virtual void* get_type_ptr() const;
+    virtual bool is_type_ptr(void* ptr) const;
     virtual VariantType get_type() const;
 
     // static
     static StringName get_type_name_static();
     static String get_type_path_static();
-    static void *get_type_ptr_static();
-    static bool is_type_static(void *ptr);
+    static void* get_type_ptr_static();
+    static bool is_type_static(void* ptr);
 };

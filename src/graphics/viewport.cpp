@@ -37,22 +37,22 @@ Viewport::Viewport() {
     renderarea = rect2();
 }
 
-Viewport::Viewport(Renderer *p_renderer) : Viewport() {
+Viewport::Viewport(Renderer* p_renderer) : Viewport() {
     set_renderer(p_renderer);
 }
 
 Viewport::~Viewport() { delete canvas; }
 
-void Viewport::set_world(World *p_world) {
+void Viewport::set_world(World* p_world) {
     if (world) remove_child(world);
 
     world = p_world;
     add_child(world);
 }
 
-World *Viewport::get_world() const { return world; }
+World* Viewport::get_world() const { return world; }
 
-void Viewport::set_canvas(Canvas *p_canvas) {
+void Viewport::set_canvas(Canvas* p_canvas) {
     if (p_canvas == NULL) {
         T_ERROR("Canvas is null...");
         return;
@@ -65,7 +65,7 @@ void Viewport::set_canvas(Canvas *p_canvas) {
     canvas->resize();
 }
 
-Canvas *Viewport::get_canvas() const { return canvas; }
+Canvas* Viewport::get_canvas() const { return canvas; }
 
 void Viewport::set_mode(DrawDestination p_mode) { destination = p_mode; }
 
@@ -77,16 +77,16 @@ void Viewport::set_wireframe_enabled(bool p_wireframe_enabled) {
 
 bool Viewport::get_wireframe_enabled() const { return wireframe_enabled; }
 
-void Viewport::set_fbo(FBO2D *p_fbo) { fbo = p_fbo; }
+void Viewport::set_fbo(FBO2D* p_fbo) { fbo = p_fbo; }
 
-FBO2D *Viewport::get_fbo() const { return fbo; }
+FBO2D* Viewport::get_fbo() const { return fbo; }
 
-void Viewport::set_postprocess(PostProcess *p_postprocess) {
+void Viewport::set_postprocess(PostProcess* p_postprocess) {
     postprocess = p_postprocess;
     destination = POSTPROCESS;
 }
 
-PostProcess *Viewport::get_postprocess() const { return postprocess; }
+PostProcess* Viewport::get_postprocess() const { return postprocess; }
 
 float Viewport::get_fps() const { return fps; }
 
@@ -104,11 +104,11 @@ void Viewport::init() {
     if (world) world->init();
 }
 
-void Viewport::bind_parent(View *p_parentview) { parentview = p_parentview; }
+void Viewport::bind_parent(View* p_parentview) { parentview = p_parentview; }
 
 vec2 Viewport::get_size() const { return renderarea.size; }
 
-void Viewport::resize(const rect2 &p_area) {
+void Viewport::resize(const rect2& p_area) {
     renderarea = p_area;
 
     vec2 size = p_area.size;
@@ -135,44 +135,44 @@ void Viewport::resize(const rect2 &p_area) {
 
 rect2 Viewport::get_area() const { return renderarea; }
 
-vec2 Viewport::get_screen_coords(const vec2 &p_pos) const {
+vec2 Viewport::get_screen_coords(const vec2& p_pos) const {
     if (!world) return vec2();
 
     vec4 p = {(p_pos - renderarea.pos), 0.0f, 1.0f};
 
-    Camera *cam = world->get_active_camera();
+    Camera* cam = world->get_active_camera();
     mat4 inv = cam->get_inverse();
 
     return p.get_xy();
 }
 
-bool Viewport::is_overlapping(const rect2 &area) const {
+bool Viewport::is_overlapping(const rect2& area) const {
     return renderarea.is_overlapping(area);
 }
 
-bool Viewport::is_in_box(const vec2 &pos) const {
+bool Viewport::is_in_box(const vec2& pos) const {
     return renderarea.is_in_box(pos);
 }
 
-bool Viewport::is_in_box(const rect2 &area) const {
+bool Viewport::is_in_box(const rect2& area) const {
     return renderarea.is_in_box(area);
 }
 
-void Viewport::set_renderer(Renderer *p_renderer) {
+void Viewport::set_renderer(Renderer* p_renderer) {
     renderer = p_renderer;
     renderer->set_viewport(this);
     renderer->activate();
 }
 
-Renderer *Viewport::get_renderer() const { return renderer; }
+Renderer* Viewport::get_renderer() const { return renderer; }
 
-void Viewport::set_scene(Scene *p_scene) {
+void Viewport::set_scene(Scene* p_scene) {
     scene = p_scene;
-    set_world(scene->get_child_by_type<World *>());
-    set_canvas(scene->get_child_by_type<Canvas *>());
+    set_world(scene->get_child_by_type<World*>());
+    set_canvas(scene->get_child_by_type<Canvas*>());
 }
 
-Scene *Viewport::get_scene() const { return scene; }
+Scene* Viewport::get_scene() const { return scene; }
 
 void Viewport::activate() {
     return_viewport = VIEW->get_active_viewport();
@@ -226,7 +226,7 @@ void Viewport::update() {
     }
 }
 
-void Viewport::handle_event(Event *event) {
+void Viewport::handle_event(Event* event) {
     // activate_transform();
 
     if (world) world->handle_event(event);
@@ -236,17 +236,17 @@ void Viewport::handle_event(Event *event) {
     // deactivate_transform();
 }
 
-vec3 Viewport::deferred_raycast(const vec2 &p_pos) const {
+vec3 Viewport::deferred_raycast(const vec2& p_pos) const {
     return DEFERRED_RENDERER->get_position_at_pixel(p_pos);
 }
 
-Object *Viewport::raycast(const vec2 &pos) const {
+Object* Viewport::raycast(const vec2& pos) const {
     vec2 projected = get_screen_coords(pos);
 
     if (world) {
         for (int c = 0; c < world->get_child_count(); c++) {
-            WorldObject *obj =
-                world->get_child_by_index(c)->cast_to_type<WorldObject *>();
+            WorldObject* obj =
+                world->get_child_by_index(c)->cast_to_type<WorldObject*>();
 
             if (obj->is_of_type<Camera>()) continue;
 
@@ -267,7 +267,7 @@ void Viewport::bind_methods() {
     REG_PROPERTY(wireframe_enabled);
 }
 
-EditorViewport::EditorViewport(Renderer *p_renderer) : Viewport(p_renderer) {}
+EditorViewport::EditorViewport(Renderer* p_renderer) : Viewport(p_renderer) {}
 
 void EditorViewport::post_draw_world() { worldview->post_draw_world(); }
 

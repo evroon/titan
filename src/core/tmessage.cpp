@@ -2,13 +2,13 @@
 
 #include "types/scriptable.h"
 
-MessageHandler *MessageHandler::singleton;
+MessageHandler* MessageHandler::singleton;
 
 //=========================================================================
 // TMessage
 //=========================================================================
 
-TMessage::TMessage(String p_description, const String &p_file_name,
+TMessage::TMessage(String p_description, const String& p_file_name,
                    int p_line_number) {
     description = p_description;
     file_name = p_file_name;
@@ -22,7 +22,7 @@ void TMessage::log() { ERROR_HANDLER->Log(*this); }
 // TError
 //=========================================================================
 
-TError::TError(const String &p_description, const String &p_file_name,
+TError::TError(const String& p_description, const String& p_file_name,
                int p_line_number)
     : TMessage(p_description, p_file_name, p_line_number) {
     type = T_ERROR;
@@ -33,7 +33,7 @@ TError::TError(const String &p_description, const String &p_file_name,
 // TWarning
 //=========================================================================
 
-TWarning::TWarning(const String &p_description, const String &p_file_name,
+TWarning::TWarning(const String& p_description, const String& p_file_name,
                    int p_line_number)
     : TMessage(p_description, p_file_name, p_line_number) {
     type = T_WARNING;
@@ -44,7 +44,7 @@ TWarning::TWarning(const String &p_description, const String &p_file_name,
 // TLog
 //=========================================================================
 
-TLog::TLog(const String &p_description, const String &p_file_name,
+TLog::TLog(const String& p_description, const String& p_file_name,
            int p_line_number)
     : TMessage(p_description, p_file_name, p_line_number) {
     type = T_LOG;
@@ -55,7 +55,7 @@ TLog::TLog(const String &p_description, const String &p_file_name,
 // TInfo
 //=========================================================================
 
-TInfo::TInfo(const String &p_description, const String &p_file_name,
+TInfo::TInfo(const String& p_description, const String& p_file_name,
              int p_line_number)
     : TMessage(p_description, p_file_name, p_line_number) {
     type = T_INFO;
@@ -74,8 +74,8 @@ MessageHandler::MessageHandler() {
     complete_description = false;
 }
 
-void MessageHandler::Log(const TMessage &p_message) {
-    TMessage *msg = new TMessage(p_message);
+void MessageHandler::Log(const TMessage& p_message) {
+    TMessage* msg = new TMessage(p_message);
 
     for (int c = 0; c < messages.size(); c++) {
         if (messages[c]->description == msg->description) {
@@ -148,22 +148,22 @@ void MessageHandler::bind_methods() {
     // REG_SIGNAL("logged");
 }
 
-TMessage *MessageHandler::get_message(int p_index) const {
+TMessage* MessageHandler::get_message(int p_index) const {
     return messages[p_index];
 }
 
 void MessageHandler::emit(int p_index) {
     if (!signal) return;
 
-    for (Connection &connection : signal->connections) {
-        Connection *c = const_cast<Connection *>(&connection);
+    for (Connection& connection : signal->connections) {
+        Connection* c = const_cast<Connection*>(&connection);
 
         if (!connection.method) return;
 
         if (connection.type == Connection::NATIVE) {
             if (connection.method->arg_count == 2) {
-                V_Method_2 *m =
-                    reinterpret_cast<V_Method_2 *>(connection.method);
+                V_Method_2* m =
+                    reinterpret_cast<V_Method_2*>(connection.method);
                 m->operator()(connection.object, p_index);
             }
         } else if (connection.type == Connection::TITANSCRIPT)
@@ -171,7 +171,7 @@ void MessageHandler::emit(int p_index) {
     }
 }
 
-void MessageHandler::connect(Object *p_object, const String &p_method) {
+void MessageHandler::connect(Object* p_object, const String& p_method) {
     Connection connection;
     connection.register_native_method(p_object, p_method);
 
@@ -180,4 +180,4 @@ void MessageHandler::connect(Object *p_object, const String &p_method) {
     signal->attach_connection(connection);
 }
 
-MessageHandler *MessageHandler::get_singleton() { return singleton; }
+MessageHandler* MessageHandler::get_singleton() { return singleton; }

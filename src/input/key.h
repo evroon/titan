@@ -118,13 +118,13 @@ class Key : public Object {
     };
 
     Key() {}
-    Key(const KeyType &_key_type) : Key() { key_type = _key_type; }
-    Key(const SDL_Keycode &key) : Key() { set_key_type(key); }
-    Key(const String &p_name) : Key() { set_using_name(p_name); }
+    Key(const KeyType& _key_type) : Key() { key_type = _key_type; }
+    Key(const SDL_Keycode& key) : Key() { set_key_type(key); }
+    Key(const String& p_name) : Key() { set_using_name(p_name); }
 
     String to_string() const { return SDL_GetKeyName(key_type); }
 
-    void set_using_name(const String &p_name) {
+    void set_using_name(const String& p_name) {
         key_type = SDL_GetKeyFromName(p_name.c_str());
     }
 
@@ -135,7 +135,7 @@ class Key : public Object {
         return SDL_GetScancodeFromKey(get_SDL_Keycode());
     }
 
-    bool operator==(const Key &r) { return key_type == r.key_type; }
+    bool operator==(const Key& r) { return key_type == r.key_type; }
 
     int key_type;
 

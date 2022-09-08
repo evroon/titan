@@ -17,7 +17,7 @@
 
 Font::Font() {}
 
-Font::Font(const String &name, int size) : Font() {
+Font::Font(const String& name, int size) : Font() {
     set_file(name);
     font = TTF_OpenFont(name.c_str(), size);
 
@@ -47,7 +47,7 @@ void Font::Init() {
 
 void Font::Quit() { TTF_Quit(); }
 
-Texture2D *Font::DrawToTex(const String &src) {
+Texture2D* Font::DrawToTex(const String& src) {
     String s = src;
 
     if (s.size() == 0 || src == "\t" || src == "\n") return DrawToTex(" ");
@@ -57,13 +57,13 @@ Texture2D *Font::DrawToTex(const String &src) {
 
     if (!text) T_ERROR("Could not render text: " + std::string(TTF_GetError()));
 
-    Texture2D *tex = new Texture2D(text);
+    Texture2D* tex = new Texture2D(text);
     tex->set_filter(Texture2D::BILINEAR_FILTER);
     CONTENT->AddTexture(tex);
     return tex;
 }
 
-int Font::get_index(const String &text, float p_offset) const {
+int Font::get_index(const String& text, float p_offset) const {
     if (p_offset < 0) return 0;
 
     Array<float> offsets;
@@ -74,7 +74,7 @@ int Font::get_index(const String &text, float p_offset) const {
     return to_int(ArrayMath::closest_to_index(p_offset, offsets));
 }
 
-float Font::get_width(const String &text) const {
+float Font::get_width(const String& text) const {
     int temp = 0;
 
     if (TTF_SizeText(font, text.c_str(), &temp, NULL)) {
@@ -92,7 +92,7 @@ float Font::get_width(const String &text) const {
 
 float Font::get_height() const { return height; }
 
-FontRenderer *Font::get_renderer() const { return renderer; }
+FontRenderer* Font::get_renderer() const { return renderer; }
 
 #undef CLASSNAME
 #define CLASSNAME Font
@@ -108,7 +108,7 @@ void Font::bind_methods() {
 // FontRenderer
 //=========================================================================
 
-FontRenderer::FontRenderer(Font *p_font) {
+FontRenderer::FontRenderer(Font* p_font) {
     font = p_font;
 
     String text;
@@ -120,7 +120,7 @@ FontRenderer::FontRenderer(Font *p_font) {
     init();
 }
 
-Texture2D *FontRenderer::get_texture() const { return texture; }
+Texture2D* FontRenderer::get_texture() const { return texture; }
 
 void FontRenderer::init() {
     String text;

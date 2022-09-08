@@ -13,7 +13,7 @@ class TransformComponent : public Component {
 
     void update() override;
 
-    void set_transform(const Transform &p_transform);
+    void set_transform(const Transform& p_transform);
     Transform get_transform() const;
 
     static void bind_methods();

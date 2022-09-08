@@ -6,7 +6,7 @@
 template <class VAL>
 class Vector {
    private:
-    typedef std::vector<VAL *> V;
+    typedef std::vector<VAL*> V;
     V vec;
 
    public:
@@ -14,7 +14,7 @@ class Vector {
     Vector(V v) { vec = v; }
 
     // Constructor function
-    void buildarray(VAL **arr, int size) {
+    void buildarray(VAL** arr, int size) {
         for (int c = 0; c < size; c++) push_back(arr[c]);
     }
 
@@ -25,14 +25,14 @@ class Vector {
     typename V::const_iterator end() const { return vec.end(); }
 
     // Data
-    VAL *at(int ind) const { return vec[ind]; }
-    VAL *getlast() { return vec[size() - 1]; }
-    void set(int ind, VAL *v) { vec[ind] = v; }
-    void push_back(VAL *e) { vec.push_back(e); }
-    void insert(int pos, VAL *e) { vec.insert(begin() + pos, e); }
-    void replace(int index, VAL *e) { vec[index] = e; }
+    VAL* at(int ind) const { return vec[ind]; }
+    VAL* getlast() { return vec[size() - 1]; }
+    void set(int ind, VAL* v) { vec[ind] = v; }
+    void push_back(VAL* e) { vec.push_back(e); }
+    void insert(int pos, VAL* e) { vec.insert(begin() + pos, e); }
+    void replace(int index, VAL* e) { vec[index] = e; }
     int size() const { return (int)vec.size(); }
-    int getindex(VAL *e) const {
+    int getindex(VAL* e) const {
         for (int c = 0; c < size(); c++)
             if (vec[c] == e) return c;
 
@@ -42,7 +42,7 @@ class Vector {
     // Cleaning
 
     // clear
-    void clear(VAL *e) {
+    void clear(VAL* e) {
         int i = getindex(e);
 
         if (i != -1) vec.erase(vec.begin() + i);
@@ -52,12 +52,12 @@ class Vector {
     void removelast() { clear(size() - 1); }
 
     // clean
-    void clean(VAL *element) {
+    void clean(VAL* element) {
         clear(element);
         delete element;
     }
     void clean_at(int index) {
-        VAL *ptr = at(index);
+        VAL* ptr = at(index);
         clean(ptr);
     }
     void clean() {
@@ -70,13 +70,13 @@ class Vector {
 
     // Helper
     bool contains(VAL v) const {
-        for (VAL *e : vec)
+        for (VAL* e : vec)
             if (v == *e) return true;
 
         return false;
     }
-    bool contains(VAL *v) const {
-        for (VAL *e : vec)
+    bool contains(VAL* v) const {
+        for (VAL* e : vec)
             if (v == e) return true;
 
         return false;
@@ -90,8 +90,8 @@ class Vector {
     Vector<VAL> getrest(int start) const { return split(start, size() - 1); }
 
     // Operators
-    VAL *operator[](const int i) const { return vec.at(i); }
-    Vector &operator+=(const VAL *e) {
+    VAL* operator[](const int i) const { return vec.at(i); }
+    Vector& operator+=(const VAL* e) {
         vec.push_back(e);
         return *this;
     }

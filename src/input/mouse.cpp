@@ -2,13 +2,13 @@
 
 #include "core/windowmanager.h"
 
-Mouse *Mouse::singleton;
+Mouse* Mouse::singleton;
 
 Mouse::Mouse() {}
 
 void Mouse::init() { singleton = new Mouse; }
 
-Mouse *Mouse::get_singleton() { return singleton; }
+Mouse* Mouse::get_singleton() { return singleton; }
 
 int Mouse::get_SDL_type(int type) {
     switch (type) {
@@ -58,7 +58,7 @@ vec2 Mouse::get_position() {
     return vec2(to_float(pos.x), to_float(pos.y));
 }
 
-void Mouse::set_position(const vec2i &p_pos) {
+void Mouse::set_position(const vec2i& p_pos) {
     SDL_WarpMouseInWindow(WINDOW->window, p_pos.x, p_pos.y);
 }
 

@@ -10,7 +10,7 @@ class ToolBar : public Control {
 
    public:
     struct ToolBarItem {
-        ContextMenu *menu;
+        ContextMenu* menu;
         rect2 area;
         String text;
     };
@@ -21,14 +21,14 @@ class ToolBar : public Control {
     vec2 get_required_size() const override;
     void notification(int p_notification) override;
 
-    void handle_event(UIEvent *p_ui_event) override;
+    void handle_event(UIEvent* p_ui_event) override;
 
     void position_items();
 
-    int get_item(const vec2 &p_pos) const;
+    int get_item(const vec2& p_pos) const;
 
-    void add_item(const String &p_text);
-    void set_menu(int p_index, ContextMenu *p_menu);
+    void add_item(const String& p_text);
+    void set_menu(int p_index, ContextMenu* p_menu);
 
     void open_item(int p_index);
 
@@ -37,7 +37,7 @@ class ToolBar : public Control {
    private:
     void menu_closed();
 
-    Font *font;
+    Font* font;
 
     Array<ToolBarItem> items;
 

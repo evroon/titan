@@ -7,7 +7,7 @@
 class UICallback {
    public:
     UICallback();
-    UICallback(const std::function<void()> &p_on_call);
+    UICallback(const std::function<void()>& p_on_call);
 
 #if 0
 	template<typename T>
@@ -29,12 +29,12 @@ class UICallback {
 class UITimer {
    public:
     UITimer() : timer(1000) {}
-    UITimer(UICallback *p_callback, int time);
+    UITimer(UICallback* p_callback, int time);
 
     void update();
     void set_enabled(bool enabled);
 
    private:
-    UICallback *callback;
+    UICallback* callback;
     Timer timer;
 };

@@ -5,7 +5,7 @@
 
 ToolTab::ToolTab() : ToolTab(nullptr) {}
 
-ToolTab::ToolTab(Terrain *p_terrain) {
+ToolTab::ToolTab(Terrain* p_terrain) {
     terrain = p_terrain;
 
     property_view = new PropertyView;

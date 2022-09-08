@@ -35,7 +35,7 @@ class CoreNames {
     const StringName handle_event = "handle_event";
 
     // static
-    static CoreNames *get_singleton();
+    static CoreNames* get_singleton();
 
-    static CoreNames *singleton;
+    static CoreNames* singleton;
 };

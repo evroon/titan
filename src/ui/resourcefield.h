@@ -12,11 +12,11 @@ class ColorField : public PropertyControl {
 
    public:
     ColorField();
-    ColorField(const Color &p_color);
-    ColorField(const Variable &p_variable);
+    ColorField(const Color& p_color);
+    ColorField(const Variable& p_variable);
 
     void init();
-    void color_chosen(const Color &p_color);
+    void color_chosen(const Color& p_color);
 
     vec2 get_required_size() const override;
 
@@ -29,8 +29,8 @@ class ColorField : public PropertyControl {
     virtual ~ColorField();
 
    private:
-    TextButton *textbutton;
-    ColorPickDialog *color_dialog;
+    TextButton* textbutton;
+    ColorPickDialog* color_dialog;
 };
 
 class Texture2DField : public PropertyControl {
@@ -38,8 +38,8 @@ class Texture2DField : public PropertyControl {
 
    public:
     Texture2DField();
-    Texture2DField(Texture2D *p_texture);
-    Texture2DField(const Variable &p_variable);
+    Texture2DField(Texture2D* p_texture);
+    Texture2DField(const Variable& p_variable);
 
     virtual ~Texture2DField();
 
@@ -53,17 +53,17 @@ class Texture2DField : public PropertyControl {
 
     void load_button_clicked();
 
-    void file_chosen(const String &p_path);
+    void file_chosen(const String& p_path);
 
     static void bind_methods();
 
    private:
     Ref<Texture2D> texture;
 
-    ImageButton *load_button;
-    ImageButton *open_button;
+    ImageButton* load_button;
+    ImageButton* open_button;
 
-    FileDialog *file_dialog;
+    FileDialog* file_dialog;
 };
 
 class ObjectField : public PropertyControl {
@@ -71,8 +71,8 @@ class ObjectField : public PropertyControl {
 
    public:
     ObjectField();
-    ObjectField(Object *p_object);
-    ObjectField(const Variable &p_variable);
+    ObjectField(Object* p_object);
+    ObjectField(const Variable& p_variable);
 
     virtual ~ObjectField();
 
@@ -82,7 +82,7 @@ class ObjectField : public PropertyControl {
 
     void load_button_clicked();
 
-    void file_chosen(const String &p_path);
+    void file_chosen(const String& p_path);
 
     vec2 get_required_size() const override;
 
@@ -91,12 +91,12 @@ class ObjectField : public PropertyControl {
    private:
     Ref<Object> object;
 
-    TextField *textfield;
+    TextField* textfield;
 
-    ImageButton *load_button;
-    ImageButton *open_button;
+    ImageButton* load_button;
+    ImageButton* open_button;
 
-    FileDialog *file_dialog;
+    FileDialog* file_dialog;
 };
 
 class ShaderField : public PropertyControl {
@@ -104,8 +104,8 @@ class ShaderField : public PropertyControl {
 
    public:
     ShaderField();
-    ShaderField(Shader *p_shader);
-    ShaderField(const Variable &p_variable);
+    ShaderField(Shader* p_shader);
+    ShaderField(const Variable& p_variable);
 
     virtual ~ShaderField();
 
@@ -120,8 +120,8 @@ class ShaderField : public PropertyControl {
    private:
     Ref<Shader> object;
 
-    TextField *textfield;
-    TextButton *open_button;
+    TextField* textfield;
+    TextButton* open_button;
 
-    FileDialog *file_dialog;
+    FileDialog* file_dialog;
 };

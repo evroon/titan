@@ -5,11 +5,11 @@
 #include "input/keyboard.h"
 #include "slider.h"
 
-TreeElement::TreeElement(const String &p_text) : TreeElement(nullptr) {
+TreeElement::TreeElement(const String& p_text) : TreeElement(nullptr) {
     text = p_text;
 }
 
-TreeElement::TreeElement(TreeView *p_treeview) {
+TreeElement::TreeElement(TreeView* p_treeview) {
     treeview = p_treeview;
     update_init_expanded();
 
@@ -35,9 +35,9 @@ TreeElement::~TreeElement() {
     if (treeview && treeview->roots.contains(this)) treeview->roots.clear(this);
 }
 
-void TreeElement::push_child(TreeElement *p_child) {
-    TreeElement *last = 0;
-    TreeElement *c = childs;
+void TreeElement::push_child(TreeElement* p_child) {
+    TreeElement* last = 0;
+    TreeElement* c = childs;
 
     while (c) {
         last = c;
@@ -55,12 +55,12 @@ void TreeElement::push_child(TreeElement *p_child) {
     update_init_expanded();
 }
 
-void TreeElement::remove_child(TreeElement *p_child) {
-    TreeElement **c = &childs;
+void TreeElement::remove_child(TreeElement* p_child) {
+    TreeElement** c = &childs;
 
     while (*c) {
         if ((*c) == p_child) {
-            TreeElement *aux = *c;
+            TreeElement* aux = *c;
 
             *c = (*c)->next;
 
@@ -73,10 +73,10 @@ void TreeElement::remove_child(TreeElement *p_child) {
 }
 
 void TreeElement::clear() {
-    TreeElement *c = childs;
+    TreeElement* c = childs;
 
     while (c) {
-        TreeElement *aux = c;
+        TreeElement* aux = c;
         c = c->next;
         aux->parent = NULL;
         delete aux;
@@ -85,7 +85,7 @@ void TreeElement::clear() {
     childs = NULL;
 }
 
-void TreeElement::bind_treeview(TreeView *p_textbox) { treeview = p_textbox; }
+void TreeElement::bind_treeview(TreeView* p_textbox) { treeview = p_textbox; }
 
 void TreeElement::update_init_expanded() {
     if (treeview)
@@ -100,19 +100,19 @@ int TreeElement::get_index() { return index; }
 
 rect2 TreeElement::get_area() const { return area; }
 
-void TreeElement::set_area(const rect2 &p_area) { area = p_area; }
+void TreeElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool TreeElement::is_in_area(const vec2 &p_pos) {
+bool TreeElement::is_in_area(const vec2& p_pos) {
     return visible && area.is_in_box(p_pos);
 }
 
 String TreeElement::get_text() const { return text; }
 
-void TreeElement::set_text(const String &p_text) { text = p_text; }
+void TreeElement::set_text(const String& p_text) { text = p_text; }
 
-Texture2D *TreeElement::get_icon() const { return icon; }
+Texture2D* TreeElement::get_icon() const { return icon; }
 
-void TreeElement::set_icon(Texture2D *p_icon) { icon = p_icon; }
+void TreeElement::set_icon(Texture2D* p_icon) { icon = p_icon; }
 
 void TreeElement::set_visible(bool p_visible) { visible = p_visible; }
 
@@ -123,7 +123,7 @@ float TreeElement::get_height() const {
 
     if (!expanded) return h;
 
-    TreeElement *current = childs;
+    TreeElement* current = childs;
 
     while (current) {
         h += current->get_height();
@@ -156,8 +156,8 @@ void TreeElement::set_expanded(bool p_expanded) {
 
 bool TreeElement::get_expanded() const { return expanded; }
 
-bool TreeElement::search(const String &p_text) {
-    TreeElement *current = childs;
+bool TreeElement::search(const String& p_text) {
+    TreeElement* current = childs;
     bool v = false;
 
     while (current) {
@@ -175,7 +175,7 @@ bool TreeElement::search(const String &p_text) {
 }
 
 void TreeElement::clear_search() {
-    TreeElement *current = childs;
+    TreeElement* current = childs;
 
     while (current) {
         current->clear_search();
@@ -185,8 +185,8 @@ void TreeElement::clear_search() {
     update_init_expanded();
 }
 
-TreeElement *TreeElement::get_item(const String &p_name) {
-    TreeElement *current = childs;
+TreeElement* TreeElement::get_item(const String& p_name) {
+    TreeElement* current = childs;
 
     if (text == p_name) return this;
 
@@ -207,7 +207,7 @@ float TreeElement::position(float p_top) {
 
     area = rect2(left, right, top, bottom);
 
-    TreeElement *next = get_next_visible();
+    TreeElement* next = get_next_visible();
 
     if (next) return next->position(bottom);
 
@@ -216,11 +216,11 @@ float TreeElement::position(float p_top) {
 
 bool TreeElement::is_selected() const { return selected; }
 
-TreeElement *TreeElement::get_parent() const { return parent; }
+TreeElement* TreeElement::get_parent() const { return parent; }
 
-TreeElement *TreeElement::get_next() const { return next; }
+TreeElement* TreeElement::get_next() const { return next; }
 
-TreeElement *TreeElement::get_prev() {
+TreeElement* TreeElement::get_prev() {
     if (!parent) {
         if (treeview->roots[0] == this)
             return nullptr;
@@ -230,15 +230,15 @@ TreeElement *TreeElement::get_prev() {
 
     if (parent->childs == this) return nullptr;
 
-    TreeElement *prev = parent->childs;
+    TreeElement* prev = parent->childs;
 
     while (prev && prev->next != this) prev = prev->next;
 
     return prev;
 }
 
-TreeElement *TreeElement::get_next_visible() {
-    TreeElement *current = this;
+TreeElement* TreeElement::get_next_visible() {
+    TreeElement* current = this;
     bool cont = false;
 
     if (current->expanded && current->childs && current->visible) {
@@ -264,7 +264,7 @@ TreeElement *TreeElement::get_next_visible() {
         current = current->parent;
 
         if (current && current->next) {
-            TreeElement *e = current;
+            TreeElement* e = current;
 
             while (current->next && (!current->visible || current == e))
                 current = current->next;
@@ -278,9 +278,9 @@ TreeElement *TreeElement::get_next_visible() {
     return nullptr;
 }
 
-TreeElement *TreeElement::get_prev_visible() {
-    TreeElement *current = this;
-    TreeElement *prev = current->get_prev();
+TreeElement* TreeElement::get_prev_visible() {
+    TreeElement* current = this;
+    TreeElement* prev = current->get_prev();
 
     if (!prev)
         current = current->parent;
@@ -340,7 +340,7 @@ TreeView::~TreeView() {}
 
 vec2 TreeView::get_required_size() const { return vec2(100); }
 
-void TreeView::handle_event(UIEvent *ui_event) {
+void TreeView::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_ENTER:
 
@@ -381,7 +381,7 @@ void TreeView::handle_event(UIEvent *ui_event) {
         case UIEvent::MOUSE_PRESS:
 
             if (ui_event->press_type == UIEvent::DOWN) {
-                TreeElement *elm = get_item(ui_event->pos);
+                TreeElement* elm = get_item(ui_event->pos);
 
                 if (elm) {
                     float offset =
@@ -514,7 +514,7 @@ void TreeView::notification(int p_notification) {
             bool loop = true;
 
             for (int c = 0; c < roots.size(); c++) {
-                TreeElement *item = roots[c];
+                TreeElement* item = roots[c];
 
                 while (item) {
                     rect2 item_area = item->area;
@@ -602,8 +602,8 @@ void TreeView::notification(int p_notification) {
     }
 }
 
-TreeElement *TreeView::create_item(TreeElement *p_parent) {
-    TreeElement *item = new TreeElement(this);
+TreeElement* TreeView::create_item(TreeElement* p_parent) {
+    TreeElement* item = new TreeElement(this);
 
     if (p_parent)
         p_parent->push_child(item);
@@ -618,7 +618,7 @@ TreeElement *TreeView::create_item(TreeElement *p_parent) {
     return item;
 }
 
-void TreeView::push_node(Node *p_node) {
+void TreeView::push_node(Node* p_node) {
     if (p_node == nullptr) return;
 
     clear();
@@ -626,12 +626,12 @@ void TreeView::push_node(Node *p_node) {
                     Connection::create_from_lambda(new V_Method_0(
                         [this, p_node]() { push_node(p_node); })));
 
-    TreeElement *root = create_item_from_node(p_node, NULL);
+    TreeElement* root = create_item_from_node(p_node, NULL);
 }
 
-TreeElement *TreeView::create_item_from_node(Node *p_node,
-                                             TreeElement *p_parent) {
-    TreeElement *current = create_item(p_parent);
+TreeElement* TreeView::create_item_from_node(Node* p_node,
+                                             TreeElement* p_parent) {
+    TreeElement* current = create_item(p_parent);
 
     current->set_text(p_node->get_name());
     current->secondary_text = p_node->get_type_name();
@@ -642,11 +642,11 @@ TreeElement *TreeView::create_item_from_node(Node *p_node,
     return current;
 }
 
-void TreeView::push_back_path(const String &p_path) {
+void TreeView::push_back_path(const String& p_path) {
     Array<String> path = p_path.split('/');
 
-    TreeElement *parent = NULL;
-    TreeElement *current = roots.size() == 0 ? NULL : roots[0];
+    TreeElement* parent = NULL;
+    TreeElement* current = roots.size() == 0 ? NULL : roots[0];
 
     for (int c = 0; c < path.size(); c++) {
         String s = path[c];
@@ -678,10 +678,10 @@ void TreeView::clear() {
     remove_slider();
 }
 
-TreeElement *TreeView::get_item(const vec2 &p_pos) {
+TreeElement* TreeView::get_item(const vec2& p_pos) {
     if (!area.is_in_box(p_pos) || roots.size() < 1) return nullptr;
 
-    TreeElement *current = roots[0];
+    TreeElement* current = roots[0];
 
     while (current) {
         if (current->area.is_in_box(p_pos)) return current;
@@ -692,9 +692,9 @@ TreeElement *TreeView::get_item(const vec2 &p_pos) {
     return nullptr;
 }
 
-TreeElement *TreeView::get_item(const String &p_name) {
+TreeElement* TreeView::get_item(const String& p_name) {
     for (int c = 0; c < roots.size(); c++) {
-        TreeElement *e = roots[c]->get_item(p_name);
+        TreeElement* e = roots[c]->get_item(p_name);
         if (e) return e;
     }
     return nullptr;
@@ -746,7 +746,7 @@ void TreeView::remove_slider() {
     use_scissor = false;
 }
 
-void TreeView::set_selected(TreeElement *p_selected) {
+void TreeView::set_selected(TreeElement* p_selected) {
     if (selected == p_selected) return;
 
     selected = p_selected;
@@ -756,15 +756,15 @@ void TreeView::set_selected(TreeElement *p_selected) {
     update();
 }
 
-TreeElement *TreeView::get_selected() const { return selected; }
+TreeElement* TreeView::get_selected() const { return selected; }
 
 void TreeView::move_selected_begin() { set_selected(roots[0]); }
 
 void TreeView::move_selected_end() {
-    TreeElement *current = roots.getlast();
+    TreeElement* current = roots.getlast();
 
     while (true) {
-        TreeElement *next = current->get_next_visible();
+        TreeElement* next = current->get_next_visible();
 
         if (next)
             current = next;
@@ -777,7 +777,7 @@ void TreeView::move_selected_end() {
 
 void TreeView::move_selected_up() {
     if (selected) {
-        TreeElement *prev = selected->get_prev_visible();
+        TreeElement* prev = selected->get_prev_visible();
 
         if (prev) set_selected(selected->get_prev_visible());
     } else
@@ -786,7 +786,7 @@ void TreeView::move_selected_up() {
 
 void TreeView::move_selected_down() {
     if (selected) {
-        TreeElement *next = selected->get_next_visible();
+        TreeElement* next = selected->get_next_visible();
 
         if (next) set_selected(selected->get_next_visible());
     } else
@@ -794,7 +794,7 @@ void TreeView::move_selected_down() {
 }
 void TreeView::select_none() { set_selected(NULL); }
 
-void TreeView::make_visible(TreeElement *p_item) {
+void TreeView::make_visible(TreeElement* p_item) {
     if (!p_item) return;
 
     rect2 item_area = p_item->area;
@@ -821,7 +821,7 @@ void TreeView::set_init_expanded_depth(int p_init_expanded_depth) {
 
 int TreeView::get_init_expanded_depth() const { return init_expanded_depth; }
 
-void TreeView::search(const String &p_src) {
+void TreeView::search(const String& p_src) {
     if (p_src == "") {
         stop_search();
         return;
@@ -850,7 +850,7 @@ void TreeView::slider_value_changed() {
     // update();
 }
 
-void TreeView::remove_item(TreeElement *p_item) {
+void TreeView::remove_item(TreeElement* p_item) {
     if (p_item == selected) selected = NULL;
 
     if (p_item == highlighted) highlighted = NULL;
@@ -861,9 +861,9 @@ void TreeView::remove_item(TreeElement *p_item) {
 #undef CLASSNAME
 #define CLASSNAME TreeView
 
-void TreeView::set_font(Font *p_font) { font = p_font; }
+void TreeView::set_font(Font* p_font) { font = p_font; }
 
-Font *TreeView::get_font() const { return font; }
+Font* TreeView::get_font() const { return font; }
 
 void TreeView::bind_methods() {
     REG_CSTR(0);

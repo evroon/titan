@@ -15,7 +15,7 @@ Node::~Node() {
     }
 }
 
-void Node::add_child(Node *p_child) {
+void Node::add_child(Node* p_child) {
     if (!p_child) return;
 
     if (p_child->name == "") p_child->name = p_child->get_type_name();
@@ -28,7 +28,7 @@ void Node::add_child(Node *p_child) {
     // children_changed();
 }
 
-void Node::remove_child(Node *p_child) {
+void Node::remove_child(Node* p_child) {
     p_child->clean();
     GC->queue_clean(p_child);
     children.clear(p_child);
@@ -38,35 +38,35 @@ void Node::remove_child(Node *p_child) {
 void Node::clean() {
     int size = children.size();
     for (int c = 0; c < size; c++) {
-        Node *child = get_child_by_index(0);
+        Node* child = get_child_by_index(0);
         GC->queue_clean(child);
         children.clear(child);
     }
 }
 
-Node *Node::duplicate() {
+Node* Node::duplicate() {
     Serializer serializer;
     String source = serializer.serialize(this);
-    Node *result = serializer.deserialize(source);
+    Node* result = serializer.deserialize(source);
     get_parent()->add_child(result);
     return result;
 }
 
-Node *Node::get_child_by_index(int p_index) { return children[p_index]; }
+Node* Node::get_child_by_index(int p_index) { return children[p_index]; }
 
-Node *Node::get_child(const String &p_name) {
+Node* Node::get_child(const String& p_name) {
     for (int c = 0; c < children.size(); c++) {
         if (children[c]->name == p_name) return children[c];
 
-        Node *n = children[c]->get_child(p_name);
+        Node* n = children[c]->get_child(p_name);
         if (n) return n;
     }
 
     return nullptr;
 }
 
-Node *Node::get_parent_by_type_recursively(const String &p_typename) const {
-    while (Node *parent = get_parent()) {
+Node* Node::get_parent_by_type_recursively(const String& p_typename) const {
+    while (Node* parent = get_parent()) {
         if (parent->get_type_name() == p_typename) return parent;
     }
     return nullptr;
@@ -74,13 +74,13 @@ Node *Node::get_parent_by_type_recursively(const String &p_typename) const {
 
 int Node::get_child_count() const { return children.size(); }
 
-Node *Node::get_parent() const { return parent; }
+Node* Node::get_parent() const { return parent; }
 
-void Node::set_name(const String &p_name) { name = p_name; }
+void Node::set_name(const String& p_name) { name = p_name; }
 
 String Node::get_name() const { return name; }
 
-int Node::get_index(Node *p_child) const { return children.getindex(p_child); }
+int Node::get_index(Node* p_child) const { return children.getindex(p_child); }
 
 void Node::children_changed() {
     emit_signal("children_changed");

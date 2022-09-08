@@ -29,7 +29,7 @@ class WorldObject : public Node {
     };
 
     virtual void ready() {}
-    virtual void handle_event(Event *e);
+    virtual void handle_event(Event* e);
     virtual void update();
     virtual void SimpleDraw() {}
     virtual void draw() {}
@@ -37,33 +37,33 @@ class WorldObject : public Node {
 
     // Get or set the most important properties
     Transform get_transform() const;
-    void set_transform(const Transform &p_transform) const;
+    void set_transform(const Transform& p_transform) const;
 
     vec3 get_pos() const;
-    void set_pos(const vec3 &p_pos);
+    void set_pos(const vec3& p_pos);
 
     vec3 get_size() const;
-    void set_size(const vec3 &p_size);
+    void set_size(const vec3& p_size);
 
     vec3 get_rotation() const;
-    void set_rotation(const vec3 &p_rotation);
+    void set_rotation(const vec3& p_rotation);
     vec3 get_axis() const;
 
-    void move(const vec3 &p_delta);
-    void rotate(const quat &p_quat);
+    void move(const vec3& p_delta);
+    void rotate(const quat& p_quat);
 
     Color get_color() const;
-    void set_color(const Color &p_color);
+    void set_color(const Color& p_color);
 
     bool get_visible() const;
     void set_visible(const bool b);
 
-    Layer *get_layer() const;
-    void set_layer(Layer *l);
+    Layer* get_layer() const;
+    void set_layer(Layer* l);
 
-    World *get_world() const;
+    World* get_world() const;
 
-    void register_in_world(World *p_world);
+    void register_in_world(World* p_world);
 
     void free();
 
@@ -74,23 +74,23 @@ class WorldObject : public Node {
     T GetComponent();
 
     // Add components
-    void set_component(Component *c);
-    void set_transformcomponent(TransformComponent *c);
-    void set_rendercomponent(RenderComponent *c);
+    void set_component(Component* c);
+    void set_transformcomponent(TransformComponent* c);
+    void set_rendercomponent(RenderComponent* c);
 
-    TransformComponent *get_transformcomponent() const;
-    RenderComponent *get_rendercomponent() const;
+    TransformComponent* get_transformcomponent() const;
+    RenderComponent* get_rendercomponent() const;
 
     // Components
     Vector<Component> components;
-    TransformComponent *transformcomponent;
-    RenderComponent *rendercomponent;
+    TransformComponent* transformcomponent;
+    RenderComponent* rendercomponent;
 
     // Check Overlap of bounding box with a vector
-    virtual bool CheckOverlap(const vec2 &p) const;
+    virtual bool CheckOverlap(const vec2& p) const;
 
     static void bind_methods();
 
-    World *world = nullptr;
-    Layer *layer = nullptr;
+    World* world = nullptr;
+    Layer* layer = nullptr;
 };

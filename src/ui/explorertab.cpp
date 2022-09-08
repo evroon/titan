@@ -13,7 +13,7 @@
 #include "treeview.h"
 #include "world/world.h"
 
-ExplorerTab::ExplorerTab(Viewport *p_viewport) {
+ExplorerTab::ExplorerTab(Viewport* p_viewport) {
     tree_view = new TreeView;
     buttons = new Container;
     add_button = new IconButton("solid/plus");
@@ -55,21 +55,21 @@ ExplorerTab::ExplorerTab() : ExplorerTab(NULL) {}
 
 ExplorerTab::~ExplorerTab() {}
 
-void ExplorerTab::add_file(const String &p_path) {}
+void ExplorerTab::add_file(const String& p_path) {}
 
-Node *ExplorerTab::get_selected_object() const {
+Node* ExplorerTab::get_selected_object() const {
     String name = tree_view->get_selected()->get_text();
     return viewport->get_child(name);
 }
 
 void ExplorerTab::delete_element() {
-    Node *item = get_selected_object();
+    Node* item = get_selected_object();
 
     if (item) item->get_parent()->remove_child(item);
 }
 
-void ExplorerTab::right_clicked(TreeElement *p_element) {
-    ContextMenu *menu = new ContextMenu;
+void ExplorerTab::right_clicked(TreeElement* p_element) {
+    ContextMenu* menu = new ContextMenu;
 
     Connection del, add;
     del.register_native_method(this, "delete_element");
@@ -97,12 +97,12 @@ vec2 ExplorerTab::get_required_size() const {
 }
 
 void ExplorerTab::add_button_clicked() {
-    TypePickDialog *dialog = new TypePickDialog;
+    TypePickDialog* dialog = new TypePickDialog;
     dialog->connect("type_chosen", this, "add_object");
     get_canvas()->set_dialog(dialog);
 }
 
-void ExplorerTab::handle_event(UIEvent *ui_event) {}
+void ExplorerTab::handle_event(UIEvent* ui_event) {}
 
 void ExplorerTab::notification(int p_notification) {
     switch (p_notification) {
@@ -123,18 +123,18 @@ void ExplorerTab::notification(int p_notification) {
     }
 }
 
-void ExplorerTab::set_viewport(Viewport *p_viewport) { viewport = p_viewport; }
+void ExplorerTab::set_viewport(Viewport* p_viewport) { viewport = p_viewport; }
 
-Viewport *ExplorerTab::get_viewport() const { return viewport; }
+Viewport* ExplorerTab::get_viewport() const { return viewport; }
 
-void ExplorerTab::add_object(const String &p_type) {
-    CSTR_0 *c = reinterpret_cast<CSTR_0 *>(MMASTER->get_constructor(p_type, 0));
+void ExplorerTab::add_object(const String& p_type) {
+    CSTR_0* c = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(p_type, 0));
     if (c) {
         Variant v = c->operator()();
 
-        if (v.o->derives_from_type<Control *>()) {
+        if (v.o->derives_from_type<Control*>()) {
             viewport->get_canvas()->add_control(v);
-        } else if (v.o->derives_from_type<WorldObject *>()) {
+        } else if (v.o->derives_from_type<WorldObject*>()) {
             viewport->get_world()->add_child(v);
         } else {
             get_selected_object()->add_child(v);
@@ -145,16 +145,16 @@ void ExplorerTab::add_object(const String &p_type) {
     }
 }
 
-void ExplorerTab::emit_selected(TreeElement *p_element) {
+void ExplorerTab::emit_selected(TreeElement* p_element) {
     if (p_element)
         emit_signal(
             "selected",
-            viewport->get_child(p_element->get_text())->cast_to_type<Node *>());
+            viewport->get_child(p_element->get_text())->cast_to_type<Node*>());
     else
         emit_signal("selected", Variant());
 }
 
-void ExplorerTab::select(WorldObject *p_object) {
+void ExplorerTab::select(WorldObject* p_object) {
     int i = viewport->get_world()->get_index(p_object);
 
     // if (tree_view->get_selected() == i)

@@ -11,26 +11,26 @@ struct Connection {
     Connection() { type = UNDEF; }
     ~Connection() {}
 
-    void register_native_method(Object *p_object,
-                                const StringName &p_method_name);
-    void register_script_method(Scriptable *p_scriptable,
-                                const StringName &p_method_name);
-    void register_signal(Scriptable *p_scriptable,
-                         const StringName &p_signal_name);
-    void register_lambda(Method *p_lambda);
+    void register_native_method(Object* p_object,
+                                const StringName& p_method_name);
+    void register_script_method(Scriptable* p_scriptable,
+                                const StringName& p_method_name);
+    void register_signal(Scriptable* p_scriptable,
+                         const StringName& p_signal_name);
+    void register_lambda(Method* p_lambda);
 
     // static versions
     static Connection create_from_native_method(
-        Object *p_object, const StringName &p_method_name);
+        Object* p_object, const StringName& p_method_name);
     static Connection create_from_script_method(
-        Scriptable *p_scriptable, const StringName &p_method_name);
-    static Connection create_from_signal(Scriptable *p_scriptable,
-                                         const StringName &p_signal_name);
-    static Connection create_from_lambda(Method *p_lambda);
+        Scriptable* p_scriptable, const StringName& p_method_name);
+    static Connection create_from_signal(Scriptable* p_scriptable,
+                                         const StringName& p_signal_name);
+    static Connection create_from_lambda(Method* p_lambda);
 
-    Method *method;
-    Object *object;
-    Scriptable *scriptable;
+    Method* method;
+    Object* object;
+    Scriptable* scriptable;
     StringName name;
 
     enum ConnectionType { UNDEF, NATIVE, TITANSCRIPT, LAMBDA, SIGNAL };
@@ -43,22 +43,22 @@ class Signal {
     Signal();
     ~Signal();
 
-    void attach_connection(const Connection &p_connection);
+    void attach_connection(const Connection& p_connection);
 
     // native
-    void attach_native_connection(Object *p_object,
-                                  const StringName &p_method_name);
+    void attach_native_connection(Object* p_object,
+                                  const StringName& p_method_name);
 
     // titanscript
-    void attach_script_connection(Scriptable *p_scriptable,
-                                  const StringName &p_name);
+    void attach_script_connection(Scriptable* p_scriptable,
+                                  const StringName& p_name);
 
     // titanscript
-    void attach_signal_connection(Scriptable *p_scriptable,
-                                  const StringName &p_name);
+    void attach_signal_connection(Scriptable* p_scriptable,
+                                  const StringName& p_name);
 
     // lambda
-    void attach_lambda_connection(Method *p_lambda);
+    void attach_lambda_connection(Method* p_lambda);
 
     void emit();
     void emit(Variant arg_0);
@@ -67,6 +67,6 @@ class Signal {
     StringName name;
 
    private:
-    void emit_connection(const Connection &p_connection) const;
-    void emit_connection(const Connection &p_connection, Variant arg_0) const;
+    void emit_connection(const Connection& p_connection) const;
+    void emit_connection(const Connection& p_connection, Variant arg_0) const;
 };

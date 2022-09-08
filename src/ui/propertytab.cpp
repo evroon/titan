@@ -5,7 +5,7 @@
 #include "resources/font.h"
 #include "textfield.h"
 
-PropertyTab::PropertyTab(Object *p_object) {
+PropertyTab::PropertyTab(Object* p_object) {
     property_view = new PropertyView;
     add_child(property_view);
 
@@ -56,7 +56,7 @@ PropertyTab::PropertyTab(Object *p_object) {
     bar_area = rect2();
     work_area = rect2();
 
-    history = History<Object *>();
+    history = History<Object*>();
 }
 
 PropertyTab::PropertyTab() : PropertyTab(nullptr) {}
@@ -67,14 +67,14 @@ vec2 PropertyTab::get_required_size() const {
     return property_view->get_required_size() + vec2(0.0f, buttons_height);
 }
 
-void PropertyTab::set_property(Object *p_object) {
+void PropertyTab::set_property(Object* p_object) {
     history.go_to(p_object);
     property_view->set_property(p_object);
 
     String title = "";
 
-    Node *n = p_object->cast_to_type<Node *>();
-    Resource *r = p_object->cast_to_type<Resource *>();
+    Node* n = p_object->cast_to_type<Node*>();
+    Resource* r = p_object->cast_to_type<Resource*>();
 
     if (n)
         title = n->get_name();
@@ -84,7 +84,7 @@ void PropertyTab::set_property(Object *p_object) {
     name_field->set_text(title);
 }
 
-Object *PropertyTab::get_property() const {
+Object* PropertyTab::get_property() const {
     return property_view->get_property();
 }
 
@@ -98,7 +98,7 @@ void PropertyTab::show_history() {}
 #define CLASSNAME PropertyTab
 
 void PropertyTab::bind_methods() {
-    REG_CSTR_OVRLD_1(Object *);
+    REG_CSTR_OVRLD_1(Object*);
 
     REG_PROPERTY(property);
 

@@ -2,13 +2,13 @@
 
 #include "tmessage.h"
 
-GarbageCollector *GarbageCollector::singleton;
+GarbageCollector* GarbageCollector::singleton;
 
-void GarbageCollector::queue_clean(const Variant &p_var) {
+void GarbageCollector::queue_clean(const Variant& p_var) {
     clean_queue.push_back(p_var);
 }
 
-void GarbageCollector::queue_free(const Variant &p_var) {
+void GarbageCollector::queue_free(const Variant& p_var) {
     if (!free_queue.contains(p_var)) free_queue.push_back(p_var);
 }
 

@@ -28,7 +28,7 @@ class CollisionShape3D : public Object {
     static void bind_methods();
 
    protected:
-    btCollisionShape *shape;
+    btCollisionShape* shape;
 };
 
 class PlaneShape3D : CollisionShape3D {
@@ -71,7 +71,7 @@ class CollisionShape2D : public Object {
     CollisionShape2D();
     static void bind_methods();
 
-    b2Body *body;
+    b2Body* body;
 
    protected:
     b2BodyDef bodydef;
@@ -86,7 +86,7 @@ class BoxShape2D : public CollisionShape2D {
 
    public:
     BoxShape2D() = default;
-    BoxShape2D(PhysicsWorld2D *world, WorldObject *p_object, bool dyn = true);
+    BoxShape2D(PhysicsWorld2D* world, WorldObject* p_object, bool dyn = true);
     virtual ~BoxShape2D() {}
 
    protected:
@@ -99,7 +99,7 @@ class CircleShape2D : public CollisionShape2D {
 
    public:
     CircleShape2D() = default;
-    CircleShape2D(PhysicsWorld2D *world, WorldObject *p_object,
+    CircleShape2D(PhysicsWorld2D* world, WorldObject* p_object,
                   bool dyn = true);
     virtual ~CircleShape2D() {}
 

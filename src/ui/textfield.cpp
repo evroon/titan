@@ -4,9 +4,9 @@
 
 TextField::TextField() : TextField("") {}
 
-TextField::TextField(const String &name) : EditableLabel(name) {}
+TextField::TextField(const String& name) : EditableLabel(name) {}
 
-TextField::TextField(const Variable &p_variable) : EditableLabel(p_variable) {}
+TextField::TextField(const Variable& p_variable) : EditableLabel(p_variable) {}
 
 TextField::~TextField() {}
 
@@ -48,7 +48,7 @@ void TextField::value_changed() {
 
 void TextField::handle_input(char c) { insert_at_selection(c); }
 
-void TextField::set_text(const String &p_text) {
+void TextField::set_text(const String& p_text) {
     text = p_text;
     value_set(p_text);
 

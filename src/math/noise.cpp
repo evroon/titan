@@ -22,13 +22,13 @@ PerlinNoise::PerlinNoise() {
     perlin_noise.SetPersistence(0.5);
 }
 
-float PerlinNoise::get_value(const vec3 &p_pos) {
+float PerlinNoise::get_value(const vec3& p_pos) {
     return to_float(perlin_noise.GetValue(p_pos.x, p_pos.y, p_pos.z));
 }
 
-void PerlinNoise::fill_partition(PerlinNoise *p_noise, vec4 *p_heights, int p_x,
-                                 int p_y, const vec2i &p_partition_size,
-                                 const vec2i &p_size) {
+void PerlinNoise::fill_partition(PerlinNoise* p_noise, vec4* p_heights, int p_x,
+                                 int p_y, const vec2i& p_partition_size,
+                                 const vec2i& p_size) {
     for (int x = p_x; x < p_x + p_partition_size.x; x++) {
         for (int y = p_y; y < p_y + p_partition_size.y; y++) {
             float value = p_noise->get_value(vec3(x, y, 0.0f) / 2000.0f) / 2.0f;
@@ -37,12 +37,12 @@ void PerlinNoise::fill_partition(PerlinNoise *p_noise, vec4 *p_heights, int p_x,
     }
 }
 
-Texture2D *PerlinNoise::create_2d_texture(const vec2i &p_size) {
+Texture2D* PerlinNoise::create_2d_texture(const vec2i& p_size) {
     unsigned id;
     vec2 size = vec2(p_size.x, p_size.y);
     int num_threads = 8;
 
-    vec4 *heights = new vec4[p_size.x * p_size.y];
+    vec4* heights = new vec4[p_size.x * p_size.y];
 
     std::thread threads[num_threads];
 
@@ -71,7 +71,7 @@ Texture2D *PerlinNoise::create_2d_texture(const vec2i &p_size) {
     return new Texture2D(size, to_int(id));
 }
 
-Texture3D *PerlinNoise::create_3d_texture() {
+Texture3D* PerlinNoise::create_3d_texture() {
     unsigned id;
     vec3 size = 128;
 
@@ -82,7 +82,7 @@ Texture3D *PerlinNoise::create_3d_texture() {
         BYTE a;
     };
 
-    ColorByte *colors =
+    ColorByte* colors =
         new ColorByte[to_int(size.x) * to_int(size.y) * to_int(size.z)];
 
     WorleyNoise w1 = WorleyNoise(8);
@@ -124,7 +124,7 @@ Texture3D *PerlinNoise::create_3d_texture() {
     return new Texture3D(size, to_int(id));
 }
 
-WorleyNoise::WorleyNoise(const vec3 &p_size) {
+WorleyNoise::WorleyNoise(const vec3& p_size) {
     size = p_size;
 
     int c = 0;
@@ -142,7 +142,7 @@ WorleyNoise::WorleyNoise(const vec3 &p_size) {
     }
 }
 
-float WorleyNoise::get_value(const vec3 &p_pos) {
+float WorleyNoise::get_value(const vec3& p_pos) {
     float closest = 1.0f;
 
     vec3 pos = p_pos * size;

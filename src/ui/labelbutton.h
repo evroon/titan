@@ -8,7 +8,7 @@ class LabelButton : public Button {
 
    public:
     LabelButton();
-    LabelButton(const String &text);
+    LabelButton(const String& text);
 
     vec2 get_required_size() const override;
     void draw();

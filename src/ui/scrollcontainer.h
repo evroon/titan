@@ -12,9 +12,9 @@ class ScrollContainer : public Container {
 
     void draw();
 
-    void set_position(const vec2 &p_position);
+    void set_position(const vec2& p_position);
 
-    Slider *vert_slider = NULL;
+    Slider* vert_slider = NULL;
 
     void set_use_scissor(bool value);
 

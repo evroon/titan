@@ -26,11 +26,11 @@ class FBO {
     bool depth;
     Color clear_color;
 
-    Texture *depth_tex;
+    Texture* depth_tex;
     Vector<Texture> color_textures;
 
     struct color_tex_def {
-        Texture2D *tex;
+        Texture2D* tex;
         bool type_byte;
         vec2i size;
     };
@@ -45,18 +45,18 @@ class FBO {
 
 class FBO2D : public FBO {
    public:
-    FBO2D(const vec2i &p_size);
-    FBO2D(const Ref<Texture2D> &p_texture);
+    FBO2D(const vec2i& p_size);
+    FBO2D(const Ref<Texture2D>& p_texture);
 
     void init() override;
 
-    Color read_pixel(const vec2 &p_pos, int p_attachment_index);
+    Color read_pixel(const vec2& p_pos, int p_attachment_index);
 
     void add_depth_texture() override;
     void add_color_texture() override;
-    void add_color_texture(const vec2i &p_size);
+    void add_color_texture(const vec2i& p_size);
     void add_float_color_texture() override;
-    void add_texture(Texture2D *p_texture);
+    void add_texture(Texture2D* p_texture);
 };
 
 class FBO1D : public FBO {

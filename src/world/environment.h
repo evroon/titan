@@ -9,7 +9,7 @@ class Environment : public WorldObject {
     Environment();
     virtual ~Environment();
 
-    void set_ambient_color(const Color &p_ambient_color);
+    void set_ambient_color(const Color& p_ambient_color);
     Color get_ambient_color() const;
 
     void set_auto_exposure_enabled(bool p_auto_exposure_enabled);

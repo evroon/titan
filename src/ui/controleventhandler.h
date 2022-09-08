@@ -7,5 +7,5 @@ class ControlEventHandler {
     ControlEventHandler();
     ~ControlEventHandler();
 
-    Object *control;  // is of Type Control
+    Object* control;  // is of Type Control
 };

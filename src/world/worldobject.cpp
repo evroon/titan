@@ -25,7 +25,7 @@ WorldObject::~WorldObject() {
     components.clean();
 }
 
-void WorldObject::handle_event(Event *e) {
+void WorldObject::handle_event(Event* e) {
     if (method_exists(CORE_NAMES->handle_event)) {
         run(CORE_NAMES->handle_event, Arguments(e));
         return;
@@ -75,20 +75,20 @@ void WorldObject::notificate(int notification) {
 }
 
 void WorldObject::update() {
-    auto rigid_body = get_child_by_type<RigidBody2D *>();
+    auto rigid_body = get_child_by_type<RigidBody2D*>();
 
     if (rigid_body != NULL) {
         rigid_body->update();
     }
 }
 
-void WorldObject::set_transformcomponent(TransformComponent *c) {
+void WorldObject::set_transformcomponent(TransformComponent* c) {
     transformcomponent = c;
 
     if (transformcomponent) components.push_back(c);
 }
 
-void WorldObject::set_rendercomponent(RenderComponent *c) {
+void WorldObject::set_rendercomponent(RenderComponent* c) {
     rendercomponent = c;
 
     if (rendercomponent) {
@@ -107,11 +107,11 @@ void WorldObject::set_rendercomponent(RenderComponent *c) {
 //	}
 //}
 
-TransformComponent *WorldObject::get_transformcomponent() const {
+TransformComponent* WorldObject::get_transformcomponent() const {
     return transformcomponent;
 }
 
-RenderComponent *WorldObject::get_rendercomponent() const {
+RenderComponent* WorldObject::get_rendercomponent() const {
     return rendercomponent;
 }
 
@@ -123,19 +123,19 @@ RenderComponent *WorldObject::get_rendercomponent() const {
 Transform WorldObject::get_transform() const {
     return transformcomponent->transform;
 }
-void WorldObject::set_transform(const Transform &p_transform) const {
+void WorldObject::set_transform(const Transform& p_transform) const {
     transformcomponent->transform = p_transform;
 }
 
 vec3 WorldObject::get_pos() const { return get_transform().get_pos(); }
 
-void WorldObject::set_pos(const vec3 &p_pos) {
-    Transform &transform = transformcomponent->transform;
+void WorldObject::set_pos(const vec3& p_pos) {
+    Transform& transform = transformcomponent->transform;
 
     transform.set_pos(p_pos);
     transform.update();
 
-    RigidBody2D *body = get_child_by_type<RigidBody2D *>();
+    RigidBody2D* body = get_child_by_type<RigidBody2D*>();
 
     if (body) body->set_transform(transform);
 }
@@ -144,13 +144,13 @@ vec3 WorldObject::get_size() const {
     return transformcomponent->transform.get_size();
 }
 
-void WorldObject::set_size(const vec3 &p_size) {
-    Transform &transform = transformcomponent->transform;
+void WorldObject::set_size(const vec3& p_size) {
+    Transform& transform = transformcomponent->transform;
 
     transform.set_size(p_size);
     transform.update();
 
-    RigidBody2D *body = get_child_by_type<RigidBody2D *>();
+    RigidBody2D* body = get_child_by_type<RigidBody2D*>();
 
     if (body) body->set_transform(transform);
 }
@@ -159,8 +159,8 @@ vec3 WorldObject::get_rotation() const {
     return transformcomponent->transform.get_rotation();
 }
 
-void WorldObject::set_rotation(const vec3 &p_rotation) {
-    Transform &transform = transformcomponent->transform;
+void WorldObject::set_rotation(const vec3& p_rotation) {
+    Transform& transform = transformcomponent->transform;
 
     transform.set_rotation(p_rotation);
     transform.update();
@@ -174,22 +174,22 @@ vec3 WorldObject::get_axis() const {
         .get_xyz();
 }
 
-void WorldObject::move(const vec3 &p_delta) { set_pos(get_pos() + p_delta); }
+void WorldObject::move(const vec3& p_delta) { set_pos(get_pos() + p_delta); }
 
-void WorldObject::rotate(const quat &p_quat) {
+void WorldObject::rotate(const quat& p_quat) {
     set_rotation((get_transform().get_quat() * p_quat).get_euler());
 }
 
 Color WorldObject::get_color() const { return rendercomponent->get_color(); }
-void WorldObject::set_color(const Color &p_color) {
+void WorldObject::set_color(const Color& p_color) {
     rendercomponent->set_color(p_color);
 }
 
 bool WorldObject::get_visible() const { return rendercomponent->isvisible; }
 void WorldObject::set_visible(const bool b) { rendercomponent->isvisible = b; }
 
-Layer *WorldObject::get_layer() const { return layer; }
-void WorldObject::set_layer(Layer *l) {
+Layer* WorldObject::get_layer() const { return layer; }
+void WorldObject::set_layer(Layer* l) {
     if (layer) layer->UnBind(this);
 
     layer = l;
@@ -197,11 +197,11 @@ void WorldObject::set_layer(Layer *l) {
     if (layer) layer->Bind(this);
 }
 
-World *WorldObject::get_world() const {
-    return world != nullptr ? world : get_parent_by_type_recursively<World *>();
+World* WorldObject::get_world() const {
+    return world != nullptr ? world : get_parent_by_type_recursively<World*>();
 }
 
-void WorldObject::register_in_world(World *p_world) { world = p_world; }
+void WorldObject::register_in_world(World* p_world) { world = p_world; }
 
 void WorldObject::free() { GC->queue_free(this); }
 
@@ -211,11 +211,11 @@ T WorldObject::GetComponent() {
         if (typeid(T) == typeid(components[c])) return components[c];
 }
 
-void WorldObject::set_component(Component *c) {
+void WorldObject::set_component(Component* c) {
     if (c->is_of_type<TransformComponent>())
-        set_transformcomponent(reinterpret_cast<TransformComponent *>(c));
+        set_transformcomponent(reinterpret_cast<TransformComponent*>(c));
     else if (c->is_of_type<RenderComponent>())
-        set_rendercomponent(reinterpret_cast<RenderComponent *>(c));
+        set_rendercomponent(reinterpret_cast<RenderComponent*>(c));
     // else if (c->is_of_type<PhysicsComponent2D>())
     //	set_physicscomponent(reinterpret_cast<PhysicsComponent2D*>(c));
 
@@ -223,7 +223,7 @@ void WorldObject::set_component(Component *c) {
     components.push_back(c);
 }
 
-bool WorldObject::CheckOverlap(const vec2 &p) const {
+bool WorldObject::CheckOverlap(const vec2& p) const {
     vec3 pos = get_pos();
     vec3 size = get_size();
 

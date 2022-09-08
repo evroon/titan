@@ -19,8 +19,8 @@ class Input : public Object {
 
     static void init();
 
-    void HandleEvent(const SDL_Event &event);
-    void AddEvent(Event *e);
+    void HandleEvent(const SDL_Event& event);
+    void AddEvent(Event* e);
     void Clean();
 
     void enable_text_input();
@@ -32,9 +32,9 @@ class Input : public Object {
 
     bool fingerdown;
     vec2 mousepos;
-    Application *parent;
+    Application* parent;
 
     Vector<Event> events;
 
-    static Input *singleton;
+    static Input* singleton;
 };

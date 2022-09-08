@@ -12,7 +12,7 @@ UIBox::UIBox() {
 
 UIBox::~UIBox() {}
 
-void UIBox::set_color(const Color &p_color) { color = p_color; }
+void UIBox::set_color(const Color& p_color) { color = p_color; }
 Color UIBox::get_color() const { return color; }
 
 void UIBox::prepare_draw() {

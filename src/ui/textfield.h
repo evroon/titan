@@ -7,8 +7,8 @@ class TextField : public EditableLabel {
 
    public:
     TextField();
-    TextField(const String &name);
-    TextField(const Variable &p_variable);
+    TextField(const String& name);
+    TextField(const Variable& p_variable);
 
     virtual ~TextField();
 
@@ -19,7 +19,7 @@ class TextField : public EditableLabel {
     void value_changed() override;
 
     void handle_input(char c) override;
-    void set_text(const String &p_text) override;
+    void set_text(const String& p_text) override;
 
     static void bind_methods();
 };

@@ -16,7 +16,7 @@ Quaternion::Quaternion(float p_x, float p_y, float p_z, float p_w) {
     w = p_w;
 }
 
-Quaternion::Quaternion(const vec3 &p_axis, float p_angle) {
+Quaternion::Quaternion(const vec3& p_axis, float p_angle) {
     float omega, s;
 
     omega = 0.5f * p_angle;
@@ -30,7 +30,7 @@ Quaternion::Quaternion(const vec3 &p_axis, float p_angle) {
     normalize();
 }
 
-Quaternion::Quaternion(const vec3 &p_angles) {
+Quaternion::Quaternion(const vec3& p_angles) {
     float cos_z = cosf(0.5f * p_angles.z);
     float cos_y = cosf(0.5f * p_angles.y);
     float cos_x = cosf(0.5f * p_angles.x);
@@ -47,7 +47,7 @@ Quaternion::Quaternion(const vec3 &p_angles) {
 
 Quaternion::~Quaternion() {}
 
-void Quaternion::slerp(const Quaternion &a, const Quaternion &b, float t) {
+void Quaternion::slerp(const Quaternion& a, const Quaternion& b, float t) {
     float omega, cosom, sinom, sclp, sclq;
 
     cosom = a.x * b.x + a.y * b.y + a.y * b.y + a.w * b.w;
@@ -82,7 +82,7 @@ void Quaternion::slerp(const Quaternion &a, const Quaternion &b, float t) {
     }
 }
 
-void Quaternion::rotate_to(const vec3 &p_start, const vec3 &p_destination) {
+void Quaternion::rotate_to(const vec3& p_start, const vec3& p_destination) {
     float l1 = p_start.length() * p_start.length();
     float l2 = p_destination.length() * p_destination.length();
     float norm_u_norm_v = sqrt(l1 * l2);
@@ -171,7 +171,7 @@ Quaternion Quaternion::inverse() const {
     return q;
 }
 
-vec3 Quaternion::rotate(const vec3 &p_in) const {
+vec3 Quaternion::rotate(const vec3& p_in) const {
     float num = x * 2.0f;
     float num2 = y * 2.0f;
     float num3 = z * 2.0f;
@@ -206,16 +206,16 @@ void Quaternion::rotate_right(float p_angle) {}
 
 void Quaternion::rotate_around_axis(float p_angle) {}
 
-Quaternion Quaternion::product(const Quaternion &rhs) const {
+Quaternion Quaternion::product(const Quaternion& rhs) const {
     return Quaternion(y * rhs.z - z * rhs.y + x * rhs.w + w * rhs.x,
                       z * rhs.x - x * rhs.z + y * rhs.w + w * rhs.y,
                       x * rhs.y - y * rhs.x + z * rhs.w + w * rhs.z,
                       w * rhs.w - x * rhs.x - y * rhs.y - z * rhs.z);
 }
 
-vec3 Quaternion::operator*(const vec3 &rhs) const { return rotate(rhs); }
+vec3 Quaternion::operator*(const vec3& rhs) const { return rotate(rhs); }
 
-Quaternion Quaternion::operator*(const Quaternion &rhs) const {
+Quaternion Quaternion::operator*(const Quaternion& rhs) const {
     return product(rhs);
 }
 
@@ -223,11 +223,11 @@ Quaternion Quaternion::operator*(float rhs) const {
     return Quaternion(get_complex() * rhs, get_real() * rhs);
 }
 
-Quaternion Quaternion::operator+(const Quaternion &rhs) const {
+Quaternion Quaternion::operator+(const Quaternion& rhs) const {
     return Quaternion(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
 }
 
-Quaternion Quaternion::operator-(const Quaternion &rhs) const {
+Quaternion Quaternion::operator-(const Quaternion& rhs) const {
     return Quaternion(x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w);
 }
 
@@ -239,11 +239,11 @@ Quaternion Quaternion::operator/(float s) const {
     return Quaternion(get_complex() / s, get_real() / s);
 }
 
-bool Quaternion::operator==(const Quaternion &rhs) const {
+bool Quaternion::operator==(const Quaternion& rhs) const {
     return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
 }
 
-bool Quaternion::operator!=(const Quaternion &rhs) const {
+bool Quaternion::operator!=(const Quaternion& rhs) const {
     return x != rhs.x || y != rhs.y || z != rhs.z || w != rhs.w;
 }
 

@@ -72,12 +72,12 @@ void FBO::add_float_color_texture() {}
 // FBO2D
 //=========================================================================
 
-FBO2D::FBO2D(const vec2i &p_size) {
+FBO2D::FBO2D(const vec2i& p_size) {
     size = p_size;
     depth = false;
 }
 
-FBO2D::FBO2D(const Ref<Texture2D> &p_texture) {
+FBO2D::FBO2D(const Ref<Texture2D>& p_texture) {
     size =
         vec2i(to_int(p_texture->get_size().x), to_int(p_texture->get_size().y));
     depth = false;
@@ -101,7 +101,7 @@ void FBO2D::init() {
     glBindFramebuffer(GL_FRAMEBUFFER, id);
 
     if (definitions.size() > 0) {
-        GLenum *DrawBuffers = new GLenum[definitions.size()];
+        GLenum* DrawBuffers = new GLenum[definitions.size()];
         for (int c = 0; c < definitions.size(); c++)
             DrawBuffers[c] = GL_COLOR_ATTACHMENT0 + c;
         glDrawBuffers(definitions.size(), DrawBuffers);
@@ -112,7 +112,7 @@ void FBO2D::init() {
     glReadBuffer(GL_NONE);
 
     for (int c = 0; c < definitions.size(); c++) {
-        Texture2D *color;
+        Texture2D* color;
         if (definitions[c].tex) {
             color = definitions[c].tex;
         } else {
@@ -137,15 +137,15 @@ void FBO2D::init() {
     RENDERER->check_error();
 }
 
-Color FBO2D::read_pixel(const vec2 &p_pos, int p_attachment_index) {
-    void *data = new float[4];
+Color FBO2D::read_pixel(const vec2& p_pos, int p_attachment_index) {
+    void* data = new float[4];
 
     glBindFramebuffer(GL_READ_FRAMEBUFFER, id);
     glReadBuffer(GL_COLOR_ATTACHMENT0 + p_attachment_index);
     glReadPixels(to_int(p_pos.x), to_int(p_pos.y), 1, 1, GL_RGBA, GL_FLOAT,
                  data);
 
-    float *b = (float *)data;
+    float* b = (float*)data;
 
     if (!b) return Color();
 
@@ -160,7 +160,7 @@ void FBO2D::add_color_texture() {
     definitions.push_back({nullptr, true, size});
 }
 
-void FBO2D::add_color_texture(const vec2i &p_size) {
+void FBO2D::add_color_texture(const vec2i& p_size) {
     definitions.push_back({nullptr, true, p_size});
 }
 
@@ -168,7 +168,7 @@ void FBO2D::add_float_color_texture() {
     definitions.push_back({nullptr, false, size});
 }
 
-void FBO2D::add_texture(Texture2D *p_texture) {
+void FBO2D::add_texture(Texture2D* p_texture) {
     vec2 size = p_texture->get_size();
     definitions.push_back({p_texture, false, vec2i(size.x, size.y)});
 }
@@ -179,7 +179,7 @@ void FBO2D::add_texture(Texture2D *p_texture) {
 
 FBO1D::FBO1D(int size) {
     this->size = vec2i(size, 1);
-    Texture1D *color = new Texture1D(size);
+    Texture1D* color = new Texture1D(size);
 
     glGenFramebuffers(1, &id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);

@@ -8,7 +8,7 @@ class Scene : public Node {
 
    public:
     Scene();
-    Scene(const String &name);
+    Scene(const String& name);
     virtual ~Scene();
 
     void Init();
@@ -16,7 +16,7 @@ class Scene : public Node {
     void Start();
     void update();
     void Draw();
-    void handle_event(Event *e);
+    void handle_event(Event* e);
 
     static void bind_methods();
 

@@ -5,14 +5,14 @@
 #include "resources/texture.h"
 #include "resources/xmldocument.h"
 
-Serializer *Serializer::singleton;
-TypeSerializer *TypeSerializer::singleton;
+Serializer* Serializer::singleton;
+TypeSerializer* TypeSerializer::singleton;
 
 Serializer::Serializer() {}
 
 Serializer::~Serializer() {}
 
-String Serializer::serialize(const Variant &p_value) {
+String Serializer::serialize(const Variant& p_value) {
     XmlDocument doc;
     doc.open("");
 
@@ -25,13 +25,13 @@ String Serializer::serialize(const Variant &p_value) {
     return s;
 }
 
-void Serializer::serialize_recursively(const String &p_name,
-                                       const Variant &p_value,
-                                       XmlNode &p_node) {
+void Serializer::serialize_recursively(const String& p_name,
+                                       const Variant& p_value,
+                                       XmlNode& p_node) {
     VariantType type = p_value.get_type();
     Variant::Type var_type = type;
 
-    XmlDocument &doc = *p_node.doc;
+    XmlDocument& doc = *p_node.doc;
     XmlNode node = doc.add_node(p_name, "");
     doc.add_attribute("type", type.get_type_name()).add_to_node(node);
 
@@ -39,14 +39,14 @@ void Serializer::serialize_recursively(const String &p_name,
     } else if (var_type != Variant::OBJECT) {
         doc.add_attribute("value", p_value.ToString()).add_to_node(node);
     } else {
-        Node *n = dynamic_cast<Node *>(p_value.o);
+        Node* n = dynamic_cast<Node*>(p_value.o);
         if (n) {
             String s = n->get_child_count();
             XmlNode children_node = p_node.doc->add_node("children", "");
             doc.add_attribute("count", s).add_to_node(children_node);
 
             for (int c = 0; c < n->get_child_count(); c++) {
-                Node *child = n->get_child_by_index(c);
+                Node* child = n->get_child_by_index(c);
                 serialize_recursively(child->get_name(), child, children_node);
             }
 
@@ -73,14 +73,14 @@ void Serializer::serialize_recursively(const String &p_name,
     node.add_to_node(p_node);
 }
 
-Variant Serializer::deserialize(const String &p_source) {
+Variant Serializer::deserialize(const String& p_source) {
     XmlDocument doc;
     doc.open(p_source);
 
     return deserialize_recursively(doc.get_root().get_children()[0]);
 }
 
-Variant Serializer::deserialize_recursively(const XmlNode &p_node) {
+Variant Serializer::deserialize_recursively(const XmlNode& p_node) {
     Array<XmlNode> nodes = p_node.get_children();
 
     if (nodes.size() == 0 && p_node.get_attributes().size() == 1) {
@@ -115,7 +115,7 @@ Variant Serializer::deserialize_recursively(const XmlNode &p_node) {
         return result;
     }
     if (MMASTER->constructor_exists(type, 0))
-        result = reinterpret_cast<CSTR_0 *>(MMASTER->get_constructor(type, 0))
+        result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))
                      ->
                      operator()();
     else {
@@ -127,20 +127,20 @@ Variant Serializer::deserialize_recursively(const XmlNode &p_node) {
     for (int c = 0; c < properties.size(); c++) {
         Serializer::Property p = deserialize_property(properties[c]);
 
-        ::Property *pr = MMASTER->get_property(type, p.name);
+        ::Property* pr = MMASTER->get_property(type, p.name);
 
         if (pr && pr->set) pr->set->operator()(result, p.value);
     }
 
     for (int c = 0; c < children.size(); c++) {
         Variant child = deserialize_recursively(children[c]);
-        (result.operator Node *())->add_child(child);
+        (result.operator Node*())->add_child(child);
     }
 
     return result;
 }
 
-Serializer::Property Serializer::deserialize_property(const XmlNode &p_node) {
+Serializer::Property Serializer::deserialize_property(const XmlNode& p_node) {
     Serializer::Property result = Serializer::Property();
 
     Array<XmlAttribute> attributes = p_node.get_attributes();
@@ -209,7 +209,7 @@ Serializer::Property Serializer::deserialize_property(const XmlNode &p_node) {
     return result;
 }
 
-vec2 Serializer::deserialize_vec2(const String &p_source) const {
+vec2 Serializer::deserialize_vec2(const String& p_source) const {
     Array<String> a = p_source.split(' ');
 
     String x = a[1];
@@ -218,7 +218,7 @@ vec2 Serializer::deserialize_vec2(const String &p_source) const {
     return vec2(x.substr(0, x.size() - 1), y);
 }
 
-vec3 Serializer::deserialize_vec3(const String &p_source) const {
+vec3 Serializer::deserialize_vec3(const String& p_source) const {
     Array<String> a = p_source.split(' ');
 
     String x = a[1];
@@ -228,7 +228,7 @@ vec3 Serializer::deserialize_vec3(const String &p_source) const {
     return vec3(x.substr(0, x.size() - 1), y.substr(0, y.size() - 1), z);
 }
 
-vec4 Serializer::deserialize_vec4(const String &p_source) const {
+vec4 Serializer::deserialize_vec4(const String& p_source) const {
     Array<String> a = p_source.split(' ');
 
     String x = a[1];
@@ -240,7 +240,7 @@ vec4 Serializer::deserialize_vec4(const String &p_source) const {
                 z.substr(0, z.size() - 1), w);
 }
 
-Color Serializer::deserialize_color(const String &p_source) const {
+Color Serializer::deserialize_color(const String& p_source) const {
     Array<String> a = p_source.split(' ');
 
     String x = a[3];
@@ -252,7 +252,7 @@ Color Serializer::deserialize_color(const String &p_source) const {
                 z.substr(0, z.size() - 1), w);
 }
 
-Transform Serializer::deserialize_transform(const String &p_source) const {
+Transform Serializer::deserialize_transform(const String& p_source) const {
     Array<int> starts = p_source.find(Char('{'));
     Array<int> ends = p_source.find(Char('}'));
 
@@ -264,17 +264,17 @@ Transform Serializer::deserialize_transform(const String &p_source) const {
                      deserialize_vec3(rot));
 }
 
-Object *Serializer::deserialize_object(const String &p_source) const {
+Object* Serializer::deserialize_object(const String& p_source) const {
     return nullptr;
 }
 
-Array<String> Serializer::deserialize_set(const String &p_value) {
+Array<String> Serializer::deserialize_set(const String& p_value) {
     return p_value.split(',');
 }
 
 void Serializer::init() { singleton = new Serializer; }
 
-Serializer *Serializer::get_singleton() { return singleton; }
+Serializer* Serializer::get_singleton() { return singleton; }
 
 #undef CLASSNAME
 #define CLASSNAME Serializer
@@ -302,15 +302,15 @@ String TypeSerializer::serialize_all_types() const {
     return doc.get_source();
 }
 
-void TypeSerializer::serialize_type(const VariantType &p_type,
-                                    XmlNode &p_node) const {
+void TypeSerializer::serialize_type(const VariantType& p_type,
+                                    XmlNode& p_node) const {
     Array<StringName> properties = MMASTER->list_property_names(p_type);
     Array<StringName> methods = MMASTER->list_method_names(p_type);
 
     XmlNode properties_node = p_node.doc->add_node("properties", "");
 
     for (int c = 0; c < properties.size(); c++) {
-        Property *p = MMASTER->get_property(p_type, properties[c]);
+        Property* p = MMASTER->get_property(p_type, properties[c]);
 
         XmlNode property_node = p_node.doc->add_node(properties[c], "");
         p_node.doc->add_attribute("type", p->var_type.get_type_name())
@@ -324,14 +324,14 @@ void TypeSerializer::serialize_type(const VariantType &p_type,
     XmlNode methods_node = p_node.doc->add_node("methods", "");
 
     for (int c = 0; c < methods.size(); c++) {
-        Method *m = MMASTER->get_method(p_type, methods[c]);
+        Method* m = MMASTER->get_method(p_type, methods[c]);
 
         XmlNode method_node = p_node.doc->add_node(m->name, "");
 
         if (m->returns_variant)
             p_node.doc
                 ->add_attribute("return_type",
-                                reinterpret_cast<ReturnMethod *>(m)
+                                reinterpret_cast<ReturnMethod*>(m)
                                     ->return_type.get_type_name())
                 .add_to_node(method_node);
         else
@@ -357,6 +357,6 @@ void TypeSerializer::serialize_type(const VariantType &p_type,
 
 void TypeSerializer::init() {}
 
-TypeSerializer *TypeSerializer::get_singleton() { return nullptr; }
+TypeSerializer* TypeSerializer::get_singleton() { return nullptr; }
 
 void TypeSerializer::bind_methods() {}

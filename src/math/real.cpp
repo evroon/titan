@@ -2,7 +2,7 @@
 
 #include "core/string.h"
 
-Real::Real(const String &text) {
+Real::Real(const String& text) {
     if (!StringUtils::Contains(text, '.')) {
         i = atoi(text.c_str());
         t = INT;

@@ -15,16 +15,16 @@ class Sky : public WorldObject {
     void update() override;
     void draw() override;
 
-    void set_sun_color(const Color &p_sun_color);
+    void set_sun_color(const Color& p_sun_color);
     Color get_sun_color() const;
 
-    void set_sky_color(const Color &p_sky_color);
+    void set_sky_color(const Color& p_sky_color);
     Color get_sky_color() const;
 
     static void bind_methods();
 
    private:
-    Shader *shader;
+    Shader* shader;
 
     vec3 sun_direction;
     Color sky_color;

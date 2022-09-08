@@ -22,7 +22,7 @@ struct TMessage {
     int line_number;
     int count;
 
-    TMessage(String p_description, const String &p_file_name,
+    TMessage(String p_description, const String& p_file_name,
              int p_line_number);
 
    protected:
@@ -30,22 +30,22 @@ struct TMessage {
 };
 
 struct TError : TMessage {
-    TError(const String &p_description, const String &p_file_name,
+    TError(const String& p_description, const String& p_file_name,
            int p_line_number);
 };
 
 struct TWarning : TMessage {
-    TWarning(const String &p_description, const String &p_file_name,
+    TWarning(const String& p_description, const String& p_file_name,
              int p_line_number);
 };
 
 struct TLog : TMessage {
-    TLog(const String &p_description, const String &p_file_name,
+    TLog(const String& p_description, const String& p_file_name,
          int p_line_number);
 };
 
 struct TInfo : TMessage {
-    TInfo(const String &p_description, const String &p_file_name,
+    TInfo(const String& p_description, const String& p_file_name,
           int p_line_number);
 };
 
@@ -56,26 +56,26 @@ class MessageHandler {
     MessageHandler();
 
    public:
-    void Log(const TMessage &p_message);
+    void Log(const TMessage& p_message);
     void clean();
 
-    TMessage *get_message(int p_index) const;
+    TMessage* get_message(int p_index) const;
 
     void emit(int p_index);
 
-    void connect(Object *p_object, const String &p_method);
+    void connect(Object* p_object, const String& p_method);
 
-    static MessageHandler *get_singleton();
+    static MessageHandler* get_singleton();
 
     static void init();
     static void bind_methods();
 
    private:
-    Signal *signal;
+    Signal* signal;
 
     Vector<TMessage> messages;
     Array<char> filters;
     bool complete_description;
 
-    static MessageHandler *singleton;
+    static MessageHandler* singleton;
 };

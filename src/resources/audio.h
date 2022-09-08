@@ -22,31 +22,31 @@ class SoundEffect : public Resource {
     OBJ_DEFINITION(SoundEffect, Resource)
 
    public:
-    SoundEffect(const String &filename) { Load(filename); }
+    SoundEffect(const String& filename) { Load(filename); }
     ~SoundEffect();
 
-    void Load(const String &filename);
+    void Load(const String& filename);
     void Play();
 
     static void bind_methods();
 
    private:
-    Mix_Chunk *effect;
+    Mix_Chunk* effect;
 };
 
 class Music : public Resource {
     OBJ_DEFINITION(Music, Resource)
 
    public:
-    Music(const String &filename) { Load(filename); }
+    Music(const String& filename) { Load(filename); }
     virtual ~Music();
 
-    void Load(const String &filename);
+    void Load(const String& filename);
     void Play();
     void Pause();
 
     static void bind_methods();
 
    private:
-    Mix_Music *music;
+    Mix_Music* music;
 };

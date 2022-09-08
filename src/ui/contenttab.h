@@ -15,12 +15,12 @@ class ContentTab : public Tab {
 
    public:
     ContentTab();
-    ContentTab(const File &p_file);
+    ContentTab(const File& p_file);
     ~ContentTab();
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
     void notification(int p_notification) override;
 
@@ -28,7 +28,7 @@ class ContentTab : public Tab {
 
     void list_chosen(int p_index);
 
-    void go_to(const File &p_file);
+    void go_to(const File& p_file);
     void go_up();
     void go_home();
     void go_back();
@@ -37,18 +37,18 @@ class ContentTab : public Tab {
     static void bind_methods();
 
    private:
-    Container *buttons;
-    TileView *tile_view;
+    Container* buttons;
+    TileView* tile_view;
 
-    ImageButton *back_button;
-    ImageButton *forward_button;
-    ImageButton *up_button;
-    ImageButton *home_button;
+    ImageButton* back_button;
+    ImageButton* forward_button;
+    ImageButton* up_button;
+    ImageButton* home_button;
 
-    TextField *path_label;
+    TextField* path_label;
 
-    Texture2D *directory_icon;
-    Texture2D *file_icon;
+    Texture2D* directory_icon;
+    Texture2D* file_icon;
 
     File file;
     File home;

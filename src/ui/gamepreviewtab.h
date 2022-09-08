@@ -10,7 +10,7 @@ class GamePreviewTab : public Tab {
 
    public:
     GamePreviewTab();
-    GamePreviewTab(Scene *p_scene);
+    GamePreviewTab(Scene* p_scene);
     virtual ~GamePreviewTab();
 
     vec2 get_required_size() const override;
@@ -19,7 +19,7 @@ class GamePreviewTab : public Tab {
 
     void transform_toggled(int p_index);
 
-    void set_preview_type(const String &p_type);
+    void set_preview_type(const String& p_type);
 
     void notification(int p_notification) override;
 
@@ -27,11 +27,11 @@ class GamePreviewTab : public Tab {
 
     void world_changed();
 
-    WorldView *get_world_view() const;
+    WorldView* get_world_view() const;
 
    private:
     Container buttons;
-    WorldView *world_view;
-    ComboBox *combo_box;
-    ComboBox *draw_mode;
+    WorldView* world_view;
+    ComboBox* combo_box;
+    ComboBox* draw_mode;
 };

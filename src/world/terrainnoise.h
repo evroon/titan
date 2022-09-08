@@ -16,7 +16,7 @@ class TerrainNoise : public WorldObject {
     static void bind_methods();
 
    private:
-    Terrain *terrain;
+    Terrain* terrain;
 
     float octaves;
 };

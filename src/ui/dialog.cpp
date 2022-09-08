@@ -34,7 +34,7 @@ Dialog::~Dialog() {}
 
 vec2 Dialog::get_required_size() const { return vec2(800); }
 
-void Dialog::handle_event(UIEvent *p_event) {
+void Dialog::handle_event(UIEvent* p_event) {
     switch (p_event->type) {
         case UIEvent::MOUSE_PRESS:
 
@@ -85,7 +85,7 @@ void Dialog::notification(int p_notification) {
     }
 }
 
-void Dialog::set_title(const String &p_title) { title = p_title; }
+void Dialog::set_title(const String& p_title) { title = p_title; }
 
 String Dialog::get_title() const { return title; }
 
@@ -140,7 +140,7 @@ void ConfirmationDialog::bind_methods() {
 
 MessageDialog::MessageDialog() : MessageDialog("") {}
 
-MessageDialog::MessageDialog(const String &p_text) {
+MessageDialog::MessageDialog(const String& p_text) {
     // desciption_label
     desciption_label = new Label(p_text);
     desciption_label->set_anchors(ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END,
@@ -161,7 +161,7 @@ void MessageDialog::bind_methods() {}
 
 FileDialog::FileDialog() : FileDialog("") {}
 
-FileDialog::FileDialog(const String &p_file) {
+FileDialog::FileDialog(const String& p_file) {
     directory_icon = CONTENT->LoadFontAwesomeIcon("solid/folder");
     file_icon = CONTENT->LoadFontAwesomeIcon("regular/file");
 
@@ -245,7 +245,7 @@ void FileDialog::list_chosen(int p_index) {
     }
 }
 
-void FileDialog::go_to(const String &p_file) {
+void FileDialog::go_to(const String& p_file) {
     File file = p_file;
     this->file = file;
     update_list();
@@ -279,7 +279,7 @@ void FileDialog::bind_methods() {
 
 ColorPickDialog::ColorPickDialog() : ColorPickDialog(Color::White) {}
 
-ColorPickDialog::ColorPickDialog(const Color &p_color) {
+ColorPickDialog::ColorPickDialog(const Color& p_color) {
     color = p_color;
     color.a = 1.0;
 
@@ -413,7 +413,7 @@ void TypePickDialog::notification(int p_notification) {
     if (p_notification == NOTIFICATION_READY) search_field->set_focused(true);
 }
 
-void TypePickDialog::search(const String &p_search) { tree->search(p_search); }
+void TypePickDialog::search(const String& p_search) { tree->search(p_search); }
 
 void TypePickDialog::update_list() {
     tree->clear();
@@ -431,7 +431,7 @@ void TypePickDialog::update_list() {
     tree->get_item("Node")->set_expanded(true);
 }
 
-void TypePickDialog::tree_chosen(TreeElement *p_element) {
+void TypePickDialog::tree_chosen(TreeElement* p_element) {
     emit_signal("type_chosen", p_element->get_text());
     close();
 }
@@ -468,9 +468,9 @@ SettingsDialog::SettingsDialog() {
     add_child(property_view);
 }
 
-void SettingsDialog::set_property_view(PropertyView *p_property_view) {}
+void SettingsDialog::set_property_view(PropertyView* p_property_view) {}
 
-PropertyView *SettingsDialog::get_property_view() const {
+PropertyView* SettingsDialog::get_property_view() const {
     return property_view;
 }
 
@@ -480,7 +480,7 @@ void SettingsDialog::notification(int p_notification) {
     if (p_notification == NOTIFICATION_READY) search_field->set_focused(true);
 }
 
-void SettingsDialog::search(const String &p_search) {}
+void SettingsDialog::search(const String& p_search) {}
 
 void SettingsDialog::update_list() {}
 

@@ -12,12 +12,12 @@ class Keyboard : public Object {
     ~Keyboard();
 
     bool is_button_pressed(Key::KeyType p_key);
-    bool is_key_pressed(Key *p_key);
+    bool is_key_pressed(Key* p_key);
 
     static void init();
-    static Keyboard *get_singleton();
+    static Keyboard* get_singleton();
     static void bind_methods();
 
    private:
-    static Keyboard *singleton;
+    static Keyboard* singleton;
 };

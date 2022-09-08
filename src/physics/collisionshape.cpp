@@ -70,9 +70,9 @@ void CollisionShape2D::bind_methods() {}
 // BoxBody
 //=========================================================================
 
-BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject *p_object,
+BoxShape2D::BoxShape2D(PhysicsWorld2D* p_world, WorldObject* p_object,
                        bool dyn) {
-    const Transform &transform = p_object->get_transform();
+    const Transform& transform = p_object->get_transform();
     shape.SetAsBox(transform.get_size().x / p_world->scale.x,
                    transform.get_size().y / p_world->scale.y);
 
@@ -94,9 +94,9 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D *p_world, WorldObject *p_object,
 // CircleBody
 //=========================================================================
 
-CircleShape2D::CircleShape2D(PhysicsWorld2D *p_world, WorldObject *p_object,
+CircleShape2D::CircleShape2D(PhysicsWorld2D* p_world, WorldObject* p_object,
                              bool dyn) {
-    const Transform &transform = p_object->get_transform();
+    const Transform& transform = p_object->get_transform();
     shape.m_radius = transform.get_size().x / p_world->scale.x;
 
     fixdef.shape = &shape;

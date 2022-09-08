@@ -12,12 +12,12 @@ class ConsoleTab : public Tab {
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
     void log(int p_index);
 
     static void bind_methods();
 
    private:
-    TextBox *textbox;
+    TextBox* textbox;
 };

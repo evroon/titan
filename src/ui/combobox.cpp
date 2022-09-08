@@ -33,12 +33,12 @@ void ComboBox::notification(int p_notification) {
     }
 }
 
-void ComboBox::add_item(const String &p_text) {
+void ComboBox::add_item(const String& p_text) {
     menu->add_item(p_text, Connection());
     update();
 }
 
-void ComboBox::set_text(const String &p_text) {
+void ComboBox::set_text(const String& p_text) {
     text = p_text;
     update();
 }
@@ -55,7 +55,7 @@ void ComboBox::clear() {
     update();
 }
 
-void ComboBox::handle_event(UIEvent *p_ui_event) {
+void ComboBox::handle_event(UIEvent* p_ui_event) {
     switch (p_ui_event->type) {
         case UIEvent::FOCUS_START:
             ACTIVE_CANVAS->set_context_menu(menu, area.get_bottom_left());

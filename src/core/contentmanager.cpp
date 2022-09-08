@@ -20,7 +20,7 @@
 #include "resources/file.h"
 #include "titanscript/titanscript.h"
 
-ContentManager *ContentManager::singleton;
+ContentManager* ContentManager::singleton;
 
 ContentManager::ContentManager() {
     assets_directory = File();
@@ -32,7 +32,7 @@ ContentManager::ContentManager() {
 
 void ContentManager::Init() { singleton = new ContentManager; }
 
-ContentManager *ContentManager::get_singleton() { return singleton; }
+ContentManager* ContentManager::get_singleton() { return singleton; }
 
 #undef CLASSNAME
 #define CLASSNAME ContentManager
@@ -75,7 +75,7 @@ void ContentManager::load_default_resources() {
     ShadowShader = LoadShader(File("engine/shaders/ShadowShader"));
 }
 
-Object *ContentManager::Load(const File &p_file) {
+Object* ContentManager::Load(const File& p_file) {
     VariantType type = GetType(p_file);
 
     static StringName Texture2D = "Texture2D";
@@ -108,96 +108,96 @@ Object *ContentManager::Load(const File &p_file) {
     }
 }
 
-Mesh *ContentManager::load_mesh(const File &p_file) {
+Mesh* ContentManager::load_mesh(const File& p_file) {
     for (int c = 0; c < meshes.size(); c++)
         if (meshes[c]->get_file() == p_file) return meshes[c];
 
-    Mesh *mesh = new Mesh(p_file);
+    Mesh* mesh = new Mesh(p_file);
     meshes.push_back(mesh);
     return mesh;
 }
 
-void ContentManager::AddTexture(Texture2D *tex) { textures.push_back(tex); }
+void ContentManager::AddTexture(Texture2D* tex) { textures.push_back(tex); }
 
-Texture2D *ContentManager::LoadTexture(const File &p_file) {
+Texture2D* ContentManager::LoadTexture(const File& p_file) {
     for (int c = 0; c < textures.size(); c++)
         if (textures[c]->get_file() == p_file) return textures[c];
 
-    Texture2D *tex = new Texture2D(p_file);
+    Texture2D* tex = new Texture2D(p_file);
     tex->set_file(p_file);
 
     textures.push_back(tex);
     return tex;
 }
 
-Texture2D *ContentManager::LoadFontAwesomeIcon(const String &p_name,
-                                               const vec2i &p_size,
-                                               const Color &p_color) {
+Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name,
+                                               const vec2i& p_size,
+                                               const Color& p_color) {
     File file = "../thirdparty/fontawesome/svgs/" + p_name + ".svg";
 
     for (int c = 0; c < textures.size(); c++)
         if (textures[c]->get_file() == file) return textures[c];
 
-    Texture2D *tex = new Texture2D(file, p_size, p_color);
+    Texture2D* tex = new Texture2D(file, p_size, p_color);
     tex->set_file(file);
 
     textures.push_back(tex);
     return tex;
 }
 
-RawTexture2D *ContentManager::LoadRawTexture(const File &p_file) {
-    RawTexture2D *tex = new RawTexture2D(p_file);
+RawTexture2D* ContentManager::LoadRawTexture(const File& p_file) {
+    RawTexture2D* tex = new RawTexture2D(p_file);
     tex->set_file(p_file);
 
     return tex;
 }
 
-TextFile *ContentManager::LoadTextFile(const File &p_file) {
+TextFile* ContentManager::LoadTextFile(const File& p_file) {
     for (int c = 0; c < textfiles.size(); c++)
         if (textfiles[c]->get_file() == p_file) return textfiles[c];
 
-    TextFile *text = new TextFile(p_file);
+    TextFile* text = new TextFile(p_file);
     textfiles.push_back(text);
     return text;
 }
 
-Shader *ContentManager::LoadShader(const File &p_file) {
-    for (Shader *s : shaders)
+Shader* ContentManager::LoadShader(const File& p_file) {
+    for (Shader* s : shaders)
         if (s->get_file() == p_file) return s;
 
-    Shader *s = new Shader(p_file);
+    Shader* s = new Shader(p_file);
     shaders.push_back(s);
     return s;
 }
 
-Font *ContentManager::LoadFont(const File &p_file, int size) {
+Font* ContentManager::LoadFont(const File& p_file, int size) {
     for (int c = 0; c < fonts.size(); c++)
         if (fonts[c]->get_file() == p_file) return fonts[c];
 
-    Font *f = new Font(p_file, size);
+    Font* f = new Font(p_file, size);
     fonts.push_back(f);
     return f;
 }
 
-Music *ContentManager::LoadMusic(const File &p_file) {
+Music* ContentManager::LoadMusic(const File& p_file) {
     for (int c = 0; c < musics.size(); c++)
         if (musics[c]->get_file() == p_file) return musics[c];
 
-    Music *s = new Music(p_file);
+    Music* s = new Music(p_file);
     musics.push_back(s);
     return s;
 }
 
-SoundEffect *ContentManager::LoadSoundEffect(const File &p_file) {
+SoundEffect* ContentManager::LoadSoundEffect(const File& p_file) {
     for (int c = 0; c < soundeffects.size(); c++)
         if (soundeffects[c]->get_file() == p_file) return soundeffects[c];
 
-    SoundEffect *s = new SoundEffect(p_file);
+    SoundEffect* s = new SoundEffect(p_file);
     soundeffects.push_back(s);
     return s;
 }
 
-VariantType ContentManager::GetType(const File &p_file) {
+VariantType ContentManager::GetType(const File& p_file) {
     String filename = p_file.get_absolute_path();
     String ext = filename.substr(StringUtils::GetLastIndexOf(filename, '.') + 1,
                                  filename.size() - 1);
@@ -227,7 +227,7 @@ void ContentManager::FreeAll() {
     Font::Quit();
 }
 
-void ContentManager::free_textfile(const File &p_file) {
+void ContentManager::free_textfile(const File& p_file) {
     for (int c = 0; c < textfiles.size(); c++)
         if (textfiles[c]->get_file() == p_file) textfiles.clear(c);
 }

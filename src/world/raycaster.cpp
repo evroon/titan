@@ -5,22 +5,22 @@
 #include "graphics/viewport.h"
 #include "terrain.h"
 
-Raycaster::Raycaster(Viewport *p_viewport) {
+Raycaster::Raycaster(Viewport* p_viewport) {
     viewport = p_viewport;
     camera = viewport->get_world()->get_active_camera();
 }
 
 Raycaster::~Raycaster() {}
 
-void Raycaster::set_camera(Camera *p_camera) { camera = p_camera; }
+void Raycaster::set_camera(Camera* p_camera) { camera = p_camera; }
 
-Camera *Raycaster::get_camera() const { return camera; }
+Camera* Raycaster::get_camera() const { return camera; }
 
-void Raycaster::set_viewport(Viewport *p_viewport) { viewport = p_viewport; }
+void Raycaster::set_viewport(Viewport* p_viewport) { viewport = p_viewport; }
 
-Viewport *Raycaster::get_viewport() const { return viewport; }
+Viewport* Raycaster::get_viewport() const { return viewport; }
 
-vec3 Raycaster::raycast(const vec2 &p_screen_pos) {
+vec3 Raycaster::raycast(const vec2& p_screen_pos) {
     rect2 window = viewport->get_area();
 
     if (!rect2(1.0).is_in_box(p_screen_pos / viewport->get_size()))
@@ -30,8 +30,8 @@ vec3 Raycaster::raycast(const vec2 &p_screen_pos) {
     float step_size = 1.0f;
     int max_it = 10000;
 
-    World *world = viewport->get_world();
-    Terrain *t = world->get_child("terrain")->cast_to_type<Terrain *>();
+    World* world = viewport->get_world();
+    Terrain* t = world->get_child("terrain")->cast_to_type<Terrain*>();
 
     if (!t) return vec3();
 
@@ -59,7 +59,7 @@ vec3 Raycaster::raycast(const vec2 &p_screen_pos) {
     return vec3();
 }
 
-vec3 Raycaster::get_dir(const vec2 &p_pos) {
+vec3 Raycaster::get_dir(const vec2& p_pos) {
     vec2 size = viewport->get_size();
 
     vec2 ndc = (p_pos * vec2(1, 1)) / size;

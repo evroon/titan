@@ -8,7 +8,7 @@
 #include "sky.h"
 #include "terrainnoise.h"
 
-TerrainBrush::TerrainBrush(Terrain *p_terrain) {
+TerrainBrush::TerrainBrush(Terrain* p_terrain) {
     terrain = p_terrain;
     // TerrainNoise* noise = p_terrain->get_child_by_type<TerrainNoise*>();
     bool noise = true;
@@ -18,7 +18,7 @@ TerrainBrush::TerrainBrush(Terrain *p_terrain) {
 
     if (noise) {
         PerlinNoise n;
-        Texture2D *tex = n.create_2d_texture(tex_size);
+        Texture2D* tex = n.create_2d_texture(tex_size);
         heightmap_fbo->add_texture(tex);
     } else {
         heightmap_fbo->add_float_color_texture();
@@ -31,7 +31,7 @@ TerrainBrush::TerrainBrush(Terrain *p_terrain) {
     if (!noise) heightmap_fbo->clear();
 
     terrain->heightmap =
-        heightmap_fbo->color_textures[0]->cast_to_type<Texture2D *>();
+        heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
     terrain->heightmap->set_filter(Texture::BILINEAR_FILTER);
 
     brush_shader = CONTENT->LoadShader("engine/shaders/Brush");
@@ -54,7 +54,7 @@ void TerrainBrush::handle() {
         pos / (terrain->node_count.x * terrain->get_size().x * 0.5f),
         vec2(radius / (terrain->node_count.y * terrain->get_size().y * 0.5f)));
 
-    Texture2D *heightmap = terrain->get_heightmap();
+    Texture2D* heightmap = terrain->get_heightmap();
 
     brush_shader->bind();
     textures[active_tex]->bind(0);
@@ -86,7 +86,7 @@ void TerrainBrush::set_deviation(float p_deviation) { deviation = p_deviation; }
 
 float TerrainBrush::get_deviation() const { return deviation; }
 
-void TerrainBrush::set_color(const Color &p_color) {
+void TerrainBrush::set_color(const Color& p_color) {
     color = p_color;
     terrain->shader->bind();
     terrain->shader->set_uniform("selection_color", color);
@@ -98,7 +98,7 @@ void TerrainBrush::set_strength(float p_strength) { strength = p_strength; }
 
 float TerrainBrush::get_strength() const { return strength; }
 
-void TerrainBrush::set_pos(const vec2 &p_pos) {
+void TerrainBrush::set_pos(const vec2& p_pos) {
     pos = p_pos;
     terrain->shader->bind();
     terrain->shader->set_uniform("selection_pos", pos);
@@ -106,7 +106,7 @@ void TerrainBrush::set_pos(const vec2 &p_pos) {
 
 vec2 TerrainBrush::get_pos() const { return pos; }
 
-FBO2D *TerrainBrush::get_fbo() const { return heightmap_fbo; }
+FBO2D* TerrainBrush::get_fbo() const { return heightmap_fbo; }
 
 #undef CLASSNAME
 #define CLASSNAME TerrainBrush
@@ -214,7 +214,7 @@ void Terrain::smooth(float p_amount) {}
 
 void Terrain::update_buffer() {}
 
-void Terrain::update_buffer_range(const vec2 &p_start, const vec2 p_end) {}
+void Terrain::update_buffer_range(const vec2& p_start, const vec2 p_end) {}
 
 void Terrain::setup_buffers() {
     struct Vertex {
@@ -227,7 +227,7 @@ void Terrain::setup_buffers() {
     int vertices_count = 16;
     int index = 0;
 
-    Vertex *vertices = new Vertex[vertices_count];
+    Vertex* vertices = new Vertex[vertices_count];
 
     vertices[index++] = {vec3(0, 0, 0)};
     vertices[index++] = {vec3(1.0f / 3.0f, 0, 0)};
@@ -258,29 +258,29 @@ void Terrain::setup_buffers() {
                  GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
     glPatchParameteri(GL_PATCH_VERTICES, vertices_count);
 
     glBindVertexArray(0);
 }
 
-float Terrain::get_height(const vec2 &p_pos) const { return 0.0f; }
+float Terrain::get_height(const vec2& p_pos) const { return 0.0f; }
 
-float Terrain::get_height_fast(const vec2 &p_pos) const { return 0.0f; }
+float Terrain::get_height_fast(const vec2& p_pos) const { return 0.0f; }
 
 Ref<Texture2D> Terrain::get_heightmap() const { return heightmap; }
 
-TerrainBrush *Terrain::get_brush() const { return brush; }
+TerrainBrush* Terrain::get_brush() const { return brush; }
 
-void Terrain::set_selection_pos(const vec2 &p_pos) { brush->set_pos(p_pos); }
+void Terrain::set_selection_pos(const vec2& p_pos) { brush->set_pos(p_pos); }
 
 void Terrain::ready() {}
 
 void Terrain::draw() {
     shader->bind();
 
-    Water *water = get_parent()->get_child_by_type<Water *>();
+    Water* water = get_parent()->get_child_by_type<Water*>();
     if (water) shader->set_uniform("water_height", water->get_pos().z);
 
     shader->set_uniform("view", RENDERER->get_final_matrix());
@@ -320,7 +320,7 @@ void Terrain::draw() {
     glDisableVertexAttribArray(0);
 }
 
-void Terrain::set_tex_name(int p_index, const String &p_tex_name) {
+void Terrain::set_tex_name(int p_index, const String& p_tex_name) {
     texture_names[p_index] = p_tex_name;
 }
 
@@ -345,8 +345,8 @@ void Water::draw() {
     normals->bind(0);
     DEFERRED_RENDERER->get_texture(DeferredRenderer::REFLECTION)->bind(1);
 
-    Sky *sky = ACTIVE_WORLD->get_child_by_type<Sky *>();
-    Camera *cam = ACTIVE_WORLD->get_active_camera();
+    Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
+    Camera* cam = ACTIVE_WORLD->get_active_camera();
 
     set_pos(vec3(cam->get_pos().get_xy(), get_pos().z));
 
@@ -374,7 +374,7 @@ void Water::bind_methods() { REG_CSTR(0); }
 
 Vegetation::Vegetation() : Vegetation(NULL) {}
 
-Vegetation::Vegetation(Terrain *p_parent) {
+Vegetation::Vegetation(Terrain* p_parent) {
     terrain = p_parent;
     init();
 }
@@ -382,7 +382,7 @@ Vegetation::Vegetation(Terrain *p_parent) {
 void Vegetation::init() { update_buffer(); }
 
 void Vegetation::draw() {
-    Terrain *terrain = ACTIVE_WORLD->get_child_by_type<Terrain *>();
+    Terrain* terrain = ACTIVE_WORLD->get_child_by_type<Terrain*>();
     if (!terrain) return;
 
     RENDERER->stop_culling();
@@ -432,7 +432,7 @@ void Vegetation::update_buffer() {
     grass_tex = CONTENT->LoadTexture("textures/grass_0.png");
     shader = CONTENT->LoadShader("Shaders/Grass/Grass");
 
-    UBO *ubo = new UBO;
+    UBO* ubo = new UBO;
 
     int instances = 2048;
     int sprites = 2 * instances;
@@ -463,9 +463,9 @@ void Vegetation::update_buffer() {
     shader->bind_block("matrix_block", ubo);
 }
 
-void Vegetation::set_terrain(Terrain *p_terrain) { terrain = p_terrain; }
+void Vegetation::set_terrain(Terrain* p_terrain) { terrain = p_terrain; }
 
-Terrain *Vegetation::get_terrain() const { return terrain; }
+Terrain* Vegetation::get_terrain() const { return terrain; }
 
 #undef CLASSNAME
 #define CLASSNAME Vegetation

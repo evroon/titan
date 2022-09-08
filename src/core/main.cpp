@@ -21,7 +21,7 @@ Platforms: Android, Linux, Mac OS X and Windows
 
 #undef main
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Array<String> args = Array<String>();
 
     for (int c = 1; c < argc; c++) args.push_back(argv[c]);

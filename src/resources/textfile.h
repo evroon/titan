@@ -6,10 +6,10 @@ class TextFile : public Resource {
     OBJ_DEFINITION(TextFile, Resource);
 
    public:
-    TextFile(const File &p_file);
+    TextFile(const File& p_file);
 
-    String load(const File &p_file);
-    void write(const String &p_source);
+    String load(const File& p_file);
+    void write(const String& p_source);
 
     void load() override;
     void save() override;

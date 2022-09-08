@@ -13,20 +13,20 @@ class PostProcess : public Object {
 
    public:
     PostProcess();
-    PostProcess(Shader *p_shader);
+    PostProcess(Shader* p_shader);
     virtual ~PostProcess();
 
-    void set_area(const rect2 &p_area);
+    void set_area(const rect2& p_area);
     rect2 get_area() const;
 
-    void set_fbo(FBO2D *p_fbo);
-    FBO2D *get_fbo() const;
+    void set_fbo(FBO2D* p_fbo);
+    FBO2D* get_fbo() const;
 
     virtual void post_process();
 
    protected:
-    Shader *shader;
-    FBO2D *fbo;
+    Shader* shader;
+    FBO2D* fbo;
 
     rect2 area;
 };
@@ -51,6 +51,6 @@ class BlurPostProcess : public PostProcess {
     void post_process() override;
 
    private:
-    Shader *blurshader;
-    FBO2D *blurbuffer;
+    Shader* blurshader;
+    FBO2D* blurbuffer;
 };

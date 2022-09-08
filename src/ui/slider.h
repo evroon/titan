@@ -14,9 +14,9 @@ class Slider : public Control {
     float get_value() const;
 
     void set_slider_pos(float p_position);
-    float get_slider_pos(const vec2 &pos) const;
+    float get_slider_pos(const vec2& pos) const;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
     void notification(int p_notification) override;
     vec2 get_required_size() const override;
 

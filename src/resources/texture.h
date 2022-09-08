@@ -66,7 +66,7 @@ class Texture3D : public Texture {
 
    public:
     Texture3D() : Texture(GL_TEXTURE_3D) {}
-    Texture3D(const vec3 &p_size, int p_index);
+    Texture3D(const vec3& p_size, int p_index);
 
     vec3 get_size() const;
 
@@ -81,15 +81,15 @@ class Texture2D : public Texture {
 
    public:
     Texture2D() : Texture(GL_TEXTURE_2D) {}
-    Texture2D(const vec2 &p_size, bool p_byte);
-    Texture2D(const vec2i &p_size, bool p_byte = true)
+    Texture2D(const vec2& p_size, bool p_byte);
+    Texture2D(const vec2i& p_size, bool p_byte = true)
         : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y)), p_byte) {}
-    Texture2D(const vec2 &p_size, int p_index);
-    Texture2D(const String &p_filepath);
-    Texture2D(const String &p_filepath, const vec2i &p_size,
-              const Color &p_color);
-    Texture2D(SDL_Surface *p_surface);
-    Texture2D(aiTexture *p_texture);
+    Texture2D(const vec2& p_size, int p_index);
+    Texture2D(const String& p_filepath);
+    Texture2D(const String& p_filepath, const vec2i& p_size,
+              const Color& p_color);
+    Texture2D(SDL_Surface* p_surface);
+    Texture2D(aiTexture* p_texture);
 
     vec2 get_size() const;
 
@@ -118,20 +118,20 @@ class RawTexture2D : public Texture2D {
     OBJ_DEFINITION(RawTexture2D, Texture2D);
 
    public:
-    RawTexture2D(const String &p_filepath);
-    RawTexture2D(SDL_Surface *p_surface);
+    RawTexture2D(const String& p_filepath);
+    RawTexture2D(SDL_Surface* p_surface);
 
     void free() override;
 
-    Color read_pixel(const vec2i &p_pos);
+    Color read_pixel(const vec2i& p_pos);
 
    private:
-    SDL_Surface *surface;
+    SDL_Surface* surface;
 };
 
 class DepthTexture2D : public Texture2D {
     OBJ_DEFINITION(DepthTexture2D, Texture2D);
 
    public:
-    DepthTexture2D(const vec2i &p_size);
+    DepthTexture2D(const vec2i& p_size);
 };

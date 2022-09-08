@@ -27,7 +27,7 @@ void Container::position_childs() {
         float offset_x = left_margin;
 
         for (int c = 0; c < children.size(); c++) {
-            Control *control = children[c]->cast_to_type<Control *>();
+            Control* control = children[c]->cast_to_type<Control*>();
 
             vec2 minimum_size = control->get_required_size();
 
@@ -45,7 +45,7 @@ void Container::position_childs() {
         float offset_y = get_area().get_top() + top_margin;
 
         for (int c = 0; c < children.size(); c++) {
-            Control *control = children[c]->cast_to_type<Control *>();
+            Control* control = children[c]->cast_to_type<Control*>();
 
             vec2 minimum_size = control->get_required_size();
 
@@ -63,7 +63,7 @@ vec2 Container::get_required_size() const {
     float height = 0, width = 0.0f;
 
     for (int c = 0; c < children.size(); c++) {
-        Control *control = children[c]->cast_to_type<Control *>();
+        Control* control = children[c]->cast_to_type<Control*>();
         vec2 req_size = control->get_required_size();
 
         if (is_vert) {
@@ -103,7 +103,7 @@ void Container::notification(int p_notification) {
     }
 }
 
-void Container::add_child(Control *p_child) {
+void Container::add_child(Control* p_child) {
     Node::add_child(p_child);
     p_child->bind_parent(this);
 
@@ -115,7 +115,7 @@ void Container::add_child(Control *p_child) {
     position_childs();
 }
 
-void Container::remove_child(Control *_child) { children.clean(_child); }
+void Container::remove_child(Control* _child) { children.clean(_child); }
 
 void Container::clean() { children.clean(); }
 

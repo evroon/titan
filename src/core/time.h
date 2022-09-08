@@ -28,11 +28,11 @@ class Time : public Object {
     Time();
 
     static void Init();
-    static Time *get_singleton();
+    static Time* get_singleton();
 
-    void register_timedcaller(TimedCaller *timed_caller);
-    void register_timer(Timer *timer);
-    void register_uitimer(UITimer *timer);
+    void register_timedcaller(TimedCaller* timed_caller);
+    void register_timer(Timer* timer);
+    void register_uitimer(UITimer* timer);
 
     void Update();
     void OnUpdate();
@@ -52,7 +52,7 @@ class Time : public Object {
 
     std::chrono::high_resolution_clock::time_point start_time;
 
-    static Time *singleton;
+    static Time* singleton;
 
     Vector<TimedCaller> timed_callers;
     Vector<Timer> timers;

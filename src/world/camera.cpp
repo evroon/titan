@@ -42,7 +42,7 @@ void Camera::activate() { RENDERER->set_camera(this); }
 
 void Camera::deactivate() { RENDERER->set_camera(NULL); }
 
-void Camera::look_at(const vec3 &p_target, const vec3 &p_up) {
+void Camera::look_at(const vec3& p_target, const vec3& p_up) {
     target = p_target;
     up = p_up;
 
@@ -66,7 +66,7 @@ void Camera::set_projection(float p_fov, float p_near, float p_far) {
 }
 
 void Camera::set_ortho_projection(float p_near, float p_far,
-                                  const vec2 &p_size) {
+                                  const vec2& p_size) {
     near = p_near;
     far = p_far;
 
@@ -77,7 +77,7 @@ void Camera::set_ortho_projection(float p_near, float p_far,
     update_final_matrix();
 }
 
-Viewport *Camera::get_viewport() const {
+Viewport* Camera::get_viewport() const {
     if (get_world() && get_world()->get_viewport()) {
         return get_world()->get_viewport();
     } else if (RENDERER->get_viewport())
@@ -133,11 +133,11 @@ void Camera::mult_zoom(float p_factor) { zoom *= p_factor; }
 
 bool Camera::get_orthogonal() const { return orthogonal; }
 
-const mat4 &Camera::get_projection_matrix() const { return projection_matrix; }
+const mat4& Camera::get_projection_matrix() const { return projection_matrix; }
 
-const mat4 &Camera::get_view_matrix() const { return view_matrix; }
+const mat4& Camera::get_view_matrix() const { return view_matrix; }
 
-const mat4 &Camera::get_final_matrix() const { return final_matrix; }
+const mat4& Camera::get_final_matrix() const { return final_matrix; }
 
 mat4 Camera::get_inverse() const {
     mat4 view_inverse = view_matrix.inverse();

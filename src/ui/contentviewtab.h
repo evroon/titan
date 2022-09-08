@@ -11,5 +11,5 @@ class ContentViewTab : public Tab {
     vec2 get_required_size() const override;
 
    private:
-    ContentView *content_view;
+    ContentView* content_view;
 };

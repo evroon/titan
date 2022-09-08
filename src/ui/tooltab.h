@@ -10,14 +10,14 @@ class ToolTab : public Tab {
 
    public:
     ToolTab();
-    ToolTab(Terrain *p_terrain);
+    ToolTab(Terrain* p_terrain);
 
     vec2 get_required_size() const override;
 
     static void bind_methods();
 
    private:
-    PropertyView *property_view;
+    PropertyView* property_view;
 
-    Terrain *terrain;
+    Terrain* terrain;
 };

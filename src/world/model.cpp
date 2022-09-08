@@ -10,9 +10,9 @@ Model::Model() {
     color_id = vec3(0.0, 1.0, 0.5);
 }
 
-Model::Model(const String &p_path) : Model() { load_mesh(p_path); }
+Model::Model(const String& p_path) : Model() { load_mesh(p_path); }
 
-Model::Model(Mesh *p_mesh) : Model() { set_mesh(p_mesh); }
+Model::Model(Mesh* p_mesh) : Model() { set_mesh(p_mesh); }
 
 Model::~Model() {}
 
@@ -44,20 +44,20 @@ void Model::shadow_draw() {
     shader->set_uniform("color", Color::White);
 }
 
-void Model::load_mesh(const String &p_path) {
+void Model::load_mesh(const String& p_path) {
     T_LOG("Loading mesh " + p_path);
     set_mesh(new Mesh(p_path));
 }
 
-void Model::set_mesh(Mesh *p_mesh) {
+void Model::set_mesh(Mesh* p_mesh) {
     mesh = p_mesh;
 
     if (mesh) mesh->model = this;
 }
 
-Mesh *Model::get_mesh() const { return mesh; }
+Mesh* Model::get_mesh() const { return mesh; }
 
-void Model::set_color_id(const vec3 &p_color_id) { color_id = p_color_id; }
+void Model::set_color_id(const vec3& p_color_id) { color_id = p_color_id; }
 
 vec3 Model::get_color_id() const { return color_id; }
 

@@ -42,34 +42,34 @@ bool StringUtils::IsDoubleOperator(const char left, const char right) {
            (left == '+' && right == '=') || (left == '-' && right == '=') ||
            (left == '*' && right == '=') || (left == '/' && right == '=');
 }
-bool StringUtils::IsString(const String &src) {
+bool StringUtils::IsString(const String& src) {
     return src[0] == '"' && src[src.size() - 1] == '"';
 }
-bool StringUtils::IsKeyword(const String &src) {
+bool StringUtils::IsKeyword(const String& src) {
     for (int c = 0; c < keywordscount; c++)
         if (*keywords[c] == src) return true;
 
     return false;
 }
-bool StringUtils::IsVariable(const String &src) {
+bool StringUtils::IsVariable(const String& src) {
     for (int c = 0; c < src.size(); c++)
         if (!IsLetter(src[c]) && !IsNumber(src[c]) && !IsDot(src[c]))
             return false;
 
     return true;
 }
-bool StringUtils::IsNumber(const String &src) {
+bool StringUtils::IsNumber(const String& src) {
     for (int c = 0; c < src.size(); c++)
         if (!IsDot(src[c]) && !IsNumber(src[c])) return false;
 
     return true;
 }
-bool StringUtils::Contains(const String &src, const char elm) {
+bool StringUtils::Contains(const String& src, const char elm) {
     for (int c = 0; c < src.size(); c++)
         if (src[c] == elm) return true;
     return false;
 }
-bool StringUtils::ContainsOutsideParentheses(const String &src,
+bool StringUtils::ContainsOutsideParentheses(const String& src,
                                              const char elm) {
     int level = 0;
     for (int c = 0; c < src.size(); c++) {
@@ -80,7 +80,7 @@ bool StringUtils::ContainsOutsideParentheses(const String &src,
     }
     return false;
 }
-bool StringUtils::Contains(const String &src, const String &elm) {
+bool StringUtils::Contains(const String& src, const String& elm) {
     int index = 0;
 
     for (int c = 0; c < src.size(); c++) {
@@ -93,7 +93,7 @@ bool StringUtils::Contains(const String &src, const String &elm) {
 
     return false;
 }
-int StringUtils::SearchChars(const String &src, const String &elm) {
+int StringUtils::SearchChars(const String& src, const String& elm) {
     for (int c = 0; c < src.length(); c++)
         if (Contains(elm, src[c])) return c;
 
@@ -119,16 +119,16 @@ String StringUtils::FloatToString(const float f) {
     return str;
 }
 String StringUtils::IntToString(int i) { return std::to_string(i); }
-float StringUtils::StringToFloat(const String &s) { return std::stof(s); }
+float StringUtils::StringToFloat(const String& s) { return std::stof(s); }
 
-String StringUtils::MultiplyString(const String &src, const int i) {
+String StringUtils::MultiplyString(const String& src, const int i) {
     String res = "";
     for (int c = 0; c < i; c++) res += src;
 
     return res;
 }
 
-String StringUtils::Trim(const String &src) {
+String StringUtils::Trim(const String& src) {
     String res = "";
     bool onleft = true, onright = false;
     for (int c = 0; c < src.length(); c++) {
@@ -139,7 +139,7 @@ String StringUtils::Trim(const String &src) {
     return res;
 }
 
-Vector<String> StringUtils::Split(const String &src, const char kar) {
+Vector<String> StringUtils::Split(const String& src, const char kar) {
     Vector<String> res;
     String buf = "";
     for (int c = 0; c < src.length(); c++) {
@@ -154,7 +154,7 @@ Vector<String> StringUtils::Split(const String &src, const char kar) {
     return res;
 }
 
-int StringUtils::CountTabs(const String &src) {
+int StringUtils::CountTabs(const String& src) {
     int count = 0;
     for (int c = 0; c < src.length(); c++) {
         if (src[c] == '\t')
@@ -165,14 +165,14 @@ int StringUtils::CountTabs(const String &src) {
     return count;
 }
 
-String StringUtils::RemoveTabs(const String &src) {
+String StringUtils::RemoveTabs(const String& src) {
     String result;
     for (int c = 0; c < src.length(); c++)
         if (src[c] != '\t') result += src[c];
     return result;
 }
 
-int StringUtils::GetLastIndexOf(const String &source, char car) {
+int StringUtils::GetLastIndexOf(const String& source, char car) {
     int result = -1;
     for (int c = 0; c < source.size(); c++)
         if (source[c] == car) result = c;

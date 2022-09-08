@@ -12,11 +12,11 @@ class VariantType;
 
 struct ObjectType {
     ObjectType() {}
-    ObjectType(const ObjectType &p_objecttype) = default;
+    ObjectType(const ObjectType& p_objecttype) = default;
 
     StringName name = "";
     String path = "";
-    void *ptr = nullptr;
+    void* ptr = nullptr;
 
     template <typename T>
     bool is_of_type() const {
@@ -24,7 +24,7 @@ struct ObjectType {
     }
 };
 
-typedef const ObjectType *ObjectTypeRef;
+typedef const ObjectType* ObjectTypeRef;
 
 class TypeManager {
    public:
@@ -41,26 +41,26 @@ class TypeManager {
         set_object_type(type);
     }
 
-    void add_type(const StringName &name);
+    void add_type(const StringName& name);
 
-    VariantType get_type(const StringName &name);
-    ObjectType get_object_type(const StringName &name);
-    VariantType get_type(void *ptr);
-    StringName get_name(void *ptr);
+    VariantType get_type(const StringName& name);
+    ObjectType get_object_type(const StringName& name);
+    VariantType get_type(void* ptr);
+    StringName get_name(void* ptr);
 
-    bool type_exists(const StringName &name) const;
+    bool type_exists(const StringName& name) const;
 
     // get singleton
-    static TypeManager *get_singleton();
+    static TypeManager* get_singleton();
     static void init();
 
     Dictionary<StringName, VariantType> types;
     Dictionary<StringName, ObjectType> object_types;
-    Dictionary<void *, StringName> names;
+    Dictionary<void*, StringName> names;
 
    private:
-    void set_object_type(const ObjectType &p_object_type);
-    static TypeManager *singleton;
+    void set_object_type(const ObjectType& p_object_type);
+    static TypeManager* singleton;
 };
 
 // helper structs for returning the type name of a type
@@ -72,26 +72,26 @@ inline String GetType() {
 
 #ifndef GET_TYPE
 #define GET_TYPE
-#define REGISTER_GETTYPE(X)              \
-    template <>                          \
-    inline String GetType<X>() {         \
-        return String(#X);               \
-    }                                    \
-    template <>                          \
-    inline String GetType<const X>() {   \
-        return String(#X);               \
-    }                                    \
-    template <>                          \
-    inline String GetType<const X &>() { \
-        return String(#X);               \
-    }                                    \
-    template <>                          \
-    inline String GetType<X &>() {       \
-        return String(#X);               \
-    }                                    \
-    template <>                          \
-    inline String GetType<X *>() {       \
-        return String(#X);               \
+#define REGISTER_GETTYPE(X)             \
+    template <>                         \
+    inline String GetType<X>() {        \
+        return String(#X);              \
+    }                                   \
+    template <>                         \
+    inline String GetType<const X>() {  \
+        return String(#X);              \
+    }                                   \
+    template <>                         \
+    inline String GetType<const X&>() { \
+        return String(#X);              \
+    }                                   \
+    template <>                         \
+    inline String GetType<X&>() {       \
+        return String(#X);              \
+    }                                   \
+    template <>                         \
+    inline String GetType<X*>() {       \
+        return String(#X);              \
     }
 
 REGISTER_GETTYPE(bool)

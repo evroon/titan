@@ -1,9 +1,9 @@
 #include "cursor.h"
 
-Cursor *CursorManager::active_cursor;
+Cursor* CursorManager::active_cursor;
 
 // CursorManager
-void CursorManager::set_active_cursor(Cursor *p_cursor) {
+void CursorManager::set_active_cursor(Cursor* p_cursor) {
     active_cursor = p_cursor;
     SDL_SetCursor(active_cursor->get_SDL_cursor());
 }
@@ -50,4 +50,4 @@ void Cursor::set_cursor(SystemCursorType p_type) {
 
 void Cursor::activate() { CursorManager::set_active_cursor(this); }
 
-SDL_Cursor *Cursor::get_SDL_cursor() const { return cursor; }
+SDL_Cursor* Cursor::get_SDL_cursor() const { return cursor; }

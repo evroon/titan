@@ -3,7 +3,7 @@
 #undef CLASSNAME
 #define CLASSNAME Resource
 
-void Resource::set_file(const String &p_file) {
+void Resource::set_file(const String& p_file) {
     file = File(p_file);
 
     file_loaded();

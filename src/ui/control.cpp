@@ -27,22 +27,22 @@ Control::Control() {
     use_scissor = false;
 }
 
-void Control::bind_parent(Control *p_parent) { parent = p_parent; }
+void Control::bind_parent(Control* p_parent) { parent = p_parent; }
 
-Control *Control::get_parent() const {
-    return parent->cast_to_type<Control *>();
+Control* Control::get_parent() const {
+    return parent->cast_to_type<Control*>();
 }
 
 vec2 Control::get_parent_size() const {
     if (parent && !parent->is_of_type<Canvas>()) {
-        Control *p = parent->cast_to_type<Control *>();
+        Control* p = parent->cast_to_type<Control*>();
         return p->area.get_size();
     } else {
         return ACTIVE_VIEWPORT->get_size();
     }
 }
 
-float Control::get_margin(const AnchorType &p_anchor, float p_value,
+float Control::get_margin(const AnchorType& p_anchor, float p_value,
                           float p_domain, float p_custom) const {
     switch (p_anchor) {
         case ANCHOR_BEGIN:
@@ -61,7 +61,7 @@ float Control::get_margin(const AnchorType &p_anchor, float p_value,
     return 0;
 }
 
-void Control::set_anchor(int p_index, const AnchorType &p_type) {
+void Control::set_anchor(int p_index, const AnchorType& p_type) {
     anchors[p_index] = p_type;
 
     flag_size_changed();
@@ -90,7 +90,7 @@ void Control::set_margins(float p_0, float p_1, float p_2, float p_3) {
     flag_size_changed();
 }
 
-void Control::set_margins(const vec4 &p_margins) {
+void Control::set_margins(const vec4& p_margins) {
     set_margins(p_margins.x, p_margins.y, p_margins.z, p_margins.w);
 }
 
@@ -98,8 +98,8 @@ vec4 Control::get_margins() const {
     return vec4(margins[0], margins[1], margins[2], margins[3]);
 }
 
-void Control::set_anchors(const AnchorType &p_0, const AnchorType &p_1,
-                          const AnchorType &p_2, const AnchorType &p_3) {
+void Control::set_anchors(const AnchorType& p_0, const AnchorType& p_1,
+                          const AnchorType& p_2, const AnchorType& p_3) {
     anchors[0] = p_0;
     anchors[1] = p_1;
     anchors[2] = p_2;
@@ -136,17 +136,17 @@ void Control::span_parent() {
     flag_size_changed();
 }
 
-Font *Control::get_default_font() const {
+Font* Control::get_default_font() const {
     return CanvasData::get_singleton()->get_default_theme()->get_font();
 }
 
-Canvas *Control::get_canvas() const { return ACTIVE_CANVAS; }
+Canvas* Control::get_canvas() const { return ACTIVE_CANVAS; }
 
-void Control::show_context_tip(const vec2 &p_pos) {
+void Control::show_context_tip(const vec2& p_pos) {
     get_canvas()->set_context_tip(get_context_tip(p_pos), p_pos);
 }
 
-String Control::get_context_tip(const vec2 &p_pos) {
+String Control::get_context_tip(const vec2& p_pos) {
     String text;
 
     if (tip_description.length() > 0)
@@ -157,9 +157,9 @@ String Control::get_context_tip(const vec2 &p_pos) {
     return text;
 }
 
-void Control::set_pos(const vec2 &p_pos) { set_area(rect2(p_pos, area.size)); }
+void Control::set_pos(const vec2& p_pos) { set_area(rect2(p_pos, area.size)); }
 
-void Control::set_size(const vec2 &p_size) {
+void Control::set_size(const vec2& p_size) {
     set_area(rect2(area.pos, p_size));
 }
 
@@ -169,13 +169,13 @@ vec2 Control::get_size() const { return area.size; }
 
 rect2 Control::get_area() const { return area; }
 
-void Control::set_area(const rect2 &p_area) {
+void Control::set_area(const rect2& p_area) {
     vec2 parent_pos;
     vec2 parent_size = get_parent_size() * 2.0f;
 
     if (parent && !parent->is_of_type<Canvas>())
         parent_pos =
-            parent->cast_to_type<Control *>()->get_area().get_bottom_left();
+            parent->cast_to_type<Control*>()->get_area().get_bottom_left();
     else
         parent_pos = get_parent_size() * -1.0f;
 
@@ -189,7 +189,7 @@ void Control::set_area(const rect2 &p_area) {
     flag_size_changed();
 }
 
-void Control::float_in_area(const rect2 &p_area) { area = p_area; }
+void Control::float_in_area(const rect2& p_area) { area = p_area; }
 
 void Control::set_level(int p_level) { level = p_level; }
 
@@ -201,27 +201,27 @@ void Control::set_update_continuoulsy(bool p_update_continuoulsy) {
 
 bool Control::get_update_continuoulsy() const { return update_continuoulsy; }
 
-Control *Control::raycast(const vec2 &pos) const {
+Control* Control::raycast(const vec2& pos) const {
     for (int i = 0; i < children.size(); i++) {
-        Control *c = children[i]->cast_to_type<Control *>();
+        Control* c = children[i]->cast_to_type<Control*>();
 
         if (c->in_area(pos) && c->visible) return c->raycast(pos);
     }
 
-    if (in_area(pos)) return const_cast<Control *>(this);
+    if (in_area(pos)) return const_cast<Control*>(this);
 
     return nullptr;
 }
 
-bool Control::in_area(const vec2 &pos) const { return area.is_in_box(pos); }
+bool Control::in_area(const vec2& pos) const { return area.is_in_box(pos); }
 
-void Control::add_child(Node *p_child) {
+void Control::add_child(Node* p_child) {
     Node::add_child(p_child);
 
-    p_child->cast_to_type<Control *>()->init();
+    p_child->cast_to_type<Control*>()->init();
 }
 
-void Control::remove_child(Node *p_child) { Node::remove_child(p_child); }
+void Control::remove_child(Node* p_child) { Node::remove_child(p_child); }
 
 bool Control::get_focused() const {
     return ACTIVE_CANVAS->get_focused() == this;
@@ -241,7 +241,7 @@ void Control::check_size_changed() {
     if (flagged_size_changed) size_changed();
 
     for (int c = 0; c < children.size(); c++)
-        children[c]->cast_to_type<Control *>()->check_size_changed();
+        children[c]->cast_to_type<Control*>()->check_size_changed();
 }
 
 void Control::flag_size_changed() { flagged_size_changed = true; }
@@ -252,7 +252,7 @@ void Control::size_changed() {
     vec4 points;
 
     if (parent && !parent->is_of_type<Canvas>()) {
-        Control *p = parent->cast_to_type<Control *>();
+        Control* p = parent->cast_to_type<Control*>();
         bottom_left = p->area.get_bottom_left();
         top_right = p->area.get_upper_right();
     } else {
@@ -318,10 +318,10 @@ void Control::size_changed() {
 
     // draw();
 
-    for (Node *n : children) n->cast_to_type<Control *>()->size_changed();
+    for (Node* n : children) n->cast_to_type<Control*>()->size_changed();
 }
 
-void Control::set_tip_description(const String &p_description) {
+void Control::set_tip_description(const String& p_description) {
     tip_description = p_description;
 }
 
@@ -340,7 +340,7 @@ void Control::draw() {
 
     render();
 
-    for (Node *n : children) n->cast_to_type<Control *>()->draw();
+    for (Node* n : children) n->cast_to_type<Control*>()->draw();
 }
 
 #define CHECK_DRAWING                                      \
@@ -349,8 +349,8 @@ void Control::draw() {
         return;                                            \
     }
 
-void Control::draw_texture(Texture2D *p_texture, const rect2 &p_area,
-                           const Color &p_color, const vec4 &p_bounds) {
+void Control::draw_texture(Texture2D* p_texture, const rect2& p_area,
+                           const Color& p_color, const vec4& p_bounds) {
     CHECK_DRAWING
 
     if (!p_texture) {
@@ -367,16 +367,16 @@ void Control::draw_texture(Texture2D *p_texture, const rect2 &p_area,
     draw_commands.push_back(command);
 }
 
-void Control::draw_text(const String &p_text, const vec2 &p_pos) {
+void Control::draw_text(const String& p_text, const vec2& p_pos) {
     draw_text(get_default_font(), p_text, p_pos);
 }
 
-void Control::draw_text(Font *p_font, const String &p_text, const vec2 &p_pos) {
+void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos) {
     draw_text(p_font, p_text, p_pos, Color::White);
 }
 
-void Control::draw_text(Font *p_font, const String &p_text, const vec2 &p_pos,
-                        const Color &p_color) {
+void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos,
+                        const Color& p_color) {
     CHECK_DRAWING
 
     if (!p_font) {
@@ -393,13 +393,13 @@ void Control::draw_text(Font *p_font, const String &p_text, const vec2 &p_pos,
     draw_commands.push_back(command);
 }
 
-void Control::draw_box(const rect2 &p_area, const Color &p_color) {
+void Control::draw_box(const rect2& p_area, const Color& p_color) {
     draw_box(p_area, p_color,
              CanvasData::get_singleton()->get_default_shader());
 }
 
-void Control::draw_box(const rect2 &p_area, const Color &p_color,
-                       Shader *p_shader) {
+void Control::draw_box(const rect2& p_area, const Color& p_color,
+                       Shader* p_shader) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -418,8 +418,8 @@ void Control::draw_polygon() {
     draw_commands.push_back(command);
 }
 
-void Control::draw_line(const vec2 &p_start, const vec2 &p_end,
-                        const Color &p_color) {
+void Control::draw_line(const vec2& p_start, const vec2& p_end,
+                        const Color& p_color) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -429,8 +429,8 @@ void Control::draw_line(const vec2 &p_start, const vec2 &p_end,
     draw_commands.push_back(command);
 }
 
-void Control::draw_frame(Texture2D *p_texture, const rect2 &p_area,
-                         const Color &p_color) {
+void Control::draw_frame(Texture2D* p_texture, const rect2& p_area,
+                         const Color& p_color) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -441,19 +441,19 @@ void Control::draw_frame(Texture2D *p_texture, const rect2 &p_area,
     draw_commands.push_back(command);
 }
 
-void Control::draw_frame(const rect2 &p_area, const Color &p_color) {
+void Control::draw_frame(const rect2& p_area, const Color& p_color) {
     draw_frame(CanvasData::get_singleton()->get_default_theme()->get_frame(),
                p_area, p_color);
 }
 
-void Control::draw_bordered_box(const rect2 &p_area, const Color &p_border,
-                                const Color &p_fill, float edge) {
+void Control::draw_bordered_box(const rect2& p_area, const Color& p_border,
+                                const Color& p_fill, float edge) {
     draw_box(p_area, p_border);
     rect2 inside = p_area.crop(edge);
     draw_box(inside, p_fill);
 }
 
-void Control::draw_highlight(const rect2 &p_area, const Color &p_color) {
+void Control::draw_highlight(const rect2& p_area, const Color& p_color) {
     draw_frame(
         CanvasData::get_singleton()->get_default_theme()->get_highlight(),
         p_area, p_color);
@@ -465,10 +465,10 @@ void Control::update() {
     to_be_updated = true;
 }
 
-void Control::render_texture(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_plane();
-    Shader *shader = CanvasData::get_singleton()->get_default_shader();
+void Control::render_texture(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+    Shader* shader = CanvasData::get_singleton()->get_default_shader();
     Transform transform =
         Transform(draw_command.area.pos, draw_command.area.size);
 
@@ -485,8 +485,8 @@ void Control::render_texture(const DrawCommand &p_draw_command) {
     mesh->draw();
 }
 
-void Control::render_font(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
+void Control::render_font(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
 
     if (draw_command.font->get_renderer() == nullptr) return;
 
@@ -498,10 +498,10 @@ void Control::render_font(const DrawCommand &p_draw_command) {
 
     pos = vec2(Math::floor(pos.x), Math::floor(pos.y)) + delta;
 
-    Texture2D *tex = draw_command.font->get_renderer()->get_texture();
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_plane();
-    Shader *shader = CanvasData::get_singleton()->get_default_shader();
-    Font *font = draw_command.font;
+    Texture2D* tex = draw_command.font->get_renderer()->get_texture();
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+    Shader* shader = CanvasData::get_singleton()->get_default_shader();
+    Font* font = draw_command.font;
 
     shader->bind();
     shader->set_uniform("color", draw_command.color);
@@ -545,11 +545,11 @@ void Control::render_font(const DrawCommand &p_draw_command) {
     }
 }
 
-void Control::render_box(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
+void Control::render_box(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
 
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_plane();
-    Shader *shader = draw_command.shader;
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+    Shader* shader = draw_command.shader;
     Transform transform =
         Transform(draw_command.area.pos, draw_command.area.size);
 
@@ -564,8 +564,8 @@ void Control::render_box(const DrawCommand &p_draw_command) {
     mesh->draw();
 }
 
-void Control::render_frame(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
+void Control::render_frame(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
 
     vec2 tex_size = draw_command.tex->get_size();
     vec2 size = draw_command.area.size;
@@ -583,8 +583,8 @@ void Control::render_frame(const DrawCommand &p_draw_command) {
                           pos.y + extension.y + v_off[1],
                           pos.y + extension.y + v_off[2]};
 
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_plane();
-    Shader *shader = CanvasData::get_singleton()->get_default_shader();
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
+    Shader* shader = CanvasData::get_singleton()->get_default_shader();
     Transform transform;
 
     shader->bind();
@@ -618,10 +618,10 @@ void Control::render_frame(const DrawCommand &p_draw_command) {
     }
 }
 
-void Control::render_line(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_line();
-    Shader *shader = CanvasData::get_singleton()->get_default_shader();
+void Control::render_line(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_line();
+    Shader* shader = CanvasData::get_singleton()->get_default_shader();
 
     // center-like coordinates
     vec2 start = draw_command.area.get_bottom_left();
@@ -649,10 +649,10 @@ void Control::render_line(const DrawCommand &p_draw_command) {
     mesh->bind();
 }
 
-void Control::render_polygon(const DrawCommand &p_draw_command) {}
+void Control::render_polygon(const DrawCommand& p_draw_command) {}
 
-void Control::render_draw_command(const DrawCommand &p_draw_command) {
-    const DrawCommand &draw_command = p_draw_command;
+void Control::render_draw_command(const DrawCommand& p_draw_command) {
+    const DrawCommand& draw_command = p_draw_command;
 
     if (draw_command.type == DrawCommand::TEXTURE) {
         render_texture(draw_command);

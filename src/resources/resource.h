@@ -14,7 +14,7 @@ class Resource : public Referenced {
     virtual void reload() {}
     virtual void free() {}
 
-    void set_file(const String &p_file);
+    void set_file(const String& p_file);
     String get_file() const;
 
     static void bind_methods();

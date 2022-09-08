@@ -2,7 +2,7 @@
 
 #include "windowmanager.h"
 
-Window::Window(const vec2i &p_size) : size(p_size) {
+Window::Window(const vec2i& p_size) : size(p_size) {
     WindowManager::get_window_manager()->register_window(this);
     Init();
 }

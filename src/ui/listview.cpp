@@ -5,7 +5,7 @@
 #include "input/keyboard.h"
 #include "slider.h"
 
-ListElement::ListElement(const String &p_text) {
+ListElement::ListElement(const String& p_text) {
     text = p_text;
     icon = NULL;
     visible = true;
@@ -13,7 +13,7 @@ ListElement::ListElement(const String &p_text) {
 
 ListElement::~ListElement() {}
 
-void ListElement::bind_textbox(ListView *p_textbox) { listview = p_textbox; }
+void ListElement::bind_textbox(ListView* p_textbox) { listview = p_textbox; }
 
 void ListElement::set_index(int p_index) { index = p_index; }
 
@@ -21,19 +21,19 @@ int ListElement::get_index() { return index; }
 
 rect2 ListElement::get_area() const { return area; }
 
-void ListElement::set_area(const rect2 &p_area) { area = p_area; }
+void ListElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool ListElement::is_in_area(const vec2 &p_pos) {
+bool ListElement::is_in_area(const vec2& p_pos) {
     return visible && area.is_in_box(p_pos);
 }
 
 String ListElement::get_text() const { return text; }
 
-void ListElement::set_text(const String &p_text) { text = p_text; }
+void ListElement::set_text(const String& p_text) { text = p_text; }
 
-Texture2D *ListElement::get_icon() const { return icon; }
+Texture2D* ListElement::get_icon() const { return icon; }
 
-void ListElement::set_icon(Texture2D *p_icon) { icon = p_icon; }
+void ListElement::set_icon(Texture2D* p_icon) { icon = p_icon; }
 
 void ListElement::set_visible(bool p_visible) { visible = p_visible; }
 
@@ -92,7 +92,7 @@ ListView::~ListView() {}
 
 vec2 ListView::get_required_size() const { return vec2(100); }
 
-void ListView::handle_event(UIEvent *ui_event) {
+void ListView::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_ENTER:
 
@@ -263,7 +263,7 @@ void ListView::position_items() {
     float offset_y = area.get_top() - top_margin + scroll_offset;
 
     for (int c = 0; c < items.size(); c++) {
-        ListElement &item = items[c];
+        ListElement& item = items[c];
 
         if (!item.get_visible()) continue;
 
@@ -367,7 +367,7 @@ void ListView::notification(int p_notification) {
     }
 }
 
-void ListView::push_back_item(ListElement &item) {
+void ListView::push_back_item(ListElement& item) {
     int index = items.size();
 
     item.bind_textbox(this);
@@ -387,7 +387,7 @@ void ListView::clear() {
     remove_slider();
 }
 
-int ListView::get_position(const vec2 &p_pos) {
+int ListView::get_position(const vec2& p_pos) {
     if (!area.is_in_box(p_pos)) return -1;
 
     for (int c = 0; c < items.size(); c++) {
@@ -396,7 +396,7 @@ int ListView::get_position(const vec2 &p_pos) {
     return -1;
 }
 
-ListElement *ListView::get_item(int row) {
+ListElement* ListView::get_item(int row) {
     if (row < 0)
         row = 0;
     else if (row > int(items.size()) - 1)
@@ -406,7 +406,7 @@ ListElement *ListView::get_item(int row) {
 }
 
 int ListView::get_item_size(int row) {
-    ListElement *l = get_item(row);
+    ListElement* l = get_item(row);
 
     if (l) return get_item(row)->get_text().size();
 
@@ -584,9 +584,9 @@ void ListView::make_visible(int p_index) {
         slider->set_slider_pos(slider->get_value() - delta / extra_space);
 }
 
-void ListView::search(const String &p_src) {
+void ListView::search(const String& p_src) {
     for (int c = 0; c < items.size(); c++) {
-        ListElement &item = items[c];
+        ListElement& item = items[c];
 
         item.set_visible(item.get_text().starts_with(p_src));
     }
@@ -613,7 +613,7 @@ void ListView::remove_item(int p_index) {
     position_items();
 }
 
-void ListView::push_back_item(const String &p_text, Texture2D *p_icon) {
+void ListView::push_back_item(const String& p_text, Texture2D* p_icon) {
     int index = items.size();
 
     ListElement item(p_text);
@@ -628,14 +628,14 @@ void ListView::push_back_item(const String &p_text, Texture2D *p_icon) {
     position_items();
 }
 
-void ListView::insert_item_at_index(int index, ListElement &item) {
+void ListView::insert_item_at_index(int index, ListElement& item) {
     item.bind_textbox(this);
     item.set_index(index);
 
     if (index >= items.size()) {
         push_back_item(item);
     } else {
-        ListElement &old = items[index];
+        ListElement& old = items[index];
 
         items.replace(index, item);
 
@@ -646,9 +646,9 @@ void ListView::insert_item_at_index(int index, ListElement &item) {
 #undef CLASSNAME
 #define CLASSNAME ListView
 
-void ListView::set_font(Font *p_font) { font = p_font; }
+void ListView::set_font(Font* p_font) { font = p_font; }
 
-Font *ListView::get_font() const { return font; }
+Font* ListView::get_font() const { return font; }
 
 void ListView::bind_methods() {
     REG_CSTR(0);

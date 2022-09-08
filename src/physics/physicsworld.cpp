@@ -13,7 +13,7 @@
 PhysicsWorld3D::~PhysicsWorld3D() { clean(); }
 
 void PhysicsWorld3D::init() {
-    btBroadphaseInterface *broadphase = new btDbvtBroadphase();
+    btBroadphaseInterface* broadphase = new btDbvtBroadphase();
     collision_configuration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collision_configuration);
     solver = new btSequentialImpulseConstraintSolver;
@@ -23,9 +23,9 @@ void PhysicsWorld3D::init() {
 }
 
 void PhysicsWorld3D::update() {
-    btCollisionShape *groundShape =
+    btCollisionShape* groundShape =
         new btStaticPlaneShape(btVector3(0, 1, 0), 1);
-    btCollisionShape *fallShape = new btSphereShape(1);
+    btCollisionShape* fallShape = new btSphereShape(1);
 }
 
 void PhysicsWorld3D::clean() {
@@ -47,7 +47,7 @@ void PhysicsWorld2D::DestroyWorld() {
     delete world;
 }
 
-void PhysicsWorld2D::destroy_box(RigidBody2D *body) {
+void PhysicsWorld2D::destroy_box(RigidBody2D* body) {
     // world->DestroyBody(body->shape->body);
     boxes.clean(body);
 }
@@ -64,6 +64,6 @@ void PhysicsWorld2D::init() {
     world->SetContactListener(&collisiondata);
 }
 
-void PhysicsWorld2D::AddBody(RigidBody2D *body) { boxes.push_back(body); }
+void PhysicsWorld2D::AddBody(RigidBody2D* body) { boxes.push_back(body); }
 
 vec2 PhysicsWorld2D::get_scale() const { return scale; }

@@ -10,7 +10,7 @@ class TerrainBrush : public Object {
     OBJ_DEFINITION(TerrainBrush, Object);
 
    public:
-    TerrainBrush(Terrain *p_terrain);
+    TerrainBrush(Terrain* p_terrain);
 
     friend class Terrain;
 
@@ -23,24 +23,24 @@ class TerrainBrush : public Object {
     void set_deviation(float p_deviation);
     float get_deviation() const;
 
-    void set_color(const Color &p_color);
+    void set_color(const Color& p_color);
     Color get_color() const;
 
     void set_strength(float p_strength);
     float get_strength() const;
 
-    void set_pos(const vec2 &p_pos);
+    void set_pos(const vec2& p_pos);
     vec2 get_pos() const;
 
-    FBO2D *get_fbo() const;
+    FBO2D* get_fbo() const;
 
     static void bind_methods();
 
    private:
-    Terrain *terrain;
+    Terrain* terrain;
 
-    FBO2D *heightmap_fbo;
-    Shader *brush_shader;
+    FBO2D* heightmap_fbo;
+    Shader* brush_shader;
     Array<Ref<Texture2D>> textures;
 
     int active_tex;
@@ -76,21 +76,21 @@ class Terrain : public WorldObject {
     void smooth(float p_amount);
 
     void update_buffer();
-    void update_buffer_range(const vec2 &p_start, const vec2 p_end);
+    void update_buffer_range(const vec2& p_start, const vec2 p_end);
     void setup_buffers();
 
-    float get_height(const vec2 &p_pos) const;
-    float get_height_fast(const vec2 &p_pos) const;
+    float get_height(const vec2& p_pos) const;
+    float get_height_fast(const vec2& p_pos) const;
     Ref<Texture2D> get_heightmap() const;
 
-    TerrainBrush *get_brush() const;
+    TerrainBrush* get_brush() const;
 
-    void set_selection_pos(const vec2 &p_pos);
+    void set_selection_pos(const vec2& p_pos);
 
     void ready() override;
     void draw() override;
 
-    void set_tex_name(int p_index, const String &p_tex_name);
+    void set_tex_name(int p_index, const String& p_tex_name);
 
     static void bind_methods();
 
@@ -101,10 +101,10 @@ class Terrain : public WorldObject {
 
     Array<TerrainNode> nodes;
 
-    Shader *shader;
-    Shader *normal_map_compute;
+    Shader* shader;
+    Shader* normal_map_compute;
 
-    TerrainBrush *brush;
+    TerrainBrush* brush;
 
     Ref<Texture2D> normalmap;
     Ref<Texture2D> heightmap;
@@ -128,9 +128,9 @@ class Water : public WorldObject {
     static void bind_methods();
 
    private:
-    Shader *shader;
+    Shader* shader;
 
-    Texture2D *normals;
+    Texture2D* normals;
 };
 
 class Model;
@@ -140,7 +140,7 @@ class Vegetation : public WorldObject {
 
    public:
     Vegetation();
-    Vegetation(Terrain *p_parent);
+    Vegetation(Terrain* p_parent);
 
     void init();
 
@@ -148,15 +148,15 @@ class Vegetation : public WorldObject {
 
     void update_buffer();
 
-    void set_terrain(Terrain *p_terrain);
-    Terrain *get_terrain() const;
+    void set_terrain(Terrain* p_terrain);
+    Terrain* get_terrain() const;
 
     static void bind_methods();
 
    private:
-    Shader *shader;
-    Texture2D *grass_tex;
-    Terrain *terrain;
+    Shader* shader;
+    Texture2D* grass_tex;
+    Terrain* terrain;
 
     Vector<Model> models;
 
@@ -173,6 +173,6 @@ class Clouds : public WorldObject {
     static void bind_methods();
 
    private:
-    Texture3D *texture;
-    Shader *shader;
+    Texture3D* texture;
+    Shader* shader;
 };

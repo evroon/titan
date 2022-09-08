@@ -15,7 +15,7 @@ class Shader : public Resource {
 
    public:
     Shader() = default;
-    Shader(const String &filename);
+    Shader(const String& filename);
     virtual ~Shader();
 
     struct Uniform {
@@ -47,27 +47,27 @@ class Shader : public Resource {
     bool has_tesselation_shader();
     bool is_compute_shader();
 
-    void set_uniform(const String &name, const bool value);
-    void set_uniform(const String &name, const int value);
-    void set_uniform(const String &name, const float value);
-    void set_uniform(const String &name, const double value);
-    void set_uniform(const String &name, const vec2 &value);
-    void set_uniform(const String &name, const vec2i &value);
-    void set_uniform(const String &name, const vec3 &value);
-    void set_uniform(const String &name, const vec3i &value);
-    void set_uniform(const String &name, const vec4 &value);
-    void set_uniform(const String &name, const vec4i &value);
-    void set_uniform(const String &name, const Color &value);
-    void set_uniform(const String &name, const mat4 &value);
-    void set_uniform(const String &name, const Array<vec4> &value);
-    void set_uniform(const String &name, const Array<mat4> &value);
+    void set_uniform(const String& name, const bool value);
+    void set_uniform(const String& name, const int value);
+    void set_uniform(const String& name, const float value);
+    void set_uniform(const String& name, const double value);
+    void set_uniform(const String& name, const vec2& value);
+    void set_uniform(const String& name, const vec2i& value);
+    void set_uniform(const String& name, const vec3& value);
+    void set_uniform(const String& name, const vec3i& value);
+    void set_uniform(const String& name, const vec4& value);
+    void set_uniform(const String& name, const vec4i& value);
+    void set_uniform(const String& name, const Color& value);
+    void set_uniform(const String& name, const mat4& value);
+    void set_uniform(const String& name, const Array<vec4>& value);
+    void set_uniform(const String& name, const Array<mat4>& value);
 
-    void bind_block(const String &p_var_name, UBO *p_ubo);
+    void bind_block(const String& p_var_name, UBO* p_ubo);
 
     int get_program() const;
 
    private:
-    GLint create_shader(const String &p_path, GLenum ShaderType);
+    GLint create_shader(const String& p_path, GLenum ShaderType);
     void create_program();
 
     void set_info();

@@ -15,8 +15,8 @@ class PropertyView : public Control {
     struct PropertyItem {
         String name = "";
         Variant var = NULL_VAR;
-        Property *property = nullptr;
-        Control *control = nullptr;
+        Property* property = nullptr;
+        Control* control = nullptr;
         rect2 area = rect2();
     };
     struct GroupItem {
@@ -25,40 +25,40 @@ class PropertyView : public Control {
         Array<PropertyItem> children = {};
     };
 
-    PropertyView(const Variant &p_var);
+    PropertyView(const Variant& p_var);
     PropertyView();
     ~PropertyView();
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
-    void draw_item(const PropertyItem &p_item);
-    void draw_item(const GroupItem &p_item);
+    void draw_item(const PropertyItem& p_item);
+    void draw_item(const GroupItem& p_item);
 
     void notification(int p_notification) override;
 
-    void set_property(Object *p_var);
-    Object *get_property() const;
+    void set_property(Object* p_var);
+    Object* get_property() const;
 
     static void bind_methods();
 
    private:
-    void add_property(Property *p_property);
+    void add_property(Property* p_property);
 
-    int get_item(const vec2 &p_pos) const;
+    int get_item(const vec2& p_pos) const;
 
-    void position_item(GroupItem &p_item);
+    void position_item(GroupItem& p_item);
     void position_items();
 
     Array<GroupItem> roots;
 
     Container buttons;
 
-    ImageButton *back;
-    ImageButton *forward;
+    ImageButton* back;
+    ImageButton* forward;
 
-    Object *var;
+    Object* var;
 
     float split_pos;
     float split_percentage;

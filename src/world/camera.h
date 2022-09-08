@@ -26,11 +26,11 @@ class Camera : public WorldObject {
     void activate();
     void deactivate();
 
-    void look_at(const vec3 &p_target, const vec3 &p_up);
+    void look_at(const vec3& p_target, const vec3& p_up);
     void look_at(float p_pitch, float p_yaw, float p_roll);
 
     void set_projection(float p_fov, float p_near, float p_far);
-    void set_ortho_projection(float p_near, float p_far, const vec2 &p_size);
+    void set_ortho_projection(float p_near, float p_far, const vec2& p_size);
 
     void set_fov(float p_fov);
     float get_fov() const;
@@ -44,15 +44,15 @@ class Camera : public WorldObject {
     void set_zoom(float p_zoom);
     float get_zoom() const;
 
-    Viewport *get_viewport() const;
+    Viewport* get_viewport() const;
 
     void mult_zoom(float p_factor);
 
     bool get_orthogonal() const;
 
-    const mat4 &get_projection_matrix() const;
-    const mat4 &get_view_matrix() const;
-    const mat4 &get_final_matrix() const;
+    const mat4& get_projection_matrix() const;
+    const mat4& get_view_matrix() const;
+    const mat4& get_final_matrix() const;
 
     mat4 get_inverse() const;
 

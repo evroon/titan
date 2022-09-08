@@ -9,13 +9,13 @@ Image::Image() {
     shader = CONTENT->LoadShader("engine/shaders/Shader2D");
     bounds = vec4(0.0, 1.0, 0.0, 1.0);
 }
-Image::Image(Texture2D *p_texture) {
+Image::Image(Texture2D* p_texture) {
     texture = p_texture;
     mesh_2d = MeshHandler::get_singleton()->get_plane();
     shader = CONTENT->LoadShader("engine/shaders/Shader2D");
     bounds = vec4(0.0, 1.0, 0.0, 1.0);
 }
-Image::Image(const String &tex_name) : Image(CONTENT->LoadTexture(tex_name)) {}
+Image::Image(const String& tex_name) : Image(CONTENT->LoadTexture(tex_name)) {}
 
 void Image::set_bounds(vec4 p_bounds) { bounds = p_bounds; }
 
@@ -24,11 +24,11 @@ void Image::set_bounds_in_pixels(vec4 p_bounds) {
                   vec2(p_bounds.z, p_bounds.w) / get_texture_size().y);
 }
 
-void Image::set_color(const Color &p_color) { color = p_color; }
+void Image::set_color(const Color& p_color) { color = p_color; }
 Color Image::get_color() const { return color; }
 
-void Image::set_texture(Texture2D *p_texture) { texture = p_texture; }
-Texture2D *Image::get_texture() const { return texture; }
+void Image::set_texture(Texture2D* p_texture) { texture = p_texture; }
+Texture2D* Image::get_texture() const { return texture; }
 
 void Image::flip_vertically() {
     float temp = bounds.z;

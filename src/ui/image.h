@@ -9,8 +9,8 @@ class Image : public Control {
 
    public:
     Image();
-    Image(Texture2D *p_texture);
-    Image(const String &tex_name);
+    Image(Texture2D* p_texture);
+    Image(const String& tex_name);
     ~Image() {}
 
     enum CenteringType {
@@ -26,11 +26,11 @@ class Image : public Control {
     void set_bounds(vec4 p_bounds);
     void set_bounds_in_pixels(vec4 p_bounds);
 
-    void set_color(const Color &p_color);
+    void set_color(const Color& p_color);
     Color get_color() const;
 
-    void set_texture(Texture2D *p_texture);
-    Texture2D *get_texture() const;
+    void set_texture(Texture2D* p_texture);
+    Texture2D* get_texture() const;
 
     void flip_vertically();
     void flip_horizontally();
@@ -43,11 +43,11 @@ class Image : public Control {
 
     void notification(int p_notification) override;
 
-    Texture2D *texture;
+    Texture2D* texture;
 
    private:
     Color color = Color::White;
-    SimpleMesh *mesh_2d;
-    Shader *shader;
+    SimpleMesh* mesh_2d;
+    Shader* shader;
     vec4 bounds;
 };

@@ -8,7 +8,7 @@
 
 ContentTab::ContentTab() : ContentTab(ASSETS_DIR) {}
 
-ContentTab::ContentTab(const File &p_file) {
+ContentTab::ContentTab(const File& p_file) {
     file = p_file;
     home = file;
 
@@ -81,7 +81,7 @@ ContentTab::~ContentTab() {}
 
 vec2 ContentTab::get_required_size() const { return vec2(); }
 
-void ContentTab::handle_event(UIEvent *p_event) {}
+void ContentTab::handle_event(UIEvent* p_event) {}
 
 void ContentTab::notification(int p_notification) {}
 
@@ -115,7 +115,7 @@ void ContentTab::list_chosen(int p_index) {
         emit_signal("file_chosen", f.get_absolute_path());
 }
 
-void ContentTab::go_to(const File &p_file) {
+void ContentTab::go_to(const File& p_file) {
     history.go_to(p_file);
     file = p_file;
     update_list();

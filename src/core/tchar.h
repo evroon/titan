@@ -5,9 +5,9 @@ class Char {
     Char(char c) { kar = c; }
 
     // Operators
-    bool operator==(const Char &r) { return r.kar == kar; }
-    bool operator==(const char &r) { return r == kar; }
-    bool operator!=(const char &r) { return r != kar; }
+    bool operator==(const Char& r) { return r.kar == kar; }
+    bool operator==(const char& r) { return r == kar; }
+    bool operator!=(const char& r) { return r != kar; }
 
     operator char() const { return kar; }
 

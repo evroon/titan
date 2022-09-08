@@ -27,9 +27,9 @@
 #include "world/terrain.h"
 
 void EditorApp::init() {
-    Renderer *r = new ForwardRenderer;
-    Viewport *v = new Viewport(r);
-    Canvas *c = new Canvas;
+    Renderer* r = new ForwardRenderer;
+    Viewport* v = new Viewport(r);
+    Canvas* c = new Canvas;
     // Terrain* t = new Terrain;
     // t->set_name("terrain");
 
@@ -49,7 +49,7 @@ void EditorApp::init() {
     active_project = new Project("projects/terrain.xml");
     active_scene = active_project->get_main_scene();
 
-    World *world = active_scene->get_child_by_index(0)->cast_to_type<World *>();
+    World* world = active_scene->get_child_by_index(0)->cast_to_type<World*>();
     world->set_name("World");
 
     // add controls
@@ -68,7 +68,7 @@ void EditorApp::init() {
     explorer_tab = new ExplorerTab(preview_viewport);
     property_tab = new PropertyTab(preview_viewport);
     console_tab = new ConsoleTab;
-    tool_tab = new ToolTab(world->get_child_by_type<Terrain *>());
+    tool_tab = new ToolTab(world->get_child_by_type<Terrain*>());
 
     // add bars
     bar = new ToolBar;
@@ -116,12 +116,12 @@ void EditorApp::init() {
     };
     auto save = [this]() { active_project->save(); };
 
-    ContextMenu *file = new ContextMenu;
+    ContextMenu* file = new ContextMenu;
     Connection load, exit;
     load.register_native_method(this, "load");
     exit.register_native_method(this, "exit");
 
-    ContextMenu *tools = new ContextMenu;
+    ContextMenu* tools = new ContextMenu;
     Connection project_options;
     project_options.register_native_method(this, "project_options");
 
@@ -151,7 +151,7 @@ void EditorApp::init() {
 
     selected = nullptr;
 
-    Camera *cam = world->get_active_camera();
+    Camera* cam = world->get_active_camera();
 
     if (!cam) {
         cam = new Camera;
@@ -164,19 +164,19 @@ void EditorApp::init() {
 }
 
 void EditorApp::update() {
-    for (Event *e : INPUT->events) VIEW->handle_event(e);
+    for (Event* e : INPUT->events) VIEW->handle_event(e);
 
     VIEW->update();
 }
 
 void EditorApp::draw() { VIEW->draw(); }
 
-void EditorApp::resize(const vec2i &p_size) {
+void EditorApp::resize(const vec2i& p_size) {
     VIEW->get_default_viewport()->resize(
         rect2(vec2(), vec2((float)p_size.x, (float)p_size.y) / 2.0f));
 }
 
-void EditorApp::open_file(const String &p_file) {
+void EditorApp::open_file(const String& p_file) {
     VariantType type = CONTENT->GetType(p_file);
 
     String name = type.get_type_name();
@@ -188,11 +188,11 @@ void EditorApp::open_file(const String &p_file) {
     }
 }
 
-void EditorApp::set_viewport(Viewport *p_viewport) {
+void EditorApp::set_viewport(Viewport* p_viewport) {
     preview_viewport = p_viewport;
 }
 
-Viewport *EditorApp::get_viewport() const { return preview_viewport; }
+Viewport* EditorApp::get_viewport() const { return preview_viewport; }
 
 void EditorApp::save() { active_project->save(); }
 
@@ -201,7 +201,7 @@ void EditorApp::save_as() {}
 void EditorApp::load() {}
 
 void EditorApp::project_options() {
-    ProjectSettingsDialog *dialog = new ProjectSettingsDialog;
+    ProjectSettingsDialog* dialog = new ProjectSettingsDialog;
 
     ACTIVE_CANVAS->set_dialog(dialog);
 }

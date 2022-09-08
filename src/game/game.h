@@ -17,19 +17,19 @@ class Game {
    public:
     Game();
 
-    Scene *LoadScene(const String &name);
-    void StartScene(Scene *s);
-    void handle_event(Event *e);
+    Scene* LoadScene(const String& name);
+    void StartScene(Scene* s);
+    void handle_event(Event* e);
 
     void Start();
     void update();
     void Draw();
 
-    Scene *activescene;
+    Scene* activescene;
 
     // Get activegame
-    static Game *GetGame();
+    static Game* GetGame();
 
    private:
-    static Game *activegame;
+    static Game* activegame;
 };

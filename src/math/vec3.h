@@ -26,46 +26,46 @@ class Vec3 {
     }
 
     // General operators
-    bool operator==(const Vec3 &r) const {
+    bool operator==(const Vec3& r) const {
         return x == r.x && y == r.y && z == r.z;
     }
-    bool operator!=(const Vec3 &r) const {
+    bool operator!=(const Vec3& r) const {
         return x != r.x || y != r.y || z != r.z;
     }
 
     // Vec3 operators
-    Vec3 operator+(const Vec3 &r) const {
+    Vec3 operator+(const Vec3& r) const {
         return Vec3(x + r.x, y + r.y, z + r.z);
     }
-    Vec3 operator-(const Vec3 &r) const {
+    Vec3 operator-(const Vec3& r) const {
         return Vec3(x - r.x, y - r.y, z - r.z);
     }
-    Vec3 operator*(const Vec3 &r) const {
+    Vec3 operator*(const Vec3& r) const {
         return Vec3(x * r.x, y * r.y, z * r.z);
     }
-    Vec3 operator/(const Vec3 &r) const {
+    Vec3 operator/(const Vec3& r) const {
         return Vec3(x / r.x, y / r.y, z / r.z);
     }
 
-    Vec3 &operator+=(const Vec3 &r) {
+    Vec3& operator+=(const Vec3& r) {
         x += r.x;
         y += r.y;
         z += r.z;
         return *this;
     }
-    Vec3 &operator-=(const Vec3 &r) {
+    Vec3& operator-=(const Vec3& r) {
         x -= r.x;
         y -= r.y;
         z -= r.z;
         return *this;
     }
-    Vec3 &operator*=(const Vec3 &r) {
+    Vec3& operator*=(const Vec3& r) {
         x *= r.x;
         y *= r.y;
         z *= r.z;
         return *this;
     }
-    Vec3 &operator/=(const Vec3 &r) {
+    Vec3& operator/=(const Vec3& r) {
         x /= r.x;
         y /= r.y;
         z /= r.z;
@@ -73,30 +73,30 @@ class Vec3 {
     }
 
     // Scalar operators
-    Vec3 operator+(const T &r) const { return Vec3(x + r, y + r, z + r); }
-    Vec3 operator-(const T &r) const { return Vec3(x - r, y - r, z - r); }
-    Vec3 operator*(const T &r) const { return Vec3(x * r, y * r, z * r); }
-    Vec3 operator/(const T &r) const { return Vec3(x / r, y / r, z / r); }
+    Vec3 operator+(const T& r) const { return Vec3(x + r, y + r, z + r); }
+    Vec3 operator-(const T& r) const { return Vec3(x - r, y - r, z - r); }
+    Vec3 operator*(const T& r) const { return Vec3(x * r, y * r, z * r); }
+    Vec3 operator/(const T& r) const { return Vec3(x / r, y / r, z / r); }
 
-    Vec3 &operator+=(const T &r) {
+    Vec3& operator+=(const T& r) {
         x += r;
         y += r;
         z += r;
         return *this;
     }
-    Vec3 &operator-=(const T &r) {
+    Vec3& operator-=(const T& r) {
         x -= r;
         y -= r;
         z -= r;
         return *this;
     }
-    Vec3 &operator*=(const T &r) {
+    Vec3& operator*=(const T& r) {
         x *= r;
         y *= r;
         z *= r;
         return *this;
     }
-    Vec3 &operator/=(const T &r) {
+    Vec3& operator/=(const T& r) {
         x /= r;
         y /= r;
         z /= r;
@@ -104,7 +104,7 @@ class Vec3 {
     }
 
     // Index operator
-    T &operator[](const int &i) { return v[i]; }
+    T& operator[](const int& i) { return v[i]; }
 
     // Conversion
     String to_string() const {
@@ -114,15 +114,15 @@ class Vec3 {
 
     // Get info
     T length() const { return sqrtf(x * x + y * y + z * z); }
-    T angle(const Vec3<T> &v) const {
+    T angle(const Vec3<T>& v) const {
         T angle = fabs(acos(dot(v) / (length() * v.length())));
         return angle;
     }
-    T dot(const Vec3<T> &v) const {
+    T dot(const Vec3<T>& v) const {
         T result = x * v.x + y * v.y + z * v.z;
         return result;
     }
-    Vec3 cross(const Vec3<T> &r) const {
+    Vec3 cross(const Vec3<T>& r) const {
         Vec3<T> result;
         result.x = y * r.z - z * r.y;
         result.y = z * r.x - x * r.z;
@@ -131,20 +131,20 @@ class Vec3 {
     }
 
     // properties
-    const T &get_x() const { return x; }
-    const T &get_y() const { return y; }
-    const T &get_z() const { return z; }
+    const T& get_x() const { return x; }
+    const T& get_y() const { return y; }
+    const T& get_z() const { return z; }
 
-    void set_x(const T &p_x) { x = p_x; }
-    void set_y(const T &p_y) { y = p_y; }
-    void set_z(const T &p_z) { z = p_z; }
+    void set_x(const T& p_x) { x = p_x; }
+    void set_y(const T& p_y) { y = p_y; }
+    void set_z(const T& p_z) { z = p_z; }
 
     Vec2<T> get_xy() const { return {x, y}; }
     Vec2<T> get_yz() const { return {y, z}; }
     Vec2<T> get_xz() const { return {x, z}; }
 
     // Set
-    Vec3 &normalize() {
+    Vec3& normalize() {
         T inv = 1.0f / length();
         x *= inv;
         y *= inv;

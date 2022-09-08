@@ -13,11 +13,11 @@ class Primitives {
     static void Init();
     static void Destroy();
 
-    static void DrawRectangle(Shader *shader, const Transform &trans);
-    static void DrawBox(const Transform &trans);
-    static void DrawBoxDark(const Transform &trans);
-    static void DrawBoxLight(const Transform &trans);
-    static void DrawCircle(Shader *shader, const Transform &trans);
+    static void DrawRectangle(Shader* shader, const Transform& trans);
+    static void DrawBox(const Transform& trans);
+    static void DrawBoxDark(const Transform& trans);
+    static void DrawBoxLight(const Transform& trans);
+    static void DrawCircle(Shader* shader, const Transform& trans);
 };
 
 class Plane : public WorldObject {
@@ -29,15 +29,15 @@ class Plane : public WorldObject {
     void draw() override;
 
    private:
-    Shader *shader;
-    SimpleMesh *mesh;
+    Shader* shader;
+    SimpleMesh* mesh;
 };
 
 class Box : public WorldObject {
     OBJ_DEFINITION(Box, WorldObject)
 
    public:
-    Box(const vec3 &p_pos, const vec3 &p_size) {
+    Box(const vec3& p_pos, const vec3& p_size) {
         shader = CONTENT->SimpleShader;
         get_transform().update(p_pos, p_size);
     }
@@ -55,14 +55,14 @@ class Box : public WorldObject {
         Primitives::DrawRectangle(CONTENT->SimpleShader, get_transform());
     }
 
-    Shader *shader;
+    Shader* shader;
 };
 
 class Disk : public WorldObject {
     OBJ_DEFINITION(Disk, WorldObject)
 
    public:
-    Disk(const vec3 &p_pos, const vec3 &p_size) {
+    Disk(const vec3& p_pos, const vec3& p_size) {
         shader = CONTENT->Shader2D;
         get_transform().update(p_pos, p_size);
     }
@@ -80,5 +80,5 @@ class Disk : public WorldObject {
         Primitives::DrawCircle(shader, get_transform());
     }
 
-    Shader *shader;
+    Shader* shader;
 };

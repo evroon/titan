@@ -15,7 +15,7 @@ class Button : public Control {
    public:
     Button();
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
     static void bind_methods();
 

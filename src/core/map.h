@@ -6,7 +6,7 @@
 template <class KEY, class VAL>
 class Map {
    private:
-    typedef std::map<KEY, VAL *> M;
+    typedef std::map<KEY, VAL*> M;
     M map;
 
    public:
@@ -19,41 +19,41 @@ class Map {
 
     void clear() { map.clear(); }
 
-    void clear(const KEY &p_key) { map.erase(p_key); }
-    void clean(const KEY &p_key) { delete map[p_key]; }
+    void clear(const KEY& p_key) { map.erase(p_key); }
+    void clean(const KEY& p_key) { delete map[p_key]; }
     int size() const { return static_cast<int>(map.size()); }
 
     // Cleaning
-    int count(const KEY &p_key) { return static_cast<int>(map.count(p_key)); }
+    int count(const KEY& p_key) { return static_cast<int>(map.count(p_key)); }
     void clean() {
         for_each(
             map.begin(), map.end(),
-            [](std::pair<const KEY &, VAL *> p_pair) { delete p_pair.second; });
+            [](std::pair<const KEY&, VAL*> p_pair) { delete p_pair.second; });
 
         map.clear();
     }
-    bool contains(const KEY &p_key) const {
+    bool contains(const KEY& p_key) const {
         if (map.count(p_key) > 0) return true;
 
         return false;
     }
-    bool contains(VAL *p_val) const {
-        for (VAL *e : map)
+    bool contains(VAL* p_val) const {
+        for (VAL* e : map)
             if (p_val == e) return true;
 
         return false;
     }
 
-    VAL *set(const KEY &p_key, VAL *p_val) {
+    VAL* set(const KEY& p_key, VAL* p_val) {
         map[p_key] = p_val;
         return p_val;
     }
 
-    VAL *get(const KEY &p_key) const { return map.at(p_key); }
+    VAL* get(const KEY& p_key) const { return map.at(p_key); }
 
     // Operators
-    VAL *&operator[](const KEY &p_key) { return map.at(p_key); }
-    VAL *operator[](const KEY &p_key) const { return map.at(p_key); }
+    VAL*& operator[](const KEY& p_key) { return map.at(p_key); }
+    VAL* operator[](const KEY& p_key) const { return map.at(p_key); }
 };
 
 #if 0

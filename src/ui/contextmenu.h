@@ -13,7 +13,7 @@ class ContextMenu : public Control {
         bool seperator;
         String text;
         rect2 area;
-        Texture2D *icon;
+        Texture2D* icon;
         Signal signal;
     };
 
@@ -21,20 +21,20 @@ class ContextMenu : public Control {
     virtual ~ContextMenu();
 
     vec2 get_required_size() const override;
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
     void position_items();
 
-    int get_item(const vec2 &p_pos) const;
+    int get_item(const vec2& p_pos) const;
 
     void notification(int p_notification) override;
 
-    void add_item(const String &p_text, const Connection &p_connection);
-    void add_item(Texture2D *p_icon, const String &p_text,
-                  const Connection &p_connection);
+    void add_item(const String& p_text, const Connection& p_connection);
+    void add_item(Texture2D* p_icon, const String& p_text,
+                  const Connection& p_connection);
     void add_seperator();
 
-    void set_text(int p_index, const String &p_text);
+    void set_text(int p_index, const String& p_text);
     String get_text(int p_index) const;
 
     int get_selected() const;
@@ -65,7 +65,7 @@ class ContextMenu : public Control {
     Color border_color;
     Color seperator_color;
 
-    Font *font;
+    Font* font;
 };
 
 class ContextTip : public Control {
@@ -73,11 +73,11 @@ class ContextTip : public Control {
 
    public:
     ContextTip();
-    ContextTip(const String &p_description);
+    ContextTip(const String& p_description);
     virtual ~ContextTip();
 
     vec2 get_required_size() const override;
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
     void notification(int p_notification) override;
 

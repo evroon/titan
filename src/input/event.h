@@ -37,13 +37,13 @@ class InputEvent : public Event {
         TEXT_INPUT
     };
 
-    InputEvent(const Type &p_type);
+    InputEvent(const Type& p_type);
 
     String to_string() const override;
     String get_name() const override;
 
-    void accept_mouse_pos(const vec2 &window_size, const vec2 &mouse_pos);
-    void accept_finger_pos(const vec2 &window_size, const vec2 &finger_pos);
+    void accept_mouse_pos(const vec2& window_size, const vec2& mouse_pos);
+    void accept_finger_pos(const vec2& window_size, const vec2& finger_pos);
 
     void set_pos(vec2 p_pos) { pos = p_pos; }
     vec2 get_pos() const { return pos; }
@@ -73,9 +73,9 @@ class CollisionEvent : public Event {
 
     ContactType contact;
 
-    WorldObject *object;
+    WorldObject* object;
 
-    WorldObject *get_object() const;
+    WorldObject* get_object() const;
     String to_string() const override;
 
     static void bind_methods();
@@ -137,7 +137,7 @@ class DropEvent : public Event {
     OBJ_DEFINITION(DropEvent, Event)
 
    public:
-    DropEvent(const String &name) { filename = name; }
+    DropEvent(const String& name) { filename = name; }
     String filename;
 };
 

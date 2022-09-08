@@ -4,23 +4,23 @@
 #include "method.h"
 #include "methodbuilder.h"
 
-MethodMaster *MethodMaster::method_master;
+MethodMaster* MethodMaster::method_master;
 
-Method *ObjectCallables::get_method_by_name(const StringName &name) {
+Method* ObjectCallables::get_method_by_name(const StringName& name) {
     for (int c = 0; c < methods.size(); c++)
         if (methods[c]->name == name) return methods[c];
 
     return nullptr;
 }
 
-Property *ObjectCallables::get_getsetter_by_name(const StringName &name) {
+Property* ObjectCallables::get_getsetter_by_name(const StringName& name) {
     for (int c = 0; c < properties.size(); c++)
         if (properties[c]->var_name == name) return properties[c];
 
     return nullptr;
 }
 
-TConstructor *ObjectCallables::get_constructor_by_params(int param_count) {
+TConstructor* ObjectCallables::get_constructor_by_params(int param_count) {
     for (int c = 0; c < constructors.size(); c++)
         if (constructors[c]->arg_count == param_count) return constructors[c];
 
@@ -46,7 +46,7 @@ void MethodMaster::init() {
 }
 
 void MethodMaster::add_inherited_methods() {
-    for (std::pair<const StringName, ObjectType> &o :
+    for (std::pair<const StringName, ObjectType>& o :
          TypeManager::get_singleton()->object_types) {
         Array<String> a = o.second.path.split('/');
 
@@ -56,12 +56,12 @@ void MethodMaster::add_inherited_methods() {
         for (int c = 0; c < a.size(); c++) {
             VariantType t = a[c];
 
-            for (Method *method : object_callables[t].methods) {
+            for (Method* method : object_callables[t].methods) {
                 method->inherits_from = t;
                 register_method(o.second.name, method);
             }
 
-            for (Property *property : object_callables[t].properties) {
+            for (Property* property : object_callables[t].properties) {
                 property->inherits_from = t;
                 register_property(o.second.name, property);
             }
@@ -182,7 +182,7 @@ void MethodMaster::add_static_functions() {
 }
 
 void MethodMaster::register_constant(VariantType type,
-                                     const ConstantMember &p_constant) {
+                                     const ConstantMember& p_constant) {
     object_callables[type].constants.push_back(p_constant);
 }
 
@@ -191,43 +191,43 @@ void MethodMaster::register_singleton(VariantType type, Variant p_singleton) {
 }
 
 // register
-void MethodMaster::register_method(VariantType type, Method *method) {
+void MethodMaster::register_method(VariantType type, Method* method) {
     if (!method_exists(type, method->name))
         object_callables[type].methods.push_back(method);
 }
 
-void MethodMaster::register_property(VariantType type, Property *getset) {
+void MethodMaster::register_property(VariantType type, Property* getset) {
     if (!property_exists(type, getset->var_name))
         object_callables[type].properties.push_back(getset);
 }
 
-void MethodMaster::register_constructor(VariantType type, TConstructor *cstr) {
+void MethodMaster::register_constructor(VariantType type, TConstructor* cstr) {
     if (!constructor_exists(type, cstr->arg_count))
         object_callables[type].constructors.push_back(cstr);
 }
 
-void MethodMaster::register_static_func(StringName name, Method *method) {
+void MethodMaster::register_static_func(StringName name, Method* method) {
     static_funcs.set(name, method);
 }
 
-void MethodMaster::register_signal(const VariantType &p_type,
-                                   const StringName &p_signal) {
+void MethodMaster::register_signal(const VariantType& p_type,
+                                   const StringName& p_signal) {
     object_callables[p_type].signal_names.push_back(p_signal);
 }
 
 // does exist
-bool MethodMaster::method_exists(VariantType type, const StringName &name) {
+bool MethodMaster::method_exists(VariantType type, const StringName& name) {
     if (!object_callables.contains(type)) return false;
 
-    for (Method *m : object_callables[type].methods)
+    for (Method* m : object_callables[type].methods)
         if (m->name == name) return true;
 
     return false;
 }
-bool MethodMaster::property_exists(VariantType type, const StringName &name) {
+bool MethodMaster::property_exists(VariantType type, const StringName& name) {
     if (!object_callables.contains(type)) return false;
 
-    for (Property *gs : object_callables[type].properties)
+    for (Property* gs : object_callables[type].properties)
         if (gs->var_name == name) return true;
 
     return false;
@@ -235,14 +235,14 @@ bool MethodMaster::property_exists(VariantType type, const StringName &name) {
 bool MethodMaster::constructor_exists(VariantType type, int argc) {
     if (!object_callables.contains(type)) return false;
 
-    for (TConstructor *m : object_callables[type].constructors)
+    for (TConstructor* m : object_callables[type].constructors)
         if (m->arg_count == argc) return true;
 
     return false;
 }
 
-bool MethodMaster::signal_exists(const VariantType &p_type,
-                                 const StringName &p_signal) {
+bool MethodMaster::signal_exists(const VariantType& p_type,
+                                 const StringName& p_signal) {
     if (!object_callables.contains(p_type)) return false;
 
     Array<String> a =
@@ -257,24 +257,24 @@ bool MethodMaster::signal_exists(const VariantType &p_type,
 }
 
 // get
-Method *MethodMaster::get_method(VariantType type, const StringName &name) {
+Method* MethodMaster::get_method(VariantType type, const StringName& name) {
     if (object_callables.contains(type)) {
         if (name == "CollisionEvent")
             for (auto m : object_callables[type].methods)
                 std::cout << (m->name).get_source() << std::endl;
 
-        Method *m = object_callables[type].get_method_by_name(name);
+        Method* m = object_callables[type].get_method_by_name(name);
         return object_callables[type].get_method_by_name(name);
     } else
         return nullptr;
 }
-Property *MethodMaster::get_property(VariantType type, const StringName &name) {
+Property* MethodMaster::get_property(VariantType type, const StringName& name) {
     if (object_callables.contains(type))
         return object_callables[type].get_getsetter_by_name(name);
     else
         return nullptr;
 }
-TConstructor *MethodMaster::get_constructor(VariantType type, int param_count) {
+TConstructor* MethodMaster::get_constructor(VariantType type, int param_count) {
     if (object_callables.contains(type))
         return object_callables[type].get_constructor_by_params(param_count);
     else
@@ -289,18 +289,18 @@ Variant MethodMaster::get_singleton(VariantType p_type) {
 }
 
 void MethodMaster::clean() {
-    for (std::pair<const int, ObjectCallables> &oc : MMASTER->object_callables)
+    for (std::pair<const int, ObjectCallables>& oc : MMASTER->object_callables)
         oc.second.free();
 }
 
-MethodMaster *MethodMaster::get_method_master() { return method_master; }
+MethodMaster* MethodMaster::get_method_master() { return method_master; }
 
 Array<StringName> MethodMaster::list_method_names(VariantType type) {
     if (!type.is_def()) return Array<StringName>();
 
     Array<StringName> result;
 
-    for (Method *m : object_callables[type].methods) result.push_back(m->name);
+    for (Method* m : object_callables[type].methods) result.push_back(m->name);
 
     return result;
 }
@@ -310,7 +310,7 @@ Array<StringName> MethodMaster::list_property_names(VariantType type) {
 
     Array<StringName> result;
 
-    for (Property *m : object_callables[type].properties)
+    for (Property* m : object_callables[type].properties)
         result.push_back(m->var_name);
 
     return result;

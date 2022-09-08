@@ -20,9 +20,9 @@ class RigidBody3D : public Node {
     static void bind_methods();
 
    private:
-    PhysicsWorld3D *physics_3d;
+    PhysicsWorld3D* physics_3d;
 
-    CollisionShape3D *shape;
+    CollisionShape3D* shape;
 };
 
 class RigidBody2D : public Node {
@@ -36,30 +36,30 @@ class RigidBody2D : public Node {
     void update();
 
     vec2 get_velocity() const;
-    void set_velocity(const vec2 &p_velocity);
+    void set_velocity(const vec2& p_velocity);
 
     bool get_fixed_rotation() const;
     void set_fixed_rotation(bool p_value);
 
-    void set_transform(const Transform &p_transform);
+    void set_transform(const Transform& p_transform);
 
     void set_as_box(bool p_dynamic);
     void set_as_circle(bool p_dynamic);
 
-    void apply_force(const vec2 &p_force);
+    void apply_force(const vec2& p_force);
 
     void set_as_sensor(bool p_value);
 
-    WorldObject *get_colliding_objects() const;
+    WorldObject* get_colliding_objects() const;
 
     static void bind_methods();
 
    protected:
-    WorldObject *get_world_object();
+    WorldObject* get_world_object();
 
-    CollisionShape2D *shape;
+    CollisionShape2D* shape;
 
-    PhysicsWorld2D *physics_2d;
+    PhysicsWorld2D* physics_2d;
 
     vec2 size;
     bool dynamic;

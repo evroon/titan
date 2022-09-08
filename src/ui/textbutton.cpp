@@ -4,7 +4,7 @@
 
 TextButton::TextButton() : TextButton("") {}
 
-TextButton::TextButton(const String &p_text) {
+TextButton::TextButton(const String& p_text) {
     font = CanvasData::get_singleton()->get_default_theme()->get_font();
 
     text = p_text;
@@ -37,7 +37,7 @@ void TextButton::notification(int p_notification) {
 #undef CLASSNAME
 #define CLASSNAME TextButton
 
-void TextButton::set_text(const String &p_text) {
+void TextButton::set_text(const String& p_text) {
     text = p_text;
     update();
 }

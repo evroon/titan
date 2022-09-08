@@ -9,7 +9,7 @@
 
 class ContentTile : public ImageButton {
    public:
-    ContentTile(const String &filepath);
+    ContentTile(const String& filepath);
 
     vec2 get_required_size() const override;
 };
@@ -24,9 +24,9 @@ class ContentView : public Control {
 
     void draw();
 
-    void add_item(const String &path);
+    void add_item(const String& path);
 
-    void browse_to(const String &path);
+    void browse_to(const String& path);
 
     void clear_history();
 
@@ -40,8 +40,8 @@ class ContentView : public Control {
 
     Container buttons;
 
-    ImageButton *back;
-    ImageButton *forward;
+    ImageButton* back;
+    ImageButton* forward;
 
     ListView list;
 

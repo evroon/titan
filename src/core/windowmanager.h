@@ -14,11 +14,11 @@ class WindowManager {
     WindowManager();
     ~WindowManager();
 
-    static WindowManager *get_window_manager();
+    static WindowManager* get_window_manager();
 
-    void register_window(Window *window);
+    void register_window(Window* window);
 
-    Window *get_default_window();
+    Window* get_default_window();
     vec2i get_default_window_size();
     vec2 get_default_window_size_f();
 
@@ -28,5 +28,5 @@ class WindowManager {
     Vector<Window> windows;
     static WindowManager window_manager;
 
-    Window *default_window;
+    Window* default_window;
 };

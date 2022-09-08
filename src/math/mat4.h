@@ -48,8 +48,8 @@ class mat4 {
         m[11] = m11;
         m[15] = m15;
     }
-    mat4(const vec4 &p_c0, const vec4 &p_c1, const vec4 &p_c2,
-         const vec4 &p_c3) {
+    mat4(const vec4& p_c0, const vec4& p_c1, const vec4& p_c2,
+         const vec4& p_c3) {
         m[0] = p_c0.x;
         m[4] = p_c1.x;
         m[8] = p_c2.x;
@@ -70,24 +70,24 @@ class mat4 {
 
     // Operators
     // Comparison
-    bool operator==(const mat4 &r) const {
+    bool operator==(const mat4& r) const {
         for (int c = 0; c < 16; c++)
             if (m[c] != r.m[c]) return false;
         return true;
     }
-    bool operator!=(const mat4 &r) const {
+    bool operator!=(const mat4& r) const {
         for (int c = 0; c < 16; c++)
             if (m[c] != r.m[c]) return true;
         return false;
     }
 
     // Multiplication
-    mat4 operator*(const mat4 &r) const {
+    mat4 operator*(const mat4& r) const {
         mat4 l = *this;
         l *= r;
         return l;
     }
-    vec4 operator*(const vec4 &r) const {
+    vec4 operator*(const vec4& r) const {
         vec4 result;
         result.x = m[0] * r.x + m[4] * r.y + m[8] * r.z + m[12] * r.w;
         result.y = m[1] * r.x + m[5] * r.y + m[9] * r.z + m[13] * r.w;
@@ -95,12 +95,12 @@ class mat4 {
         result.w = m[3] * r.x + m[7] * r.y + m[11] * r.z + m[15] * r.w;
         return result;
     }
-    mat4 operator*(const float &r) const {
+    mat4 operator*(const float& r) const {
         mat4 l = *this;
         l *= r;
         return l;
     }
-    mat4 &operator*=(const mat4 &r) {
+    mat4& operator*=(const mat4& r) {
         mat4 l = *this;
 
         m[0] = l.m[0] * r.m[0] + l.m[4] * r.m[1] + l.m[8] * r.m[2] +
@@ -138,7 +138,7 @@ class mat4 {
 
         return *this;
     }
-    mat4 &operator*=(const float &r) {
+    mat4& operator*=(const float& r) {
         m[0] *= r;
         m[4] *= r;
         m[8] *= r;
@@ -158,17 +158,17 @@ class mat4 {
         return *this;
     }
     // Addition
-    mat4 operator+(const mat4 &r) const {
+    mat4 operator+(const mat4& r) const {
         mat4 l = *this;
         l += r;
         return l;
     }
-    mat4 operator-(const mat4 &r) const {
+    mat4 operator-(const mat4& r) const {
         mat4 l = *this;
         l -= r;
         return l;
     }
-    mat4 &operator+=(const mat4 &r) {
+    mat4& operator+=(const mat4& r) {
         m[0] += r.m[0];
         m[1] += r.m[1];
         m[2] += r.m[2];
@@ -187,7 +187,7 @@ class mat4 {
         m[15] += r.m[15];
         return *this;
     }
-    mat4 &operator-=(const mat4 &r) {
+    mat4& operator-=(const mat4& r) {
         m[0] -= r.m[0];
         m[1] -= r.m[1];
         m[2] -= r.m[2];
@@ -208,7 +208,7 @@ class mat4 {
     }
 
     // Conversion
-    operator float *() { return m; }
+    operator float*() { return m; }
     String ToString() const {
         String s = "{ ";
         for (int c = 0; c < 16; c++) s += std::to_string(m[c]) + ", ";
@@ -231,7 +231,7 @@ class mat4 {
     void identity() { *this = mat4(); }
 
     // Transformations
-    void translate(const vec3 &trans) {
+    void translate(const vec3& trans) {
         m[12] = trans.x;
         m[13] = trans.y;
         m[14] = trans.z;
@@ -240,7 +240,7 @@ class mat4 {
     void rotate(float x, float y, float z, float angle) {
         rotate(vec3(x, y, z), angle);
     }
-    void rotate(const vec3 &axis, float angle) {
+    void rotate(const vec3& axis, float angle) {
         // Math::DegToRad(angle);
         // float c = cosf(angle);
         // float s = sinf(angle);
@@ -342,7 +342,7 @@ class mat4 {
         m[11] = 0.0;
         m[15] = 1.0;
     }
-    void scale(const vec3 &v) {
+    void scale(const vec3& v) {
         m[0] = v.x;
         m[4] = 0.0;
         m[8] = 0.0;
@@ -441,25 +441,25 @@ class mat4 {
     }
 
     // Perspective matrices
-    void perspective(const rect2 &p_window, float fov, float aspect,
+    void perspective(const rect2& p_window, float fov, float aspect,
                      float p_near, float p_far);
-    void orthographic(const rect2 &p_window, float p_near, float p_far);
+    void orthographic(const rect2& p_window, float p_near, float p_far);
 
     // view matrices
-    void look_at(const vec3 &p_eye, const vec3 &p_target, const vec3 &p_up);
+    void look_at(const vec3& p_eye, const vec3& p_target, const vec3& p_up);
 
     // Static Contructors
-    static mat4 Scale(const vec3 &v) {
+    static mat4 Scale(const vec3& v) {
         mat4 result;
         result.scale(v);
         return result;
     }
-    static mat4 Translate(const vec3 &v) {
+    static mat4 Translate(const vec3& v) {
         mat4 result;
         result.translate(v);
         return result;
     }
-    static mat4 Rotate(const vec3 &v) {
+    static mat4 Rotate(const vec3& v) {
         mat4 result;
         // result.rotate(v);
         return result;

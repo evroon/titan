@@ -11,21 +11,21 @@
 //=========================================================================
 
 RigidBody3D::RigidBody3D() {
-    btDefaultMotionState *groundMotionState = new btDefaultMotionState(
+    btDefaultMotionState* groundMotionState = new btDefaultMotionState(
         btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
     btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(
         0, groundMotionState, shape->shape, btVector3(0, 0, 0));
-    btRigidBody *groundRigidBody = new btRigidBody(groundRigidBodyCI);
+    btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
     physics_3d->dynamics_world->addRigidBody(groundRigidBody);
 
-    btDefaultMotionState *fallMotionState = new btDefaultMotionState(
+    btDefaultMotionState* fallMotionState = new btDefaultMotionState(
         btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
     btScalar mass = 1;
     btVector3 fallInertia(0, 0, 0);
     shape->shape->calculateLocalInertia(mass, fallInertia);
     btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(
         mass, fallMotionState, shape->shape, fallInertia);
-    btRigidBody *fallRigidBody = new btRigidBody(fallRigidBodyCI);
+    btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
     physics_3d->dynamics_world->addRigidBody(fallRigidBody);
 }
 
@@ -80,7 +80,7 @@ void RigidBody2D::update() {
 }
 
 void RigidBody2D::set_as_sensor(bool p_value) {
-    for (b2Fixture *f = shape->body->GetFixtureList(); f; f = f->GetNext())
+    for (b2Fixture* f = shape->body->GetFixtureList(); f; f = f->GetNext())
         f->SetSensor(p_value);
 }
 
@@ -91,7 +91,7 @@ vec2 RigidBody2D::get_velocity() const {
     return vec2(velo.x, velo.y) * physics_2d->get_scale();
 }
 
-void RigidBody2D::set_velocity(const vec2 &p_velocity) {
+void RigidBody2D::set_velocity(const vec2& p_velocity) {
     if (!physics_2d || physics_2d == nullptr || !shape || !shape->body) return;
 
     vec2 velo = p_velocity / physics_2d->get_scale();
@@ -109,7 +109,7 @@ void RigidBody2D::set_fixed_rotation(bool p_value) {
     if (shape && shape->body) shape->body->SetFixedRotation(p_value);
 }
 
-void RigidBody2D::set_transform(const Transform &p_transform) {
+void RigidBody2D::set_transform(const Transform& p_transform) {
     vec2 pos = p_transform.get_pos().get_xy() / physics_2d->get_scale();
 
     if (shape && shape->body) {
@@ -130,18 +130,18 @@ void RigidBody2D::set_as_circle(bool p_dynamic) {
     shape = new CircleShape2D(physics_2d, get_world_object(), p_dynamic);
 }
 
-void RigidBody2D::apply_force(const vec2 &p_force) {
+void RigidBody2D::apply_force(const vec2& p_force) {
     shape->body->ApplyLinearImpulse(b2Vec2(p_force.x, p_force.y),
                                     shape->body->GetWorldCenter(), true);
 }
 
-WorldObject *RigidBody2D::get_colliding_objects() const {
-    b2ContactEdge *bce = shape->body->GetContactList();
+WorldObject* RigidBody2D::get_colliding_objects() const {
+    b2ContactEdge* bce = shape->body->GetContactList();
 
     if (!bce) return nullptr;
 
-    b2Contact *c = bce->contact;
-    WorldObject *o = reinterpret_cast<WorldObject *>(
+    b2Contact* c = bce->contact;
+    WorldObject* o = reinterpret_cast<WorldObject*>(
         c->GetFixtureB()->GetBody()->GetUserData());
 
     return o;
@@ -169,9 +169,9 @@ void RigidBody2D::bind_methods() {
     REG_PROPERTY(fixed_rotation);
 }
 
-WorldObject *RigidBody2D::get_world_object() {
-    Node *parent = get_parent();
+WorldObject* RigidBody2D::get_world_object() {
+    Node* parent = get_parent();
     if (parent == NULL) return nullptr;
 
-    return parent->cast_to_type<WorldObject *>();
+    return parent->cast_to_type<WorldObject*>();
 }

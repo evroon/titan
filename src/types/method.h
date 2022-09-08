@@ -14,16 +14,16 @@
 // define defines
 #define CLASSNAME
 #define COMMA ,
-#define DCAST dynamic_cast<CLASSNAME *>
-#define CAST reinterpret_cast<CLASSNAME *>
-#define INVOKE0(METHOD) return CAST()(in.operator Object *())->METHOD()
-#define INVOKE(METHOD, ARGS) return CAST()(in.operator Object *())->METHOD(ARGS)
+#define DCAST dynamic_cast<CLASSNAME*>
+#define CAST reinterpret_cast<CLASSNAME*>
+#define INVOKE0(METHOD) return CAST()(in.operator Object*())->METHOD()
+#define INVOKE(METHOD, ARGS) return CAST()(in.operator Object*())->METHOD(ARGS)
 
 // base classes for method
 struct Method : Callable {
     Method() {}
 
-    virtual Variant operator()(const Array<Variant> &args) { return Variant(); }
+    virtual Variant operator()(const Array<Variant>& args) { return Variant(); }
 
     StringName name = "";
     bool returns_variant;

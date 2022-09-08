@@ -54,49 +54,49 @@ class Vec4 {
     }
 
     // General operators
-    bool operator==(const Vec4 &r) const {
+    bool operator==(const Vec4& r) const {
         return x == r.x && y == r.y && z == r.z && w == r.w;
     }
-    bool operator!=(const Vec4 &r) const {
+    bool operator!=(const Vec4& r) const {
         return x != r.x || y != r.y || z != r.z || w != r.w;
     }
 
     // Vec4 operators
-    Vec4 operator+(const Vec4 &r) const {
+    Vec4 operator+(const Vec4& r) const {
         return Vec4(x + r.x, y + r.y, z + r.z, w + r.w);
     }
-    Vec4 operator-(const Vec4 &r) const {
+    Vec4 operator-(const Vec4& r) const {
         return Vec4(x - r.x, y - r.y, z - r.z, w - r.w);
     }
-    Vec4 operator*(const Vec4 &r) const {
+    Vec4 operator*(const Vec4& r) const {
         return Vec4(x * r.x, y * r.y, z * r.z, w * r.w);
     }
-    Vec4 operator/(const Vec4 &r) const {
+    Vec4 operator/(const Vec4& r) const {
         return Vec4(x / r.x, y / r.y, z / r.z, w / r.w);
     }
 
-    Vec4 &operator+=(const Vec4 &r) {
+    Vec4& operator+=(const Vec4& r) {
         x += r.x;
         y += r.y;
         z += r.z;
         w += r.w;
         return *this;
     }
-    Vec4 &operator-=(const Vec4 &r) {
+    Vec4& operator-=(const Vec4& r) {
         x -= r.x;
         y -= r.y;
         z -= r.z;
         w -= r.w;
         return *this;
     }
-    Vec4 &operator*=(const Vec4 &r) {
+    Vec4& operator*=(const Vec4& r) {
         x *= r.x;
         y *= r.y;
         z *= r.z;
         w *= r.w;
         return *this;
     }
-    Vec4 &operator/=(const Vec4 &r) {
+    Vec4& operator/=(const Vec4& r) {
         x /= r.x;
         y /= r.y;
         z /= r.z;
@@ -105,41 +105,41 @@ class Vec4 {
     }
 
     // Scalar operators
-    Vec4 operator+(const T &r) const {
+    Vec4 operator+(const T& r) const {
         return Vec4(x + r, y + r, z + r, w + r);
     }
-    Vec4 operator-(const T &r) const {
+    Vec4 operator-(const T& r) const {
         return Vec4(x - r, y - r, z - r, w - r);
     }
-    Vec4 operator*(const T &r) const {
+    Vec4 operator*(const T& r) const {
         return Vec4(x * r, y * r, z * r, w * r);
     }
-    Vec4 operator/(const T &r) const {
+    Vec4 operator/(const T& r) const {
         return Vec4(x / r, y / r, z / r, w / r);
     }
 
-    Vec4 &operator+=(const T &r) {
+    Vec4& operator+=(const T& r) {
         x += r;
         y += r;
         z += r;
         w += r;
         return *this;
     }
-    Vec4 &operator-=(const T &r) {
+    Vec4& operator-=(const T& r) {
         x -= r;
         y -= r;
         z -= r;
         w -= r;
         return *this;
     }
-    Vec4 &operator*=(const T &r) {
+    Vec4& operator*=(const T& r) {
         x *= r;
         y *= r;
         z *= r;
         w *= r;
         return *this;
     }
-    Vec4 &operator/=(const T &r) {
+    Vec4& operator/=(const T& r) {
         x /= r;
         y /= r;
         z /= r;
@@ -148,7 +148,7 @@ class Vec4 {
     }
 
     // Index operator
-    T &operator[](const int &i) { return v[i]; }
+    T& operator[](const int& i) { return v[i]; }
 
     // Conversion
     String to_string() const {
@@ -161,25 +161,25 @@ class Vec4 {
 
     // Get info
     T length() const { return sqrt(x * x + y * y + z * z + w * w); }
-    T angle(const Vec4<T> &v) const {
+    T angle(const Vec4<T>& v) const {
         T angle = fabs(acos(dot(v) / (length() * v.length())));
         return angle;
     }
-    T dot(const Vec4<T> &v) const {
+    T dot(const Vec4<T>& v) const {
         T result = x * v.x + y * v.y + z * v.z + w * v.w;
         return result;
     }
 
     // properties
-    const T &get_x() const { return x; }
-    const T &get_y() const { return y; }
-    const T &get_z() const { return z; }
-    const T &get_w() const { return w; }
+    const T& get_x() const { return x; }
+    const T& get_y() const { return y; }
+    const T& get_z() const { return z; }
+    const T& get_w() const { return w; }
 
-    void set_x(const T &p_x) { x = p_x; }
-    void set_y(const T &p_y) { y = p_y; }
-    void set_z(const T &p_z) { z = p_z; }
-    void set_w(const T &p_w) { w = p_w; }
+    void set_x(const T& p_x) { x = p_x; }
+    void set_y(const T& p_y) { y = p_y; }
+    void set_z(const T& p_z) { z = p_z; }
+    void set_w(const T& p_w) { w = p_w; }
 
     Vec2<T> get_xy() const { return {x, y}; }
     Vec2<T> get_yz() const { return {y, z}; }
@@ -188,7 +188,7 @@ class Vec4 {
     Vec3<T> get_xyz() const { return {x, y, z}; }
 
     // Set
-    Vec4 &normalize() {
+    Vec4& normalize() {
         T inv = 1.0f / length();
         x *= inv;
         y *= inv;

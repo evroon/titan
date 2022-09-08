@@ -7,11 +7,11 @@ class Toggle : public Button {
 
    public:
     Toggle();
-    Toggle(const String &p_text);
+    Toggle(const String& p_text);
     Toggle(Ref<Texture2D> p_tex);
     virtual ~Toggle();
 
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
     void notification(int p_notification) override;
     vec2 get_required_size() const override;
 
@@ -38,11 +38,11 @@ class ToggleStrip : public Control {
         rect2 area = rect2();
     };
 
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
     void notification(int p_notification) override;
     vec2 get_required_size() const override;
 
-    void add_child(const String &p_tip, Ref<Texture2D> p_tex);
+    void add_child(const String& p_tip, Ref<Texture2D> p_tex);
 
     static void bind_methods();
 

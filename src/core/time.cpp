@@ -2,7 +2,7 @@
 
 #include "ui/uicallback.h"
 
-Time *Time::singleton;
+Time* Time::singleton;
 
 //=========================================================================
 // Time
@@ -19,13 +19,13 @@ Time::Time() {
     delta_time = 0;
 }
 
-Time *Time::get_singleton() { return singleton; }
+Time* Time::get_singleton() { return singleton; }
 
-void Time::register_timedcaller(TimedCaller *timed_caller) {
+void Time::register_timedcaller(TimedCaller* timed_caller) {
     timed_callers.push_back(timed_caller);
 }
-void Time::register_timer(Timer *timer) { timers.push_back(timer); }
-void Time::register_uitimer(UITimer *timer) { uitimers.push_back(timer); }
+void Time::register_timer(Timer* timer) { timers.push_back(timer); }
+void Time::register_uitimer(UITimer* timer) { uitimers.push_back(timer); }
 
 void Time::Init() { singleton = new Time; }
 

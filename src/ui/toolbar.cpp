@@ -66,7 +66,7 @@ void ToolBar::notification(int p_notification) {
     }
 }
 
-void ToolBar::handle_event(UIEvent *p_event) {
+void ToolBar::handle_event(UIEvent* p_event) {
     switch (p_event->type) {
         case UIEvent::FOCUS_LOSE:
         case UIEvent::MOUSE_EXIT:
@@ -125,7 +125,7 @@ void ToolBar::position_items() {
     update();
 }
 
-int ToolBar::get_item(const vec2 &p_pos) const {
+int ToolBar::get_item(const vec2& p_pos) const {
     int result = -1;
 
     for (int c = 0; c < items.size(); c++) {
@@ -138,7 +138,7 @@ int ToolBar::get_item(const vec2 &p_pos) const {
     return result;
 }
 
-void ToolBar::add_item(const String &p_text) {
+void ToolBar::add_item(const String& p_text) {
     ToolBarItem item;
     item.text = p_text;
     item.menu = NULL;
@@ -147,7 +147,7 @@ void ToolBar::add_item(const String &p_text) {
     update();
 }
 
-void ToolBar::set_menu(int p_index, ContextMenu *p_menu) {
+void ToolBar::set_menu(int p_index, ContextMenu* p_menu) {
     if (p_index < 0 || p_index > items.size()) return;
 
     items[p_index].menu = p_menu;

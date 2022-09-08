@@ -214,7 +214,7 @@ struct MethodBinder {
     //=========================================================================
 
     template <typename R, typename T>
-    static std::function<VAR(T *)> bind(R (T::*f)()) {
+    static std::function<VAR(T*)> bind(R (T::*f)()) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->return_type = GetType<R>();
         get_singleton()->is_const = false;
@@ -223,7 +223,7 @@ struct MethodBinder {
     }
 
     template <typename R, typename T, typename A_0>
-    static std::function<VAR(T *, A_0)> bind(R (T::*f)(A_0)) {
+    static std::function<VAR(T*, A_0)> bind(R (T::*f)(A_0)) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->return_type = GetType<R>();
@@ -233,7 +233,7 @@ struct MethodBinder {
     }
 
     template <typename R, typename T, typename A_0, typename A_1>
-    static std::function<VAR(T *, A_0, A_1)> bind(R (T::*f)(A_0, A_1)) {
+    static std::function<VAR(T*, A_0, A_1)> bind(R (T::*f)(A_0, A_1)) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->arg_typenames.push_back(GetType<A_1>());
@@ -249,7 +249,7 @@ struct MethodBinder {
     //=========================================================================
 
     template <typename T>
-    static std::function<void(T *)> bind(void (T::*f)()) {
+    static std::function<void(T*)> bind(void (T::*f)()) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->is_const = false;
 
@@ -257,7 +257,7 @@ struct MethodBinder {
     }
 
     template <typename T, typename A_0>
-    static std::function<void(T *, A_0)> bind(void (T::*f)(A_0)) {
+    static std::function<void(T*, A_0)> bind(void (T::*f)(A_0)) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->is_const = false;
@@ -266,7 +266,7 @@ struct MethodBinder {
     }
 
     template <typename T, typename A_0, typename A_1>
-    static std::function<void(T *, A_0, A_1)> bind(void (T::*f)(A_0, A_1)) {
+    static std::function<void(T*, A_0, A_1)> bind(void (T::*f)(A_0, A_1)) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->arg_typenames.push_back(GetType<A_1>());
@@ -281,7 +281,7 @@ struct MethodBinder {
     //=========================================================================
 
     template <typename R, typename T>
-    static std::function<VAR(T *)> bind(R (T::*f)() const) {
+    static std::function<VAR(T*)> bind(R (T::*f)() const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->return_type = GetType<R>();
         get_singleton()->is_const = true;
@@ -290,7 +290,7 @@ struct MethodBinder {
     }
 
     template <typename R, typename T, typename A_0>
-    static std::function<VAR(T *, A_0)> bind(R (T::*f)(A_0) const) {
+    static std::function<VAR(T*, A_0)> bind(R (T::*f)(A_0) const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->return_type = GetType<R>();
@@ -300,7 +300,7 @@ struct MethodBinder {
     }
 
     template <typename R, typename T, typename A_0, typename A_1>
-    static std::function<VAR(T *, A_0, A_1)> bind(R (T::*f)(A_0, A_1) const) {
+    static std::function<VAR(T*, A_0, A_1)> bind(R (T::*f)(A_0, A_1) const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->arg_typenames.push_back(GetType<A_1>());
@@ -316,7 +316,7 @@ struct MethodBinder {
     //=========================================================================
 
     template <typename T>
-    static std::function<void(T *)> bind(void (T::*f)() const) {
+    static std::function<void(T*)> bind(void (T::*f)() const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->is_const = true;
 
@@ -324,7 +324,7 @@ struct MethodBinder {
     }
 
     template <typename T, typename A_0>
-    static std::function<void(T *, A_0)> bind(void (T::*f)(A_0) const) {
+    static std::function<void(T*, A_0)> bind(void (T::*f)(A_0) const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->is_const = true;
@@ -333,8 +333,8 @@ struct MethodBinder {
     }
 
     template <typename T, typename A_0, typename A_1>
-    static std::function<void(T *, A_0, A_1)> bind(void (T::*f)(A_0, A_1)
-                                                       const) {
+    static std::function<void(T*, A_0, A_1)> bind(void (T::*f)(A_0, A_1)
+                                                      const) {
         get_singleton()->arg_typenames.clear();
         get_singleton()->arg_typenames.push_back(GetType<A_0>());
         get_singleton()->arg_typenames.push_back(GetType<A_1>());
@@ -344,7 +344,7 @@ struct MethodBinder {
                          std::placeholders::_3);
     }
 
-    static MethodBinder *get_singleton() {
+    static MethodBinder* get_singleton() {
         static MethodBinder mb;
         return &mb;
     }
@@ -361,64 +361,64 @@ class MethodBuilder {
 #define VAR_TYPE VariantType var_type
 
     // void method
-    static V_Method_1 *reg_method(std::function<void(VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
-    static V_Method_2 *reg_method(std::function<void(VAR, VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
-    static V_Method_3 *reg_method(std::function<void(VAR, VAR, VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
+    static V_Method_1* reg_method(std::function<void(VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
+    static V_Method_2* reg_method(std::function<void(VAR, VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
+    static V_Method_3* reg_method(std::function<void(VAR, VAR, VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
 
     // return method
-    static R_Method_1 *reg_method(std::function<VAR(VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
-    static R_Method_2 *reg_method(std::function<VAR(VAR, VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
-    static R_Method_3 *reg_method(std::function<VAR(VAR, VAR, VAR)> p_func,
-                                  const StringName &name,
-                                  const ParameterNames &p_args, VAR_TYPE);
+    static R_Method_1* reg_method(std::function<VAR(VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
+    static R_Method_2* reg_method(std::function<VAR(VAR, VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
+    static R_Method_3* reg_method(std::function<VAR(VAR, VAR, VAR)> p_func,
+                                  const StringName& name,
+                                  const ParameterNames& p_args, VAR_TYPE);
 
     // static void method
-    static V_Method_0 *reg_static_func(std::function<void()> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
-    static V_Method_1 *reg_static_func(std::function<void(VAR)> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
-    static V_Method_2 *reg_static_func(std::function<void(VAR, VAR)> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
+    static V_Method_0* reg_static_func(std::function<void()> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
+    static V_Method_1* reg_static_func(std::function<void(VAR)> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
+    static V_Method_2* reg_static_func(std::function<void(VAR, VAR)> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
 
     // static return method
-    static R_Method_0 *reg_static_func(std::function<VAR()> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
-    static R_Method_1 *reg_static_func(std::function<VAR(VAR)> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
-    static R_Method_2 *reg_static_func(std::function<VAR(VAR, VAR)> p_func,
-                                       const StringName &name,
-                                       const ParameterNames &p_args);
+    static R_Method_0* reg_static_func(std::function<VAR()> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
+    static R_Method_1* reg_static_func(std::function<VAR(VAR)> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
+    static R_Method_2* reg_static_func(std::function<VAR(VAR, VAR)> p_func,
+                                       const StringName& name,
+                                       const ParameterNames& p_args);
 
     // constructor
-    static CSTR_0 *register_constructor(std::function<VAR()> p_func,
-                                        const ParameterNames &p_args, VAR_TYPE);
-    static CSTR_1 *register_constructor(std::function<VAR(VAR)> p_func,
-                                        const ParameterNames &p_args, VAR_TYPE);
-    static CSTR_2 *register_constructor(std::function<VAR(VAR, VAR)> p_func,
-                                        const ParameterNames &p_args, VAR_TYPE);
-    static CSTR_3 *register_constructor(
-        std::function<VAR(VAR, VAR, VAR)> p_func, const ParameterNames &p_args,
+    static CSTR_0* register_constructor(std::function<VAR()> p_func,
+                                        const ParameterNames& p_args, VAR_TYPE);
+    static CSTR_1* register_constructor(std::function<VAR(VAR)> p_func,
+                                        const ParameterNames& p_args, VAR_TYPE);
+    static CSTR_2* register_constructor(std::function<VAR(VAR, VAR)> p_func,
+                                        const ParameterNames& p_args, VAR_TYPE);
+    static CSTR_3* register_constructor(
+        std::function<VAR(VAR, VAR, VAR)> p_func, const ParameterNames& p_args,
         VAR_TYPE);
-    static CSTR_4 *register_constructor(
+    static CSTR_4* register_constructor(
         std::function<VAR(VAR, VAR, VAR, VAR)> p_func,
-        const ParameterNames &p_args, VAR_TYPE);
+        const ParameterNames& p_args, VAR_TYPE);
 
     // Property
-    static Property *register_property(R_Method_1 *p_get, V_Method_2 *p_set,
-                                       const StringName &name, VAR_TYPE);
+    static Property* register_property(R_Method_1* p_get, V_Method_2* p_set,
+                                       const StringName& name, VAR_TYPE);
 };

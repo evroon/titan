@@ -3,12 +3,12 @@
 #include "container.h"
 #include "control.h"
 
-ControlState::ControlState(Control *p_parent) { parent = p_parent; }
+ControlState::ControlState(Control* p_parent) { parent = p_parent; }
 
 ControlState::~ControlState() {}
 
-void ControlState::handle_event(InputEvent *input_event) {
-    UIEvent *key_press_event;
+void ControlState::handle_event(InputEvent* input_event) {
+    UIEvent* key_press_event;
 
     switch (input_event->type) {
         case InputEvent::MOUSEMOVE:
@@ -68,31 +68,31 @@ void ControlState::handle_event(InputEvent *input_event) {
     }
 }
 
-void ControlState::pass_mouse_hover(const vec2 &pos) {
-    UIEvent *e = new UIEvent;
+void ControlState::pass_mouse_hover(const vec2& pos) {
+    UIEvent* e = new UIEvent;
     e->type = UIEvent::MOUSE_HOVER;
     e->pos = pos;
     parent->handle_event(e);
 }
-void ControlState::pass_mouse_scroll(const InputEvent::ScrollType &st) {
-    UIEvent *e = new UIEvent(UIEvent::MOUSE_SCROLL);
+void ControlState::pass_mouse_scroll(const InputEvent::ScrollType& st) {
+    UIEvent* e = new UIEvent(UIEvent::MOUSE_SCROLL);
     e->scroll_type = st;
     parent->handle_event(e);
 }
 void ControlState::pass_mouse_enter() {
-    UIEvent *e = new UIEvent;
+    UIEvent* e = new UIEvent;
     e->type = UIEvent::MOUSE_ENTER;
     parent->handle_event(e);
 }
 void ControlState::pass_mouse_exit() {
-    UIEvent *e = new UIEvent;
+    UIEvent* e = new UIEvent;
     e->type = UIEvent::MOUSE_EXIT;
     parent->handle_event(e);
 }
 
-void ControlState::pass_mouse_press(const vec2 &pos,
+void ControlState::pass_mouse_press(const vec2& pos,
                                     Event::PressType press_type) {
-    UIEvent *e = new UIEvent;
+    UIEvent* e = new UIEvent;
     e->type = UIEvent::MOUSE_PRESS;
     e->press_type = press_type;
     e->pos = pos;

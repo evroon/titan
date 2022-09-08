@@ -11,7 +11,7 @@ class CheckBox : public PropertyControl {
    public:
     CheckBox();
     CheckBox(bool p_value);
-    CheckBox(const Variable &p_variable);
+    CheckBox(const Variable& p_variable);
     virtual ~CheckBox() {}
 
     void init();
@@ -23,7 +23,7 @@ class CheckBox : public PropertyControl {
 
     void notification(int p_notification) override;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
     void draw();
 

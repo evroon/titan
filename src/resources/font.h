@@ -10,34 +10,34 @@ class Font : public Resource {
 
    public:
     Font();
-    Font(const String &name, int size);
+    Font(const String& name, int size);
     ~Font();
 
     static void Init();
     static void Quit();
 
-    Texture2D *DrawToTex(const String &src);
-    int get_index(const String &text, float p_offset) const;
-    float get_width(const String &text) const;
+    Texture2D* DrawToTex(const String& src);
+    int get_index(const String& text, float p_offset) const;
+    float get_width(const String& text) const;
     float get_height() const;
 
-    FontRenderer *get_renderer() const;
+    FontRenderer* get_renderer() const;
 
     static void bind_methods();
 
     float height;
 
    private:
-    SDL_Surface *text;
-    TTF_Font *font;
-    FontRenderer *renderer;
+    SDL_Surface* text;
+    TTF_Font* font;
+    FontRenderer* renderer;
 };
 
 class FontRenderer {
    public:
-    FontRenderer(Font *p_font);
+    FontRenderer(Font* p_font);
 
-    Texture2D *get_texture() const;
+    Texture2D* get_texture() const;
     vec4 get_bounds(Char p_c) const;
 
     float get_space_offset() const;
@@ -46,8 +46,8 @@ class FontRenderer {
     void init();
 
    private:
-    Font *font;
-    Texture2D *texture;
+    Font* font;
+    Texture2D* texture;
 
     float space_offset, tab_offset;
 

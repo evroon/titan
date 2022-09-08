@@ -7,24 +7,24 @@ class Slider;
 class TileView;
 
 struct TileElement {
-    TileElement(const String &p_text);
+    TileElement(const String& p_text);
     ~TileElement();
 
-    void bind_tileview(TileView *p_tileview);
+    void bind_tileview(TileView* p_tileview);
 
     void set_index(int p_index);
     int get_index();
 
     rect2 get_area() const;
-    void set_area(const rect2 &p_area);
+    void set_area(const rect2& p_area);
 
-    bool is_in_area(const vec2 &p_pos);
+    bool is_in_area(const vec2& p_pos);
 
     String get_text() const;
-    void set_text(const String &p_text);
+    void set_text(const String& p_text);
 
-    Texture2D *get_icon() const;
-    void set_icon(Texture2D *p_icon);
+    Texture2D* get_icon() const;
+    void set_icon(Texture2D* p_icon);
 
     void set_visible(bool p_visible);
     bool get_visible() const;
@@ -36,8 +36,8 @@ struct TileElement {
 
    private:
     int index;
-    TileView *tileview;
-    Texture2D *icon;
+    TileView* tileview;
+    Texture2D* icon;
 
     String text;
 
@@ -55,7 +55,7 @@ class TileView : public Control {
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
     void position_items();
 
@@ -65,11 +65,11 @@ class TileView : public Control {
 
     // unique methods
     void clear();
-    void push_back_item(TileElement &item);
+    void push_back_item(TileElement& item);
 
-    int get_position(const vec2 &pos);
+    int get_position(const vec2& pos);
 
-    TileElement *get_item(int row);
+    TileElement* get_item(int row);
     int get_item_size(int row);
 
     void set_item_numbers_enabled(bool p_value);
@@ -89,8 +89,8 @@ class TileView : public Control {
 
     void remove_item(int p_index);
 
-    void push_back_item(const String &p_text, Texture2D *p_icon = NULL);
-    void insert_item_at_index(int index, TileElement &item);
+    void push_back_item(const String& p_text, Texture2D* p_icon = NULL);
+    void insert_item_at_index(int index, TileElement& item);
 
     void set_selection(int p_begin, int p_end);
     void delete_selection();
@@ -105,13 +105,13 @@ class TileView : public Control {
 
     void make_visible(int p_index);
 
-    void search(const String &p_src);
+    void search(const String& p_src);
     void stop_search();
 
     void slider_value_changed();
 
-    void set_font(Font *p_font);
-    Font *get_font() const;
+    void set_font(Font* p_font);
+    Font* get_font() const;
 
     static void bind_methods();
 
@@ -148,8 +148,8 @@ class TileView : public Control {
 
     Array<TileElement> items;
 
-    Font *font;
-    Slider *slider;
+    Font* font;
+    Slider* slider;
 
     rect2 selection_box;
 };

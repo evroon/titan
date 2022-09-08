@@ -10,8 +10,8 @@ class Vec2Field : public PropertyControl {
 
    public:
     Vec2Field();
-    Vec2Field(const vec2 &p_variant);
-    Vec2Field(const Variable &p_variable);
+    Vec2Field(const vec2& p_variant);
+    Vec2Field(const Variable& p_variable);
 
     void init();
 
@@ -36,8 +36,8 @@ class Vec3Field : public PropertyControl {
 
    public:
     Vec3Field();
-    Vec3Field(const vec3 &p_variant);
-    Vec3Field(const Variable &p_variable);
+    Vec3Field(const vec3& p_variant);
+    Vec3Field(const Variable& p_variable);
 
     void init();
 
@@ -62,8 +62,8 @@ class Vec4Field : public PropertyControl {
 
    public:
     Vec4Field();
-    Vec4Field(const vec4 &p_variant);
-    Vec4Field(const Variable &p_variable);
+    Vec4Field(const vec4& p_variant);
+    Vec4Field(const Variable& p_variable);
 
     void init();
 
@@ -88,8 +88,8 @@ class TransformField : public PropertyControl {
 
    public:
     TransformField();
-    TransformField(const Transform &p_variant);
-    TransformField(const Variable &p_variable);
+    TransformField(const Transform& p_variant);
+    TransformField(const Variable& p_variable);
 
     void init();
 

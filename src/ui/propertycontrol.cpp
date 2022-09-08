@@ -2,9 +2,9 @@
 
 PropertyControl::PropertyControl() { set_value(Variant()); }
 
-PropertyControl::PropertyControl(const Variant &p_value) { set_value(p_value); }
+PropertyControl::PropertyControl(const Variant& p_value) { set_value(p_value); }
 
-PropertyControl::PropertyControl(const Variable &p_variable) {
+PropertyControl::PropertyControl(const Variable& p_variable) {
     set_value(p_variable);
 }
 
@@ -18,7 +18,7 @@ void PropertyControl::update_value() {
     update();
 }
 
-void PropertyControl::set_value(const Variant &p_value) {
+void PropertyControl::set_value(const Variant& p_value) {
     if (get_focused()) return;
 
     type = VARIANT;
@@ -28,7 +28,7 @@ void PropertyControl::set_value(const Variant &p_value) {
     update();
 }
 
-void PropertyControl::set_value(const Variable &p_variable) {
+void PropertyControl::set_value(const Variable& p_variable) {
     if (get_focused()) return;
 
     type = VARIABLE;
@@ -54,7 +54,7 @@ VariantType PropertyControl::get_property_type() {
     return variant.get_type();
 }
 
-void PropertyControl::value_set(const Variant &p_value) {
+void PropertyControl::value_set(const Variant& p_value) {
     if (type == VARIANT) {
         variant = p_value;
     } else {

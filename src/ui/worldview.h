@@ -10,7 +10,7 @@ class WorldView : public Control {
 
    public:
     WorldView();
-    WorldView(Scene *p_scene);
+    WorldView(Scene* p_scene);
     virtual ~WorldView();
 
     enum DragType { DRAG_INACTIVE, DRAG_X, DRAG_Y, DRAG_Z };
@@ -25,7 +25,7 @@ class WorldView : public Control {
 
     void notification(int p_notification) override;
 
-    void handle_event(UIEvent *ui_event) override;
+    void handle_event(UIEvent* ui_event) override;
 
     void post_draw_world();
     void post_draw_canvas();
@@ -33,17 +33,17 @@ class WorldView : public Control {
 
     void update_camera();
 
-    void set_postprocess(PostProcess *p_postprocess);
-    PostProcess *get_postprocess() const;
+    void set_postprocess(PostProcess* p_postprocess);
+    PostProcess* get_postprocess() const;
 
-    void set_scene(Scene *p_scene);
-    Scene *get_scene() const;
+    void set_scene(Scene* p_scene);
+    Scene* get_scene() const;
 
-    void select(Node *p_object);
-    Node *get_selected() const;
+    void select(Node* p_object);
+    Node* get_selected() const;
 
-    void highlight(Node *p_object);
-    Node *get_highlight() const;
+    void highlight(Node* p_object);
+    Node* get_highlight() const;
 
     void set_preview_type(int p_type);
     int get_preview_type();
@@ -62,26 +62,26 @@ class WorldView : public Control {
 
     vec3 get_click_position_in_world();
 
-    WorldObject *raycast(const vec2 &p_pos) const;
+    WorldObject* raycast(const vec2& p_pos) const;
 
-    Viewport *get_viewport() const;
+    Viewport* get_viewport() const;
 
     static void bind_methods();
 
    private:
     void draw_grid();
 
-    FBO2D *raycast_fbo;
-    SimpleMesh *plane;
-    Shader *raycast_shader;
+    FBO2D* raycast_fbo;
+    SimpleMesh* plane;
+    Shader* raycast_shader;
 
-    EditorViewport *viewport;
-    PostProcess *postprocess;
-    Viewport *return_viewport;
-    Texture2D *preview_texture;
+    EditorViewport* viewport;
+    PostProcess* postprocess;
+    Viewport* return_viewport;
+    Texture2D* preview_texture;
 
-    Node *selected;
-    Node *highlighted;
+    Node* selected;
+    Node* highlighted;
 
     TransformType transform_type = TRANSLATE;
     DragType drag_type = DRAG_INACTIVE;
@@ -99,8 +99,8 @@ class WorldView : public Control {
     bool cam_dragging;
     vec2 prev_cam_drag_pos;
 
-    Model *cone;
-    Model *disk;
+    Model* cone;
+    Model* disk;
 
     bool handle_2d;
 

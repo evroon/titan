@@ -40,7 +40,7 @@ vec2 ContextMenu::get_required_size() const {
     return vec2(left_margin + max_size_x + right_margin, size_y);
 }
 
-void ContextMenu::handle_event(UIEvent *ui_event) {
+void ContextMenu::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_EXIT:
 
@@ -100,7 +100,7 @@ void ContextMenu::position_items() {
     float offset_y = area.get_top();
 
     for (int c = 0; c < items.size(); c++) {
-        rect2 &item_area = items[c].area;
+        rect2& item_area = items[c].area;
 
         float size;
 
@@ -118,7 +118,7 @@ void ContextMenu::position_items() {
     update();
 }
 
-int ContextMenu::get_item(const vec2 &p_pos) const {
+int ContextMenu::get_item(const vec2& p_pos) const {
     int result = -1;
 
     for (int c = 0; c < items.size(); c++) {
@@ -146,7 +146,7 @@ void ContextMenu::notification(int p_notification) {
                     draw_line(start, end, seperator_color);
                     continue;
                 }
-                rect2 &item_area = items[c].area;
+                rect2& item_area = items[c].area;
                 vec2 pos = vec2(item_area.get_left(), item_area.pos.y);
 
                 if (selected == c)
@@ -187,13 +187,13 @@ void ContextMenu::notification(int p_notification) {
     }
 }
 
-void ContextMenu::add_item(const String &p_text,
-                           const Connection &p_connection) {
+void ContextMenu::add_item(const String& p_text,
+                           const Connection& p_connection) {
     add_item(NULL, p_text, p_connection);
 }
 
-void ContextMenu::add_item(Texture2D *p_icon, const String &p_text,
-                           const Connection &p_connection) {
+void ContextMenu::add_item(Texture2D* p_icon, const String& p_text,
+                           const Connection& p_connection) {
     ContextMenuItem item;
 
     item.text = p_text;
@@ -219,7 +219,7 @@ void ContextMenu::add_seperator() {
     position_items();
 }
 
-void ContextMenu::set_text(int p_index, const String &p_text) {
+void ContextMenu::set_text(int p_index, const String& p_text) {
     items[p_index].text = p_text;
     update();
 }
@@ -264,7 +264,7 @@ ContextTip::ContextTip() {
     bottom_margin = 4;
 }
 
-ContextTip::ContextTip(const String &p_description) : ContextTip() {
+ContextTip::ContextTip(const String& p_description) : ContextTip() {
     description = p_description;
 }
 
@@ -276,7 +276,7 @@ vec2 ContextTip::get_required_size() const {
         get_default_font()->get_height() + top_margin + bottom_margin);
 }
 
-void ContextTip::handle_event(UIEvent *p_event) {
+void ContextTip::handle_event(UIEvent* p_event) {
     switch (p_event->type) {
         case UIEvent::FOCUS_LOSE:
 

@@ -4,9 +4,9 @@
 
 FBOManager FBOManager::singleton;
 
-void FBOManager::set_active_fbo(FBO *p_active) { active_fbo = p_active; }
+void FBOManager::set_active_fbo(FBO* p_active) { active_fbo = p_active; }
 
-void FBOManager::register_fbo(FBO *fbo) { fbos.push_back(fbo); }
+void FBOManager::register_fbo(FBO* fbo) { fbos.push_back(fbo); }
 
 void FBOManager::bind_default_fbo() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -25,4 +25,4 @@ void FBOManager::clear_all() {
 
 void FBOManager::free() { fbos.clean(); }
 
-FBOManager *FBOManager::get_singleton() { return &singleton; }
+FBOManager* FBOManager::get_singleton() { return &singleton; }

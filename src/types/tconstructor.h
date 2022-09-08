@@ -37,40 +37,40 @@ struct CSTR_0 : public TConstructor {
 
 struct CSTR_1 : public TConstructor {
     CSTR_1() { arg_count = 1; }
-    CSTR_1(std::function<Variant(Variant &)> p_func) : CSTR_1() {
+    CSTR_1(std::function<Variant(Variant&)> p_func) : CSTR_1() {
         func = p_func;
     }
     Variant operator()(Variant arg_0) { return func(arg_0); }
-    std::function<Variant(Variant &)> func;
+    std::function<Variant(Variant&)> func;
 };
 
 struct CSTR_2 : public TConstructor {
     CSTR_2() { arg_count = 2; }
-    CSTR_2(std::function<Variant(Variant &, Variant &)> p_func) : CSTR_2() {
+    CSTR_2(std::function<Variant(Variant&, Variant&)> p_func) : CSTR_2() {
         func = p_func;
     }
     Variant operator()(Variant arg_0, Variant arg_1) {
         return func(arg_0, arg_1);
     }
-    std::function<Variant(Variant &, Variant &)> func;
+    std::function<Variant(Variant&, Variant&)> func;
 };
 
 struct CSTR_3 : public TConstructor {
     CSTR_3() { arg_count = 3; }
-    CSTR_3(std::function<Variant(Variant &, Variant &, Variant &)> p_func)
+    CSTR_3(std::function<Variant(Variant&, Variant&, Variant&)> p_func)
         : CSTR_3() {
         func = p_func;
     }
     Variant operator()(Variant arg_0, Variant arg_1, Variant arg_2) {
         return func(arg_0, arg_1, arg_2);
     }
-    std::function<Variant(Variant &, Variant &, Variant &)> func;
+    std::function<Variant(Variant&, Variant&, Variant&)> func;
 };
 
 struct CSTR_4 : public TConstructor {
     CSTR_4() { arg_count = 4; }
-    CSTR_4(std::function<Variant(Variant &, Variant &, Variant &, Variant &)>
-               p_func)
+    CSTR_4(
+        std::function<Variant(Variant&, Variant&, Variant&, Variant&)> p_func)
         : CSTR_4() {
         func = p_func;
     }
@@ -78,5 +78,5 @@ struct CSTR_4 : public TConstructor {
                        Variant arg_3) {
         return func(arg_0, arg_1, arg_2, arg_3);
     }
-    std::function<Variant(Variant &, Variant &, Variant &, Variant &)> func;
+    std::function<Variant(Variant&, Variant&, Variant&, Variant&)> func;
 };

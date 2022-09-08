@@ -6,12 +6,12 @@
 
 EditableLabel::EditableLabel() : EditableLabel("") {}
 
-EditableLabel::EditableLabel(const String &name) {
+EditableLabel::EditableLabel(const String& name) {
     text = name;
     init();
 }
 
-EditableLabel::EditableLabel(const Variable &p_variable)
+EditableLabel::EditableLabel(const Variable& p_variable)
     : PropertyControl(p_variable) {
     init();
 }
@@ -35,7 +35,7 @@ void EditableLabel::switch_blink() {
 }
 
 vec2 EditableLabel::get_required_size() const {
-    Font *f = CanvasData::get_singleton()->get_default_theme()->get_font();
+    Font* f = CanvasData::get_singleton()->get_default_theme()->get_font();
 
     float width1 = 0.0f;
     float width2 = 0.0f;
@@ -49,7 +49,7 @@ vec2 EditableLabel::get_required_size() const {
     return vec2(width + start_margin + end_margin, f->get_height());
 }
 
-void EditableLabel::handle_event(UIEvent *ui_event) {
+void EditableLabel::handle_event(UIEvent* ui_event) {
     Cursor cursor;
     int sel_pos;
 
@@ -318,7 +318,7 @@ void EditableLabel::insert_at_index(int index, char kar) {
     set_text(get_text().insert(index, 1, kar));
 }
 
-void EditableLabel::insert_at_index(int index, const String &kar) {
+void EditableLabel::insert_at_index(int index, const String& kar) {
     if (index < 0 || index > get_text().size() + 1) return;
 
     set_text(get_text().insert(index, kar));
@@ -348,7 +348,7 @@ String EditableLabel::get_selected_text() {
 
 String EditableLabel::get_text() const { return text; }
 
-void EditableLabel::set_text(const String &p_text) {
+void EditableLabel::set_text(const String& p_text) {
     text = p_text;
     set_value(text);
     update();
@@ -356,7 +356,7 @@ void EditableLabel::set_text(const String &p_text) {
 
 inline String EditableLabel::get_empty_text() const { return empty_text; }
 
-void EditableLabel::set_empty_text(const String &p_empty_text) {
+void EditableLabel::set_empty_text(const String& p_empty_text) {
     empty_text = p_empty_text;
     update();
 }
@@ -364,13 +364,13 @@ void EditableLabel::set_empty_text(const String &p_empty_text) {
 int EditableLabel::get_index(float x) const {
     float offset = x - area.get_left() - start_margin;
 
-    Font *f = CanvasData::get_singleton()->get_default_theme()->get_font();
+    Font* f = CanvasData::get_singleton()->get_default_theme()->get_font();
     return f->get_index(text, offset);
 }
 
 float EditableLabel::get_position_x(int index) const {
     float origin_x = area.get_left() + start_margin;
-    Font *f = CanvasData::get_singleton()->get_default_theme()->get_font();
+    Font* f = CanvasData::get_singleton()->get_default_theme()->get_font();
     return (origin_x + (float)f->get_width(text.substr(0, index)));
 }
 

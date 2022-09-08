@@ -2,7 +2,7 @@
 
 #include "core/nodemanager.h"
 
-Game *Game::activegame;
+Game* Game::activegame;
 
 Game::Game() { activescene = nullptr; }
 
@@ -10,8 +10,8 @@ void Game::Start() { LoadScene("main"); }
 
 void Game::update() { activescene->update(); }
 
-Scene *Game::LoadScene(const String &name) {
-    Scene *s = SCENEMANAGER->get_scene(name);
+Scene* Game::LoadScene(const String& name) {
+    Scene* s = SCENEMANAGER->get_scene(name);
 
     StartScene(s);
     s->Init();
@@ -19,10 +19,10 @@ Scene *Game::LoadScene(const String &name) {
     return s;
 }
 
-void Game::StartScene(Scene *s) { activescene = s; }
+void Game::StartScene(Scene* s) { activescene = s; }
 
-void Game::handle_event(Event *e) { activescene->handle_event(e); }
+void Game::handle_event(Event* e) { activescene->handle_event(e); }
 
 void Game::Draw() { activescene->Draw(); }
 
-Game *Game::GetGame() { return activegame; }
+Game* Game::GetGame() { return activegame; }

@@ -124,8 +124,8 @@ class Math {
         return value;
     }
 
-    static float get_barry_centric(const vec3 &p_p1, const vec3 &p_p2,
-                                   const vec3 &p_p3, const vec2 &p_pos) {
+    static float get_barry_centric(const vec3& p_p1, const vec3& p_p2,
+                                   const vec3& p_p3, const vec2& p_pos) {
         float det = (p_p2.z - p_p3.z) * (p_p1.x - p_p3.x) +
                     (p_p3.x - p_p2.x) * (p_p1.z - p_p3.z);
 

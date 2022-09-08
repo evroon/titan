@@ -31,7 +31,7 @@ void Slider::set_slider_pos(float p_position) {
     emit_signal("value_changed");
 }
 
-float Slider::get_slider_pos(const vec2 &pos) const {
+float Slider::get_slider_pos(const vec2& pos) const {
     float top = area.get_top() - space - inner_height;
     float bottom = area.get_bottom() + space + inner_height;
     float pos_y = pos.y;
@@ -40,7 +40,7 @@ float Slider::get_slider_pos(const vec2 &pos) const {
     return Math::clip(result, 0.0f, 1.0f);
 }
 
-void Slider::handle_event(UIEvent *ui_event) {
+void Slider::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_PRESS:
 

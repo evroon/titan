@@ -8,7 +8,7 @@ class UIBox : public Control {
     UIBox();
     ~UIBox();
 
-    void set_color(const Color &p_color);
+    void set_color(const Color& p_color);
     Color get_color() const;
 
     void prepare_draw();
@@ -18,7 +18,7 @@ class UIBox : public Control {
 
    private:
     Color color;
-    SimpleMesh *mesh_2d;
-    Shader *shader;
+    SimpleMesh* mesh_2d;
+    Shader* shader;
     Transform transform;
 };

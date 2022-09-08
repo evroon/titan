@@ -3,7 +3,7 @@
 #include "core/string.h"
 #include "utility/stringutils.h"
 
-ContentTile::ContentTile(const String &filepath) : ImageButton(filepath) {}
+ContentTile::ContentTile(const String& filepath) : ImageButton(filepath) {}
 
 vec2 ContentTile::get_required_size() const { return vec2(60); }
 
@@ -29,9 +29,9 @@ void ContentView::draw() {
     list.draw();
 }
 
-void ContentView::add_item(const String &path) {}
+void ContentView::add_item(const String& path) {}
 
-void ContentView::browse_to(const String &path) {
+void ContentView::browse_to(const String& path) {
     currentdir = path;
 
     File file = path;

@@ -25,11 +25,11 @@ class Dialog : public Control {
 
     vec2 get_required_size() const override;
 
-    void handle_event(UIEvent *p_event) override;
+    void handle_event(UIEvent* p_event) override;
 
     void notification(int p_notification) override;
 
-    void set_title(const String &p_title);
+    void set_title(const String& p_title);
     String get_title() const;
 
     void show();
@@ -40,7 +40,7 @@ class Dialog : public Control {
    private:
     rect2 bar;
 
-    ImageButton *close_button;
+    ImageButton* close_button;
 
     float header_offset;
 
@@ -62,8 +62,8 @@ class ConfirmationDialog : public Dialog {
     static void bind_methods();
 
    private:
-    TextButton *ok_button;
-    TextButton *cancel_button;
+    TextButton* ok_button;
+    TextButton* cancel_button;
 };
 
 class MessageDialog : public Dialog {
@@ -71,12 +71,12 @@ class MessageDialog : public Dialog {
 
    public:
     MessageDialog();
-    MessageDialog(const String &p_text);
+    MessageDialog(const String& p_text);
 
     static void bind_methods();
 
    private:
-    Label *desciption_label;
+    Label* desciption_label;
 
     String desciption;
 };
@@ -86,7 +86,7 @@ class FileDialog : public ConfirmationDialog {
 
    public:
     FileDialog();
-    FileDialog(const String &p_file);
+    FileDialog(const String& p_file);
 
     vec2 get_required_size() const override;
 
@@ -94,23 +94,23 @@ class FileDialog : public ConfirmationDialog {
 
     void list_chosen(int p_index);
 
-    void go_to(const String &p_file);
+    void go_to(const String& p_file);
     void go_back();
     void go_forward();
 
     static void bind_methods();
 
    private:
-    Container *buttons;
-    ListView *list;
+    Container* buttons;
+    ListView* list;
 
-    ImageButton *back_button;
-    ImageButton *forward_button;
+    ImageButton* back_button;
+    ImageButton* forward_button;
 
-    TextField *path_label;
+    TextField* path_label;
 
-    Texture2D *directory_icon;
-    Texture2D *file_icon;
+    Texture2D* directory_icon;
+    Texture2D* file_icon;
 
     String file;
 };
@@ -120,7 +120,7 @@ class ColorPickDialog : public ConfirmationDialog {
 
    public:
     ColorPickDialog();
-    ColorPickDialog(const Color &p_color);
+    ColorPickDialog(const Color& p_color);
 
     vec2 get_required_size() const override;
 
@@ -137,15 +137,15 @@ class ColorPickDialog : public ConfirmationDialog {
 
     Color color;
 
-    Shader *shader;
+    Shader* shader;
 
-    Label *r_label;
-    Label *g_label;
-    Label *b_label;
+    Label* r_label;
+    Label* g_label;
+    Label* b_label;
 
-    NumberField *r_field;
-    NumberField *g_field;
-    NumberField *b_field;
+    NumberField* r_field;
+    NumberField* g_field;
+    NumberField* b_field;
 };
 
 class TypePickDialog : public ConfirmationDialog {
@@ -156,17 +156,17 @@ class TypePickDialog : public ConfirmationDialog {
 
     void notification(int p_notification) override;
 
-    void search(const String &p_search);
+    void search(const String& p_search);
 
     void update_list();
 
-    void tree_chosen(TreeElement *p_element);
+    void tree_chosen(TreeElement* p_element);
 
     static void bind_methods();
 
    private:
-    TreeView *tree;
-    TextField *search_field;
+    TreeView* tree;
+    TextField* search_field;
 };
 
 class SettingsDialog : public ConfirmationDialog {
@@ -175,19 +175,19 @@ class SettingsDialog : public ConfirmationDialog {
    public:
     SettingsDialog();
 
-    void set_property_view(PropertyView *p_property_view);
-    PropertyView *get_property_view() const;
+    void set_property_view(PropertyView* p_property_view);
+    PropertyView* get_property_view() const;
 
     void notification(int p_notification) override;
-    void search(const String &p_search);
+    void search(const String& p_search);
     void update_list();
     void list_chosen(int p_element);
 
     static void bind_methods();
 
    private:
-    PropertyView *property_view;
-    TextField *search_field;
+    PropertyView* property_view;
+    TextField* search_field;
     Dictionary<String, Variant> dictionary;
 };
 

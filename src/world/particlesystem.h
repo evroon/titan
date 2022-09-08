@@ -24,5 +24,5 @@ class ParticleSystem : public WorldObject {
     Array<vec3> velocities;
     Array<Color> colors;
 
-    UBO *ubo;
+    UBO* ubo;
 };

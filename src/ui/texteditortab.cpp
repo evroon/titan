@@ -5,7 +5,7 @@
 
 TextEditorTab::TextEditorTab() : TextEditorTab("") {}
 
-TextEditorTab::TextEditorTab(const File &p_file) {
+TextEditorTab::TextEditorTab(const File& p_file) {
     textbox = new TextBox;
     buttons = new Container;
 
@@ -46,7 +46,7 @@ TextEditorTab::~TextEditorTab() {}
 
 vec2 TextEditorTab::get_required_size() const { return vec2(200); }
 
-void TextEditorTab::handle_event(UIEvent *ui_event) {}
+void TextEditorTab::handle_event(UIEvent* ui_event) {}
 
 void TextEditorTab::notification(int p_notification) {
     switch (p_notification) {
@@ -68,7 +68,7 @@ void TextEditorTab::show_dialog() {
     dialog->show();
 }
 
-void TextEditorTab::open_file(const String &p_path) {
+void TextEditorTab::open_file(const String& p_path) {
     textfile = CONTENT->LoadTextFile(p_path);
 
     textbox->set_text(textfile->get_source());
@@ -96,7 +96,7 @@ void TextEditorTab::bind_methods() {
 
 ShaderEditorTab::ShaderEditorTab() : ShaderEditorTab(NULL) {}
 
-ShaderEditorTab::ShaderEditorTab(const File &p_file) {
+ShaderEditorTab::ShaderEditorTab(const File& p_file) {
     String s = p_file.operator String();
     s = s.substr(0, s.find_first('.'));
     shader = CONTENT->LoadShader(s);
@@ -106,7 +106,7 @@ ShaderEditorTab::ShaderEditorTab(const File &p_file) {
     init();
 }
 
-ShaderEditorTab::ShaderEditorTab(Shader *p_shader) {
+ShaderEditorTab::ShaderEditorTab(Shader* p_shader) {
     shader = p_shader;
 
     if (shader) {

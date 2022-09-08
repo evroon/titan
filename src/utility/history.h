@@ -6,7 +6,7 @@
 template <typename T>
 class History {
    public:
-    void go_to(const T &p_current) {
+    void go_to(const T& p_current) {
         history.push(current);
         current = p_current;
         future.clear();

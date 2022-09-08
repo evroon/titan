@@ -13,9 +13,9 @@
 
 File::File() { path = ""; }
 
-File::File(const String &p_path) { go_to(p_path); }
+File::File(const String& p_path) { go_to(p_path); }
 
-File::File(const char *p_path) : File(String(p_path)) {}
+File::File(const char* p_path) : File(String(p_path)) {}
 
 File::~File() {}
 
@@ -36,9 +36,9 @@ void File::go_up(int p_times) {
     go_to(path.substr(0, length - 1));
 }
 
-void File::go_into(const String &p_name) { go_to(path + "/" + p_name); }
+void File::go_into(const String& p_name) { go_to(path + "/" + p_name); }
 
-void File::go_to(const String &p_path) {
+void File::go_to(const String& p_path) {
     path = p_path;
     correct_path();
 }
@@ -77,15 +77,15 @@ String File::get_extension() const {
     return elements[elements.size() - 1];
 }
 
-File File::operator+(const String &r) { return File(path + '/' + r); }
+File File::operator+(const String& r) { return File(path + '/' + r); }
 
-void File::operator+=(const String &r) { go_into(r); }
+void File::operator+=(const String& r) { go_into(r); }
 
-bool File::operator==(const File &r) {
+bool File::operator==(const File& r) {
     return get_absolute_path() == r.get_absolute_path();
 }
 
-bool File::operator!=(const File &r) {
+bool File::operator!=(const File& r) {
     return get_absolute_path() != r.get_absolute_path();
 }
 
@@ -96,11 +96,11 @@ bool File::is_absolute_path() const { return path.starts_with(ASSETS_DIR); }
 Array<File> File::listdir() const {
     Array<File> result = Array<File>();
 
-    DIR *d = opendir(path.c_str());
+    DIR* d = opendir(path.c_str());
 
     if (!d) return result;
 
-    dirent *r;
+    dirent* r;
 
     while ((r = readdir(d)) != nullptr) {
         String s = r->d_name;

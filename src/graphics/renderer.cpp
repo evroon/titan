@@ -9,7 +9,7 @@
 #include "world/sky.h"
 #include "world/terrain.h"
 
-MasterRenderer *MasterRenderer::singleton;
+MasterRenderer* MasterRenderer::singleton;
 
 //=========================================================================
 // MasterRenderer
@@ -28,15 +28,15 @@ void MasterRenderer::init() {
     Primitives::Init();
 }
 
-void MasterRenderer::set_active_renderer(Renderer *p_renderer) {
+void MasterRenderer::set_active_renderer(Renderer* p_renderer) {
     active_renderer = p_renderer;
 }
 
-Renderer *MasterRenderer::get_active_renderer() const {
+Renderer* MasterRenderer::get_active_renderer() const {
     return active_renderer;
 }
 
-MasterRenderer *MasterRenderer::get_singleton() { return singleton; }
+MasterRenderer* MasterRenderer::get_singleton() { return singleton; }
 
 //=========================================================================
 // Renderer
@@ -89,7 +89,7 @@ void Renderer::prepare() {
 
 void Renderer::finish() {}
 
-void Renderer::set_camera(Camera *p_camera) {
+void Renderer::set_camera(Camera* p_camera) {
     camera = p_camera;
 
     if (camera) {
@@ -99,19 +99,19 @@ void Renderer::set_camera(Camera *p_camera) {
     }
 }
 
-void Renderer::set_viewport(Viewport *p_viewport) { viewport = p_viewport; }
+void Renderer::set_viewport(Viewport* p_viewport) { viewport = p_viewport; }
 
-Viewport *Renderer::get_viewport() const { return viewport; }
+Viewport* Renderer::get_viewport() const { return viewport; }
 
-const mat4 &Renderer::get_projection_matrix() const {
+const mat4& Renderer::get_projection_matrix() const {
     return projection_matrix;
 }
 
-const mat4 &Renderer::get_view_matrix() const { return view_matrix; }
+const mat4& Renderer::get_view_matrix() const { return view_matrix; }
 
-const mat4 &Renderer::get_final_matrix() const { return final_matrix; }
+const mat4& Renderer::get_final_matrix() const { return final_matrix; }
 
-void Renderer::use_scissor(const rect2 &area) {
+void Renderer::use_scissor(const rect2& area) {
     glEnable(GL_SCISSOR_TEST);
 
     glScissor(WINDOWSIZE.x / 2 + (int)area.get_bottom_left().x,
@@ -168,11 +168,11 @@ void Renderer::use_wireframe(bool p_wireframe) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-Texture2D *Renderer::get_texture(int p_type) const { return textures[p_type]; }
+Texture2D* Renderer::get_texture(int p_type) const { return textures[p_type]; }
 
 int Renderer::get_textures_count() const { return textures.size(); }
 
-FBO2D *Renderer::get_fbo(int p_type) const { return buffers[p_type]; }
+FBO2D* Renderer::get_fbo(int p_type) const { return buffers[p_type]; }
 
 void Renderer::activate() {
     MASTER_RENDERER->set_active_renderer(this);
@@ -219,10 +219,10 @@ void Renderer::draw_plane() {
     MeshHandler::get_singleton()->get_plane()->unbind();
 }
 
-void Renderer::draw_line(const vec3 &p_start, const vec3 &p_end,
-                         const Color &p_color) {
-    SimpleMesh *mesh = MeshHandler::get_singleton()->get_line();
-    Shader *shader = CanvasData::get_singleton()->get_default_shader();
+void Renderer::draw_line(const vec3& p_start, const vec3& p_end,
+                         const Color& p_color) {
+    SimpleMesh* mesh = MeshHandler::get_singleton()->get_line();
+    Shader* shader = CanvasData::get_singleton()->get_default_shader();
 
     // center-like coordinates
     // vec3 delta = p_end - p_start;
@@ -274,23 +274,23 @@ ForwardRenderer::ForwardRenderer() : Renderer() {
     activeshader = nullptr;
 }
 
-ForwardRenderer::ForwardRenderer(Viewport *p_viewport) : ForwardRenderer() {
+ForwardRenderer::ForwardRenderer(Viewport* p_viewport) : ForwardRenderer() {
     viewport = p_viewport;
 }
 
 ForwardRenderer::~ForwardRenderer() {}
 
-void ForwardRenderer::set_light_matrix(const mat4 &p_light_matrix) {
+void ForwardRenderer::set_light_matrix(const mat4& p_light_matrix) {
     light_matrix = p_light_matrix;
 }
 
-const mat4 &ForwardRenderer::get_light_matrix() const { return light_matrix; }
+const mat4& ForwardRenderer::get_light_matrix() const { return light_matrix; }
 
-FBO2D *ForwardRenderer::get_shadow_buffer() const { return shadow_buffer; }
+FBO2D* ForwardRenderer::get_shadow_buffer() const { return shadow_buffer; }
 
-FBO2D *ForwardRenderer::get_render_buffer() const { return render_buffer; }
+FBO2D* ForwardRenderer::get_render_buffer() const { return render_buffer; }
 
-FBO2D *ForwardRenderer::get_reflection_buffer() const {
+FBO2D* ForwardRenderer::get_reflection_buffer() const {
     return reflection_buffer;
 }
 
@@ -307,7 +307,7 @@ void ForwardRenderer::render() {
     activate();
 
     if (viewport->world) {
-        Camera *c = viewport->world->get_active_camera();
+        Camera* c = viewport->world->get_active_camera();
         c->update_matrices();
 
         RENDERER->use_depth_test(c->get_near(), c->get_far());
@@ -447,55 +447,55 @@ DeferredRenderer::DeferredRenderer() {
     for (int c = 0; c < 3; c++) buffers.push_back(shadow_buffers[0]);
 
     textures.set(FINAL_COLOR,
-                 final_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+                 final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(RENDER_COLOR,
-                 render_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+                 render_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(RENDER_DEPTH,
-                 render_buffer->depth_tex->cast_to_type<Texture2D *>());
+                 render_buffer->depth_tex->cast_to_type<Texture2D*>());
     textures.set(
         DEFERRED_ALBEDO,
-        deferred_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        deferred_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
         DEFERRED_POSITION,
-        deferred_buffer->color_textures[1]->cast_to_type<Texture2D *>());
+        deferred_buffer->color_textures[1]->cast_to_type<Texture2D*>());
     textures.set(
         DEFERRED_NORMAL,
-        deferred_buffer->color_textures[2]->cast_to_type<Texture2D *>());
+        deferred_buffer->color_textures[2]->cast_to_type<Texture2D*>());
     textures.set(
         DEFERRED_MATERIAL,
-        deferred_buffer->color_textures[3]->cast_to_type<Texture2D *>());
+        deferred_buffer->color_textures[3]->cast_to_type<Texture2D*>());
     textures.set(DEFERRED_DEPTH,
-                 deferred_buffer->depth_tex->cast_to_type<Texture2D *>());
+                 deferred_buffer->depth_tex->cast_to_type<Texture2D*>());
     textures.set(
         DEFERRED_SPECULAR,
-        deferred_buffer->color_textures[4]->cast_to_type<Texture2D *>());
+        deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
     textures.set(SHADOW_FAR,
-                 shadow_buffers[0]->depth_tex->cast_to_type<Texture2D *>());
+                 shadow_buffers[0]->depth_tex->cast_to_type<Texture2D*>());
     textures.set(SHADOW_MIDDLE,
-                 shadow_buffers[1]->depth_tex->cast_to_type<Texture2D *>());
+                 shadow_buffers[1]->depth_tex->cast_to_type<Texture2D*>());
     textures.set(SHADOW_NEAR,
-                 shadow_buffers[2]->depth_tex->cast_to_type<Texture2D *>());
+                 shadow_buffers[2]->depth_tex->cast_to_type<Texture2D*>());
     textures.set(
         REFLECTION,
-        reflection_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        reflection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(SSAO,
-                 ssao_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+                 ssao_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
         SSAO_BLUR,
-        ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(GODRAY,
-                 godray_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+                 godray_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
         BLOOM,
-        bloom_horiz_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        bloom_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
         VIRTUALTEX,
-        virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
         INDIRECTION,
-        indirection_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
     textures.set(
-        BLUR, blur_vert_buffer->color_textures[0]->cast_to_type<Texture2D *>());
+        BLUR, blur_vert_buffer->color_textures[0]->cast_to_type<Texture2D*>());
 
     first_pass = CONTENT->LoadShader("engine/shaders/FirstPass");
     second_pass = CONTENT->LoadShader("engine/shaders/SecondPass");
@@ -541,11 +541,11 @@ DeferredRenderer::DeferredRenderer() {
 
 DeferredRenderer::~DeferredRenderer() {}
 
-vec3 DeferredRenderer::get_position_at_pixel(const vec2 &p_pos) const {
+vec3 DeferredRenderer::get_position_at_pixel(const vec2& p_pos) const {
     return deferred_buffer->read_pixel(p_pos, 1).get_rgb();
 }
 
-vec3 DeferredRenderer::get_material_at_pixel(const vec2 &p_pos) const {
+vec3 DeferredRenderer::get_material_at_pixel(const vec2& p_pos) const {
     return deferred_buffer->read_pixel(p_pos, 3).get_rgb();
 }
 
@@ -681,8 +681,8 @@ void DeferredRenderer::render_ssao() {
 }
 
 void DeferredRenderer::render_shadowmaps() {
-    Camera *camera = viewport->world->get_active_camera();
-    DirectionalLight *light = ACTIVE_WORLD->get_active_light();
+    Camera* camera = viewport->world->get_active_camera();
+    DirectionalLight* light = ACTIVE_WORLD->get_active_light();
 
     if (!light || !camera) return;
 
@@ -706,8 +706,8 @@ void DeferredRenderer::render_shadowmaps() {
         glCullFace(GL_BACK);
 
         for (int c = 0; c < viewport->world->get_child_count(); c++) {
-            Node *n = viewport->world->get_child_by_index(c);
-            WorldObject *wo = n->cast_to_type<WorldObject *>();
+            Node* n = viewport->world->get_child_by_index(c);
+            WorldObject* wo = n->cast_to_type<WorldObject*>();
             wo->notificate(WorldObject::NOTIFICATION_DRAW);
         }
     }
@@ -718,7 +718,7 @@ void DeferredRenderer::render_shadowmaps() {
 }
 
 void DeferredRenderer::render_reflection() {
-    Camera *c = ACTIVE_WORLD->get_active_camera();
+    Camera* c = ACTIVE_WORLD->get_active_camera();
 
     if (!c) return;
 
@@ -736,8 +736,8 @@ void DeferredRenderer::render_reflection() {
     RENDERER->use_depth_test(c->get_near(), c->get_far());
 
     for (int c = 0; c < ACTIVE_WORLD->get_child_count(); c++) {
-        Node *n = ACTIVE_WORLD->get_child_by_index(c);
-        WorldObject *wo = n->cast_to_type<WorldObject *>();
+        Node* n = ACTIVE_WORLD->get_child_by_index(c);
+        WorldObject* wo = n->cast_to_type<WorldObject*>();
         wo->notificate(WorldObject::NOTIFICATION_DRAW);
     }
 
@@ -749,10 +749,10 @@ void DeferredRenderer::render_reflection() {
 void DeferredRenderer::render_flare() {
     int count = 10;
 
-    Camera *camera = ACTIVE_WORLD->get_active_camera();
-    Sky *sky = ACTIVE_WORLD->get_child_by_type<Sky *>();
-    DirectionalLight *light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight *>();
+    Camera* camera = ACTIVE_WORLD->get_active_camera();
+    Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
+    DirectionalLight* light =
+        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!camera || !sky || !light) return;
 
@@ -812,10 +812,10 @@ void DeferredRenderer::render_flare() {
 }
 
 void DeferredRenderer::render_godray() {
-    Camera *camera = ACTIVE_WORLD->get_active_camera();
-    Sky *sky = ACTIVE_WORLD->get_child_by_type<Sky *>();
-    DirectionalLight *light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight *>();
+    Camera* camera = ACTIVE_WORLD->get_active_camera();
+    Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
+    DirectionalLight* light =
+        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!camera || !sky || !light) return;
 
@@ -852,9 +852,9 @@ void DeferredRenderer::render_first_pass() {
 
     Color sky_color;
     Color light_color;
-    Sky *sky = ACTIVE_WORLD->get_child_by_type<Sky *>();
+    Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
     vec3 view_pos = ACTIVE_WORLD->get_active_camera()->get_pos();
-    DirectionalLight *light = ACTIVE_WORLD->get_active_light();
+    DirectionalLight* light = ACTIVE_WORLD->get_active_light();
     bool lighting_enabled = false;
     vec3 light_dir = vec3(0, 0, -1);
 
@@ -957,10 +957,10 @@ void DeferredRenderer::render_second_pass() {
     draw_plane();
 }
 
-void DeferredRenderer::render_physical_tile(const vec2 &p_pos,
-                                            const vec2 &p_size) {
+void DeferredRenderer::render_physical_tile(const vec2& p_pos,
+                                            const vec2& p_size) {
     vec2 texsize = virtual_tex_buffer->color_textures[0]
-                       ->cast_to_type<Texture2D *>()
+                       ->cast_to_type<Texture2D*>()
                        ->get_size();
 
     float left = -1.0f + 2.0f * p_pos.x / texsize.x;
@@ -998,7 +998,7 @@ void DeferredRenderer::render_virtual_tex() {
 }
 
 void DeferredRenderer::render() {
-    environment = ACTIVE_WORLD->get_child_by_type<Environment *>();
+    environment = ACTIVE_WORLD->get_child_by_type<Environment*>();
 
     set_viewport();
 
@@ -1009,7 +1009,7 @@ void DeferredRenderer::render() {
     activate();
 
     if (viewport->world && draw_world) {
-        Camera *c = viewport->world->get_active_camera();
+        Camera* c = viewport->world->get_active_camera();
         c->update_matrices();
 
         use_depth_test(c->get_near(), c->get_far());
@@ -1064,7 +1064,7 @@ void DeferredRenderer::save_tex(Ref<Texture2D> p_tex) {
 }
 
 // http://www.david-amador.com/2012/09/how-to-take-screenshot-in-opengl/
-void DeferredRenderer::save_fbo(FBO2D *p_fbo, const String &p_filename,
+void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename,
                                 int attachment) {
     p_fbo->bind();
     glReadBuffer(GL_COLOR_ATTACHMENT0 + attachment);
@@ -1072,16 +1072,16 @@ void DeferredRenderer::save_fbo(FBO2D *p_fbo, const String &p_filename,
 
     int nSize = p_fbo->size.x * p_fbo->size.y * 3;
 
-    SDL_Surface *surface =
+    SDL_Surface* surface =
         SDL_CreateRGBSurface(SDL_SWSURFACE, p_fbo->size.x, p_fbo->size.y, 24,
                              0x000000FF, 0x0000FF00, 0x00FF0000, 0);
-    char *pixels = new char[3 * p_fbo->size.x * p_fbo->size.y];
+    char* pixels = new char[3 * p_fbo->size.x * p_fbo->size.y];
 
     glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE,
                  pixels);
 
     for (int i = 0; i < p_fbo->size.y; i++)
-        memcpy(((char *)surface->pixels) + surface->pitch * i,
+        memcpy(((char*)surface->pixels) + surface->pitch * i,
                pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1),
                p_fbo->size.x * 3);
 
@@ -1128,7 +1128,7 @@ String DeferredRenderer::get_texture_typename(int p_type) const {
     return "invalid";
 }
 
-int DeferredRenderer::get_texture_type(const String &p_typename) const {
+int DeferredRenderer::get_texture_type(const String& p_typename) const {
     if (p_typename == "FINAL_COLOR") return FINAL_COLOR;
 
     ELSEIF(RENDER_COLOR)

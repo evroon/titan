@@ -18,7 +18,7 @@
 
 Scene::Scene() : Scene("Scene") {}
 
-Scene::Scene(const String &p_name) {
+Scene::Scene(const String& p_name) {
     set_name(p_name);
 
     SCENEMANAGER->add_scene(this);
@@ -36,7 +36,7 @@ void Scene::update() {}
 
 void Scene::Draw() { VIEW->draw(); }
 
-void Scene::handle_event(Event *e) {}
+void Scene::handle_event(Event* e) {}
 
 #undef CLASSNAME
 #define CLASSNAME Scene

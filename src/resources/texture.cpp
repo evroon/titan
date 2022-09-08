@@ -75,7 +75,7 @@ void Texture::bind_methods() {}
 // Texture3D
 //=========================================================================
 
-Texture3D::Texture3D(const vec3 &p_size, int p_index) : Texture3D() {
+Texture3D::Texture3D(const vec3& p_size, int p_index) : Texture3D() {
     size = p_size;
     id = p_index;
     loaded = true;
@@ -89,13 +89,13 @@ void Texture3D::bind_methods() {}
 // Texture2D
 //=========================================================================
 
-Texture2D::Texture2D(const vec2 &p_size, int p_index) : Texture2D() {
+Texture2D::Texture2D(const vec2& p_size, int p_index) : Texture2D() {
     loaded = true;
     size = p_size;
     id = p_index;
 }
 
-Texture2D::Texture2D(const vec2 &p_size, bool p_byte = true) : Texture2D() {
+Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D() {
     generate_gl_texture();
 
     if (p_byte)
@@ -108,9 +108,9 @@ Texture2D::Texture2D(const vec2 &p_size, bool p_byte = true) : Texture2D() {
     size = p_size;
 }
 
-Texture2D::Texture2D(const String &p_filepath) : Texture2D() {
+Texture2D::Texture2D(const String& p_filepath) : Texture2D() {
     String path = File(p_filepath).get_absolute_path();
-    SDL_Surface *image = IMG_Load(path.c_str());
+    SDL_Surface* image = IMG_Load(path.c_str());
 
     if (!image) {
         T_ERROR("Failed to load Image: " + path +
@@ -129,10 +129,10 @@ Texture2D::Texture2D(const String &p_filepath) : Texture2D() {
     SDL_FreeSurface(image);
 }
 
-Texture2D::Texture2D(const String &p_filepath, const vec2i &p_size,
-                     const Color &p_color)
+Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size,
+                     const Color& p_color)
     : Texture2D() {
-    SDL_Surface *image = IMG_Load((p_filepath).c_str());
+    SDL_Surface* image = IMG_Load((p_filepath).c_str());
 
     if (!image) {
         T_ERROR("Failed to load svg: " + p_filepath +
@@ -146,7 +146,7 @@ Texture2D::Texture2D(const String &p_filepath, const vec2i &p_size,
     vec2i rescaled_size = vec2i(image->w * scaling, image->h * scaling);
 
     SDL_Rect dst = {0, 0, rescaled_size.x, rescaled_size.y};
-    SDL_Surface *processed =
+    SDL_Surface* processed =
         SDL_CreateRGBSurface(image->flags, rescaled_size.x, rescaled_size.y, 32,
                              image->format->Rmask, image->format->Gmask,
                              image->format->Bmask, image->format->Amask);
@@ -158,7 +158,7 @@ Texture2D::Texture2D(const String &p_filepath, const vec2i &p_size,
         return;
     }
 
-    unsigned char *pixels = (unsigned char *)processed->pixels;
+    unsigned char* pixels = (unsigned char*)processed->pixels;
 
     for (int x = 0; x < processed->w; x++) {
         for (int y = 0; y < processed->h; y++) {
@@ -181,7 +181,7 @@ Texture2D::Texture2D(const String &p_filepath, const vec2i &p_size,
     SDL_FreeSurface(processed);
 }
 
-Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D() {
+Texture2D::Texture2D(SDL_Surface* p_surface) : Texture2D() {
     generate_gl_texture();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -195,7 +195,7 @@ Texture2D::Texture2D(SDL_Surface *p_surface) : Texture2D() {
     SDL_FreeSurface(p_surface);
 }
 
-Texture2D::Texture2D(aiTexture *p_texture) : Texture2D() {
+Texture2D::Texture2D(aiTexture* p_texture) : Texture2D() {
     generate_gl_texture();
 
     int texture_format = GL_BGRA;
@@ -230,7 +230,7 @@ void Texture1D::bind_methods() {}
 // RawTexture2D
 //=========================================================================
 
-RawTexture2D::RawTexture2D(const String &p_filepath) {
+RawTexture2D::RawTexture2D(const String& p_filepath) {
     surface = IMG_Load((p_filepath).c_str());
 
     if (!surface) {
@@ -241,12 +241,12 @@ RawTexture2D::RawTexture2D(const String &p_filepath) {
     size = vec2(to_float(surface->w), to_float(surface->h));
 }
 
-RawTexture2D::RawTexture2D(SDL_Surface *p_surface) { surface = p_surface; }
+RawTexture2D::RawTexture2D(SDL_Surface* p_surface) { surface = p_surface; }
 
 void RawTexture2D::free() { SDL_FreeSurface(surface); }
 
-Color RawTexture2D::read_pixel(const vec2i &p_pos) {
-    Uint32 *pixels = (Uint32 *)surface->pixels;
+Color RawTexture2D::read_pixel(const vec2i& p_pos) {
+    Uint32* pixels = (Uint32*)surface->pixels;
     Uint32 pixel = pixels[p_pos.y * surface->pitch / 4 + p_pos.x];
     Uint8 r, g, b;
 
@@ -259,7 +259,7 @@ Color RawTexture2D::read_pixel(const vec2i &p_pos) {
 // DepthTexture2D
 //=========================================================================
 
-DepthTexture2D::DepthTexture2D(const vec2i &p_size) {
+DepthTexture2D::DepthTexture2D(const vec2i& p_size) {
     size = vec2(to_float(p_size.x), to_float(p_size.y));
     loaded = true;
 

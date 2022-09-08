@@ -12,7 +12,7 @@ Environment::Environment() {
 
 Environment::~Environment() {}
 
-void Environment::set_ambient_color(const Color &p_ambient_color) {
+void Environment::set_ambient_color(const Color& p_ambient_color) {
     ambient_color = p_ambient_color;
 }
 

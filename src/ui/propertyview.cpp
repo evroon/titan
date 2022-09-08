@@ -6,7 +6,7 @@
 #include "types/methodmaster.h"
 #include "vectorfield.h"
 
-PropertyView::PropertyView(const Variant &p_var) {
+PropertyView::PropertyView(const Variant& p_var) {
     roots = Array<GroupItem>();
     buttons = Container();
 
@@ -34,11 +34,11 @@ PropertyView::~PropertyView() {}
 
 vec2 PropertyView::get_required_size() const { return vec2(150); }
 
-void PropertyView::handle_event(UIEvent *ui_event) {
+void PropertyView::handle_event(UIEvent* ui_event) {
     int relevant_item = get_item(ui_event->pos);
 }
 
-void PropertyView::draw_item(const PropertyItem &p_item) {
+void PropertyView::draw_item(const PropertyItem& p_item) {
     vec2 pos = vec2(p_item.area.get_left(), p_item.area.pos.y);
     rect2 area = p_item.area;
 
@@ -47,7 +47,7 @@ void PropertyView::draw_item(const PropertyItem &p_item) {
     // p_item.control->draw();
 }
 
-void PropertyView::draw_item(const GroupItem &p_item) {
+void PropertyView::draw_item(const GroupItem& p_item) {
     vec2 pos = vec2(
         p_item.area.pos.x - get_default_font()->get_width(p_item.name) / 2.0f,
         p_item.area.pos.y);
@@ -67,7 +67,7 @@ void PropertyView::notification(int p_notification) {
 
             for (int c = 0; c < roots.size(); c++) {
                 for (int i = 0; i < roots[c].children.size(); i++) {
-                    PropertyControl *pc = dynamic_cast<PropertyControl *>(
+                    PropertyControl* pc = dynamic_cast<PropertyControl*>(
                         roots[c].children[i].control);
                     if (pc && !pc->get_focused()) pc->update_value();
                 }
@@ -97,7 +97,7 @@ void PropertyView::notification(int p_notification) {
     }
 }
 
-void PropertyView::set_property(Object *p_var) {
+void PropertyView::set_property(Object* p_var) {
     if (p_var == var) return;
 
     var = p_var;
@@ -109,16 +109,16 @@ void PropertyView::set_property(Object *p_var) {
         Array<StringName> names =
             MMASTER->list_property_names(p_var->get_type());
 
-        for (StringName &n : names)
+        for (StringName& n : names)
             add_property(MMASTER->get_property(p_var->get_type(), n));
     }
 
     position_items();
 }
 
-Object *PropertyView::get_property() const { return var; }
+Object* PropertyView::get_property() const { return var; }
 
-void PropertyView::add_property(Property *p_property) {
+void PropertyView::add_property(Property* p_property) {
     PropertyItem item;
     item.property = p_property;
     item.var = p_property->get->operator()(var);
@@ -215,7 +215,7 @@ void PropertyView::add_property(Property *p_property) {
     position_items();
 }
 
-int PropertyView::get_item(const vec2 &p_pos) const {
+int PropertyView::get_item(const vec2& p_pos) const {
     for (int c = 0; c < roots.size(); c++) {
         // if (items[c].area.is_in_box(p_pos))
         //	return c;
@@ -223,7 +223,7 @@ int PropertyView::get_item(const vec2 &p_pos) const {
     return -1;
 }
 
-void PropertyView::position_item(GroupItem &p_item) {
+void PropertyView::position_item(GroupItem& p_item) {
     float left = area.get_left() + margin[0];
     float right = area.get_right() - margin[1];
     float top = -offset + area.get_top();
@@ -233,7 +233,7 @@ void PropertyView::position_item(GroupItem &p_item) {
     offset += 20;
 
     for (int c = 0; c < p_item.children.size(); c++) {
-        PropertyItem &p = p_item.children[c];
+        PropertyItem& p = p_item.children[c];
         float height = p.control->get_required_size().y + 8;
 
         float left = area.get_left() + margin[0];

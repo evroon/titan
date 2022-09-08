@@ -1,6 +1,6 @@
 #include "mat4.h"
 
-void mat4::perspective(const rect2 &p_window, float fov, float aspect,
+void mat4::perspective(const rect2& p_window, float fov, float aspect,
                        float p_near, float p_far) {
     float y = Math::tan(fov * PI / 2.0f / 180.0f);
     float x = y / aspect;
@@ -23,7 +23,7 @@ void mat4::perspective(const rect2 &p_window, float fov, float aspect,
     m[15] = 0.0;
 }
 
-void mat4::orthographic(const rect2 &p_window, float p_near, float p_far) {
+void mat4::orthographic(const rect2& p_window, float p_near, float p_far) {
     float left = p_window.get_left();
     float right = p_window.get_right();
     float top = p_window.get_top();
@@ -47,7 +47,7 @@ void mat4::orthographic(const rect2 &p_window, float p_near, float p_far) {
     m[15] = 1.0f;
 }
 
-void mat4::look_at(const vec3 &p_eye, const vec3 &p_target, const vec3 &p_up) {
+void mat4::look_at(const vec3& p_eye, const vec3& p_target, const vec3& p_up) {
     // https://www.3dgep.com/understanding-the-view-matrix/
 
     vec3 forward = (p_target - p_eye).normalize();

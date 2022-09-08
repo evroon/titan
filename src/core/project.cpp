@@ -9,7 +9,7 @@ Project::Project() {
     // create();
 }
 
-Project::Project(const String &p_file) {
+Project::Project(const String& p_file) {
     text_file = new TextFile(p_file);
     load();
 }
@@ -27,15 +27,15 @@ void Project::load() {
 
     Variant project = s.deserialize(text_file->get_source());
 
-    default_scene = project.operator Project *()->get_child_by_type<Scene *>();
+    default_scene = project.operator Project*()->get_child_by_type<Scene*>();
     add_child(default_scene);
 }
 
 void Project::save() {
-    Node *terrain = default_scene->get_child_by_type<World *>()
-                        ->get_child_by_type<Terrain *>();
+    Node* terrain = default_scene->get_child_by_type<World*>()
+                        ->get_child_by_type<Terrain*>();
     if (terrain) {
-        FBO2D *f = terrain->cast_to_type<Terrain *>()->get_brush()->get_fbo();
+        FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
         // DEFERRED_RENDERER->save_fbo(f, "engine/heightmap.bmp", 0);
     }
 
@@ -45,17 +45,17 @@ void Project::save() {
     text_file->write(source);
 }
 
-void Project::save_as(const String &p_file) {
+void Project::save_as(const String& p_file) {
     text_file = new TextFile(p_file);
 
     save();
 }
 
-Scene *Project::get_main_scene() const { return default_scene; }
+Scene* Project::get_main_scene() const { return default_scene; }
 
 String Project::serialize() const { return String(); }
 
-Renderer *Project::get_renderer() const { return DEFERRED_RENDERER; }
+Renderer* Project::get_renderer() const { return DEFERRED_RENDERER; }
 
 #undef CLASSNAME
 #define CLASSNAME Project

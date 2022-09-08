@@ -51,7 +51,7 @@ void Frame::build() {
     image_map.build(texture, texc, positions);
 }
 
-void Frame::set_texture(Texture2D *p_texture) {
+void Frame::set_texture(Texture2D* p_texture) {
     texture = p_texture;
     image_map.set_texture(texture);
 }
@@ -60,7 +60,7 @@ void Frame::set_default_texture() {
     set_texture(CONTENT->LoadTexture("engine/ui/Container.png"));
 }
 
-void Frame::set_color(const Color &p_color) {
+void Frame::set_color(const Color& p_color) {
     color = p_color;
     image_map.set_color(color);
 }

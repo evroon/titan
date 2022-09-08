@@ -5,20 +5,20 @@
 
 Label::Label() : Label("Label") {}
 
-Label::Label(const String &t)
+Label::Label(const String& t)
     : Label(t, CanvasData::get_singleton()->get_default_theme()->get_font()) {}
 
-Label::Label(const String &t, Font *f) {
+Label::Label(const String& t, Font* f) {
     set_font(f);
     text = t;
 }
 
-void Label::handle_event(UIEvent *ui_event) {}
+void Label::handle_event(UIEvent* ui_event) {}
 
-void Label::set_font(Font *p_font) { font = p_font; }
+void Label::set_font(Font* p_font) { font = p_font; }
 
-Font *Label::get_font() const { return font; }
-void Label::set_color(const Color &p_color) { color = p_color; }
+Font* Label::get_font() const { return font; }
+void Label::set_color(const Color& p_color) { color = p_color; }
 Color Label::get_color() const { return color; }
 int Label::get_index(float x) const {
     float offset = x - area.get_left();
@@ -30,25 +30,25 @@ float Label::get_position_x(int index) const {
     return (origin_x + (float)get_font()->get_width(text.substr(0, index)));
 }
 
-void Label::set_centering_type(const Image::CenteringType &centering_type) {
+void Label::set_centering_type(const Image::CenteringType& centering_type) {
     // image.centertype = centering_type;
 }
 
 String Label::get_text() const { return text; }
 
 vec2 Label::get_required_size() const {
-    Font *f = CanvasData::get_singleton()->get_default_theme()->get_font();
+    Font* f = CanvasData::get_singleton()->get_default_theme()->get_font();
 
     return vec2(f->get_width(text), f->get_height());
 }
 
-bool Label::is_in_text(const vec2 &pos) {
+bool Label::is_in_text(const vec2& pos) {
     // return image.in_render_area(pos);
 
     return true;
 }
 
-void Label::set_text(const String &p_text) {
+void Label::set_text(const String& p_text) {
     text = p_text;
 
     if (text == "") text = " ";

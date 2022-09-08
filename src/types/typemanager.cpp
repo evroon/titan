@@ -3,23 +3,23 @@
 #include "core/tmessage.h"
 #include "core/variant/varianttype.h"
 
-TypeManager *TypeManager::singleton;
+TypeManager* TypeManager::singleton;
 
 TypeManager::TypeManager() {}
 
 TypeManager::~TypeManager() {}
 
-void TypeManager::add_type(const StringName &name) { types[name] = name; }
+void TypeManager::add_type(const StringName& name) { types[name] = name; }
 
-VariantType TypeManager::get_type(const StringName &name) {
+VariantType TypeManager::get_type(const StringName& name) {
     return types[name];
 }
 
-VariantType TypeManager::get_type(void *ptr) { return get_type(get_name(ptr)); }
+VariantType TypeManager::get_type(void* ptr) { return get_type(get_name(ptr)); }
 
-StringName TypeManager::get_name(void *ptr) { return names[ptr]; }
+StringName TypeManager::get_name(void* ptr) { return names[ptr]; }
 
-ObjectType TypeManager::get_object_type(const StringName &name) {
+ObjectType TypeManager::get_object_type(const StringName& name) {
     if (type_exists(name))
         return object_types[name];
     else {
@@ -28,17 +28,17 @@ ObjectType TypeManager::get_object_type(const StringName &name) {
     }
 }
 
-bool TypeManager::type_exists(const StringName &name) const {
+bool TypeManager::type_exists(const StringName& name) const {
     return types.contains(name);
 }
 
-void TypeManager::set_object_type(const ObjectType &p_object_type) {
+void TypeManager::set_object_type(const ObjectType& p_object_type) {
     object_types[p_object_type.name] = p_object_type;
     types[p_object_type.name] = p_object_type.name;
     names[p_object_type.ptr] = p_object_type.name;
 }
 
-TypeManager *TypeManager::get_singleton() { return singleton; }
+TypeManager* TypeManager::get_singleton() { return singleton; }
 
 #include "core/time.h"
 #include "core/titanscript/titanscript.h"

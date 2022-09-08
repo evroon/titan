@@ -61,7 +61,7 @@ void ScrollContainer::draw() {
 //		return nullptr;
 //}
 
-void ScrollContainer::set_position(const vec2 &p_position) {
+void ScrollContainer::set_position(const vec2& p_position) {
     position = p_position;
     // vec2 o = (area - vec2(work_area.size.x, work_area.size.y) * 4.0) *
     // position / 2.0;

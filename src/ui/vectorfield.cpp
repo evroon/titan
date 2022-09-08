@@ -6,11 +6,11 @@
 
 Vec2Field::Vec2Field() : Vec2Field(vec2()) {}
 
-Vec2Field::Vec2Field(const vec2 &p_variant) : PropertyControl(p_variant) {
+Vec2Field::Vec2Field(const vec2& p_variant) : PropertyControl(p_variant) {
     init();
 }
 
-Vec2Field::Vec2Field(const Variable &p_variable) : PropertyControl(p_variable) {
+Vec2Field::Vec2Field(const Variable& p_variable) : PropertyControl(p_variable) {
     init();
 }
 
@@ -85,11 +85,11 @@ void Vec2Field::bind_methods() {
 
 Vec3Field::Vec3Field() : Vec3Field(vec3()) {}
 
-Vec3Field::Vec3Field(const vec3 &p_variant) : PropertyControl(p_variant) {
+Vec3Field::Vec3Field(const vec3& p_variant) : PropertyControl(p_variant) {
     init();
 }
 
-Vec3Field::Vec3Field(const Variable &p_variable) : PropertyControl(p_variable) {
+Vec3Field::Vec3Field(const Variable& p_variable) : PropertyControl(p_variable) {
     init();
 }
 
@@ -169,11 +169,11 @@ void Vec3Field::bind_methods() {
 
 Vec4Field::Vec4Field() : Vec4Field(vec4()) {}
 
-Vec4Field::Vec4Field(const vec4 &p_variant) : PropertyControl(p_variant) {
+Vec4Field::Vec4Field(const vec4& p_variant) : PropertyControl(p_variant) {
     init();
 }
 
-Vec4Field::Vec4Field(const Variable &p_variable) : PropertyControl(p_variable) {
+Vec4Field::Vec4Field(const Variable& p_variable) : PropertyControl(p_variable) {
     init();
 }
 
@@ -263,12 +263,12 @@ void Vec4Field::bind_methods() {
 
 TransformField::TransformField() : TransformField(Transform()) {}
 
-TransformField::TransformField(const Transform &p_variant)
+TransformField::TransformField(const Transform& p_variant)
     : PropertyControl(p_variant) {
     init();
 }
 
-TransformField::TransformField(const Variable &p_variable)
+TransformField::TransformField(const Variable& p_variable)
     : PropertyControl(p_variable) {
     init();
 }

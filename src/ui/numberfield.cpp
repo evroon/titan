@@ -2,7 +2,7 @@
 
 #include "canvas.h"
 
-NumberField::NumberField(const Real &number)
+NumberField::NumberField(const Real& number)
     : EditableLabel(number.to_string()) {}
 
 NumberField::NumberField() : NumberField(0.0f) {}
@@ -41,7 +41,7 @@ void NumberField::notification(int p_notification) {
 
 void NumberField::handle_input(char c) { insert_at_selection(c); }
 
-void NumberField::set_text(const String &p_text) {
+void NumberField::set_text(const String& p_text) {
     text = p_text;
     value_set(Real(p_text));
 

@@ -5,7 +5,7 @@
 #include "input/keyboard.h"
 #include "slider.h"
 
-TileElement::TileElement(const String &p_text) {
+TileElement::TileElement(const String& p_text) {
     text = p_text;
     icon = nullptr;
     tileview = nullptr;
@@ -16,7 +16,7 @@ TileElement::TileElement(const String &p_text) {
 
 TileElement::~TileElement() {}
 
-void TileElement::bind_tileview(TileView *p_tileview) { tileview = p_tileview; }
+void TileElement::bind_tileview(TileView* p_tileview) { tileview = p_tileview; }
 
 void TileElement::set_index(int p_index) { index = p_index; }
 
@@ -24,19 +24,19 @@ int TileElement::get_index() { return index; }
 
 rect2 TileElement::get_area() const { return area; }
 
-void TileElement::set_area(const rect2 &p_area) { area = p_area; }
+void TileElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool TileElement::is_in_area(const vec2 &p_pos) {
+bool TileElement::is_in_area(const vec2& p_pos) {
     return visible && area.is_in_box(p_pos);
 }
 
 String TileElement::get_text() const { return text; }
 
-void TileElement::set_text(const String &p_text) { text = p_text; }
+void TileElement::set_text(const String& p_text) { text = p_text; }
 
-Texture2D *TileElement::get_icon() const { return icon; }
+Texture2D* TileElement::get_icon() const { return icon; }
 
-void TileElement::set_icon(Texture2D *p_icon) { icon = p_icon; }
+void TileElement::set_icon(Texture2D* p_icon) { icon = p_icon; }
 
 void TileElement::set_visible(bool p_visible) { visible = p_visible; }
 
@@ -106,7 +106,7 @@ TileView::~TileView() {}
 
 vec2 TileView::get_required_size() const { return vec2(100); }
 
-void TileView::handle_event(UIEvent *ui_event) {
+void TileView::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_ENTER:
 
@@ -287,7 +287,7 @@ void TileView::position_items() {
     if (tilecount.x < 1) tilecount.x = 1;
 
     for (int c = 0; c < items.size(); c++) {
-        TileElement &item = items[c];
+        TileElement& item = items[c];
 
         if (!item.get_visible()) continue;
 
@@ -351,7 +351,7 @@ void TileView::notification(int p_notification) {
                          DEFAULT_THEME->get_selection_color());
 
             for (int c = 0; c < items.size(); c++) {
-                const rect2 &area = items[c].get_area();
+                const rect2& area = items[c].get_area();
 
                 if (area.get_bottom() > area.get_top()) continue;
 
@@ -359,7 +359,7 @@ void TileView::notification(int p_notification) {
                     draw_text(font, c, vec2(area.get_left() + 4, area.pos.y),
                               item_numbers_color);
 
-                Texture2D *icon = items[c].get_icon();
+                Texture2D* icon = items[c].get_icon();
 
                 if (icon) {
                     vec2 icon_size = icon->get_size() / 2.0f;
@@ -408,7 +408,7 @@ void TileView::notification(int p_notification) {
     }
 }
 
-void TileView::push_back_item(TileElement &item) {
+void TileView::push_back_item(TileElement& item) {
     int index = items.size();
 
     item.bind_tileview(this);
@@ -428,7 +428,7 @@ void TileView::clear() {
     remove_slider();
 }
 
-int TileView::get_position(const vec2 &p_pos) {
+int TileView::get_position(const vec2& p_pos) {
     if (!area.is_in_box(p_pos)) return -1;
 
     for (int c = 0; c < items.size(); c++) {
@@ -437,7 +437,7 @@ int TileView::get_position(const vec2 &p_pos) {
     return -1;
 }
 
-TileElement *TileView::get_item(int row) {
+TileElement* TileView::get_item(int row) {
     if (row < 0)
         row = 0;
     else if (row > int(items.size()) - 1)
@@ -447,7 +447,7 @@ TileElement *TileView::get_item(int row) {
 }
 
 int TileView::get_item_size(int row) {
-    TileElement *l = get_item(row);
+    TileElement* l = get_item(row);
 
     if (l) return get_item(row)->get_text().size();
 
@@ -634,9 +634,9 @@ void TileView::make_visible(int p_index) {
     update();
 }
 
-void TileView::search(const String &p_src) {
+void TileView::search(const String& p_src) {
     for (int c = 0; c < items.size(); c++) {
-        TileElement &item = items[c];
+        TileElement& item = items[c];
 
         item.set_visible(item.get_text().starts_with(p_src));
     }
@@ -663,7 +663,7 @@ void TileView::remove_item(int p_index) {
     position_items();
 }
 
-void TileView::push_back_item(const String &p_text, Texture2D *p_icon) {
+void TileView::push_back_item(const String& p_text, Texture2D* p_icon) {
     int index = items.size();
 
     TileElement item(p_text);
@@ -678,14 +678,14 @@ void TileView::push_back_item(const String &p_text, Texture2D *p_icon) {
     position_items();
 }
 
-void TileView::insert_item_at_index(int index, TileElement &item) {
+void TileView::insert_item_at_index(int index, TileElement& item) {
     item.bind_tileview(this);
     item.set_index(index);
 
     if (index >= items.size())
         push_back_item(item);
     else {
-        TileElement &old = items[index];
+        TileElement& old = items[index];
 
         items.replace(index, item);
         items.push_back(old);
@@ -695,9 +695,9 @@ void TileView::insert_item_at_index(int index, TileElement &item) {
 #undef CLASSNAME
 #define CLASSNAME TileView
 
-void TileView::set_font(Font *p_font) { font = p_font; }
+void TileView::set_font(Font* p_font) { font = p_font; }
 
-Font *TileView::get_font() const { return font; }
+Font* TileView::get_font() const { return font; }
 
 void TileView::bind_methods() {
     REG_CSTR(0);

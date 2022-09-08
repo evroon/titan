@@ -6,19 +6,19 @@
 #include "resources/shader.h"
 #include "resources/texture.h"
 
-SimpleMesh *Sprite::defaultmesh;
+SimpleMesh* Sprite::defaultmesh;
 
 Sprite::Sprite() : Sprite(NULL, vec2(0)) {}
-Sprite::Sprite(Texture2D *p_texture, Shader *p_shader)
+Sprite::Sprite(Texture2D* p_texture, Shader* p_shader)
     : Sprite(p_texture, p_texture->get_size(), p_shader) {}
-Sprite::Sprite(Texture2D *p_texture, vec2 p_tilesize)
+Sprite::Sprite(Texture2D* p_texture, vec2 p_tilesize)
     : Sprite(p_texture, p_tilesize, NULL) {}
-Sprite::Sprite(Texture2D *p_texture)
+Sprite::Sprite(Texture2D* p_texture)
     : Sprite(p_texture, p_texture->get_size()) {}
-Sprite::Sprite(const String &tex_name)
+Sprite::Sprite(const String& tex_name)
     : Sprite(CONTENT->LoadTexture(tex_name)) {}
 
-Sprite::Sprite(Texture2D *p_texture, vec2 p_tilesize, Shader *p_shader) {
+Sprite::Sprite(Texture2D* p_texture, vec2 p_tilesize, Shader* p_shader) {
     texture = p_texture;
     set_shader(p_shader);
 
@@ -32,7 +32,7 @@ Sprite::Sprite(Texture2D *p_texture, vec2 p_tilesize, Shader *p_shader) {
 
 Sprite::~Sprite() {}
 
-void Sprite::set_tilesize(const vec2 &p_tilesize) {
+void Sprite::set_tilesize(const vec2& p_tilesize) {
     tilesize = p_tilesize;
 
     if (texture) {
@@ -57,18 +57,18 @@ vec4 Sprite::GetTileBounds(int index) const {
            vec4(vec2(texture->get_size().x), vec2(texture->get_size().y));
 }
 
-void Sprite::set_shader(Shader *p_shader) {
+void Sprite::set_shader(Shader* p_shader) {
     shader = p_shader;
     if (!shader) shader = CONTENT->LoadShader("engine/shaders/SpriteShader");
 }
 
-Shader *Sprite::get_shader() const { return shader; }
+Shader* Sprite::get_shader() const { return shader; }
 
-void Sprite::set_texture(Texture2D *p_texture) { texture = p_texture; }
+void Sprite::set_texture(Texture2D* p_texture) { texture = p_texture; }
 
-Texture2D *Sprite::get_texture() const { return texture; }
+Texture2D* Sprite::get_texture() const { return texture; }
 
-void Sprite::set_bounds(const vec4 &p_bounds) { bounds = p_bounds; }
+void Sprite::set_bounds(const vec4& p_bounds) { bounds = p_bounds; }
 
 vec4 Sprite::get_bounds() const { return bounds; }
 
@@ -168,7 +168,7 @@ void Sprite::update() { WorldObject::update(); }
 void Sprite::bind_methods() {
     REG_CSTR(0);
     REG_CSTR_OVRLD_1(String);
-    REG_CSTR_OVRLD_1(Texture2D *);
+    REG_CSTR_OVRLD_1(Texture2D*);
 
     REG_METHOD(flip_vertically);
     REG_METHOD(flip_horizontally);

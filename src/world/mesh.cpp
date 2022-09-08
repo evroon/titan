@@ -5,14 +5,14 @@
 #include "model.h"
 #include "resources/file.h"
 
-MeshHandler *MeshHandler::singleton = new MeshHandler;
+MeshHandler* MeshHandler::singleton = new MeshHandler;
 
 //=========================================================================
 // SimpleMesh
 //=========================================================================
 
-void SimpleMesh::init(const Array<Vertex> &p_vertices,
-                      const Array<Face> &p_faces, int p_type) {
+void SimpleMesh::init(const Array<Vertex>& p_vertices,
+                      const Array<Face>& p_faces, int p_type) {
     draw_type = p_type;
     vertices_count = p_vertices.size();
     faces_count = p_faces.size();
@@ -95,7 +95,7 @@ void SimpleMesh::set_cube() {
     init(vertices, faces, GL_TRIANGLES);
 }
 
-void SimpleMesh::SetAttributes(Shader *shader) {
+void SimpleMesh::SetAttributes(Shader* shader) {
     position_id = glGetAttribLocation(shader->get_program(), "a_position");
 
     if (position_id < 0) T_ERROR("attribute location invalid");
@@ -139,7 +139,7 @@ void SimpleMesh::draw_instanced(int p_count) {
 
 Mesh::Mesh() {}
 
-Mesh::Mesh(const String &p_path) {
+Mesh::Mesh(const String& p_path) {
     file = p_path;
     import(p_path);
 }
@@ -149,11 +149,11 @@ Mesh::~Mesh() {
     // glDeleteBuffers(1, &EBO);
 }
 
-BoundingBox Mesh::get_bounding_box(Mesh *p_mesh, const mat4 &p_transform) {
+BoundingBox Mesh::get_bounding_box(Mesh* p_mesh, const mat4& p_transform) {
     BoundingBox box;
 
     for (int c = 0; c < p_mesh->meshes.size(); c++) {
-        MeshNode *node = p_mesh->meshes[c];
+        MeshNode* node = p_mesh->meshes[c];
 
         for (int t = 0; t < node->vertices.size(); ++t) {
             vec3 tmp = node->vertices[t].position;
@@ -171,10 +171,10 @@ BoundingBox Mesh::get_bounding_box(Mesh *p_mesh, const mat4 &p_transform) {
     return box;
 }
 
-bool Mesh::import(const String &p_filepath) {
+bool Mesh::import(const String& p_filepath) {
     Assimp::Importer importer;
 
-    const aiScene *scene = importer.ReadFile(
+    const aiScene* scene = importer.ReadFile(
         p_filepath, aiProcess_FlipUVs | aiProcess_Triangulate |
                         aiProcess_JoinIdenticalVertices |
                         aiProcess_SortByPType | aiProcess_GenSmoothNormals);
@@ -185,7 +185,7 @@ bool Mesh::import(const String &p_filepath) {
     }
 
     for (unsigned c = 0; c < scene->mNumMeshes; c++) {
-        MeshNode *node = new MeshNode;
+        MeshNode* node = new MeshNode;
         node->init(scene->mMeshes[c]);
         node->parent = this;
         meshes.push_back(node);
@@ -195,7 +195,7 @@ bool Mesh::import(const String &p_filepath) {
         textures.push_back(new Texture2D(scene->mTextures[c]));
 
     for (unsigned c = 0; c < scene->mNumMaterials; c++) {
-        Material *material = new Material;
+        Material* material = new Material;
         material->mesh = this;
         material->load_material(scene->mMaterials[c]);
         materials.push_back(material);
@@ -216,7 +216,7 @@ void Mesh::draw() {
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
-    for (MeshNode *mesh : meshes) mesh->draw();
+    for (MeshNode* mesh : meshes) mesh->draw();
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -233,7 +233,7 @@ Array<Variant> Mesh::get_materials() const {
     return v;
 }
 
-void Mesh::set_materials(const Array<Variant> &p_materials) {}
+void Mesh::set_materials(const Array<Variant>& p_materials) {}
 
 #undef CLASSNAME
 #define CLASSNAME Mesh
@@ -269,7 +269,7 @@ void Mesh::MeshNode::draw() {
     glBindVertexArray(0);
 }
 
-void Mesh::MeshNode::init(aiMesh *p_mesh) {
+void Mesh::MeshNode::init(aiMesh* p_mesh) {
     mat_index = p_mesh->mMaterialIndex;
 
     // add vertices
@@ -318,17 +318,17 @@ void Mesh::MeshNode::setup_buffers() {
 
     // Vertex Positions
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
     // Vertex Normals
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-                          (void *)offsetof(Vertex, normal));
+                          (void*)offsetof(Vertex, normal));
 
     // Vertex Texture Coords
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-                          (void *)offsetof(Vertex, texcoords));
+                          (void*)offsetof(Vertex, texcoords));
 
     glBindVertexArray(0);
 }
@@ -355,7 +355,7 @@ Material::Material() {
     shininess = 0.0f;
 }
 
-void Material::load_material(const aiMaterial *p_material) {
+void Material::load_material(const aiMaterial* p_material) {
     // initialize values
     aiString name;
     aiColor3D color;
@@ -390,8 +390,8 @@ void Material::load_material(const aiMaterial *p_material) {
     shader = CONTENT->LoadShader("engine/shaders/Shader3D");
 }
 
-Texture2D *Material::load_texture(const aiMaterial *p_material,
-                                  const aiTextureType &p_type) {
+Texture2D* Material::load_texture(const aiMaterial* p_material,
+                                  const aiTextureType& p_type) {
     if (p_material->GetTextureCount(p_type) > 0) {
         aiString Path;
 
@@ -412,27 +412,27 @@ Texture2D *Material::load_texture(const aiMaterial *p_material,
 #undef CLASSNAME
 #define CLASSNAME Material
 
-void Material::set_shader(Shader *p_shader) { shader = p_shader; }
+void Material::set_shader(Shader* p_shader) { shader = p_shader; }
 
-Shader *Material::get_shader() const { return shader; }
+Shader* Material::get_shader() const { return shader; }
 
 String Material::get_name() const { return name; }
 
-void Material::set_diffuse_color(const Color &p_color) {}
+void Material::set_diffuse_color(const Color& p_color) {}
 
 Color Material::get_diffuse_color() const { return diffuse_color; }
 
-void Material::set_specular_color(const Color &p_color) {}
+void Material::set_specular_color(const Color& p_color) {}
 
 Color Material::get_specular_color() const { return specular_color; }
 
-void Material::set_ambient_color(const Color &p_color) {
+void Material::set_ambient_color(const Color& p_color) {
     ambient_color = p_color;
 }
 
 Color Material::get_ambient_color() const { return ambient_color; }
 
-void Material::set_emissive_color(const Color &p_color) {
+void Material::set_emissive_color(const Color& p_color) {
     emissive_color = p_color;
 }
 
@@ -442,13 +442,13 @@ void Material::set_shininess(float p_shininess) {}
 
 float Material::get_shininess() const { return shininess; }
 
-Texture2D *Material::get_diffuse_texture() const { return diffuse_texture; }
+Texture2D* Material::get_diffuse_texture() const { return diffuse_texture; }
 
-Texture2D *Material::get_specular_texture() const { return specular_texture; }
+Texture2D* Material::get_specular_texture() const { return specular_texture; }
 
-Texture2D *Material::get_ambient_texture() const { return ambient_texture; }
+Texture2D* Material::get_ambient_texture() const { return ambient_texture; }
 
-Mesh *Material::get_mesh() const { return mesh; }
+Mesh* Material::get_mesh() const { return mesh; }
 
 #undef CLASSNAME
 #define CLASSNAME Material
@@ -476,10 +476,10 @@ void MeshHandler::Init() {
     cube->set_cube();
 }
 
-SimpleMesh *MeshHandler::get_plane() const { return plane; }
+SimpleMesh* MeshHandler::get_plane() const { return plane; }
 
-SimpleMesh *MeshHandler::get_line() const { return line; }
+SimpleMesh* MeshHandler::get_line() const { return line; }
 
-SimpleMesh *MeshHandler::get_cube() const { return cube; }
+SimpleMesh* MeshHandler::get_cube() const { return cube; }
 
-MeshHandler *MeshHandler::get_singleton() { return singleton; }
+MeshHandler* MeshHandler::get_singleton() { return singleton; }

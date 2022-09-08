@@ -1,6 +1,6 @@
 #include "syntaxhighlighter.h"
 
-SyntaxMaster *SyntaxMaster::singleton;
+SyntaxMaster* SyntaxMaster::singleton;
 
 SyntaxMaster::SyntaxMaster() {
     // GLSL
@@ -79,11 +79,11 @@ SyntaxMaster::SyntaxMaster() {
 
 SyntaxMaster::~SyntaxMaster() {}
 
-SyntaxMaster *SyntaxMaster::get_singleton() { return singleton; }
+SyntaxMaster* SyntaxMaster::get_singleton() { return singleton; }
 
 void SyntaxMaster::init() { singleton = new SyntaxMaster; }
 
-SyntaxHighlighter *SyntaxMaster::get_highlighter(
+SyntaxHighlighter* SyntaxMaster::get_highlighter(
     SyntaxHighlighter::Language p_language) {
     switch (p_language) {
         case SyntaxHighlighter::C_PLUS_PLUS:

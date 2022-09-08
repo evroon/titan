@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 
-TextFile::TextFile(const File &p_file) { load(p_file); }
+TextFile::TextFile(const File& p_file) { load(p_file); }
 
-String TextFile::load(const File &p_file) {
+String TextFile::load(const File& p_file) {
     file = p_file;
 
     std::string line;
@@ -28,7 +28,7 @@ String TextFile::load(const File &p_file) {
     return source;
 }
 
-void TextFile::write(const String &p_source) {
+void TextFile::write(const String& p_source) {
     std::ofstream myfile(file.get_absolute_path());
 
     if (!myfile.is_open()) {

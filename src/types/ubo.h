@@ -9,11 +9,11 @@ class UBO : public Resource {
     UBO();
     virtual ~UBO();
 
-    void set_data(const Array<float> &p_buffer);
-    void set_data(const Array<mat4> &p_buffer);
+    void set_data(const Array<float>& p_buffer);
+    void set_data(const Array<mat4>& p_buffer);
 
-    void update_data(const Array<float> &p_buffer);
-    void update_data(const Array<mat4> &p_buffer);
+    void update_data(const Array<float>& p_buffer);
+    void update_data(const Array<mat4>& p_buffer);
 
     void bind();
 
@@ -26,6 +26,6 @@ class UBO : public Resource {
     unsigned ubo;
     unsigned bound_index;
 
-    float *data;
+    float* data;
     int data_size;
 };

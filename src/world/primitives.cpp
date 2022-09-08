@@ -6,15 +6,15 @@ void Primitives::Init() {}
 
 void Primitives::Destroy() {}
 
-void Primitives::DrawRectangle(Shader *shader, const Transform &trans) {}
+void Primitives::DrawRectangle(Shader* shader, const Transform& trans) {}
 
-void Primitives::DrawBox(const Transform &trans) {}
+void Primitives::DrawBox(const Transform& trans) {}
 
-void Primitives::DrawBoxDark(const Transform &trans) {}
+void Primitives::DrawBoxDark(const Transform& trans) {}
 
-void Primitives::DrawBoxLight(const Transform &trans) {}
+void Primitives::DrawBoxLight(const Transform& trans) {}
 
-void Primitives::DrawCircle(Shader *shader, const Transform &trans) {}
+void Primitives::DrawCircle(Shader* shader, const Transform& trans) {}
 
 Plane::Plane() {
     shader = CONTENT->LoadShader("engine/shaders/Shader3D");

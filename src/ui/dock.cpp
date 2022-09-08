@@ -28,7 +28,7 @@ Dock::Dock() {
 
 vec2 Dock::get_required_size() const { return vec2(150); }
 
-void Dock::handle_event(UIEvent *p_event) {
+void Dock::handle_event(UIEvent* p_event) {
     int h;
     switch (p_event->type) {
         case UIEvent::FOCUS_LOSE:
@@ -129,7 +129,7 @@ void Dock::notification(int p_notification) {
     }
 }
 
-int Dock::get_item(const vec2 &p_pos) const {
+int Dock::get_item(const vec2& p_pos) const {
     int result = -1;
 
     for (int c = 0; c < selectors.size(); c++) {
@@ -162,7 +162,7 @@ void Dock::position_items() {
     update();
 }
 
-void Dock::add_tab(Tab *p_tab) {
+void Dock::add_tab(Tab* p_tab) {
     Selector sel;
     sel.name = p_tab->get_tab_title();
 
@@ -196,12 +196,12 @@ void Dock::set_active_tab(int p_index) {
     active = p_index;
 
     for (int c = 0; c < children.size(); c++)
-        children[c]->cast_to_type<Control *>()->set_visible(false);
+        children[c]->cast_to_type<Control*>()->set_visible(false);
 
-    Tab *a = tabs[active];
+    Tab* a = tabs[active];
     if (a) {
-        a->cast_to_type<Control *>()->set_visible(true);
-        a->cast_to_type<Control *>()->check_size_changed();
+        a->cast_to_type<Control*>()->set_visible(true);
+        a->cast_to_type<Control*>()->check_size_changed();
     }
     update();
 }

@@ -11,7 +11,7 @@ class FramedButton : public Button {
 
     void notification(int p_notification) override;
 
-    void set_color(const Color &p_color);
+    void set_color(const Color& p_color);
 
     void start_highlight() override;
     void start_selection() override;

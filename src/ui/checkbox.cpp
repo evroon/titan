@@ -4,7 +4,7 @@ CheckBox::CheckBox() : CheckBox(false) {}
 
 CheckBox::CheckBox(bool p_value) : PropertyControl(p_value) { init(); }
 
-CheckBox::CheckBox(const Variable &p_variable) : PropertyControl(p_variable) {
+CheckBox::CheckBox(const Variable& p_variable) : PropertyControl(p_variable) {
     init();
 }
 
@@ -43,7 +43,7 @@ void CheckBox::notification(int p_notification) {
     }
 }
 
-void CheckBox::handle_event(UIEvent *ui_event) {
+void CheckBox::handle_event(UIEvent* ui_event) {
     switch (ui_event->type) {
         case UIEvent::MOUSE_PRESS:
 

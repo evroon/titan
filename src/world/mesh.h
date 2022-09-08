@@ -45,14 +45,14 @@ class SimpleMesh {
 
     ~SimpleMesh();
 
-    void init(const Array<Vertex> &p_vertices, const Array<Face> &p_faces,
+    void init(const Array<Vertex>& p_vertices, const Array<Face>& p_faces,
               int p_type = GL_TRIANGLES);
 
     void set_plane();
     void set_line();
     void set_cube();
 
-    void SetAttributes(Shader *shader);
+    void SetAttributes(Shader* shader);
     void bind();
     void unbind();
 
@@ -60,8 +60,8 @@ class SimpleMesh {
     void draw_instanced(int p_count);
 
    private:
-    Vertex *vertices;
-    Face *faces;
+    Vertex* vertices;
+    Face* faces;
 
     int faces_count;
     int vertices_count;
@@ -77,7 +77,7 @@ class Mesh : public Resource {
 
    public:
     Mesh();
-    Mesh(const String &p_path);
+    Mesh(const String& p_path);
 
     ~Mesh();
 
@@ -108,7 +108,7 @@ class Mesh : public Resource {
     struct MeshNode {
         void draw();
 
-        void init(aiMesh *p_mesh);
+        void init(aiMesh* p_mesh);
         void setup_buffers();
 
         String name;
@@ -118,30 +118,30 @@ class Mesh : public Resource {
         Array<Color> colors;
 
         unsigned mat_index;
-        Material *material;
+        Material* material;
 
-        Mesh *parent;
+        Mesh* parent;
 
         GLuint VAO, VBO, EBO;
 
         Color modulate;
     };
 
-    bool import(const String &p_filepath);
+    bool import(const String& p_filepath);
 
     void draw();
 
     BoundingBox get_bounding_box() const;
 
     Array<Variant> get_materials() const;
-    void set_materials(const Array<Variant> &p_materials);
+    void set_materials(const Array<Variant>& p_materials);
 
     static void bind_methods();
 
    private:
-    BoundingBox get_bounding_box(Mesh *p_mesh, const mat4 &p_transform);
+    BoundingBox get_bounding_box(Mesh* p_mesh, const mat4& p_transform);
 
-    MeshNode *root;
+    MeshNode* root;
 
     Vector<Texture2D> textures;
     Vector<MeshNode> meshes;
@@ -149,7 +149,7 @@ class Mesh : public Resource {
 
     BoundingBox bounding_box;
 
-    Model *model;
+    Model* model;
 };
 
 class Material : public Resource {
@@ -160,49 +160,49 @@ class Material : public Resource {
    public:
     Material();
 
-    void set_shader(Shader *p_shader);
-    Shader *get_shader() const;
+    void set_shader(Shader* p_shader);
+    Shader* get_shader() const;
 
     String get_name() const;
 
-    void set_diffuse_color(const Color &p_color);
+    void set_diffuse_color(const Color& p_color);
     Color get_diffuse_color() const;
 
-    void set_specular_color(const Color &p_color);
+    void set_specular_color(const Color& p_color);
     Color get_specular_color() const;
 
-    void set_ambient_color(const Color &p_color);
+    void set_ambient_color(const Color& p_color);
     Color get_ambient_color() const;
 
-    void set_emissive_color(const Color &p_color);
+    void set_emissive_color(const Color& p_color);
     Color get_emissive_color() const;
 
     void set_shininess(float p_shininess);
     float get_shininess() const;
 
-    Texture2D *get_diffuse_texture() const;
-    Texture2D *get_specular_texture() const;
-    Texture2D *get_ambient_texture() const;
+    Texture2D* get_diffuse_texture() const;
+    Texture2D* get_specular_texture() const;
+    Texture2D* get_ambient_texture() const;
 
-    Mesh *get_mesh() const;
+    Mesh* get_mesh() const;
 
     static void bind_methods();
 
    private:
-    void load_material(const aiMaterial *p_material);
-    Texture2D *load_texture(const aiMaterial *p_material,
-                            const aiTextureType &p_type);
+    void load_material(const aiMaterial* p_material);
+    Texture2D* load_texture(const aiMaterial* p_material,
+                            const aiTextureType& p_type);
 
     Vector<Texture2D> textures;
 
     String name;
 
-    Shader *shader;
-    Mesh *mesh;
+    Shader* shader;
+    Mesh* mesh;
 
-    Texture2D *diffuse_texture;
-    Texture2D *specular_texture;
-    Texture2D *ambient_texture;
+    Texture2D* diffuse_texture;
+    Texture2D* specular_texture;
+    Texture2D* ambient_texture;
 
     Color diffuse_color;
     Color specular_color;
@@ -214,18 +214,18 @@ class Material : public Resource {
 
 class MeshHandler {
    public:
-    static MeshHandler *get_singleton();
+    static MeshHandler* get_singleton();
 
     void Init();
 
-    SimpleMesh *get_plane() const;
-    SimpleMesh *get_line() const;
-    SimpleMesh *get_cube() const;
+    SimpleMesh* get_plane() const;
+    SimpleMesh* get_line() const;
+    SimpleMesh* get_cube() const;
 
    private:
-    static MeshHandler *singleton;
+    static MeshHandler* singleton;
 
-    SimpleMesh *plane;
-    SimpleMesh *line;
-    SimpleMesh *cube;
+    SimpleMesh* plane;
+    SimpleMesh* line;
+    SimpleMesh* cube;
 };

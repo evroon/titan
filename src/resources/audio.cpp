@@ -10,7 +10,7 @@ void Audio::Free() { Mix_CloseAudio(); }
 // SoundEffect
 SoundEffect::~SoundEffect() { Mix_FreeChunk(effect); }
 
-void SoundEffect::Load(const String &filename) {
+void SoundEffect::Load(const String& filename) {
     effect = Mix_LoadWAV(filename.c_str());
 }
 
@@ -34,7 +34,7 @@ void SoundEffect::bind_methods() {
 
 Music::~Music() { Mix_FreeMusic(music); }
 
-void Music::Load(const String &filename) {
+void Music::Load(const String& filename) {
     music = Mix_LoadMUS(filename.c_str());
 }
 

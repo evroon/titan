@@ -11,10 +11,10 @@ class SceneManager : public Object {
     SceneManager();
     ~SceneManager();
 
-    void add_scene(Scene *ps_scene);
-    Scene *get_scene(const String &p_name);
-    void remove_scene(const String &p_name);
-    bool DoesSceneExist(const String &p_name);
+    void add_scene(Scene* ps_scene);
+    Scene* get_scene(const String& p_name);
+    void remove_scene(const String& p_name);
+    bool DoesSceneExist(const String& p_name);
 
     void Free();
 
@@ -22,10 +22,10 @@ class SceneManager : public Object {
 
     static void init();
 
-    static SceneManager *get_singleton();
+    static SceneManager* get_singleton();
 
     static void bind_methods();
 
    private:
-    static SceneManager *singleton;
+    static SceneManager* singleton;
 };

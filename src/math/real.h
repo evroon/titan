@@ -23,32 +23,32 @@ class Real {
         t = FLOAT;
     }
 
-    Real(const String &text);
+    Real(const String& text);
 
     String to_string() const;
 
-    Real &operator+=(const Real &n) {
+    Real& operator+=(const Real& n) {
         if (t == INT)
             i += (n.t == INT ? n.i : (int)n.f);
         else
             f += (n.t == INT ? n.i : n.f);
         return *this;
     }
-    Real &operator-=(const Real &n) {
+    Real& operator-=(const Real& n) {
         if (t == INT)
             i -= (n.t == INT ? n.i : (int)n.f);
         else
             f -= (n.t == INT ? n.i : n.f);
         return *this;
     }
-    Real &operator*=(const Real &n) {
+    Real& operator*=(const Real& n) {
         if (t == INT)
             i *= (n.t == INT ? n.i : (int)n.f);
         else
             f *= (n.t == INT ? n.i : n.f);
         return *this;
     }
-    Real &operator/=(const Real &n) {
+    Real& operator/=(const Real& n) {
         if (t == INT)
             i /= (n.t == INT ? n.i : (int)n.f);
         else
@@ -56,42 +56,42 @@ class Real {
         return *this;
     }
 
-    Real operator+(const Real &n) const {
+    Real operator+(const Real& n) const {
         return Real((t == INT ? i : f) + (n.t == INT ? n.i : n.f));
     }
-    Real operator-(const Real &n) const {
+    Real operator-(const Real& n) const {
         return Real((t == INT ? i : f) - (n.t == INT ? n.i : n.f));
     }
-    Real operator*(const Real &n) const {
+    Real operator*(const Real& n) const {
         return Real((t == INT ? i : f) * (n.t == INT ? n.i : n.f));
     }
-    Real operator/(const Real &n) const {
+    Real operator/(const Real& n) const {
         return Real((t == INT ? i : f) / (n.t == INT ? n.i : n.f));
     }
 
-    bool operator>(const Real &n) const {
+    bool operator>(const Real& n) const {
         return (t == INT ? i : f) > (n.t == INT ? n.i : n.f);
     }
-    bool operator>=(const Real &n) const {
+    bool operator>=(const Real& n) const {
         return (t == INT ? i : f) >= (n.t == INT ? n.i : n.f);
     }
-    bool operator==(const Real &n) const {
+    bool operator==(const Real& n) const {
         return (t == INT ? i : f) == (n.t == INT ? n.i : n.f);
     }
-    bool operator!=(const Real &n) const {
+    bool operator!=(const Real& n) const {
         return (t == INT ? i : f) != (n.t == INT ? n.i : n.f);
     }
-    bool operator<(const Real &n) const {
+    bool operator<(const Real& n) const {
         return (t == INT ? i : f) < (n.t == INT ? n.i : n.f);
     }
-    bool operator<=(const Real &n) const {
+    bool operator<=(const Real& n) const {
         return (t == INT ? i : f) <= (n.t == INT ? n.i : n.f);
     }
 
-    bool operator==(const float &r) const {
+    bool operator==(const float& r) const {
         return (t == INT ? i : f) == (t == INT ? (int)r : (float)r);
     }
-    bool operator==(const int &r) const {
+    bool operator==(const int& r) const {
         return (t == INT ? i : f) == (t == INT ? (int)r : (float)r);
     }
 

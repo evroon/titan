@@ -6,7 +6,7 @@ UBO::UBO() { glGenBuffers(1, &ubo); }
 
 UBO::~UBO() {}
 
-void UBO::set_data(const Array<float> &p_buffer) {
+void UBO::set_data(const Array<float>& p_buffer) {
     GLuint ubo = 0;
     data_size = p_buffer.size();
     data = new float[data_size];
@@ -16,7 +16,7 @@ void UBO::set_data(const Array<float> &p_buffer) {
     init();
 }
 
-void UBO::set_data(const Array<mat4> &p_buffer) {
+void UBO::set_data(const Array<mat4>& p_buffer) {
     GLuint ubo = 0;
     data_size = p_buffer.size() * 16;
     data = new float[data_size];
@@ -36,19 +36,19 @@ void UBO::init() {
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
-void UBO::update_data(const Array<float> &p_buffer) {
+void UBO::update_data(const Array<float>& p_buffer) {
     bind();
 
-    GLvoid *p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+    GLvoid* p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     memcpy(p, &p_buffer, p_buffer.size() * sizeof(float));
 
     glUnmapBuffer(GL_UNIFORM_BUFFER);
 }
 
-void UBO::update_data(const Array<mat4> &p_buffer) {
+void UBO::update_data(const Array<mat4>& p_buffer) {
     bind();
 
-    GLvoid *p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+    GLvoid* p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     memcpy(p, &p_buffer, p_buffer.size() * 16 * sizeof(float));
 
     glUnmapBuffer(GL_UNIFORM_BUFFER);

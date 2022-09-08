@@ -6,7 +6,7 @@
 
 Toggle::Toggle() : Toggle("") {}
 
-Toggle::Toggle(const String &p_text) {
+Toggle::Toggle(const String& p_text) {
     text = p_text;
     tex = nullptr;
     selected = false;
@@ -16,7 +16,7 @@ Toggle::Toggle(Ref<Texture2D> p_tex) : Toggle("") { tex = p_tex; }
 
 Toggle::~Toggle() {}
 
-void Toggle::handle_event(UIEvent *p_event) {
+void Toggle::handle_event(UIEvent* p_event) {
     if (p_event->type == UIEvent::MOUSE_PRESS &&
         p_event->press_type == UIEvent::DOWN) {
         if (area.is_in_box(p_event->pos)) {
@@ -82,7 +82,7 @@ ToggleStrip::ToggleStrip() {
 
 ToggleStrip::~ToggleStrip() {}
 
-void ToggleStrip::handle_event(UIEvent *p_event) {
+void ToggleStrip::handle_event(UIEvent* p_event) {
     if (p_event->type == UIEvent::MOUSE_PRESS &&
         p_event->press_type == UIEvent::DOWN) {
         for (int c = 0; c < toggles.size(); c++) {
@@ -160,7 +160,7 @@ vec2 ToggleStrip::get_required_size() const {
     return size;
 }
 
-void ToggleStrip::add_child(const String &p_tip, Ref<Texture2D> p_tex) {
+void ToggleStrip::add_child(const String& p_tip, Ref<Texture2D> p_tex) {
     Toggle t;
     t.tip = p_tip;
     t.tex = p_tex;

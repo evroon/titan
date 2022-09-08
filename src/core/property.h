@@ -12,12 +12,12 @@ class Property : public Callable {
     VariantType inherits_from;
     VariantType var_type;
 
-    R_Method_1 *get;
-    V_Method_2 *set;
+    R_Method_1* get;
+    V_Method_2* set;
 };
 
 struct Variable {
-    Property *property;
+    Property* property;
     Variant variant;
 
     Variant get() {
@@ -27,7 +27,7 @@ struct Variable {
             return NULL_VAR;
     }
 
-    void set(const Variant &p_new) {
+    void set(const Variant& p_new) {
         property->set->operator()(variant, p_new);
     }
 };

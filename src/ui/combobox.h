@@ -14,15 +14,15 @@ class ComboBox : public Control {
     vec2 get_required_size() const override;
     void notification(int p_notification) override;
 
-    void add_item(const String &p_text);
+    void add_item(const String& p_text);
 
-    void set_text(const String &p_text);
+    void set_text(const String& p_text);
 
     void selected();
 
     void clear();
 
-    void handle_event(UIEvent *p_ui_event) override;
+    void handle_event(UIEvent* p_ui_event) override;
 
     static void bind_methods();
 
@@ -30,5 +30,5 @@ class ComboBox : public Control {
     Ref<Texture2D> texture;
     String text;
 
-    ContextMenu *menu;
+    ContextMenu* menu;
 };
