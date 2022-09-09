@@ -50,9 +50,7 @@ class Math {
     static inline float floor(float p_x) { return ::floorf(p_x); }
     static inline float ceil(float p_x) { return ::ceilf(p_x); }
 
-    static inline float lerp(float p_x, float p_y, float p_z) {
-        return p_x + (p_y - p_x) * p_z;
-    }
+    static inline float lerp(float p_x, float p_y, float p_z) { return p_x + (p_y - p_x) * p_z; }
 
     static inline float clamp(float p_x, float p_min, float p_max) {
         if (p_x > p_min && p_x < p_max)
@@ -69,8 +67,7 @@ class Math {
         return t * t * (3.0f - 2.0f * t);
     }
 
-    static inline float bandpass(float x, float start, float edge1, float edge2,
-                                 float end) {
+    static inline float bandpass(float x, float start, float edge1, float edge2, float end) {
         if (x < start) return 0.0f;
         if (x > end) return 0.0f;
         if (x < edge1) return smoothstep(start, edge1, x);
@@ -83,12 +80,8 @@ class Math {
 
     static inline float abs(float p_x) { return ::abs(p_x); }
 
-    static inline float DegToRad(float p_degrees) {
-        return p_degrees * PI / 180;
-    }
-    static inline float RadToDeg(float p_radians) {
-        return p_radians / PI * 180;
-    }
+    static inline float DegToRad(float p_degrees) { return p_degrees * PI / 180; }
+    static inline float RadToDeg(float p_radians) { return p_radians / PI * 180; }
 
     static inline float random() {
         return static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
@@ -96,17 +89,11 @@ class Math {
 
     static vec2 GetVector(float angle) { return vec2(cosf(angle), sin(angle)); }
 
-    static float floor(float value, float proj) {
-        return ::floorf(value / proj) * proj;
-    }
+    static float floor(float value, float proj) { return ::floorf(value / proj) * proj; }
 
-    static float modulo(float value, float proj) {
-        return value - floor(value, proj);
-    }
+    static float modulo(float value, float proj) { return value - floor(value, proj); }
 
-    static inline float distance(float p_a, float p_b) {
-        return abs(abs(p_a) - abs(p_b));
-    }
+    static inline float distance(float p_a, float p_b) { return abs(abs(p_a) - abs(p_b)); }
 
     static float closest_to(float value, float a, float b) {
         if (distance(value, a) < distance(value, b))
@@ -124,17 +111,14 @@ class Math {
         return value;
     }
 
-    static float get_barry_centric(const vec3& p_p1, const vec3& p_p2,
-                                   const vec3& p_p3, const vec2& p_pos) {
-        float det = (p_p2.z - p_p3.z) * (p_p1.x - p_p3.x) +
-                    (p_p3.x - p_p2.x) * (p_p1.z - p_p3.z);
+    static float get_barry_centric(const vec3& p_p1, const vec3& p_p2, const vec3& p_p3,
+                                   const vec2& p_pos) {
+        float det = (p_p2.z - p_p3.z) * (p_p1.x - p_p3.x) + (p_p3.x - p_p2.x) * (p_p1.z - p_p3.z);
 
-        float l1 = ((p_p2.z - p_p3.z) * (p_pos.x - p_p3.x) +
-                    (p_p3.x - p_p2.x) * (p_pos.y - p_p3.z)) /
-                   det;
-        float l2 = ((p_p3.z - p_p1.z) * (p_pos.x - p_p3.x) +
-                    (p_p1.x - p_p3.x) * (p_pos.y - p_p3.z)) /
-                   det;
+        float l1 =
+            ((p_p2.z - p_p3.z) * (p_pos.x - p_p3.x) + (p_p3.x - p_p2.x) * (p_pos.y - p_p3.z)) / det;
+        float l2 =
+            ((p_p3.z - p_p1.z) * (p_pos.x - p_p3.x) + (p_p1.x - p_p3.x) * (p_pos.y - p_p3.z)) / det;
         float l3 = 1.0f - l1 - l2;
 
         return l1 * p_p1.y + l2 * p_p2.y + l3 * p_p3.y;

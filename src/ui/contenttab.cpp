@@ -12,10 +12,8 @@ ContentTab::ContentTab(const File& p_file) {
     file = p_file;
     home = file;
 
-    directory_icon =
-        CONTENT->LoadFontAwesomeIcon("regular/folder-open", vec2i(128, 128));
-    file_icon =
-        CONTENT->LoadFontAwesomeIcon("regular/file-code", vec2i(100, 100));
+    directory_icon = CONTENT->LoadFontAwesomeIcon("regular/folder-open", vec2i(128, 128));
+    file_icon = CONTENT->LoadFontAwesomeIcon("regular/file-code", vec2i(100, 100));
 
     back_button = new IconButton("solid/arrow-left");
     forward_button = new IconButton("solid/arrow-right");

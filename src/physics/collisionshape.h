@@ -99,8 +99,7 @@ class CircleShape2D : public CollisionShape2D {
 
    public:
     CircleShape2D() = default;
-    CircleShape2D(PhysicsWorld2D* world, WorldObject* p_object,
-                  bool dyn = true);
+    CircleShape2D(PhysicsWorld2D* world, WorldObject* p_object, bool dyn = true);
     virtual ~CircleShape2D() {}
 
    protected:

@@ -43,17 +43,11 @@ class Ref {
         ref->increase_ref_count();
     }
 
-    inline bool operator<(const Ref<T>& p_r) const {
-        return referenced < p_r.referenced;
-    }
+    inline bool operator<(const Ref<T>& p_r) const { return referenced < p_r.referenced; }
 
-    inline bool operator==(const Ref<T>& p_r) const {
-        return referenced == p_r.referenced;
-    }
+    inline bool operator==(const Ref<T>& p_r) const { return referenced == p_r.referenced; }
 
-    inline bool operator!=(const Ref<T>& p_r) const {
-        return referenced != p_r.referenced;
-    }
+    inline bool operator!=(const Ref<T>& p_r) const { return referenced != p_r.referenced; }
 
     inline T* operator->() { return referenced; }
 

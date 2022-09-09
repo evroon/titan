@@ -26,9 +26,8 @@ float PerlinNoise::get_value(const vec3& p_pos) {
     return to_float(perlin_noise.GetValue(p_pos.x, p_pos.y, p_pos.z));
 }
 
-void PerlinNoise::fill_partition(PerlinNoise* p_noise, vec4* p_heights, int p_x,
-                                 int p_y, const vec2i& p_partition_size,
-                                 const vec2i& p_size) {
+void PerlinNoise::fill_partition(PerlinNoise* p_noise, vec4* p_heights, int p_x, int p_y,
+                                 const vec2i& p_partition_size, const vec2i& p_size) {
     for (int x = p_x; x < p_x + p_partition_size.x; x++) {
         for (int y = p_y; y < p_y + p_partition_size.y; y++) {
             float value = p_noise->get_value(vec3(x, y, 0.0f) / 2000.0f) / 2.0f;
@@ -50,8 +49,7 @@ Texture2D* PerlinNoise::create_2d_texture(const vec2i& p_size) {
         vec2i partition_size = vec2i(p_size.x, p_size.y / num_threads);
         int y = partition_size.y * c;
 
-        threads[c] = std::thread(fill_partition, this, heights, 0, y,
-                                 partition_size, p_size);
+        threads[c] = std::thread(fill_partition, this, heights, 0, y, partition_size, p_size);
     }
 
     for (int c = 0; c < num_threads; c++) {
@@ -64,8 +62,8 @@ Texture2D* PerlinNoise::create_2d_texture(const vec2i& p_size) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, (GLsizei)p_size.x,
-                 (GLsizei)p_size.y, 0, GL_RGBA, GL_FLOAT, heights);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA,
+                 GL_FLOAT, heights);
 
     delete[] heights;
     return new Texture2D(size, to_int(id));
@@ -82,8 +80,7 @@ Texture3D* PerlinNoise::create_3d_texture() {
         BYTE a;
     };
 
-    ColorByte* colors =
-        new ColorByte[to_int(size.x) * to_int(size.y) * to_int(size.z)];
+    ColorByte* colors = new ColorByte[to_int(size.x) * to_int(size.y) * to_int(size.z)];
 
     WorleyNoise w1 = WorleyNoise(8);
     WorleyNoise w2 = WorleyNoise(16);
@@ -118,8 +115,8 @@ Texture3D* PerlinNoise::create_3d_texture() {
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
-    glTexImage3D(GL_TEXTURE_3D, 0, (GLsizei)GL_RGBA, size.x, size.y, size.z, 0,
-                 (GLsizei)GL_RGBA, GL_UNSIGNED_BYTE, colors);
+    glTexImage3D(GL_TEXTURE_3D, 0, (GLsizei)GL_RGBA, size.x, size.y, size.z, 0, (GLsizei)GL_RGBA,
+                 GL_UNSIGNED_BYTE, colors);
 
     return new Texture3D(size, to_int(id));
 }
@@ -164,12 +161,9 @@ float WorleyNoise::get_value(const vec3& p_pos) {
     for (int x = -1; x <= 1; x++) {
         for (int y = -1; y <= 1; y++) {
             for (int z = -1; z <= 1; z++) {
-                int c = (z + cell.z) + (y + cell.y) * size.z +
-                        (x + cell.x) * size.y * size.z;
+                int c = (z + cell.z) + (y + cell.y) * size.z + (x + cell.x) * size.y * size.z;
 
-                float dist = (spheres[c] +
-                              vec3(cell.x + x, cell.y + y, cell.z + z) - pos)
-                                 .length();
+                float dist = (spheres[c] + vec3(cell.x + x, cell.y + y, cell.z + z) - pos).length();
                 closest = MIN(closest, dist);
             }
         }

@@ -28,8 +28,7 @@ WorldView::WorldView(Scene* p_scene) {
     fbo->add_depth_texture();
     fbo->init();
 
-    preview_texture = r->get_texture(DeferredRenderer::FINAL_COLOR)
-                          ->cast_to_type<Texture2D*>();
+    preview_texture = r->get_texture(DeferredRenderer::FINAL_COLOR)->cast_to_type<Texture2D*>();
 
     selected = nullptr;
     postprocess = nullptr;
@@ -80,23 +79,17 @@ void WorldView::update_camera() {
     vec3 movement_speed = 1.0f * 0.0001f * TIME->get_deltatime();
 
     // Rotation
-    if (KEYBOARD->is_button_pressed(Key::KEY_UP))
-        c->rotate(rotate_speed * vec3(1, 0, 0));
+    if (KEYBOARD->is_button_pressed(Key::KEY_UP)) c->rotate(rotate_speed * vec3(1, 0, 0));
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_DOWN))
-        c->rotate(rotate_speed * vec3(-1, 0, 0));
+    if (KEYBOARD->is_button_pressed(Key::KEY_DOWN)) c->rotate(rotate_speed * vec3(-1, 0, 0));
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_LEFT))
-        c->rotate(rotate_speed * vec3(0, 1, 0));
+    if (KEYBOARD->is_button_pressed(Key::KEY_LEFT)) c->rotate(rotate_speed * vec3(0, 1, 0));
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_RIGHT))
-        c->rotate(rotate_speed * vec3(0, -1, 0));
+    if (KEYBOARD->is_button_pressed(Key::KEY_RIGHT)) c->rotate(rotate_speed * vec3(0, -1, 0));
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_M))
-        c->rotate(rotate_speed * vec3(0, 0, -1));
+    if (KEYBOARD->is_button_pressed(Key::KEY_M)) c->rotate(rotate_speed * vec3(0, 0, -1));
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_N))
-        c->rotate(rotate_speed * vec3(0, 0, 1));
+    if (KEYBOARD->is_button_pressed(Key::KEY_N)) c->rotate(rotate_speed * vec3(0, 0, 1));
 
     // Movement
     if (KEYBOARD->is_button_pressed(Key::KEY_A))
@@ -111,8 +104,7 @@ void WorldView::update_camera() {
     if (KEYBOARD->is_button_pressed(Key::KEY_S))
         c->move(movement_speed * c->get_forward().normalize() * -1.0f);
 
-    if (KEYBOARD->is_button_pressed(Key::KEY_E))
-        c->move(movement_speed * c->get_up().normalize());
+    if (KEYBOARD->is_button_pressed(Key::KEY_E)) c->move(movement_speed * c->get_up().normalize());
 
     if (KEYBOARD->is_button_pressed(Key::KEY_F))
         c->move(movement_speed * c->get_up().normalize() * -1.0f);
@@ -121,8 +113,7 @@ void WorldView::update_camera() {
         vec3 pos = c->get_pos();
         float height = t->get_height(pos.get_xy());
 
-        if (c->get_pos().z < height + 1.0f)
-            c->set_pos(vec3(pos.x, pos.y, height + 1.0f));
+        if (c->get_pos().z < height + 1.0f) c->set_pos(vec3(pos.x, pos.y, height + 1.0f));
     }
 
     c->look_at(c->get_pos() + vec3(0, 1, 0), vec3(0, 0, -1));
@@ -163,8 +154,7 @@ void WorldView::notification(int p_notification) {
             postprocess = nullptr;
 
             if (!postprocess)
-                draw_texture(preview_texture, get_area(), Color::White,
-                             vec4(0, 1, 0, 1));
+                draw_texture(preview_texture, get_area(), Color::White, vec4(0, 1, 0, 1));
             else
                 postprocess->post_process();
 
@@ -244,16 +234,14 @@ void WorldView::draw_grid() {
 
             if (c == 0) color = Color::Red;
 
-            draw_line(vec2(-1000.0f, c * 100.0f), vec2(1000.0f, c * 100.0f),
-                      color);
+            draw_line(vec2(-1000.0f, c * 100.0f), vec2(1000.0f, c * 100.0f), color);
         }
         for (int c = -10; c <= 10; c++) {
             Color color = TO_RGB(50);
 
             if (c == 0) color = Color::Green;
 
-            draw_line(vec2(c * 100.0f, -1000.0f), vec2(c * 100.0f, 1000.0f),
-                      color);
+            draw_line(vec2(c * 100.0f, -1000.0f), vec2(c * 100.0f, 1000.0f), color);
         }
     } else {
         for (int c = -10; c <= 10; c++) {
@@ -292,8 +280,7 @@ void WorldView::handle_event(UIEvent* ui_event) {
                     select(n->cast_to_type<WorldObject*>());
 
                     item_dragging = true;
-                    prev_item_drag_pos =
-                        viewport->get_screen_coords(MOUSE->get_position());
+                    prev_item_drag_pos = viewport->get_screen_coords(MOUSE->get_position());
                 } else if (ui_event->button_type == Mouse::CENTER) {
                     cam_dragging = ui_event->press_type == UIEvent::DOWN;
                     prev_cam_drag_pos = ui_event->pos;
@@ -302,10 +289,8 @@ void WorldView::handle_event(UIEvent* ui_event) {
         } else if (ui_event->type == UIEvent::KEY_PRESS) {
             if (ui_event->press_type == Event::UP) return;
 
-            if (ui_event->key == Key::KEY_RIGHT ||
-                ui_event->key == Key::KEY_LEFT ||
-                ui_event->key == Key::KEY_UP ||
-                ui_event->key == Key::KEY_DOWN) {
+            if (ui_event->key == Key::KEY_RIGHT || ui_event->key == Key::KEY_LEFT ||
+                ui_event->key == Key::KEY_UP || ui_event->key == Key::KEY_DOWN) {
                 Camera* cam = viewport->get_world()->get_active_camera();
                 float velo = 20.0f;
 
@@ -320,19 +305,17 @@ void WorldView::handle_event(UIEvent* ui_event) {
 
                 cam->look_at(cam->get_pos() + vec3(0, 0, -1), vec3(0, 1, 0));
             }
-        } else if (ui_event->type == UIEvent::MOUSE_HOVER &&
-                   MOUSE->is_pressed(Mouse::LEFT) && item_dragging &&
-                   selected) {
-            vec2 current_drag_pos =
-                viewport->get_screen_coords(MOUSE->get_position());
+        } else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::LEFT) &&
+                   item_dragging && selected) {
+            vec2 current_drag_pos = viewport->get_screen_coords(MOUSE->get_position());
 
             vec2 drag_diff = current_drag_pos - prev_item_drag_pos;
 
             selected_worldobject->move(vec3(drag_diff, 0.0f));
 
             prev_item_drag_pos = current_drag_pos;
-        } else if (ui_event->type == UIEvent::MOUSE_HOVER &&
-                   MOUSE->is_pressed(Mouse::CENTER) && cam_dragging) {
+        } else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::CENTER) &&
+                   cam_dragging) {
             vec2 current_drag_pos = MOUSE->get_position();
             vec2 drag_diff = current_drag_pos - prev_cam_drag_pos;
 
@@ -355,12 +338,11 @@ void WorldView::handle_event(UIEvent* ui_event) {
         }
     } else {
         if (ui_event->type == UIEvent::MOUSE_PRESS &&
-            (ui_event->button_type == Mouse::RIGHT ||
-             ui_event->button_type == Mouse::CENTER)) {
+            (ui_event->button_type == Mouse::RIGHT || ui_event->button_type == Mouse::CENTER)) {
             cam_dragging = ui_event->press_type == UIEvent::DOWN;
             prev_cam_drag_pos = ui_event->pos;
-        } else if (ui_event->type == UIEvent::MOUSE_HOVER &&
-                   MOUSE->is_pressed(Mouse::RIGHT) && cam_dragging) {
+        } else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::RIGHT) &&
+                   cam_dragging) {
             vec2 current_drag_pos = MOUSE->get_position();
             vec2 drag_diff = current_drag_pos - prev_cam_drag_pos;
             Camera* cam = viewport->get_world()->get_active_camera();
@@ -377,8 +359,8 @@ void WorldView::handle_event(UIEvent* ui_event) {
 
             cam->move((x + y) * speed);
             prev_cam_drag_pos = current_drag_pos;
-        } else if (ui_event->type == UIEvent::MOUSE_HOVER &&
-                   MOUSE->is_pressed(Mouse::CENTER) && cam_dragging) {
+        } else if (ui_event->type == UIEvent::MOUSE_HOVER && MOUSE->is_pressed(Mouse::CENTER) &&
+                   cam_dragging) {
             vec2 current_drag_pos = MOUSE->get_position();
             vec2 drag_diff = current_drag_pos - prev_cam_drag_pos;
             Camera* cam = viewport->get_world()->get_active_camera();
@@ -391,19 +373,16 @@ void WorldView::handle_event(UIEvent* ui_event) {
                    ui_event->type == UIEvent::MOUSE_HOVER) {
             DeferredRenderer* renderer =
                 viewport->get_renderer()->cast_to_type<DeferredRenderer*>();
-            Terrain* terrain =
-                viewport->get_world()->get_child_by_type<Terrain*>();
+            Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
             Raycaster r(viewport);
             vec3 p;
-            vec2 sp =
-                vec2(MOUSE->get_position() - viewport->get_area().get_pos());
+            vec2 sp = vec2(MOUSE->get_position() - viewport->get_area().get_pos());
             sp /= viewport->get_size();
 
             if (rect2(vec2(), vec2(1.0f)).is_in_box(sp)) {
                 sp += 1.0f;
                 sp /= 2.0f;
-                sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)
-                          ->get_size();
+                sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)->get_size();
 
                 vec3 m = renderer->get_material_at_pixel(sp);
                 vec3 mouse_pos = get_click_position_in_world();
@@ -424,8 +403,7 @@ void WorldView::handle_event(UIEvent* ui_event) {
                             drag_start_grab = mouse_pos;
                             drag_start_pos = selected_worldobject->get_pos();
                             drag_start_size = selected_worldobject->get_size();
-                            drag_start_rotation =
-                                selected_worldobject->get_rotation();
+                            drag_start_rotation = selected_worldobject->get_rotation();
                         }
                     } else {
                         drag_type = DRAG_INACTIVE;
@@ -445,33 +423,27 @@ void WorldView::handle_event(UIEvent* ui_event) {
                     if (transform_type == TRANSLATE) {
                         if (drag_type == DRAG_X)
                             selected_worldobject->set_pos(
-                                drag_start_pos +
-                                vec3(mouse_pos.x - drag_start_grab.x, 0, 0));
+                                drag_start_pos + vec3(mouse_pos.x - drag_start_grab.x, 0, 0));
                         else if (drag_type == DRAG_Y)
                             selected_worldobject->set_pos(
-                                drag_start_pos +
-                                vec3(0, mouse_pos.y - drag_start_grab.y, 0));
+                                drag_start_pos + vec3(0, mouse_pos.y - drag_start_grab.y, 0));
                         else if (drag_type == DRAG_Z)
                             selected_worldobject->set_pos(
-                                drag_start_pos +
-                                vec3(0, 0, mouse_pos.z - drag_start_grab.z));
+                                drag_start_pos + vec3(0, 0, mouse_pos.z - drag_start_grab.z));
                     } else if (transform_type == ROTATE) {
                     } else if (transform_type == SCALE) {
                         if (drag_type == DRAG_X)
                             selected_worldobject->set_size(
                                 drag_start_size *
-                                vec3(mouse_pos.x / drag_start_grab.x, 1.0f,
-                                     1.0f));
+                                vec3(mouse_pos.x / drag_start_grab.x, 1.0f, 1.0f));
                         else if (drag_type == DRAG_Y)
                             selected_worldobject->set_size(
                                 drag_start_size *
-                                vec3(1.0f, mouse_pos.y / drag_start_grab.y,
-                                     1.0f));
+                                vec3(1.0f, mouse_pos.y / drag_start_grab.y, 1.0f));
                         else if (drag_type == DRAG_Z)
                             selected_worldobject->set_size(
                                 drag_start_size *
-                                vec3(1.0f, 1.0f,
-                                     mouse_pos.z / drag_start_grab.z));
+                                vec3(1.0f, 1.0f, mouse_pos.z / drag_start_grab.z));
                     }
                 }
 
@@ -484,8 +456,7 @@ void WorldView::handle_event(UIEvent* ui_event) {
         if (ui_event->type == UIEvent::KEY_PRESS) {
             if (ui_event->press_type == Event::UP) return;
 
-            Terrain* terrain =
-                viewport->get_world()->get_child_by_type<Terrain*>();
+            Terrain* terrain = viewport->get_world()->get_child_by_type<Terrain*>();
 
             if (ui_event->key == Key::KEY_P)
                 TIME->game_paused = !TIME->game_paused;
@@ -529,11 +500,8 @@ void WorldView::post_draw_world() {
     World* world = viewport->get_world();
 
     if (handle_2d) {
-        vec2 item_size =
-            selected->cast_to_type<WorldObject*>()->get_size().get_xy() +
-            vec2(2);
-        vec2 item_pos =
-            selected->cast_to_type<WorldObject*>()->get_pos().get_xy();
+        vec2 item_size = selected->cast_to_type<WorldObject*>()->get_size().get_xy() + vec2(2);
+        vec2 item_pos = selected->cast_to_type<WorldObject*>()->get_pos().get_xy();
         vec2 handle_size = vec2(4.0f);
         vec2 offset = item_size + handle_size;
 
@@ -541,8 +509,7 @@ void WorldView::post_draw_world() {
         command.type = DrawCommand::FRAME;
         command.area = rect2(item_pos, item_size);
         command.color = TO_RGB(vec3i(255, 164, 66));
-        command.tex =
-            CanvasData::get_singleton()->get_default_theme()->get_highlight();
+        command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
         command.shader = CanvasData::get_singleton()->get_default_shader();
 
         render_frame(command);
@@ -594,8 +561,7 @@ void WorldView::post_draw_world() {
 
     int highlight = 150;
 
-    vec3 mesh_size =
-        vec3(1.0f, .5f, .5f) * (camera->get_pos() - pos).length() / 50.0f;
+    vec3 mesh_size = vec3(1.0f, .5f, .5f) * (camera->get_pos() - pos).length() / 50.0f;
 
     if (transform_type == TRANSLATE) {
         // draw translation cones
@@ -696,8 +662,7 @@ void WorldView::post_draw_canvas() {
         command.type = DrawCommand::FRAME;
         command.area = rect2(item_pos, item_size);
         command.color = TO_RGB(vec3i(255, 164, 66));
-        command.tex =
-            CanvasData::get_singleton()->get_default_theme()->get_highlight();
+        command.tex = CanvasData::get_singleton()->get_default_theme()->get_highlight();
         command.shader = CanvasData::get_singleton()->get_default_shader();
 
         render_frame(command);
@@ -720,23 +685,17 @@ void WorldView::draw_fps_info() {
     command.color = Color();
     command.font = get_default_font();
     command.text =
-        "R: " +
-        StringUtils::FloatToString(viewport->get_rendering_time() * 1000) +
-        " ms";
+        "R: " + StringUtils::FloatToString(viewport->get_rendering_time() * 1000) + " ms";
     command.pos = viewport->get_size() / 1.0f - vec2(110, 10);
     command.area = rect2(command.pos, vec2());
 
     render_font(command);
 
-    command.text =
-        "R: " + StringUtils::FloatToString(viewport->get_fps()) + " fps";
+    command.text = "R: " + StringUtils::FloatToString(viewport->get_fps()) + " fps";
     command.pos.y -= 20.0f;
     render_font(command);
 
-    command.text =
-        "U: " +
-        StringUtils::FloatToString(viewport->get_updating_time() * 1000) +
-        " ms";
+    command.text = "U: " + StringUtils::FloatToString(viewport->get_updating_time() * 1000) + " ms";
     command.pos.y -= 20.0f;
     render_font(command);
 }
@@ -770,9 +729,7 @@ void WorldView::highlight(Node* p_object) {
     highlighted = p_object;
 }
 
-Node* WorldView::get_highlight() const {
-    return highlighted->cast_to_type<WorldObject*>();
-}
+Node* WorldView::get_highlight() const { return highlighted->cast_to_type<WorldObject*>(); }
 
 void WorldView::set_preview_type(int p_type) {
     preview_type = p_type;
@@ -827,8 +784,7 @@ void WorldView::set_display_mode(int p_display_mode) {
 int WorldView::get_display_mode() const { return display_mode; }
 
 vec3 WorldView::get_click_position_in_world() {
-    DeferredRenderer* renderer =
-        viewport->get_renderer()->cast_to_type<DeferredRenderer*>();
+    DeferredRenderer* renderer = viewport->get_renderer()->cast_to_type<DeferredRenderer*>();
     Raycaster r(viewport);
     vec3 p;
     vec2 sp = vec2(MOUSE->get_position() - viewport->get_area().get_pos());
@@ -837,8 +793,7 @@ vec3 WorldView::get_click_position_in_world() {
     if (rect2(vec2(), vec2(1.0f)).is_in_box(sp)) {
         sp += 1.0f;
         sp /= 2.0f;
-        sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)
-                  ->get_size();
+        sp *= renderer->get_texture(DeferredRenderer::DEFERRED_POSITION)->get_size();
 
         vec3 m = renderer->get_material_at_pixel(sp);
         vec3 mouse_pos = raycast_fbo->read_pixel(sp, 0).get_rgb();

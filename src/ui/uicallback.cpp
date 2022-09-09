@@ -12,8 +12,7 @@ void UICallback::operator()() {
 // UITimer
 //=========================================================================
 
-UITimer::UITimer(UICallback* p_callback, int time)
-    : callback(p_callback), timer(time) {
+UITimer::UITimer(UICallback* p_callback, int time) : callback(p_callback), timer(time) {
     TIME->register_uitimer(this);
 }
 

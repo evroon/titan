@@ -15,14 +15,9 @@ ColorField::ColorField() { init(); }
 
 ColorField::~ColorField() {}
 
-ColorField::ColorField(const Color& p_color) : PropertyControl(p_color) {
-    init();
-}
+ColorField::ColorField(const Color& p_color) : PropertyControl(p_color) { init(); }
 
-ColorField::ColorField(const Variable& p_variable)
-    : PropertyControl(p_variable) {
-    init();
-}
+ColorField::ColorField(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void ColorField::init() {
     textbutton = new TextButton("...");
@@ -36,9 +31,7 @@ void ColorField::init() {
 
 void ColorField::color_chosen(const Color& p_color) { value_set(p_color); }
 
-vec2 ColorField::get_required_size() const {
-    return vec2(100, textbutton->get_required_size().y);
-}
+vec2 ColorField::get_required_size() const { return vec2(100, textbutton->get_required_size().y); }
 
 void ColorField::notification(int p_notification) {
     switch (p_notification) {
@@ -82,10 +75,7 @@ Texture2DField::Texture2DField(Texture2D* p_texture) : Texture2DField() {
     init();
 }
 
-Texture2DField::Texture2DField(const Variable& p_variable)
-    : PropertyControl(p_variable) {
-    init();
-}
+Texture2DField::Texture2DField(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 Texture2DField::~Texture2DField() {}
 
@@ -115,8 +105,8 @@ void Texture2DField::notification(int p_notification) {
 
             if (!get_value()) return;
 
-            rect2 color_area = rect2(area.get_left(), area.get_left() + 40,
-                                     area.get_top(), area.get_bottom());
+            rect2 color_area =
+                rect2(area.get_left(), area.get_left() + 40, area.get_top(), area.get_bottom());
 
             draw_texture(get_value(), color_area, Color::White);
 
@@ -129,9 +119,7 @@ void Texture2DField::load_texture() {
     file_dialog->connect("file_chosen", this, "file_chosen");
 }
 
-void Texture2DField::file_chosen(const String& p_path) {
-    value_set(CONTENT->LoadTexture(p_path));
-}
+void Texture2DField::file_chosen(const String& p_path) { value_set(CONTENT->LoadTexture(p_path)); }
 
 #undef CLASSNAME
 #define CLASSNAME Texture2DField
@@ -160,13 +148,11 @@ ObjectField::ObjectField(Object* p_object) : PropertyControl(p_object) {
     } else {
         Resource* resource = reinterpret_cast<Resource*>(p_object);
 
-        if (resource)
-            textfield->set_text(File(resource->get_file()).get_name());
+        if (resource) textfield->set_text(File(resource->get_file()).get_name());
     }
 }
 
-ObjectField::ObjectField(const Variable& p_variable)
-    : PropertyControl(p_variable) {
+ObjectField::ObjectField(const Variable& p_variable) : PropertyControl(p_variable) {
     init();
 
     Variable var = Variable(p_variable);
@@ -179,8 +165,7 @@ ObjectField::ObjectField(const Variable& p_variable)
     } else {
         Resource* resource = dynamic_cast<Resource*>(object.operator Object*());
 
-        if (resource)
-            textfield->set_text(File(resource->get_file()).get_name());
+        if (resource) textfield->set_text(File(resource->get_file()).get_name());
     }
 }
 
@@ -219,8 +204,7 @@ void ObjectField::open_button_clicked() {
     Variant v = get_value();
 
     if (v.operator Object*()->derives_from_type<Resource*>())
-        EDITOR_APP->open_file(
-            File(v.operator Resource*()->get_file()).get_absolute_path());
+        EDITOR_APP->open_file(File(v.operator Resource*()->get_file()).get_absolute_path());
     else if (v.operator Object*()->derives_from_type<Node*>())
         textfield->set_text(v.operator Node*()->get_name());
     else {
@@ -240,10 +224,7 @@ void ObjectField::load_button_clicked() {
 
     if (!v) {
         if (MMASTER->constructor_exists(type, 0))
-            result =
-                reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))
-                    ->
-                    operator()();
+            result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))->operator()();
 
         value_set(result);
     } else
@@ -260,8 +241,8 @@ void ObjectField::load_button_clicked() {
             res->save();
             textfield->set_text(File(res->get_file()).get_name());
         };
-        file_dialog->connect("file_chosen", Connection::create_from_lambda(
-                                                new V_Method_1(save_as)));
+        file_dialog->connect("file_chosen",
+                             Connection::create_from_lambda(new V_Method_1(save_as)));
         file_dialog->show();
 
     } else if (result.operator Object*()->derives_from_type<Node*>())
@@ -278,8 +259,7 @@ void ObjectField::file_chosen(const String& p_path) {
 }
 
 vec2 ObjectField::get_required_size() const {
-    return vec2(100, MAX(textfield->get_required_size().y,
-                         open_button->get_required_size().y));
+    return vec2(100, MAX(textfield->get_required_size().y, open_button->get_required_size().y));
 }
 
 #undef CLASSNAME

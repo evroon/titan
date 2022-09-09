@@ -27,6 +27,7 @@
 #include "resource.h"
 
 struct aiTexture;
+class Texture2D;
 
 class Texture : public Resource {
     OBJ_DEFINITION(Texture, Resource)
@@ -49,6 +50,12 @@ class Texture : public Resource {
     void set_shadow_parameters();
 
     unsigned get_id() const;
+
+    inline Texture2D* cast_to_texture_2d() {
+        if (derives_from_type<Texture2D*>()) return reinterpret_cast<Texture2D*>(this);
+
+        return nullptr;
+    }
 
     static void bind_methods();
 
@@ -86,8 +93,7 @@ class Texture2D : public Texture {
         : Texture2D(vec2(to_float(p_size.x), to_float(p_size.y)), p_byte) {}
     Texture2D(const vec2& p_size, int p_index);
     Texture2D(const String& p_filepath);
-    Texture2D(const String& p_filepath, const vec2i& p_size,
-              const Color& p_color);
+    Texture2D(const String& p_filepath, const vec2i& p_size, const Color& p_color);
     Texture2D(SDL_Surface* p_surface);
     Texture2D(aiTexture* p_texture);
 

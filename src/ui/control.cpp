@@ -29,9 +29,7 @@ Control::Control() {
 
 void Control::bind_parent(Control* p_parent) { parent = p_parent; }
 
-Control* Control::get_parent() const {
-    return parent->cast_to_type<Control*>();
-}
+Control* Control::get_parent() const { return parent->cast_to_type<Control*>(); }
 
 vec2 Control::get_parent_size() const {
     if (parent && !parent->is_of_type<Canvas>()) {
@@ -42,8 +40,8 @@ vec2 Control::get_parent_size() const {
     }
 }
 
-float Control::get_margin(const AnchorType& p_anchor, float p_value,
-                          float p_domain, float p_custom) const {
+float Control::get_margin(const AnchorType& p_anchor, float p_value, float p_domain,
+                          float p_custom) const {
     switch (p_anchor) {
         case ANCHOR_BEGIN:
             return p_value;
@@ -94,12 +92,10 @@ void Control::set_margins(const vec4& p_margins) {
     set_margins(p_margins.x, p_margins.y, p_margins.z, p_margins.w);
 }
 
-vec4 Control::get_margins() const {
-    return vec4(margins[0], margins[1], margins[2], margins[3]);
-}
+vec4 Control::get_margins() const { return vec4(margins[0], margins[1], margins[2], margins[3]); }
 
-void Control::set_anchors(const AnchorType& p_0, const AnchorType& p_1,
-                          const AnchorType& p_2, const AnchorType& p_3) {
+void Control::set_anchors(const AnchorType& p_0, const AnchorType& p_1, const AnchorType& p_2,
+                          const AnchorType& p_3) {
     anchors[0] = p_0;
     anchors[1] = p_1;
     anchors[2] = p_2;
@@ -159,9 +155,7 @@ String Control::get_context_tip(const vec2& p_pos) {
 
 void Control::set_pos(const vec2& p_pos) { set_area(rect2(p_pos, area.size)); }
 
-void Control::set_size(const vec2& p_size) {
-    set_area(rect2(area.pos, p_size));
-}
+void Control::set_size(const vec2& p_size) { set_area(rect2(area.pos, p_size)); }
 
 vec2 Control::get_pos() const { return area.pos; }
 
@@ -174,16 +168,15 @@ void Control::set_area(const rect2& p_area) {
     vec2 parent_size = get_parent_size() * 2.0f;
 
     if (parent && !parent->is_of_type<Canvas>())
-        parent_pos =
-            parent->cast_to_type<Control*>()->get_area().get_bottom_left();
+        parent_pos = parent->cast_to_type<Control*>()->get_area().get_bottom_left();
     else
         parent_pos = get_parent_size() * -1.0f;
 
     vec2 local_pos = p_area.get_bottom_left() - parent_pos;
 
     for (int c = 0; c < 4; c++) {
-        margins[c] = get_margin(anchors[c], local_pos[c & 1],
-                                parent_size[c & 1], custom_anchors[c]);
+        margins[c] =
+            get_margin(anchors[c], local_pos[c & 1], parent_size[c & 1], custom_anchors[c]);
     }
 
     flag_size_changed();
@@ -223,9 +216,7 @@ void Control::add_child(Node* p_child) {
 
 void Control::remove_child(Node* p_child) { Node::remove_child(p_child); }
 
-bool Control::get_focused() const {
-    return ACTIVE_CANVAS->get_focused() == this;
-}
+bool Control::get_focused() const { return ACTIVE_CANVAS->get_focused() == this; }
 
 void Control::set_focused(bool value) {
     if (value) ACTIVE_CANVAS->focus(this);
@@ -321,9 +312,7 @@ void Control::size_changed() {
     for (Node* n : children) n->cast_to_type<Control*>()->size_changed();
 }
 
-void Control::set_tip_description(const String& p_description) {
-    tip_description = p_description;
-}
+void Control::set_tip_description(const String& p_description) { tip_description = p_description; }
 
 String Control::get_tip_description() const { return tip_description; }
 
@@ -349,8 +338,8 @@ void Control::draw() {
         return;                                            \
     }
 
-void Control::draw_texture(Texture2D* p_texture, const rect2& p_area,
-                           const Color& p_color, const vec4& p_bounds) {
+void Control::draw_texture(Texture2D* p_texture, const rect2& p_area, const Color& p_color,
+                           const vec4& p_bounds) {
     CHECK_DRAWING
 
     if (!p_texture) {
@@ -394,12 +383,10 @@ void Control::draw_text(Font* p_font, const String& p_text, const vec2& p_pos,
 }
 
 void Control::draw_box(const rect2& p_area, const Color& p_color) {
-    draw_box(p_area, p_color,
-             CanvasData::get_singleton()->get_default_shader());
+    draw_box(p_area, p_color, CanvasData::get_singleton()->get_default_shader());
 }
 
-void Control::draw_box(const rect2& p_area, const Color& p_color,
-                       Shader* p_shader) {
+void Control::draw_box(const rect2& p_area, const Color& p_color, Shader* p_shader) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -418,8 +405,7 @@ void Control::draw_polygon() {
     draw_commands.push_back(command);
 }
 
-void Control::draw_line(const vec2& p_start, const vec2& p_end,
-                        const Color& p_color) {
+void Control::draw_line(const vec2& p_start, const vec2& p_end, const Color& p_color) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -429,8 +415,7 @@ void Control::draw_line(const vec2& p_start, const vec2& p_end,
     draw_commands.push_back(command);
 }
 
-void Control::draw_frame(Texture2D* p_texture, const rect2& p_area,
-                         const Color& p_color) {
+void Control::draw_frame(Texture2D* p_texture, const rect2& p_area, const Color& p_color) {
     CHECK_DRAWING
 
     DrawCommand command;
@@ -442,21 +427,18 @@ void Control::draw_frame(Texture2D* p_texture, const rect2& p_area,
 }
 
 void Control::draw_frame(const rect2& p_area, const Color& p_color) {
-    draw_frame(CanvasData::get_singleton()->get_default_theme()->get_frame(),
-               p_area, p_color);
+    draw_frame(CanvasData::get_singleton()->get_default_theme()->get_frame(), p_area, p_color);
 }
 
-void Control::draw_bordered_box(const rect2& p_area, const Color& p_border,
-                                const Color& p_fill, float edge) {
+void Control::draw_bordered_box(const rect2& p_area, const Color& p_border, const Color& p_fill,
+                                float edge) {
     draw_box(p_area, p_border);
     rect2 inside = p_area.crop(edge);
     draw_box(inside, p_fill);
 }
 
 void Control::draw_highlight(const rect2& p_area, const Color& p_color) {
-    draw_frame(
-        CanvasData::get_singleton()->get_default_theme()->get_highlight(),
-        p_area, p_color);
+    draw_frame(CanvasData::get_singleton()->get_default_theme()->get_highlight(), p_area, p_color);
 }
 
 void Control::update() {
@@ -469,8 +451,7 @@ void Control::render_texture(const DrawCommand& p_draw_command) {
     const DrawCommand& draw_command = p_draw_command;
     SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
     Shader* shader = CanvasData::get_singleton()->get_default_shader();
-    Transform transform =
-        Transform(draw_command.area.pos, draw_command.area.size);
+    Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
 
     shader->bind();
     shader->set_uniform("texbounds", draw_command.bounds);
@@ -526,17 +507,14 @@ void Control::render_font(const DrawCommand& p_draw_command) {
         }
 
         vec4 bounds = font->get_renderer()->get_bounds(c);
-        vec4 b = vec4(bounds.x / tex->get_size().x,
-                      bounds.y / tex->get_size().x, 1, 0);
+        vec4 b = vec4(bounds.x / tex->get_size().x, bounds.y / tex->get_size().x, 1, 0);
 
         float delta = bounds.y - bounds.x;
 
-        Transform transform =
-            Transform(vec2(pos.x + offset + delta / 2.0f, pos.y),
-                      vec2(delta, tex->get_size().y) / 2.0f);
+        Transform transform = Transform(vec2(pos.x + offset + delta / 2.0f, pos.y),
+                                        vec2(delta, tex->get_size().y) / 2.0f);
 
-        shader->set_uniform(
-            "model", RENDERER->get_final_matrix() * transform.get_model());
+        shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
         shader->set_uniform("texbounds", b);
 
         mesh->draw();
@@ -550,8 +528,7 @@ void Control::render_box(const DrawCommand& p_draw_command) {
 
     SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
     Shader* shader = draw_command.shader;
-    Transform transform =
-        Transform(draw_command.area.pos, draw_command.area.size);
+    Transform transform = Transform(draw_command.area.pos, draw_command.area.size);
 
     shader->bind();
     shader->set_uniform("color", draw_command.color);
@@ -559,8 +536,7 @@ void Control::render_box(const DrawCommand& p_draw_command) {
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    shader->set_uniform("model",
-                        RENDERER->get_final_matrix() * transform.get_model());
+    shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
     mesh->draw();
 }
 
@@ -571,16 +547,13 @@ void Control::render_frame(const DrawCommand& p_draw_command) {
     vec2 size = draw_command.area.size;
 
     vec2 pos = draw_command.area.get_bottom_left();
-    vec2 extension = {size.x * 2 - tex_size.x * 2 / 3,
-                      size.y * 2 - tex_size.x * 2 / 3};
+    vec2 extension = {size.x * 2 - tex_size.x * 2 / 3, size.y * 2 - tex_size.x * 2 / 3};
 
     Array<float> h_off = {0, tex_size.x / 3, 2 * tex_size.x / 3, tex_size.x};
     Array<float> v_off = {0, tex_size.y / 3, 2 * tex_size.y / 3, tex_size.y};
-    Array<float> h_pos = {pos.x, pos.x + h_off[1],
-                          pos.x + extension.x + h_off[1],
+    Array<float> h_pos = {pos.x, pos.x + h_off[1], pos.x + extension.x + h_off[1],
                           pos.x + extension.x + h_off[2]};
-    Array<float> v_pos = {pos.y, pos.y + v_off[1],
-                          pos.y + extension.y + v_off[1],
+    Array<float> v_pos = {pos.y, pos.y + v_off[1], pos.y + extension.y + v_off[1],
                           pos.y + extension.y + v_off[2]};
 
     SimpleMesh* mesh = MeshHandler::get_singleton()->get_plane();
@@ -600,8 +573,7 @@ void Control::render_frame(const DrawCommand& p_draw_command) {
             vec2 horiz_bounds = vec2(h_off[x], h_off[x + 1]);
             vec2 vert_bounds = vec2(v_off[y], v_off[y + 1]);
 
-            rect2 new_area =
-                rect2(h_pos[x], h_pos[x + 1], v_pos[y + 1], v_pos[y]);
+            rect2 new_area = rect2(h_pos[x], h_pos[x + 1], v_pos[y + 1], v_pos[y]);
 
             vec4 b = vec4(horiz_bounds, vert_bounds);
             vec4 bounds = vec4(vec2(b.x, b.y) / draw_command.tex->get_size().x,
@@ -610,8 +582,7 @@ void Control::render_frame(const DrawCommand& p_draw_command) {
             transform = Transform(new_area.pos, new_area.size);
 
             shader->set_uniform("texbounds", bounds);
-            shader->set_uniform(
-                "model", RENDERER->get_final_matrix() * transform.get_model());
+            shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
 
             mesh->draw();
         }
@@ -640,8 +611,7 @@ void Control::render_line(const DrawCommand& p_draw_command) {
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    shader->set_uniform("model",
-                        RENDERER->get_final_matrix() * transform.get_model());
+    shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
     mesh->bind();
     mesh->draw();
 
@@ -671,8 +641,7 @@ void Control::render_draw_command(const DrawCommand& p_draw_command) {
 void Control::render() {
     if (use_scissor) RENDERER->use_scissor(area);
 
-    for (int c = 0; c < draw_commands.size(); c++)
-        render_draw_command(draw_commands[c]);
+    for (int c = 0; c < draw_commands.size(); c++) render_draw_command(draw_commands[c]);
 
     if (use_scissor) RENDERER->stop_scissor();
 }

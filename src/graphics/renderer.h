@@ -108,8 +108,7 @@ class Renderer : public Object {
     virtual void render();
 
     void draw_plane();
-    void draw_line(const vec3& p_start, const vec3& p_end,
-                   const Color& p_color);
+    void draw_line(const vec3& p_start, const vec3& p_end, const Color& p_color);
 
     static void bind_methods();
 

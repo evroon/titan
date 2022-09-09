@@ -30,8 +30,7 @@ void File::go_up(int p_times) {
 
     int length = 0;
 
-    for (int c = 0; c < elements.size() - p_times; c++)
-        length += elements[c].length() + 1;
+    for (int c = 0; c < elements.size() - p_times; c++) length += elements[c].length() + 1;
 
     go_to(path.substr(0, length - 1));
 }
@@ -81,13 +80,9 @@ File File::operator+(const String& r) { return File(path + '/' + r); }
 
 void File::operator+=(const String& r) { go_into(r); }
 
-bool File::operator==(const File& r) {
-    return get_absolute_path() == r.get_absolute_path();
-}
+bool File::operator==(const File& r) { return get_absolute_path() == r.get_absolute_path(); }
 
-bool File::operator!=(const File& r) {
-    return get_absolute_path() != r.get_absolute_path();
-}
+bool File::operator!=(const File& r) { return get_absolute_path() != r.get_absolute_path(); }
 
 File::operator String() const { return path; }
 
@@ -113,15 +108,12 @@ Array<File> File::listdir() const {
 }
 
 #if PLATFORM == WINDOWS
-bool File::is_directory() const {
-    return (get_attributes() & FILE_ATTRIBUTE_DIRECTORY) != 0;
-}
+bool File::is_directory() const { return (get_attributes() & FILE_ATTRIBUTE_DIRECTORY) != 0; }
 
 bool File::is_file() const {
     DWORD attributes = GetFileAttributes(path.c_str());
 
-    return (attributes != INVALID_FILE_ATTRIBUTES &&
-            !(attributes & FILE_ATTRIBUTE_DIRECTORY));
+    return (attributes != INVALID_FILE_ATTRIBUTES && !(attributes & FILE_ATTRIBUTE_DIRECTORY));
 }
 unsigned int File::get_attributes() const {
     DWORD attributes = GetFileAttributes(path.c_str());
@@ -129,11 +121,11 @@ unsigned int File::get_attributes() const {
     if (attributes == INVALID_FILE_ATTRIBUTES) {
         LPSTR messageBuffer = NULL;
 
-        size_t size = FormatMessageA(
-            FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
-                FORMAT_MESSAGE_IGNORE_INSERTS,
-            NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-            (LPSTR)&messageBuffer, 0, NULL);
+        size_t size =
+            FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+                               FORMAT_MESSAGE_IGNORE_INSERTS,
+                           NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                           (LPSTR)&messageBuffer, 0, NULL);
 
         std::string message(messageBuffer, size);
 
@@ -146,8 +138,7 @@ void File::correct_path() {
 
     path.replace('\\', '/');
 
-    if (path.find_last('/') == path.length() - 1)
-        path = path.substr(0, path.length() - 1);
+    if (path.find_last('/') == path.length() - 1) path = path.substr(0, path.length() - 1);
 
     directory = GetFileAttributes(path.c_str()) == FILE_ATTRIBUTE_DIRECTORY;
     hidden = GetFileAttributes(path.c_str()) == FILE_ATTRIBUTE_HIDDEN;
@@ -176,8 +167,7 @@ void File::correct_path() {
     path = get_absolute_path();
     path.replace('\\', '/');
 
-    if (path.find_last('/') == path.length() - 1)
-        path = path.substr(0, path.length() - 1);
+    if (path.find_last('/') == path.length() - 1) path = path.substr(0, path.length() - 1);
 
     directory = is_directory();
     hidden = get_name()[0] == '.';

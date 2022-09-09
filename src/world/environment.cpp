@@ -22,25 +22,17 @@ void Environment::set_auto_exposure_enabled(bool p_auto_exposure_enabled) {
     auto_exposure_enabled = p_auto_exposure_enabled;
 }
 
-bool Environment::get_auto_exposure_enabled() const {
-    return auto_exposure_enabled;
-}
+bool Environment::get_auto_exposure_enabled() const { return auto_exposure_enabled; }
 
-void Environment::set_fog_enabled(bool p_fog_enabled) {
-    fog_enabled = p_fog_enabled;
-}
+void Environment::set_fog_enabled(bool p_fog_enabled) { fog_enabled = p_fog_enabled; }
 
 bool Environment::get_fog_enabled() const { return fog_enabled; }
 
-void Environment::set_fog_density(float p_fog_density) {
-    fog_density = p_fog_density;
-}
+void Environment::set_fog_density(float p_fog_density) { fog_density = p_fog_density; }
 
 float Environment::get_fog_density() const { return fog_density; }
 
-void Environment::set_fog_gradient(float p_fog_gradient) {
-    fog_gradient = p_fog_gradient;
-}
+void Environment::set_fog_gradient(float p_fog_gradient) { fog_gradient = p_fog_gradient; }
 
 float Environment::get_fog_gradient() const { return fog_gradient; }
 

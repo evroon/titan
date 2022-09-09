@@ -30,8 +30,7 @@ class ContextMenu : public Control {
     void notification(int p_notification) override;
 
     void add_item(const String& p_text, const Connection& p_connection);
-    void add_item(Texture2D* p_icon, const String& p_text,
-                  const Connection& p_connection);
+    void add_item(Texture2D* p_icon, const String& p_text, const Connection& p_connection);
     void add_seperator();
 
     void set_text(int p_index, const String& p_text);

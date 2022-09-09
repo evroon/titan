@@ -17,9 +17,7 @@ void WindowManager::register_window(Window* window) {
 
 Window* WindowManager::get_default_window() { return default_window; }
 
-vec2i WindowManager::get_default_window_size() {
-    return get_default_window()->size;
-}
+vec2i WindowManager::get_default_window_size() { return get_default_window()->size; }
 
 vec2 WindowManager::get_default_window_size_f() {
     vec2i size = get_default_window_size();

@@ -5,9 +5,7 @@
 #include "graphics/view.h"
 #include "input/input.h"
 
-GameApp::GameApp(Platform* p_platform) : Application(p_platform) {
-    activescene = nullptr;
-}
+GameApp::GameApp(Platform* p_platform) : Application(p_platform) { activescene = nullptr; }
 
 void GameApp::init() {
     Renderer* r = new DeferredRenderer;
@@ -38,8 +36,7 @@ void GameApp::start_scene(Scene* s) {
     activescene = s;
     ACTIVE_VIEWPORT->set_scene(activescene);
 
-    Camera* active_camera =
-        ACTIVE_VIEWPORT->get_world()->get_child_by_type<Camera*>();
+    Camera* active_camera = ACTIVE_VIEWPORT->get_world()->get_child_by_type<Camera*>();
 
     if (!active_camera) {
         active_camera = new Camera;

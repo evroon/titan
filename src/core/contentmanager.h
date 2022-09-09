@@ -35,8 +35,7 @@ class ContentManager : public Object {
     Object* Load(const File& p_file);
     Mesh* load_mesh(const File& p_file);
     Texture2D* LoadTexture(const File& p_file);
-    Texture2D* LoadFontAwesomeIcon(const String& p_name,
-                                   const vec2i& p_size = vec2i(16),
+    Texture2D* LoadFontAwesomeIcon(const String& p_name, const vec2i& p_size = vec2i(16),
                                    const Color& p_color = Color::White);
     RawTexture2D* LoadRawTexture(const File& p_file);
     TextFile* LoadTextFile(const File& p_file);

@@ -13,7 +13,7 @@ include_directories(/usr/include/bullet/)
 file(GLOB sources */*.cpp */*/*.cpp)
 add_executable(titan ${sources})
 
-set_property(TARGET titan PROPERTY CXX_STANDARD 17)
+set_property(TARGET titan PROPERTY CXX_STANDARD 20)
 
 target_link_libraries (titan LINK_PUBLIC SDL2)
 target_link_libraries (titan LINK_PUBLIC SDL2_image)

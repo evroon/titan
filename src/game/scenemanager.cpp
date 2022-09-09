@@ -26,9 +26,7 @@ void SceneManager::remove_scene(const String& p_name) {
     T_ERROR("Scene does not exist: " + p_name);
 }
 
-bool SceneManager::DoesSceneExist(const String& p_name) {
-    return get_scene(p_name) != NULL;
-}
+bool SceneManager::DoesSceneExist(const String& p_name) { return get_scene(p_name) != NULL; }
 
 void SceneManager::Free() { scenes.clean(); }
 

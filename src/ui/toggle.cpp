@@ -17,8 +17,7 @@ Toggle::Toggle(Ref<Texture2D> p_tex) : Toggle("") { tex = p_tex; }
 Toggle::~Toggle() {}
 
 void Toggle::handle_event(UIEvent* p_event) {
-    if (p_event->type == UIEvent::MOUSE_PRESS &&
-        p_event->press_type == UIEvent::DOWN) {
+    if (p_event->type == UIEvent::MOUSE_PRESS && p_event->press_type == UIEvent::DOWN) {
         if (area.is_in_box(p_event->pos)) {
             selected = !selected;
             emit_signal("toggled", selected);
@@ -38,8 +37,7 @@ void Toggle::notification(int p_notification) {
             if (selected) color = DEFAULT_THEME->get_selection_color();
 
             if (tex)
-                draw_texture(tex, rect2(area.pos, tex->get_size() / 2.0f),
-                             color);
+                draw_texture(tex, rect2(area.pos, tex->get_size() / 2.0f), color);
             else
                 draw_text(text, vec2(area.get_left(), area.pos.y));
 
@@ -83,8 +81,7 @@ ToggleStrip::ToggleStrip() {
 ToggleStrip::~ToggleStrip() {}
 
 void ToggleStrip::handle_event(UIEvent* p_event) {
-    if (p_event->type == UIEvent::MOUSE_PRESS &&
-        p_event->press_type == UIEvent::DOWN) {
+    if (p_event->type == UIEvent::MOUSE_PRESS && p_event->press_type == UIEvent::DOWN) {
         for (int c = 0; c < toggles.size(); c++) {
             if (toggles[c].area.is_in_box(p_event->pos)) {
                 if (selected == c) return;
@@ -112,22 +109,21 @@ void ToggleStrip::notification(int p_notification) {
                 if (toggles[c].tex) {
                     vec2 tex_size = toggles[c].tex->get_size();
 
-                    toggles[c].area = rect2(offset, offset + tex_size.x,
-                                            area.pos.y + tex_size.y / 2.0f,
-                                            area.pos.y - tex_size.y / 2.0f);
+                    toggles[c].area =
+                        rect2(offset, offset + tex_size.x, area.pos.y + tex_size.y / 2.0f,
+                              area.pos.y - tex_size.y / 2.0f);
 
                     draw_texture(toggles[c].tex, toggles[c].area, color);
                     offset += tex_size.x;
                 } else {
-                    vec2 text_size =
-                        DEFAULT_THEME->get_font()->get_width(toggles[c].text);
+                    vec2 text_size = DEFAULT_THEME->get_font()->get_width(toggles[c].text);
 
-                    toggles[c].area = rect2(offset, offset + text_size.x,
-                                            area.pos.y + text_size.y / 2.0f,
-                                            area.pos.y - text_size.y / 2.0f);
+                    toggles[c].area =
+                        rect2(offset, offset + text_size.x, area.pos.y + text_size.y / 2.0f,
+                              area.pos.y - text_size.y / 2.0f);
 
-                    draw_text(toggles[c].text, vec2(toggles[c].area.get_left(),
-                                                    toggles[c].area.pos.y));
+                    draw_text(toggles[c].text,
+                              vec2(toggles[c].area.get_left(), toggles[c].area.pos.y));
                     offset += text_size.x;
                 }
             }
@@ -147,8 +143,7 @@ vec2 ToggleStrip::get_required_size() const {
 
     for (int c = 0; c < toggles.size(); c++) {
         if (toggles[c].tex) {
-            if (toggles[c].tex->get_size().y > size.y)
-                size.y = toggles[c].tex->get_size().y;
+            if (toggles[c].tex->get_size().y > size.y) size.y = toggles[c].tex->get_size().y;
 
             size.x += toggles[c].tex->get_size().x;
             size.x += margin;

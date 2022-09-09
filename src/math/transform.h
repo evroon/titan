@@ -15,14 +15,11 @@ class Transform {
     Transform(const vec3& p, const vec3& s) : Transform(p, s, 0) {}
     Transform(const vec3& p, const vec2& s) : Transform(p, vec3(s, 0.0f), 0) {}
     Transform(const vec2& p, const vec3& s) : Transform(vec3(p, 0.0f), s, 0) {}
-    Transform(const vec2& p, const vec2& s)
-        : Transform(vec3(p, 0.0f), vec3(s, 1.0f), 0) {}
+    Transform(const vec2& p, const vec2& s) : Transform(vec3(p, 0.0f), vec3(s, 1.0f), 0) {}
 
     Transform(const vec3& p, const vec3& s, const vec3& r);
-    Transform(const vec3& p, const vec2& s, const vec3& r)
-        : Transform(p, vec3(s, 0.0f), r) {}
-    Transform(const vec2& p, const vec3& s, const vec3& r)
-        : Transform(vec3(p, 0.0f), s, r) {}
+    Transform(const vec3& p, const vec2& s, const vec3& r) : Transform(p, vec3(s, 0.0f), r) {}
+    Transform(const vec2& p, const vec3& s, const vec3& r) : Transform(vec3(p, 0.0f), s, r) {}
     Transform(const vec2& p, const vec2& s, const vec3& r)
         : Transform(vec3(p, 0.0f), vec3(s, 1.0f), r) {}
 

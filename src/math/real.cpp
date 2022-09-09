@@ -13,8 +13,7 @@ Real::Real(const String& text) {
 }
 
 String Real::to_string() const {
-    return t == INT ? StringUtils::IntToString(i)
-                    : StringUtils::FloatToString(f);
+    return t == INT ? StringUtils::IntToString(i) : StringUtils::FloatToString(f);
 }
 
 Real::operator String() const { return to_string(); }

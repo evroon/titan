@@ -17,14 +17,13 @@ void PhysicsWorld3D::init() {
     collision_configuration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collision_configuration);
     solver = new btSequentialImpulseConstraintSolver;
-    dynamics_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver,
-                                                 collision_configuration);
+    dynamics_world =
+        new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
     dynamics_world->setGravity(btVector3(0, 0, 0));
 }
 
 void PhysicsWorld3D::update() {
-    btCollisionShape* groundShape =
-        new btStaticPlaneShape(btVector3(0, 1, 0), 1);
+    btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
     btCollisionShape* fallShape = new btSphereShape(1);
 }
 

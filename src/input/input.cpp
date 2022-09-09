@@ -34,8 +34,7 @@ void Input::HandleEvent(const SDL_Event& event) {
         e->index = (int)event.tfinger.fingerId;
 
         AddEvent(e);
-    } else if (event.type == SDL_MOUSEBUTTONDOWN ||
-               event.type == SDL_MOUSEBUTTONUP) {
+    } else if (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP) {
         InputEvent::PressType pt;
 
         if (event.type == SDL_MOUSEBUTTONDOWN)
@@ -51,8 +50,7 @@ void Input::HandleEvent(const SDL_Event& event) {
         AddEvent(e);
     } else if (event.type == SDL_MOUSEMOTION) {
         InputEvent* e = new InputEvent(InputEvent::MOUSEMOVE);
-        e->accept_mouse_pos(
-            size, vec2(to_float(event.motion.x), to_float(event.motion.y)));
+        e->accept_mouse_pos(size, vec2(to_float(event.motion.x), to_float(event.motion.y)));
 
         AddEvent(e);
     } else if (event.type == SDL_MOUSEWHEEL) {

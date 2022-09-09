@@ -23,14 +23,11 @@ void StringUtils::Free() { keywords.clean(); }
 bool StringUtils::is_underscore(char kar) { return kar == '_'; }
 bool StringUtils::IsTab(const char kar) { return kar == '\t'; }
 bool StringUtils::IsLetter(const char kar) {
-    return (kar >= 65 && kar <= 90) || (kar >= 97 && kar <= 122) ||
-           is_underscore(kar);
+    return (kar >= 65 && kar <= 90) || (kar >= 97 && kar <= 122) || is_underscore(kar);
 }
 bool StringUtils::IsNumber(const char kar) { return kar >= 48 && kar <= 57; }
 bool StringUtils::IsDot(const char kar) { return kar == '.'; }
-bool StringUtils::IsOperator(const char kar) {
-    return Contains(operators, kar);
-}
+bool StringUtils::IsOperator(const char kar) { return Contains(operators, kar); }
 bool StringUtils::IsDoubleOperator(const char left, const char right) {
     return (left == '/' && right == '/') || (left == '&' && right == '&') ||
            (left == '|' && right == '|') || (left == '+' && right == '+') ||
@@ -53,8 +50,7 @@ bool StringUtils::IsKeyword(const String& src) {
 }
 bool StringUtils::IsVariable(const String& src) {
     for (int c = 0; c < src.size(); c++)
-        if (!IsLetter(src[c]) && !IsNumber(src[c]) && !IsDot(src[c]))
-            return false;
+        if (!IsLetter(src[c]) && !IsNumber(src[c]) && !IsDot(src[c])) return false;
 
     return true;
 }
@@ -69,8 +65,7 @@ bool StringUtils::Contains(const String& src, const char elm) {
         if (src[c] == elm) return true;
     return false;
 }
-bool StringUtils::ContainsOutsideParentheses(const String& src,
-                                             const char elm) {
+bool StringUtils::ContainsOutsideParentheses(const String& src, const char elm) {
     int level = 0;
     for (int c = 0; c < src.size(); c++) {
         if (src[c] == '(' || src[c] == '[') level++;

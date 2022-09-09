@@ -40,13 +40,9 @@ void Transform::update(const vec3& pos, const vec3& size) {
     update();
 }
 
-void Transform::update(const vec3& p_pos, const vec2& p_size) {
-    update(p_pos, vec3(p_size, 0.0f));
-}
+void Transform::update(const vec3& p_pos, const vec2& p_size) { update(p_pos, vec3(p_size, 0.0f)); }
 
-void Transform::update(const vec2& p_pos, const vec3& p_size) {
-    update(vec3(p_pos, 0.0f), p_size);
-}
+void Transform::update(const vec2& p_pos, const vec3& p_size) { update(vec3(p_pos, 0.0f), p_size); }
 
 void Transform::update(const vec2& p_pos, const vec2& p_size) {
     update(vec3(p_pos, 0.0f), vec3(p_size, 0.0f));

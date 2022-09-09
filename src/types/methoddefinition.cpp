@@ -9,13 +9,11 @@
 
 MethodDefinition::MethodDefinition(str p_call_name) { call_name = p_call_name; }
 
-MethodDefinition::MethodDefinition(str p_call_name,
-                                   str p_arg_0) OVERLOAD_CSTR_0 {
+MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0) OVERLOAD_CSTR_0 {
     arg_names.push_back(p_arg_0);
 }
 
-MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0,
-                                   str p_arg_1) OVERLOAD_CSTR_1 {
+MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1) OVERLOAD_CSTR_1 {
     arg_names.push_back(p_arg_1);
 }
 
@@ -24,14 +22,13 @@ MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1,
     arg_names.push_back(p_arg_2);
 }
 
-MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1,
-                                   str p_arg_2, str p_arg_3) OVERLOAD_CSTR_3 {
+MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1, str p_arg_2,
+                                   str p_arg_3) OVERLOAD_CSTR_3 {
     arg_names.push_back(p_arg_3);
 }
 
-MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1,
-                                   str p_arg_2, str p_arg_3,
-                                   str p_arg_4) OVERLOAD_CSTR_4 {
+MethodDefinition::MethodDefinition(str p_call_name, str p_arg_0, str p_arg_1, str p_arg_2,
+                                   str p_arg_3, str p_arg_4) OVERLOAD_CSTR_4 {
     arg_names.push_back(p_arg_4);
 }
 

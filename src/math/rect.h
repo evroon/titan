@@ -32,50 +32,37 @@ class Rect2 {
     // get vertices
     Vec2<T> get_upper_left() const { return Vec2<T>(get_left(), get_top()); }
     Vec2<T> get_upper_right() const { return Vec2<T>(get_right(), get_top()); }
-    Vec2<T> get_bottom_left() const {
-        return Vec2<T>(get_left(), get_bottom());
-    }
-    Vec2<T> get_bottom_right() const {
-        return Vec2<T>(get_right(), get_bottom());
-    }
+    Vec2<T> get_bottom_left() const { return Vec2<T>(get_left(), get_bottom()); }
+    Vec2<T> get_bottom_right() const { return Vec2<T>(get_right(), get_bottom()); }
 
     // mix
-    T mix_horiz(double value) const {
-        return get_left() + T(size.x * 2.0 * value);
-    }
-    T mix_vert(double value) const {
-        return get_bottom() + T(size.y * 2.0 * value);
-    }
+    T mix_horiz(double value) const { return get_left() + T(size.x * 2.0 * value); }
+    T mix_vert(double value) const { return get_bottom() + T(size.y * 2.0 * value); }
 
     // check overlaps
     bool is_in_box(const Vec2<T>& pos) const {
-        return pos.x >= get_left() && pos.x <= get_right() &&
-               pos.y >= get_bottom() && pos.y <= get_top();
+        return pos.x >= get_left() && pos.x <= get_right() && pos.y >= get_bottom() &&
+               pos.y <= get_top();
     }
     bool is_in_box(const Rect2<T>& area) const {
-        return is_in_box(area.get_upper_left()) &&
-               is_in_box(area.get_upper_right()) &&
-               is_in_box(area.get_bottom_left()) &&
-               is_in_box(area.get_bottom_right());
+        return is_in_box(area.get_upper_left()) && is_in_box(area.get_upper_right()) &&
+               is_in_box(area.get_bottom_left()) && is_in_box(area.get_bottom_right());
     }
     bool is_overlapping(const Rect2<T>& area) const {
-        return is_in_box(area.get_upper_left()) ||
-               is_in_box(area.get_upper_right()) ||
-               is_in_box(area.get_bottom_left()) ||
-               is_in_box(area.get_bottom_right()) || area.is_in_box(pos);
+        return is_in_box(area.get_upper_left()) || is_in_box(area.get_upper_right()) ||
+               is_in_box(area.get_bottom_left()) || is_in_box(area.get_bottom_right()) ||
+               area.is_in_box(pos);
     }
 
     // crop
-    Rect2<T> crop(const T& left, const T& right, const T& top,
-                  const T& bottom) const {
+    Rect2<T> crop(const T& left, const T& right, const T& top, const T& bottom) const {
         return Rect2<T>(get_left() + left, get_right() - right, get_top() - top,
                         get_bottom() + bottom);
     }
     Rect2<T> crop(const T& all) const { return crop(all, all, all, all); }
 
     // extend
-    Rect2<T> extend(const T& left, const T& right, const T& top,
-                    const T& bottom) const {
+    Rect2<T> extend(const T& left, const T& right, const T& top, const T& bottom) const {
         return crop(-left, -right, -top, -bottom);
     }
     Rect2<T> extend(const T& all) const { return extend(all, all, all, all); }
@@ -114,15 +101,9 @@ class Rect2 {
         return Rect2<T>(left, right, top, bottom);
     }
 
-    Rect2<T> align_full_left(const T& width) const {
-        return align_left(Vec2<T>(width, size.y));
-    }
-    Rect2<T> align_full_right(const T& width) const {
-        return align_right(Vec2<T>(width, size.y));
-    }
-    Rect2<T> align_full_top(const T& height) const {
-        return align_top(Vec2<T>(size.x, height));
-    }
+    Rect2<T> align_full_left(const T& width) const { return align_left(Vec2<T>(width, size.y)); }
+    Rect2<T> align_full_right(const T& width) const { return align_right(Vec2<T>(width, size.y)); }
+    Rect2<T> align_full_top(const T& height) const { return align_top(Vec2<T>(size.x, height)); }
     Rect2<T> align_full_bottom(const T& height) const {
         return align_bottom(Vec2<T>(size.x, height));
     }
@@ -131,39 +112,30 @@ class Rect2 {
     Array<Rect2<T>> horiz_split_2(const T& boundary) const {
         Array<Rect2<T>> r;
 
-        r.push_back(
-            rect2(get_left(), get_left() + boundary, get_top(), get_bottom()));
-        r.push_back(
-            rect2(get_left() + boundary, get_right(), get_top(), get_bottom()));
+        r.push_back(rect2(get_left(), get_left() + boundary, get_top(), get_bottom()));
+        r.push_back(rect2(get_left() + boundary, get_right(), get_top(), get_bottom()));
 
         return r;
     }
-    Array<Rect2<T>> horiz_split_3(const T& boundary_1,
-                                  const T& boundary_2) const {
+    Array<Rect2<T>> horiz_split_3(const T& boundary_1, const T& boundary_2) const {
         Array<Rect2<T>> r;
 
-        r.push_back(rect2(get_left(), get_left() + boundary_1, get_top(),
-                          get_bottom()));
-        r.push_back(rect2(get_left() + boundary_1, get_left() + boundary_2,
-                          get_top(), get_bottom()));
-        r.push_back(rect2(get_left() + boundary_2, get_right(), get_top(),
-                          get_bottom()));
+        r.push_back(rect2(get_left(), get_left() + boundary_1, get_top(), get_bottom()));
+        r.push_back(
+            rect2(get_left() + boundary_1, get_left() + boundary_2, get_top(), get_bottom()));
+        r.push_back(rect2(get_left() + boundary_2, get_right(), get_top(), get_bottom()));
 
         return r;
     }
 
-    Array<Rect2<T>> default_horiz_split_2() const {
-        return horiz_split_2(pos.x);
-    }
+    Array<Rect2<T>> default_horiz_split_2() const { return horiz_split_2(pos.x); }
     Array<Rect2<T>> default_horiz_split_3() const {
-        return horiz_split_3(get_left() + size.x * 2 / 3,
-                             get_left() + size.x * 4 / 3);
+        return horiz_split_3(get_left() + size.x * 2 / 3, get_left() + size.x * 4 / 3);
     }
 
     // conversions
     operator String() const {
-        return "{ pos: " + pos.to_string() + ", size: " + size.to_string() +
-               " }";
+        return "{ pos: " + pos.to_string() + ", size: " + size.to_string() + " }";
     }
 
     // getters and setters

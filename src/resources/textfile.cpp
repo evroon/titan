@@ -45,8 +45,7 @@ void TextFile::load() {
     String src;
     std::ifstream myfile(file.get_absolute_path());
 
-    if (!myfile.is_open())
-        T_ERROR("Error loading file: " + file.get_relative_path());
+    if (!myfile.is_open()) T_ERROR("Error loading file: " + file.get_relative_path());
 
     while (std::getline(myfile, line)) src.append(line + String("\n"));
 

@@ -16,8 +16,7 @@ class Serializer : public Object {
     ~Serializer();
 
     String serialize(const Variant& p_value);
-    void serialize_recursively(const String& p_name, const Variant& p_value,
-                               XmlNode& p_node);
+    void serialize_recursively(const String& p_name, const Variant& p_value, XmlNode& p_node);
 
     Variant deserialize(const String& p_source);
     Variant deserialize_recursively(const XmlNode& p_node);

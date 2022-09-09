@@ -8,9 +8,8 @@ Window::Window(const vec2i& p_size) : size(p_size) {
 }
 
 void Window::Init() {
-    window = SDL_CreateWindow("Titan Engine", SDL_WINDOWPOS_CENTERED,
-                              SDL_WINDOWPOS_CENTERED, size.x, size.y,
-                              SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow("Titan Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                              size.x, size.y, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
     if (!window) T_ERROR("Failed to create window");
 

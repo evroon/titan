@@ -6,39 +6,27 @@
 #include "types/typemanager.h"
 #include "utility/chelper.h"
 
-#define OBJ_DEFINITION(NAME, INHERITS)                                        \
-   public:                                                                    \
-    bool is_type(const String& name) const override { return name == #NAME; } \
-    void* get_type_ptr() const override {                                     \
-        return NAME::get_type_ptr_static();                                   \
-    }                                                                         \
-    bool is_type_ptr(void* ptr) const override {                              \
-        return ptr == get_type_ptr();                                         \
-    }                                                                         \
-    VariantType get_type() const override {                                   \
-        return GETTYPE(StringName(#NAME));                                    \
-    }                                                                         \
-                                                                              \
-    String get_type_path() const override {                                   \
-        return INHERITS::get_type_path() + "/" + #NAME;                       \
-    }                                                                         \
-                                                                              \
-    static void init_type() {                                                 \
-        TypeManager::get_singleton()->add_object_type<NAME>();                \
-    }                                                                         \
-    StringName get_type_name() const override { return #NAME; }               \
-    static StringName get_type_name_static() { return #NAME; }                \
-    static String get_type_path_static() {                                    \
-        return INHERITS::get_type_path_static() + "/" + #NAME;                \
-    }                                                                         \
-    static void* get_type_ptr_static() {                                      \
-        static int ptr;                                                       \
-        return &ptr;                                                          \
-    }                                                                         \
-    static bool is_type_static(void* ptr) {                                   \
-        return ptr == get_type_ptr_static();                                  \
-    }                                                                         \
-                                                                              \
+#define OBJ_DEFINITION(NAME, INHERITS)                                                        \
+   public:                                                                                    \
+    bool is_type(const String& name) const override { return name == #NAME; }                 \
+    void* get_type_ptr() const override { return NAME::get_type_ptr_static(); }               \
+    bool is_type_ptr(void* ptr) const override { return ptr == get_type_ptr(); }              \
+    VariantType get_type() const override { return GETTYPE(StringName(#NAME)); }              \
+                                                                                              \
+    String get_type_path() const override { return INHERITS::get_type_path() + "/" + #NAME; } \
+                                                                                              \
+    static void init_type() { TypeManager::get_singleton()->add_object_type<NAME>(); }        \
+    StringName get_type_name() const override { return #NAME; }                               \
+    static StringName get_type_name_static() { return #NAME; }                                \
+    static String get_type_path_static() {                                                    \
+        return INHERITS::get_type_path_static() + "/" + #NAME;                                \
+    }                                                                                         \
+    static void* get_type_ptr_static() {                                                      \
+        static int ptr;                                                                       \
+        return &ptr;                                                                          \
+    }                                                                                         \
+    static bool is_type_static(void* ptr) { return ptr == get_type_ptr_static(); }            \
+                                                                                              \
    private:
 
 class VariantType;
@@ -63,10 +51,9 @@ class Object {
 
     template <typename T>
     inline T cast_to_type() {
-        if (derives_from_type<T>())
-            return reinterpret_cast<T>(this);
-        else
-            return nullptr;
+        if (derives_from_type<T>()) return reinterpret_cast<T>(this);
+
+        return nullptr;
     }
 
     virtual StringName get_type_name() const;

@@ -11,15 +11,11 @@
 GamePreviewTab::GamePreviewTab() : GamePreviewTab(NULL) {}
 
 GamePreviewTab::GamePreviewTab(Scene* p_scene) {
-    auto toggle_run = [this]() {
-        world_view->set_simulating(!world_view->get_simulating());
-    };
+    auto toggle_run = [this]() { world_view->set_simulating(!world_view->get_simulating()); };
 
-    Toggle* run_button =
-        new Toggle(CONTENT->LoadFontAwesomeIcon("solid/play", vec2i(26)));
+    Toggle* run_button = new Toggle(CONTENT->LoadFontAwesomeIcon("solid/play", vec2i(26)));
     run_button->set_tip_description("Run");
-    run_button->connect(
-        "toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
+    run_button->connect("toggled", Connection::create_from_lambda(new V_Method_0(toggle_run)));
 
     ToggleStrip* strip = new ToggleStrip;
     strip->add_child("Move", CONTENT->LoadTexture("engine/ui/Move.png"));
@@ -31,49 +27,44 @@ GamePreviewTab::GamePreviewTab(Scene* p_scene) {
     combo_box->connect("selected", this, "set_preview_type");
 
     ImageButton* toggle_2d = new IconButton("solid/cube");
-    toggle_2d->connect(
-        "clicked",
-        Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
-            bool v = world_view->get_handle_2d();
-            world_view->set_handle_2d(!v);
+    toggle_2d->connect("clicked",
+                       Connection::create_from_lambda(new V_Method_0([this, toggle_2d]() {
+                           bool v = world_view->get_handle_2d();
+                           world_view->set_handle_2d(!v);
 
-            if (v)
-                toggle_2d->set_icon("solid/cube");
-            else
-                toggle_2d->set_icon("solid/vector-square");
-        })));
+                           if (v)
+                               toggle_2d->set_icon("solid/cube");
+                           else
+                               toggle_2d->set_icon("solid/vector-square");
+                       })));
 
     TextButton* toggle_wireframe = new TextButton("F");
     toggle_wireframe->connect(
-        "clicked",
-        Connection::create_from_lambda(
-            new V_Method_0([this, toggle_wireframe]() {
-                bool v = world_view->get_viewport()->get_wireframe_enabled();
-                world_view->get_viewport()->set_wireframe_enabled(!v);
+        "clicked", Connection::create_from_lambda(new V_Method_0([this, toggle_wireframe]() {
+            bool v = world_view->get_viewport()->get_wireframe_enabled();
+            world_view->get_viewport()->set_wireframe_enabled(!v);
 
-                if (v)
-                    toggle_wireframe->set_text("F");
-                else
-                    toggle_wireframe->set_text("W");
-            })));
+            if (v)
+                toggle_wireframe->set_text("F");
+            else
+                toggle_wireframe->set_text("W");
+        })));
 
     ImageButton* toggle_display_mode = new IconButton("solid/globe-europe");
     toggle_display_mode->connect(
-        "clicked",
-        Connection::create_from_lambda(
-            new V_Method_0([this, toggle_display_mode]() {
-                int v = world_view->get_display_mode();
+        "clicked", Connection::create_from_lambda(new V_Method_0([this, toggle_display_mode]() {
+            int v = world_view->get_display_mode();
 
-                if (v == WorldView::DISPLAY_CANVAS)
-                    world_view->set_display_mode(WorldView::DISPLAY_WORLD);
-                else
-                    world_view->set_display_mode(WorldView::DISPLAY_CANVAS);
+            if (v == WorldView::DISPLAY_CANVAS)
+                world_view->set_display_mode(WorldView::DISPLAY_WORLD);
+            else
+                world_view->set_display_mode(WorldView::DISPLAY_CANVAS);
 
-                if (v)
-                    toggle_display_mode->set_icon("solid/globe-europe");
-                else
-                    toggle_display_mode->set_icon("solid/tv");
-            })));
+            if (v)
+                toggle_display_mode->set_icon("solid/globe-europe");
+            else
+                toggle_display_mode->set_icon("solid/tv");
+        })));
 
     world_view = new WorldView(p_scene);
 
@@ -136,12 +127,10 @@ void GamePreviewTab::update_textures() {
     for (int c = 0; c < a.size(); c++) {
         Texture2D* tex = DEFERRED_RENDERER->get_texture(a[c]);
 
-        if (tex)
-            combo_box->add_item(DEFERRED_RENDERER->get_texture_typename(a[c]));
+        if (tex) combo_box->add_item(DEFERRED_RENDERER->get_texture_typename(a[c]));
     }
 
-    combo_box->set_text(
-        DEFERRED_RENDERER->get_texture_typename(DeferredRenderer::FINAL_COLOR));
+    combo_box->set_text(DEFERRED_RENDERER->get_texture_typename(DeferredRenderer::FINAL_COLOR));
 }
 
 void GamePreviewTab::transform_toggled(int p_index) {
@@ -157,9 +146,7 @@ void GamePreviewTab::set_preview_type(const String& p_type) {
     world_view->set_preview_type(DEFERRED_RENDERER->get_texture_type(p_type));
 }
 
-void GamePreviewTab::world_changed() {
-    set_tab_title(world_view->get_scene()->get_name());
-}
+void GamePreviewTab::world_changed() { set_tab_title(world_view->get_scene()->get_name()); }
 
 WorldView* GamePreviewTab::get_world_view() const { return world_view; }
 

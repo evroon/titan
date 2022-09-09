@@ -131,8 +131,7 @@ void Application::Loop() {
                 if (event.key.keysym.sym == SDLK_ESCAPE)
                     running = false;
                 else if (event.key.keysym.sym == SDLK_F4 &&
-                         (event.key.keysym.mod == KMOD_LALT ||
-                          event.key.keysym.mod == KMOD_RALT))
+                         (event.key.keysym.mod == KMOD_LALT || event.key.keysym.mod == KMOD_RALT))
                     running = false;
                 else
                     INPUT->HandleEvent(event);
@@ -142,8 +141,8 @@ void Application::Loop() {
                 WINDOW->size = size;
                 resize(size);
             } else if (event.type == SDL_DROPFILE) {
-                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "dropped",
-                                         event.drop.file, WINDOW->window);
+                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "dropped", event.drop.file,
+                                         WINDOW->window);
             } else
                 INPUT->HandleEvent(event);
         }

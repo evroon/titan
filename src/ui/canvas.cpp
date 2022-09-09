@@ -46,9 +46,7 @@ Canvas::Canvas() {
 
 Canvas::~Canvas() {}
 
-void Canvas::schedule_update(Control* p_control) {
-    scheduled_updates.push_back(p_control);
-}
+void Canvas::schedule_update(Control* p_control) { scheduled_updates.push_back(p_control); }
 
 void Canvas::add_layer() { layers.push_back(CanvasLayer(layers.size() - 1)); }
 
@@ -78,9 +76,7 @@ void Canvas::remove_control(Control* p_control) {
     remove_child(p_control);
 }
 
-void Canvas::add_control_to_top(Control* p_control) {
-    add_control(p_control, layers.size());
-}
+void Canvas::add_control_to_top(Control* p_control) { add_control(p_control, layers.size()); }
 
 void Canvas::set_dialog(Dialog* p_dialog) {
     dialog = p_dialog;
@@ -106,8 +102,7 @@ void Canvas::set_context_tip(const String& p_description, const vec2& pos) {
     context_tip = tip;
 
     context_tip->init();
-    context_tip->set_pos(
-        pos + vec2(context_tip->get_size().x, -context_tip->get_size().y));
+    context_tip->set_pos(pos + vec2(context_tip->get_size().x, -context_tip->get_size().y));
 }
 
 void Canvas::remove_context_tip() {
@@ -173,11 +168,9 @@ void Canvas::handle_event(Event* e) {
             }
         } else {
             if (last_hover != hover) {
-                if (last_hover)
-                    last_hover->handle_event(new UIEvent(UIEvent::MOUSE_EXIT));
+                if (last_hover) last_hover->handle_event(new UIEvent(UIEvent::MOUSE_EXIT));
 
-                if (hover)
-                    hover->handle_event(new UIEvent(UIEvent::MOUSE_ENTER));
+                if (hover) hover->handle_event(new UIEvent(UIEvent::MOUSE_ENTER));
 
                 if (hover && !hover->is_of_type<ContextTip>()) {
                     tip_shower = hover;
@@ -195,8 +188,7 @@ void Canvas::handle_event(Event* e) {
 
         last_hover = hover;
     } else if (in->type == InputEvent::MOUSEPRESS) {
-        if (in->press_type == InputEvent::DOWN &&
-            in->button_type == Mouse::LEFT) {
+        if (in->press_type == InputEvent::DOWN && in->button_type == Mouse::LEFT) {
             remove_context_tip();  // TODO: should be checked
             focus(hover);
         }
@@ -209,8 +201,7 @@ void Canvas::handle_event(Event* e) {
         if (click->press_type == InputEvent::DOWN) {
             if (hover == last_clicked &&
                 TIME->get_absolutetime() < click_time + double_click_treshold) {
-                UIEvent* double_click =
-                    new UIEvent(UIEvent::MOUSE_DOUBLE_CLICK);
+                UIEvent* double_click = new UIEvent(UIEvent::MOUSE_DOUBLE_CLICK);
                 click->pos = in->pos;
 
                 if (hover) hover->handle_event(double_click);
@@ -250,13 +241,11 @@ void Canvas::init(Viewport* p_parent) {
 void Canvas::resize() {
     if (parent) size = parent->get_size();
 
-    for (Node* child : children)
-        child->cast_to_type<Control*>()->flag_size_changed();
+    for (Node* child : children) child->cast_to_type<Control*>()->flag_size_changed();
 }
 
 void Canvas::draw() {
-    for (Node* child : children)
-        child->cast_to_type<Control*>()->check_size_changed();
+    for (Node* child : children) child->cast_to_type<Control*>()->check_size_changed();
 
     if (context_tip) context_tip->check_size_changed();
 
@@ -276,8 +265,7 @@ void Canvas::draw() {
 }
 
 void Canvas::update() {
-    if (tip_shower && awaiting_tip &&
-        TIME->get_absolutetime() > tip_time + wait_time) {
+    if (tip_shower && awaiting_tip && TIME->get_absolutetime() > tip_time + wait_time) {
         tip_shower->show_context_tip(MOUSE->get_position() - vec2(0, 30));
         awaiting_tip = false;
     }

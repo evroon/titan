@@ -22,31 +22,26 @@ struct TMessage {
     int line_number;
     int count;
 
-    TMessage(String p_description, const String& p_file_name,
-             int p_line_number);
+    TMessage(String p_description, const String& p_file_name, int p_line_number);
 
    protected:
     void log();
 };
 
 struct TError : TMessage {
-    TError(const String& p_description, const String& p_file_name,
-           int p_line_number);
+    TError(const String& p_description, const String& p_file_name, int p_line_number);
 };
 
 struct TWarning : TMessage {
-    TWarning(const String& p_description, const String& p_file_name,
-             int p_line_number);
+    TWarning(const String& p_description, const String& p_file_name, int p_line_number);
 };
 
 struct TLog : TMessage {
-    TLog(const String& p_description, const String& p_file_name,
-         int p_line_number);
+    TLog(const String& p_description, const String& p_file_name, int p_line_number);
 };
 
 struct TInfo : TMessage {
-    TInfo(const String& p_description, const String& p_file_name,
-          int p_line_number);
+    TInfo(const String& p_description, const String& p_file_name, int p_line_number);
 };
 
 class Object;

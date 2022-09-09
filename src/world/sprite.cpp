@@ -11,12 +11,9 @@ SimpleMesh* Sprite::defaultmesh;
 Sprite::Sprite() : Sprite(NULL, vec2(0)) {}
 Sprite::Sprite(Texture2D* p_texture, Shader* p_shader)
     : Sprite(p_texture, p_texture->get_size(), p_shader) {}
-Sprite::Sprite(Texture2D* p_texture, vec2 p_tilesize)
-    : Sprite(p_texture, p_tilesize, NULL) {}
-Sprite::Sprite(Texture2D* p_texture)
-    : Sprite(p_texture, p_texture->get_size()) {}
-Sprite::Sprite(const String& tex_name)
-    : Sprite(CONTENT->LoadTexture(tex_name)) {}
+Sprite::Sprite(Texture2D* p_texture, vec2 p_tilesize) : Sprite(p_texture, p_tilesize, NULL) {}
+Sprite::Sprite(Texture2D* p_texture) : Sprite(p_texture, p_texture->get_size()) {}
+Sprite::Sprite(const String& tex_name) : Sprite(CONTENT->LoadTexture(tex_name)) {}
 
 Sprite::Sprite(Texture2D* p_texture, vec2 p_tilesize, Shader* p_shader) {
     texture = p_texture;
@@ -36,10 +33,8 @@ void Sprite::set_tilesize(const vec2& p_tilesize) {
     tilesize = p_tilesize;
 
     if (texture) {
-        tilecount = {texture->get_size().x / tilesize.x,
-                     texture->get_size().y / tilesize.y};
-        packed = tilesize.x != texture->get_size().x &&
-                 tilesize.y != texture->get_size().y;
+        tilecount = {texture->get_size().x / tilesize.x, texture->get_size().y / tilesize.y};
+        packed = tilesize.x != texture->get_size().x && tilesize.y != texture->get_size().y;
     } else {
         tilecount = vec2(0, 0);
         packed = false;
@@ -47,8 +42,7 @@ void Sprite::set_tilesize(const vec2& p_tilesize) {
 }
 
 vec2 Sprite::GetTilePosition(int index) const {
-    return vec2(to_float(index % (int)tilecount.x),
-                to_float(index / tilecount.y));
+    return vec2(to_float(index % (int)tilecount.x), to_float(index / tilecount.y));
 }
 
 vec4 Sprite::GetTileBounds(int index) const {
@@ -136,8 +130,7 @@ void Sprite::DrawMap() {
     for (int y = 0; y < 3; y++) {
         for (int x = 0; x < 3; x++) {
             activeindex = x + 3 * y;
-            if (activeindex == 0 || activeindex == 2 || activeindex == 6 ||
-                activeindex == 8)
+            if (activeindex == 0 || activeindex == 2 || activeindex == 6 || activeindex == 8)
                 size = tilesize;
             else if (activeindex == 1 || activeindex == 7)
                 size = vec2(inner.x + 0, tilesize.y);

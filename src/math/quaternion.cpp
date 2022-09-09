@@ -117,9 +117,7 @@ vec3 Quaternion::get_euler() const {
     return euler;
 }
 
-float Quaternion::get_norm() const {
-    return Math::sqrt(x * x + y * y + z * z + w * w);
-}
+float Quaternion::get_norm() const { return Math::sqrt(x * x + y * y + z * z + w * w); }
 
 void Quaternion::normalize() {
     float length = get_norm();
@@ -157,9 +155,7 @@ float Quaternion::get_real() const { return w; }
 
 vec3 Quaternion::get_axis() const { return vec3(x, y, z) / get_norm(); }
 
-bool Quaternion::is_identity() const {
-    return x == 0 && y == 0 && z == 0 && w == 1;
-}
+bool Quaternion::is_identity() const { return x == 0 && y == 0 && z == 0 && w == 1; }
 
 Quaternion Quaternion::inverse() const {
     Quaternion q;
@@ -186,12 +182,9 @@ vec3 Quaternion::rotate(const vec3& p_in) const {
     float num12 = w * num3;
 
     vec3 result;
-    result.x = (1.0f - (num5 + num6)) * p_in.x + (num7 - num12) * p_in.y +
-               (num8 + num11) * p_in.z;
-    result.y = (num7 + num12) * p_in.x + (1.0f - (num4 + num6)) * p_in.y +
-               (num9 - num10) * p_in.z;
-    result.z = (num8 - num11) * p_in.x + (num9 + num10) * p_in.y +
-               (1.0f - (num4 + num5)) * p_in.z;
+    result.x = (1.0f - (num5 + num6)) * p_in.x + (num7 - num12) * p_in.y + (num8 + num11) * p_in.z;
+    result.y = (num7 + num12) * p_in.x + (1.0f - (num4 + num6)) * p_in.y + (num9 - num10) * p_in.z;
+    result.z = (num8 - num11) * p_in.x + (num9 + num10) * p_in.y + (1.0f - (num4 + num5)) * p_in.z;
     return result;
 }
 
@@ -215,9 +208,7 @@ Quaternion Quaternion::product(const Quaternion& rhs) const {
 
 vec3 Quaternion::operator*(const vec3& rhs) const { return rotate(rhs); }
 
-Quaternion Quaternion::operator*(const Quaternion& rhs) const {
-    return product(rhs);
-}
+Quaternion Quaternion::operator*(const Quaternion& rhs) const { return product(rhs); }
 
 Quaternion Quaternion::operator*(float rhs) const {
     return Quaternion(get_complex() * rhs, get_real() * rhs);
@@ -250,7 +241,7 @@ bool Quaternion::operator!=(const Quaternion& rhs) const {
 Quaternion::operator mat4() const { return get_matrix(); }
 
 String Quaternion::to_string() const {
-    String s = "{ " + std::to_string(x) + ", " + std::to_string(y) + ", " +
-               std::to_string(z) + ", " + std::to_string(w) + " }";
+    String s = "{ " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) +
+               ", " + std::to_string(w) + " }";
     return s;
 }

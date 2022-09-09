@@ -94,8 +94,7 @@ void World::update() {
     physics_2d->update();
 
     for (Layer* l : layers)
-        for (WorldObject* wo : l->objects)
-            wo->notificate(WorldObject::NOTIFICATION_UPDATE);
+        for (WorldObject* wo : l->objects) wo->notificate(WorldObject::NOTIFICATION_UPDATE);
 }
 
 void World::draw() {

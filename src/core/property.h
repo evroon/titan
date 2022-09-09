@@ -27,7 +27,5 @@ struct Variable {
             return NULL_VAR;
     }
 
-    void set(const Variant& p_new) {
-        property->set->operator()(variant, p_new);
-    }
+    void set(const Variant& p_new) { property->set->operator()(variant, p_new); }
 };

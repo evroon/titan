@@ -31,10 +31,8 @@ void TextField::notification(int p_notification) {
             EditableLabel::notification(NOTIFICATION_DRAW);
 
             if (get_focused())
-                draw_frame(CanvasData::get_singleton()
-                               ->get_default_theme()
-                               ->get_highlight(),
-                           area, Color::Green);
+                draw_frame(CanvasData::get_singleton()->get_default_theme()->get_highlight(), area,
+                           Color::Green);
 
             break;
     }

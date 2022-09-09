@@ -19,9 +19,7 @@ class Color {
         return {val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, val.w / 256.0f};
     }
 
-    void FromRGB(vec3 val) {
-        rgba = {val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, 1.0f};
-    }
+    void FromRGB(vec3 val) { rgba = {val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, 1.0f}; }
     static Color FromRGB(vec3i val) {
         return {val.x / 256.0f, val.y / 256.0f, val.z / 256.0f, 1.0f};
     }
@@ -37,26 +35,14 @@ class Color {
     //(operators are exactly the same as Vec4)
 
     // General operators
-    bool operator==(const Color& r) const {
-        return x == r.x && y == r.y && z == r.z && w == r.w;
-    }
-    bool operator!=(const Color& r) const {
-        return x != r.x || y != r.y || z != r.z || w != r.w;
-    }
+    bool operator==(const Color& r) const { return x == r.x && y == r.y && z == r.z && w == r.w; }
+    bool operator!=(const Color& r) const { return x != r.x || y != r.y || z != r.z || w != r.w; }
 
     // Vec4 operators
-    Color operator+(const Color& r) const {
-        return Color(x + r.x, y + r.y, z + r.z, w + r.w);
-    }
-    Color operator-(const Color& r) const {
-        return Color(x - r.x, y - r.y, z - r.z, w - r.w);
-    }
-    Color operator*(const Color& r) const {
-        return Color(x * r.x, y * r.y, z * r.z, w * r.w);
-    }
-    Color operator/(const Color& r) const {
-        return Color(x / r.x, y / r.y, z / r.z, w / r.w);
-    }
+    Color operator+(const Color& r) const { return Color(x + r.x, y + r.y, z + r.z, w + r.w); }
+    Color operator-(const Color& r) const { return Color(x - r.x, y - r.y, z - r.z, w - r.w); }
+    Color operator*(const Color& r) const { return Color(x * r.x, y * r.y, z * r.z, w * r.w); }
+    Color operator/(const Color& r) const { return Color(x / r.x, y / r.y, z / r.z, w / r.w); }
 
     Color& operator+=(const Color& r) {
         x += r.x;
@@ -88,18 +74,10 @@ class Color {
     }
 
     // Scalar operators
-    Color operator+(const T& r) const {
-        return Color(x + r, y + r, z + r, w + r);
-    }
-    Color operator-(const T& r) const {
-        return Color(x - r, y - r, z - r, w - r);
-    }
-    Color operator*(const T& r) const {
-        return Color(x * r, y * r, z * r, w * r);
-    }
-    Color operator/(const T& r) const {
-        return Color(x / r, y / r, z / r, w / r);
-    }
+    Color operator+(const T& r) const { return Color(x + r, y + r, z + r, w + r); }
+    Color operator-(const T& r) const { return Color(x - r, y - r, z - r, w - r); }
+    Color operator*(const T& r) const { return Color(x * r, y * r, z * r, w * r); }
+    Color operator/(const T& r) const { return Color(x / r, y / r, z / r, w / r); }
 
     Color& operator+=(const T& r) {
         x += r;

@@ -41,8 +41,7 @@ Font::~Font() {
 }
 
 void Font::Init() {
-    if (TTF_Init())
-        T_ERROR("Could not initialize TTF:" + std::string(TTF_GetError()));
+    if (TTF_Init()) T_ERROR("Could not initialize TTF:" + std::string(TTF_GetError()));
 }
 
 void Font::Quit() { TTF_Quit(); }
@@ -68,8 +67,7 @@ int Font::get_index(const String& text, float p_offset) const {
 
     Array<float> offsets;
 
-    for (int c = 0; c < text.size() + 1; c++)
-        offsets.push_back(get_width(text.substr(0, c)));
+    for (int c = 0; c < text.size() + 1; c++) offsets.push_back(get_width(text.substr(0, c)));
 
     return to_int(ArrayMath::closest_to_index(p_offset, offsets));
 }
@@ -140,8 +138,7 @@ void FontRenderer::init() {
 }
 
 vec4 FontRenderer::get_bounds(Char p_c) const {
-    return vec4(starts[p_c.kar - 33], ends[p_c.kar - 33], texture->get_size().y,
-                0);
+    return vec4(starts[p_c.kar - 33], ends[p_c.kar - 33], texture->get_size().y, 0);
 }
 
 float FontRenderer::get_space_offset() const { return space_offset; }

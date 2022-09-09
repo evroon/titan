@@ -4,9 +4,7 @@ LabelButton::LabelButton() : LabelButton("") {}
 
 LabelButton::LabelButton(const String& text) : Button(), label(text) {}
 
-vec2 LabelButton::get_required_size() const {
-    return label.get_required_size() + vec2(5);
-}
+vec2 LabelButton::get_required_size() const { return label.get_required_size() + vec2(5); }
 
 void LabelButton::draw() {
     if (selected || highlighted) box.draw();

@@ -49,8 +49,7 @@ void Container::position_childs() {
 
             vec2 minimum_size = control->get_required_size();
 
-            rect2 area =
-                rect2(left, right, offset_y, offset_y - minimum_size.y);
+            rect2 area = rect2(left, right, offset_y, offset_y - minimum_size.y);
 
             control->set_area(area);
 
@@ -80,8 +79,7 @@ vec2 Container::get_required_size() const {
     width = MAX(10, width);
     height = MAX(10, height);
 
-    return vec2(width + left_margin + right_margin,
-                height + top_margin + bottom_margin);
+    return vec2(width + left_margin + right_margin, height + top_margin + bottom_margin);
 }
 
 void Container::notification(int p_notification) {
@@ -107,8 +105,7 @@ void Container::add_child(Control* p_child) {
     Node::add_child(p_child);
     p_child->bind_parent(this);
 
-    p_child->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN,
-                         ANCHOR_BEGIN);
+    p_child->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN);
 
     flag_size_changed();
 

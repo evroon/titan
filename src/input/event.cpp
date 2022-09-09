@@ -90,14 +90,12 @@ String InputEvent::get_name() const {
     }
 }
 
-void InputEvent::accept_mouse_pos(const vec2& window_size,
-                                  const vec2& mouse_pos) {
+void InputEvent::accept_mouse_pos(const vec2& window_size, const vec2& mouse_pos) {
     pos = mouse_pos - window_size / vec2(2);
     pos.y *= -1;
 }
 
-void InputEvent::accept_finger_pos(const vec2& window_size,
-                                   const vec2& finger_pos) {
+void InputEvent::accept_finger_pos(const vec2& window_size, const vec2& finger_pos) {
     pos = finger_pos * vec2(2) * window_size - window_size;
 }
 
@@ -113,8 +111,7 @@ void InputEvent::bind_methods() {
 WorldObject* CollisionEvent::get_object() const { return object; }
 
 String CollisionEvent::to_string() const {
-    String result =
-        "CollisionEvent: " + (contact == ContactType::BEGIN) ? "begin" : "end";
+    String result = "CollisionEvent: " + (contact == ContactType::BEGIN) ? "begin" : "end";
 
     return result;
 }

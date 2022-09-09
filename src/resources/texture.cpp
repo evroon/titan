@@ -50,8 +50,7 @@ void Texture::set_filter(FilterType p_filter_type) {
 
         case TRILINEAR_FILTER:
 
-            glTexParameteri(type, GL_TEXTURE_MIN_FILTER,
-                            GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glGenerateMipmap(type);
             break;
@@ -59,8 +58,7 @@ void Texture::set_filter(FilterType p_filter_type) {
 }
 
 void Texture::set_shadow_parameters() {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE,
-                    GL_COMPARE_REF_TO_TEXTURE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 }
 
@@ -99,11 +97,11 @@ Texture2D::Texture2D(const vec2& p_size, bool p_byte = true) : Texture2D() {
     generate_gl_texture();
 
     if (p_byte)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)p_size.x,
-                     (GLsizei)p_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA,
+                     GL_UNSIGNED_BYTE, 0);
     else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, (GLsizei)p_size.x,
-                     (GLsizei)p_size.y, 0, GL_RGBA, GL_FLOAT, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, (GLsizei)p_size.x, (GLsizei)p_size.y, 0, GL_RGBA,
+                     GL_FLOAT, 0);
 
     size = p_size;
 }
@@ -113,48 +111,43 @@ Texture2D::Texture2D(const String& p_filepath) : Texture2D() {
     SDL_Surface* image = IMG_Load(path.c_str());
 
     if (!image) {
-        T_ERROR("Failed to load Image: " + path +
-                ", reason: " + IMG_GetError());
+        T_ERROR("Failed to load Image: " + path + ", reason: " + IMG_GetError());
         return;
     }
 
     generate_gl_texture();
 
     int texture_format = image->format->Amask ? GL_RGBA : GL_RGB;
-    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, image->w, image->h, 0,
-                 texture_format, GL_UNSIGNED_BYTE, image->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, image->w, image->h, 0, texture_format,
+                 GL_UNSIGNED_BYTE, image->pixels);
 
     size = vec2(to_float(image->w), to_float(image->h));
 
     SDL_FreeSurface(image);
 }
 
-Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size,
-                     const Color& p_color)
+Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size, const Color& p_color)
     : Texture2D() {
     SDL_Surface* image = IMG_Load((p_filepath).c_str());
 
     if (!image) {
-        T_ERROR("Failed to load svg: " + p_filepath +
-                ", reason: " + IMG_GetError());
+        T_ERROR("Failed to load svg: " + p_filepath + ", reason: " + IMG_GetError());
         return;
     }
 
     // Keep aspect ratio.
-    float scaling = MIN(to_float(p_size.x) / to_float(image->w),
-                        to_float(p_size.y) / to_float(image->h));
+    float scaling =
+        MIN(to_float(p_size.x) / to_float(image->w), to_float(p_size.y) / to_float(image->h));
     vec2i rescaled_size = vec2i(image->w * scaling, image->h * scaling);
 
     SDL_Rect dst = {0, 0, rescaled_size.x, rescaled_size.y};
-    SDL_Surface* processed =
-        SDL_CreateRGBSurface(image->flags, rescaled_size.x, rescaled_size.y, 32,
-                             image->format->Rmask, image->format->Gmask,
-                             image->format->Bmask, image->format->Amask);
+    SDL_Surface* processed = SDL_CreateRGBSurface(image->flags, rescaled_size.x, rescaled_size.y,
+                                                  32, image->format->Rmask, image->format->Gmask,
+                                                  image->format->Bmask, image->format->Amask);
     SDL_UpperBlitScaled(image, NULL, processed, &dst);
 
     if (!processed) {
-        T_ERROR("Failed to resize svg: " + p_filepath +
-                ", reason: " + SDL_GetError());
+        T_ERROR("Failed to resize svg: " + p_filepath + ", reason: " + SDL_GetError());
         return;
     }
 
@@ -171,8 +164,8 @@ Texture2D::Texture2D(const String& p_filepath, const vec2i& p_size,
     generate_gl_texture();
 
     int texture_format = processed->format->Amask ? GL_RGBA : GL_RGB;
-    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, processed->w, processed->h,
-                 0, texture_format, GL_UNSIGNED_BYTE, processed->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, processed->w, processed->h, 0, texture_format,
+                 GL_UNSIGNED_BYTE, processed->pixels);
     set_filter(BILINEAR_FILTER);
 
     size = vec2(to_float(processed->w), to_float(processed->h));
@@ -187,8 +180,8 @@ Texture2D::Texture2D(SDL_Surface* p_surface) : Texture2D() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     int texture_format = p_surface->format->Amask ? GL_RGBA : GL_RGB;
-    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, p_surface->w, p_surface->h,
-                 0, texture_format, GL_UNSIGNED_BYTE, p_surface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, p_surface->w, p_surface->h, 0, texture_format,
+                 GL_UNSIGNED_BYTE, p_surface->pixels);
 
     size = vec2(to_float(p_surface->w), to_float(p_surface->h));
 
@@ -199,9 +192,8 @@ Texture2D::Texture2D(aiTexture* p_texture) : Texture2D() {
     generate_gl_texture();
 
     int texture_format = GL_BGRA;
-    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, (int)p_texture->mWidth,
-                 (int)p_texture->mHeight, 0, texture_format,
-                 GL_UNSIGNED_INT_8_8_8_8_REV, p_texture->pcData);
+    glTexImage2D(GL_TEXTURE_2D, 0, texture_format, (int)p_texture->mWidth, (int)p_texture->mHeight,
+                 0, texture_format, GL_UNSIGNED_INT_8_8_8_8_REV, p_texture->pcData);
 
     size = vec2(to_float(p_texture->mWidth), to_float(p_texture->mHeight));
 }
@@ -220,8 +212,7 @@ void Texture2D::bind_methods() { REG_CSTR(0); }
 Texture1D::Texture1D(int p_size) : Texture(GL_TEXTURE_1D) {
     generate_gl_texture();
 
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, p_size, 0, GL_RGBA,
-                 GL_UNSIGNED_BYTE, 0);
+    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, p_size, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 }
 
 void Texture1D::bind_methods() {}
@@ -270,6 +261,6 @@ DepthTexture2D::DepthTexture2D(const vec2i& p_size) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, to_int(p_size.x),
-                 to_int(p_size.y), 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, to_int(p_size.x), to_int(p_size.y), 0,
+                 GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 }

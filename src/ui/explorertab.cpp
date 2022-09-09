@@ -73,8 +73,7 @@ void ExplorerTab::right_clicked(TreeElement* p_element) {
 
     Connection del, add;
     del.register_native_method(this, "delete_element");
-    Connection duplicate =
-        LAMBDA_CONNECTION_0([this]() { get_selected_object()->duplicate(); });
+    Connection duplicate = LAMBDA_CONNECTION_0([this]() { get_selected_object()->duplicate(); });
     add.register_native_method(this, "add_button_clicked");
 
     menu->add_item("Delete " + p_element->get_text(), del);
@@ -92,9 +91,7 @@ void ExplorerTab::update_items() {
     tree_view->push_node(viewport);
 }
 
-vec2 ExplorerTab::get_required_size() const {
-    return tree_view->get_required_size();
-}
+vec2 ExplorerTab::get_required_size() const { return tree_view->get_required_size(); }
 
 void ExplorerTab::add_button_clicked() {
     TypePickDialog* dialog = new TypePickDialog;
@@ -147,9 +144,7 @@ void ExplorerTab::add_object(const String& p_type) {
 
 void ExplorerTab::emit_selected(TreeElement* p_element) {
     if (p_element)
-        emit_signal(
-            "selected",
-            viewport->get_child(p_element->get_text())->cast_to_type<Node*>());
+        emit_signal("selected", viewport->get_child(p_element->get_text())->cast_to_type<Node*>());
     else
         emit_signal("selected", Variant());
 }

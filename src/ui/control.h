@@ -66,8 +66,8 @@ class Control : public Node {
     void set_margins(const vec4& p_margins);
     vec4 get_margins() const;
 
-    void set_anchors(const AnchorType& p_0, const AnchorType& p_1,
-                     const AnchorType& p_2, const AnchorType& p_3);
+    void set_anchors(const AnchorType& p_0, const AnchorType& p_1, const AnchorType& p_2,
+                     const AnchorType& p_3);
     void set_custom_anchors(float p_0, float p_1, float p_2, float p_3);
 
     int get_anchor_top() const;
@@ -129,23 +129,19 @@ class Control : public Node {
    protected:
     virtual void notification(int p_notification) {}
 
-    void draw_texture(Texture2D* p_texture, const rect2& p_area,
-                      const Color& p_color,
+    void draw_texture(Texture2D* p_texture, const rect2& p_area, const Color& p_color,
                       const vec4& p_bounds = vec4(0, 1, 1, 0));
     void draw_text(const String& p_text, const vec2& p_pos);
-    void draw_text(Font* p_font, const String& p_text, const vec2& p_pos,
-                   const Color& p_color);
+    void draw_text(Font* p_font, const String& p_text, const vec2& p_pos, const Color& p_color);
     void draw_text(Font* p_font, const String& p_text, const vec2& p_pos);
     void draw_box(const rect2& p_area, const Color& p_color);
     void draw_box(const rect2& p_area, const Color& p_color, Shader* p_shader);
     void draw_polygon();
-    void draw_line(const vec2& p_start, const vec2& p_end,
-                   const Color& p_color);
-    void draw_frame(Texture2D* p_texture, const rect2& p_area,
-                    const Color& p_color);
+    void draw_line(const vec2& p_start, const vec2& p_end, const Color& p_color);
+    void draw_frame(Texture2D* p_texture, const rect2& p_area, const Color& p_color);
     void draw_frame(const rect2& p_area, const Color& p_color);
-    void draw_bordered_box(const rect2& p_area, const Color& p_border,
-                           const Color& p_fill, float edge = 1);
+    void draw_bordered_box(const rect2& p_area, const Color& p_border, const Color& p_fill,
+                           float edge = 1);
 
     void draw_highlight(const rect2& p_area, const Color& p_color);
 

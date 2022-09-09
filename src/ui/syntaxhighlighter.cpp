@@ -9,35 +9,22 @@ SyntaxMaster::SyntaxMaster() {
     glsl.definitions.push_back({"for ", Color::FromRGB(vec3i(255, 32, 125))});
     glsl.definitions.push_back({"while ", Color::FromRGB(vec3i(255, 32, 125))});
 
-    glsl.definitions.push_back(
-        {"attribute ", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"uniform ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"attribute ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"uniform ", Color::FromRGB(vec3i(255, 187, 40))});
     glsl.definitions.push_back({"in ", Color::FromRGB(vec3i(255, 187, 40))});
     glsl.definitions.push_back({"out ", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"gl_Position ", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"gl_FragColor ", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"layout ", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"varying ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"gl_Position ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"gl_FragColor ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"layout ", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"varying ", Color::FromRGB(vec3i(255, 187, 40))});
 
-    glsl.definitions.push_back(
-        {"EndPrimitive", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"EmitVertex", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"texture", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"texture1D", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"texture2D", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"texture3D", Color::FromRGB(vec3i(255, 187, 40))});
-    glsl.definitions.push_back(
-        {"texture3D", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"EndPrimitive", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"EmitVertex", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"texture", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"texture1D", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"texture2D", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"texture3D", Color::FromRGB(vec3i(255, 187, 40))});
+    glsl.definitions.push_back({"texture3D", Color::FromRGB(vec3i(255, 187, 40))});
 
     glsl.definitions.push_back({"void ", Color::LightBlue});
     glsl.definitions.push_back({"bool ", Color::LightBlue});
@@ -52,21 +39,14 @@ SyntaxMaster::SyntaxMaster() {
     glsl.definitions.push_back({"struct ", Color::LightBlue});
 
     // TitanScript
-    titanscript.definitions.push_back(
-        {"if ", Color::FromRGB(vec3i(255, 32, 125))});
-    titanscript.definitions.push_back(
-        {"else ", Color::FromRGB(vec3i(255, 32, 125))});
-    titanscript.definitions.push_back(
-        {"for ", Color::FromRGB(vec3i(255, 32, 125))});
-    titanscript.definitions.push_back(
-        {"while ", Color::FromRGB(vec3i(255, 32, 125))});
-    titanscript.definitions.push_back(
-        {"define ", Color::FromRGB(vec3i(255, 32, 125))});
+    titanscript.definitions.push_back({"if ", Color::FromRGB(vec3i(255, 32, 125))});
+    titanscript.definitions.push_back({"else ", Color::FromRGB(vec3i(255, 32, 125))});
+    titanscript.definitions.push_back({"for ", Color::FromRGB(vec3i(255, 32, 125))});
+    titanscript.definitions.push_back({"while ", Color::FromRGB(vec3i(255, 32, 125))});
+    titanscript.definitions.push_back({"define ", Color::FromRGB(vec3i(255, 32, 125))});
 
-    titanscript.definitions.push_back(
-        {"true", Color::FromRGB(vec3i(255, 187, 40))});
-    titanscript.definitions.push_back(
-        {"false", Color::FromRGB(vec3i(255, 187, 40))});
+    titanscript.definitions.push_back({"true", Color::FromRGB(vec3i(255, 187, 40))});
+    titanscript.definitions.push_back({"false", Color::FromRGB(vec3i(255, 187, 40))});
 
     titanscript.definitions.push_back({"func ", Color::LightBlue});
     titanscript.definitions.push_back({"extends ", Color::LightBlue});
@@ -83,8 +63,7 @@ SyntaxMaster* SyntaxMaster::get_singleton() { return singleton; }
 
 void SyntaxMaster::init() { singleton = new SyntaxMaster; }
 
-SyntaxHighlighter* SyntaxMaster::get_highlighter(
-    SyntaxHighlighter::Language p_language) {
+SyntaxHighlighter* SyntaxMaster::get_highlighter(SyntaxHighlighter::Language p_language) {
     switch (p_language) {
         case SyntaxHighlighter::C_PLUS_PLUS:
             return &get_singleton()->c_plus_plus;

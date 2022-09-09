@@ -4,9 +4,7 @@ PropertyControl::PropertyControl() { set_value(Variant()); }
 
 PropertyControl::PropertyControl(const Variant& p_value) { set_value(p_value); }
 
-PropertyControl::PropertyControl(const Variable& p_variable) {
-    set_value(p_variable);
-}
+PropertyControl::PropertyControl(const Variable& p_variable) { set_value(p_variable); }
 
 PropertyControl::~PropertyControl() {}
 

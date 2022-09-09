@@ -32,8 +32,7 @@ void Project::load() {
 }
 
 void Project::save() {
-    Node* terrain = default_scene->get_child_by_type<World*>()
-                        ->get_child_by_type<Terrain*>();
+    Node* terrain = default_scene->get_child_by_type<World*>()->get_child_by_type<Terrain*>();
     if (terrain) {
         FBO2D* f = terrain->cast_to_type<Terrain*>()->get_brush()->get_fbo();
         // DEFERRED_RENDERER->save_fbo(f, "engine/heightmap.bmp", 0);

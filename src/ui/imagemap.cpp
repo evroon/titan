@@ -9,8 +9,7 @@ ImageMap::ImageMap() {
     }
 }
 
-ImageMap::ImageMap(Texture2D* p_texture,
-                   SplitProperties::TexCoords p_tex_coords,
+ImageMap::ImageMap(Texture2D* p_texture, SplitProperties::TexCoords p_tex_coords,
                    SplitProperties::Positions p_positions)
     : ImageMap() {
     texture = p_texture;
@@ -34,8 +33,7 @@ void ImageMap::notification(int p_notification) {
     }
 }
 
-void ImageMap::build(Texture2D* p_texture,
-                     SplitProperties::TexCoords p_tex_coords,
+void ImageMap::build(Texture2D* p_texture, SplitProperties::TexCoords p_tex_coords,
                      SplitProperties::Positions p_positions) {
     texture = p_texture;
     properties.tex_coords = p_tex_coords;
@@ -49,10 +47,10 @@ void ImageMap::build() {
         for (int y = 0; y < 3; y++) {
             Image* image = images[x * 3 + y];
 
-            vec2 horiz_bounds = vec2(properties.tex_coords.h_off[x],
-                                     properties.tex_coords.h_off[x + 1]);
-            vec2 vert_bounds = vec2(properties.tex_coords.v_off[y],
-                                    properties.tex_coords.v_off[y + 1]);
+            vec2 horiz_bounds =
+                vec2(properties.tex_coords.h_off[x], properties.tex_coords.h_off[x + 1]);
+            vec2 vert_bounds =
+                vec2(properties.tex_coords.v_off[y], properties.tex_coords.v_off[y + 1]);
 
             float left = properties.positions.horiz_pos[x];
             float right = properties.positions.horiz_pos[x + 1];

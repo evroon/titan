@@ -111,8 +111,8 @@ void Slider::notification(int p_notification) {
 
             float pos_y = top - (top - bottom) * position;
 
-            inner_box = rect2(area.get_left(), area.get_right(),
-                              pos_y + inner_height, pos_y - inner_height);
+            inner_box = rect2(area.get_left(), area.get_right(), pos_y + inner_height,
+                              pos_y - inner_height);
 
             draw_box(area, Color::DarkGrey);
             draw_box(inner_box, Color::Grey);

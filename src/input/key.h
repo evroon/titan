@@ -124,16 +124,12 @@ class Key : public Object {
 
     String to_string() const { return SDL_GetKeyName(key_type); }
 
-    void set_using_name(const String& p_name) {
-        key_type = SDL_GetKeyFromName(p_name.c_str());
-    }
+    void set_using_name(const String& p_name) { key_type = SDL_GetKeyFromName(p_name.c_str()); }
 
     void set_key_type(SDL_Keycode key) { key_type = key; }
 
     SDL_Keycode get_SDL_Keycode() const { return key_type; }
-    SDL_Scancode get_SDL_Scancode() const {
-        return SDL_GetScancodeFromKey(get_SDL_Keycode());
-    }
+    SDL_Scancode get_SDL_Scancode() const { return SDL_GetScancodeFromKey(get_SDL_Keycode()); }
 
     bool operator==(const Key& r) { return key_type == r.key_type; }
 

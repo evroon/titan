@@ -1,7 +1,6 @@
 #include "mat4.h"
 
-void mat4::perspective(const rect2& p_window, float fov, float aspect,
-                       float p_near, float p_far) {
+void mat4::perspective(const rect2& p_window, float fov, float aspect, float p_near, float p_far) {
     float y = Math::tan(fov * PI / 2.0f / 180.0f);
     float x = y / aspect;
 
@@ -54,8 +53,7 @@ void mat4::look_at(const vec3& p_eye, const vec3& p_target, const vec3& p_up) {
     vec3 right = p_up.cross(forward).normalize();
     vec3 up = forward.cross(right);
 
-    mat4 orientation = {vec4(right, 0), vec4(up, 0), vec4(forward, 0),
-                        vec4(vec3(), 1)};
+    mat4 orientation = {vec4(right, 0), vec4(up, 0), vec4(forward, 0), vec4(vec3(), 1)};
 
     mat4 translation;
     translation.translate(vec3(-1.0f) * p_eye);

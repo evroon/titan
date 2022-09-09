@@ -139,10 +139,8 @@ void ContextMenu::notification(int p_notification) {
 
             for (int c = 0; c < items.size(); c++) {
                 if (items[c].seperator) {
-                    vec2 start = vec2(area.get_left() + left_margin,
-                                      items[c].area.pos.y);
-                    vec2 end = vec2(area.get_right() - right_margin,
-                                    items[c].area.pos.y);
+                    vec2 start = vec2(area.get_left() + left_margin, items[c].area.pos.y);
+                    vec2 end = vec2(area.get_right() - right_margin, items[c].area.pos.y);
                     draw_line(start, end, seperator_color);
                     continue;
                 }
@@ -158,13 +156,11 @@ void ContextMenu::notification(int p_notification) {
                     rect2 icon_area;
                     float tex_width = 20;
 
-                    icon_area = rect2(
-                        item_area.get_left(), item_area.get_left() + tex_width,
-                        item_area.get_top(), item_area.get_bottom());
+                    icon_area = rect2(item_area.get_left(), item_area.get_left() + tex_width,
+                                      item_area.get_top(), item_area.get_bottom());
                     draw_texture(items[c].icon, icon_area, Color::White);
 
-                    draw_text(items[c].text,
-                              pos + vec2(left_margin + tex_width, 0));
+                    draw_text(items[c].text, pos + vec2(left_margin + tex_width, 0));
                 } else
                     draw_text(items[c].text, pos + vec2(left_margin, 0));
             }
@@ -187,8 +183,7 @@ void ContextMenu::notification(int p_notification) {
     }
 }
 
-void ContextMenu::add_item(const String& p_text,
-                           const Connection& p_connection) {
+void ContextMenu::add_item(const String& p_text, const Connection& p_connection) {
     add_item(NULL, p_text, p_connection);
 }
 
@@ -201,8 +196,7 @@ void ContextMenu::add_item(Texture2D* p_icon, const String& p_text,
     item.icon = p_icon;
     item.signal = Signal();
 
-    if (p_connection.type != Connection::UNDEF)
-        item.signal.attach_connection(p_connection);
+    if (p_connection.type != Connection::UNDEF) item.signal.attach_connection(p_connection);
 
     items.push_back(item);
 
@@ -264,16 +258,13 @@ ContextTip::ContextTip() {
     bottom_margin = 4;
 }
 
-ContextTip::ContextTip(const String& p_description) : ContextTip() {
-    description = p_description;
-}
+ContextTip::ContextTip(const String& p_description) : ContextTip() { description = p_description; }
 
 ContextTip::~ContextTip() {}
 
 vec2 ContextTip::get_required_size() const {
-    return vec2(
-        get_default_font()->get_width(description) + left_margin + right_margin,
-        get_default_font()->get_height() + top_margin + bottom_margin);
+    return vec2(get_default_font()->get_width(description) + left_margin + right_margin,
+                get_default_font()->get_height() + top_margin + bottom_margin);
 }
 
 void ContextTip::handle_event(UIEvent* p_event) {
@@ -292,8 +283,7 @@ void ContextTip::notification(int p_notification) {
 
             draw_bordered_box(area, Color::Black, background_color);
 
-            draw_text(description,
-                      vec2(area.get_left() + left_margin, area.pos.y));
+            draw_text(description, vec2(area.get_left() + left_margin, area.pos.y));
 
             break;
 

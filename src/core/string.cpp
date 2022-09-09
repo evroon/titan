@@ -37,9 +37,7 @@ String::String(float d) {
     src = ss.str();
 }
 
-String::String(const Variant& v) {
-    std::cout << "TODO: String(var)" << std::endl;
-}
+String::String(const Variant& v) { std::cout << "TODO: String(var)" << std::endl; }
 
 // Operators
 bool String::operator==(const String& r) const {
@@ -113,9 +111,7 @@ String::operator float() const { return std::stof(c_str()); }
 
 // Methods
 const char* String::c_str() const { return src.c_str(); }
-size_t String::get_hash() const {
-    return std::hash<std::string>{}((std::string)src);
-}
+size_t String::get_hash() const { return std::hash<std::string>{}((std::string)src); }
 void String::set(int i, char c) { src[i] = c; }
 bool String::is_white() const {
     for (char c : src) {
@@ -237,20 +233,14 @@ int String::count(Char p_char) const {
     return result;
 }
 
-String String::insert(int index, const String& text) {
-    return src.insert(index, text);
-}
-String String::insert(int start, int end, char kar) {
-    return src.insert(start, end, kar);
-}
+String String::insert(int index, const String& text) { return src.insert(index, text); }
+String String::insert(int start, int end, char kar) { return src.insert(start, end, kar); }
 String String::erase(int start, int end) { return src.erase(start, end); }
 
-bool String::IsString() {
-    return src[0] == '"' && src[src.length() - 1] == '"';
-}
+bool String::IsString() { return src[0] == '"' && src[src.length() - 1] == '"'; }
 bool String::IsKeyword() {
-    return src == "var" || src == "if" || src == "else" || src == "elseif" ||
-           src == "var" || src == "func" || src == "return" || src == "while";
+    return src == "var" || src == "if" || src == "else" || src == "elseif" || src == "var" ||
+           src == "func" || src == "return" || src == "while";
 }
 bool String::IsVariable() {
     Char k(' ');
@@ -278,8 +268,7 @@ bool String::starts_with(const String& p_str) const {
 }
 bool String::ends_with(const String& p_str) const {
     for (int c = 0; c < p_str.size(); c++)
-        if (src[src.length() - 1 - c] != p_str[p_str.length() - 1 - c])
-            return false;
+        if (src[src.length() - 1 - c] != p_str[p_str.length() - 1 - c]) return false;
 
     return true;
 }
@@ -354,9 +343,7 @@ String String::RemoveTabs() {
 
 StringName::StringName(const String& p_src) { set_source(p_src); }
 
-void StringName::update_hash() {
-    hash = std::hash<std::string>{}((std::string)src);
-}
+void StringName::update_hash() { hash = std::hash<std::string>{}((std::string)src); }
 
 size_t StringName::get_hash() const { return hash; }
 
@@ -366,9 +353,7 @@ void StringName::set_source(const String& p_src) {
 }
 String StringName::get_source() const { return src; }
 
-bool StringName::operator==(const StringName& r) const {
-    return hash == r.hash;
-}
+bool StringName::operator==(const StringName& r) const { return hash == r.hash; }
 
 /*
 StringName::operator String() const
@@ -382,10 +367,6 @@ std::ostream& operator<<(std::ostream& p_stream, const String& p_str) {
     return p_stream;
 }
 
-String operator+(std::string& p_l, const String& p_r) {
-    return String(p_l) + p_r.src;
-}
+String operator+(std::string& p_l, const String& p_r) { return String(p_l) + p_r.src; }
 
-String operator+(const char* p_l, const String& p_r) {
-    return String(p_l) + p_r;
-}
+String operator+(const char* p_l, const String& p_r) { return String(p_l) + p_r; }

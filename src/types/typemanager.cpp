@@ -11,9 +11,7 @@ TypeManager::~TypeManager() {}
 
 void TypeManager::add_type(const StringName& name) { types[name] = name; }
 
-VariantType TypeManager::get_type(const StringName& name) {
-    return types[name];
-}
+VariantType TypeManager::get_type(const StringName& name) { return types[name]; }
 
 VariantType TypeManager::get_type(void* ptr) { return get_type(get_name(ptr)); }
 
@@ -28,9 +26,7 @@ ObjectType TypeManager::get_object_type(const StringName& name) {
     }
 }
 
-bool TypeManager::type_exists(const StringName& name) const {
-    return types.contains(name);
-}
+bool TypeManager::type_exists(const StringName& name) const { return types.contains(name); }
 
 void TypeManager::set_object_type(const ObjectType& p_object_type) {
     object_types[p_object_type.name] = p_object_type;

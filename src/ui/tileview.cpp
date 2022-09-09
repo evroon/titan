@@ -26,9 +26,7 @@ rect2 TileElement::get_area() const { return area; }
 
 void TileElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool TileElement::is_in_area(const vec2& p_pos) {
-    return visible && area.is_in_box(p_pos);
-}
+bool TileElement::is_in_area(const vec2& p_pos) { return visible && area.is_in_box(p_pos); }
 
 String TileElement::get_text() const { return text; }
 
@@ -43,10 +41,7 @@ void TileElement::set_visible(bool p_visible) { visible = p_visible; }
 bool TileElement::get_visible() const { return visible; }
 
 float TileElement::get_height() const {
-    return CanvasData::get_singleton()
-        ->get_default_theme()
-        ->get_font()
-        ->get_height();
+    return CanvasData::get_singleton()->get_default_theme()->get_font()->get_height();
 }
 
 int TileElement::get_index(float x) const {
@@ -56,8 +51,7 @@ int TileElement::get_index(float x) const {
 }
 float TileElement::get_position_x(int index) const {
     float origin_x = area.get_left();
-    return (origin_x +
-            (float)tileview->get_font()->get_width(text.substr(0, index)));
+    return (origin_x + (float)tileview->get_font()->get_width(text.substr(0, index)));
 }
 
 //=========================================================================
@@ -275,8 +269,7 @@ void TileView::position_items() {
 
     tilesize = vec2(150.0f);
 
-    vec2 reduced_size =
-        get_size() * 2.0f - vec2(left_margin + right_margin, top_margin);
+    vec2 reduced_size = get_size() * 2.0f - vec2(left_margin + right_margin, top_margin);
     tilecount.x = to_int(reduced_size.x / tilesize.x);
 
     if (tilecount.x < 1) tilecount.x = 1;
@@ -294,9 +287,8 @@ void TileView::position_items() {
         int x = c % tilecount.x;
         int y = to_int(c / tilecount.x);
 
-        rect2 a =
-            rect2(start_x + x * tilesize.x, start_x + (x + 1) * tilesize.x,
-                  offset_y - y * tilesize.y, offset_y - (y + 1) * tilesize.y);
+        rect2 a = rect2(start_x + x * tilesize.x, start_x + (x + 1) * tilesize.x,
+                        offset_y - y * tilesize.y, offset_y - (y + 1) * tilesize.y);
         item.set_area(a);
     }
     check_slider_necessity();
@@ -331,9 +323,8 @@ void TileView::notification(int p_notification) {
 
             RENDERER->use_scissor(area);
 
-            if (selecting && selection_begin < items.size() &&
-                selection_end < items.size() && selection_begin >= 0 &&
-                selection_end >= 0) {
+            if (selecting && selection_begin < items.size() && selection_end < items.size() &&
+                selection_begin >= 0 && selection_end >= 0) {
                 float top = get_item(selection_begin)->get_area().get_top();
                 float bottom = get_item(selection_end)->get_area().get_bottom();
                 float left = get_item(selection_begin)->get_area().get_left();
@@ -343,12 +334,10 @@ void TileView::notification(int p_notification) {
             }
 
             if (highlighted != -1)
-                draw_box(get_item(highlighted)->get_area(),
-                         DEFAULT_THEME->get_highlight_color());
+                draw_box(get_item(highlighted)->get_area(), DEFAULT_THEME->get_highlight_color());
 
             if (selected != -1)
-                draw_box(get_item(selected)->get_area(),
-                         DEFAULT_THEME->get_selection_color());
+                draw_box(get_item(selected)->get_area(), DEFAULT_THEME->get_selection_color());
 
             for (int c = 0; c < items.size(); c++) {
                 const rect2& area = items[c].get_area();
@@ -356,53 +345,43 @@ void TileView::notification(int p_notification) {
                 if (area.get_bottom() > area.get_top()) continue;
 
                 if (item_numbers_enabled)
-                    draw_text(font, c, vec2(area.get_left() + 4, area.pos.y),
-                              item_numbers_color);
+                    draw_text(font, c, vec2(area.get_left() + 4, area.pos.y), item_numbers_color);
 
                 Texture2D* icon = items[c].get_icon();
 
                 if (icon) {
                     vec2 icon_size = icon->get_size() / 2.0f;
-                    vec2 pos =
-                        vec2(area.get_left() + internal_left_margin,
-                             area.get_bottom() + get_font()->get_height());
+                    vec2 pos = vec2(area.get_left() + internal_left_margin,
+                                    area.get_bottom() + get_font()->get_height());
 
-                    float text_width =
-                        get_font()->get_width(items[c].get_text());
+                    float text_width = get_font()->get_width(items[c].get_text());
 
-                    rect2 a =
-                        rect2(pos.x, area.get_right() - 4.0f, area.get_top(),
-                              pos.y + get_font()->get_height());
+                    rect2 a = rect2(pos.x, area.get_right() - 4.0f, area.get_top(),
+                                    pos.y + get_font()->get_height());
 
                     // Keep aspect ratio and don't exceed asssigned tile size.
-                    float scaling =
-                        MIN(a.size.x / icon_size.x, a.size.y / icon_size.y);
-                    vec2 rescaled_size =
-                        vec2(icon_size.x * scaling, icon_size.y * scaling);
+                    float scaling = MIN(a.size.x / icon_size.x, a.size.y / icon_size.y);
+                    vec2 rescaled_size = vec2(icon_size.x * scaling, icon_size.y * scaling);
 
                     a.set_size(rescaled_size);
 
                     draw_texture(icon, a, Color::White);
-                    draw_text(
-                        items[c].get_text(),
-                        vec2(area.get_pos().x - text_width / 2.0f, pos.y));
+                    draw_text(items[c].get_text(),
+                              vec2(area.get_pos().x - text_width / 2.0f, pos.y));
                 } else
                     draw_text(items[c].get_text(),
-                              vec2(area.get_left() + internal_left_margin,
-                                   area.pos.y));
+                              vec2(area.get_left() + internal_left_margin, area.pos.y));
             }
 
             if (items.size() == 0) {
                 float width = get_font()->get_width("No content to display");
 
-                draw_text("No content to display",
-                          area.pos - vec2(width / 2.0f, 0));
+                draw_text("No content to display", area.pos - vec2(width / 2.0f, 0));
             }
 
             RENDERER->stop_scissor();
 
-            if (get_focused())
-                draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
+            if (get_focused()) draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
 
             break;
     }
@@ -594,8 +573,7 @@ void TileView::stop_selecting() {
 }
 
 void TileView::select_all() {
-    if (selecting && selection_begin == 0 && selection_end == items.size() - 1)
-        return;
+    if (selecting && selection_begin == 0 && selection_end == items.size() - 1) return;
 
     set_selection(0, items.size() - 1);
 
@@ -613,8 +591,7 @@ void TileView::select_none() {
 }
 
 bool TileView::multiple_selection() const {
-    return selecting && selection_begin != 0 &&
-           selection_begin != selection_end;
+    return selecting && selection_begin != 0 && selection_begin != selection_end;
 }
 
 void TileView::make_visible(int p_index) {
@@ -625,11 +602,9 @@ void TileView::make_visible(int p_index) {
     if (item_area.get_bottom() < area.get_bottom())
         delta = item_area.get_bottom() - area.get_bottom();
 
-    if (item_area.get_top() > area.get_top())
-        delta = item_area.get_top() - area.get_top();
+    if (item_area.get_top() > area.get_top()) delta = item_area.get_top() - area.get_top();
 
-    if (slider)
-        slider->set_slider_pos(slider->get_value() - delta / extra_space);
+    if (slider) slider->set_slider_pos(slider->get_value() - delta / extra_space);
 
     update();
 }

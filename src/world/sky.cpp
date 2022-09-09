@@ -59,8 +59,7 @@ void Sky::update() {
 void Sky::draw() {
     RENDERER->stop_culling();
 
-    DirectionalLight* light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
+    DirectionalLight* light = ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!light) return;
 
@@ -70,8 +69,7 @@ void Sky::draw() {
     shader->set_uniform("view", RENDERER->get_final_matrix());
     shader->set_uniform("sun_direction", light_dir);
     shader->set_uniform("sky_color", get_sky_color().get_rgb());
-    shader->set_uniform("camera_position",
-                        ACTIVE_WORLD->get_active_camera()->get_pos());
+    shader->set_uniform("camera_position", ACTIVE_WORLD->get_active_camera()->get_pos());
 
     MeshHandler::get_singleton()->get_cube()->bind();
     MeshHandler::get_singleton()->get_cube()->draw();

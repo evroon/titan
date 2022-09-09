@@ -12,8 +12,7 @@ TextButton::TextButton(const String& p_text) {
 }
 
 vec2 TextButton::get_required_size() const {
-    return vec2(font->get_width(text) + left_margin + right_margin,
-                font->get_height());
+    return vec2(font->get_width(text) + left_margin + right_margin, font->get_height());
 }
 
 void TextButton::notification(int p_notification) {
@@ -21,8 +20,7 @@ void TextButton::notification(int p_notification) {
         case NOTIFICATION_DRAW:
 
             draw_frame(area, color);
-            draw_text(text, vec2(area.pos.x - font->get_width(text) / 2.0f,
-                                 area.pos.y));
+            draw_text(text, vec2(area.pos.x - font->get_width(text) / 2.0f, area.pos.y));
 
             break;
 

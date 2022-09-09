@@ -90,8 +90,7 @@ void ControlState::pass_mouse_exit() {
     parent->handle_event(e);
 }
 
-void ControlState::pass_mouse_press(const vec2& pos,
-                                    Event::PressType press_type) {
+void ControlState::pass_mouse_press(const vec2& pos, Event::PressType press_type) {
     UIEvent* e = new UIEvent;
     e->type = UIEvent::MOUSE_PRESS;
     e->press_type = press_type;

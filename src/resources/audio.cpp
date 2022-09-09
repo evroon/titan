@@ -10,9 +10,7 @@ void Audio::Free() { Mix_CloseAudio(); }
 // SoundEffect
 SoundEffect::~SoundEffect() { Mix_FreeChunk(effect); }
 
-void SoundEffect::Load(const String& filename) {
-    effect = Mix_LoadWAV(filename.c_str());
-}
+void SoundEffect::Load(const String& filename) { effect = Mix_LoadWAV(filename.c_str()); }
 
 void SoundEffect::Play() {
     if (Mix_PlayChannel(-1, effect, 0) == -1) T_ERROR("Error playing sound!");
@@ -34,9 +32,7 @@ void SoundEffect::bind_methods() {
 
 Music::~Music() { Mix_FreeMusic(music); }
 
-void Music::Load(const String& filename) {
-    music = Mix_LoadMUS(filename.c_str());
-}
+void Music::Load(const String& filename) { music = Mix_LoadMUS(filename.c_str()); }
 
 void Music::Play() {
     if (!Mix_PlayMusic(music, -1)) T_ERROR("Error playing music!");

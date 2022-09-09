@@ -81,37 +81,36 @@ void EditorApp::init() {
 
     // main_dock
     main_dock->add_tab(game_preview_tab);
-    main_dock->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN,
-                           Control::ANCHOR_END, Control::ANCHOR_END);
+    main_dock->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN, Control::ANCHOR_END,
+                           Control::ANCHOR_END);
     main_dock->set_margins(0, 300, 500, 35);
 
     // content_dock
     content_dock->add_tab(content_tab);
     content_dock->add_tab(console_tab);
-    content_dock->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN,
-                              Control::ANCHOR_END, Control::ANCHOR_BEGIN);
+    content_dock->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN, Control::ANCHOR_END,
+                              Control::ANCHOR_BEGIN);
     content_dock->set_margins(4, 4, 500, 295);
 
     // explorer_dock
     explorer_dock->add_tab(explorer_tab);
     explorer_dock->add_tab(tool_tab);
-    explorer_dock->set_anchors(Control::ANCHOR_END, Control::ANCHOR_CENTER,
-                               Control::ANCHOR_END, Control::ANCHOR_END);
+    explorer_dock->set_anchors(Control::ANCHOR_END, Control::ANCHOR_CENTER, Control::ANCHOR_END,
+                               Control::ANCHOR_END);
     explorer_dock->set_margins(495, 2, 4, 35);
     explorer_dock->set_active_tab(0);
 
     // property_dock
     property_dock->add_tab(property_tab);
-    property_dock->set_anchors(Control::ANCHOR_END, Control::ANCHOR_BEGIN,
-                               Control::ANCHOR_END, Control::ANCHOR_CENTER);
+    property_dock->set_anchors(Control::ANCHOR_END, Control::ANCHOR_BEGIN, Control::ANCHOR_END,
+                               Control::ANCHOR_CENTER);
     property_dock->set_margins(495, 4, 4, -2);
 
     // toolbar
     auto save_as = [this]() { active_project->save(); };
     auto open_save_as = [&]() {
         auto f = new FileDialog;
-        f->connect("file_chosen",
-                   Connection::create_from_lambda(new V_Method_0(save_as)));
+        f->connect("file_chosen", Connection::create_from_lambda(new V_Method_0(save_as)));
         ACTIVE_CANVAS->set_dialog(f);
     };
     auto save = [this]() { active_project->save(); };
@@ -125,10 +124,8 @@ void EditorApp::init() {
     Connection project_options;
     project_options.register_native_method(this, "project_options");
 
-    file->add_item("Save Project",
-                   Connection::create_from_lambda(new V_Method_0(save)));
-    file->add_item("Save Project As", Connection::create_from_lambda(
-                                          new V_Method_0(open_save_as)));
+    file->add_item("Save Project", Connection::create_from_lambda(new V_Method_0(save)));
+    file->add_item("Save Project As", Connection::create_from_lambda(new V_Method_0(open_save_as)));
     file->add_item("Load Project", load);
     file->add_seperator();
     file->add_item("Project Settings", project_options);
@@ -136,8 +133,8 @@ void EditorApp::init() {
     file->add_item("Exit", exit);
     bar->add_item("File");
     bar->set_menu(0, file);
-    bar->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_END,
-                     Control::ANCHOR_END, Control::ANCHOR_END);
+    bar->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_END, Control::ANCHOR_END,
+                     Control::ANCHOR_END);
     bar->set_margins(0, 30, 0, 0);
 
     world->connect("children_changed", explorer_tab, "update_items");
@@ -145,8 +142,7 @@ void EditorApp::init() {
 
     content_tab->connect("file_chosen", this, "open_file");
 
-    explorer_tab->connect("selected", game_preview_tab->get_world_view(),
-                          "select");
+    explorer_tab->connect("selected", game_preview_tab->get_world_view(), "select");
     explorer_tab->connect("selected", property_tab, "set_property");
 
     selected = nullptr;
@@ -188,9 +184,7 @@ void EditorApp::open_file(const String& p_file) {
     }
 }
 
-void EditorApp::set_viewport(Viewport* p_viewport) {
-    preview_viewport = p_viewport;
-}
+void EditorApp::set_viewport(Viewport* p_viewport) { preview_viewport = p_viewport; }
 
 Viewport* EditorApp::get_viewport() const { return preview_viewport; }
 

@@ -91,8 +91,7 @@ void Dock::notification(int p_notification) {
             draw_frame(tab_area, TO_RGB(90));
 
             for (int c = 0; c < selectors.size(); c++) {
-                vec2 pos =
-                    vec2(selectors[c].area.get_left(), selectors[c].area.pos.y);
+                vec2 pos = vec2(selectors[c].area.get_left(), selectors[c].area.pos.y);
 
                 Color color = inactive_color;
                 Color text_color;
@@ -108,8 +107,8 @@ void Dock::notification(int p_notification) {
                     color = highlight_color;
 
                 draw_box(selectors[c].area, color);
-                draw_text(get_default_font(), selectors[c].name,
-                          pos + vec2(text_offset, 0.0f), text_color);
+                draw_text(get_default_font(), selectors[c].name, pos + vec2(text_offset, 0.0f),
+                          text_color);
             }
 
             break;
@@ -118,10 +117,10 @@ void Dock::notification(int p_notification) {
         case NOTIFICATION_RESIZED:
         case NOTIFICATION_TRANSLATED:
 
-            selectors_area = rect2(area.get_left(), area.get_right(),
-                                   area.get_top(), area.get_top() - 30.0f);
-            tab_area = rect2(area.get_left(), area.get_right(),
-                             area.get_top() - 30.0f, area.get_bottom());
+            selectors_area =
+                rect2(area.get_left(), area.get_right(), area.get_top(), area.get_top() - 30.0f);
+            tab_area =
+                rect2(area.get_left(), area.get_right(), area.get_top() - 30.0f, area.get_bottom());
 
             position_items();
 
@@ -148,13 +147,11 @@ void Dock::position_items() {
     for (int c = 0; c < selectors.size(); c++) {
         selectors[c].name = tabs[c]->get_tab_title();
 
-        float width = MAX(get_default_font()->get_width(selectors[c].name) +
-                              text_offset * 2.0f,
-                          100);
+        float width =
+            MAX(get_default_font()->get_width(selectors[c].name) + text_offset * 2.0f, 100);
 
-        selectors[c].area =
-            rect2(offset_x, offset_x + width, selectors_area.get_top(),
-                  selectors_area.get_bottom());
+        selectors[c].area = rect2(offset_x, offset_x + width, selectors_area.get_top(),
+                                  selectors_area.get_bottom());
 
         offset_x += width;
     }

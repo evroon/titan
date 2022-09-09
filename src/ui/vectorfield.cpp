@@ -6,13 +6,9 @@
 
 Vec2Field::Vec2Field() : Vec2Field(vec2()) {}
 
-Vec2Field::Vec2Field(const vec2& p_variant) : PropertyControl(p_variant) {
-    init();
-}
+Vec2Field::Vec2Field(const vec2& p_variant) : PropertyControl(p_variant) { init(); }
 
-Vec2Field::Vec2Field(const Variable& p_variable) : PropertyControl(p_variable) {
-    init();
-}
+Vec2Field::Vec2Field(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void Vec2Field::init() {
     add_child(&x);
@@ -48,8 +44,7 @@ vec2 Vec2Field::get_required_size() const {
     vec2 size_x = x.get_required_size();
     vec2 size_y = y.get_required_size();
 
-    return vec2(size_x.x + size_y.x + margin[0] + margin[1] * 2.0f + margin[2],
-                size_x.y);
+    return vec2(size_x.x + size_y.x + margin[0] + margin[1] * 2.0f + margin[2], size_x.y);
 }
 
 void Vec2Field::position_items() {
@@ -85,13 +80,9 @@ void Vec2Field::bind_methods() {
 
 Vec3Field::Vec3Field() : Vec3Field(vec3()) {}
 
-Vec3Field::Vec3Field(const vec3& p_variant) : PropertyControl(p_variant) {
-    init();
-}
+Vec3Field::Vec3Field(const vec3& p_variant) : PropertyControl(p_variant) { init(); }
 
-Vec3Field::Vec3Field(const Variable& p_variable) : PropertyControl(p_variable) {
-    init();
-}
+Vec3Field::Vec3Field(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void Vec3Field::init() {
     add_child(&x);
@@ -133,8 +124,8 @@ vec2 Vec3Field::get_required_size() const {
     vec2 size_y = y.get_required_size();
     vec2 size_z = z.get_required_size();
 
-    return vec2(size_x.x + size_y.x + size_z.x + margin[0] + margin[1] * 2.0f +
-                    margin[2] * 2.0f + margin[3],
+    return vec2(size_x.x + size_y.x + size_z.x + margin[0] + margin[1] * 2.0f + margin[2] * 2.0f +
+                    margin[3],
                 size_x.y);
 }
 
@@ -169,13 +160,9 @@ void Vec3Field::bind_methods() {
 
 Vec4Field::Vec4Field() : Vec4Field(vec4()) {}
 
-Vec4Field::Vec4Field(const vec4& p_variant) : PropertyControl(p_variant) {
-    init();
-}
+Vec4Field::Vec4Field(const vec4& p_variant) : PropertyControl(p_variant) { init(); }
 
-Vec4Field::Vec4Field(const Variable& p_variable) : PropertyControl(p_variable) {
-    init();
-}
+Vec4Field::Vec4Field(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void Vec4Field::init() {
     add_child(&x);
@@ -223,9 +210,8 @@ vec2 Vec4Field::get_required_size() const {
     vec2 size_z = z.get_required_size();
     vec2 size_w = w.get_required_size();
 
-    return vec2(size_x.x + size_y.x + size_z.x + size_w.x + margin[0] +
-                    margin[1] * 2.0f + margin[2] * 2.0f + margin[3] * 2.0f +
-                    margin[4],
+    return vec2(size_x.x + size_y.x + size_z.x + size_w.x + margin[0] + margin[1] * 2.0f +
+                    margin[2] * 2.0f + margin[3] * 2.0f + margin[4],
                 size_x.y);
 }
 
@@ -263,15 +249,9 @@ void Vec4Field::bind_methods() {
 
 TransformField::TransformField() : TransformField(Transform()) {}
 
-TransformField::TransformField(const Transform& p_variant)
-    : PropertyControl(p_variant) {
-    init();
-}
+TransformField::TransformField(const Transform& p_variant) : PropertyControl(p_variant) { init(); }
 
-TransformField::TransformField(const Variable& p_variable)
-    : PropertyControl(p_variable) {
-    init();
-}
+TransformField::TransformField(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void TransformField::init() {
     margin[0] = 0.0f;
@@ -314,8 +294,8 @@ vec2 TransformField::get_required_size() const {
 
     float max_x = MAX(MAX(size_pos.x, size_size.x), size_rotation.x);
 
-    return vec2(max_x, size_pos.y + size_size.y + size_rotation.y + margin[0] +
-                           margin[1] + margin[2] + margin[3]);
+    return vec2(max_x, size_pos.y + size_size.y + size_rotation.y + margin[0] + margin[1] +
+                           margin[2] + margin[3]);
 }
 
 void TransformField::position_items() {
@@ -331,10 +311,8 @@ void TransformField::position_items() {
     size.set_margins(0, size_size.y + margin[1] + size_pos.y + margin[0], 0,
                      margin[1] + size_pos.y + margin[0]);
     rotation.set_margins(
-        0,
-        size_rotation.y + margin[2] + size_size.y + margin[1] + size_pos.y +
-            margin[0],
-        0, margin[2] + size_size.y + margin[1] + size_pos.y + margin[0]);
+        0, size_rotation.y + margin[2] + size_size.y + margin[1] + size_pos.y + margin[0], 0,
+        margin[2] + size_size.y + margin[1] + size_pos.y + margin[0]);
 }
 
 #undef CLASSNAME

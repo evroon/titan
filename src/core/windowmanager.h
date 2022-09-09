@@ -4,10 +4,8 @@
 
 #define WINDOWMAN WindowManager::get_window_manager()
 #define WINDOW WindowManager::get_window_manager()->get_default_window()
-#define WINDOWSIZE \
-    WindowManager::get_window_manager()->get_default_window_size()
-#define WINDOWSIZE_F \
-    WindowManager::get_window_manager()->get_default_window_size_f()
+#define WINDOWSIZE WindowManager::get_window_manager()->get_default_window_size()
+#define WINDOWSIZE_F WindowManager::get_window_manager()->get_default_window_size_f()
 
 class WindowManager {
    public:

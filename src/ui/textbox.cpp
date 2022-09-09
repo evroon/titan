@@ -44,10 +44,7 @@ void TextLine::set_text(const String& p_text) {
 }
 
 float TextLine::get_height() const {
-    return CanvasData::get_singleton()
-        ->get_default_theme()
-        ->get_font()
-        ->get_height();
+    return CanvasData::get_singleton()->get_default_theme()->get_font()->get_height();
 }
 
 int TextLine::get_index(float x) const {
@@ -57,8 +54,7 @@ int TextLine::get_index(float x) const {
 }
 float TextLine::get_position_x(int index) const {
     float origin_x = area.get_left();
-    return (origin_x +
-            (float)textbox->get_font()->get_width(text.substr(0, index)));
+    return (origin_x + (float)textbox->get_font()->get_width(text.substr(0, index)));
 }
 
 //=========================================================================
@@ -78,8 +74,7 @@ TextBox::TextBox(const String& p_source) {
     selection_color = DEFAULT_THEME->get_selection_color();
     selection_color.a = 0.8f;
 
-    ibeam_blinker = new UITimer(
-        new UICallback(std::bind(&TextBox::switch_blink, this)), 500000);
+    ibeam_blinker = new UITimer(new UICallback(std::bind(&TextBox::switch_blink, this)), 500000);
     ibeam_blinker->set_enabled(false);
 
     font = CONTENT->LoadFont("engine/fonts/Hack-Regular.ttf", 17);
@@ -339,22 +334,19 @@ void TextBox::handle_event(UIEvent* ui_event) {
 
                     case Key::KEY_X:
 
-                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL)
-                            cut_text();
+                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL) cut_text();
 
                         break;
 
                     case Key::KEY_C:
 
-                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL)
-                            copy_text();
+                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL) copy_text();
 
                         break;
 
                     case Key::KEY_V:
 
-                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL)
-                            paste_text();
+                        if (ui_event->mod.type & ModKey::KEY_MOD_CTRL) paste_text();
 
                         break;
 
@@ -369,8 +361,7 @@ void TextBox::handle_event(UIEvent* ui_event) {
                         if (selecting)
                             delete_selection();
                         else {
-                            remove_at_index(
-                                TextPosition(caret_pos.row, caret_pos.column));
+                            remove_at_index(TextPosition(caret_pos.row, caret_pos.column));
                             move_cursor_left();
                         }
 
@@ -438,8 +429,7 @@ void TextBox::notification(int p_notification) {
 
             draw_frame(area, background_color);
 
-            if (get_focused())
-                draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
+            if (get_focused()) draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
 
             // draw selection
             if (selecting && !(selection_begin == selection_end)) {
@@ -475,10 +465,8 @@ void TextBox::notification(int p_notification) {
                 if (lines[c].get_area().get_top() < area.get_bottom()) break;
 
                 if (line_numbers_enabled)
-                    draw_text(
-                        font, c,
-                        vec2(area.get_left() + 4, lines[c].get_area().pos.y),
-                        line_numbers_color);
+                    draw_text(font, c, vec2(area.get_left() + 4, lines[c].get_area().pos.y),
+                              line_numbers_color);
 
                 float offset = lines[c].get_area().get_left();
 
@@ -486,22 +474,17 @@ void TextBox::notification(int p_notification) {
                     const TextStyle& style = lines[c].styles[s];
 
                     int end = lines[c].get_text().size() - 1;
-                    if (s < lines[c].styles.size() - 1)
-                        end = lines[c].styles[s + 1].start - 1;
+                    if (s < lines[c].styles.size() - 1) end = lines[c].styles[s + 1].start - 1;
 
-                    String src = lines[c].get_text().substr(
-                        style.start, end - style.start + 1);
+                    String src = lines[c].get_text().substr(style.start, end - style.start + 1);
 
-                    draw_text(font, src,
-                              vec2(offset, lines[c].get_area().pos.y),
-                              style.color);
+                    draw_text(font, src, vec2(offset, lines[c].get_area().pos.y), style.color);
                     offset += font->get_width(src);
                 }
             }
             if (line_numbers_enabled)
                 draw_line(area.get_upper_left() + vec2(left_margin - 3, 0),
-                          area.get_bottom_left() + vec2(left_margin - 3, 0),
-                          TO_RGB(200));
+                          area.get_bottom_left() + vec2(left_margin - 3, 0), TO_RGB(200));
 
             draw_box(cursor, Color::White);
 
@@ -511,9 +494,7 @@ void TextBox::notification(int p_notification) {
     }
 }
 
-void TextBox::push_back_line(const String& p_source) {
-    push_back_line(TextLine(p_source));
-}
+void TextBox::push_back_line(const String& p_source) { push_back_line(TextLine(p_source)); }
 
 void TextBox::push_back_line(TextLine line) {
     int index = lines.size();
@@ -598,8 +579,7 @@ void TextBox::copy_text() { SDL_SetClipboardText(get_selected_text().c_str()); }
 void TextBox::paste_text() {
     String inserted_text = SDL_GetClipboardText();
     insert_at_index(caret_pos, inserted_text);
-    set_caret_pos(
-        TextPosition(caret_pos.row, caret_pos.column + inserted_text.size()));
+    set_caret_pos(TextPosition(caret_pos.row, caret_pos.column + inserted_text.size()));
 }
 
 String TextBox::get_selected_text() {
@@ -615,8 +595,7 @@ String TextBox::get_selected_text() {
 
         if (c == selection_end.row) end = selection_end.column;
 
-        result += text.substr(start, end - start) +
-                  (c == lines.size() - 1 ? "" : "\n");
+        result += text.substr(start, end - start) + (c == lines.size() - 1 ? "" : "\n");
     }
 
     return result;
@@ -715,9 +694,7 @@ void TextBox::set_caret_pos(const TextPosition& p_pos, bool update_preferred) {
     make_visible(caret_pos.row);
 }
 
-void TextBox::set_caret_bottom() {
-    set_caret_pos(TextPosition(lines.size() - 1, 0));
-}
+void TextBox::set_caret_bottom() { set_caret_pos(TextPosition(lines.size() - 1, 0)); }
 
 void TextBox::update_caret() {
     TextLine* line = get_line(caret_pos.row);
@@ -747,8 +724,7 @@ void TextBox::set_line_numbers_enabled(bool p_value) {
 void TextBox::check_slider_necessity() {
     if (lines.size() < 1) return;
 
-    extra_space =
-        area.get_bottom() - lines[lines.size() - 1].get_area().get_bottom();
+    extra_space = area.get_bottom() - lines[lines.size() - 1].get_area().get_bottom();
 
     if (extra_space > 0)
         add_slider();
@@ -789,15 +765,12 @@ void TextBox::remove_slider() {
 
 void TextBox::move_cursor_begin() { set_caret_pos({caret_pos.row, 0}); }
 
-void TextBox::move_cursor_end() {
-    set_caret_pos({caret_pos.row, get_line_size(caret_pos.row)});
-}
+void TextBox::move_cursor_end() { set_caret_pos({caret_pos.row, get_line_size(caret_pos.row)}); }
 
 void TextBox::move_cursor_left() {
     if (caret_pos.column <= 0) {
         TextLine* textline = get_line(caret_pos.row - 1);
-        if (textline)
-            set_caret_pos({caret_pos.row - 1, textline->get_text().size()});
+        if (textline) set_caret_pos({caret_pos.row - 1, textline->get_text().size()});
     } else
         set_caret_pos({caret_pos.row, caret_pos.column - 1});
 }
@@ -843,8 +816,7 @@ void TextBox::move_cursor_down() {
     set_caret_pos(get_position(newpos), false);
 }
 
-void TextBox::set_selection(const TextPosition& begin,
-                            const TextPosition& end) {
+void TextBox::set_selection(const TextPosition& begin, const TextPosition& end) {
     if (begin == end) {
         selecting = false;
         return;
@@ -860,18 +832,15 @@ void TextBox::delete_selection() {
     TextPosition end = selection_end;
 
     if (start.row == selection_end.row)
-        remove_at_index({start.row, start.column + 1},
-                        end.column - start.column);
+        remove_at_index({start.row, start.column + 1}, end.column - start.column);
     else {
         String text = get_line(end.row)->get_text();
         String to_append = text.substr(end.column, text.size() - end.column);
 
         String start_text = get_line(start.row)->get_text();
-        get_line(start.row)->set_text(start_text.substr(0, start.column) +
-                                      to_append);
+        get_line(start.row)->set_text(start_text.substr(0, start.column) + to_append);
 
-        for (int c = 0; c < end.row - start.row; c++)
-            remove_line(start.row + 1);
+        for (int c = 0; c < end.row - start.row; c++) remove_line(start.row + 1);
 
         position_lines();
         check_slider_necessity();
@@ -912,11 +881,9 @@ void TextBox::make_visible(int p_index) {
     if (item_area.get_bottom() < area.get_bottom())
         delta = item_area.get_bottom() - area.get_bottom();
 
-    if (item_area.get_top() > area.get_top())
-        delta = item_area.get_top() - area.get_top();
+    if (item_area.get_top() > area.get_top()) delta = item_area.get_top() - area.get_top();
 
-    if (slider)
-        slider->set_slider_pos(slider->get_value() - delta / extra_space);
+    if (slider) slider->set_slider_pos(slider->get_value() - delta / extra_space);
 
     update();
 }
@@ -928,8 +895,7 @@ void TextBox::slider_value_changed() {
 }
 
 void TextBox::set_colors_on_line(TextLine& p_line, const Array<int>& p_starts,
-                                 const Array<String>& p_matches,
-                                 const Color& p_color) {
+                                 const Array<String>& p_matches, const Color& p_color) {
     Array<Color> colors;
     if (p_starts.size() < 1) return;
 
@@ -942,8 +908,7 @@ void TextBox::set_colors_on_line(TextLine& p_line, const Array<int>& p_starts,
     }
 
     for (int c = 0; c < p_starts.size(); c++) {
-        for (int k = p_starts[c]; k < p_starts[c] + p_matches[c].size(); k++)
-            colors[k] = p_color;
+        for (int k = p_starts[c]; k < p_starts[c] + p_matches[c].size(); k++) colors[k] = p_color;
     }
 
     p_line.styles.clear();
@@ -962,8 +927,7 @@ void TextBox::set_colors_on_line(TextLine& p_line, const Array<int>& p_starts,
     p_line.styles.push_back(last_style);
 }
 
-void TextBox::give_color_to_word(TextLine& p_line, const String& p_src,
-                                 const Color& p_color) {
+void TextBox::give_color_to_word(TextLine& p_line, const String& p_src, const Color& p_color) {
     if (p_line.get_text().size() < 1) return;
 
     String s = p_line.get_text();
@@ -981,14 +945,12 @@ void TextBox::give_color_to_patterns(TextLine& p_line) {
     String s = p_line.get_text();
     Array<int> starts = s.find("\"");
 
-    if (starts.size() % 2 == 1)
-        starts.push_back(p_line.get_text().length() - 1);
+    if (starts.size() % 2 == 1) starts.push_back(p_line.get_text().length() - 1);
 
     Array<String> matches;
 
     for (int c = 0; c < starts.size(); c += 2)
-        matches.push_back(
-            p_line.get_text().substr(starts[c], starts[c + 1] - starts[c] + 1));
+        matches.push_back(p_line.get_text().substr(starts[c], starts[c + 1] - starts[c] + 1));
 
     for (int c = 1; c < starts.size(); c++) starts.clear(c);
 
@@ -998,8 +960,7 @@ void TextBox::give_color_to_patterns(TextLine& p_line) {
 void TextBox::handle_extension(const String& p_extension) {
     if (p_extension == "ts")
         set_language(SyntaxHighlighter::TITANSCRIPT);
-    else if (p_extension == "geom" || p_extension == "frag" ||
-             p_extension == "vert")
+    else if (p_extension == "geom" || p_extension == "frag" || p_extension == "vert")
         set_language(SyntaxHighlighter::GLSL);
 }
 
@@ -1015,8 +976,7 @@ void TextBox::update_highlighting() {
 void TextBox::update_highlighting(TextLine& p_line) {
     p_line.styles.clear();
     p_line.styles.push_back({Color::White, 0});
-    SyntaxHighlighter* highlighter =
-        SyntaxMaster::get_singleton()->get_highlighter(language);
+    SyntaxHighlighter* highlighter = SyntaxMaster::get_singleton()->get_highlighter(language);
 
     for (int c = 0; c < highlighter->definitions.size(); c++)
         give_color_to_word(p_line, highlighter->definitions[c].word,
@@ -1026,9 +986,7 @@ void TextBox::update_highlighting(TextLine& p_line) {
     update();
 }
 
-bool TextBox::is_in_text(TextLine* line, const vec2& pos) {
-    return line->is_in_text(pos);
-}
+bool TextBox::is_in_text(TextLine* line, const vec2& pos) { return line->is_in_text(pos); }
 
 void TextBox::remove_at_index(const TextPosition& p_index, int p_length) {
     TextLine* line = get_line(p_index.row);

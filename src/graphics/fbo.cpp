@@ -28,8 +28,7 @@ FBO::~FBO() { glDeleteFramebuffers(1, &id); }
 
 void FBO::check_status() {
     int err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    if (err != GL_FRAMEBUFFER_COMPLETE)
-        T_ERROR("Error Setting up FBO" + String(err));
+    if (err != GL_FRAMEBUFFER_COMPLETE) T_ERROR("Error Setting up FBO" + String(err));
 }
 
 void FBO::clear() {
@@ -78,8 +77,7 @@ FBO2D::FBO2D(const vec2i& p_size) {
 }
 
 FBO2D::FBO2D(const Ref<Texture2D>& p_texture) {
-    size =
-        vec2i(to_int(p_texture->get_size().x), to_int(p_texture->get_size().y));
+    size = vec2i(to_int(p_texture->get_size().x), to_int(p_texture->get_size().y));
     depth = false;
 
     glGenFramebuffers(1, &id);
@@ -88,8 +86,8 @@ FBO2D::FBO2D(const Ref<Texture2D>& p_texture) {
     glReadBuffer(GL_NONE);
 
     color_textures.push_back(p_texture);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           p_texture->get_id(), 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, p_texture->get_id(),
+                           0);
 
     check_status();
 
@@ -102,8 +100,7 @@ void FBO2D::init() {
 
     if (definitions.size() > 0) {
         GLenum* DrawBuffers = new GLenum[definitions.size()];
-        for (int c = 0; c < definitions.size(); c++)
-            DrawBuffers[c] = GL_COLOR_ATTACHMENT0 + c;
+        for (int c = 0; c < definitions.size(); c++) DrawBuffers[c] = GL_COLOR_ATTACHMENT0 + c;
         glDrawBuffers(definitions.size(), DrawBuffers);
         delete[] DrawBuffers;
     } else
@@ -116,20 +113,19 @@ void FBO2D::init() {
         if (definitions[c].tex) {
             color = definitions[c].tex;
         } else {
-            color =
-                new Texture2D(definitions[c].size, definitions[c].type_byte);
+            color = new Texture2D(definitions[c].size, definitions[c].type_byte);
         }
         color_textures.push_back(color);
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + c,
-                               GL_TEXTURE_2D, color->get_id(), 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + c, GL_TEXTURE_2D,
+                               color->get_id(), 0);
     }
 
     if (depth) {
         depth_tex = new DepthTexture2D(size);
 
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-                               GL_TEXTURE_2D, depth_tex->get_id(), 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+                               depth_tex->get_id(), 0);
     }
 
     check_status();
@@ -142,8 +138,7 @@ Color FBO2D::read_pixel(const vec2& p_pos, int p_attachment_index) {
 
     glBindFramebuffer(GL_READ_FRAMEBUFFER, id);
     glReadBuffer(GL_COLOR_ATTACHMENT0 + p_attachment_index);
-    glReadPixels(to_int(p_pos.x), to_int(p_pos.y), 1, 1, GL_RGBA, GL_FLOAT,
-                 data);
+    glReadPixels(to_int(p_pos.x), to_int(p_pos.y), 1, 1, GL_RGBA, GL_FLOAT, data);
 
     float* b = (float*)data;
 
@@ -156,17 +151,13 @@ Color FBO2D::read_pixel(const vec2& p_pos, int p_attachment_index) {
 
 void FBO2D::add_depth_texture() { depth = true; }
 
-void FBO2D::add_color_texture() {
-    definitions.push_back({nullptr, true, size});
-}
+void FBO2D::add_color_texture() { definitions.push_back({nullptr, true, size}); }
 
 void FBO2D::add_color_texture(const vec2i& p_size) {
     definitions.push_back({nullptr, true, p_size});
 }
 
-void FBO2D::add_float_color_texture() {
-    definitions.push_back({nullptr, false, size});
-}
+void FBO2D::add_float_color_texture() { definitions.push_back({nullptr, false, size}); }
 
 void FBO2D::add_texture(Texture2D* p_texture) {
     vec2 size = p_texture->get_size();
@@ -183,8 +174,7 @@ FBO1D::FBO1D(int size) {
 
     glGenFramebuffers(1, &id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
-    glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D,
-                           color->get_id(), 0);
+    glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, color->get_id(), 0);
     glDrawBuffers(1, DrawBuffers);
 
     check_status();

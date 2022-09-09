@@ -73,10 +73,8 @@ void Shader::load() {
 
     // tesselation shaders
     if (has_tesselation_shader()) {
-        tess_control_id =
-            create_shader(tess_control_path, GL_TESS_CONTROL_SHADER);
-        tess_evaluation_id =
-            create_shader(tess_evaluation_path, GL_TESS_EVALUATION_SHADER);
+        tess_control_id = create_shader(tess_control_path, GL_TESS_CONTROL_SHADER);
+        tess_evaluation_id = create_shader(tess_evaluation_path, GL_TESS_EVALUATION_SHADER);
         if (!tess_control_id || !tess_evaluation_id) isvalid = false;
     }
 
@@ -167,8 +165,7 @@ void Shader::create_program() {
         glAttachShader(program_id, vertexshader_id);
         glAttachShader(program_id, fragmentshader_id);
 
-        if (geometryshader_id != -1)
-            glAttachShader(program_id, geometryshader_id);
+        if (geometryshader_id != -1) glAttachShader(program_id, geometryshader_id);
 
         if (tess_control_id != -1 && tess_evaluation_id != -1) {
             glAttachShader(program_id, tess_control_id);
@@ -215,8 +212,8 @@ void Shader::set_info() {
     glGetProgramiv(program_id, GL_ACTIVE_UNIFORMS, &count);
 
     for (GLint c = 0; c < count; c++) {
-        glGetActiveUniform(program_id, c, sizeof(uni.name) - 1, &uni.length,
-                           &uni.size, &uni.type, uni.name);
+        glGetActiveUniform(program_id, c, sizeof(uni.name) - 1, &uni.length, &uni.size, &uni.type,
+                           uni.name);
         uni.location = glGetUniformLocation(program_id, uni.name);
         uni.index = c;
         uniforms[uni.name] = uni;
@@ -227,8 +224,8 @@ void Shader::set_info() {
     glGetProgramiv(program_id, GL_ACTIVE_UNIFORM_BLOCKS, &count);
 
     for (GLint c = 0; c < count; c++) {
-        glGetActiveUniformBlockName(program_id, c, sizeof(block.name) - 1,
-                                    &block.length, block.name);
+        glGetActiveUniformBlockName(program_id, c, sizeof(block.name) - 1, &block.length,
+                                    block.name);
         block.location = glGetUniformBlockIndex(program_id, block.name);
         block.index = c;
         blocks[block.name] = block;
@@ -240,11 +237,10 @@ void Shader::set_info() {
     if (uniforms[name].count == 0) return;
 #endif
 
-#define CHECK_NAME                                             \
-    if (!uniforms.contains(name)) {                            \
-        T_WARNING("uniform with name: " + name +               \
-                  " does not exist in shader: " + get_file()); \
-        return;                                                \
+#define CHECK_NAME                                                                            \
+    if (!uniforms.contains(name)) {                                                           \
+        T_WARNING("uniform with name: " + name + " does not exist in shader: " + get_file()); \
+        return;                                                                               \
     }
 
 void Shader::set_uniform(const String& name, bool value) {
@@ -328,13 +324,11 @@ void Shader::set_uniform(const String& name, const Array<vec4>& value) {
 void Shader::set_uniform(const String& name, const Array<mat4>& value) {
     CHECK_NAME
 
-    glUniformMatrix4fv(uniforms[name].location, value.size(), false,
-                       &(&value[0])->m[0]);
+    glUniformMatrix4fv(uniforms[name].location, value.size(), false, &(&value[0])->m[0]);
 }
 
 void Shader::bind_block(const String& p_var_name, UBO* p_ubo) {
-    glUniformBlockBinding(program_id, blocks[p_var_name].location,
-                          p_ubo->get_bound_index());
+    glUniformBlockBinding(program_id, blocks[p_var_name].location, p_ubo->get_bound_index());
 }
 
 int Shader::get_program() const { return program_id; }

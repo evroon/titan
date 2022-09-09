@@ -34,9 +34,7 @@ PropertyView::~PropertyView() {}
 
 vec2 PropertyView::get_required_size() const { return vec2(150); }
 
-void PropertyView::handle_event(UIEvent* ui_event) {
-    int relevant_item = get_item(ui_event->pos);
-}
+void PropertyView::handle_event(UIEvent* ui_event) { int relevant_item = get_item(ui_event->pos); }
 
 void PropertyView::draw_item(const PropertyItem& p_item) {
     vec2 pos = vec2(p_item.area.get_left(), p_item.area.pos.y);
@@ -48,9 +46,8 @@ void PropertyView::draw_item(const PropertyItem& p_item) {
 }
 
 void PropertyView::draw_item(const GroupItem& p_item) {
-    vec2 pos = vec2(
-        p_item.area.pos.x - get_default_font()->get_width(p_item.name) / 2.0f,
-        p_item.area.pos.y);
+    vec2 pos = vec2(p_item.area.pos.x - get_default_font()->get_width(p_item.name) / 2.0f,
+                    p_item.area.pos.y);
 
     draw_box(p_item.area, TO_RGB(100));
     draw_text(p_item.name, pos);
@@ -67,8 +64,8 @@ void PropertyView::notification(int p_notification) {
 
             for (int c = 0; c < roots.size(); c++) {
                 for (int i = 0; i < roots[c].children.size(); i++) {
-                    PropertyControl* pc = dynamic_cast<PropertyControl*>(
-                        roots[c].children[i].control);
+                    PropertyControl* pc =
+                        dynamic_cast<PropertyControl*>(roots[c].children[i].control);
                     if (pc && !pc->get_focused()) pc->update_value();
                 }
 
@@ -76,14 +73,12 @@ void PropertyView::notification(int p_notification) {
             }
 
             if (roots.size() > 0)
-                draw_line(vec2(split_pos, area.get_top()),
-                          vec2(split_pos, area.get_bottom()), TO_RGB(150));
+                draw_line(vec2(split_pos, area.get_top()), vec2(split_pos, area.get_bottom()),
+                          TO_RGB(150));
             else {
-                float width =
-                    get_default_font()->get_width("No content to display");
+                float width = get_default_font()->get_width("No content to display");
 
-                draw_text("No content to display",
-                          area.pos - vec2(width / 2.0f, 0));
+                draw_text("No content to display", area.pos - vec2(width / 2.0f, 0));
             }
 
             break;
@@ -106,11 +101,9 @@ void PropertyView::set_property(Object* p_var) {
     clean();
 
     if (p_var != NULL) {
-        Array<StringName> names =
-            MMASTER->list_property_names(p_var->get_type());
+        Array<StringName> names = MMASTER->list_property_names(p_var->get_type());
 
-        for (StringName& n : names)
-            add_property(MMASTER->get_property(p_var->get_type(), n));
+        for (StringName& n : names) add_property(MMASTER->get_property(p_var->get_type(), n));
     }
 
     position_items();
@@ -242,8 +235,7 @@ void PropertyView::position_item(GroupItem& p_item) {
         float bottom = -offset - height + area.get_top();
 
         p.area = rect2(left, right, top, bottom);
-        p.control->set_anchors(ANCHOR_CENTER, ANCHOR_END, ANCHOR_END,
-                               ANCHOR_END);
+        p.control->set_anchors(ANCHOR_CENTER, ANCHOR_END, ANCHOR_END, ANCHOR_END);
         p.control->set_margins(4, offset + height - 4, 6, offset + 4);
 
         offset += height;

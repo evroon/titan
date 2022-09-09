@@ -69,24 +69,12 @@ class Real {
         return Real((t == INT ? i : f) / (n.t == INT ? n.i : n.f));
     }
 
-    bool operator>(const Real& n) const {
-        return (t == INT ? i : f) > (n.t == INT ? n.i : n.f);
-    }
-    bool operator>=(const Real& n) const {
-        return (t == INT ? i : f) >= (n.t == INT ? n.i : n.f);
-    }
-    bool operator==(const Real& n) const {
-        return (t == INT ? i : f) == (n.t == INT ? n.i : n.f);
-    }
-    bool operator!=(const Real& n) const {
-        return (t == INT ? i : f) != (n.t == INT ? n.i : n.f);
-    }
-    bool operator<(const Real& n) const {
-        return (t == INT ? i : f) < (n.t == INT ? n.i : n.f);
-    }
-    bool operator<=(const Real& n) const {
-        return (t == INT ? i : f) <= (n.t == INT ? n.i : n.f);
-    }
+    bool operator>(const Real& n) const { return (t == INT ? i : f) > (n.t == INT ? n.i : n.f); }
+    bool operator>=(const Real& n) const { return (t == INT ? i : f) >= (n.t == INT ? n.i : n.f); }
+    bool operator==(const Real& n) const { return (t == INT ? i : f) == (n.t == INT ? n.i : n.f); }
+    bool operator!=(const Real& n) const { return (t == INT ? i : f) != (n.t == INT ? n.i : n.f); }
+    bool operator<(const Real& n) const { return (t == INT ? i : f) < (n.t == INT ? n.i : n.f); }
+    bool operator<=(const Real& n) const { return (t == INT ? i : f) <= (n.t == INT ? n.i : n.f); }
 
     bool operator==(const float& r) const {
         return (t == INT ? i : f) == (t == INT ? (int)r : (float)r);

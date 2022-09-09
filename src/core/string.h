@@ -37,8 +37,7 @@ class String {
 
     bool operator<(const String& r) const { return get_hash() < r.get_hash(); }
 
-    friend std::ostream& operator<<(std::ostream& p_stream,
-                                    const String& p_str);
+    friend std::ostream& operator<<(std::ostream& p_stream, const String& p_str);
     friend String operator+(std::string& p_l, const String& p_r);
     friend String operator+(const char* p_l, const String& p_r);
 

@@ -26,26 +26,14 @@ class Vec3 {
     }
 
     // General operators
-    bool operator==(const Vec3& r) const {
-        return x == r.x && y == r.y && z == r.z;
-    }
-    bool operator!=(const Vec3& r) const {
-        return x != r.x || y != r.y || z != r.z;
-    }
+    bool operator==(const Vec3& r) const { return x == r.x && y == r.y && z == r.z; }
+    bool operator!=(const Vec3& r) const { return x != r.x || y != r.y || z != r.z; }
 
     // Vec3 operators
-    Vec3 operator+(const Vec3& r) const {
-        return Vec3(x + r.x, y + r.y, z + r.z);
-    }
-    Vec3 operator-(const Vec3& r) const {
-        return Vec3(x - r.x, y - r.y, z - r.z);
-    }
-    Vec3 operator*(const Vec3& r) const {
-        return Vec3(x * r.x, y * r.y, z * r.z);
-    }
-    Vec3 operator/(const Vec3& r) const {
-        return Vec3(x / r.x, y / r.y, z / r.z);
-    }
+    Vec3 operator+(const Vec3& r) const { return Vec3(x + r.x, y + r.y, z + r.z); }
+    Vec3 operator-(const Vec3& r) const { return Vec3(x - r.x, y - r.y, z - r.z); }
+    Vec3 operator*(const Vec3& r) const { return Vec3(x * r.x, y * r.y, z * r.z); }
+    Vec3 operator/(const Vec3& r) const { return Vec3(x / r.x, y / r.y, z / r.z); }
 
     Vec3& operator+=(const Vec3& r) {
         x += r.x;
@@ -108,8 +96,8 @@ class Vec3 {
 
     // Conversion
     String to_string() const {
-        return "{ " + std::to_string(x) + ", " + std::to_string(y) + ", " +
-               std::to_string(z) + " }";
+        return "{ " + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) +
+               " }";
     }
 
     // Get info

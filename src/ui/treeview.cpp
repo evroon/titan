@@ -5,9 +5,7 @@
 #include "input/keyboard.h"
 #include "slider.h"
 
-TreeElement::TreeElement(const String& p_text) : TreeElement(nullptr) {
-    text = p_text;
-}
+TreeElement::TreeElement(const String& p_text) : TreeElement(nullptr) { text = p_text; }
 
 TreeElement::TreeElement(TreeView* p_treeview) {
     treeview = p_treeview;
@@ -102,9 +100,7 @@ rect2 TreeElement::get_area() const { return area; }
 
 void TreeElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool TreeElement::is_in_area(const vec2& p_pos) {
-    return visible && area.is_in_box(p_pos);
-}
+bool TreeElement::is_in_area(const vec2& p_pos) { return visible && area.is_in_box(p_pos); }
 
 String TreeElement::get_text() const { return text; }
 
@@ -134,9 +130,7 @@ float TreeElement::get_height() const {
     return h;
 }
 
-float TreeElement::get_item_height() const {
-    return treeview->get_font()->get_height() + 6;
-}
+float TreeElement::get_item_height() const { return treeview->get_font()->get_height() + 6; }
 
 int TreeElement::get_index(float x) const {
     float offset = x - area.get_left();
@@ -145,8 +139,7 @@ int TreeElement::get_index(float x) const {
 }
 float TreeElement::get_position_x(int index) const {
     float origin_x = area.get_left();
-    return (origin_x +
-            (float)treeview->get_font()->get_width(text.substr(0, index)));
+    return (origin_x + (float)treeview->get_font()->get_width(text.substr(0, index)));
 }
 
 void TreeElement::set_expanded(bool p_expanded) {
@@ -252,8 +245,7 @@ TreeElement* TreeElement::get_next_visible() {
     // could not find appropiate child, search next
     current = this;
 
-    while (current->next && (!current->visible || current == this))
-        current = current->next;
+    while (current->next && (!current->visible || current == this)) current = current->next;
 
     if (current != this && current->visible) return current;
 
@@ -266,8 +258,7 @@ TreeElement* TreeElement::get_next_visible() {
         if (current && current->next) {
             TreeElement* e = current;
 
-            while (current->next && (!current->visible || current == e))
-                current = current->next;
+            while (current->next && (!current->visible || current == e)) current = current->next;
 
             if (current->visible) return current;
         }
@@ -319,10 +310,8 @@ TreeView::TreeView() {
     highlighted = nullptr;
 
     font = CanvasData::get_singleton()->get_default_theme()->get_font();
-    collapsed_tex =
-        CONTENT->LoadFontAwesomeIcon("solid/plus-square", vec2i(13));
-    expanded_tex =
-        CONTENT->LoadFontAwesomeIcon("solid/minus-square", vec2i(13));
+    collapsed_tex = CONTENT->LoadFontAwesomeIcon("solid/plus-square", vec2i(13));
+    expanded_tex = CONTENT->LoadFontAwesomeIcon("solid/minus-square", vec2i(13));
 
     scroll_offset = 0.0f;
     search_text = "";
@@ -384,12 +373,10 @@ void TreeView::handle_event(UIEvent* ui_event) {
                 TreeElement* elm = get_item(ui_event->pos);
 
                 if (elm) {
-                    float offset =
-                        elm->area.get_left() + elm->depth * depth_offset + 4;
+                    float offset = elm->area.get_left() + elm->depth * depth_offset + 4;
 
-                    rect2 collapse_icon =
-                        rect2(offset, offset + 12, elm->area.get_top() - 1,
-                              elm->area.get_bottom() + 1);
+                    rect2 collapse_icon = rect2(offset, offset + 12, elm->area.get_top() - 1,
+                                                elm->area.get_bottom() + 1);
 
                     if (ui_event->button_type == Mouse::LEFT &&
                         collapse_icon.is_in_box(ui_event->pos))
@@ -525,18 +512,13 @@ void TreeView::notification(int p_notification) {
                     }
 
                     if (item == highlighted)
-                        draw_box(item_area,
-                                 DEFAULT_THEME->get_highlight_color());
+                        draw_box(item_area, DEFAULT_THEME->get_highlight_color());
 
-                    if (item == selected)
-                        draw_box(item_area,
-                                 DEFAULT_THEME->get_selection_color());
+                    if (item == selected) draw_box(item_area, DEFAULT_THEME->get_selection_color());
 
                     if (item_numbers_enabled)
-                        draw_text(
-                            font, c,
-                            vec2(item_area.get_left() + 4, item_area.pos.y),
-                            item_numbers_color);
+                        draw_text(font, c, vec2(item_area.get_left() + 4, item_area.pos.y),
+                                  item_numbers_color);
 
                     float left = item_area.get_left() + internal_left_margin +
                                  depth_offset * item->depth + 4;
@@ -547,17 +529,15 @@ void TreeView::notification(int p_notification) {
                         left += size.x;
 
                         if (item->expanded)
-                            draw_texture(
-                                expanded_tex,
-                                rect2(vec2(left, item_area.pos.y),
-                                      collapsed_tex->get_size() / 2.0f),
-                                Color::White);
+                            draw_texture(expanded_tex,
+                                         rect2(vec2(left, item_area.pos.y),
+                                               collapsed_tex->get_size() / 2.0f),
+                                         Color::White);
                         else
-                            draw_texture(
-                                collapsed_tex,
-                                rect2(vec2(left, item_area.pos.y),
-                                      collapsed_tex->get_size() / 2.0f),
-                                Color::White);
+                            draw_texture(collapsed_tex,
+                                         rect2(vec2(left, item_area.pos.y),
+                                               collapsed_tex->get_size() / 2.0f),
+                                         Color::White);
 
                         left += size.x + 8;
                     } else {
@@ -567,19 +547,14 @@ void TreeView::notification(int p_notification) {
                         vec2 size = item->get_icon()->get_size() / 2.0f;
                         vec2 pos = vec2(left + size.x, item_area.pos.y);
 
-                        draw_texture(item->get_icon(), rect2(pos, size),
-                                     Color::White);
-                        draw_text(item->get_text(),
-                                  vec2(pos.x + size.x + 4, pos.y));
+                        draw_texture(item->get_icon(), rect2(pos, size), Color::White);
+                        draw_text(item->get_text(), vec2(pos.x + size.x + 4, pos.y));
                     } else
-                        draw_text(item->get_text(),
-                                  vec2(left, item_area.pos.y));
+                        draw_text(item->get_text(), vec2(left, item_area.pos.y));
 
-                    float sec_left =
-                        item->get_area().get_right() - secondary_margin;
+                    float sec_left = item->get_area().get_right() - secondary_margin;
 
-                    draw_text(get_font(), item->secondary_text,
-                              vec2(sec_left, item_area.pos.y),
+                    draw_text(get_font(), item->secondary_text, vec2(sec_left, item_area.pos.y),
                               TO_RGB(vec3i(150, 150, 150)));
 
                     item = item->get_next_visible();
@@ -589,14 +564,12 @@ void TreeView::notification(int p_notification) {
             if (roots.size() == 0) {
                 float width = get_font()->get_width("No content to display");
 
-                draw_text("No content to display",
-                          area.pos - vec2(width / 2.0f, 0));
+                draw_text("No content to display", area.pos - vec2(width / 2.0f, 0));
             }
 
             RENDERER->stop_scissor();
 
-            if (get_focused())
-                draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
+            if (get_focused()) draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
 
             break;
     }
@@ -622,15 +595,14 @@ void TreeView::push_node(Node* p_node) {
     if (p_node == nullptr) return;
 
     clear();
-    p_node->connect("children_changed",
-                    Connection::create_from_lambda(new V_Method_0(
-                        [this, p_node]() { push_node(p_node); })));
+    p_node->connect(
+        "children_changed",
+        Connection::create_from_lambda(new V_Method_0([this, p_node]() { push_node(p_node); })));
 
     TreeElement* root = create_item_from_node(p_node, NULL);
 }
 
-TreeElement* TreeView::create_item_from_node(Node* p_node,
-                                             TreeElement* p_parent) {
+TreeElement* TreeView::create_item_from_node(Node* p_node, TreeElement* p_parent) {
     TreeElement* current = create_item(p_parent);
 
     current->set_text(p_node->get_name());
@@ -804,11 +776,9 @@ void TreeView::make_visible(TreeElement* p_item) {
     if (item_area.get_bottom() < area.get_bottom())
         delta = item_area.get_bottom() - area.get_bottom();
 
-    if (item_area.get_top() > area.get_top())
-        delta = item_area.get_top() - area.get_top();
+    if (item_area.get_top() > area.get_top()) delta = item_area.get_top() - area.get_top();
 
-    if (slider && delta != 0.0f)
-        slider->set_slider_pos(slider->get_value() - delta / extra_space);
+    if (slider && delta != 0.0f) slider->set_slider_pos(slider->get_value() - delta / extra_space);
 }
 
 void TreeView::set_init_expanded(bool p_init_expanded) {

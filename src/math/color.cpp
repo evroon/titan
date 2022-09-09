@@ -19,8 +19,7 @@ void Color::from_hsv(vec3 val) {
     float q = h * 6.0f;
 
     float c = v * s;
-    float x = c * (1.0f - Math::abs(static_cast<int>(q) % 2 + q -
-                                    static_cast<int>(q) - 1.0f));
+    float x = c * (1.0f - Math::abs(static_cast<int>(q) % 2 + q - static_cast<int>(q) - 1.0f));
 
     float m = v - c;
 
@@ -64,9 +63,9 @@ void Color::from_hsv(vec3 val) {
 
 Color Color::from_hsv(vec3i val) {
     Color c;
-    c.from_hsv(vec3(static_cast<float>(val.x), static_cast<float>(val.y),
-                    static_cast<float>(val.z)) /
-               256.0f);
+    c.from_hsv(
+        vec3(static_cast<float>(val.x), static_cast<float>(val.y), static_cast<float>(val.z)) /
+        256.0f);
     return c;
 }
 

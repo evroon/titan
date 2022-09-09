@@ -4,15 +4,12 @@
 #include "world/worldobject.h"
 
 void TransformComponent::update() {
-    RenderComponent* r =
-        (RenderComponent*)((WorldObject*)parent)->rendercomponent;
+    RenderComponent* r = (RenderComponent*)((WorldObject*)parent)->rendercomponent;
 
     if (!r->isstatic && r->isvisible) transform.update();
 }
 
-void TransformComponent::set_transform(const Transform& p_transform) {
-    transform = p_transform;
-}
+void TransformComponent::set_transform(const Transform& p_transform) { transform = p_transform; }
 
 Transform TransformComponent::get_transform() const { return transform; }
 

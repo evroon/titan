@@ -43,12 +43,10 @@ void Scriptable::set(const StringName& name, const Variant& value) {
 }
 
 void Scriptable::disconnect(const StringName& p_signalname) {
-    if (signals.contains(p_signalname))
-        signals[p_signalname].connections.clear();
+    if (signals.contains(p_signalname)) signals[p_signalname].connections.clear();
 }
 
-void Scriptable::connect(const StringName& p_signalname,
-                         const Connection& p_connection) {
+void Scriptable::connect(const StringName& p_signalname, const Connection& p_connection) {
     if (!MMASTER->signal_exists(get_type(), p_signalname)) {
         T_ERROR("Signal does not exist: " + p_signalname.get_source() +
                 " in type: " + get_type_name().get_source() +
@@ -75,9 +73,8 @@ void Scriptable::connect(const StringName& p_signalname, Object* p_object,
     }
 
     if (!MMASTER->signal_exists(get_type(), p_signalname)) {
-        T_ERROR("Signal does not exist: " + p_signalname.get_source() +
-                " in type: " + get_type_name().get_source() +
-                " for method: " + p_method.get_source());
+        T_ERROR("Signal does not exist: " + p_signalname.get_source() + " in type: " +
+                get_type_name().get_source() + " for method: " + p_method.get_source());
         return;
     }
 
@@ -99,8 +96,7 @@ void Scriptable::connect_signal(const StringName& p_in, Scriptable* p_object,
                                 const StringName& p_out) {
     if (!MMASTER->signal_exists(get_type(), p_in)) {
         T_ERROR("Signal does not exist: " + p_in.get_source() +
-                " in type: " + get_type_name().get_source() +
-                " for method: " + p_out.get_source());
+                " in type: " + get_type_name().get_source() + " for method: " + p_out.get_source());
         return;
     }
 

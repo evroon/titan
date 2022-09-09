@@ -23,15 +23,7 @@ class Cursor {
     Cursor();
     ~Cursor();
 
-    enum SystemCursorType {
-        ARROW,
-        IBEAM,
-        WAIT,
-        CROSSHAIR,
-        WAITARROW,
-        NO,
-        HAND
-    };
+    enum SystemCursorType { ARROW, IBEAM, WAIT, CROSSHAIR, WAITARROW, NO, HAND };
 
     void set_default();
     void set_cursor(SystemCursorType p_type);

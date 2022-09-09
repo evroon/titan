@@ -80,8 +80,7 @@ class Vec2 {
 
     // Conversion
     String to_string() const {
-        return "{ " + (std::string)std::to_string(x) + ", " +
-               (std::string)std::to_string(y) + " }";
+        return "{ " + (std::string)std::to_string(x) + ", " + (std::string)std::to_string(y) + " }";
     }
 
     // Get info

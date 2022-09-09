@@ -31,8 +31,7 @@ void UBO::init() {
     GLuint ubo = 0;
     glGenBuffers(1, &ubo);
     bind();
-    glBufferData(GL_UNIFORM_BUFFER, data_size * sizeof(float), &data[0],
-                 GL_STATIC_DRAW);
+    glBufferData(GL_UNIFORM_BUFFER, data_size * sizeof(float), &data[0], GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 

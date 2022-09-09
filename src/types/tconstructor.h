@@ -13,10 +13,8 @@
 #define BUILD_OBJ_CSTR_1() \
     static Variant CLASSNAME##_1(VAR arg_0) { return new CLASSNAME(arg_0); }
 
-#define BUILD_OBJ_CSTR_2()                               \
-    static Variant CLASSNAME##_2(VAR arg_0, VAR arg_1) { \
-        return new CLASSNAME(arg_0 COMMA arg_1);         \
-    }
+#define BUILD_OBJ_CSTR_2() \
+    static Variant CLASSNAME##_2(VAR arg_0, VAR arg_1) { return new CLASSNAME(arg_0 COMMA arg_1); }
 
 #define BUILD_OBJ_CSTR_3(TYPE)                                      \
     static Variant CLASSNAME##_3(VAR arg_0, VAR arg_1, VAR arg_2) { \
@@ -37,28 +35,21 @@ struct CSTR_0 : public TConstructor {
 
 struct CSTR_1 : public TConstructor {
     CSTR_1() { arg_count = 1; }
-    CSTR_1(std::function<Variant(Variant&)> p_func) : CSTR_1() {
-        func = p_func;
-    }
+    CSTR_1(std::function<Variant(Variant&)> p_func) : CSTR_1() { func = p_func; }
     Variant operator()(Variant arg_0) { return func(arg_0); }
     std::function<Variant(Variant&)> func;
 };
 
 struct CSTR_2 : public TConstructor {
     CSTR_2() { arg_count = 2; }
-    CSTR_2(std::function<Variant(Variant&, Variant&)> p_func) : CSTR_2() {
-        func = p_func;
-    }
-    Variant operator()(Variant arg_0, Variant arg_1) {
-        return func(arg_0, arg_1);
-    }
+    CSTR_2(std::function<Variant(Variant&, Variant&)> p_func) : CSTR_2() { func = p_func; }
+    Variant operator()(Variant arg_0, Variant arg_1) { return func(arg_0, arg_1); }
     std::function<Variant(Variant&, Variant&)> func;
 };
 
 struct CSTR_3 : public TConstructor {
     CSTR_3() { arg_count = 3; }
-    CSTR_3(std::function<Variant(Variant&, Variant&, Variant&)> p_func)
-        : CSTR_3() {
+    CSTR_3(std::function<Variant(Variant&, Variant&, Variant&)> p_func) : CSTR_3() {
         func = p_func;
     }
     Variant operator()(Variant arg_0, Variant arg_1, Variant arg_2) {
@@ -69,13 +60,10 @@ struct CSTR_3 : public TConstructor {
 
 struct CSTR_4 : public TConstructor {
     CSTR_4() { arg_count = 4; }
-    CSTR_4(
-        std::function<Variant(Variant&, Variant&, Variant&, Variant&)> p_func)
-        : CSTR_4() {
+    CSTR_4(std::function<Variant(Variant&, Variant&, Variant&, Variant&)> p_func) : CSTR_4() {
         func = p_func;
     }
-    Variant operator()(Variant arg_0, Variant arg_1, Variant arg_2,
-                       Variant arg_3) {
+    Variant operator()(Variant arg_0, Variant arg_1, Variant arg_2, Variant arg_3) {
         return func(arg_0, arg_1, arg_2, arg_3);
     }
     std::function<Variant(Variant&, Variant&, Variant&, Variant&)> func;

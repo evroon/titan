@@ -23,8 +23,7 @@ Viewport* Raycaster::get_viewport() const { return viewport; }
 vec3 Raycaster::raycast(const vec2& p_screen_pos) {
     rect2 window = viewport->get_area();
 
-    if (!rect2(1.0).is_in_box(p_screen_pos / viewport->get_size()))
-        return vec3();
+    if (!rect2(1.0).is_in_box(p_screen_pos / viewport->get_size())) return vec3();
 
     vec3 dir = get_dir(p_screen_pos);
     float step_size = 1.0f;
@@ -38,8 +37,7 @@ vec3 Raycaster::raycast(const vec2& p_screen_pos) {
     vec3 pos = camera->get_pos();
 
     vec3 p = pos + dir * 20.0f;
-    vec4 s = camera->get_projection_matrix() * camera->get_view_matrix() *
-             vec4(p, 0.0f);
+    vec4 s = camera->get_projection_matrix() * camera->get_view_matrix() * vec4(p, 0.0f);
     vec2 m = MOUSE->get_position() - window.pos;
     // T_LOG(m.to_string() + " and " + s.get_xy().to_string());
     // T_LOG(dir.to_string());

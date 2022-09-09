@@ -11,20 +11,20 @@
 //=========================================================================
 
 RigidBody3D::RigidBody3D() {
-    btDefaultMotionState* groundMotionState = new btDefaultMotionState(
-        btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(
-        0, groundMotionState, shape->shape, btVector3(0, 0, 0));
+    btDefaultMotionState* groundMotionState =
+        new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+    btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, shape->shape,
+                                                               btVector3(0, 0, 0));
     btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
     physics_3d->dynamics_world->addRigidBody(groundRigidBody);
 
-    btDefaultMotionState* fallMotionState = new btDefaultMotionState(
-        btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
+    btDefaultMotionState* fallMotionState =
+        new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
     btScalar mass = 1;
     btVector3 fallInertia(0, 0, 0);
     shape->shape->calculateLocalInertia(mass, fallInertia);
-    btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(
-        mass, fallMotionState, shape->shape, fallInertia);
+    btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, shape->shape,
+                                                             fallInertia);
     btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
     physics_3d->dynamics_world->addRigidBody(fallRigidBody);
 }
@@ -44,11 +44,8 @@ RigidBody2D::RigidBody2D(bool dyn) {
 
     dynamic = dyn;
 
-    auto ready = [this]() {
-        get_parent()->connect("parent_changed", this, "ready");
-    };
-    connect("parent_changed",
-            Connection::create_from_lambda(new V_Method_0(ready)));
+    auto ready = [this]() { get_parent()->connect("parent_changed", this, "ready"); };
+    connect("parent_changed", Connection::create_from_lambda(new V_Method_0(ready)));
 }
 
 void RigidBody2D::ready() {
@@ -75,13 +72,11 @@ void RigidBody2D::update() {
     vec2 new_pos = vec2(pos.x, pos.y) * physics_2d->get_scale();
 
     get_world_object()->set_pos(vec3(new_pos, get_world_object()->get_pos().z));
-    get_world_object()->set_rotation(
-        vec3(0.0f, 0.0f, -shape->body->GetAngle()));
+    get_world_object()->set_rotation(vec3(0.0f, 0.0f, -shape->body->GetAngle()));
 }
 
 void RigidBody2D::set_as_sensor(bool p_value) {
-    for (b2Fixture* f = shape->body->GetFixtureList(); f; f = f->GetNext())
-        f->SetSensor(p_value);
+    for (b2Fixture* f = shape->body->GetFixtureList(); f; f = f->GetNext()) f->SetSensor(p_value);
 }
 
 vec2 RigidBody2D::get_velocity() const {
@@ -113,8 +108,7 @@ void RigidBody2D::set_transform(const Transform& p_transform) {
     vec2 pos = p_transform.get_pos().get_xy() / physics_2d->get_scale();
 
     if (shape && shape->body) {
-        shape->body->SetTransform(b2Vec2(pos.x, pos.y),
-                                  p_transform.get_rotation().z);
+        shape->body->SetTransform(b2Vec2(pos.x, pos.y), p_transform.get_rotation().z);
         shape->body->SetAwake(true);
     }
 }
@@ -131,8 +125,8 @@ void RigidBody2D::set_as_circle(bool p_dynamic) {
 }
 
 void RigidBody2D::apply_force(const vec2& p_force) {
-    shape->body->ApplyLinearImpulse(b2Vec2(p_force.x, p_force.y),
-                                    shape->body->GetWorldCenter(), true);
+    shape->body->ApplyLinearImpulse(b2Vec2(p_force.x, p_force.y), shape->body->GetWorldCenter(),
+                                    true);
 }
 
 WorldObject* RigidBody2D::get_colliding_objects() const {
@@ -141,8 +135,7 @@ WorldObject* RigidBody2D::get_colliding_objects() const {
     if (!bce) return nullptr;
 
     b2Contact* c = bce->contact;
-    WorldObject* o = reinterpret_cast<WorldObject*>(
-        c->GetFixtureB()->GetBody()->GetUserData());
+    WorldObject* o = reinterpret_cast<WorldObject*>(c->GetFixtureB()->GetBody()->GetUserData());
 
     return o;
 }

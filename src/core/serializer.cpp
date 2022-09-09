@@ -25,8 +25,7 @@ String Serializer::serialize(const Variant& p_value) {
     return s;
 }
 
-void Serializer::serialize_recursively(const String& p_name,
-                                       const Variant& p_value,
+void Serializer::serialize_recursively(const String& p_name, const Variant& p_value,
                                        XmlNode& p_node) {
     VariantType type = p_value.get_type();
     Variant::Type var_type = type;
@@ -61,11 +60,10 @@ void Serializer::serialize_recursively(const String& p_name,
             doc.add_attribute("count", s).add_to_node(properties_node);
 
             for (int c = 0; c < properties.size(); c++)
-                serialize_recursively(properties[c].get_source(),
-                                      MMASTER->get_property(type, properties[c])
-                                          ->get->
-                                          operator()(p_value),
-                                      properties_node);
+                serialize_recursively(
+                    properties[c].get_source(),
+                    MMASTER->get_property(type, properties[c])->get->operator()(p_value),
+                    properties_node);
 
             properties_node.add_to_node(node);
         }
@@ -84,8 +82,7 @@ Variant Serializer::deserialize_recursively(const XmlNode& p_node) {
     Array<XmlNode> nodes = p_node.get_children();
 
     if (nodes.size() == 0 && p_node.get_attributes().size() == 1) {
-        if (p_node.get_attributes()[0].get_value() != "NULL")
-            T_ERROR("Corrupt");
+        if (p_node.get_attributes()[0].get_value() != "NULL") T_ERROR("Corrupt");
 
         return NULL_VAR;
     } else if (nodes.size() == 0 || p_node.get_attributes().size() == 0) {
@@ -115,9 +112,7 @@ Variant Serializer::deserialize_recursively(const XmlNode& p_node) {
         return result;
     }
     if (MMASTER->constructor_exists(type, 0))
-        result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))
-                     ->
-                     operator()();
+        result = reinterpret_cast<CSTR_0*>(MMASTER->get_constructor(type, 0))->operator()();
     else {
         T_ERROR("type " + type.get_type_name().get_source() +
                 " has no default constructor that takes one parameter");
@@ -236,8 +231,7 @@ vec4 Serializer::deserialize_vec4(const String& p_source) const {
     String z = a[3];
     String w = a[4];
 
-    return vec4(x.substr(0, x.size() - 1), y.substr(0, y.size() - 1),
-                z.substr(0, z.size() - 1), w);
+    return vec4(x.substr(0, x.size() - 1), y.substr(0, y.size() - 1), z.substr(0, z.size() - 1), w);
 }
 
 Color Serializer::deserialize_color(const String& p_source) const {
@@ -248,8 +242,7 @@ Color Serializer::deserialize_color(const String& p_source) const {
     String z = a[9];
     String w = a[12];
 
-    return vec4(x.substr(0, x.size() - 1), y.substr(0, y.size() - 1),
-                z.substr(0, z.size() - 1), w);
+    return vec4(x.substr(0, x.size() - 1), y.substr(0, y.size() - 1), z.substr(0, z.size() - 1), w);
 }
 
 Transform Serializer::deserialize_transform(const String& p_source) const {
@@ -260,17 +253,12 @@ Transform Serializer::deserialize_transform(const String& p_source) const {
     String size = p_source.substr(starts[2], ends[1] - starts[2]);
     String rot = p_source.substr(starts[3], ends[2] - starts[3]);
 
-    return Transform(deserialize_vec3(pos), deserialize_vec3(size),
-                     deserialize_vec3(rot));
+    return Transform(deserialize_vec3(pos), deserialize_vec3(size), deserialize_vec3(rot));
 }
 
-Object* Serializer::deserialize_object(const String& p_source) const {
-    return nullptr;
-}
+Object* Serializer::deserialize_object(const String& p_source) const { return nullptr; }
 
-Array<String> Serializer::deserialize_set(const String& p_value) {
-    return p_value.split(',');
-}
+Array<String> Serializer::deserialize_set(const String& p_value) { return p_value.split(','); }
 
 void Serializer::init() { singleton = new Serializer; }
 
@@ -302,8 +290,7 @@ String TypeSerializer::serialize_all_types() const {
     return doc.get_source();
 }
 
-void TypeSerializer::serialize_type(const VariantType& p_type,
-                                    XmlNode& p_node) const {
+void TypeSerializer::serialize_type(const VariantType& p_type, XmlNode& p_node) const {
     Array<StringName> properties = MMASTER->list_property_names(p_type);
     Array<StringName> methods = MMASTER->list_method_names(p_type);
 
@@ -313,8 +300,7 @@ void TypeSerializer::serialize_type(const VariantType& p_type,
         Property* p = MMASTER->get_property(p_type, properties[c]);
 
         XmlNode property_node = p_node.doc->add_node(properties[c], "");
-        p_node.doc->add_attribute("type", p->var_type.get_type_name())
-            .add_to_node(property_node);
+        p_node.doc->add_attribute("type", p->var_type.get_type_name()).add_to_node(property_node);
 
         property_node.add_to_node(properties_node);
     }
@@ -331,21 +317,17 @@ void TypeSerializer::serialize_type(const VariantType& p_type,
         if (m->returns_variant)
             p_node.doc
                 ->add_attribute("return_type",
-                                reinterpret_cast<ReturnMethod*>(m)
-                                    ->return_type.get_type_name())
+                                reinterpret_cast<ReturnMethod*>(m)->return_type.get_type_name())
                 .add_to_node(method_node);
         else
-            p_node.doc->add_attribute("return_type", "void")
-                .add_to_node(method_node);
+            p_node.doc->add_attribute("return_type", "void").add_to_node(method_node);
 
-        p_node.doc->add_attribute("const", m->is_const ? "true" : "false")
-            .add_to_node(method_node);
+        p_node.doc->add_attribute("const", m->is_const ? "true" : "false").add_to_node(method_node);
 
         XmlNode parameters_node = p_node.doc->add_node("parameters", "");
 
         for (int i = 0; i < m->param_types.size(); i++)
-            p_node.doc->add_node("type", m->param_types[i])
-                .add_to_node(parameters_node);
+            p_node.doc->add_node("type", m->param_types[i]).add_to_node(parameters_node);
 
         parameters_node.add_to_node(method_node);
 

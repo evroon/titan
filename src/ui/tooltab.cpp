@@ -9,8 +9,8 @@ ToolTab::ToolTab(Terrain* p_terrain) {
     terrain = p_terrain;
 
     property_view = new PropertyView;
-    property_view->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN,
-                               Control::ANCHOR_END, Control::ANCHOR_END);
+    property_view->set_anchors(Control::ANCHOR_BEGIN, Control::ANCHOR_BEGIN, Control::ANCHOR_END,
+                               Control::ANCHOR_END);
     property_view->set_margins(4, 4, 4, 4);
 
     add_child(property_view);

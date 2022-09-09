@@ -59,8 +59,7 @@ void ContentManager::setup() {
     extensions["egg"] = GETTYPE(StringName("Mesh"));
     extensions["fbx"] = GETTYPE(StringName("Mesh"));
 
-    File base_path =
-        View::get_singleton()->get_application()->platform->get_cwd();
+    File base_path = View::get_singleton()->get_application()->platform->get_cwd();
     base_path += "titan/assets";
 
     int result = chdir(base_path.get_absolute_path().c_str());
@@ -130,8 +129,7 @@ Texture2D* ContentManager::LoadTexture(const File& p_file) {
     return tex;
 }
 
-Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name,
-                                               const vec2i& p_size,
+Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name, const vec2i& p_size,
                                                const Color& p_color) {
     File file = "../thirdparty/fontawesome/svgs/" + p_name + ".svg";
 
@@ -199,8 +197,8 @@ SoundEffect* ContentManager::LoadSoundEffect(const File& p_file) {
 
 VariantType ContentManager::GetType(const File& p_file) {
     String filename = p_file.get_absolute_path();
-    String ext = filename.substr(StringUtils::GetLastIndexOf(filename, '.') + 1,
-                                 filename.size() - 1);
+    String ext =
+        filename.substr(StringUtils::GetLastIndexOf(filename, '.') + 1, filename.size() - 1);
     return extensions[ext];
 }
 

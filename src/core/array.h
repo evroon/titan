@@ -14,48 +14,42 @@ class Array {
     Array() { vec = V(); }
     Array(const VAL& v_0) : Array() { push_back(v_0); }
     Array(const VAL& v_0, const VAL& v_1) : Array(v_0) { push_back(v_1); }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2) : Array(v_0, v_1) {
-        push_back(v_2);
-    }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3)
-        : Array(v_0, v_1, v_2) {
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2) : Array(v_0, v_1) { push_back(v_2); }
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3) : Array(v_0, v_1, v_2) {
         push_back(v_3);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4)
         : Array(v_0, v_1, v_2, v_3) {
         push_back(v_4);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5)
         : Array(v_0, v_1, v_2, v_3, v_4) {
         push_back(v_5);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5, const VAL& v_6)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5, const VAL& v_6)
         : Array(v_0, v_1, v_2, v_3, v_4, v_5) {
         push_back(v_6);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5, const VAL& v_6, const VAL& v_7)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5, const VAL& v_6, const VAL& v_7)
         : Array(v_0, v_1, v_2, v_3, v_4, v_5, v_6) {
         push_back(v_7);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5, const VAL& v_6, const VAL& v_7,
-          const VAL& v_8)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5, const VAL& v_6, const VAL& v_7, const VAL& v_8)
         : Array(v_0, v_1, v_2, v_3, v_4, v_5, v_6, v_7) {
         push_back(v_8);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5, const VAL& v_6, const VAL& v_7,
-          const VAL& v_8, const VAL& v_9)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5, const VAL& v_6, const VAL& v_7, const VAL& v_8, const VAL& v_9)
         : Array(v_0, v_1, v_2, v_3, v_4, v_5, v_6, v_7, v_8) {
         push_back(v_9);
     }
-    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3,
-          const VAL& v_4, const VAL& v_5, const VAL& v_6, const VAL& v_7,
-          const VAL& v_8, const VAL& v_9, const VAL& v_10)
+    Array(const VAL& v_0, const VAL& v_1, const VAL& v_2, const VAL& v_3, const VAL& v_4,
+          const VAL& v_5, const VAL& v_6, const VAL& v_7, const VAL& v_8, const VAL& v_9,
+          const VAL& v_10)
         : Array(v_0, v_1, v_2, v_3, v_4, v_5, v_6, v_7, v_8, v_9) {
         push_back(v_10);
     }
@@ -112,9 +106,7 @@ class Array {
 
         return result;
     }
-    Array<VAL> getrest(const int start) const {
-        return split(start, size() - 1);
-    }
+    Array<VAL> getrest(const int start) const { return split(start, size() - 1); }
 
     // Operators
     VAL& operator[](int i) { return vec[i]; }

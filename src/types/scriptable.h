@@ -26,12 +26,9 @@ class Scriptable : public Object {
 
     void disconnect(const StringName& p_signalname);
 
-    void connect(const StringName& p_signalname,
-                 const Connection& p_connection);
-    void connect(const StringName& p_signalname, Object* p_object,
-                 const StringName& p_method);
-    void connect_signal(const StringName& p_in, Scriptable* p_object,
-                        const StringName& p_out);
+    void connect(const StringName& p_signalname, const Connection& p_connection);
+    void connect(const StringName& p_signalname, Object* p_object, const StringName& p_method);
+    void connect_signal(const StringName& p_in, Scriptable* p_object, const StringName& p_out);
 
     void emit_signal(const StringName& p_name);
     void emit_signal(const StringName& p_name, Variant arg_0);

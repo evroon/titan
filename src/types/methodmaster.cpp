@@ -46,8 +46,7 @@ void MethodMaster::init() {
 }
 
 void MethodMaster::add_inherited_methods() {
-    for (std::pair<const StringName, ObjectType>& o :
-         TypeManager::get_singleton()->object_types) {
+    for (std::pair<const StringName, ObjectType>& o : TypeManager::get_singleton()->object_types) {
         Array<String> a = o.second.path.split('/');
 
         // do not add the object's own methods again
@@ -165,24 +164,18 @@ void MethodMaster::add_fundamental_methods() {
 }
 
 void MethodMaster::add_static_functions() {
-    register_static_func(StringName("sin"),
-                         new R_Method_1([](float f) { return ::sin(f); }));
-    register_static_func(
-        StringName("min"),
-        new R_Method_2([](float f1, float f2) { return f1 > f2 ? f2 : f1; }));
-    register_static_func(
-        StringName("max"),
-        new R_Method_2([](float f1, float f2) { return f1 < f2 ? f2 : f1; }));
-    register_static_func(StringName("sgn"), new R_Method_1([](Variant f) {
-                             return Math::sgn(f);
-                         }));
+    register_static_func(StringName("sin"), new R_Method_1([](float f) { return ::sin(f); }));
+    register_static_func(StringName("min"),
+                         new R_Method_2([](float f1, float f2) { return f1 > f2 ? f2 : f1; }));
+    register_static_func(StringName("max"),
+                         new R_Method_2([](float f1, float f2) { return f1 < f2 ? f2 : f1; }));
+    register_static_func(StringName("sgn"), new R_Method_1([](Variant f) { return Math::sgn(f); }));
     register_static_func(StringName("get_type"), new R_Method_1([](Variant v) {
                              return v.get_type().get_type_name().get_source();
                          }));
 }
 
-void MethodMaster::register_constant(VariantType type,
-                                     const ConstantMember& p_constant) {
+void MethodMaster::register_constant(VariantType type, const ConstantMember& p_constant) {
     object_callables[type].constants.push_back(p_constant);
 }
 
@@ -192,8 +185,7 @@ void MethodMaster::register_singleton(VariantType type, Variant p_singleton) {
 
 // register
 void MethodMaster::register_method(VariantType type, Method* method) {
-    if (!method_exists(type, method->name))
-        object_callables[type].methods.push_back(method);
+    if (!method_exists(type, method->name)) object_callables[type].methods.push_back(method);
 }
 
 void MethodMaster::register_property(VariantType type, Property* getset) {
@@ -210,8 +202,7 @@ void MethodMaster::register_static_func(StringName name, Method* method) {
     static_funcs.set(name, method);
 }
 
-void MethodMaster::register_signal(const VariantType& p_type,
-                                   const StringName& p_signal) {
+void MethodMaster::register_signal(const VariantType& p_type, const StringName& p_signal) {
     object_callables[p_type].signal_names.push_back(p_signal);
 }
 
@@ -241,16 +232,13 @@ bool MethodMaster::constructor_exists(VariantType type, int argc) {
     return false;
 }
 
-bool MethodMaster::signal_exists(const VariantType& p_type,
-                                 const StringName& p_signal) {
+bool MethodMaster::signal_exists(const VariantType& p_type, const StringName& p_signal) {
     if (!object_callables.contains(p_type)) return false;
 
-    Array<String> a =
-        TYPEMAN->get_object_type(p_type.get_type_name()).path.split('/');
+    Array<String> a = TYPEMAN->get_object_type(p_type.get_type_name()).path.split('/');
 
     for (int c = 0; c < a.size(); c++) {
-        if (object_callables[VariantType(a[c])].signal_names.contains(p_signal))
-            return true;
+        if (object_callables[VariantType(a[c])].signal_names.contains(p_signal)) return true;
     }
 
     return false;
@@ -289,8 +277,7 @@ Variant MethodMaster::get_singleton(VariantType p_type) {
 }
 
 void MethodMaster::clean() {
-    for (std::pair<const int, ObjectCallables>& oc : MMASTER->object_callables)
-        oc.second.free();
+    for (std::pair<const int, ObjectCallables>& oc : MMASTER->object_callables) oc.second.free();
 }
 
 MethodMaster* MethodMaster::get_method_master() { return method_master; }
@@ -310,8 +297,7 @@ Array<StringName> MethodMaster::list_property_names(VariantType type) {
 
     Array<StringName> result;
 
-    for (Property* m : object_callables[type].properties)
-        result.push_back(m->var_name);
+    for (Property* m : object_callables[type].properties) result.push_back(m->var_name);
 
     return result;
 }

@@ -43,8 +43,7 @@ Mouse::ButtonType Mouse::get_ButtonType(int SDL_type) {
 }
 
 bool Mouse::is_pressed(int type) {
-    return (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(get_SDL_type(type))) !=
-           0;
+    return (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(get_SDL_type(type))) != 0;
 }
 
 vec2 Mouse::get_position() {

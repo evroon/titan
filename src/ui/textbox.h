@@ -56,9 +56,7 @@ struct TextPosition {
         column = p_column;
     }
 
-    bool operator==(const TextPosition& r) const {
-        return row == r.row && column == r.column;
-    }
+    bool operator==(const TextPosition& r) const { return row == r.row && column == r.column; }
     bool operator>(const TextPosition& p_r) const {
         return row > p_r.row || (row == p_r.row && column > p_r.column);
     }
@@ -146,8 +144,7 @@ class TextBox : public Control {
 
     void slider_value_changed();
 
-    void give_color_to_word(TextLine& p_line, const String& p_src,
-                            const Color& p_color);
+    void give_color_to_word(TextLine& p_line, const String& p_src, const Color& p_color);
     void give_color_to_patterns(TextLine& p_line);
 
     void handle_extension(const String& p_extension);
@@ -159,8 +156,7 @@ class TextBox : public Control {
 
    private:
     void set_colors_on_line(TextLine& p_line, const Array<int>& p_starts,
-                            const Array<String>& p_matches,
-                            const Color& p_color);
+                            const Array<String>& p_matches, const Color& p_color);
 
     rect2 box, cursor;
     TextPosition caret_pos;

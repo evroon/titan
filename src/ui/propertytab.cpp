@@ -9,8 +9,7 @@ PropertyTab::PropertyTab(Object* p_object) {
     property_view = new PropertyView;
     add_child(property_view);
 
-    property_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END,
-                               ANCHOR_END);
+    property_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
     property_view->set_margins(4, 4, 4, 40);
 
     name_field = new TextField;
@@ -84,9 +83,7 @@ void PropertyTab::set_property(Object* p_object) {
     name_field->set_text(title);
 }
 
-Object* PropertyTab::get_property() const {
-    return property_view->get_property();
-}
+Object* PropertyTab::get_property() const { return property_view->get_property(); }
 
 void PropertyTab::go_back() { set_property(history.go_back()); }
 

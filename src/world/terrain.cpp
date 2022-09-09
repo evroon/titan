@@ -30,8 +30,7 @@ TerrainBrush::TerrainBrush(Terrain* p_terrain) {
 
     if (!noise) heightmap_fbo->clear();
 
-    terrain->heightmap =
-        heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
+    terrain->heightmap = heightmap_fbo->color_textures[0]->cast_to_type<Texture2D*>();
     terrain->heightmap->set_filter(Texture::BILINEAR_FILTER);
 
     brush_shader = CONTENT->LoadShader("engine/shaders/Brush");
@@ -50,9 +49,8 @@ void TerrainBrush::apply() { to_apply = true; }
 void TerrainBrush::handle() {
     if (!to_apply) return;
 
-    Transform t = Transform(
-        pos / (terrain->node_count.x * terrain->get_size().x * 0.5f),
-        vec2(radius / (terrain->node_count.y * terrain->get_size().y * 0.5f)));
+    Transform t = Transform(pos / (terrain->node_count.x * terrain->get_size().x * 0.5f),
+                            vec2(radius / (terrain->node_count.y * terrain->get_size().y * 0.5f)));
 
     Texture2D* heightmap = terrain->get_heightmap();
 
@@ -150,8 +148,7 @@ void Terrain::init() {
     brush->set_pos(vec2(0.0f, 0.0f));
 
     textures.push_back(CONTENT->LoadTexture("textures/oreon/grass0_DIF.jpg"));
-    textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/Ground_11_DIF.jpg"));
+    textures.push_back(CONTENT->LoadTexture("textures/oreon/Ground_11_DIF.jpg"));
     // textures.push_back(CONTENT->LoadTexture("textures/look_up.jpg"));
 
     texture_names.push_back("grass");
@@ -173,8 +170,7 @@ void Terrain::init() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexStorage2D(GL_TEXTURE_2D, Math::log((float)N) / Math::log(2.0f),
-                   GL_RGBA32F, N, N);
+    glTexStorage2D(GL_TEXTURE_2D, Math::log((float)N) / Math::log(2.0f), GL_RGBA32F, N, N);
 
     normalmap = new Texture2D(vec2(N, N), (int)id);
 
@@ -202,8 +198,7 @@ void Terrain::compute_normals() {
     normal_map_compute->set_uniform("strength", 100.0f);
     normal_map_compute->set_uniform("heightmap", 0);
 
-    glBindImageTexture(0, normalmap->get_id(), 0, false, 0, GL_WRITE_ONLY,
-                       GL_RGBA32F);
+    glBindImageTexture(0, normalmap->get_id(), 0, false, 0, GL_WRITE_ONLY, GL_RGBA32F);
     glDispatchCompute(N / 16, N / 16, 1);
     glFinish();
 }
@@ -254,8 +249,7 @@ void Terrain::setup_buffers() {
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices_count, &vertices[0],
-                 GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices_count, &vertices[0], GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
@@ -285,8 +279,7 @@ void Terrain::draw() {
 
     shader->set_uniform("view", RENDERER->get_final_matrix());
     shader->set_uniform("model", get_transform().get_model());
-    shader->set_uniform("camera_pos",
-                        ACTIVE_WORLD->get_active_camera()->get_pos());
+    shader->set_uniform("camera_pos", ACTIVE_WORLD->get_active_camera()->get_pos());
     shader->set_uniform("terrain_size", get_size());
 
     for (int c = 0; c < textures.size(); c++) {
@@ -300,12 +293,10 @@ void Terrain::draw() {
     normalmap->bind(textures.size() + 1);
 
     shader->set_uniform("virtualtex", textures.size() + 2);
-    DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->VIRTUALTEX)
-        ->bind(textures.size() + 2);
+    DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->VIRTUALTEX)->bind(textures.size() + 2);
 
     shader->set_uniform("indirection", textures.size() + 3);
-    DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->INDIRECTION)
-        ->bind(textures.size() + 3);
+    DEFERRED_RENDERER->get_texture(DEFERRED_RENDERER->INDIRECTION)->bind(textures.size() + 3);
 
     glBindVertexArray(VAO);
     glEnableVertexAttribArray(0);
@@ -353,8 +344,7 @@ void Water::draw() {
     shader->bind();
     shader->set_uniform("view", RENDERER->get_final_matrix());
     shader->set_uniform("model", get_transform().get_model());
-    shader->set_uniform("ambient",
-                        Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
+    shader->set_uniform("ambient", Color::FromRGB(vec3i(66, 173, 244)).get_rgb());
     shader->set_uniform("time", TIME->get_absolutetime() / 1000.0f);
     shader->set_uniform("normals", 0);
     shader->set_uniform("reflection_tex", 1);
@@ -395,8 +385,7 @@ void Vegetation::draw() {
     shader->set_uniform("heightmap", 1);
 
     vec2 cam_pos = ACTIVE_WORLD->get_active_camera()->get_pos().get_xy();
-    vec3 pos = vec3(((int)(cam_pos.x / 5.0f)) * 5.0f,
-                    ((int)(cam_pos.y / 5.0f)) * 5.0f, 0.0f);
+    vec3 pos = vec3(((int)(cam_pos.x / 5.0f)) * 5.0f, ((int)(cam_pos.y / 5.0f)) * 5.0f, 0.0f);
 
     for (int x = -8; x <= 8; x++) {
         for (int y = -8; y <= 8; y++) {
@@ -420,8 +409,7 @@ void Vegetation::draw() {
             shader->set_uniform("block_offset", delta + pos);
 
             MeshHandler::get_singleton()->get_plane()->bind();
-            MeshHandler::get_singleton()->get_plane()->draw_instanced(2048 / 6 *
-                                                                      lod);
+            MeshHandler::get_singleton()->get_plane()->draw_instanced(2048 / 6 * lod);
         }
     }
 

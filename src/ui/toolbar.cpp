@@ -25,8 +25,7 @@ ToolBar::~ToolBar() {}
 vec2 ToolBar::get_required_size() const {
     float width = left_margin + seperation * (items.size()) + right_margin;
 
-    for (int c = 0; c < items.size(); c++)
-        width += font->get_width(items[c].text);
+    for (int c = 0; c < items.size(); c++) width += font->get_width(items[c].text);
 
     return vec2(width, 30.0f);
 }
@@ -159,8 +158,7 @@ void ToolBar::open_item(int p_index) {
 
     if (!items[p_index].menu) return;
 
-    get_canvas()->set_context_menu(items[p_index].menu,
-                                   items[p_index].area.get_bottom_left());
+    get_canvas()->set_context_menu(items[p_index].menu, items[p_index].area.get_bottom_left());
 }
 
 void ToolBar::menu_closed() {

@@ -23,9 +23,7 @@ rect2 ListElement::get_area() const { return area; }
 
 void ListElement::set_area(const rect2& p_area) { area = p_area; }
 
-bool ListElement::is_in_area(const vec2& p_pos) {
-    return visible && area.is_in_box(p_pos);
-}
+bool ListElement::is_in_area(const vec2& p_pos) { return visible && area.is_in_box(p_pos); }
 
 String ListElement::get_text() const { return text; }
 
@@ -40,10 +38,7 @@ void ListElement::set_visible(bool p_visible) { visible = p_visible; }
 bool ListElement::get_visible() const { return visible; }
 
 float ListElement::get_height() const {
-    return CanvasData::get_singleton()
-        ->get_default_theme()
-        ->get_font()
-        ->get_height();
+    return CanvasData::get_singleton()->get_default_theme()->get_font()->get_height();
 }
 
 int ListElement::get_index(float x) const {
@@ -53,8 +48,7 @@ int ListElement::get_index(float x) const {
 }
 float ListElement::get_position_x(int index) const {
     float origin_x = area.get_left();
-    return (origin_x +
-            (float)listview->get_font()->get_width(text.substr(0, index)));
+    return (origin_x + (float)listview->get_font()->get_width(text.substr(0, index)));
 }
 
 //=========================================================================
@@ -278,10 +272,8 @@ void ListView::position_items() {
 }
 
 void ListView::check_slider_necessity() {
-    if (items.size() > 0 &&
-        items[items.size() - 1].get_area().get_bottom() < area.get_bottom()) {
-        extra_space =
-            area.get_bottom() - items[items.size() - 1].get_area().get_bottom();
+    if (items.size() > 0 && items[items.size() - 1].get_area().get_bottom() < area.get_bottom()) {
+        extra_space = area.get_bottom() - items[items.size() - 1].get_area().get_bottom();
         add_slider();
     } else
         remove_slider();
@@ -306,9 +298,8 @@ void ListView::notification(int p_notification) {
 
             RENDERER->use_scissor(area);
 
-            if (selecting && selection_begin < items.size() &&
-                selection_end < items.size() && selection_begin >= 0 &&
-                selection_end >= 0) {
+            if (selecting && selection_begin < items.size() && selection_end < items.size() &&
+                selection_begin >= 0 && selection_end >= 0) {
                 float top = get_item(selection_begin)->get_area().get_top();
                 float bottom = get_item(selection_end)->get_area().get_bottom();
                 float left = get_item(selection_begin)->get_area().get_left();
@@ -318,50 +309,40 @@ void ListView::notification(int p_notification) {
             }
 
             if (highlighted != -1)
-                draw_box(get_item(highlighted)->get_area(),
-                         DEFAULT_THEME->get_highlight_color());
+                draw_box(get_item(highlighted)->get_area(), DEFAULT_THEME->get_highlight_color());
 
             if (selected != -1)
-                draw_box(get_item(selected)->get_area(),
-                         DEFAULT_THEME->get_selection_color());
+                draw_box(get_item(selected)->get_area(), DEFAULT_THEME->get_selection_color());
 
             for (int c = 0; c < items.size(); c++) {
                 if (items[c].get_area().get_bottom() > area.get_top()) continue;
 
                 if (item_numbers_enabled)
-                    draw_text(
-                        font, c,
-                        vec2(area.get_left() + 4, items[c].get_area().pos.y),
-                        item_numbers_color);
+                    draw_text(font, c, vec2(area.get_left() + 4, items[c].get_area().pos.y),
+                              item_numbers_color);
 
                 if (items[c].get_icon()) {
                     vec2 size = items[c].get_icon()->get_size() / 2.0f;
-                    vec2 pos = vec2(items[c].get_area().get_left() +
-                                        internal_left_margin + size.x,
+                    vec2 pos = vec2(items[c].get_area().get_left() + internal_left_margin + size.x,
                                     items[c].get_area().pos.y);
 
-                    draw_texture(items[c].get_icon(), rect2(pos, size),
-                                 Color::White);
-                    draw_text(items[c].get_text(),
-                              vec2(pos.x + size.x + 4, pos.y));
+                    draw_texture(items[c].get_icon(), rect2(pos, size), Color::White);
+                    draw_text(items[c].get_text(), vec2(pos.x + size.x + 4, pos.y));
                 } else
                     draw_text(items[c].get_text(),
-                              vec2(items[c].get_area().get_left() +
-                                       internal_left_margin,
+                              vec2(items[c].get_area().get_left() + internal_left_margin,
                                    items[c].get_area().pos.y));
             }
 
             if (items.size() == 0) {
                 float width = get_font()->get_width("No content to display");
 
-                draw_text("No content to display",
-                          area.pos - vec2(width / 2.0f, 0));
+                draw_text("No content to display", area.pos - vec2(width / 2.0f, 0));
             }
 
             RENDERER->stop_scissor();
 
-            if (get_focused())
-                draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
+            if (get_focused()) draw_frame(DEFAULT_THEME->get_highlight(), area, Color::Green);
 
             break;
     }
@@ -546,8 +527,7 @@ void ListView::stop_selecting() {
 }
 
 void ListView::select_all() {
-    if (selecting && selection_begin == 0 && selection_end == items.size() - 1)
-        return;
+    if (selecting && selection_begin == 0 && selection_end == items.size() - 1) return;
 
     set_selection(0, items.size() - 1);
 
@@ -565,8 +545,7 @@ void ListView::select_none() {
 }
 
 bool ListView::multiple_selection() const {
-    return selecting && selection_begin != 0 &&
-           selection_begin != selection_end;
+    return selecting && selection_begin != 0 && selection_begin != selection_end;
 }
 
 void ListView::make_visible(int p_index) {
@@ -577,11 +556,9 @@ void ListView::make_visible(int p_index) {
     if (item_area.get_bottom() < area.get_bottom())
         delta = item_area.get_bottom() - area.get_bottom();
 
-    if (item_area.get_top() > area.get_top())
-        delta = item_area.get_top() - area.get_top();
+    if (item_area.get_top() > area.get_top()) delta = item_area.get_top() - area.get_top();
 
-    if (slider)
-        slider->set_slider_pos(slider->get_value() - delta / extra_space);
+    if (slider) slider->set_slider_pos(slider->get_value() - delta / extra_space);
 }
 
 void ListView::search(const String& p_src) {

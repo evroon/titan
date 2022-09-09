@@ -11,8 +11,7 @@ MeshHandler* MeshHandler::singleton = new MeshHandler;
 // SimpleMesh
 //=========================================================================
 
-void SimpleMesh::init(const Array<Vertex>& p_vertices,
-                      const Array<Face>& p_faces, int p_type) {
+void SimpleMesh::init(const Array<Vertex>& p_vertices, const Array<Face>& p_faces, int p_type) {
     draw_type = p_type;
     vertices_count = p_vertices.size();
     faces_count = p_faces.size();
@@ -26,13 +25,11 @@ void SimpleMesh::init(const Array<Vertex>& p_vertices,
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices_count, &vertices[0],
-                 GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices_count, &vertices[0], GL_STATIC_DRAW);
 
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Face) * faces_count, &faces[0],
-                 GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Face) * faces_count, &faces[0], GL_STATIC_DRAW);
 }
 
 SimpleMesh::~SimpleMesh() {
@@ -41,8 +38,7 @@ SimpleMesh::~SimpleMesh() {
 }
 
 void SimpleMesh::set_plane() {
-    const Array<Vertex> vertices = {
-        {1, -1, 0}, {1, 1, 0}, {-1, 1, 0}, {-1, -1, 0}};
+    const Array<Vertex> vertices = {{1, -1, 0}, {1, 1, 0}, {-1, 1, 0}, {-1, -1, 0}};
 
     const Array<Face> faces = {{0, 1, 2}, {2, 3, 0}};
 
@@ -117,8 +113,8 @@ void SimpleMesh::unbind() {
 void SimpleMesh::draw() {
     glEnableVertexAttribArray(0);
 
-    glDrawElements(draw_type, faces_count * (draw_type == GL_TRIANGLES ? 3 : 2),
-                   GL_UNSIGNED_BYTE, 0);
+    glDrawElements(draw_type, faces_count * (draw_type == GL_TRIANGLES ? 3 : 2), GL_UNSIGNED_BYTE,
+                   0);
 
     glDisableVertexAttribArray(0);
 }
@@ -126,8 +122,7 @@ void SimpleMesh::draw() {
 void SimpleMesh::draw_instanced(int p_count) {
     glEnableVertexAttribArray(0);
 
-    glDrawElementsInstanced(draw_type,
-                            faces_count * (draw_type == GL_TRIANGLES ? 3 : 2),
+    glDrawElementsInstanced(draw_type, faces_count * (draw_type == GL_TRIANGLES ? 3 : 2),
                             GL_UNSIGNED_BYTE, 0, p_count);
 
     glDisableVertexAttribArray(0);
@@ -175,8 +170,7 @@ bool Mesh::import(const String& p_filepath) {
     Assimp::Importer importer;
 
     const aiScene* scene = importer.ReadFile(
-        p_filepath, aiProcess_FlipUVs | aiProcess_Triangulate |
-                        aiProcess_JoinIdenticalVertices |
+        p_filepath, aiProcess_FlipUVs | aiProcess_Triangulate | aiProcess_JoinIdenticalVertices |
                         aiProcess_SortByPType | aiProcess_GenSmoothNormals);
 
     if (!scene) {
@@ -293,8 +287,7 @@ void Mesh::MeshNode::init(aiMesh* p_mesh) {
     for (unsigned i = 0; i < p_mesh->mNumFaces; i++) {
         Face face;
 
-        for (int c = 0; c < 3; c++)
-            face.indices[c] = p_mesh->mFaces[i].mIndices[c];
+        for (int c = 0; c < 3; c++) face.indices[c] = p_mesh->mFaces[i].mIndices[c];
 
         faces.push_back(face);
     }
@@ -309,12 +302,10 @@ void Mesh::MeshNode::setup_buffers() {
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
-                 &vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.size() * sizeof(Face),
-                 &faces[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.size() * sizeof(Face), &faces[0], GL_STATIC_DRAW);
 
     // Vertex Positions
     glEnableVertexAttribArray(0);
@@ -390,13 +381,11 @@ void Material::load_material(const aiMaterial* p_material) {
     shader = CONTENT->LoadShader("engine/shaders/Shader3D");
 }
 
-Texture2D* Material::load_texture(const aiMaterial* p_material,
-                                  const aiTextureType& p_type) {
+Texture2D* Material::load_texture(const aiMaterial* p_material, const aiTextureType& p_type) {
     if (p_material->GetTextureCount(p_type) > 0) {
         aiString Path;
 
-        if (p_material->GetTexture(p_type, 0, &Path, NULL, NULL, NULL, NULL,
-                                   NULL) == AI_SUCCESS) {
+        if (p_material->GetTexture(p_type, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
             File f = mesh->get_file();
             f.go_up();
             String p = String(Path.C_Str());
@@ -426,15 +415,11 @@ void Material::set_specular_color(const Color& p_color) {}
 
 Color Material::get_specular_color() const { return specular_color; }
 
-void Material::set_ambient_color(const Color& p_color) {
-    ambient_color = p_color;
-}
+void Material::set_ambient_color(const Color& p_color) { ambient_color = p_color; }
 
 Color Material::get_ambient_color() const { return ambient_color; }
 
-void Material::set_emissive_color(const Color& p_color) {
-    emissive_color = p_color;
-}
+void Material::set_emissive_color(const Color& p_color) { emissive_color = p_color; }
 
 Color Material::get_emissive_color() const { return emissive_color; }
 

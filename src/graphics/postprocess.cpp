@@ -5,8 +5,7 @@
 #include "graphics/view.h"
 #include "world/terrain.h"
 
-PostProcess::PostProcess()
-    : PostProcess(CONTENT->LoadShader("engine/shaders/PostProcess")) {}
+PostProcess::PostProcess() : PostProcess(CONTENT->LoadShader("engine/shaders/PostProcess")) {}
 
 PostProcess::PostProcess(Shader* p_shader) { shader = p_shader; }
 
@@ -77,9 +76,7 @@ void WorldPostProcess::post_process() {
 // WorldPostProcess
 //=========================================================================
 
-BlurPostProcess::BlurPostProcess() {
-    blurshader = CONTENT->LoadShader("engine/shaders/Blur");
-}
+BlurPostProcess::BlurPostProcess() { blurshader = CONTENT->LoadShader("engine/shaders/Blur"); }
 
 BlurPostProcess::~BlurPostProcess() {}
 

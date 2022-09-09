@@ -28,13 +28,9 @@ void MasterRenderer::init() {
     Primitives::Init();
 }
 
-void MasterRenderer::set_active_renderer(Renderer* p_renderer) {
-    active_renderer = p_renderer;
-}
+void MasterRenderer::set_active_renderer(Renderer* p_renderer) { active_renderer = p_renderer; }
 
-Renderer* MasterRenderer::get_active_renderer() const {
-    return active_renderer;
-}
+Renderer* MasterRenderer::get_active_renderer() const { return active_renderer; }
 
 MasterRenderer* MasterRenderer::get_singleton() { return singleton; }
 
@@ -76,8 +72,7 @@ void Renderer::resized() {
 
 void Renderer::check_error() {
     GLenum err = GL_NO_ERROR;
-    while ((err = glGetError()) != GL_NO_ERROR)
-        T_ERROR("OpenGL error: " + std::to_string(err));
+    while ((err = glGetError()) != GL_NO_ERROR) T_ERROR("OpenGL error: " + std::to_string(err));
 }
 
 void Renderer::prepare() {
@@ -103,9 +98,7 @@ void Renderer::set_viewport(Viewport* p_viewport) { viewport = p_viewport; }
 
 Viewport* Renderer::get_viewport() const { return viewport; }
 
-const mat4& Renderer::get_projection_matrix() const {
-    return projection_matrix;
-}
+const mat4& Renderer::get_projection_matrix() const { return projection_matrix; }
 
 const mat4& Renderer::get_view_matrix() const { return view_matrix; }
 
@@ -115,14 +108,12 @@ void Renderer::use_scissor(const rect2& area) {
     glEnable(GL_SCISSOR_TEST);
 
     glScissor(WINDOWSIZE.x / 2 + (int)area.get_bottom_left().x,
-              WINDOWSIZE.y / 2 + (int)area.get_bottom_left().y,
-              (int)area.size.x * 2, (int)area.size.y * 2);
+              WINDOWSIZE.y / 2 + (int)area.get_bottom_left().y, (int)area.size.x * 2,
+              (int)area.size.y * 2);
 }
 void Renderer::stop_scissor() { glDisable(GL_SCISSOR_TEST); }
 
-void Renderer::use_depth_test(float p_near, float p_far) {
-    glEnable(GL_DEPTH_TEST);
-}
+void Renderer::use_depth_test(float p_near, float p_far) { glEnable(GL_DEPTH_TEST); }
 
 void Renderer::stop_depth_test() { glDisable(GL_DEPTH_TEST); }
 
@@ -145,9 +136,7 @@ void Renderer::use_additive_blending() {
 
 void Renderer::stop_blending() { glDisable(GL_BLEND); }
 
-void Renderer::set_draw_on_screen(bool p_draw_on_screen) {
-    draw_on_screen = p_draw_on_screen;
-}
+void Renderer::set_draw_on_screen(bool p_draw_on_screen) { draw_on_screen = p_draw_on_screen; }
 
 bool Renderer::get_draw_on_screen() const { return draw_on_screen; }
 
@@ -155,9 +144,7 @@ void Renderer::set_draw_world(bool p_draw_world) { draw_world = p_draw_world; }
 
 bool Renderer::get_draw_world() const { return draw_world; }
 
-void Renderer::set_draw_canvas(bool p_draw_canvas) {
-    draw_canvas = p_draw_canvas;
-}
+void Renderer::set_draw_canvas(bool p_draw_canvas) { draw_canvas = p_draw_canvas; }
 
 bool Renderer::get_draw_canvas() const { return draw_canvas; }
 
@@ -193,9 +180,7 @@ void Renderer::set_viewport() {
                to_int(viewport->renderarea.size.y * 4.0f));
 }
 
-void Renderer::activate_world_transform() {
-    set_camera(viewport->world->get_active_camera());
-}
+void Renderer::activate_world_transform() { set_camera(viewport->world->get_active_camera()); }
 
 void Renderer::deactivate_world_transform() { set_camera(NULL); }
 
@@ -219,8 +204,7 @@ void Renderer::draw_plane() {
     MeshHandler::get_singleton()->get_plane()->unbind();
 }
 
-void Renderer::draw_line(const vec3& p_start, const vec3& p_end,
-                         const Color& p_color) {
+void Renderer::draw_line(const vec3& p_start, const vec3& p_end, const Color& p_color) {
     SimpleMesh* mesh = MeshHandler::get_singleton()->get_line();
     Shader* shader = CanvasData::get_singleton()->get_default_shader();
 
@@ -290,9 +274,7 @@ FBO2D* ForwardRenderer::get_shadow_buffer() const { return shadow_buffer; }
 
 FBO2D* ForwardRenderer::get_render_buffer() const { return render_buffer; }
 
-FBO2D* ForwardRenderer::get_reflection_buffer() const {
-    return reflection_buffer;
-}
+FBO2D* ForwardRenderer::get_reflection_buffer() const { return reflection_buffer; }
 
 void ForwardRenderer::render() {
     set_viewport();
@@ -408,14 +390,12 @@ DeferredRenderer::DeferredRenderer() {
     blur_horiz_buffer = new FBO2D(WINDOWSIZE);
     blur_horiz_buffer->add_color_texture();
     blur_horiz_buffer->init();
-    blur_horiz_buffer->color_textures[0]->set_filter(
-        Texture2D::BILINEAR_FILTER);
+    blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
 
     blur_vert_buffer = new FBO2D(WINDOWSIZE);
     blur_vert_buffer->add_color_texture();
     blur_vert_buffer->init();
-    blur_horiz_buffer->color_textures[0]->set_filter(
-        Texture2D::BILINEAR_FILTER);
+    blur_horiz_buffer->color_textures[0]->set_filter(Texture2D::BILINEAR_FILTER);
 
     virtual_tex_buffer = new FBO2D(1024);
     virtual_tex_buffer->add_color_texture();
@@ -446,56 +426,26 @@ DeferredRenderer::DeferredRenderer() {
 
     for (int c = 0; c < 3; c++) buffers.push_back(shadow_buffers[0]);
 
-    textures.set(FINAL_COLOR,
-                 final_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(RENDER_COLOR,
-                 render_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(RENDER_DEPTH,
-                 render_buffer->depth_tex->cast_to_type<Texture2D*>());
-    textures.set(
-        DEFERRED_ALBEDO,
-        deferred_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        DEFERRED_POSITION,
-        deferred_buffer->color_textures[1]->cast_to_type<Texture2D*>());
-    textures.set(
-        DEFERRED_NORMAL,
-        deferred_buffer->color_textures[2]->cast_to_type<Texture2D*>());
-    textures.set(
-        DEFERRED_MATERIAL,
-        deferred_buffer->color_textures[3]->cast_to_type<Texture2D*>());
-    textures.set(DEFERRED_DEPTH,
-                 deferred_buffer->depth_tex->cast_to_type<Texture2D*>());
-    textures.set(
-        DEFERRED_SPECULAR,
-        deferred_buffer->color_textures[4]->cast_to_type<Texture2D*>());
-    textures.set(SHADOW_FAR,
-                 shadow_buffers[0]->depth_tex->cast_to_type<Texture2D*>());
-    textures.set(SHADOW_MIDDLE,
-                 shadow_buffers[1]->depth_tex->cast_to_type<Texture2D*>());
-    textures.set(SHADOW_NEAR,
-                 shadow_buffers[2]->depth_tex->cast_to_type<Texture2D*>());
-    textures.set(
-        REFLECTION,
-        reflection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(SSAO,
-                 ssao_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        SSAO_BLUR,
-        ssao_blur_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(GODRAY,
-                 godray_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        BLOOM,
-        bloom_horiz_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        VIRTUALTEX,
-        virtual_tex_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        INDIRECTION,
-        indirection_buffer->color_textures[0]->cast_to_type<Texture2D*>());
-    textures.set(
-        BLUR, blur_vert_buffer->color_textures[0]->cast_to_type<Texture2D*>());
+    textures.set(FINAL_COLOR, final_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(RENDER_COLOR, render_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(RENDER_DEPTH, render_buffer->depth_tex->cast_to_texture_2d());
+    textures.set(DEFERRED_ALBEDO, deferred_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(DEFERRED_POSITION, deferred_buffer->color_textures[1]->cast_to_texture_2d());
+    textures.set(DEFERRED_NORMAL, deferred_buffer->color_textures[2]->cast_to_texture_2d());
+    textures.set(DEFERRED_MATERIAL, deferred_buffer->color_textures[3]->cast_to_texture_2d());
+    textures.set(DEFERRED_DEPTH, deferred_buffer->depth_tex->cast_to_texture_2d());
+    textures.set(DEFERRED_SPECULAR, deferred_buffer->color_textures[4]->cast_to_texture_2d());
+    textures.set(SHADOW_FAR, shadow_buffers[0]->depth_tex->cast_to_texture_2d());
+    textures.set(SHADOW_MIDDLE, shadow_buffers[1]->depth_tex->cast_to_texture_2d());
+    textures.set(SHADOW_NEAR, shadow_buffers[2]->depth_tex->cast_to_texture_2d());
+    textures.set(REFLECTION, reflection_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(SSAO, ssao_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(SSAO_BLUR, ssao_blur_horiz_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(GODRAY, godray_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(BLOOM, bloom_horiz_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(VIRTUALTEX, virtual_tex_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(INDIRECTION, indirection_buffer->color_textures[0]->cast_to_texture_2d());
+    textures.set(BLUR, blur_vert_buffer->color_textures[0]->cast_to_texture_2d());
 
     first_pass = CONTENT->LoadShader("engine/shaders/FirstPass");
     second_pass = CONTENT->LoadShader("engine/shaders/SecondPass");
@@ -509,26 +459,16 @@ DeferredRenderer::DeferredRenderer() {
     reflection_camera = new Camera;
     light_camera = new Camera;
 
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex0.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex1.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex2.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex3.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex4.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex5.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex6.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex7.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex8.png"));
-    flare_textures.push_back(
-        CONTENT->LoadTexture("textures/oreon/lens_flare/tex9.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex0.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex1.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex2.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex3.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex4.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex5.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex6.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex7.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex8.png"));
+    flare_textures.push_back(CONTENT->LoadTexture("textures/oreon/lens_flare/tex9.png"));
 
     for (int c = 0; c < flare_textures.size(); c++) {
         flare_textures[c]->set_filter(Texture2D::BILINEAR_FILTER);
@@ -553,8 +493,8 @@ void DeferredRenderer::generate_ssao_kernel() {
     vec3 kernel_buffer[64];
 
     for (unsigned int i = 0; i < 64; ++i) {
-        vec3 sample = vec3(Math::random() * 2.0f - 1.0f,
-                           Math::random() * 2.0f - 1.0f, Math::random());
+        vec3 sample =
+            vec3(Math::random() * 2.0f - 1.0f, Math::random() * 2.0f - 1.0f, Math::random());
         sample = sample.normalize();
 
         float scale = i / 64.0f;
@@ -566,8 +506,7 @@ void DeferredRenderer::generate_ssao_kernel() {
 
     glGenTextures(1, &kernel_id);
     glBindTexture(GL_TEXTURE_2D, kernel_id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, 8, 8, 0, GL_RGB, GL_FLOAT,
-                 &kernel_buffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, 8, 8, 0, GL_RGB, GL_FLOAT, &kernel_buffer);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -576,15 +515,13 @@ void DeferredRenderer::generate_ssao_kernel() {
     vec3 noise_buffer[16];
 
     for (unsigned int i = 0; i < 16; ++i) {
-        vec3 sample = vec3(Math::random() * 2.0f - 1.0f,
-                           Math::random() * 2.0f - 1.0f, 0.0f);
+        vec3 sample = vec3(Math::random() * 2.0f - 1.0f, Math::random() * 2.0f - 1.0f, 0.0f);
         noise_buffer[i] = sample;
     }
 
     glGenTextures(1, &noise_id);
     glBindTexture(GL_TEXTURE_2D, noise_id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, 4, 4, 0, GL_RGB, GL_FLOAT,
-                 &noise_buffer[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, 4, 4, 0, GL_RGB, GL_FLOAT, &noise_buffer[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -592,8 +529,7 @@ void DeferredRenderer::generate_ssao_kernel() {
 }
 
 void DeferredRenderer::render_blur() {
-    vec2 step =
-        vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
+    vec2 step = vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
     blur_horiz_buffer->bind();
     blur_shader->bind();
 
@@ -612,8 +548,7 @@ void DeferredRenderer::render_blur() {
 }
 
 void DeferredRenderer::render_bloom() {
-    vec2 step =
-        vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
+    vec2 step = vec2(1.0f) / vec2(blur_vert_buffer->size.x, blur_vert_buffer->size.y);
 
     float threshold = 0.6f;
     if (environment) threshold = environment->get_bloom_threshold();
@@ -751,8 +686,7 @@ void DeferredRenderer::render_flare() {
 
     Camera* camera = ACTIVE_WORLD->get_active_camera();
     Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
-    DirectionalLight* light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
+    DirectionalLight* light = ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!camera || !sky || !light) return;
 
@@ -786,8 +720,7 @@ void DeferredRenderer::render_flare() {
     vec2 dir = sun_on_screen.normalize();
 
     float max_length = viewport->get_size().x;
-    shader_2d->set_uniform("color",
-                           vec4(1.0f, 1.0f, 1.0f, 1.0f - length / max_length));
+    shader_2d->set_uniform("color", vec4(1.0f, 1.0f, 1.0f, 1.0f - length / max_length));
     shader_2d->set_uniform("texbounds", vec4(0.0f, 1.0f, 0.0f, 1.0f));
 
     for (int c = 0; c < count; c++) {
@@ -814,8 +747,7 @@ void DeferredRenderer::render_flare() {
 void DeferredRenderer::render_godray() {
     Camera* camera = ACTIVE_WORLD->get_active_camera();
     Sky* sky = ACTIVE_WORLD->get_child_by_type<Sky*>();
-    DirectionalLight* light =
-        ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
+    DirectionalLight* light = ACTIVE_WORLD->get_child_by_type<DirectionalLight*>();
 
     if (!camera || !sky || !light) return;
 
@@ -889,14 +821,11 @@ void DeferredRenderer::render_first_pass() {
     first_pass->set_uniform("light_color", vec3(1.0));
 
     if (environment) {
-        first_pass->set_uniform("ambient",
-                                environment->get_ambient_color().get_rgb());
+        first_pass->set_uniform("ambient", environment->get_ambient_color().get_rgb());
         first_pass->set_uniform("fog_enabled", environment->get_fog_enabled());
         first_pass->set_uniform("fog_density", environment->get_fog_density());
-        first_pass->set_uniform("fog_gradient",
-                                environment->get_fog_gradient());
-        first_pass->set_uniform("ssao_enabled",
-                                environment->get_ssao_enabled());
+        first_pass->set_uniform("fog_gradient", environment->get_fog_gradient());
+        first_pass->set_uniform("ssao_enabled", environment->get_ssao_enabled());
     } else {
         first_pass->set_uniform("ambient", vec3(0.4f));
         first_pass->set_uniform("fog_enabled", false);
@@ -957,11 +886,8 @@ void DeferredRenderer::render_second_pass() {
     draw_plane();
 }
 
-void DeferredRenderer::render_physical_tile(const vec2& p_pos,
-                                            const vec2& p_size) {
-    vec2 texsize = virtual_tex_buffer->color_textures[0]
-                       ->cast_to_type<Texture2D*>()
-                       ->get_size();
+void DeferredRenderer::render_physical_tile(const vec2& p_pos, const vec2& p_size) {
+    vec2 texsize = virtual_tex_buffer->color_textures[0]->cast_to_texture_2d()->get_size();
 
     float left = -1.0f + 2.0f * p_pos.x / texsize.x;
     float right = -1.0f + 2.0f * (p_pos.x + p_size.x) / texsize.x;
@@ -1064,26 +990,22 @@ void DeferredRenderer::save_tex(Ref<Texture2D> p_tex) {
 }
 
 // http://www.david-amador.com/2012/09/how-to-take-screenshot-in-opengl/
-void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename,
-                                int attachment) {
+void DeferredRenderer::save_fbo(FBO2D* p_fbo, const String& p_filename, int attachment) {
     p_fbo->bind();
     glReadBuffer(GL_COLOR_ATTACHMENT0 + attachment);
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
     int nSize = p_fbo->size.x * p_fbo->size.y * 3;
 
-    SDL_Surface* surface =
-        SDL_CreateRGBSurface(SDL_SWSURFACE, p_fbo->size.x, p_fbo->size.y, 24,
-                             0x000000FF, 0x0000FF00, 0x00FF0000, 0);
+    SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE, p_fbo->size.x, p_fbo->size.y, 24,
+                                                0x000000FF, 0x0000FF00, 0x00FF0000, 0);
     char* pixels = new char[3 * p_fbo->size.x * p_fbo->size.y];
 
-    glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE,
-                 pixels);
+    glReadPixels(0, 0, p_fbo->size.x, p_fbo->size.y, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
     for (int i = 0; i < p_fbo->size.y; i++)
         memcpy(((char*)surface->pixels) + surface->pitch * i,
-               pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1),
-               p_fbo->size.x * 3);
+               pixels + 3 * p_fbo->size.x * (p_fbo->size.y - i - 1), p_fbo->size.x * 3);
 
     SDL_SaveBMP(surface, p_filename.c_str());
 

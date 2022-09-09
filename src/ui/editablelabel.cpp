@@ -11,10 +11,7 @@ EditableLabel::EditableLabel(const String& name) {
     init();
 }
 
-EditableLabel::EditableLabel(const Variable& p_variable)
-    : PropertyControl(p_variable) {
-    init();
-}
+EditableLabel::EditableLabel(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void EditableLabel::init() {
     start_margin = end_margin = 5;
@@ -23,8 +20,8 @@ void EditableLabel::init() {
 
     selection_color = DEFAULT_THEME->get_selection_color();
 
-    ibeam_blinker = new UITimer(
-        new UICallback(std::bind(&EditableLabel::switch_blink, this)), 500000);
+    ibeam_blinker =
+        new UITimer(new UICallback(std::bind(&EditableLabel::switch_blink, this)), 500000);
 
     value_changed();
 }
@@ -222,8 +219,7 @@ void EditableLabel::handle_event(UIEvent* ui_event) {
                         if (ui_event->mod.type & ModKey::KEY_MOD_CTRL) {
                             String inserted_text = SDL_GetClipboardText();
                             insert_at_index(cursor_index, inserted_text);
-                            set_cursor_index(cursor_index +
-                                             inserted_text.size());
+                            set_cursor_index(cursor_index + inserted_text.size());
                         }
                         break;
 
@@ -265,18 +261,15 @@ void EditableLabel::notification(int p_notification) {
     switch (p_notification) {
         case NOTIFICATION_DRAW:
 
-            if (get_focused() && selecting)
-                draw_box(selection_area, selection_color);
+            if (get_focused() && selecting) draw_box(selection_area, selection_color);
 
             draw_text(text, vec2(area.get_left() + start_margin, area.pos.y));
 
-            if (get_focused() && ibeam_blinks)
-                draw_box(cursor_area, Color::Grey);
+            if (get_focused() && ibeam_blinks) draw_box(cursor_area, Color::Grey);
 
             if (text.size() == 0)
                 draw_text(get_default_font(), empty_text,
-                          vec2(area.get_left() + start_margin, area.pos.y),
-                          TO_RGB(150));
+                          vec2(area.get_left() + start_margin, area.pos.y), TO_RGB(150));
 
             break;
 
@@ -306,8 +299,7 @@ void EditableLabel::set_cursor_index(int p_cursor_index) {
 
     float position_x = get_position_x(cursor_index);
 
-    cursor_area = rect2(position_x - 1, position_x + 1, area.get_top(),
-                        area.get_bottom());
+    cursor_area = rect2(position_x - 1, position_x + 1, area.get_top(), area.get_bottom());
 
     update();
 }
@@ -330,9 +322,7 @@ void EditableLabel::remove_at_index(int index) {
     set_text(get_text().erase(index, 1));
 }
 
-bool EditableLabel::cursor_is_at_end() {
-    return cursor_index == get_text().size();
-}
+bool EditableLabel::cursor_is_at_end() { return cursor_index == get_text().size(); }
 
 void EditableLabel::value_changed() {
     Variant v = get_value();
@@ -382,8 +372,7 @@ void EditableLabel::select_all() {
     update_selection_box();
 }
 void EditableLabel::delete_selection() {
-    set_text(
-        get_text().erase(selection_start, selection_end - selection_start));
+    set_text(get_text().erase(selection_start, selection_end - selection_start));
     set_cursor_index(selection_start);
     stop_selecting();
 }
@@ -411,8 +400,7 @@ void EditableLabel::update_selection_box() {
     float position_1 = get_position_x(selection_start);
     float position_2 = get_position_x(selection_end);
 
-    selection_area = rect2(position_1, position_2, get_area().get_top(),
-                           get_area().get_bottom());
+    selection_area = rect2(position_1, position_2, get_area().get_top(), get_area().get_bottom());
     update();
 }
 

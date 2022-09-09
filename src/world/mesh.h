@@ -190,8 +190,7 @@ class Material : public Resource {
 
    private:
     void load_material(const aiMaterial* p_material);
-    Texture2D* load_texture(const aiMaterial* p_material,
-                            const aiTextureType& p_type);
+    Texture2D* load_texture(const aiMaterial* p_material, const aiTextureType& p_type);
 
     Vector<Texture2D> textures;
 

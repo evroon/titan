@@ -33,16 +33,13 @@ void Frame::build() {
     vec2 size = area.size;
 
     vec2 pos = area.get_bottom_left();
-    vec2 extension = {size.x * 2 - tex_size.x * 2 / 3,
-                      size.y * 2 - tex_size.x * 2 / 3};
+    vec2 extension = {size.x * 2 - tex_size.x * 2 / 3, size.y * 2 - tex_size.x * 2 / 3};
 
     Array<float> h_off = {0, tex_size.x / 3, 2 * tex_size.x / 3, tex_size.x};
     Array<float> v_off = {0, tex_size.y / 3, 2 * tex_size.y / 3, tex_size.y};
-    Array<float> h_pos = {pos.x, pos.x + h_off[1],
-                          pos.x + extension.x + h_off[1],
+    Array<float> h_pos = {pos.x, pos.x + h_off[1], pos.x + extension.x + h_off[1],
                           pos.x + extension.x + h_off[2]};
-    Array<float> v_pos = {pos.y, pos.y + v_off[1],
-                          pos.y + extension.y + v_off[1],
+    Array<float> v_pos = {pos.y, pos.y + v_off[1], pos.y + extension.y + v_off[1],
                           pos.y + extension.y + v_off[2]};
 
     SplitProperties::TexCoords texc = {h_off, v_off};
@@ -56,9 +53,7 @@ void Frame::set_texture(Texture2D* p_texture) {
     image_map.set_texture(texture);
 }
 
-void Frame::set_default_texture() {
-    set_texture(CONTENT->LoadTexture("engine/ui/Container.png"));
-}
+void Frame::set_default_texture() { set_texture(CONTENT->LoadTexture("engine/ui/Container.png")); }
 
 void Frame::set_color(const Color& p_color) {
     color = p_color;

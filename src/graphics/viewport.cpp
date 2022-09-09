@@ -37,9 +37,7 @@ Viewport::Viewport() {
     renderarea = rect2();
 }
 
-Viewport::Viewport(Renderer* p_renderer) : Viewport() {
-    set_renderer(p_renderer);
-}
+Viewport::Viewport(Renderer* p_renderer) : Viewport() { set_renderer(p_renderer); }
 
 Viewport::~Viewport() { delete canvas; }
 
@@ -90,13 +88,9 @@ PostProcess* Viewport::get_postprocess() const { return postprocess; }
 
 float Viewport::get_fps() const { return fps; }
 
-float Viewport::get_rendering_time() const {
-    return rendering_stopwatch.result_averaged;
-}
+float Viewport::get_rendering_time() const { return rendering_stopwatch.result_averaged; }
 
-float Viewport::get_updating_time() const {
-    return updating_stopwatch.result_averaged;
-}
+float Viewport::get_updating_time() const { return updating_stopwatch.result_averaged; }
 
 void Viewport::init() {
     if (canvas) canvas->init(this);
@@ -116,8 +110,7 @@ void Viewport::resize(const rect2& p_area) {
 
     mat4 translate, rotate, scale;
 
-    translate.translate(
-        vec3(renderarea.pos.x / size.x, renderarea.pos.y / size.y, 0));
+    translate.translate(vec3(renderarea.pos.x / size.x, renderarea.pos.y / size.y, 0));
     scale.scale(vec3(1.0f / size.x, 1.0f / size.y, 0.0f));
 
     graphics_transform = scale;
@@ -146,17 +139,11 @@ vec2 Viewport::get_screen_coords(const vec2& p_pos) const {
     return p.get_xy();
 }
 
-bool Viewport::is_overlapping(const rect2& area) const {
-    return renderarea.is_overlapping(area);
-}
+bool Viewport::is_overlapping(const rect2& area) const { return renderarea.is_overlapping(area); }
 
-bool Viewport::is_in_box(const vec2& pos) const {
-    return renderarea.is_in_box(pos);
-}
+bool Viewport::is_in_box(const vec2& pos) const { return renderarea.is_in_box(pos); }
 
-bool Viewport::is_in_box(const rect2& area) const {
-    return renderarea.is_in_box(area);
-}
+bool Viewport::is_in_box(const rect2& area) const { return renderarea.is_in_box(area); }
 
 void Viewport::set_renderer(Renderer* p_renderer) {
     renderer = p_renderer;
@@ -245,13 +232,11 @@ Object* Viewport::raycast(const vec2& pos) const {
 
     if (world) {
         for (int c = 0; c < world->get_child_count(); c++) {
-            WorldObject* obj =
-                world->get_child_by_index(c)->cast_to_type<WorldObject*>();
+            WorldObject* obj = world->get_child_by_index(c)->cast_to_type<WorldObject*>();
 
             if (obj->is_of_type<Camera>()) continue;
 
-            if (obj->CheckOverlap(projected))
-                return world->get_child_by_index(c);
+            if (obj->CheckOverlap(projected)) return world->get_child_by_index(c);
         }
     }
 

@@ -20,17 +20,11 @@ struct Parameter {
 struct ParameterNames {
     ParameterNames() {}
 
-    ParameterNames(const Array<Parameter>& p_formal_params) {
-        formal_params = p_formal_params;
-    }
+    ParameterNames(const Array<Parameter>& p_formal_params) { formal_params = p_formal_params; }
     Array<Parameter> formal_params;
 
-    bool operator==(const ParameterNames& r) {
-        return formal_params == r.formal_params;
-    }
-    bool operator!=(const ParameterNames& r) {
-        return !(formal_params == r.formal_params);
-    }
+    bool operator==(const ParameterNames& r) { return formal_params == r.formal_params; }
+    bool operator!=(const ParameterNames& r) { return !(formal_params == r.formal_params); }
 };
 
 typedef Array<String> ParameterTypes;

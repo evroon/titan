@@ -123,8 +123,7 @@ struct FPSLimiter {
 class TimedCaller {
    public:
     TimedCaller() : timer(1000) {}
-    TimedCaller(std::function<void()> p_on_call)
-        : TimedCaller(1000, p_on_call) {}
+    TimedCaller(std::function<void()> p_on_call) : TimedCaller(1000, p_on_call) {}
     TimedCaller(int repeat_time, std::function<void()> p_on_call);
 
     void update();

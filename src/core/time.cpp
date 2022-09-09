@@ -34,9 +34,7 @@ void Time::Update() { absolute_time = get_time_since_start(); }
 int Time::get_time_since_start() {
     auto now = std::chrono::high_resolution_clock::now();
 
-    return to_int(
-        std::chrono::duration_cast<std::chrono::microseconds>(now - start_time)
-            .count());
+    return to_int(std::chrono::duration_cast<std::chrono::microseconds>(now - start_time).count());
 }
 
 void Time::OnUpdate() {
@@ -76,9 +74,7 @@ Stopwatch::Stopwatch() {
     for (int c = 0; c < 100; c++) history.push_back(0.0f);
 }
 
-void Stopwatch::start() {
-    start_time = std::chrono::high_resolution_clock::now();
-}
+void Stopwatch::start() { start_time = std::chrono::high_resolution_clock::now(); }
 
 float Stopwatch::stop() {
     auto now = std::chrono::high_resolution_clock::now();
@@ -135,8 +131,7 @@ FPSLimiter::FPSInfo FPSLimiter::update() {
 // TimedCaller
 //=========================================================================
 
-TimedCaller::TimedCaller(int repeat_time, std::function<void()> p_on_call)
-    : timer(repeat_time) {
+TimedCaller::TimedCaller(int repeat_time, std::function<void()> p_on_call) : timer(repeat_time) {
     on_call = p_on_call;
     timer.start();
 }

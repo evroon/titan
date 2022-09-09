@@ -21,8 +21,7 @@ void UIBox::prepare_draw() {
 }
 
 void UIBox::draw_mesh() {
-    shader->set_uniform("model",
-                        RENDERER->get_final_matrix() * transform.get_model());
+    shader->set_uniform("model", RENDERER->get_final_matrix() * transform.get_model());
     mesh_2d->draw();
 }
 void UIBox::draw() {

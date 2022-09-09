@@ -107,22 +107,16 @@ void WorldObject::set_rendercomponent(RenderComponent* c) {
 //	}
 //}
 
-TransformComponent* WorldObject::get_transformcomponent() const {
-    return transformcomponent;
-}
+TransformComponent* WorldObject::get_transformcomponent() const { return transformcomponent; }
 
-RenderComponent* WorldObject::get_rendercomponent() const {
-    return rendercomponent;
-}
+RenderComponent* WorldObject::get_rendercomponent() const { return rendercomponent; }
 
 // PhysicsComponent2D* WorldObject::get_physicscomponent() const
 //{
 //	return physicscomponent;
 //}
 
-Transform WorldObject::get_transform() const {
-    return transformcomponent->transform;
-}
+Transform WorldObject::get_transform() const { return transformcomponent->transform; }
 void WorldObject::set_transform(const Transform& p_transform) const {
     transformcomponent->transform = p_transform;
 }
@@ -140,9 +134,7 @@ void WorldObject::set_pos(const vec3& p_pos) {
     if (body) body->set_transform(transform);
 }
 
-vec3 WorldObject::get_size() const {
-    return transformcomponent->transform.get_size();
-}
+vec3 WorldObject::get_size() const { return transformcomponent->transform.get_size(); }
 
 void WorldObject::set_size(const vec3& p_size) {
     Transform& transform = transformcomponent->transform;
@@ -155,9 +147,7 @@ void WorldObject::set_size(const vec3& p_size) {
     if (body) body->set_transform(transform);
 }
 
-vec3 WorldObject::get_rotation() const {
-    return transformcomponent->transform.get_rotation();
-}
+vec3 WorldObject::get_rotation() const { return transformcomponent->transform.get_rotation(); }
 
 void WorldObject::set_rotation(const vec3& p_rotation) {
     Transform& transform = transformcomponent->transform;
@@ -170,8 +160,7 @@ void WorldObject::set_rotation(const vec3& p_rotation) {
 }
 
 vec3 WorldObject::get_axis() const {
-    return (transformcomponent->get_transform().get_model() * vec4(0, 1, 0, 1))
-        .get_xyz();
+    return (transformcomponent->get_transform().get_model() * vec4(0, 1, 0, 1)).get_xyz();
 }
 
 void WorldObject::move(const vec3& p_delta) { set_pos(get_pos() + p_delta); }
@@ -181,9 +170,7 @@ void WorldObject::rotate(const quat& p_quat) {
 }
 
 Color WorldObject::get_color() const { return rendercomponent->get_color(); }
-void WorldObject::set_color(const Color& p_color) {
-    rendercomponent->set_color(p_color);
-}
+void WorldObject::set_color(const Color& p_color) { rendercomponent->set_color(p_color); }
 
 bool WorldObject::get_visible() const { return rendercomponent->isvisible; }
 void WorldObject::set_visible(const bool b) { rendercomponent->isvisible = b; }
@@ -227,8 +214,8 @@ bool WorldObject::CheckOverlap(const vec2& p) const {
     vec3 pos = get_pos();
     vec3 size = get_size();
 
-    return p.x > pos.x - size.x && p.x < pos.x + size.x &&
-           p.y > pos.y - size.y && p.y < pos.y + size.y;
+    return p.x > pos.x - size.x && p.x < pos.x + size.x && p.y > pos.y - size.y &&
+           p.y < pos.y + size.y;
 }
 
 #undef CLASSNAME

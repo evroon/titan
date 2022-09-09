@@ -9,12 +9,9 @@
 
 #define MMASTER MethodMaster::get_method_master()
 
-#define REG_SINGLETON(X) \
-    MMASTER->register_singleton(CLASSNAME::get_type_name_static(), X)
-#define REG_CONSTANT(X) \
-    MMASTER->register_constant(CLASSNAME::get_type_name_static(), {#X, X})
-#define REG_SIGNAL(X) \
-    MMASTER->register_signal(CLASSNAME::get_type_name_static(), X);
+#define REG_SINGLETON(X) MMASTER->register_singleton(CLASSNAME::get_type_name_static(), X)
+#define REG_CONSTANT(X) MMASTER->register_constant(CLASSNAME::get_type_name_static(), {#X, X})
+#define REG_SIGNAL(X) MMASTER->register_signal(CLASSNAME::get_type_name_static(), X);
 
 struct Method;
 

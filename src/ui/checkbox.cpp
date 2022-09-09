@@ -4,9 +4,7 @@ CheckBox::CheckBox() : CheckBox(false) {}
 
 CheckBox::CheckBox(bool p_value) : PropertyControl(p_value) { init(); }
 
-CheckBox::CheckBox(const Variable& p_variable) : PropertyControl(p_variable) {
-    init();
-}
+CheckBox::CheckBox(const Variable& p_variable) : PropertyControl(p_variable) { init(); }
 
 void CheckBox::init() {
     tex_checked = CONTENT->LoadFontAwesomeIcon("solid/check-square");
@@ -29,8 +27,8 @@ void CheckBox::notification(int p_notification) {
         case NOTIFICATION_DRAW:
 
             vec2 size = tex_checked->get_size() / 2.0f;
-            rect2 a = rect2(area.pos.x - size.x, area.pos.x + size.x,
-                            area.pos.y + size.y, area.pos.y - size.y);
+            rect2 a = rect2(area.pos.x - size.x, area.pos.x + size.x, area.pos.y + size.y,
+                            area.pos.y - size.y);
 
             draw_frame(a, Color::DarkGrey);
 

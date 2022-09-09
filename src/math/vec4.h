@@ -54,26 +54,14 @@ class Vec4 {
     }
 
     // General operators
-    bool operator==(const Vec4& r) const {
-        return x == r.x && y == r.y && z == r.z && w == r.w;
-    }
-    bool operator!=(const Vec4& r) const {
-        return x != r.x || y != r.y || z != r.z || w != r.w;
-    }
+    bool operator==(const Vec4& r) const { return x == r.x && y == r.y && z == r.z && w == r.w; }
+    bool operator!=(const Vec4& r) const { return x != r.x || y != r.y || z != r.z || w != r.w; }
 
     // Vec4 operators
-    Vec4 operator+(const Vec4& r) const {
-        return Vec4(x + r.x, y + r.y, z + r.z, w + r.w);
-    }
-    Vec4 operator-(const Vec4& r) const {
-        return Vec4(x - r.x, y - r.y, z - r.z, w - r.w);
-    }
-    Vec4 operator*(const Vec4& r) const {
-        return Vec4(x * r.x, y * r.y, z * r.z, w * r.w);
-    }
-    Vec4 operator/(const Vec4& r) const {
-        return Vec4(x / r.x, y / r.y, z / r.z, w / r.w);
-    }
+    Vec4 operator+(const Vec4& r) const { return Vec4(x + r.x, y + r.y, z + r.z, w + r.w); }
+    Vec4 operator-(const Vec4& r) const { return Vec4(x - r.x, y - r.y, z - r.z, w - r.w); }
+    Vec4 operator*(const Vec4& r) const { return Vec4(x * r.x, y * r.y, z * r.z, w * r.w); }
+    Vec4 operator/(const Vec4& r) const { return Vec4(x / r.x, y / r.y, z / r.z, w / r.w); }
 
     Vec4& operator+=(const Vec4& r) {
         x += r.x;
@@ -105,18 +93,10 @@ class Vec4 {
     }
 
     // Scalar operators
-    Vec4 operator+(const T& r) const {
-        return Vec4(x + r, y + r, z + r, w + r);
-    }
-    Vec4 operator-(const T& r) const {
-        return Vec4(x - r, y - r, z - r, w - r);
-    }
-    Vec4 operator*(const T& r) const {
-        return Vec4(x * r, y * r, z * r, w * r);
-    }
-    Vec4 operator/(const T& r) const {
-        return Vec4(x / r, y / r, z / r, w / r);
-    }
+    Vec4 operator+(const T& r) const { return Vec4(x + r, y + r, z + r, w + r); }
+    Vec4 operator-(const T& r) const { return Vec4(x - r, y - r, z - r, w - r); }
+    Vec4 operator*(const T& r) const { return Vec4(x * r, y * r, z * r, w * r); }
+    Vec4 operator/(const T& r) const { return Vec4(x / r, y / r, z / r, w / r); }
 
     Vec4& operator+=(const T& r) {
         x += r;
@@ -152,10 +132,9 @@ class Vec4 {
 
     // Conversion
     String to_string() const {
-        String s = "{ " + (std::string)std::to_string(x) + ", " +
-                   (std::string)std::to_string(y) + ", " +
-                   (std::string)std::to_string(z) + ", " +
-                   (std::string)std::to_string(w) + " }";
+        String s = "{ " + (std::string)std::to_string(x) + ", " + (std::string)std::to_string(y) +
+                   ", " + (std::string)std::to_string(z) + ", " + (std::string)std::to_string(w) +
+                   " }";
         return s;
     }
 

@@ -58,8 +58,7 @@ class ArrayMath {
     static T closest_to(T value, const Array<T> array) {
         Array<T> distances;
 
-        for (int c = 0; c < array.size(); c++)
-            distances.push_back(distance(value, array[c]));
+        for (int c = 0; c < array.size(); c++) distances.push_back(distance(value, array[c]));
 
         return min(distances);
     }
@@ -68,8 +67,7 @@ class ArrayMath {
     static T closest_to_index(T value, const Array<T> array) {
         Array<T> distances;
 
-        for (int c = 0; c < array.size(); c++)
-            distances.push_back(Math::distance(value, array[c]));
+        for (int c = 0; c < array.size(); c++) distances.push_back(Math::distance(value, array[c]));
 
         return static_cast<T>(min_index(distances));
     }

@@ -6,9 +6,7 @@
 
 using namespace rapidxml;
 
-void XmlAttribute::add_to_node(const XmlNode& p_node) {
-    p_node.node->append_attribute(attr);
-}
+void XmlAttribute::add_to_node(const XmlNode& p_node) { p_node.node->append_attribute(attr); }
 
 String XmlAttribute::get_name() const { return attr->name(); }
 
@@ -16,9 +14,7 @@ String XmlAttribute::get_value() const { return attr->value(); }
 
 //==========================================================
 
-void XmlNode::add_to_node(const XmlNode& p_node) {
-    p_node.node->append_node(node);
-}
+void XmlNode::add_to_node(const XmlNode& p_node) { p_node.node->append_node(node); }
 
 void XmlNode::add_to_document() { doc->doc.append_node(node); }
 
@@ -39,8 +35,7 @@ Array<XmlNode> XmlNode::get_children() const {
 Array<XmlAttribute> XmlNode::get_attributes() const {
     Array<XmlAttribute> arr;
 
-    for (xml_attribute<>* a = node->first_attribute(); a;
-         a = a->next_attribute()) {
+    for (xml_attribute<>* a = node->first_attribute(); a; a = a->next_attribute()) {
         arr.push_back({a, doc});
     }
 
@@ -71,8 +66,7 @@ XmlNode XmlDocument::add_node(const String& p_name, const String& p_value) {
     return {node, this};
 }
 
-XmlAttribute XmlDocument::add_attribute(const String& p_name,
-                                        const String& p_value) {
+XmlAttribute XmlDocument::add_attribute(const String& p_name, const String& p_value) {
     char* node_name = doc.allocate_string(p_name.c_str());
     char* node_value = doc.allocate_string(p_value.c_str());
 

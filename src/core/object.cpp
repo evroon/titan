@@ -21,6 +21,4 @@ void* Object::get_type_ptr_static() {
     static int ptr;
     return &ptr;
 }
-bool Object::is_type_static(void* ptr) {
-    return ptr == Object::get_type_ptr_static();
-}
+bool Object::is_type_static(void* ptr) { return ptr == Object::get_type_ptr_static(); }

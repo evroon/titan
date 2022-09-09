@@ -16,15 +16,7 @@ class State;
 class Class;
 
 struct Token {
-    enum Type {
-        UNDEF,
-        OPERATOR,
-        KEYWORD,
-        WORD,
-        NUMBER,
-        STRING,
-        TAB
-    } type = UNDEF;
+    enum Type { UNDEF, OPERATOR, KEYWORD, WORD, NUMBER, STRING, TAB } type = UNDEF;
 
     String text;
 
@@ -49,12 +41,8 @@ class Line {
     int size() const { return tokens.size(); }
     bool StartsWith(const String& txt) const { return tokens[0].text == txt; }
     bool StartsWith(const int& type) const { return tokens[0].type == type; }
-    bool EndsWith(const String& txt) const {
-        return tokens[size() - 1].text == txt;
-    }
-    bool EndsWith(const int& type) const {
-        return tokens[size() - 1].type == type;
-    }
+    bool EndsWith(const String& txt) const { return tokens[size() - 1].text == txt; }
+    bool EndsWith(const int& type) const { return tokens[size() - 1].type == type; }
     bool Contains(const String& txt) const { return Search(txt) != -1; }
     bool ContainsOutside(const String& elm) const {
         int level = 0;
@@ -184,8 +172,7 @@ class State {
         if (FuncExists(name))
             return funcs[name];
         else
-            T_ERROR("Func: " + name.operator std::string() +
-                    " does not exist!");
+            T_ERROR("Func: " + name.operator std::string() + " does not exist!");
 
         return 0;
     }

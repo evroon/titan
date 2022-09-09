@@ -15,8 +15,8 @@
 
 Dialog::Dialog() {
     close_button = new IconButtonSized("solid/times", vec2i(32));
-    close_button->set_anchors(Control::ANCHOR_END, Control::ANCHOR_END,
-                              Control::ANCHOR_END, Control::ANCHOR_END);
+    close_button->set_anchors(Control::ANCHOR_END, Control::ANCHOR_END, Control::ANCHOR_END,
+                              Control::ANCHOR_END);
     close_button->set_margins(30, 31, 1, 1);
 
     close_button->connect("clicked", this, "close");
@@ -70,16 +70,15 @@ void Dialog::notification(int p_notification) {
             draw_box(bar, TO_RGB(150));
 
             draw_text(DEFAULT_THEME->get_font(), title,
-                      vec2(bar.get_left() + header_offset, bar.pos.y),
-                      TO_RGB(30));
+                      vec2(bar.get_left() + header_offset, bar.pos.y), TO_RGB(30));
 
             break;
 
         case NOTIFICATION_RESIZED:
         case NOTIFICATION_TRANSLATED:
 
-            bar = rect2(area.get_left() + 1, area.get_right() - 1,
-                        area.get_top() - 1, area.get_top() - 31);
+            bar = rect2(area.get_left() + 1, area.get_right() - 1, area.get_top() - 1,
+                        area.get_top() - 31);
 
             break;
     }
@@ -105,8 +104,7 @@ void Dialog::bind_methods() { REG_METHOD(close); }
 ConfirmationDialog::ConfirmationDialog() {
     // ok_button
     ok_button = new TextButton("OK");
-    ok_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER,
-                           ANCHOR_BEGIN);
+    ok_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER, ANCHOR_BEGIN);
     ok_button->set_margins(-110, 10, -10, 35);
     ok_button->connect("clicked", this, "chosen_exit");
 
@@ -114,8 +112,7 @@ ConfirmationDialog::ConfirmationDialog() {
 
     // cancel_button
     cancel_button = new TextButton("Cancel");
-    cancel_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER,
-                               ANCHOR_BEGIN);
+    cancel_button->set_anchors(ANCHOR_CENTER, ANCHOR_BEGIN, ANCHOR_CENTER, ANCHOR_BEGIN);
     cancel_button->set_margins(10, 10, 110, 35);
     cancel_button->connect("clicked", this, "close");
 
@@ -143,8 +140,7 @@ MessageDialog::MessageDialog() : MessageDialog("") {}
 MessageDialog::MessageDialog(const String& p_text) {
     // desciption_label
     desciption_label = new Label(p_text);
-    desciption_label->set_anchors(ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END,
-                                  ANCHOR_END);
+    desciption_label->set_anchors(ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END, ANCHOR_END);
     desciption_label->set_margins(4, 60, 4, 30);
 
     add_child(desciption_label);
@@ -224,8 +220,7 @@ void FileDialog::update_list() {
 
     for (int c = 0; c < files.size(); c++) {
         File f = files[c];
-        list->push_back_item(f.get_name(),
-                             f.is_directory() ? directory_icon : file_icon);
+        list->push_back_item(f.get_name(), f.is_directory() ? directory_icon : file_icon);
     }
 
     list->size_changed();
@@ -294,12 +289,9 @@ ColorPickDialog::ColorPickDialog(const Color& p_color) {
     add_child(g_label);
     add_child(b_label);
 
-    r_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN,
-                         ANCHOR_BEGIN);
-    g_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN,
-                         ANCHOR_BEGIN);
-    b_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN,
-                         ANCHOR_BEGIN);
+    r_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN);
+    g_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN);
+    b_label->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_BEGIN);
 
     r_label->set_margins(4, 100, 36, 130);
     g_label->set_margins(4, 70, 36, 100);
@@ -454,8 +446,7 @@ void TypePickDialog::bind_methods() {
 
 SettingsDialog::SettingsDialog() {
     property_view = new PropertyView;
-    property_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END,
-                               ANCHOR_END);
+    property_view->set_anchors(ANCHOR_BEGIN, ANCHOR_BEGIN, ANCHOR_END, ANCHOR_END);
     property_view->set_margins(4, 60, 4, 80);
 
     search_field = new TextField;
@@ -470,9 +461,7 @@ SettingsDialog::SettingsDialog() {
 
 void SettingsDialog::set_property_view(PropertyView* p_property_view) {}
 
-PropertyView* SettingsDialog::get_property_view() const {
-    return property_view;
-}
+PropertyView* SettingsDialog::get_property_view() const { return property_view; }
 
 void SettingsDialog::notification(int p_notification) {
     Dialog::notification(p_notification);
