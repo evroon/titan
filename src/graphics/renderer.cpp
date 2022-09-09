@@ -700,48 +700,50 @@ void DeferredRenderer::render_flare() {
     if (s.w < 0) return;
 
     vec2 sun_on_screen = s.get_xy() / s.w;
-    deactivate_world_transform();
+    if (s.w < 0.0f) {
+        deactivate_world_transform();
 
-    sun_on_screen *= viewport->get_size();
+        sun_on_screen *= viewport->get_size();
 
-    stop_depth_test();
-    use_additive_blending();
+        stop_depth_test();
+        use_additive_blending();
 
-    shader_2d->bind();
-    shader_2d->set_uniform("texture_enabled", true);
-    shader_2d->set_uniform("tex", 0);
+        shader_2d->bind();
+        shader_2d->set_uniform("texture_enabled", true);
+        shader_2d->set_uniform("tex", 0);
 
-    render_buffer->bind();
+        render_buffer->bind();
 
-    activate_canvas_transform();
+        activate_canvas_transform();
 
-    float length = sun_on_screen.length();
-    float stepsize = length * 2.0f / (count - 1);
-    vec2 dir = sun_on_screen.normalize();
+        float length = sun_on_screen.length();
+        float stepsize = length * 2.0f / (count - 1);
+        vec2 dir = sun_on_screen.normalize();
 
-    float max_length = viewport->get_size().x;
-    shader_2d->set_uniform("color", vec4(1.0f, 1.0f, 1.0f, 1.0f - length / max_length));
-    shader_2d->set_uniform("texbounds", vec4(0.0f, 1.0f, 0.0f, 1.0f));
+        float max_length = viewport->get_size().x;
+        shader_2d->set_uniform("color", vec4(1.0f, 1.0f, 1.0f, 1.0f - length / max_length));
+        shader_2d->set_uniform("texbounds", vec4(0.0f, 1.0f, 0.0f, 1.0f));
 
-    for (int c = 0; c < count; c++) {
-        Transform t;
+        for (int c = 0; c < count; c++) {
+            Transform t;
 
-        vec2 size = vec2(100.0f);
+            vec2 size = vec2(100.0f);
 
-        t.set_size(vec3(size, 1.0f));
-        t.set_pos(vec3(sun_on_screen - dir * to_float(c) * stepsize, 0.0f));
-        t.update();
+            t.set_size(vec3(size, 1.0f));
+            t.set_pos(vec3(sun_on_screen - dir * to_float(c) * stepsize, 0.0f));
+            t.update();
 
-        flare_textures[c]->bind(0);
+            flare_textures[c]->bind(0);
 
-        shader_2d->set_uniform("model", get_final_matrix() * t.get_model());
+            shader_2d->set_uniform("model", get_final_matrix() * t.get_model());
 
-        draw_plane();
+            draw_plane();
+        }
+
+        deactivate_canvas_transform();
+
+        use_blending();
     }
-
-    deactivate_canvas_transform();
-
-    use_blending();
 }
 
 void DeferredRenderer::render_godray() {
@@ -760,15 +762,17 @@ void DeferredRenderer::render_godray() {
     vec2 sun_on_screen = s.get_xy() / s.w;
     deactivate_world_transform();
 
-    godray_buffer->bind();
+    if (s.w < 0.0f) {
+        godray_buffer->bind();
 
-    textures[DEFERRED_MATERIAL]->bind(0);
+        textures[DEFERRED_MATERIAL]->bind(0);
 
-    godray->bind();
-    godray->set_uniform("g_material", 0);
-    godray->set_uniform("sun_pos", sun_on_screen);
+        godray->bind();
+        godray->set_uniform("g_material", 0);
+        godray->set_uniform("sun_pos", sun_on_screen);
 
-    draw_plane();
+        draw_plane();
+    }
 }
 
 void DeferredRenderer::render_first_pass() {
