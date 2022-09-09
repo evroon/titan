@@ -87,10 +87,10 @@
 								<properties count="24">
 									<ambient_color type="Color" value="{ r = 2.000000, g = 2.000000, b = 2.000000, a = 1.000000 }"/>
 									<auto_exposure_enabled type="bool" value="true"/>
-									<exposure type="float" value="3"/>
-									<gamma type="float" value="0.3"/>
+									<exposure type="float" value="3.0"/>
+									<gamma type="float" value="0.4"/>
 									<fog_enabled type="bool" value="true"/>
-									<fog_density type="float" value="0.003"/>
+									<fog_density type="float" value="0.002"/>
 									<fog_gradient type="float" value="2"/>
 									<dof_enabled type="bool" value="false"/>
 									<dof_rate type="float" value="5"/>
@@ -216,4 +216,3 @@
 		</properties>
 	</root>
 </root>
-
