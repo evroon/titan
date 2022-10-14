@@ -67,7 +67,7 @@ Node* Node::get_child(const String& p_name) {
 
 Node* Node::get_parent_by_type_recursively(const String& p_typename) const {
     while (Node* parent = get_parent()) {
-        if (parent->get_type_name() == p_typename) return parent;
+        if (parent->get_type_name().get_source() == p_typename) return parent;
     }
     return nullptr;
 }

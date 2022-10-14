@@ -86,7 +86,7 @@ BoxShape2D::BoxShape2D(PhysicsWorld2D* p_world, WorldObject* p_object, bool dyn)
 
     body = p_world->world->CreateBody(&bodydef);
     body->CreateFixture(&fixdef);
-    body->SetUserData(p_object);
+    body->GetUserData().pointer = (uintptr_t)p_object;
 }
 
 //=========================================================================
@@ -108,5 +108,5 @@ CircleShape2D::CircleShape2D(PhysicsWorld2D* p_world, WorldObject* p_object, boo
 
     body = p_world->world->CreateBody(&bodydef);
     body->CreateFixture(&fixdef);
-    body->SetUserData(p_object);
+    body->GetUserData().pointer = (uintptr_t)p_object;
 }
