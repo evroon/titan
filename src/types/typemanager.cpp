@@ -67,6 +67,7 @@ TypeManager* TypeManager::get_singleton() { return singleton; }
 #include "ui/treeview.h"
 #include "ui/vectorfield.h"
 #include "ui/worldview.h"
+#include "world/clouds.h"
 #include "world/environment.h"
 #include "world/light.h"
 #include "world/model.h"

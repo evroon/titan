@@ -43,7 +43,7 @@ Building on Linux is possible using CMake. First, make sure that the above libra
 
 ```bash
 sudo apt install cmake librapidxml-dev libglew-dev libassimp-dev libnoise-dev libbullet-dev libbox2d-dev \
-  libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev
+  libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-image-2.0-0 libsdl2-dev ccache clang-format
 ```
 
 When the libraries are installed, clone and build the project:

@@ -79,12 +79,12 @@ void Camera::set_ortho_projection(float p_near, float p_far, const vec2& p_size)
 Viewport* Camera::get_viewport() const {
     if (get_world() && get_world()->get_viewport()) {
         return get_world()->get_viewport();
-    } else if (RENDERER->get_viewport())
-        return RENDERER->get_viewport();
-    else {
-        T_ERROR("Could not get viewport");
-        return nullptr;
     }
+
+    if (RENDERER->get_viewport()) return RENDERER->get_viewport();
+
+    T_ERROR("Could not get viewport");
+    return nullptr;
 }
 
 void Camera::update_projection_matrix() {

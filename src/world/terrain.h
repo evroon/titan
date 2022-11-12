@@ -163,16 +163,3 @@ class Vegetation : public WorldObject {
     Array<mat4> model_matrices;
     Array<float> positions;
 };
-
-class Clouds : public WorldObject {
-    OBJ_DEFINITION(Clouds, WorldObject);
-
-   public:
-    Clouds();
-
-    static void bind_methods();
-
-   private:
-    Texture3D* texture;
-    Shader* shader;
-};

@@ -459,17 +459,3 @@ Terrain* Vegetation::get_terrain() const { return terrain; }
 #define CLASSNAME Vegetation
 
 void Vegetation::bind_methods() { REG_CSTR(0); }
-
-//=========================================================================
-// Clouds
-//=========================================================================
-
-Clouds::Clouds() {
-    PerlinNoise n;
-    texture = n.create_3d_texture();
-}
-
-#undef CLASSNAME
-#define CLASSNAME Clouds
-
-void Clouds::bind_methods() { REG_CSTR(0); }

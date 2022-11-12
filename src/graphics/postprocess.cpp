@@ -3,6 +3,7 @@
 #include "core/windowmanager.h"
 #include "graphics/renderer.h"
 #include "graphics/view.h"
+#include "world/clouds.h"
 #include "world/terrain.h"
 
 PostProcess::PostProcess() : PostProcess(CONTENT->LoadShader("engine/shaders/PostProcess")) {}
