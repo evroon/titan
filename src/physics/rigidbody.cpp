@@ -135,7 +135,8 @@ WorldObject* RigidBody2D::get_colliding_objects() const {
     if (!bce) return nullptr;
 
     b2Contact* c = bce->contact;
-    WorldObject* o = reinterpret_cast<WorldObject*>(c->GetFixtureB()->GetBody()->GetUserData());
+    WorldObject* o =
+        reinterpret_cast<WorldObject*>(c->GetFixtureB()->GetBody()->GetUserData().pointer);
 
     return o;
 }

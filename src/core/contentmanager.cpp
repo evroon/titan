@@ -134,7 +134,7 @@ Texture2D* ContentManager::LoadFontAwesomeIcon(const String& p_name, const vec2i
     File file = "../thirdparty/fontawesome/svgs/" + p_name + ".svg";
 
     for (int c = 0; c < textures.size(); c++)
-        if (textures[c]->get_file() == file) return textures[c];
+        if (textures[c]->get_file() == file.get_name()) return textures[c];
 
     Texture2D* tex = new Texture2D(file, p_size, p_color);
     tex->set_file(file);

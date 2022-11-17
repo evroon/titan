@@ -4,8 +4,10 @@
 #include "input/eventhandler.h"
 
 void CollisionData::BeginContact(b2Contact* contact) {
-    WorldObject* A = static_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
-    WorldObject* B = static_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
+    WorldObject* A =
+        reinterpret_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer);
+    WorldObject* B =
+        reinterpret_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
 
     CollisionEvent* e = new CollisionEvent;
     e->object = A;
@@ -15,8 +17,10 @@ void CollisionData::BeginContact(b2Contact* contact) {
 }
 
 void CollisionData::EndContact(b2Contact* contact) {
-    WorldObject* A = static_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
-    WorldObject* B = static_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
+    WorldObject* A =
+        reinterpret_cast<WorldObject*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer);
+    WorldObject* B =
+        reinterpret_cast<WorldObject*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
 
     CollisionEvent* e = new CollisionEvent;
     e->object = A;

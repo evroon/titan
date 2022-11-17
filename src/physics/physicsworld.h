@@ -8,7 +8,7 @@ Updates in a discrete manner at 60FPS
 Libraries: Box2D, Bullet
 */
 
-#include "Box2D/Box2D.h"
+#include "box2d/box2d.h"
 #include "core/definitions.h"
 
 #if PLATFORM == WINDOWS
