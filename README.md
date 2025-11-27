@@ -4,6 +4,12 @@
 
 A graphics engine using OpenGL and written in C++.
 
+> [!WARNING]
+> This repository is archived since I don't plan to work anymore.
+> 
+> Instead, I work on smaller [Rust projects](https://github.com/evroon?tab=repositories&q=&type=source&language=rust&sort=) with the Bevy game engine.
+
+
 Preview of the editor:
 ![alt text](misc/titan_preview.png "Preview of the editor")
 
